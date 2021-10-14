@@ -9,7 +9,7 @@ class M_Dropdown extends CI_Model {
      $this->db->distinct();
      $this->db->select('kdprogram');
      $this->db->where("kdsatker", $kdsatker);
-     $this->db->where("kdprogram like '%".$searchTerm."%' ");
+     $this->db->or_where("kdprogram like '%".$searchTerm."%' ");
      $fetched_records = $this->db->get('d_pagu');
      $users = $fetched_records->result_array();
 
@@ -28,7 +28,7 @@ class M_Dropdown extends CI_Model {
    $this->db->select('kdgiat');
    $this->db->where("kdsatker", $kdsatker);
    $this->db->where("kdprogram", $kdprogram);
-   $this->db->where("kdgiat like '%".$searchTerm."%' ");
+   $this->db->or_where("kdgiat like '%".$searchTerm."%' ");
    $fetched_records = $this->db->get('d_pagu');
    $users = $fetched_records->result_array();
 
@@ -48,7 +48,7 @@ function getData_kro($searchTerm="",$kdsatker, $kdprogram, $kdgiat){
    $this->db->where("kdsatker", $kdsatker);
    $this->db->where("kdprogram", $kdprogram);
    $this->db->where("kdgiat", $kdgiat);
-   $this->db->where("kdoutput like '%".$searchTerm."%' ");
+   $this->db->or_where("kdoutput like '%".$searchTerm."%' ");
    $fetched_records = $this->db->get('d_pagu');
    $users = $fetched_records->result_array();
 
@@ -69,7 +69,7 @@ function getData_ro($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdouput){
    $this->db->where("kdprogram", $kdprogram);
    $this->db->where("kdgiat", $kdgiat);
    $this->db->where("kdoutput", $kdouput);
-   $this->db->where("kdsoutput like '%".$searchTerm."%' ");
+   $this->db->or_where("kdsoutput like '%".$searchTerm."%' ");
    $fetched_records = $this->db->get('d_pagu');
    $users = $fetched_records->result_array();
 
@@ -91,7 +91,7 @@ function getData_komponen($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdoupu
    $this->db->where("kdgiat", $kdgiat);
    $this->db->where("kdoutput", $kdouput);
    $this->db->where("kdsoutput", $kdsoutput);
-   $this->db->where("kdkmpnen like '%".$searchTerm."%' ");
+   $this->db->or_where("kdkmpnen like '%".$searchTerm."%' ");
    $fetched_records = $this->db->get('d_pagu');
    $users = $fetched_records->result_array();
 
@@ -109,7 +109,7 @@ function getData_satker($searchTerm=""){
    $this->db->select('kdsatker');
    $this->db->select('nmsatker');
    $this->db->where("nmsatker like '%".$searchTerm."%' ");
-   $this->db->where("kdsatker like '%".$searchTerm."%' ");
+   $this->db->or_where("kdsatker like '%".$searchTerm."%' ");
    $fetched_records = $this->db->get('t_satker');
    $users = $fetched_records->result_array();
 
@@ -127,7 +127,7 @@ function getData_role($searchTerm=""){
    $this->db->select('id');
    $this->db->select('rolename');
    $this->db->where("rolename like '%".$searchTerm."%' ");
-   $this->db->where("id like '%".$searchTerm."%' ");
+   $this->db->or_where("id like '%".$searchTerm."%' ");
    $fetched_records = $this->db->get('role');
    $users = $fetched_records->result_array();
 

@@ -19,41 +19,47 @@ $assets 	= $this->config->item('assets_url');
     <title>Manajemen Keuangan - 2022</title>
     <link rel="apple-touch-icon" href="<?= base_url().'assets'?>/app-assets/images/favicon/apple-touch-icon-152x152.png">
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url().'assets'?>/app-assets/images/favicon/favicon-32x32.png">
-    <link href="<?= base_url().'assets'?>/icon.css?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
-
-
-    
-    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/vendors/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/css/pages/login.css">
 
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/vendors/vendors.min.css">
+
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/vendors/flag-icon/css/flag-icon.min.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/vendors/data-tables/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/vendors/data-tables/css/select.dataTables.min.css">
 
+
+    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/vendors/flag-icon/css/flag-icon.min.css">
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/css/themes/vertical-dark-menu-template/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/css/themes/vertical-dark-menu-template/style.min.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/css/pages/data-tables.min.css">
 
-    <link rel="stylesheet" href="<?= base_url().'assets'?>/app-assets/vendors/select2/select2.min.css" type="text/css">
+    <!-- <link rel="stylesheet" href="<?= base_url().'assets'?>/app-assets/vendors/select2/select2.min.css" type="text/css"> -->
     <!-- <link rel="stylesheet" href="<?= base_url().'assets'?>/app-assets/vendors/select2/select2-materialize.css" type="text/css"> -->
 
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/css/pages/dashboard.min.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/css/custom/custom.css">
+
+    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/css/custom/select2.css">
 
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/vendors/sweetalert/sweetalert.css">
 
   </head>
 
   <style>
-.select-wrapper{
+/* .select-wrapper{
   display: none !important;
-}
+} */
 
 .input-field{
   position: relative;
   margin-top: 0 !important;
 }
+
 
   </style>
 

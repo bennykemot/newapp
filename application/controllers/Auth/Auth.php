@@ -23,6 +23,7 @@ class Auth extends CI_Controller{
 			$data_session = array(
 				'username' => $username,
 				'kdsatker' => $session[0]->kdsatker,
+				'user_id' => $session[0]->id,
 				'status' => "login"
 				);
 

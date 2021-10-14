@@ -32,6 +32,8 @@ class Pembagianpagu extends CI_Controller {
             $row['kdoutput'] = $customers->kdoutput;
             $row['kdsoutput'] = $customers->kdsoutput;
 			$row['kdkmpnen'] = $customers->kdkmpnen;
+            $row['username'] = $customers->username;
+            $row['id'] = $customers->id;
 
  
             $data[] = $row;
@@ -39,8 +41,8 @@ class Pembagianpagu extends CI_Controller {
  
         $output = array(
                         "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->Pembagianpagu->count_all(),
-                        "recordsFiltered" => $this->Pembagianpagu->count_filtered(),
+                        "recordsTotal" => $this->Pembagianpagu->count_all($kdsatker),
+                        "recordsFiltered" => $this->Pembagianpagu->count_filtered($kdsatker),
                         "data" => $data,
                 );
         //output to json format
@@ -49,25 +51,39 @@ class Pembagianpagu extends CI_Controller {
 
     public function Action()
     {
-        $nama_user = $this->input->post('nama_user');
-        $kdsatker = $this->input->post('kdsatker');
-        $kdprogram = $this->input->post('kdprogram');
-        $kdgiat = $this->input->post('kdgiat');
-        $kdoutput = $this->input->post('kdoutput');
-        $kdsoutput = $this->input->post('kdsoutput');
-        $kdkomponen = $this->input->post('kdkomponen');
-        $trigger = $this->input->post('Trigger');
 
-        $data = array(
-			'nama_user' => $nama_user,
-			'kdsatker' => $kdsatker,
-			'kdprogram' => $kdprogram,
-            'kdgiat' => $kdgiat,
-			'kdoutput' => $kdoutput,
-			'kdsoutput' => $kdsoutput,
-            'kdkomponen' => $kdkomponen
-            
-			);
-		$this->Pembagianpagu->CRUD($data,'d_pagu');
+        $Trigger = $this->input->post('Trigger');
+        if($Trigger == "C"){
+            $nama_user = $this->input->post('nama_user');
+            $kdsatker = $this->input->post('kdsatker');
+            $kdprogram = $this->input->post('kdprogram');
+            $kdgiat = $this->input->post('kdgiat');
+            $kdoutput = $this->input->post('kdoutput');
+            $kdsoutput = $this->input->post('kdsoutput');
+            $kdkomponen = $this->input->post('kdkomponen');
+            $trigger = $this->input->post('Trigger');
+
+            $data = array(
+                'thang' => '2021',
+                'user_id' => $nama_user,
+                'kdsatker' => $kdsatker,
+                'kddept' => "089",
+                'kdunit' => "01",
+                'kdprogram' => $kdprogram,
+                'kdgiat' => $kdgiat,
+                'kdoutput' => $kdoutput,
+                'kdsoutput' => $kdsoutput,
+                'kdkmpnen' => $kdkomponen
+                
+                );
+            $this->Pembagianpagu->CRUD($data,'d_bagipagu', $Trigger);
+        }else{
+
+            $id = $this->input->post('id');
+            $where = array('id' => $id);
+	        $this->Pembagianpagu->CRUD($where,'d_bagipagu', $Trigger);
+
+        }
+        
     }
 }

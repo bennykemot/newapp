@@ -7,7 +7,7 @@
       <div class="card">
         <div class="card-content">
           <h4 class="card-title col s10">List User : <?php echo $this->session->userdata("kdsatker"); ?></h4>
-          <a class="waves-effect waves-light btn modal-trigger" href="#modal2">Tambah Data</a>
+          <a class=" btn modal-trigger" href="#modal2">Tambah Data</a>
                 <!-- datatable start -->
                 <div class="responsive-table">
                     <table id="tabel_user" class="display">
@@ -34,6 +34,7 @@
         <div id="modal2" class="modal">
             <div class="modal-content">
               <h4>Tambah User</h4>
+              <div style="padding-top: 10px"></div>
                 <div class="row">
 
                   <form class="col s12" id="FormUser">
@@ -50,8 +51,8 @@
                     <div class="input-field col s12">
                         <div class="input-field col s2" >Satker</div>
 
-                        <div class="input-field col s10 " >
-                          <select  id="satker-select2" name="kdsatker"></select>
+                        <div class="input-field col s10" >
+                          <select id="satker-select2" name="kdsatker" class="browser-default"></select>
                           </div>
                       </div>
 
@@ -59,7 +60,7 @@
                         <div class="input-field col s2" >Role</div>
 
                         <div class="input-field col s10 " >
-                          <select  id="role-select2" name="kdrole"></select>
+                          <select  id="role-select2" name="kdrole" class="browser-default"></select>
                           </div>
                       </div>
 
@@ -67,7 +68,7 @@
                         <div class="input-field col s2" >Status</div>
 
                         <div class="input-field col s10 " >
-                          <select  id="status-select2" name="kdstatus"></select>
+                          <select  id="status-select2" name="kdstatus" class="browser-default"></select>
                           </div>
                       </div>
 
@@ -96,7 +97,7 @@
             </div>
             <div class="modal-footer">
               <button id="TambahUser" class="waves-effect waves-light btn"><i class="material-icons left">done</i> Simpan</button>
-              <a href="#!" class="modal-action modal-close  waves-effect waves-light red btn">Batal</a>
+              <a class="modal-action modal-close red btn">Batal</a>
             </div>
           </div>
 
@@ -189,8 +190,8 @@ function Reset(idForm) {
 
                 { data: 'id',
                   render: function(data, type, row) {
-                      return '<button type="button" class="btn-floating mb-1 waves-effect waves-light green" onclick="Edit(\''+row.kdsatker+'\')"><i class="material-icons">edit</i></button>\
-                      <button type="button" class="btn-floating mb-1 waves-effect waves-light red" onclick="Delete(\''+data+'\')"><i class="material-icons">delete</i></button>';
+                      return '<button type="button" class="btn-floating mb-1 green" onclick="Edit(\''+data+'\')"><i class="material-icons">edit</i></button>\
+                      <button type="button" class="btn-floating mb-1 red" onclick="Delete(\''+data+'\')"><i class="material-icons">delete</i></button>';
                   }
                 },
 
@@ -218,12 +219,12 @@ function Reset(idForm) {
     }
 
 
+
         $("#satker-select2").select2({
-          dropdownAutoWidth: true,
           width: '100%',
           placeholder: "Pilih Satker",
-          theme: "classic",
-         ajax: { 
+          dropdownParent: "#modal2",
+          ajax: { 
            url: dropdown_baseurl + 'satker',
            type: "post",
            dataType: 'json',
@@ -246,7 +247,7 @@ function Reset(idForm) {
           dropdownAutoWidth: true,
           width: '100%',
           placeholder: "Pilih Role",
-          theme: "classic",
+          dropdownParent: "#modal2",
          ajax: { 
            url: dropdown_baseurl + 'role',
            type: "post",
@@ -270,8 +271,8 @@ function Reset(idForm) {
      $("#status-select2").select2({
         dropdownAutoWidth: true,
           width: '100%',
+          dropdownParent: "#modal2",
           placeholder: "Pilih Role",
-          theme: "classic",
         data: [{
             id: 0,
             text: "Non - Aktif"
