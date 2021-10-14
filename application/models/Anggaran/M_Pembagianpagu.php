@@ -107,10 +107,17 @@ class M_Pembagianpagu extends CI_Model{
     function CRUD($data,$table,$Trigger){
 
         if($Trigger == "C"){
+
             $this->db->insert($table,$data);
-        }else{
+
+        }else if($Trigger == "D"){
+
             $this->db->where($data);
             $this->db->delete($table);
+
+        }else if($Trigger == "R"){
+
+            $this->db->get_where($table,$data);
         }
 	}
 

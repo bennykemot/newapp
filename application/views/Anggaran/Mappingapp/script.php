@@ -1,9 +1,9 @@
 <script>
-    var baseurl 	= "<?= base_url('Anggaran/Pembagianpagu/')?>";
+    var baseurl 	= "<?= base_url('Anggaran/Mappingapp/')?>";
     var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";
     var satker_session = "<?= $this->session->userdata("kdsatker")?>"
 
-var grid_detail = "#tabel_anggaran";
+var grid_detail = "#tabel_mapping";
     var is_set_grid_detail = false;
 
     var all;
@@ -16,11 +16,14 @@ var grid_detail = "#tabel_anggaran";
             serverSide: true,
             processing: true,
             searchDelay: 500,
-            searching: true,
+            searching: false,
             ordering: true,
+            scrollY:450,
+            scrollX:!0,
+            responsive:!0,
            
             ajax: {
-                url: baseurl + 'getPembagianPagu',
+                url: baseurl + 'getMappingApp',
                 type: "post",
                 data : {"kdsatker": satker_session}
             },
@@ -36,70 +39,29 @@ var grid_detail = "#tabel_anggaran";
                 // },
                
                 
-                { data: "thang",
+                { data: "kode",
                 render: function (data, type, row, meta) {
                         return data;
                     } 
                   },
 
-                { data: "kdsatker",
+                { data: "uraian",
               render: function (data, type, row, meta) {
                       return data;
                   } 
                 },
 
-                { data: "kdsatker",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
+                { data: "jumlah", className: "text-right", render: $.fn.dataTable.render.number( ',', '.', 0 )
                 },
 
-                { data: "kdsatker",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
-                },
 
-                { data: "kdprogram",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
-                },
-
-                { data: "kdgiat",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
-                },
-
-                { data: "kdoutput",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
-                },
-
-                { data: "kdsoutput",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
-                },
-
-                { data: "kdkmpnen",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
-                },
-
-                { data: "username",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
-                },
-
-                { data: 'id',
+                { data: 'kdlevel',
                   render: function(data, type, row) {
-                      return '<button type="button" class="btn-floating mb-1 green" onclick="Edit(\''+data+'\')"><i class="material-icons">edit</i></button>\
-                      <button type="button" class="btn-floating mb-1 red" onclick="Delete(\''+data+'\')"><i class="material-icons">delete</i></button>';
+                    if(data == 7){
+                      return '<button type="button" class="btn-floating mb-1 green" onclick="Edit(\''+data+'\')"><i class="material-icons">add</i></button>';
+                    }
+                    return '';
+                      
                   }
                 },
 
@@ -107,17 +69,36 @@ var grid_detail = "#tabel_anggaran";
 
  
             ],
-            pageLength: 5,
+            pageLength: 10,
             lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-            //order: [[1,'asc']],
+            //order: [[3,'asc']],
             bFilter: false,
-            ordering: false,
             scrollCollapse: true,
-            columnDefs: [ ],
+            columnDefs: [
+              { width: '10%', targets: 0 },
+              { width: '60%', targets: 1 },
+              { width: '10%', targets: 2 },
+              { width: '10%', targets: 3 } ],
 
             initComplete: function (settings, json) {
                     $(grid_detail).wrap('<div class="table-responsive"></div>');
                 },
+
+            //     rowGroup: {
+            //     dataSrc: [
+            //         'kdprogram' , 
+            //         'kdgiat'],
+            //     startRender: function(rows, group, level) {  
+            //             return $('<tr/>')
+            //                     .append('<td colspan= "2">' + group +'</td>')
+            //                     .append('<button type="button" class="btn-floating mb-1 green" onclick="Edit(\''+data+'\')"><i class="material-icons">add</i></button>')
+            //     }
+
+                
+            // },
+            
+
+                //BATES
             });
     
             } else {

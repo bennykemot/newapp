@@ -22,7 +22,7 @@
           </i><span class="menu-title" data-i18n="Mail">Pembagian Pagu</span></a>
           </li>
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="app-chat.html">
+        <li class="bold"><a class="waves-effect waves-cyan " href="<?= site_url('Anggaran/Mappingapp')?>">
           <i class="material-icons">
           view_comfy
           </i><span class="menu-title" data-i18n="Chat">Mapping App</span></a>

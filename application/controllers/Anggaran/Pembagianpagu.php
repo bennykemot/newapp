@@ -77,12 +77,18 @@ class Pembagianpagu extends CI_Controller {
                 
                 );
             $this->Pembagianpagu->CRUD($data,'d_bagipagu', $Trigger);
-        }else{
+        }else if($Trigger == "D"){
 
             $id = $this->input->post('id');
             $where = array('id' => $id);
 	        $this->Pembagianpagu->CRUD($where,'d_bagipagu', $Trigger);
 
+        }else if($Trigger == "R"){
+            $id = $this->input->post('id');
+            $where = array('id' => $id);
+            $output = $this->Pembagianpagu->CRUD($where,'d_bagipagu', $Trigger);
+            echo json_encode($output);
+            
         }
         
     }

@@ -60,6 +60,18 @@ $assets 	= $this->config->item('assets_url');
   margin-top: 0 !important;
 }
 
+.text-right{
+  text-align: right;
+}
+
+.text-left{
+  text-align: left;
+}
+
+.text-center{
+  text-align: center;
+}
+
 
   </style>
 
