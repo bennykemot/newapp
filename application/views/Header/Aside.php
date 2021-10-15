@@ -6,7 +6,7 @@
         <h1 class="logo-wrapper"><a class="brand-logo darken-1" href="index.html"><img class="hide-on-med-and-down " src="<?= base_url().'assets'?>/app-assets/images/logo/materialize-logo.png" alt="materialize logo"><img class="show-on-medium-and-down hide-on-med-and-up" src="<?= base_url().'assets'?>/app-assets/images/logo/materialize-logo-color.png" alt="materialize logo"><span class="logo-text hide-on-med-and-down">Materialize</span></a></h1>
       </div>
       <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="accordion">
-        <li class="bold"><a class="waves-effect waves-cyan " href="app-email.html">
+        <li class="bold"><a class="waves-effect waves-cyan " href="<?= site_url('Main/Home')?>">
           <i class="material-icons">
           home
           </i><span class="menu-title" data-i18n="Mail">Dashboard</span></a>
