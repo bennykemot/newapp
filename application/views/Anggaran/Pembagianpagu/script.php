@@ -48,13 +48,13 @@ var grid_detail = "#tabel_anggaran";
                   } 
                 },
 
-                { data: "kdsatker",
+                { data: "kddept",
               render: function (data, type, row, meta) {
                       return data;
                   } 
                 },
 
-                { data: "kdsatker",
+                { data: "kdunit",
               render: function (data, type, row, meta) {
                       return data;
                   } 

@@ -27,6 +27,8 @@ class Pembagianpagu extends CI_Controller {
             $row = array();
             $row['thang'] = $customers->thang;
             $row['kdsatker'] = $customers->kdsatker;
+            $row['kddept'] = $customers->kddept;
+            $row['kdunit'] = $customers->kdunit;
             $row['kdprogram'] = $customers->kdprogram;
             $row['kdgiat'] = $customers->kdgiat;
             $row['kdoutput'] = $customers->kdoutput;

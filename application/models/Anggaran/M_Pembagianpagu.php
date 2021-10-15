@@ -34,6 +34,8 @@ class M_Pembagianpagu extends CI_Model{
         $this->db->select('d_bagipagu.id');
         $this->db->select('d_bagipagu.user_id');
         $this->db->select('d_bagipagu.kdsatker');
+        $this->db->select('d_bagipagu.kddept');
+        $this->db->select('d_bagipagu.kdunit');
         $this->db->select('d_bagipagu.thang');
         $this->db->select('d_bagipagu.kdprogram');
         $this->db->select('d_bagipagu.kdgiat');

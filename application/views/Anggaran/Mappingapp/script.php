@@ -61,7 +61,7 @@ var grid_detail = "#tabel_mapping";
                 },
 
 
-                { data: 'kdlevel',
+                { data: 'kdlevel',className: "text-center",
                   render: function(data, type, row) {
                     if(data == 7){
                       return '<button type="button" class="btn-floating mb-1 green" onclick="Edit(\''+row.kdindex+'\')"><i class="material-icons">add</i></button>';
