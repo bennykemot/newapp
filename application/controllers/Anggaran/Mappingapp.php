@@ -48,31 +48,6 @@ class MappingApp extends CI_Controller {
         echo json_encode($output);
     }
 
-    public function getMappingApp_detail()
-    {
-		$id_r_mak = $_POST['id_r_mak'];
-        $list = $this->Mappingapp->get_datatables_detail($id_r_mak);
-        $data = array();
-        $no = $_POST['start'];
-        foreach ($list as $customers) {
-            $no++;
-            $row = array();
-            $row['id'] = $customers->id;
-            $row['nama_app'] = $customers->nama_app;
-			$row['jumlah'] = $customers->jumlah;
-			$row['id_r_mak'] = $customers->id_r_mak;
-            $data[] = $row;
-        }
- 
-        $output = array(
-                        "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->Mappingapp->count_all_detail($id_r_mak),
-                        "recordsFiltered" => $this->Mappingapp->count_filtered_detail($id_r_mak),
-                        "data" => $data,
-                );
-        echo json_encode($output);
-    }
-
     public function Action()
     {
 

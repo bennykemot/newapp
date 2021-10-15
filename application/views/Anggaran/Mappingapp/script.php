@@ -1,7 +1,13 @@
 <script>
     var baseurl 	= "<?= base_url('Anggaran/Mappingapp/')?>";
+    var baseurl_detail 	= "<?= base_url('Anggaran/detail_Mappingapp/')?>";
     var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";
     var satker_session = "<?= $this->session->userdata("kdsatker")?>"
+
+    function Reset(idForm) {
+      document.getElementById(idForm).reset();
+      $('#app-select2').val(null).trigger('change');
+    }
 
 var grid_detail = "#tabel_mapping";
     var is_set_grid_detail = false;
@@ -134,18 +140,14 @@ var grid_detail = "#tabel_mapping";
            cache: true
          }
      });
- 
-     
-     // SELECT2 UPDATE
 
-
-     $("#program-select2_Edit").select2({
+     $("#app-select2_Edit").select2({
           dropdownAutoWidth: true,
           width: '100%',
-          placeholder: "Pilih Program",
+          placeholder: "Pilih App",
           dropdownParent: "#modalEdit",
          ajax: { 
-           url: dropdown_baseurl + 'program_per_satker',
+           url: dropdown_baseurl + 'app',
            type: "post",
            dataType: 'json',
            delay: 250,
@@ -164,119 +166,8 @@ var grid_detail = "#tabel_mapping";
          }
      });
  
-     $("#kegiatan-select2_Edit").select2({
-          dropdownAutoWidth: true,
-          width: '100%',
-          placeholder: "Pilih Kegiatan",
-          dropdownParent: "#modalEdit",
-         ajax: { 
-           url: dropdown_baseurl + 'kegiatan_per_satker',
-           type: "post",
-           dataType: 'json',
-           delay: 250,
-           data: function (params) {
-              return {
-                kdprogram: $('#program-select2_Edit').val(),
-                kdsatker: satker_session,
-                searchTerm: params.term
-                 // search term
-              };
-           },
-           processResults: function (response) {
-              return {
-                 results: response
-              };
-           },
-           cache: true
-         }
-     });
-
-     $("#kro-select2_Edit").select2({
-          dropdownAutoWidth: true,
-          width: '100%',
-          placeholder: "Pilih KRO",
-          dropdownParent: "#modalEdit",
-         ajax: { 
-           url: dropdown_baseurl + 'kro_per_satker',
-           type: "post",
-           dataType: 'json',
-           delay: 250,
-           data: function (params) {
-              return {
-                kdprogram: $('#program-select2_Edit').val(),
-                kdgiat: $('#kegiatan-select2_Edit').val(),
-                kdsatker: satker_session,
-                searchTerm: params.term
-                 // search term
-              };
-           },
-           processResults: function (response) {
-              return {
-                 results: response
-              };
-           },
-           cache: true
-         }
-     });
-
-     $("#ro-select2_Edit").select2({
-          dropdownAutoWidth: true,
-          width: '100%',
-          placeholder: "Pilih RO",
-          dropdownParent: "#modalEdit",
-         ajax: { 
-           url: dropdown_baseurl + 'ro_per_satker',
-           type: "post",
-           dataType: 'json',
-           delay: 250,
-           data: function (params) {
-              return {
-                kdprogram: $('#program-select2_Edit').val(),
-                kdgiat: $('#kegiatan-select2_Edit').val(),
-                kdoutput: $('#kro-select2_Edit').val(),
-                kdsatker: satker_session,
-                searchTerm: params.term
-                 // search term
-              };
-           },
-           processResults: function (response) {
-              return {
-                 results: response
-              };
-           },
-           cache: true
-         }
-     });
-
-     $("#komponen-select2_Edit").select2({
-          dropdownAutoWidth: true,
-          width: '100%',
-          placeholder: "Pilih Komponen",
-          dropdownParent: "#modalEdit",
-         ajax: { 
-           url: dropdown_baseurl + 'komponen_per_satker',
-           type: "post",
-           dataType: 'json',
-           delay: 250,
-           data: function (params) {
-              return {
-                kdprogram: $('#program-select2_Edit').val(),
-                kdgiat: $('#kegiatan-select2_Edit').val(),
-                kdoutput: $('#kro-select2_Edit').val(),
-                kdsoutput: $('#ro-select2_Edit').val(),
-                kdsatker: satker_session,
-                searchTerm: params.term
-                 // search term
-              };
-           },
-           processResults: function (response) {
-              return {
-                 results: response
-              };
-           },
-           cache: true
-         }
-     });
+     
+     
 
 
      var grid_detail_app = "#tabel_mapping_detail";
@@ -285,17 +176,17 @@ var grid_detail = "#tabel_mapping";
             serverSide: true,
             processing: true,
             searchDelay: 500,
-            searching: false,
+            searching: true,
             ordering: true,
-            scrollY:450,
-            scrollX:!0,
+            // scrollY:450,
+            // scrollX:!0,
             responsive:!0,
             bDestroy: true,
            
             ajax: {
-                url: baseurl + 'getMappingApp_detail',
+                url: baseurl_detail + 'getMappingApp_detail',
                 type: "post",
-                data : {"id_r_mak": Id}
+                data : {"kdindex": Id}
             },
                 
             autoWidth: false,
@@ -313,13 +204,17 @@ var grid_detail = "#tabel_mapping";
                 },
 
                 {
-                    data: "jumlah"
+                    data: "rupiah", className: "text-right", render: $.fn.dataTable.render.number( ',', '.', 0 )
                 },
                 {
-                    data: "pkpt",
-                    render: function (data, type, row, meta) {
-                        return "2021";
-                    }
+                    data: "th_pkpt"
+                },
+
+                { data: 'id',
+                  render: function(data, type, row) {
+                      return '<button type="button" class="btn-floating mb-1 green" onclick="Edit(\''+row.id+'\')"><i class="material-icons">edit</i></button>\
+                      <button type="button" class="btn-floating mb-1 red" onclick="Delete(\''+row.id+'\',\''+row.kdindex+'\')"><i class="material-icons">delete</i></button>';
+                  }
                 },
                
  
@@ -357,13 +252,14 @@ $("#TambahApp").click(function (e) {
   $.ajax({
     type: "POST",
     data: formData,
-    url: baseurl + "Action",
+    url: baseurl_detail + "Action",
     processData: false,
     contentType: false,
     success: function (data, textStatus, jqXHR) {
               show_msg(textStatus);
               $('#modal2').modal('close');
               set_grid_tabel(false);
+              showDetailapp($('#kodeindex').val());
               Reset(IdForm);
               
               
@@ -373,11 +269,64 @@ $("#TambahApp").click(function (e) {
 });
 
 function Edit(Id){
-  $('#kodeindex').val(Id);
-  $('#modal2').modal('open');
+
+  $.ajax({
+      url : baseurl_detail + "Action",
+      data: {"id": Id, "Trigger": "R"},
+      type: "post",
+      dataType: "JSON",
+      success: function(data)
+          {    
+              $('#nilai_app_Edit').val(data['rupiah']);
+              $('#Id_Edit').val(Id);
+              $('#th_pkpt_Edit').val(data['th_pkpt']);
+              $('#kodeindex_Edit').val(data['kdindex']);
+
+                var app = $("<option selected='selected'></option>").val(data['id_app']).text(data['id_app']+' - '+data['nama_app'])
+                $("#app-select2_Edit").append(app).trigger('change');
+
+              $('#modalEdit').modal('open');
+          
+          
+          }
+  });
+
 }
 
-function Delete(Id) {
+$("#EditMapping").click(function (e) {
+  e.preventDefault();
+
+  var btn = $(this);
+  var form = $(this).closest("form");
+  var formData = new FormData($("#FormMapping_Edit")[0]);
+  var IdForm =  "FormMapping_Edit";
+
+  btn
+    .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
+    .attr("disabled", true);
+
+  formData.append('Trigger', 'U')
+
+  $.ajax({
+    type: "POST",
+    data: formData,
+    url: baseurl_detail + "Action",
+    processData: false,
+    contentType: false,
+    success: function (data, textStatus, jqXHR) {
+              show_msg(textStatus);
+              $('#modalEdit').modal('close');
+              set_grid_tabel(false);
+              showDetailapp($('#kodeindex_Edit').val());
+              Reset(IdForm);
+              
+              
+          },
+          error: function (jqXHR, textStatus, errorThrown) { },
+      });
+});
+
+function Delete(Id,Kdindex) {
     swal({
     title: "Apakah Yakin Ingin Dihapus?",
     text: "Anda tidak bisa mengembalikan data yang telah dihapus!",
@@ -387,12 +336,12 @@ function Delete(Id) {
     cancelButtonText: "Batal",
   }).then(function (result) {
     if (result) {
-      Execute(Id);
+      Execute(Id,Kdindex);
     }
   });
 }
 
-function Execute(Id) {
+function Execute(Id,Kdindex) {
   var formData = new FormData();
   formData.append("Trigger", "D");
   formData.append("id", Id);
@@ -400,13 +349,14 @@ function Execute(Id) {
   $.ajax({
     type: "POST",
     data: formData,
-    url: baseurl + "Action",
+    url: baseurl_detail + "Action",
     processData: false,
     contentType: false,
     success: function (data, textStatus, jqXHR) {
 
         show_msg(textStatus)
         set_grid_tabel(true);
+        showDetailapp(Kdindex);
     },
     error: function (jqXHR, textStatus, errorThrown) { },
   });

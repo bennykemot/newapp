@@ -7,7 +7,7 @@
       <div class="card">
         <div class="card-content">
           <h4 class="card-title col s10">Mapping APP Satker : <?php echo $this->session->userdata("kdsatker"); ?></h4>
-          <a class="btn modal-trigger col s2" href="#modal2">Tambah Data</a>
+          <!-- <a class="btn modal-trigger col s2" href="#modal2">Tambah Data</a> -->
           <div class="row">
             <div class="col s12">
               <table id="tabel_mapping" class="display" style="width: 100%">
