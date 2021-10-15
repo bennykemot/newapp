@@ -16,6 +16,46 @@ class MappingApp extends CI_Controller {
 		$this->load->view('Anggaran/Mappingapp/manage');
 	}
 
+    public function getMapp(){
+        $draw = intval($this->input->get("draw"));
+        $start = intval($this->input->get("start"));
+        $length = intval($this->input->get("length"));
+
+        $kdsatker = $this->input->get("kdsatker");
+        $list = $this->Mappingapp->getData($kdsatker);
+
+        $data = array();
+
+        foreach ($list->result() as $customers) {
+            $start++;
+            $row = array();
+            $row['kode'] = $customers->kode;
+			$row['jumlah'] = $customers->jumlah;
+			$row['uraian'] = $customers->nmsatker;
+			$row['kdlevel'] = $customers->kdlevel;
+            $row['kdindex'] = $customers->kdindex;
+
+
+            //GROUP
+            $row['kdsatker'] = $customers->kdsatker;
+			$row['kdprogram'] = $customers->kdprogram;
+			$row['kdgiat'] = $customers->kdgiat;
+
+ 
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $draw,
+                        "recordsTotal" => $list->num_rows(),
+                        "recordsFiltered" => $list->num_rows(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
+
+    }
+
 	public function getMappingApp()
     {
 		$kdsatker = $_POST['kdsatker'];

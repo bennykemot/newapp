@@ -13,6 +13,10 @@
               <table id="tabel_mapping" class="display" style="width: 100%">
                   <thead>
                     <tr>
+                        <th>kdsatker</th>
+                        <th>kdprogram</th>
+                        <th>kdgiat</th>
+
                         <th>Kode</th>
                         <th>Uraian</th>
                         <th>Jumlah</th>

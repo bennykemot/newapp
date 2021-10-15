@@ -23,6 +23,60 @@ class M_Mappingapp extends CI_Model{
     
     var $order= array('kdlevel' => 'asc'); // default order 
 
+
+    function getData($kdsatker){
+
+        return $this->db->query("
+
+        (SELECT 
+        kode,jumlah,kdindex,nmsatker, kdlevel,kdsatker,kddept,  kdunit,  kdprogram,  kdgiat,  kdoutput,  kdsoutput,  kdkmpnen,  kdskmpnen,  kdakun,  kdib FROM 
+        v_level0 WHERE kdsatker  = '".$kdsatker."')
+
+        UNION 
+
+        (SELECT 
+        kode,jumlah,kdindex,nmprogram, kdlevel,kdsatker,kddept,  kdunit,  kdprogram,  kdgiat,  kdoutput,  kdsoutput,  kdkmpnen,  kdskmpnen,  kdakun,  kdib FROM 
+        v_level1 WHERE kdsatker  = '".$kdsatker."')
+
+        UNION
+
+        (SELECT 
+        kode,jumlah,kdindex,nmgiat, kdlevel,kdsatker,kddept,  kdunit,  kdprogram,  kdgiat,  kdoutput,  kdsoutput,  kdkmpnen,  kdskmpnen,  kdakun,  kdib FROM 
+        v_level2 WHERE kdsatker  = '".$kdsatker."')
+
+        UNION
+
+        (SELECT 
+        kode,jumlah,kdindex,nmoutput, kdlevel,kdsatker,kddept,  kdunit,  kdprogram,  kdgiat,  kdoutput,  kdsoutput,  kdkmpnen,  kdskmpnen,  kdakun,  kdib FROM 
+        v_level3 WHERE kdsatker  = '".$kdsatker."')
+
+        UNION
+
+        (SELECT 
+        kode,jumlah,kdindex,ursoutput, kdlevel,kdsatker,kddept,  kdunit,  kdprogram,  kdgiat,  kdoutput,  kdsoutput,  kdkmpnen,  kdskmpnen,  kdakun,  kdib FROM 
+        v_level4 WHERE kdsatker  = '".$kdsatker."')
+
+        UNION
+
+        (SELECT 
+        kode,jumlah,kdindex,urkmpnen, kdlevel,kdsatker,kddept,  kdunit,  kdprogram,  kdgiat,  kdoutput,  kdsoutput,  kdkmpnen,  kdskmpnen,  kdakun,  kdib FROM 
+        v_level5 WHERE kdsatker =  '".$kdsatker."')
+
+        UNION
+
+        (SELECT 
+        kode,jumlah,kdindex,urskmpnen, kdlevel,kdsatker,kddept,  kdunit,  kdprogram,  kdgiat,  kdoutput,  kdsoutput,  kdkmpnen,  kdskmpnen,  kdakun,  kdib FROM 
+        v_level6 WHERE kdsatker =  '".$kdsatker."')
+
+        UNION
+
+        (SELECT 
+        kode,jumlah,kdindex,nmakun, kdlevel,kdsatker,kddept,  kdunit,  kdprogram,  kdgiat,  kdoutput,  kdsoutput,  kdkmpnen,  kdskmpnen,  kdakun,  kdib FROM 
+        v_level7 WHERE kdsatker  = '".$kdsatker."')
+        ");
+
+    }
+
     
     private function query($kdsatker){
         $this->db->select('kode,jumlah,kdindex,nmsatker, kdlevel,kdsatker,kddept,  kdunit,  kdprogram,  kdgiat,  kdoutput,  kdsoutput,  kdkmpnen,  kdskmpnen,  kdakun,  kdib');

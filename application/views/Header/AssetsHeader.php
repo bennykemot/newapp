@@ -48,6 +48,8 @@ $assets 	= $this->config->item('assets_url');
 
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/vendors/sweetalert/sweetalert.css">
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowgroup/1.1.3/css/rowGroup.dataTables.min.css">
+
   </head>
 
   <style>

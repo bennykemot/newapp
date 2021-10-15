@@ -29,20 +29,19 @@ var grid_detail = "#tabel_mapping";
             responsive:!0,
            
             ajax: {
-                url: baseurl + 'getMappingApp',
-                type: "post",
+                url: baseurl + 'getMapp',
+                type: "get",
                 data : {"kdsatker": satker_session}
             },
                 
             autoWidth: false,
             columns: [
-             
-                // {
-                //     data: null, class: "text-center",
-                //     render: function (data, type, row, meta) {
-                //         return meta.row + meta.settings._iDisplayStart + 1;
-                //     }
-                // },
+
+              { data: "kdsatker"},
+
+              { data: "kdprogram"},
+
+              { data: "kdgiat"},
                
                 
                 { data: "kode",
@@ -77,27 +76,30 @@ var grid_detail = "#tabel_mapping";
             ],
             pageLength: 10,
             lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-            //order: [[3,'asc']],
+            order: [[3,'asc']],
             bFilter: false,
             scrollCollapse: true,
             columnDefs: [
               { width: '10%', targets: 0 },
               { width: '60%', targets: 1 },
               { width: '10%', targets: 2 },
-              { width: '10%', targets: 3 } ],
+              { width: '10%', targets: 3 },
+              {targets: [ 0,1,2 ],visible: false}],
 
             initComplete: function (settings, json) {
                     $(grid_detail).wrap('<div class="table-responsive"></div>');
                 },
 
+            // rowGroup: {
+            //     dataSrc: ['kdsatker', 'kdprogram','kdgiat']
+            // },
+
             //     rowGroup: {
             //     dataSrc: [
-            //         'kdprogram' , 
-            //         'kdgiat'],
+            //         'kdsatker'],
             //     startRender: function(rows, group, level) {  
             //             return $('<tr/>')
-            //                     .append('<td colspan= "2">' + group +'</td>')
-            //                     .append('<button type="button" class="btn-floating mb-1 green" onclick="Edit(\''+data+'\')"><i class="material-icons">add</i></button>')
+            //                     .append('<td colspan= "4">' + group +'</td>')
             //     }
 
                 
