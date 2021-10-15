@@ -139,4 +139,22 @@ function getData_role($searchTerm=""){
    return $data;
 }
 
+function getData_app($searchTerm=""){
+
+   // Fetch users
+   $this->db->select('id');
+   $this->db->select('nama_app');
+   $this->db->where("nama_app like '%".$searchTerm."%' ");
+   $this->db->or_where("id like '%".$searchTerm."%' ");
+   $fetched_records = $this->db->get('t_app');
+   $users = $fetched_records->result_array();
+
+   // Initialize Array with fetched data
+   $data = array();
+   foreach($users as $user){
+      $data[] = array("id"=>$user['id'], "text"=>$user['id']. ' - ' .$user['nama_app']);
+   }
+   return $data;
+}
+
 }

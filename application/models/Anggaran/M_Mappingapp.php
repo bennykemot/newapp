@@ -21,7 +21,23 @@ class M_Mappingapp extends CI_Model{
     'nmsatker','nmprogram','nmprogram','nmgiat','nmoutput','ursoutput','urkmpnen','urskmpnen','nmakun',
     'kdlevel'); //set column field database for datatable searchable 
     
-    var $order = array('kdlevel' => 'asc'); // default order 
+    var $order= array('kdlevel' => 'asc'); // default order 
+
+    //////////////////////////
+
+    var $column_order_detail = array(
+        'id',
+        'nama_app',
+        'jumlah',
+        'id_r_mak'); //set column field database for datatable orderable
+
+    var $column_search_detail = array(
+        'id',
+        'nama_app',
+        'jumlah',
+        'id_r_mak'); //set column field database for datatable searchable 
+    
+    var $order_detail = array('id' => 'asc'); // default order 
     
     public function __construct()
 	{
@@ -213,6 +229,72 @@ class M_Mappingapp extends CI_Model{
         return $this->db->count_all();
     }
 
+    ////////////////////////////////////DETAIL//////////////////////////////
+
+    private function _get_datatables_query_detail($id_r_mak)
+    {   
+
+        $this->db->from('d_detailapp');
+        $this->db->where('id_r_mak', $id_r_mak);
+ 
+        $i = 0;
+     
+        foreach ($this->column_search_detail as $item) // loop column 
+        {
+            if($_POST['search']['value']) // if datatable send POST for search
+            {
+                 
+                if($i===0) // first loop
+                {   
+                    $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
+                    $this->db->like($item, $_POST['search']['value']);
+                }
+                else
+                {   
+                    $this->db->or_like($item, $_POST['search']['value']);
+                }
+ 
+                if(count($this->column_search_detail) - 1 == $i) //last loop
+                    $this->db->group_end(); //close bracket
+            }
+            $i++;
+        }
+         
+        if(isset($_POST['order'])) // here order processing
+        {   
+            $this->db->order_by($this->column_order_detail[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } 
+        else if(isset($this->order_detail))
+        {
+            $order = $this->order_detail;
+            $this->db->order_by(key($order), $order[key($order)]);
+        }
+    }
+ 
+    function get_datatables_detail($id_r_mak)
+    {
+        $this->_get_datatables_query_detail($id_r_mak);
+        if($_POST['length'] != -1)
+        $this->db->limit($_POST['length'], $_POST['start']);
+        $query = $this->db->get();
+        return $query->result();
+    }
+ 
+    function count_filtered_detail($id_r_mak)
+    {
+        $this->_get_datatables_query_detail($id_r_mak);
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+ 
+    public function count_all_detail($id_r_mak)
+    {
+        $this->db->from('d_detailapp');
+        $this->db->where('id_r_mak', $id_r_mak);
+        return $this->db->count_all_results();
+    }
+
+
 
     function CRUD($data,$table,$Trigger){
 
@@ -227,8 +309,12 @@ class M_Mappingapp extends CI_Model{
 
         }else if($Trigger == "R"){
 
-            $this->db->get_where($table,$data);
+            return $this->db->get_where($table,$data);
         }
 	}
+
+    function getApp($data,$table){
+        return $this->db->get_where($table,$data);
+    }
 
 }

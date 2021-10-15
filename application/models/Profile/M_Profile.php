@@ -97,12 +97,26 @@ class M_Profile extends CI_Model{
     function CRUD($data,$table,$Trigger){
 
         if($Trigger == "C"){
+
             $this->db->insert($table,$data);
-        }else{
+
+        }else if($Trigger == "D"){
+
             $this->db->where($data);
             $this->db->delete($table);
+
+        }else if($Trigger == "R"){
+
+            $this->db->from($table);
+            $this->db->join('t_satker', 't_satker.kdsatker = '.$table.'.kdsatker');
+            // $this->db->join('role', 'role.id = '.$table.'.role_id');
+            $this->db->where($data);
+            $query = $this->db->get();
+    
+            return $query->row();
+
+            //return $this->db->get_where($table,$data)->row();
         }
-		
 	}
 
 }

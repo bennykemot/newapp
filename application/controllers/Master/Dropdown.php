@@ -103,4 +103,15 @@ class Dropdown extends CI_Controller {
 
       echo json_encode($response);
    }
+
+   public function app(){
+
+      // Search term
+      $searchTerm = $this->input->post('searchTerm');
+
+      // Get users
+      $response = $this->Dropdown->getData_app($searchTerm);
+
+      echo json_encode($response);
+   }
 }

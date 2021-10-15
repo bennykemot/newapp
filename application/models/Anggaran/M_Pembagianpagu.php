@@ -117,7 +117,7 @@ class M_Pembagianpagu extends CI_Model{
 
         }else if($Trigger == "R"){
 
-            $this->db->get_where($table,$data);
+            return $this->db->get_where($table,$data);
         }
 	}
 

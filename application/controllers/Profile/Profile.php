@@ -72,10 +72,18 @@ class Profile extends CI_Controller {
                 );
             $this->Profile->CRUD($data,'user', $Trigger);
 
-        }else{
+        }else if($Trigger == "D"){
+
             $id = $this->input->post('id');
             $where = array('id' => $id);
 	        $this->Profile->CRUD($where,'user', $Trigger);
+
+        }else if($Trigger == "R"){
+            $id = $this->input->post('id');
+            $where = array('id' => $id);
+            $output = $this->Profile->CRUD($where,'user', $Trigger);
+            echo json_encode($output);
+            
         }
 
         

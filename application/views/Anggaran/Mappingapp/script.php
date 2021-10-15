@@ -41,7 +41,7 @@ var grid_detail = "#tabel_mapping";
                 
                 { data: "kode",
                 render: function (data, type, row, meta) {
-                        return data;
+                        return '<a href="javascript:;" onclick="showDetailapp(\''+row.kdindex+'\')">'+data+'</a>';
                     } 
                   },
 
@@ -58,7 +58,7 @@ var grid_detail = "#tabel_mapping";
                 { data: 'kdlevel',
                   render: function(data, type, row) {
                     if(data == 7){
-                      return '<button type="button" class="btn-floating mb-1 green" onclick="Edit(\''+data+'\')"><i class="material-icons">add</i></button>';
+                      return '<button type="button" class="btn-floating mb-1 green" onclick="Edit(\''+row.kdindex+'\')"><i class="material-icons">add</i></button>';
                     }
                     return '';
                       
@@ -110,13 +110,13 @@ var grid_detail = "#tabel_mapping";
 
         // SELECT2 INSERT
 
-        $("#program-select2").select2({
+        $("#app-select2").select2({
           dropdownAutoWidth: true,
           width: '100%',
-          placeholder: "Pilih Program",
+          placeholder: "Pilih App",
           dropdownParent: "#modal2",
          ajax: { 
-           url: dropdown_baseurl + 'program_per_satker',
+           url: dropdown_baseurl + 'app',
            type: "post",
            dataType: 'json',
            delay: 250,
@@ -135,122 +135,7 @@ var grid_detail = "#tabel_mapping";
          }
      });
  
-     $("#kegiatan-select2").select2({
-          dropdownAutoWidth: true,
-          width: '100%',
-          placeholder: "Pilih Kegiatan",
-          dropdownParent: "#modal2",
-         ajax: { 
-           url: dropdown_baseurl + 'kegiatan_per_satker',
-           type: "post",
-           dataType: 'json',
-           delay: 250,
-           data: function (params) {
-              return {
-                kdprogram: $('#program-select2').val(),
-                kdsatker: satker_session,
-                searchTerm: params.term
-                 // search term
-              };
-           },
-           processResults: function (response) {
-              return {
-                 results: response
-              };
-           },
-           cache: true
-         }
-     });
-
-     $("#kro-select2").select2({
-          dropdownAutoWidth: true,
-          width: '100%',
-          placeholder: "Pilih KRO",
-          dropdownParent: "#modal2",
-         ajax: { 
-           url: dropdown_baseurl + 'kro_per_satker',
-           type: "post",
-           dataType: 'json',
-           delay: 250,
-           data: function (params) {
-              return {
-                kdprogram: $('#program-select2').val(),
-                kdgiat: $('#kegiatan-select2').val(),
-                kdsatker: satker_session,
-                searchTerm: params.term
-                 // search term
-              };
-           },
-           processResults: function (response) {
-              return {
-                 results: response
-              };
-           },
-           cache: true
-         }
-     });
-
-     $("#ro-select2").select2({
-          dropdownAutoWidth: true,
-          width: '100%',
-          placeholder: "Pilih RO",
-          dropdownParent: "#modal2",
-         ajax: { 
-           url: dropdown_baseurl + 'ro_per_satker',
-           type: "post",
-           dataType: 'json',
-           delay: 250,
-           data: function (params) {
-              return {
-                kdprogram: $('#program-select2').val(),
-                kdgiat: $('#kegiatan-select2').val(),
-                kdoutput: $('#kro-select2').val(),
-                kdsatker: satker_session,
-                searchTerm: params.term
-                 // search term
-              };
-           },
-           processResults: function (response) {
-              return {
-                 results: response
-              };
-           },
-           cache: true
-         }
-     });
-
-     $("#komponen-select2").select2({
-          dropdownAutoWidth: true,
-          width: '100%',
-          placeholder: "Pilih Komponen",
-          dropdownParent: "#modal2",
-         ajax: { 
-           url: dropdown_baseurl + 'komponen_per_satker',
-           type: "post",
-           dataType: 'json',
-           delay: 250,
-           data: function (params) {
-              return {
-                kdprogram: $('#program-select2').val(),
-                kdgiat: $('#kegiatan-select2').val(),
-                kdoutput: $('#kro-select2').val(),
-                kdsoutput: $('#ro-select2').val(),
-                kdsatker: satker_session,
-                searchTerm: params.term
-                 // search term
-              };
-           },
-           processResults: function (response) {
-              return {
-                 results: response
-              };
-           },
-           cache: true
-         }
-     });
-
-
-
+     
      // SELECT2 UPDATE
 
 
@@ -394,14 +279,74 @@ var grid_detail = "#tabel_mapping";
      });
 
 
+     var grid_detail_app = "#tabel_mapping_detail";
+     function showDetailapp(Id){
+      $(grid_detail_app).DataTable({
+            serverSide: true,
+            processing: true,
+            searchDelay: 500,
+            searching: false,
+            ordering: true,
+            scrollY:450,
+            scrollX:!0,
+            responsive:!0,
+            bDestroy: true,
+           
+            ajax: {
+                url: baseurl + 'getMappingApp_detail',
+                type: "post",
+                data : {"id_r_mak": Id}
+            },
+                
+            autoWidth: false,
+            columns: [
+             
+                {
+                    data: null, class: "text-center",
+                    render: function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
 
-$("#TambahPagu").click(function (e) {
+                {
+                    data: "nama_app"
+                },
+
+                {
+                    data: "jumlah"
+                },
+                {
+                    data: "pkpt",
+                    render: function (data, type, row, meta) {
+                        return "2021";
+                    }
+                },
+               
+ 
+            ],
+            pageLength: 10,
+            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            //order: [[3,'asc']],
+            bFilter: false,
+            scrollCollapse: true,
+            columnDefs: [ ],
+
+            initComplete: function (settings, json) {
+                    $(grid_detail_app).wrap('<div class="table-responsive"></div>');
+                },
+            });
+
+            //$('#DetailCard').fadeIn();
+     }
+
+
+$("#TambahApp").click(function (e) {
   e.preventDefault();
 
   var btn = $(this);
   var form = $(this).closest("form");
-  var formData = new FormData($("#FormPagu")[0]);
-  var IdForm =  "FormPagu";
+  var formData = new FormData($("#FormApp")[0]);
+  var IdForm =  "FormApp";
 
   btn
     .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
@@ -428,26 +373,8 @@ $("#TambahPagu").click(function (e) {
 });
 
 function Edit(Id){
-
-  $.ajax({
-        url : baseurl + "Action",
-        data: {"id": Id, "Trigger": "R"},
-        type: "post",
-        dataType: "JSON",
-        success: function(data)
-            {
-
-            // var unit = $("<option selected='selected'></option>").val(data[0].id_unit).text(data[0].nama_unitkerja)
-            //     $('#id_unit').val(data[0].id_unit);
-            //     $('#kode_index').val(kdIndex);
-            //     $('#trigger').val(Trigger);
-            //     $("#unitselect2").append(unit).trigger('change');
-                $('#modalEdit').modal('open');
-            
-            
-            }
-    });
-
+  $('#kodeindex').val(Id);
+  $('#modal2').modal('open');
 }
 
 function Delete(Id) {
