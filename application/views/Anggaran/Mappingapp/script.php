@@ -9,113 +9,6 @@
       $('#app-select2').val(null).trigger('change');
     }
 
-var grid_detail = "#tabel_mapping";
-    var is_set_grid_detail = false;
-
-    var all;
-    set_grid_tabel(false);
-
-    function set_grid_tabel(is_current) {
-      if (!is_set_grid_detail) {
-        is_set_grid_detail = true;
-        $(grid_detail).DataTable({
-            serverSide: true,
-            processing: true,
-            searchDelay: 500,
-            searching: false,
-            ordering: true,
-            scrollY:450,
-            scrollX:!0,
-            responsive:!0,
-           
-            ajax: {
-                url: baseurl + 'getMapp',
-                type: "get",
-                data : {"kdsatker": satker_session}
-            },
-                
-            autoWidth: false,
-            columns: [
-
-              { data: "kdsatker"},
-
-              { data: "kdprogram"},
-
-              { data: "kdgiat"},
-               
-                
-                { data: "kode",
-                render: function (data, type, row, meta) {
-                        return '<a href="javascript:;" onclick="showDetailapp(\''+row.kdindex+'\')">'+data+'</a>';
-                    } 
-                  },
-
-                { data: "uraian",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
-                },
-
-                { data: "jumlah", className: "text-right", render: $.fn.dataTable.render.number( ',', '.', 0 )
-                },
-
-
-                { data: 'kdlevel',className: "text-center",
-                  render: function(data, type, row) {
-                    if(data == 7){
-                      return '<button type="button" class="btn-floating mb-1 green" onclick="Edit(\''+row.kdindex+'\')"><i class="material-icons">add</i></button>';
-                    }
-                    return '';
-                      
-                  }
-                },
-
-  
-
- 
-            ],
-            pageLength: 10,
-            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-            order: [[3,'asc']],
-            bFilter: false,
-            scrollCollapse: true,
-            columnDefs: [
-              { width: '10%', targets: 0 },
-              { width: '60%', targets: 1 },
-              { width: '10%', targets: 2 },
-              { width: '10%', targets: 3 },
-              {targets: [ 0,1,2 ],visible: false}],
-
-            initComplete: function (settings, json) {
-                    $(grid_detail).wrap('<div class="table-responsive"></div>');
-                },
-
-            // rowGroup: {
-            //     dataSrc: ['kdsatker', 'kdprogram','kdgiat']
-            // },
-
-            //     rowGroup: {
-            //     dataSrc: [
-            //         'kdsatker'],
-            //     startRender: function(rows, group, level) {  
-            //             return $('<tr/>')
-            //                     .append('<td colspan= "4">' + group +'</td>')
-            //     }
-
-                
-            // },
-            
-
-                //BATES
-            });
-    
-            } else {
-        $(grid_detail).DataTable().search("");
-        $(grid_detail).DataTable().ajax.reload(null, !is_current);
-      }
-    }
-
-
         // SELECT2 INSERT
 
         $("#app-select2").select2({
@@ -233,7 +126,12 @@ var grid_detail = "#tabel_mapping";
                 },
             });
 
-            //$('#DetailCard').fadeIn();
+            $('#DetailCard').fadeIn();
+     }
+
+     function Add(Id){
+      $('#kodeindex').val(Id);
+      $('#modal2').modal('open');
      }
 
 
@@ -260,7 +158,6 @@ $("#TambahApp").click(function (e) {
     success: function (data, textStatus, jqXHR) {
               show_msg(textStatus);
               $('#modal2').modal('close');
-              set_grid_tabel(false);
               showDetailapp($('#kodeindex').val());
               Reset(IdForm);
               

@@ -8,85 +8,63 @@ class MappingApp extends CI_Controller {
 		parent::__construct();
 		$this->load->helper("url");
 		$this->load->library("datatables");
+        $this->load->library('pagination');
+        $this->load->library('session');
 		$this->load->model('Anggaran/M_Mappingapp','Mappingapp');
 	}
 
 	public function index()
 	{
-		$this->load->view('Anggaran/Mappingapp/manage');
+        
 	}
 
-    public function getMapp(){
-        $draw = intval($this->input->get("draw"));
-        $start = intval($this->input->get("start"));
-        $length = intval($this->input->get("length"));
+    public function Page(){
 
-        $kdsatker = $this->input->get("kdsatker");
-        $list = $this->Mappingapp->getData($kdsatker);
+        $satker = $this->uri->segment(4);
 
-        $data = array();
+        $jumlah_data = $this->Mappingapp->Jum();
+        $config['base_url'] = base_url().'Anggaran/Mappingapp/Page/'.$satker.'/1';
+		$config['total_rows'] = $jumlah_data;
+		$config['per_page'] = 10;
 
-        foreach ($list->result() as $customers) {
-            $start++;
-            $row = array();
-            $row['kode'] = $customers->kode;
-			$row['jumlah'] = $customers->jumlah;
-			$row['uraian'] = $customers->nmsatker;
-			$row['kdlevel'] = $customers->kdlevel;
-            $row['kdindex'] = $customers->kdindex;
+        $config['full_tag_open'] = "<ul id='pagination'>";
+        $config['full_tag_close'] = '</ul>';
+        $config['num_tag_open'] = '<li >';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['prev_tag_open'] = '<li >';
+        $config['prev_tag_close'] = '</li>';
+        $config['first_tag_open'] = '<li >';
+        $config['first_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li >';
+        $config['last_tag_close'] = '</li>';
 
 
-            //GROUP
-            $row['kdsatker'] = $customers->kdsatker;
-			$row['kdprogram'] = $customers->kdprogram;
-			$row['kdgiat'] = $customers->kdgiat;
 
- 
-            $data[] = $row;
-        }
- 
-        $output = array(
-                        "draw" => $draw,
-                        "recordsTotal" => $list->num_rows(),
-                        "recordsFiltered" => $list->num_rows(),
-                        "data" => $data,
-                );
-        //output to json format
-        echo json_encode($output);
+        $config['prev_link'] = '<i class="mdi-navigation-chevron-left"></i> Previous';
+        $config['prev_tag_open'] = '<li >';
+        $config['prev_tag_close'] = '</li>';
+
+
+        $config['next_link'] = 'Next <i class="mdi-navigation-chevron-right"></i>';
+        $config['next_tag_open'] = '<li >';
+        $config['next_tag_close'] = '</li>';
+
+
+		$from =  ($this->uri->segment(5)) ? $this->uri->segment(5) : 0;
+		$this->pagination->initialize($config);
+
+        $kdsatker =  $satker;
+        $data['mapp'] = $this->Mappingapp->getDataNew($kdsatker, $config['per_page'], $from);
+
+        //$data['mapp'] = $this->Page();
+        
+		$this->load->view('Anggaran/Mappingapp/manage',$data);
 
     }
 
-	public function getMappingApp()
-    {
-		$kdsatker = $_POST['kdsatker'];
-        $list = $this->Mappingapp->get_datatables($kdsatker);
-        $data = array();
-        $no = $_POST['start'];
-        foreach ($list as $customers) {
-            $no++;
-            $row = array();
-            $row['kode'] = $customers->kode;
-			$row['jumlah'] = $customers->jumlah;
-			$row['uraian'] = $customers->nmsatker;
-			$row['kdlevel'] = $customers->kdlevel;
-            $row['kdindex'] = $customers->kdindex;
-
-			$row['kdprogram'] = $customers->kdprogram;
-			$row['kdgiat'] = $customers->kdgiat;
-
- 
-            $data[] = $row;
-        }
- 
-        $output = array(
-                        "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->Mappingapp->count_all($kdsatker),
-                        "recordsFiltered" => $this->Mappingapp->count_filtered($kdsatker),
-                        "data" => $data,
-                );
-        //output to json format
-        echo json_encode($output);
-    }
+    
 
     public function Action()
     {
