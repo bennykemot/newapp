@@ -23,7 +23,7 @@ class MappingApp extends CI_Controller {
         $satker = $this->uri->segment(4);
 
         $jumlah_data = $this->Mappingapp->Jum();
-        $config['base_url'] = base_url().'Anggaran/Mappingapp/Page/'.$satker.'/1';
+        $config['base_url'] = base_url().'Anggaran/Mappingapp/Page/'.$satker.'';
 		$config['total_rows'] = $jumlah_data;
 		$config['per_page'] = 10;
 

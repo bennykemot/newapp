@@ -22,10 +22,16 @@
           </i><span class="menu-title" data-i18n="Mail">Pembagian Pagu</span></a>
           </li>
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="<?= site_url('Anggaran/Mappingapp/Page/'.$this->session->userdata("kdsatker").'/1')?>">
+        <li class="bold"><a class="waves-effect waves-cyan " href="<?= site_url('Anggaran/Mappingapp/Page/'.$this->session->userdata("kdsatker").'/0')?>">
           <i class="material-icons">
           view_comfy
           </i><span class="menu-title" data-i18n="Chat">Mapping App</span></a>
+          </li>
+
+        <li class="bold"><a class="waves-effect waves-cyan " href="<?= site_url('Anggaran/Transfer')?>">
+          <i class="material-icons">
+          get_app
+          </i><span class="menu-title" data-i18n="Chat">Transfer Pagu</span></a>
           </li>
 
         

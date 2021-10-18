@@ -1,9 +1,6 @@
 <?php include(APPPATH . 'views/Header/Aside.php') ?>
 
 <!-- Page Length Options -->
-
-
-
  <div class="row">
 
   <div class="col s12">
