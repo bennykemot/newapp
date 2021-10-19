@@ -47,9 +47,6 @@ class M_Transfer extends CI_Model{
         $this->db->where('kdsatker', $kdsatker);
         $this->db->delete('d_pagu');
 
-        $this->db->where('kdsatker', $kdsatker);
-        $this->db->delete('d_pagu');
-
         $this->db->query("
         INSERT INTO d_pagu
         SELECT 
@@ -124,10 +121,6 @@ class M_Transfer extends CI_Model{
                     unlink($file); // delete file
                 }
             }
-
-        //unlink(FCPATH.'/assets/temp_folder/'.$kdsatker.'');
-
-        // insert into d_item data dari file d_item+substring(nama file,4,10).xml
     }
 
 }

@@ -92,8 +92,4 @@ class Transfer extends CI_Controller {
     }
 
 
-        
-
-        
-
 }

@@ -61,11 +61,11 @@ $('.btn-upload').click(function (e) {
             formData.append("revisike", revisiKe);
 
             var file = $('#shad_file').val();
-        var name = file.split(".");
-        var ext = name[1];
-        var name_file = name[0];
+            var name = file.split(".");
+            var ext = name[1];
+            var name_file = name[0];
 
-        var cek_satker = name_file.substring(19,13);
+            var cek_satker = name_file.substring(19,13);
 
         if (!file) {
             swal("File Belum di Upload", "Upload File Dengan Benar !", "info")
