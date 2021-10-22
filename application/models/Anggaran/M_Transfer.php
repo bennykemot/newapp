@@ -58,7 +58,7 @@ class M_Transfer extends CI_Model{
         ");
     }
 
-    function xml($kdsatker,$name){
+    function xml_d_item($kdsatker,$name){
 
         $this->db->where('kdsatker', $kdsatker);
         $this->db->delete('d_item');
@@ -73,7 +73,7 @@ class M_Transfer extends CI_Model{
         $tgkontrak = date("Y-m-d", strtotime("0000-00-00"));
 
         foreach($my_xml->c_item as $item) {
-           $result = $this->db->query("INSERT INTO d_item(thang,kdjendok,kdsatker,kddept,
+           $this->db->query("INSERT INTO d_item(thang,kdjendok,kdsatker,kddept,
                                        kdunit,kdprogram,kdgiat,kdoutput,
                                        kdlokasi,kdkabkota,kddekon,kdsoutput,
                                        kdkmpnen,kdskmpnen,kdakun,kdkppn,
@@ -113,14 +113,102 @@ class M_Transfer extends CI_Model{
                                        $item->kdubah."','".$item->kurs."','".$item->indexkpjm."','".$item->kdib."')");
         }
 
-        //unlink semua file dr temp folder/session(kdsatker)
+       
+    }
 
-        $files = glob(FCPATH.'/assets/temp_folder/'.$kdsatker.'/*'); // get all file names
-                foreach($files as $file){ // iterate files
-                if(is_file($file)) {
-                    unlink($file); // delete file
-                }
+    function xml_d_soutput($kdsatker,$name){
+
+        $this->db->where('kdsatker', $kdsatker);
+        $this->db->delete('d_soutput');
+
+        $dir = FCPATH.'assets/temp_folder/'.$kdsatker.'/';
+
+        $tmp= substr($name,4,17);
+        $file = str_replace("_","",$tmp);
+
+        $my_xml = simplexml_load_file($dir . "d_soutput".$file.".xml");
+
+        foreach($my_xml->c_soutput as $soutput) {
+            $this->db->query("INSERT INTO d_soutput(thang,kdjendok,kdsatker,kddept,
+                                       kdunit,kdprogram,kdgiat,kdoutput,
+                                       kdlokasi,kdkabkota,kddekon,kdsoutput,
+                                       ursoutput,sbmkvol,sbmksat,sbmkmin1,
+                                       sbmkket,kdsb,volsout,volsbk,kdib)			
+                                       VALUES ('" . $soutput->thang . "','" . $soutput->kdjendok . "','" . $soutput->kdsatker . "','" . $soutput->kddept . "','" . 
+                                       $soutput->kdunit."','".$soutput->kdprogram."','".$soutput->kdgiat."','".$soutput->kdoutput ."','".
+                                       $soutput->kdlokasi."','".$soutput->kdkabkota."','".$soutput->kddekon."','".$soutput->kdsoutput ."','".
+                                       $soutput->ursoutput."','".$soutput->sbmkvol."','".$soutput->sbmksat."','".$soutput->sbmkmin1 ."','".
+                                       $soutput->sbmket."','".$soutput->kdsb."','".$soutput->volsout."','".$soutput->volsbk ."','".
+                                       $soutput->kdib."')");
+
+    }
+}
+
+    function xml_d_kmpnen($kdsatker,$name){
+
+        $this->db->where('kdsatker', $kdsatker);
+        $this->db->delete('d_kmpnen');
+
+        $dir = FCPATH.'assets/temp_folder/'.$kdsatker.'/';
+
+        $tmp= substr($name,4,17);
+        $file = str_replace("_","",$tmp);
+
+        $my_xml = simplexml_load_file($dir . "d_kmpnen".$file.".xml");
+
+            foreach($my_xml->c_kmpnen as $kmpnen) {
+                $this->db->query("INSERT INTO d_kmpnen(thang,kdjendok,kdsatker,kddept,
+                kdunit,kdprogram,kdgiat,kdoutput,
+                kdlokasi,kdkabkota,kddekon,kdsoutput,
+                kdkmpnen,kdbiaya,kdsbiaya,urkmpnen,kdtema,
+                rphpls1,rphpls2,rphpls3,rphmin1,thangawal,
+                thangakhir,indekskali,kdib,indeksout,n1,n2,n3,n4,
+                rphn1,rphn2,rphn3,rphn4)			
+                    VALUES ('" . $kmpnen->thang . "','" . $kmpnen->kdjendok . "','" . $kmpnen->kdsatker . "','" . $kmpnen->kddept . "','" . 
+                            $kmpnen->kdunit."','".$kmpnen->kdprogram."','".$kmpnen->kdgiat."','".$kmpnen->kdoutput ."','".
+                            $kmpnen->kdlokasi."','".$kmpnen->kdkabkota."','".$kmpnen->kddekon."','".$kmpnen->kdsoutput ."','".
+                            $kmpnen->kdkmpnen."','".$kmpnen->kdbiaya."','".$kmpnen->kdsbiaya."','".$kmpnen->urkmpnen ."','".
+                            $kmpnen->kdtema."','".$kmpnen->rphpls1."','".$kmpnen->rphpls2."','".$kmpnen->rphpls3 ."','".
+                            $kmpnen->rphmin1."','".$kmpnen->thangawal."','".$kmpnen->thangakhir."','".$kmpnen->indekskali."','".
+                            $kmpnen->kdib."','".$kmpnen->indeksout."','".$kmpnen->n1."','".$kmpnen->n2."','".
+                            $kmpnen->n3."','".$kmpnen->n4."','".$kmpnen->rphn1."','".$kmpnen->rphn2."','".$kmpnen->rphn3."','".
+                            $kmpnen->rphn4."')");
+
             }
     }
+
+    function xml_d_skmpnen($kdsatker,$name){
+
+        $this->db->where('kdsatker', $kdsatker);
+        $this->db->delete('d_skmpnen');
+    
+        $dir = FCPATH.'assets/temp_folder/'.$kdsatker.'/';
+    
+        $tmp= substr($name,4,17);
+        $file = str_replace("_","",$tmp);
+    
+        $my_xml = simplexml_load_file($dir . "d_skmpnen".$file.".xml");
+    
+        foreach($my_xml->c_skmpnen as $skmpnen) {
+                $this->db->query("INSERT INTO d_skmpnen(thang,kdjendok,kdsatker,kddept,
+                kdunit,kdprogram,kdgiat,kdoutput,
+                kdlokasi,kdkabkota,kddekon,kdsoutput,
+                kdkmpnen,kdskmpnen,urskmpnen,kdib)			
+                    VALUES ('" . $skmpnen->thang . "','" . $skmpnen->kdjendok . "','" . $skmpnen->kdsatker . "','" . $skmpnen->kddept . "','" . 
+								$skmpnen->kdunit."','".$skmpnen->kdprogram."','".$skmpnen->kdgiat."','".$skmpnen->kdoutput ."','".
+								$skmpnen->kdlokasi."','".$skmpnen->kdkabkota."','".$skmpnen->kddekon."','".$skmpnen->kdsoutput ."','".
+								$skmpnen->kdkmpnen."','".$skmpnen->kdskmpnen."','".$skmpnen->urskmpnen."','".$skmpnen->kdib."')");
+    
+            }
+
+             //unlink semua file dr temp folder/session(kdsatker)
+
+            $files = glob(FCPATH.'/assets/temp_folder/'.$kdsatker.'/*'); // get all file names
+            foreach($files as $file){ // iterate files
+            if(is_file($file)) {
+                unlink($file); // delete file
+                    }
+                }
+        }
 
 }

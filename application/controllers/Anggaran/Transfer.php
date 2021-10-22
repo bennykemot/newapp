@@ -87,7 +87,10 @@ class Transfer extends CI_Controller {
             $this->Transfer->h_pagu($kdsatker, $no_revisi, $revisiKe);
         }
 
-        $this->Transfer->xml($kdsatker,$name);
+        $this->Transfer->xml_d_item($kdsatker,$name);
+        $this->Transfer->xml_d_soutput($kdsatker,$name);
+        $this->Transfer->xml_d_kmpnen($kdsatker,$name);
+        $this->Transfer->xml_d_skmpnen($kdsatker,$name);
 
     }
 

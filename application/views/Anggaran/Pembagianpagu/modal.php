@@ -7,7 +7,7 @@
           <form class="col s12" id="FormPagu">
             <div class="row">
 
-            <div class="input-field col s12">
+            <div class="input-field col s12" hidden>
                 <div class="input-field col s2">Nama User</div>
 
                 <div class="input-field col s10 " >
@@ -15,7 +15,7 @@
                 </div>
             </div>
 
-            <div class="input-field col s12">
+            <div class="input-field col s12" hidden>
                 <div class="input-field col s2">Satker</div>
 
                 <div class="input-field col s10 " >
@@ -83,7 +83,7 @@
           <form class="col s12" id="FormPagu_Edit">
             <div class="row">
 
-            <div class="input-field col s12">
+            <div class="input-field col s12" hidden>
                 <div class="input-field col s2">Nama User</div>
 
                 <div class="input-field col s10 " >
@@ -91,7 +91,7 @@
                 </div>
             </div>
 
-            <div class="input-field col s12">
+            <div class="input-field col s12" hidden>
                 <div class="input-field col s2">Satker</div>
 
                 <div class="input-field col s10 " >

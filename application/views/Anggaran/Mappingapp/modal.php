@@ -33,7 +33,7 @@
                 </div>
             </div>
 
-            <div class="input-field col s12">
+            <div class="input-field col s12" hidden>
                 <div class="input-field col s2">kodeindex</div>
 
                 <div class="input-field col s10 " >
@@ -86,7 +86,7 @@
                 </div>
             </div>
 
-            <div class="input-field col s12">
+            <div class="input-field col s12" hidden>
                 <div class="input-field col s2">kodeindex</div>
 
                 <div class="input-field col s10 " >
@@ -94,7 +94,7 @@
                 </div>
             </div>
 
-            <div class="input-field col s12">
+            <div class="input-field col s12" hidden>
                 <div class="input-field col s2">Id</div>
 
                 <div class="input-field col s10 " >
