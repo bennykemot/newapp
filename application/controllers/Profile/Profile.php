@@ -18,9 +18,10 @@ class Profile extends CI_Controller {
 
     public function getUser()
     {
-		// $kdsatker = $_POST['kdsatker'];
-        $list = $this->Profile->get_datatables();
+		$kdsatker = $_POST['kdsatker'];
+        $list = $this->Profile->get_datatables($kdsatker);
         $data = array();
+        
         $no = $_POST['start'];
         foreach ($list as $customers) {
             $no++;
@@ -40,8 +41,8 @@ class Profile extends CI_Controller {
  
         $output = array(
                         "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->Profile->count_all(),
-                        "recordsFiltered" => $this->Profile->count_filtered(),
+                        "recordsTotal" => $this->Profile->count_all($kdsatker),
+                        "recordsFiltered" => $this->Profile->count_filtered($kdsatker),
                         "data" => $data,
                 );
         //output to json format
@@ -80,10 +81,31 @@ class Profile extends CI_Controller {
 
         }else if($Trigger == "R"){
             $id = $this->input->post('id');
-            $where = array('id' => $id);
+            $where = array('user.id' => $id);
             $output = $this->Profile->CRUD($where,'user', $Trigger);
             echo json_encode($output);
             
+        }else if($Trigger == "U"){
+
+            $id         = $this->input->post('idUser');
+            $username         = $this->input->post('nama_user_Edit');
+            $kdsatker  = $this->input->post('kdsatker_Edit');
+            $kdrole   = $this->input->post('kdrole_Edit');
+            $kdstatus  = $this->input->post('kdstatus_Edit');
+            $password     = $this->input->post('password_Edit');
+            $keterangan   = $this->input->post('keterangan_Edit');
+
+            $data = array(
+                'username' => $username,
+                'password' => $password,
+                'kdsatker' => $kdsatker,
+                'role_id' => $kdrole,
+                'status' => $kdstatus,
+                'keterangan' => $keterangan
+                
+                );
+            $where = array('id' => $id);
+	        $this->Profile->update($data,'user', $where);
         }
 
         

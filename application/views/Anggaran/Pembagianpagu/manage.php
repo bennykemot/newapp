@@ -6,7 +6,7 @@
  <div class="col s12">
         <div class="card">
           <div class="card-content" style="height: 90px">
-            <h6 class="col s10">Mapping APP Satker : <?php echo $this->session->userdata("nmsatker"); ?></h6>
+            <h6 class="col s10">Pembagian Pagu Satker : <?php echo $this->session->userdata("nmsatker"); ?></h6>
             <a class="btn modal-trigger col s2" href="#modal2">Tambah Data</a>
           </div>
         </div>

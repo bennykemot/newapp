@@ -87,8 +87,15 @@ class Dropdown extends CI_Controller {
       // Search term
       $searchTerm = $this->input->post('searchTerm');
 
+      $Trigger = $this->input->post('Trigger');
+      if($Trigger == "user_profile"){
+         $kdsatker = $this->input->post('session_satker');
+      }else{
+         $kdsatker = "";
+      }
+
       // Get users
-      $response = $this->Dropdown->getData_satker($searchTerm);
+      $response = $this->Dropdown->getData_satker($searchTerm, $kdsatker, $Trigger);
 
       echo json_encode($response);
    }
@@ -114,4 +121,17 @@ class Dropdown extends CI_Controller {
 
       echo json_encode($response);
    }
+
+   public function user(){
+
+      // Search term
+      $searchTerm = $this->input->post('searchTerm');
+      $kdsatker = $this->input->post('session_satker');
+
+      // Get users
+      $response = $this->Dropdown->getData_user($searchTerm, $kdsatker);
+
+      echo json_encode($response);
+   }
+
 }

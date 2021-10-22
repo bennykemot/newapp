@@ -68,9 +68,9 @@ function Reset(idForm) {
                 { data: "status",
               render: function (data, type, row, meta) {
                   if(data == 1){
-                    return '<button type="button" class="btn-floating mb-1 waves-effect waves-light green" onclick="show_doc_pendidikan(\''+row.kdsatker+'\')"><i class="material-icons">check</i></button>'
+                    return '<button type="button" class="btn-floating mb-1 waves-effect waves-light blue"><i class="material-icons">check</i></button>'
                     }else{
-                        return '<button type="button" class="btn-floating mb-1 waves-effect waves-light red" onclick="show_doc_pendidikan(\''+row.kdsatker+'\')"><i class="material-icons">do_not_disturb</i></button>';
+                        return '<button type="button" class="btn-floating mb-1 waves-effect waves-light orange"><i class="material-icons">do_not_disturb</i></button>';
                     }
                     
                   }
@@ -126,7 +126,9 @@ function Reset(idForm) {
            delay: 250,
            data: function (params) {
               return {
-                searchTerm: params.term // search term
+                searchTerm: params.term ,
+                session_satker : satker_session,
+                Trigger : "user_profile"// search term
               };
            },
            processResults: function (response) {
@@ -291,8 +293,19 @@ $.ajax({
                 var satker = $("<option selected='selected'></option>").val(data['kdsatker']).text(data['kdsatker']+' - '+data['nmsatker'])
                 $("#satker-select2_Edit").append(satker).trigger('change');
 
-                var role = $("<option selected='selected'></option>").val(data['role_id']).text(data['role_id']+' - '+data['role_id'])
+                var role = $("<option selected='selected'></option>").val(data['role_id']).text(data['role_id']+' - '+data['rolename'])
                 $("#role-select2_Edit").append(role).trigger('change');
+
+                if(data['status'] == 1){
+                  var textt = "Aktif"
+                }else{
+                  var textt = "Non - Aktif"
+                }
+
+                var status = $("<option selected='selected'></option>").val(data['status']).text(textt)
+                $("#status-select2_Edit").append(status).trigger('change');
+
+                $('#idUser').val(Id);
 
               $('#modalEdit').modal('open');
           
@@ -301,6 +314,38 @@ $.ajax({
   });
 
 }
+
+$("#EditUser").click(function (e) {
+  e.preventDefault();
+
+  var btn = $(this);
+  var form = $(this).closest("form");
+  var formData = new FormData($("#FormUser_Edit")[0]);
+  var IdForm =  "FormUser_Edit";
+
+  btn
+    .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
+    .attr("disabled", true);
+
+  formData.append('Trigger', 'U')
+
+  $.ajax({
+    type: "POST",
+    data: formData,
+    url: baseurl + "Action",
+    processData: false,
+    contentType: false,
+    success: function (data, textStatus, jqXHR) {
+              show_msg(textStatus);
+              $('#modalEdit').modal('close');
+              set_grid_tabel(false);
+              Reset(IdForm);
+              
+              
+          },
+          error: function (jqXHR, textStatus, errorThrown) { },
+      });
+});
 
   function Delete(Id) {
     swal({

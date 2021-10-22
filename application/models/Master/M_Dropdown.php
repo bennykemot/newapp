@@ -103,13 +103,14 @@ function getData_komponen($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdoupu
    return $data;
 }
 
-function getData_satker($searchTerm=""){
+function getData_satker($searchTerm="", $kdsatker, $Trigger){
 
    // Fetch users
    $this->db->select('kdsatker');
    $this->db->select('nmsatker');
+   $this->db->where("kdsatker",$kdsatker);
    $this->db->where("nmsatker like '%".$searchTerm."%' ");
-   $this->db->or_where("kdsatker like '%".$searchTerm."%' ");
+   $this->db->where("kdsatker like '%".$searchTerm."%' ");
    $fetched_records = $this->db->get('t_satker');
    $users = $fetched_records->result_array();
 
@@ -128,7 +129,7 @@ function getData_role($searchTerm=""){
    $this->db->select('rolename');
    $this->db->where("rolename like '%".$searchTerm."%' ");
    $this->db->or_where("id like '%".$searchTerm."%' ");
-   $fetched_records = $this->db->get('role');
+   $fetched_records = $this->db->get('t_role');
    $users = $fetched_records->result_array();
 
    // Initialize Array with fetched data
@@ -153,6 +154,24 @@ function getData_app($searchTerm=""){
    $data = array();
    foreach($users as $user){
       $data[] = array("id"=>$user['id'], "text"=>$user['id']. ' - ' .$user['nama_app']);
+   }
+   return $data;
+}
+
+function getData_user($searchTerm="", $kdsatker){
+
+   // Fetch users
+   $this->db->select('id');
+   $this->db->select('username');
+   $this->db->where("kdsatker", $kdsatker);
+   $this->db->where("username like '%".$searchTerm."%' ");
+   $fetched_records = $this->db->get('user');
+   $users = $fetched_records->result_array();
+
+   // Initialize Array with fetched data
+   $data = array();
+   foreach($users as $user){
+      $data[] = array("id"=>$user['id'], "text"=>$user['username']);
    }
    return $data;
 }

@@ -119,8 +119,19 @@ class M_Pembagianpagu extends CI_Model{
 
         }else if($Trigger == "R"){
 
-            return $this->db->get_where($table,$data);
+            
+            $this->db->from($table);
+            $this->db->join('user', 'user.id = '.$table.'.user_id');
+            $this->db->where($data);
+            $query = $this->db->get();
+    
+            return $query->row();
+
         }
 	}
+
+    public function Update($data, $table, $where){
+        $this->db->update($table, $data, $where); 
+    }
 
 }

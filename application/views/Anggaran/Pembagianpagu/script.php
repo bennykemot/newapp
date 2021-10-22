@@ -129,6 +129,31 @@ var grid_detail = "#tabel_anggaran";
 
         // SELECT2 INSERT
 
+        $("#user-select2").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih User",
+          dropdownParent: "#modal2",
+         ajax: { 
+           url: dropdown_baseurl + 'user',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+                session_satker: satker_session,
+                searchTerm: params.term // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
         $("#program-select2").select2({
           dropdownAutoWidth: true,
           width: '100%',
@@ -271,6 +296,31 @@ var grid_detail = "#tabel_anggaran";
 
 
      // SELECT2 UPDATE
+
+     $("#user-select2_Edit").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih User",
+          dropdownParent: "#modalEdit",
+         ajax: { 
+           url: dropdown_baseurl + 'user',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+                session_satker: satker_session,
+                searchTerm: params.term // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
 
 
      $("#program-select2_Edit").select2({
@@ -455,12 +505,22 @@ function Edit(Id){
         dataType: "JSON",
         success: function(data)
             {
+                var user = $("<option selected='selected'></option>").val(data['user_id']).text(data['username'])
+                var program = $("<option selected='selected'></option>").val(data['kdprogram']).text(data['kdprogram'])
+                var kegiatan = $("<option selected='selected'></option>").val(data['kdgiat']).text(data['kdgiat'])
+                var kro = $("<option selected='selected'></option>").val(data['kdoutput']).text(data['kdoutput'])
+                var ro = $("<option selected='selected'></option>").val(data['kdsoutput']).text(data['kdsoutput'])
+                var komponen = $("<option selected='selected'></option>").val(data['kdkmpnen']).text(data['kdkmpnen'])
 
-            // var unit = $("<option selected='selected'></option>").val(data[0].id_unit).text(data[0].nama_unitkerja)
-            //     $('#id_unit').val(data[0].id_unit);
-            //     $('#kode_index').val(kdIndex);
-            //     $('#trigger').val(Trigger);
-            //     $("#unitselect2").append(unit).trigger('change');
+                $("#user-select2_Edit").append(user).trigger('change');
+                $("#program-select2_Edit").append(program).trigger('change');
+                $("#kegiatan-select2_Edit").append(kegiatan).trigger('change');
+                $("#kro-select2_Edit").append(kro).trigger('change');
+                $("#ro-select2_Edit").append(ro).trigger('change');
+                $("#komponen-select2_Edit").append(komponen).trigger('change');
+
+                $("#idPagu").val(Id);
+
                 $('#modalEdit').modal('open');
             
             
@@ -468,6 +528,38 @@ function Edit(Id){
     });
 
 }
+
+$("#EditPagu").click(function (e) {
+  e.preventDefault();
+
+  var btn = $(this);
+  var form = $(this).closest("form");
+  var formData = new FormData($("#FormPagu_Edit")[0]);
+  var IdForm =  "FormPagu_Edit";
+
+  btn
+    .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
+    .attr("disabled", true);
+
+  formData.append('Trigger', 'U')
+
+  $.ajax({
+    type: "POST",
+    data: formData,
+    url: baseurl + "Action",
+    processData: false,
+    contentType: false,
+    success: function (data, textStatus, jqXHR) {
+              show_msg(textStatus);
+              $('#modalEdit').modal('close');
+              set_grid_tabel(false);
+              Reset(IdForm);
+              
+              
+          },
+          error: function (jqXHR, textStatus, errorThrown) { },
+      });
+});
 
 function Delete(Id) {
     swal({

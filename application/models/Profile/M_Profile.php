@@ -19,7 +19,7 @@ class M_Profile extends CI_Model{
 	}
 
 
-    private function _get_datatables_query()
+    private function _get_datatables_query($kdsatker)
     {
         $this->db->select('t_satker.nmsatker');
         $this->db->select('t_satker.kdsatker');
@@ -35,7 +35,7 @@ class M_Profile extends CI_Model{
         $this->db->from($this->table);
         $this->db->join('t_satker', 't_satker.kdsatker = user.kdsatker');
         $this->db->join('role', 'role.id = user.role_id');
-       // $this->db->where('kdsatker', '450491');
+        $this->db->where('user.kdsatker', $kdsatker);
  
         $i = 0;
      
@@ -71,23 +71,23 @@ class M_Profile extends CI_Model{
         }
     }
  
-    function get_datatables()
+    function get_datatables($kdsatker)
     {
-        $this->_get_datatables_query();
+        $this->_get_datatables_query($kdsatker);
         if($_POST['length'] != -1)
         $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
         return $query->result();
     }
  
-    function count_filtered()
+    function count_filtered($kdsatker)
     {
-        $this->_get_datatables_query();
+        $this->_get_datatables_query($kdsatker);
         $query = $this->db->get();
         return $query->num_rows();
     }
  
-    public function count_all()
+    public function count_all($kdsatker)
     {
         $this->db->from($this->table);
         return $this->db->count_all_results();
@@ -107,10 +107,28 @@ class M_Profile extends CI_Model{
 
         }else if($Trigger == "R"){
 
+            $this->db->select('t_satker.nmsatker');
+            $this->db->select('t_satker.kdsatker');
+    
+            $this->db->select('user.id');
+            $this->db->select('user.password');
+            $this->db->select('user.username');
+            $this->db->select('user.role_id');
+            $this->db->select('user.keterangan');
+            $this->db->select('user.status');
+            $this->db->select('role.rolename');
+            
+            
             $this->db->from($table);
-            $this->db->join('t_satker', 't_satker.kdsatker = '.$table.'.kdsatker');
-            // $this->db->join('role', 'role.id = '.$table.'.role_id');
+            $this->db->join('t_satker', 't_satker.kdsatker = user.kdsatker');
+            $this->db->join('role', 'role.id = user.role_id');
             $this->db->where($data);
+
+
+            // $this->db->from($table);
+            // $this->db->join('t_satker', 't_satker.kdsatker = '.$table.'.kdsatker');
+            // // $this->db->join('role', 'role.id = '.$table.'.role_id');
+            // $this->db->where($data);
             $query = $this->db->get();
     
             return $query->row();
@@ -118,5 +136,9 @@ class M_Profile extends CI_Model{
             //return $this->db->get_where($table,$data)->row();
         }
 	}
+
+    public function Update($data, $table, $where){
+        $this->db->update($table, $data, $where); 
+    }
 
 }

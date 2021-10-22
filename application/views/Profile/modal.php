@@ -11,7 +11,7 @@
                         <div class="input-field col s2">Nama User</div>
 
                         <div class="input-field col s10 " >
-                          <input placeholder="Nama User" id="nama_user" id="nama_user" type="text" class="validate">
+                          <input placeholder="Nama User" id="nama_user" name="nama_user" type="text" class="validate">
                         </div>
                     </div>
 
@@ -70,7 +70,7 @@
 
           <div id="modalEdit" class="modal">
             <div class="modal-content">
-              <h4>Tambah User</h4>
+              <h4>Ubah User</h4>
               <div style="padding-top: 10px"></div>
                 <div class="row">
 
@@ -89,7 +89,7 @@
                         <div class="input-field col s2" >Satker</div>
 
                         <div class="input-field col s10" >
-                          <select id="satker-select2_Edit" name="kdsatker_Edit" class="browser-default"></select>
+                          <select id="satker-select2_Edit" name="kdsatker_Edit" class="browser-default" readonly></select>
                           </div>
                       </div>
 
@@ -125,6 +125,8 @@
                         </div>
                     </div>
 
+                    <input placeholder="idUser" id="idUser" name="idUser" type="text" hidden>
+
 
 
 
@@ -133,7 +135,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-              <button id="UpdateUser" class="waves-effect waves-light btn"><i class="material-icons left">done</i> Simpan</button>
+              <button id="EditUser" class="waves-effect waves-light btn"><i class="material-icons left">done</i> Simpan</button>
               <a class="modal-action modal-close red btn">Batal</a>
             </div>
           </div>

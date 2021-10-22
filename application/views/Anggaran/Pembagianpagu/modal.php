@@ -7,13 +7,21 @@
           <form class="col s12" id="FormPagu">
             <div class="row">
 
-            <div class="input-field col s12" hidden>
+            <!-- <div class="input-field col s12">
                 <div class="input-field col s2">Nama User</div>
 
                 <div class="input-field col s10 " >
                   <input placeholder="Nama User" id="nama_user" name="nama_user" type="text" value="<?=$this->session->userdata("user_id")?>">
                 </div>
-            </div>
+            </div> -->
+
+            <div class="input-field col s12">
+                <div class="input-field col s2" >Nama User</div>
+
+                <div class="input-field col s10 " >
+                  <select  id="user-select2" name="nama_user" class="browser-default"></select>
+                  </div>
+              </div>
 
             <div class="input-field col s12" hidden>
                 <div class="input-field col s2">Satker</div>
@@ -83,13 +91,13 @@
           <form class="col s12" id="FormPagu_Edit">
             <div class="row">
 
-            <div class="input-field col s12" hidden>
-                <div class="input-field col s2">Nama User</div>
+            <div class="input-field col s12">
+                <div class="input-field col s2" >Nama User</div>
 
                 <div class="input-field col s10 " >
-                  <input placeholder="Nama User" id="nama_user_Edit" name="nama_user_Edit" type="text" value="<?=$this->session->userdata("user_id")?>">
-                </div>
-            </div>
+                  <select  id="user-select2_Edit" name="nama_user" class="browser-default"></select>
+                  </div>
+              </div>
 
             <div class="input-field col s12" hidden>
                 <div class="input-field col s2">Satker</div>
@@ -138,6 +146,8 @@
                   <select  id="komponen-select2_Edit" name="kdkomponen_Edit" class="browser-default"></select>
                   </div>
               </div>
+
+              <input placeholder="idPagu" id="idPagu" name="idPagu" type="text" hidden>
 
 
             </div>
