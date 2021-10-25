@@ -98,7 +98,7 @@ $assets 	= $this->config->item('assets_url');
     
 }
 #pagination li a.active {
-  background-color: #03a9f4;
+  /* background-color: #03a9f4; */
   color: #fff
 }
 #pagination li a:hover:not(.active) {

@@ -33,7 +33,7 @@ class MappingApp extends CI_Controller {
         $config['full_tag_close'] = '</ul>';
         $config['num_tag_open'] = '<li >';
         $config['num_tag_close'] = '</li>';
-        $config['cur_tag_open'] = '<li class="active" ><a>';
+        $config['cur_tag_open'] = '<li><a>';
         $config['cur_tag_close'] = '</a></li>';
         $config['prev_tag_open'] = '<li >';
         $config['prev_tag_close'] = '</li>';
