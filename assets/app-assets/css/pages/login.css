@@ -2,7 +2,7 @@
     Login Page
 ------------------------------------------*/
 .login-bg {
-  background-image: url("../../images/gallery/flat-bg.jpg");
+  background-image: url("../../../app-assets/images/gallery/3.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
