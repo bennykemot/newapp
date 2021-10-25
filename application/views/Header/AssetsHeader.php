@@ -93,7 +93,8 @@ $assets 	= $this->config->item('assets_url');
 #pagination li a {
   border-radius: 5px;
   -webkit-transition: background-color 0.3s;
-  transition: background-color 0.3s
+  transition: background-color 0.3s;
+ 
     
 }
 #pagination li a.active {

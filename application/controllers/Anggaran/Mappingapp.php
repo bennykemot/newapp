@@ -22,16 +22,18 @@ class MappingApp extends CI_Controller {
 
         $satker = $this->uri->segment(4);
 
-        $jumlah_data = $this->Mappingapp->Jum();
+        $jumlah_data = $this->Mappingapp->Jum($satker);
         $config['base_url'] = base_url().'Anggaran/Mappingapp/Page/'.$satker.'';
 		$config['total_rows'] = $jumlah_data;
 		$config['per_page'] = 10;
 
-        $config['full_tag_open'] = "<ul id='pagination'>";
+        $config['first_url'] = '1';
+
+        $config['full_tag_open'] = "<ul id='pagination' class='pagination'>";
         $config['full_tag_close'] = '</ul>';
         $config['num_tag_open'] = '<li >';
         $config['num_tag_close'] = '</li>';
-        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_open'] = '<li class="active" ><a>';
         $config['cur_tag_close'] = '</a></li>';
         $config['prev_tag_open'] = '<li >';
         $config['prev_tag_close'] = '</li>';
@@ -52,7 +54,7 @@ class MappingApp extends CI_Controller {
         $config['next_tag_close'] = '</li>';
 
 
-		$from =  ($this->uri->segment(5)) ? $this->uri->segment(5) : 0;
+		$from =  $this->uri->segment(5);
 		$this->pagination->initialize($config);
 
         $kdsatker =  $satker;

@@ -29,7 +29,21 @@
 
       <script src="https://cdn.datatables.net/rowgroup/1.1.3/js/dataTables.rowGroup.min.js"></script>
 
+      <script type="text/javascript" src="<?= base_url().'assets'?>/app-assets/js/jquery.idle.js"></script>
 
-    
+      <script>
+        
+        // setTimeout(function(){ swal({
+        //     title:"Session Habis silahlkan login kembali ! ", 
+        //     icon: "warning",
+        //     timer: 2000
+        //     })
+        //   }, 60000);
+
+        //setTimeout(function(){ alert("Hello"); }, 3000);
+      
+      </script>
+
   </body>
 </html>
+

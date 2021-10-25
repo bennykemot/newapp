@@ -4,7 +4,7 @@
         <nav class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-light">
           <div class="nav-wrapper">
             <div class="header-search-wrapper hide-on-med-and-down">
-              <h6> <?= $this->session->userdata("username"); ?></h6>
+              <h6>Badan Pengawasan Keuangan dan Pembangunan</h6>
             </div>
             <ul class="navbar-list right">
               <li><a class="waves-effect waves-block waves-light notification-button" href="javascript:void(0);" data-target="notifications-dropdown"><i class="material-icons">notifications_none<small class="notification-badge">5</small></i></a></li>

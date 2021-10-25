@@ -30,6 +30,24 @@ $('.btn-upload').click(function (e) {
     
    
     var revisiKe = "";
+    var file = $('#shad_file').val();
+    if (!file) {
+            swal("File Belum di Upload", "Upload File Dengan Benar !", "info")
+            return false;
+        }else{
+            var name = file.split(".");
+            var ext = name[1];
+            var name_file = name[0];
+
+            var cek_satker = name_file.substring(19,13);
+            if(cek_satker !=  satker_session){
+                swal("Kode Satker Salah", "nama file harus sesuai dgn kdsatker", "warning")
+                return false;
+            }
+            
+        }
+
+        
      $.ajax({
         url : baseurl + 'getPagu_Norevisi',
         type : "POST",

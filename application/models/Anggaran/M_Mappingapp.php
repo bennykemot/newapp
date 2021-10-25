@@ -14,8 +14,9 @@ class M_Mappingapp extends CI_Model{
      
     }
 
-    function Jum(){
-		return $this->db->get($this->table)->num_rows();
+    function Jum($satker){
+		 $this->db->where('kdsatker',$satker);
+         return $this->db->get($this->table)->num_rows();
 	}
 
 

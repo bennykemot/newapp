@@ -4,6 +4,7 @@
 					<!-- card stats start -->
 					<div id="card-stats" class="pt-0">
 						<div class="row">
+						<?php echo $this->session->userdata("last_visited"); ?>
 							<div class="col s12 m6 l3">
 								<div class="card animate fadeLeft">
 									<div class="card-content cyan white-text">
