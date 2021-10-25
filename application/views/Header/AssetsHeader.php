@@ -17,8 +17,8 @@ $assets 	= $this->config->item('assets_url');
     <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
     <meta name="author" content="ThemeSelect">
     <title>Manajemen Keuangan - 2022</title>
-    <link rel="apple-touch-icon" href="<?= base_url().'assets'?>/app-assets/images/favicon/apple-touch-icon-152x152.png">
-    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url().'assets'?>/app-assets/images/favicon/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2.png">
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2.png">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/css/pages/login.css">
@@ -74,36 +74,39 @@ $assets 	= $this->config->item('assets_url');
   text-align: center;
 }
 
-#pagination {
-  /* margin: 0; */
+.pagination {
   padding: 0;
   text-align: right
 }
-#pagination li {
-  display: inline
+
+.pagination li {
+  display: inline;
+  padding-left : 10px;
 }
-#pagination li a {
+
+.pagination li a {
   display: inline-block;
   text-decoration: none;
   padding: 5px 10px;
   color: #000
 }
 
-/* Active and Hoverable Pagination */
-#pagination li a {
+.pagination a.active {
+  background-color: #03a9f4;
+  color: #fff
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #03a9f4;
+}
+
+.pagination li a {
   border-radius: 5px;
   -webkit-transition: background-color 0.3s;
   transition: background-color 0.3s;
  
     
 }
-#pagination li a.active {
-  /* background-color: #03a9f4; */
-  color: #fff
-}
-#pagination li a:hover:not(.active) {
-  background-color: #03a9f4;
-} 
 
 /* border-pagination */
 .b-pagination-outer {

@@ -68,9 +68,9 @@ function Reset(idForm) {
                 { data: "status",
               render: function (data, type, row, meta) {
                   if(data == 1){
-                    return '<button type="button" class="btn-floating mb-1 waves-effect waves-light blue"><i class="material-icons">check</i></button>'
+                    return '<button type="button" class="btn-floating mb-1 blue"><i class="material-icons">check</i></button>'
                     }else{
-                        return '<button type="button" class="btn-floating mb-1 waves-effect waves-light orange"><i class="material-icons">do_not_disturb</i></button>';
+                        return '<button type="button" class="btn-floating mb-1 orange"><i class="material-icons">do_not_disturb</i></button>';
                     }
                     
                   }
