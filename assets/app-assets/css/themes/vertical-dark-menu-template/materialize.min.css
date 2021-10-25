@@ -4419,7 +4419,7 @@ h6 {
 .card,
 .card-panel {
     margin: .5rem 0 1rem;
-    border-radius: 2px;
+    border-radius: 10px;
     background-color: #fff
 }
 

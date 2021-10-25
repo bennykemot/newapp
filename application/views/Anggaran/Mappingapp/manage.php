@@ -3,20 +3,22 @@
 <!-- Page Length Options -->
  <div class="row">
 
-  <div class="col s12">
+ <div class="col s12">
         <div class="card">
-          <div class="card-content">
-            <h6>Mapping APP Satker : <?php echo $this->session->userdata("nmsatker"); ?></h6>
-
-            <div class="card-alert card cyan lighten-5">
-                <div class="card-content cyan-text">
+          <div class="card-content" style="height: 90px; padding: 0px !important">
+            <div class="col s1 display-flex justify-content-end" style="height: 100%;padding: 24px;padding-right: 34px; border-radius: 10px" >
+              <button type="button" class="btn-floating" style=""><i class="material-icons">
+              view_comfy
+                </i></button>
+            </div>
+            <div class="col s9" style="padding-top: 24px">
+              <h6> Mapping APP Satker : <?php echo $this->session->userdata("nmsatker"); ?></h6>
                   <p><?php echo $this->session->userdata("keterangan"); ?></p>
-                </div>
-              </div>
+            </div>
           </div>
         </div>
   </div>
-   
+
     <div class="col s12">
       <div class="card">
         <div class="card-content">
