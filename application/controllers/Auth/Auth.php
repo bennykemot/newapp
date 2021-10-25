@@ -25,6 +25,7 @@ class Auth extends CI_Controller{
 				'kdsatker' => $session[0]->kdsatker,
 				'nmsatker' => $session[0]->nmsatker,
 				'user_id' => $session[0]->id,
+				'keterangan' => $session[0]->keterangan,
 				'status' => "login"
 				);
 

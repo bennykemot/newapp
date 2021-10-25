@@ -123,22 +123,15 @@ class M_Profile extends CI_Model{
             $this->db->join('t_satker', 't_satker.kdsatker = user.kdsatker');
             $this->db->join('role', 'role.id = user.role_id');
             $this->db->where($data);
-
-
-            // $this->db->from($table);
-            // $this->db->join('t_satker', 't_satker.kdsatker = '.$table.'.kdsatker');
-            // // $this->db->join('role', 'role.id = '.$table.'.role_id');
-            // $this->db->where($data);
             $query = $this->db->get();
     
             return $query->row();
-
-            //return $this->db->get_where($table,$data)->row();
         }
 	}
 
     public function Update($data, $table, $where){
         $this->db->update($table, $data, $where); 
     }
+
 
 }

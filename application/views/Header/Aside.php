@@ -136,7 +136,7 @@
         <li class="navigation-header"><a class="navigation-header-text">Pengaturan </a><i class="navigation-header-icon material-icons">more_horiz</i>
         </li>
         
-        <li class="bold"><a class="waves-effect waves-cyan " href="<?= site_url('Profile/Profile')?>"><i class="material-icons">import_contacts</i><span class="menu-title" data-i18n="Documentation">Penggunan</span></a>
+        <li class="bold"><a class="waves-effect waves-cyan " href="<?= site_url('Profile/Profile/')?>"><i class="material-icons">import_contacts</i><span class="menu-title" data-i18n="Documentation">Penggunan</span></a>
         </li>
 
         <li class="bold"><a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)"><i class="material-icons">photo_filter</i><span class="menu-title" data-i18n="Menu levels">Utility</span></a>

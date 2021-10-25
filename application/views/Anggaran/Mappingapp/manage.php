@@ -7,6 +7,12 @@
         <div class="card">
           <div class="card-content">
             <h6>Mapping APP Satker : <?php echo $this->session->userdata("nmsatker"); ?></h6>
+
+            <div class="card-alert card cyan lighten-5">
+                <div class="card-content cyan-text">
+                  <p><?php echo $this->session->userdata("keterangan"); ?></p>
+                </div>
+              </div>
           </div>
         </div>
   </div>

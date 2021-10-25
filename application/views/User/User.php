@@ -17,22 +17,6 @@
     <div class="container">
                 <!-- users view start -->
         <div class="section users-view">
-            <!-- users view media object start -->
-            <!-- <div class="card-panel">
-              <div class="row">
-                <div class="col s12 m7">
-                  <div class="display-flex media">
-                    <div class="media-body">
-                      <h6 class="media-heading">
-                        <span class="users-view-name"><?php echo $this->session->userdata("username"); ?></span>
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-            <!-- users view media object ends -->
-            <!-- users view card data start -->
             <div class="card">
               <div class="card-content">
                 <div class="row">
@@ -42,34 +26,40 @@
                         <tbody>
                           <tr>
                             <td>Username:</td>
-                            <td><?php echo $this->session->userdata("username"); ?></td>
+                            <td><?= $user->username?></td>
                           </tr>
                           <tr>
                             <td>Password:</td>
-                            <td class="users-view-latest-activity"><?php echo $this->session->userdata("password"); ?></td>
+                            <td class="users-view-latest-activity"><?= $user->password?><td>
                           </tr>
                           <tr>
                             <td>Role:</td>
-                            <td class="users-view-verified"><?php echo $this->session->userdata("username"); ?></td>
+                            <td class="users-view-verified"><?= $user->rolename?></td>
                           </tr>
                           <tr>
                             <td>Kode Satker:</td>
-                            <td class="users-view-role"><?php echo $this->session->userdata("kdsatker"); ?></td>
+                            <td class="users-view-role"><?= $user->kdsatker?></td>
                           </tr>
                           <tr>
                             <td>Nama Satker:</td>
-                            <td class="users-view-role"><?php echo $this->session->userdata("nmsatker"); ?></td>
+                            <td class="users-view-role"><?= $user->nmsatker?></td>
                           </tr>
                           <tr>
-                            <td>Status:</td>
+                            <td>Status User:</td>
+                            <?php if($user->status == 1) {?>
                             <td><span class=" users-view-status chip green lighten-5 green-text">Aktif</span></td>
+
+                            <?php }else{ ?>
+                              <td><span class=" users-view-status chip red lighten-5 red-text">Non - Aktif</span></td>
+
+                              <?php }?>
                           </tr>
                         </tbody>
                       </table>
                     </div>
                     <div class="col s4">
                       <div class="col s12 quick-action-btns display-flex justify-content-end align-items-center pt-2">
-                        <a href="page-users-edit.html" class="btn-small indigo">Edit</a>
+                        <a class="btn-small indigo">Edit</a>
                       </div>
                     </div>
                   </div>
