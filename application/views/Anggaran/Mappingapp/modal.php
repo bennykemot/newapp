@@ -48,7 +48,7 @@
         </div>
     </div>
     <div class="modal-footer">
-      <button id="TambahApp" class="waves-effect waves-light btn"><i class="material-icons left">done</i> Simpan</button>
+      <button id="TambahApp" class="btn"><i class="material-icons left">done</i> Simpan</button>
       <a class="modal-action modal-close  red btn">Batal</a>
     </div>
 </div>
@@ -108,7 +108,7 @@
         </div>
     </div>
     <div class="modal-footer">
-      <button id="EditMapping" class="waves-effect waves-light btn"><i class="material-icons left">done</i> Simpan</button>
+      <button id="EditMapping" class="btn"><i class="material-icons left">done</i> Simpan</button>
       <a class="modal-action modal-close  red btn">Batal</a>
     </div>
 </div>

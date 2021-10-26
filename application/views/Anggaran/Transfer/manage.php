@@ -48,6 +48,41 @@
                   </div>
                 </div>
             </div>
+
+            <div class="card-alert card green" id="alert-Pagu" style="display: none">
+                <div class="card-content white-text">
+                  <p>
+                  <i class="material-icons">check</i> BERHASIL : Transfer Pagu.</p>
+                </div>
+            </div>
+
+            <div class="card-alert card green" id="alert-Item" style="display: none">
+                <div class="card-content white-text">
+                  <p>
+                    <i class="material-icons">check</i> BERHASIL : Import Item.</p>
+                </div>
+            </div>
+
+            <div class="card-alert card green" id="alert-SubOutput" style="display: none">
+                <div class="card-content white-text">
+                  <p>
+                    <i class="material-icons">check</i> BERHASIL : Import Sub Output.</p>
+                </div>
+            </div>
+
+            <div class="card-alert card green" id="alert-Komponen" style="display: none">
+                <div class="card-content white-text">
+                  <p>
+                    <i class="material-icons">check</i> BERHASIL : Import Komponen.</p>
+                </div>
+            </div>
+
+            <div class="card-alert card green" id="alert-SubKomponen" style="display: none">
+                <div class="card-content white-text">
+                  <p>
+                    <i class="material-icons">check</i> BERHASIL : Import Sub Komponen.</p>
+                </div>
+            </div>
 </div>
 
 

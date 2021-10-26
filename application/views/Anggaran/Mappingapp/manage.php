@@ -29,10 +29,10 @@
               <table id="tabel" class="bordered striped responsive-table" style="width: 100%">
                   <thead>
                     <tr>
-                        <th>Kode</th>
-                        <th>Uraian</th>
-                        <th>Jumlah</th>
-                        <th>Aksi</th>
+                        <th style="width: 20%" >Kode</th>
+                        <th style="width: 50%" >Uraian</th>
+                        <th style="width: 20%" >Jumlah</th>
+                        <th style="width: 10%" >Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -53,7 +53,7 @@
                                 <td><?php echo $u->uraian ?></td>
                                 <td class="text-right"><?php echo number_format($u->jumlah,0,',','.') ?></td>
                                 <?php if ($u->kdlevel == "7"){ ?>
-                                <td><button type="button" class="btn-floating green text-center" onclick="Add('<?= $u->kdindex ?>')"><i class="material-icons">add</i></button></td>
+                                <td style="text-align: center"><button type="button" class="btn-floating green" onclick="Add('<?= $u->kdindex ?>')"><i class="material-icons">add</i></button></td>
                                 <?php } else{ 
                                   echo '<td></td>';
 

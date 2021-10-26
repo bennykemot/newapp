@@ -3,6 +3,9 @@
 var  baseurl	= "<?= base_url('Anggaran/Transfer/')?>";
 var satker_session = "<?= $this->session->userdata("kdsatker")?>";
 
+
+
+
 function Reset(idForm) {
       document.getElementById(idForm).reset();
     }
@@ -106,13 +109,28 @@ $('.btn-upload').click(function (e) {
             success: function (data, textStatus, jqXHR) {
                 var res = JSON.parse(data)
                 show_msg(res.status, res.msg);
+                $('#alert-Pagu').fadeIn()
+                $('#alert-Item').fadeIn()
+                $('#alert-SubOutput').fadeIn()
+                $('#alert-Komponen').fadeIn()
+                $('#alert-SubKomponen').fadeIn()
+
+                $('#alert-Pagu').addClass('animated fadeOutUp delay-1s');
+                $('#alert-Item').addClass('animated fadeOutUp delay-2s');
+                $('#alert-SubOutput').addClass('animated fadeOutUp delay-3s');
+                $('#alert-Komponen').addClass('animated fadeOutUp delay-4s');
+                $('#alert-SubKomponen').addClass('animated fadeOutUp delay-5s');
                 Reset(IdForm)
             },
             error: function (jqXHR, textStatus, errorThrown) { },
         });
 
+        
+
 
         },
+
+        
         
     });
     

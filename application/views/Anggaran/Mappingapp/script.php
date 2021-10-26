@@ -7,6 +7,8 @@
     function Reset(idForm) {
       document.getElementById(idForm).reset();
       $('#app-select2').val(null).trigger('change');
+      document.getElementById("TambahApp").disabled = false; 
+     
     }
 
         // SELECT2 INSERT
@@ -215,9 +217,10 @@ $("#EditMapping").click(function (e) {
     success: function (data, textStatus, jqXHR) {
               show_msg(textStatus);
               $('#modalEdit').modal('close');
-              set_grid_tabel(false);
+              // set_grid_tabel(false);
               showDetailapp($('#kodeindex_Edit').val());
               Reset(IdForm);
+              document.getElementById("EditMapping").disabled = false; 
               
               
           },
@@ -254,7 +257,7 @@ function Execute(Id,Kdindex) {
     success: function (data, textStatus, jqXHR) {
 
         show_msg(textStatus)
-        set_grid_tabel(true);
+        //set_grid_tabel(true);
         showDetailapp(Kdindex);
     },
     error: function (jqXHR, textStatus, errorThrown) { },

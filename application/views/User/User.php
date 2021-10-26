@@ -31,7 +31,7 @@
               <div class="card-content">
                 <div class="row">
                   <div class="col s12">
-                    <div class="col s8">
+                    <div class="col s12">
                       <table class="striped">
                         <tbody>
                           <tr>

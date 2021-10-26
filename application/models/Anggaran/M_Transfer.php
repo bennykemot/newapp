@@ -42,7 +42,17 @@ class M_Transfer extends CI_Model{
     function h_pagu($kdsatker, $no_revisi, $revisiKe){
         $tglRevisi = date("Y-m-d");
 
-        $this->db->query("INSERT into h_pagu  select * from d_pagu where kdsatker = '".$kdsatker."'");
+        $this->db->query("INSERT into h_pagu (kdindex,thang,kdsatker,kddept,kdunit,
+        kdprogram,kdgiat,kdoutput,kdsoutput,kdkmpnen,
+        kdskmpnen,kdakun,kdbeban,kdib,rupiah,
+        register,revisike,tgrevisi,norevisi)
+        
+        (select 
+        kdindex,thang,kdsatker,kddept,kdunit,
+        kdprogram,kdgiat,kdoutput,kdsoutput,kdkmpnen,
+        kdskmpnen,kdakun,kdbeban,kdib,rupiah,
+        register,revisike,tgrevisi,norevisi
+         from d_pagu where kdsatker = '".$kdsatker."')");
 
         $this->db->where('kdsatker', $kdsatker);
         $this->db->delete('d_pagu');

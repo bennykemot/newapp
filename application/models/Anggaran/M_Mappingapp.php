@@ -6,7 +6,7 @@ class M_Mappingapp extends CI_Model{
 
     function getDataNew($kdsatker,$number,$offset){
         $this->db->where('kdsatker', $kdsatker);
-        $this->db->order_by('kdsatker, kddept, kdunit, kdprogram, kdgiat, kdoutput, kdsoutput, kdkmpnen, kdskmpnen, kdakun, kdib');
+        $this->db->order_by('kdsatker, kddept, kdunit, kdprogram, kdgiat, kdoutput,kdib, kdsoutput, kdkmpnen, kdskmpnen, kdakun');
         $this->db->limit($number, $offset);
         $query = $this->db->get($this->table);
 
