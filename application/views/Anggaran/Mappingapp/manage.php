@@ -52,8 +52,8 @@
 
                                 <td><?php echo $u->uraian ?></td>
                                 <td class="text-right"><?php echo number_format($u->jumlah,0,',','.') ?></td>
-                                <?php if ($u->kdlevel == "7"){ ?>
-                                <td style="text-align: center"><button type="button" class="btn-floating green" onclick="Add('<?= $u->kdindex ?>')"><i class="material-icons">add</i></button></td>
+                                <?php if ($u->kdlevel == "7" && $u->kode != "521811"){ ?>
+                                <td style="text-align: center"><button type="button" class="btn-floating green" onclick="Add('<?= $u->kdindex ?>', '<?= $u->jumlah ?>')"><i class="material-icons">add</i></button></td>
                                 <?php } else{ 
                                   echo '<td></td>';
 
@@ -89,7 +89,8 @@
                     <tr>
                         <th>No</th>
                         <th>URAIAN AGENDA PRIORITAS PENGAWASAN (APP)</th>
-                        <th>Rupiah</th>
+                        <th>Tahapan</th>
+                        <th>Rupiah Tahapan</th>
                         <th>PKPT</th>
                         <th>Aksi</th>
                     </tr>

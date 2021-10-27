@@ -32,6 +32,8 @@
         $this->db->select('d_detailapp.rupiah');
         $this->db->select('d_detailapp.kdindex');
         $this->db->select('d_detailapp.th_pkpt');
+        $this->db->select('d_detailapp.tahapan');
+        $this->db->select('d_detailapp.rupiah_tahapan');
         $this->db->select('t_app.nama_app');
 
         $this->db->from('d_detailapp');

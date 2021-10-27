@@ -26,6 +26,7 @@
            data: function (params) {
               return {
                 kdsatker: satker_session,
+                kdindex : $('#kodeindex').val(),
                 searchTerm: params.term // search term
               };
            },
@@ -99,9 +100,12 @@
                 {
                     data: "nama_app"
                 },
+                {
+                    data: "tahapan"
+                },
 
                 {
-                    data: "rupiah", className: "text-right", render: $.fn.dataTable.render.number( ',', '.', 0 )
+                    data: "rupiah_tahapan", className: "text-right", render: $.fn.dataTable.render.number( ',', '.', 0 )
                 },
                 {
                     data: "th_pkpt"
@@ -121,7 +125,56 @@
             //order: [[3,'asc']],
             bFilter: false,
             scrollCollapse: true,
-            columnDefs: [ ],
+            columnDefs: [{ visible: false, targets: 1 } ],
+
+            drawCallback: function ( settings ) {
+            var api = this.api();
+            var rows = api.rows( {page:'current'} ).nodes();
+            var last=null;
+            var subTotal = new Array();
+            var groupID = -1;
+            var aData = new Array();
+            var index = 0;
+            
+            api.column(1, {page:'current'} ).data().each( function ( group, i ) {
+            	
+              // console.log(group+">>>"+i);
+            
+              var vals = api.row(api.row($(rows).eq(i)).index()).data();
+              var salary = vals['rupiah_tahapan'] ? parseFloat(vals['rupiah_tahapan']) : 0;
+               
+              if (typeof aData[group] == 'undefined') {
+                 aData[group] = new Array();
+                 aData[group].rows = [];
+                 aData[group].salary = [];
+              }
+          
+           		aData[group].rows.push(i); 
+        			aData[group].salary.push(salary); 
+                
+            } );
+    
+
+            var idx= 0;
+
+      
+          	for(var office in aData){
+       
+									 idx =  Math.max.apply(Math,aData[office].rows);
+      
+                   var sum = 0; 
+                   $.each(aData[office].salary,function(k,v){
+                        sum = sum + v;
+                   });
+  									console.log(aData[office].salary);
+                   $(rows).eq( idx ).after(
+                        '<tr class="group"><td colspan="2">'+office+'</td>'+
+                        '<td style="text-align: right">'+formatMoney(sum)+'</td><td></td><td></td></tr>'
+                    );
+                    
+            };
+
+        },
 
             initComplete: function (settings, json) {
                     $(grid_detail_app).wrap('<div class="table-responsive"></div>');
@@ -131,10 +184,86 @@
             $('#DetailCard').fadeIn();
      }
 
-     function Add(Id){
-      $('#kodeindex').val(Id);
-      $('#modal2').modal('open');
+     function formatMoney(n) {
+        return (Math.round(n * 100) / 100).toLocaleString();
+    }
+
+     function Add(Id,Jumlah){
+        $('#kodeindex').val(Id);
+        $('#jumlah').html(Jumlah);
+        $('#nilai_app').val(Jumlah);
+        $('#modal2').modal('open');
      }
+
+     $('.multi-field-wrapper').each(function() {
+        var max      = 7;
+        var $wrapper = $('.multi-fields', this);
+        var x = 1;
+        $("#add-field", $(this)).click(function(e) {
+           if(x < max){
+              x++;
+              $($wrapper).append('<div class="multi-field">\
+                      <div class="input-field col s12">\
+                          <div class="input-field col s2">Tahapan '+x+'</div>\
+                          <div class="input-field col s10 " >\
+                            <input placeholder="00.000.000" id="rupiah'+x+'" name="rupiah'+x+'" type="number" min="1000" onkeyup=AllCount()>\
+                          </div>\
+                      </div>\
+                    </div>');
+
+            }
+            
+        });
+
+        $("#remove-field").on("click", function() {  
+            if ($('.multi-field', $wrapper).length > 1){
+              $(".multi-fields").children().last().remove();  x--;
+            }else{
+              x = x
+            }
+        }); 
+    });
+
+
+    // $('input').keyup(function(){ 
+  function AllCount(){
+
+
+      var nilai_app1 = Number(document.getElementById('rupiah1').value)
+      var nilai_app = [];
+      var total_nilaiapp = 0;
+      for(i = 2 ; i < 8 ; i++){
+        if(document.getElementById('rupiah'+i+'') == null){
+          nilai_app[i] = 0
+        }else{
+          nilai_app[i] = Number(document.getElementById('rupiah'+i+'').value)
+        }
+
+        total_nilaiapp += nilai_app[i]
+            
+      }
+
+      var nilai_app = Number($('#nilai_app').val())
+      var total  = Number($('#jumlah').val());
+        $('#jumlah').html(nilai_app - (nilai_app1 + total_nilaiapp)); 
+
+    if($('#jumlah').html() < 0){
+          swal({
+            title: "JUMLAH AKUN MINUS ! ", 
+            icon: "warning",
+            timer: 2000
+            })
+
+            var element = document.getElementById("jumlah");
+                        element.classList.remove("cyan");
+                        element.classList.add("red");
+        }else{
+          var element = document.getElementById("jumlah");
+                        element.classList.remove("red");
+                        element.classList.add("cyan");
+        }
+  }
+
 
 
 $("#TambahApp").click(function (e) {
@@ -144,12 +273,16 @@ $("#TambahApp").click(function (e) {
   var form = $(this).closest("form");
   var formData = new FormData($("#FormApp")[0]);
   var IdForm =  "FormApp";
+  var countingDiv = document.getElementById('counting');
+  var countRupiah = countingDiv.getElementsByTagName('input').length;
 
   btn
     .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
     .attr("disabled", true);
 
   formData.append('Trigger', 'C')
+  formData.append('countRupiah', countRupiah)
+  // formData.append('app', $('#app').val())
 
   $.ajax({
     type: "POST",

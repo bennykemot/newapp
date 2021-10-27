@@ -29,6 +29,8 @@ class detail_Mappingapp extends CI_Controller {
             $row['id_app'] = $customers->id_app;
             $row['nama_app'] = $customers->nama_app;
 			$row['rupiah'] = $customers->rupiah;
+            $row['tahapan'] = $customers->tahapan;
+            $row['rupiah_tahapan'] = $customers->rupiah_tahapan;
 			$row['kdindex'] = $customers->kdindex;
             $row['th_pkpt'] = $customers->th_pkpt;
             $data[] = $row;
@@ -53,21 +55,32 @@ class detail_Mappingapp extends CI_Controller {
             $th_pkpt = $this->input->post('th_pkpt');
             $kodeindex = $this->input->post('kodeindex');
             $app = $this->input->post('app');
+            $countRupiah = $this->input->post('countRupiah');
 
             $where = array('id_app' => $app, 'kdindex' => $kodeindex);
 
             $cek = $this->detail_Mappingapp->cek($where,'d_detailapp')->result_array();
+            
 
             if(count($cek) == 0){
-
-                $data = array(
-                    'id_app' => $app,
-                    'rupiah' => $nilai_app,
-                    'kdindex' => $kodeindex,
-                    'th_pkpt' => $th_pkpt
+                $data = array();    
+                $j = 1;
+                for($i = 0 ; $i < $countRupiah; $i++){
                     
-                    );
-                $this->detail_Mappingapp->CRUD($data,'d_detailapp', $Trigger);
+                        //$rupiah_tahapan[$i] = $this->input->post('rupiah'.$j.'');
+                        array_push($data , array(
+                            'id_app' => $app,
+                            'rupiah' => $nilai_app,
+                            'kdindex' => $kodeindex,
+                            'th_pkpt' => $th_pkpt,
+                            'tahapan' => $i,
+                            'rupiah_tahapan'  => $this->input->post('rupiah'.$j.'')
+                            
+                            ));
+                    $j++;
+                }
+                //$this->detail_Mappingapp->CRUD($data,'d_detailapp', $Trigger);
+                $this->db->insert_batch('d_detailapp', $data);
                
 
             }else{

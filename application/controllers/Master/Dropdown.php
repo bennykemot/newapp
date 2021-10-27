@@ -115,9 +115,10 @@ class Dropdown extends CI_Controller {
 
       // Search term
       $searchTerm = $this->input->post('searchTerm');
+      $kdindex = $this->input->post('kdindex');
 
       // Get users
-      $response = $this->Dropdown->getData_app($searchTerm);
+      $response = $this->Dropdown->getData_app($searchTerm, $kdindex);
 
       echo json_encode($response);
    }

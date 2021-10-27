@@ -18,6 +18,7 @@ class Pembagianpagu extends CI_Controller {
 
 	public function getPembagianPagu()
     {
+        
 		$kdsatker = $_POST['kdsatker'];
         $list = $this->Pembagianpagu->get_datatables($kdsatker);
         $data = array();

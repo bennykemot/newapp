@@ -140,14 +140,22 @@ function getData_role($searchTerm=""){
    return $data;
 }
 
-function getData_app($searchTerm=""){
 
-   // Fetch users
-   $this->db->select('id');
-   $this->db->select('nama_app');
-   $this->db->where("nama_app like '%".$searchTerm."%' ");
-   $this->db->or_where("id like '%".$searchTerm."%' ");
-   $fetched_records = $this->db->get('t_app');
+function getData_app($searchTerm="", $kdindex){
+
+   $getId_app = $this->db->query("SELECT distinct id_app from d_detailapp where kdindex = '".$kdindex."'");
+  
+   $loop = [];
+   foreach ($getId_app->result_array() as $row)
+   {
+         $loop[] =  $row['id_app'];
+         
+   }
+
+   $res = implode(",", $loop);
+   
+
+   $fetched_records = $this->db->query("SELECT id, nama_app FROM t_app where id NOT IN (".$res.")");
    $users = $fetched_records->result_array();
 
    // Initialize Array with fetched data

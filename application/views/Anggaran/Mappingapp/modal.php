@@ -17,13 +17,48 @@
                   </div>
             </div>
 
+              <div id = "counting">
+                <div class="multi-field-wrapper">
+                  <div class="multi-fields">
+                    <div class="multi-field">
+                      <div class="input-field col s12">
+                          <div class="input-field col s2">Tahapan 1</div>
+
+                          <div class="input-field col s10 " >
+                            <input placeholder="00.000.000" id="rupiah1" name="rupiah1" type="number" min="1000" onkeyup="AllCount()">
+                            <!-- <input placeholder="00.000.000" id="nilai_app2" name="nilai_app[]" type="number" min="1000" > -->
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="input-field col s12">
+                      <div class="input-field col s2"></div>
+
+                        <div class="input-field col s3 ">
+                            <button type="button" class="btn green " id ="add-field"><i class="material-icons left">add</i> Tambah Tahapan</button>
+                        </div>
+
+                        <div class="input-field col s3 ">
+                            <button type="button" class="btn red " id ="remove-field"><i class="material-icons left">delete</i> Hapus Tahapan</button>
+                        </div>
+                    </div>
+
+                </div>
+              </div>
+
+              
+
             <div class="input-field col s12">
-                <div class="input-field col s2">Nilai App</div>
+                <div class="input-field col s2">Jumlah</div>
 
                 <div class="input-field col s10 " >
-                  <input placeholder="00.000.000" id="nilai_app" name="nilai_app" type="number">
+                <button class="btn cyan col s12" style="text-align: left;font-weight: bold;cursor: default;" id ="jumlah" name="jumlah"></button>
+               
                 </div>
             </div>
+
+            <input placeholder="00.000.000" id="nilai_app" name="nilai_app" type="number" readonly hidden>
 
             <div class="input-field col s12">
                 <div class="input-field col s2">PKPT</div>
