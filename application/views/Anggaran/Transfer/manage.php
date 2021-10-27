@@ -1,6 +1,8 @@
 <?php include(APPPATH . 'views/Header/Aside.php') ?>
 
 
+
+
 <div class="row">
 
               <div class="col s12">
@@ -84,7 +86,6 @@
                 </div>
             </div>
 </div>
-
 
 
 <?php include(APPPATH . 'views/Footer/Footer.php') ?>

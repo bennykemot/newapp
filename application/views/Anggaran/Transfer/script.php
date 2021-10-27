@@ -50,6 +50,17 @@ $('.btn-upload').click(function (e) {
             
         }
 
+        swal({
+            title:"Upload Loading ...", 
+            icon: "info",
+            timer: 2000,
+            buttonsStyling: false,
+            customClass: {
+                confirmButton: 'd-none' //insert class here
+            }
+
+            })
+
         
      $.ajax({
         url : baseurl + 'getPagu_Norevisi',

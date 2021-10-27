@@ -25,6 +25,8 @@
 
 
       <script src="<?= base_url().'assets'?>/app-assets/vendors/sweetalert/sweetalert.min.js"></script>
+  
+
       <script src="<?= base_url().'assets'?>/app-assets/js/scripts/extra-components-sweetalert.min.js"></script>
 
       <script src="https://cdn.datatables.net/rowgroup/1.1.3/js/dataTables.rowGroup.min.js"></script>

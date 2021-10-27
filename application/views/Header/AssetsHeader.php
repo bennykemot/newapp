@@ -109,6 +109,10 @@ $assets 	= $this->config->item('assets_url');
     
 }
 
+.d-none{
+  display: none
+}
+
 /* border-pagination */
 .b-pagination-outer {
   width: 100%;
