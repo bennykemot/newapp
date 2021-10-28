@@ -22,7 +22,7 @@
                   <div class="multi-fields">
                     <div class="multi-field">
                       <div class="input-field col s12">
-                          <div class="input-field col s2">Tahapan 1</div>
+                          <div class="input-field col s2">Pengumpulan Data</div>
 
                           <div class="input-field col s10 " >
                             <input placeholder="00.000.000" id="rupiah1" name="rupiah1" type="number" min="1000" onkeyup="AllCount()">
@@ -59,6 +59,7 @@
             </div>
 
             <input placeholder="00.000.000" id="nilai_app" name="nilai_app" type="number" readonly hidden>
+            <input placeholder="00.000.000" id="dummy" name="dummy" type="number" readonly hidden>
 
             <div class="input-field col s12">
                 <div class="input-field col s2">PKPT</div>
@@ -101,7 +102,7 @@
                 <div class="input-field col s2">Nama App</div>
 
                 <div class="input-field col s10 " >
-                  <select  id="app-select2_Edit" name="app_Edit" class="browser-default"></select>
+                  <select  id="app-select2_Edit" name="app_Edit" class="browser-default" readonly></select>
                   </div>
             </div>
 
@@ -109,7 +110,7 @@
                 <div class="input-field col s2">Nilai App</div>
 
                 <div class="input-field col s10 " >
-                  <input placeholder="00.000.000" id="nilai_app_Edit" name="nilai_app_Edit" type="number">
+                  <input placeholder="00.000.000" id="rupiah_tahapan_Edit" name="rupiah_tahapan_Edit" type="number">
                 </div>
             </div>
 

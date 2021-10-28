@@ -166,7 +166,7 @@
                    $.each(aData[office].salary,function(k,v){
                         sum = sum + v;
                    });
-  									console.log(aData[office].salary);
+  									// console.log(aData[office].salary);
                    $(rows).eq( idx ).after(
                         '<tr class="group"><td colspan="2">'+office+'</td>'+
                         '<td style="text-align: right">'+formatMoney(sum)+'</td><td></td><td></td></tr>'
@@ -189,22 +189,53 @@
     }
 
      function Add(Id,Jumlah){
-        $('#kodeindex').val(Id);
-        $('#jumlah').html(Jumlah);
-        $('#nilai_app').val(Jumlah);
-        $('#modal2').modal('open');
+
+      $.ajax({
+      url : baseurl_detail + "Action",
+      data: {"kdindex": Id, "Trigger": "getRupiahTahapan"},
+      type: "post",
+      dataType: "JSON",
+      success: function(data)
+          { 
+            var jum = Jumlah;
+            $('#kodeindex').val(Id);
+            if(data['rupiah_tahapan'] == null || data['rupiah_tahapan'] == 0 || data['rupiah_tahapan'] == "null"){
+              $('#jumlah').html(Jumlah);
+            }else{
+              var jum = Jumlah - data['rupiah_tahapan'];
+              $('#jumlah').html(jum);
+            }
+            $('#dummy').val(jum);
+            $('#nilai_app').val(Jumlah);
+            $('#modal2').modal('open');   
+          }
+      });
+        
      }
 
      $('.multi-field-wrapper').each(function() {
-        var max      = 7;
+        var max      = 9;
         var $wrapper = $('.multi-fields', this);
         var x = 1;
+        var i = 0;
+        var tahapan = [
+          "Pengumpulan Data",
+          "Penelitian Awal",
+          "Rapat/FGD Penyusunan Draft Pedoman", 
+          "Diseminasi Draft Pedoman", 
+          "Diseminasi Pedoman",
+          "Pemahaman Objek Penugasan Pengawasan serta Identifikasi dan Mitigasi Risiko", 
+          "Evaluasi SPI Objek Pengawasan", 
+          "Penyusunan Laporan Hasil Penugasan", 
+          "Pendistribusian Laporan Hasil Penugasan"];
+        console.log(tahapan)
         $("#add-field", $(this)).click(function(e) {
            if(x < max){
               x++;
+              i++;
               $($wrapper).append('<div class="multi-field">\
                       <div class="input-field col s12">\
-                          <div class="input-field col s2">Tahapan '+x+'</div>\
+                          <div class="input-field col s2">Tahapan '+tahapan[i]+'</div>\
                           <div class="input-field col s10 " >\
                             <input placeholder="00.000.000" id="rupiah'+x+'" name="rupiah'+x+'" type="number" min="1000" onkeyup=AllCount()>\
                           </div>\
@@ -245,7 +276,14 @@
 
       var nilai_app = Number($('#nilai_app').val())
       var total  = Number($('#jumlah').val());
+      var dummy  = Number($('#dummy').val());
+
+      if(total < dummy){
+        $('#jumlah').html(dummy - (nilai_app1 + total_nilaiapp)); 
+      }else{
         $('#jumlah').html(nilai_app - (nilai_app1 + total_nilaiapp)); 
+      }
+        
 
     if($('#jumlah').html() < 0){
           swal({
@@ -311,7 +349,7 @@ function Edit(Id){
       dataType: "JSON",
       success: function(data)
           {    
-              $('#nilai_app_Edit').val(data['rupiah']);
+              $('#rupiah_tahapan_Edit').val(data['rupiah_tahapan']);
               $('#Id_Edit').val(Id);
               $('#th_pkpt_Edit').val(data['th_pkpt']);
               $('#kodeindex_Edit').val(data['kdindex']);

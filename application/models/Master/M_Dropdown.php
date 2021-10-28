@@ -144,7 +144,7 @@ function getData_role($searchTerm=""){
 function getData_app($searchTerm="", $kdindex){
 
    $getId_app = $this->db->query("SELECT distinct id_app from d_detailapp where kdindex = '".$kdindex."'");
-  
+   //echo $getId_app;
    $loop = [];
    foreach ($getId_app->result_array() as $row)
    {
@@ -154,8 +154,12 @@ function getData_app($searchTerm="", $kdindex){
 
    $res = implode(",", $loop);
    
-
-   $fetched_records = $this->db->query("SELECT id, nama_app FROM t_app where id NOT IN (".$res.")");
+   if(count($loop) <= 0){
+      $fetched_records = $this->db->query("SELECT id, nama_app FROM t_app");
+   }else{
+      $fetched_records = $this->db->query("SELECT id, nama_app FROM t_app where id NOT IN (".$res.")");
+   }
+   
    $users = $fetched_records->result_array();
 
    // Initialize Array with fetched data

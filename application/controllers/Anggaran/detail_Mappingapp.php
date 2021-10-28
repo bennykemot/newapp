@@ -56,6 +56,16 @@ class detail_Mappingapp extends CI_Controller {
             $kodeindex = $this->input->post('kodeindex');
             $app = $this->input->post('app');
             $countRupiah = $this->input->post('countRupiah');
+            $tahapan = [
+                "Pengumpulan Data",
+                "Penelitian Awal",
+                "Rapat/FGD Penyusunan Draft Pedoman", 
+                "Diseminasi Draft Pedoman", 
+                "Diseminasi Pedoman", 
+                "Pemahaman Objek Penugasan Pengawasan serta Identifikasi dan Mitigasi Risiko", 
+                "Evaluasi SPI Objek Pengawasan", 
+                "Penyusunan Laporan Hasil Penugasan", 
+                "Pendistribusian Laporan Hasil Penugasan"];
 
             $where = array('id_app' => $app, 'kdindex' => $kodeindex);
 
@@ -73,7 +83,7 @@ class detail_Mappingapp extends CI_Controller {
                             'rupiah' => $nilai_app,
                             'kdindex' => $kodeindex,
                             'th_pkpt' => $th_pkpt,
-                            'tahapan' => $i,
+                            'tahapan' => $tahapan[$i],
                             'rupiah_tahapan'  => $this->input->post('rupiah'.$j.'')
                             
                             ));
@@ -110,11 +120,11 @@ class detail_Mappingapp extends CI_Controller {
             
         }else if($Trigger == "U"){
 
-            $nilai_app = $this->input->post('nilai_app_Edit');
+            $rupiah_tahapan = $this->input->post('rupiah_tahapan_Edit');
             $th_pkpt = $this->input->post('th_pkpt_Edit');
 
             $data = array(
-                'rupiah' => $nilai_app,
+                'rupiah_tahapan' => $rupiah_tahapan,
                 'th_pkpt' => $th_pkpt
                 
                 );
@@ -122,6 +132,14 @@ class detail_Mappingapp extends CI_Controller {
             $id = $this->input->post('Id_Edit');
             $where = array('id' => $id);
 	        $this->detail_Mappingapp->update($data,'d_detailapp', $where);
+
+        }else if($Trigger == "getRupiahTahapan"){
+
+            $kdindex = $this->input->post('kdindex');
+            //$where = array('kdindex' => $kdindex);
+            $output = $this->detail_Mappingapp->CRUD($kdindex,'d_detailapp', $Trigger);
+            echo json_encode($output);
+
         }
         
     }

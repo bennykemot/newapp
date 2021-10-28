@@ -35,6 +35,7 @@ class M_Mappingapp extends CI_Model{
         }else if($Trigger == "R"){
 
             return $this->db->get_where($table,$data);
+
         }
 	}
 

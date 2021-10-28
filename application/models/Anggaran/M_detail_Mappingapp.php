@@ -122,6 +122,10 @@
 
             $this->db->update($table, $data, $where);
 
+        }else if($Trigger == "getRupiahTahapan"){
+
+            $query = $this->db->query("SELECT SUM(rupiah_tahapan) as rupiah_tahapan from d_detailapp where kdindex = '".$data."'");    
+            return $query->row();
         }
 	}
 
