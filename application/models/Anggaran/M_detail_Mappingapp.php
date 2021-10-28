@@ -35,9 +35,11 @@
         $this->db->select('d_detailapp.tahapan');
         $this->db->select('d_detailapp.rupiah_tahapan');
         $this->db->select('t_app.nama_app');
+        $this->db->select('v_mapping.jumlah');
 
         $this->db->from('d_detailapp');
         $this->db->join('t_app', 't_app.id = d_detailapp.id_app');
+        $this->db->join('v_mapping', 'v_mapping.kdindex = d_detailapp.kdindex');
         $this->db->where('d_detailapp.kdindex', $kdindex);
  
         $i = 0;
@@ -97,6 +99,7 @@
         return $this->db->count_all_results();
     }
 
+
     function CRUD($data,$table,$Trigger){
 
         if($Trigger == "C"){
@@ -109,11 +112,11 @@
             $this->db->delete($table);
 
         }else if($Trigger == "R"){
-
-            $this->db->from($table);
-            $this->db->join('t_app', 't_app.id = '.$table.'.id_app');
-            $this->db->where($data);
-            $query = $this->db->get();
+            $query = $this->db->query("SELECT SUM(d_detailapp.rupiah_tahapan) as total ,
+            d_detailapp.id, d_detailapp.kdindex, d_detailapp.id_app, 
+            d_detailapp.rupiah, d_detailapp.th_pkpt, d_detailapp.tahapan, 
+            d_detailapp.rupiah_tahapan , t_app.id as id_app, t_app.nama_app FROM d_detailapp JOIN t_app ON t_app.id = d_detailapp.id_app
+            WHERE d_detailapp.id = '".$data."'");
     
             return $query->row();
 

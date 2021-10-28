@@ -97,6 +97,13 @@
                   </thead>
                   <tbody>
                   </tbody>
+                    <tfoot style="background-color: #faf8a6;">
+                      <tr>
+                      <td>TOTAL </td><td></td><td></td>
+                        <td style="text-align: right; padding-right: 10px !important"></td>
+                        <td></td><td></td>
+                      </tr>
+                  </tfoot>
                 </table>
             </div>
           </div>

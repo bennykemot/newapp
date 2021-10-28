@@ -74,10 +74,8 @@
             serverSide: true,
             processing: true,
             searchDelay: 500,
-            searching: true,
-            ordering: true,
-            // scrollY:450,
-            // scrollX:!0,
+            searching: false,
+            ordering: false,
             responsive:!0,
             bDestroy: true,
            
@@ -113,7 +111,7 @@
 
                 { data: 'id',
                   render: function(data, type, row) {
-                      return '<button type="button" class="btn-floating mb-1 green" onclick="Edit(\''+row.id+'\')"><i class="material-icons">edit</i></button>\
+                      return '<button type="button" class="btn-floating mb-1 green" onclick="Edit(\''+row.id+'\',\''+row.jumlah+'\')"><i class="material-icons">edit</i></button>\
                       <button type="button" class="btn-floating mb-1 red" onclick="Delete(\''+row.id+'\',\''+row.kdindex+'\')"><i class="material-icons">delete</i></button>';
                   }
                 },
@@ -169,12 +167,32 @@
   									// console.log(aData[office].salary);
                    $(rows).eq( idx ).after(
                         '<tr class="group"><td colspan="2">'+office+'</td>'+
-                        '<td style="text-align: right">'+formatMoney(sum)+'</td><td></td><td></td></tr>'
+                        '<td style="text-align: right" >'+formatMoney(sum)+'</td><td></td><td></td></tr>'
+                        
                     );
+                    
                     
             };
 
         },
+
+        footerCallback: function ( row, data, start, end, display ) {
+				var api = this.api();
+				nb_cols = api.columns().nodes().length;
+				var j = 3;
+              var pageTotal = api
+                    .column( j, { page: 'current'} )
+                    .data()
+                    .reduce( function (a, b) {
+                        return Number(a) + Number(b);
+                    }, 0 );
+              // Update footer
+              $( api.column( j ).footer() ).html(formatMoney(pageTotal));
+              $('#total').val(pageTotal);
+          },
+
+         
+        
 
             initComplete: function (settings, json) {
                     $(grid_detail_app).wrap('<div class="table-responsive"></div>');
@@ -256,7 +274,36 @@
     });
 
 
-    // $('input').keyup(function(){ 
+  function Count(){
+    var nilai_tahapan = Number(document.getElementById('rupiah_tahapan_Edit').value)
+    var total  = Number($('#rupiah_Edit').val());
+    var sisa = Number(document.getElementById('sisa').value)
+
+    if(total < sisa){
+        $('#rupiah_Edit').html(sisa - nilai_tahapan); 
+      }else{
+        $('#rupiah_Edit').html(total - nilai_tahapan); 
+      }
+
+      if($('#rupiah_Edit').html() < 0){
+          swal({
+            title: "JUMLAH AKUN MINUS ! ", 
+            icon: "warning",
+            timer: 2000
+            })
+
+            var element = document.getElementById("rupiah_Edit");
+                        element.classList.remove("cyan");
+                        element.classList.add("red");
+        }else{
+          var element = document.getElementById("rupiah_Edit");
+                        element.classList.remove("red");
+                        element.classList.add("cyan");
+        }
+
+
+  }
+
   function AllCount(){
 
 
@@ -340,7 +387,7 @@ $("#TambahApp").click(function (e) {
       });
 });
 
-function Edit(Id){
+function Edit(Id,Jumlah){
 
   $.ajax({
       url : baseurl_detail + "Action",
@@ -350,6 +397,10 @@ function Edit(Id){
       success: function(data)
           {    
               $('#rupiah_tahapan_Edit').val(data['rupiah_tahapan']);
+              $('#tahapan_Edit').val(data['tahapan']);
+              var sisa = Jumlah - $('#total').val();
+              $('#rupiah_Edit').html(sisa);
+              $('#sisa').val(sisa);
               $('#Id_Edit').val(Id);
               $('#th_pkpt_Edit').val(data['th_pkpt']);
               $('#kodeindex_Edit').val(data['kdindex']);

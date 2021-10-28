@@ -3,7 +3,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <script src="<?= base_url().'assets'?>/app-assets/vendors/data-tables/js/jquery.dataTables.min.js"></script>
-    <script src="<?= base_url().'assets'?>/app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js"></script>
+    <!-- <script src="<?= base_url().'assets'?>/app-assets/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js"></script> -->
     <script src="<?= base_url().'assets'?>/app-assets/vendors/data-tables/js/dataTables.select.min.js"></script>
 
     

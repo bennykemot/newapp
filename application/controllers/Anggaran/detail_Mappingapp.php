@@ -33,6 +33,7 @@ class detail_Mappingapp extends CI_Controller {
             $row['rupiah_tahapan'] = $customers->rupiah_tahapan;
 			$row['kdindex'] = $customers->kdindex;
             $row['th_pkpt'] = $customers->th_pkpt;
+            $row['jumlah'] = $customers->jumlah;
             $data[] = $row;
         }
  
@@ -114,8 +115,10 @@ class detail_Mappingapp extends CI_Controller {
 
         }else if($Trigger == "R"){
             $id = $this->input->post('id');
-            $where = array('d_detailapp.id' => $id);
-            $output = $this->detail_Mappingapp->CRUD($where,'d_detailapp', $Trigger);
+            
+           
+            $output = $this->detail_Mappingapp->CRUD($id,'d_detailapp', $Trigger);
+            // $total = $this->detail_Mappingapp->getTotalRupiah($kdindex);
             echo json_encode($output);
             
         }else if($Trigger == "U"){

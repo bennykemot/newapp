@@ -107,10 +107,30 @@
             </div>
 
             <div class="input-field col s12">
+                <div class="input-field col s2">Tahapan</div>
+
+                <div class="input-field col s10 " >
+                  <input id="tahapan_Edit" name="tahapan_Edit" type="text" readonly>
+                </div>
+            </div>
+
+            <div class="input-field col s12">
+                <div class="input-field col s2">Rupiah Tahapan</div>
+
+                <div class="input-field col s10 " >
+                  <input placeholder="00.000.000" id="rupiah_tahapan_Edit" name="rupiah_tahapan_Edit" type="number" onkeyup="Count()">
+                </div>
+            </div>
+
+            <input id="total" name="total" hidden>
+            <input id="sisa" name="sisa" hidden>
+
+            <div class="input-field col s12">
                 <div class="input-field col s2">Nilai App</div>
 
                 <div class="input-field col s10 " >
-                  <input placeholder="00.000.000" id="rupiah_tahapan_Edit" name="rupiah_tahapan_Edit" type="number">
+                <button class="btn cyan col s12" style="text-align: left;font-weight: bold;cursor: default;" id ="rupiah_Edit" name="rupiah_Edit"></button>
+                  <!-- <input placeholder="00.000.000" id="rupiah_Edit" name="rupiah_Edit" type="number"> -->
                 </div>
             </div>
 
