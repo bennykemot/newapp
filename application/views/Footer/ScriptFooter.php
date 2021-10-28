@@ -35,14 +35,11 @@
 
       <script>
         
-        // setTimeout(function(){ swal({
-        //     title:"Session Habis silahlkan login kembali ! ", 
-        //     icon: "warning",
-        //     timer: 2000
-        //     })
-        //   }, 60000);
+        function validateNumber(e) {
+            const pattern = /^[0-9]$/;
 
-        //setTimeout(function(){ alert("Hello"); }, 3000);
+            return pattern.test(e.key )
+        }
       
       </script>
 

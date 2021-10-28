@@ -25,7 +25,7 @@
                           <div class="input-field col s2">Pengumpulan Data</div>
 
                           <div class="input-field col s10 " >
-                            <input placeholder="00.000.000" id="rupiah1" name="rupiah1" type="number" min="1000" onkeyup="AllCount()">
+                            <input placeholder="00.000.000" id="rupiah1" name="rupiah1"  onkeyup="AllCount()" onkeypress="return validateNumber(event)">
                             <!-- <input placeholder="00.000.000" id="nilai_app2" name="nilai_app[]" type="number" min="1000" > -->
                           </div>
                       </div>
@@ -118,7 +118,7 @@
                 <div class="input-field col s2">Rupiah Tahapan</div>
 
                 <div class="input-field col s10 " >
-                  <input placeholder="00.000.000" id="rupiah_tahapan_Edit" name="rupiah_tahapan_Edit" type="number" onkeyup="Count()">
+                  <input placeholder="00.000.000" id="rupiah_tahapan_Edit" name="rupiah_tahapan_Edit" onkeypress="return validateNumber(event)" onkeyup="Count()">
                 </div>
             </div>
 

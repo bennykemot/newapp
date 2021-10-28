@@ -11,6 +11,8 @@
      
     }
 
+
+
         // SELECT2 INSERT
 
         $("#app-select2").select2({
@@ -255,7 +257,7 @@
                       <div class="input-field col s12">\
                           <div class="input-field col s2">Tahapan '+tahapan[i]+'</div>\
                           <div class="input-field col s10 " >\
-                            <input placeholder="00.000.000" id="rupiah'+x+'" name="rupiah'+x+'" type="number" min="1000" onkeyup=AllCount()>\
+                            <input placeholder="00.000.000" id="rupiah'+x+'" name="rupiah'+x+'" type="number" min="1000" onkeyup=AllCount() onkeypress="return validateNumber(event)">\
                           </div>\
                       </div>\
                     </div>');
