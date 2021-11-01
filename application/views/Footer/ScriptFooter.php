@@ -33,6 +33,8 @@
 
       <script type="text/javascript" src="<?= base_url().'assets'?>/app-assets/js/jquery.idle.js"></script>
 
+      <script src="<?= base_url().'assets'?>/app-assets/vendors/formatter/jquery.formatter.min.js"></script>
+
       <script>
         
         function validateNumber(e) {
@@ -40,6 +42,8 @@
 
             return pattern.test(e.key )
         }
+
+        
       
       </script>
 

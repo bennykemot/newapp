@@ -135,4 +135,40 @@ class Dropdown extends CI_Controller {
       echo json_encode($response);
    }
 
+   public function pegawai(){
+
+      // Search term
+      $searchTerm = $this->input->post('searchTerm');
+      $Trigger = $this->input->post('Trigger');
+
+      // Get users
+      $response = $this->Dropdown->getData_Pegawai($searchTerm, $Trigger);
+
+      echo json_encode($response);
+   }
+
+   public function sub_komponen(){
+
+      // Search term
+      $searchTerm = $this->input->post('searchTerm');
+      $Trigger = $this->input->post('Trigger');
+
+      // Get users
+      $response = $this->Dropdown->getData_skomponen($searchTerm, $Trigger);
+
+      echo json_encode($response);
+   }
+
+   public function unitkerja(){
+
+      // Search term
+      $searchTerm = $this->input->post('searchTerm');
+      $Trigger = $this->input->post('Trigger');
+
+      // Get users
+      $response = $this->Dropdown->getData_unitkerja($searchTerm, $Trigger);
+
+      echo json_encode($response);
+   }
+
 }

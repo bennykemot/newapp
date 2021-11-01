@@ -25,7 +25,7 @@
                           <div class="input-field col s2">Pengumpulan Data</div>
 
                           <div class="input-field col s10 " >
-                            <input placeholder="00.000.000" id="rupiah1" name="rupiah1"  onkeyup="AllCount()" onkeypress="return validateNumber(event)">
+                            <input placeholder="00.000.000" class="rupiah" id="rupiah1" name="rupiah1"  onkeyup="AllCount()" onkeypress="return validateNumber(event)">
                             <!-- <input placeholder="00.000.000" id="nilai_app2" name="nilai_app[]" type="number" min="1000" > -->
                           </div>
                       </div>

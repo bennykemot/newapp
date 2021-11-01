@@ -11,6 +11,12 @@
      
     }
 
+    // $('.rupiah').formatter({
+    //     'pattern': '{{999}},{{999}},{{999}},{{999}}',
+    //     'persistent': true
+    //   });
+
+
 
 
         // SELECT2 INSERT
@@ -257,7 +263,7 @@
                       <div class="input-field col s12">\
                           <div class="input-field col s2">Tahapan '+tahapan[i]+'</div>\
                           <div class="input-field col s10 " >\
-                            <input placeholder="00.000.000" id="rupiah'+x+'" name="rupiah'+x+'" type="number" min="1000" onkeyup=AllCount() onkeypress="return validateNumber(event)">\
+                            <input placeholder="00.000.000" class="rupiah" id="rupiah'+x+'" name="rupiah'+x+'" type="number" min="1000" onkeyup=AllCount() onkeypress="return validateNumber(event)">\
                           </div>\
                       </div>\
                     </div>');
@@ -268,7 +274,10 @@
 
         $("#remove-field").on("click", function() {  
             if ($('.multi-field', $wrapper).length > 1){
-              $(".multi-fields").children().last().remove();  x--;
+              $(".multi-fields").children().last().remove();  x--; i--;
+                if(i == 0){
+                  i = 0;
+                }
             }else{
               x = x
             }
@@ -309,7 +318,8 @@
   function AllCount(){
 
 
-      var nilai_app1 = Number(document.getElementById('rupiah1').value)
+      var nilai_app1 = document.getElementById('rupiah1').value
+      // var nilai_app1 = a.unmask();
       var nilai_app = [];
       var total_nilaiapp = 0;
       for(i = 2 ; i < 8 ; i++){

@@ -152,7 +152,31 @@ $assets 	= $this->config->item('assets_url');
 }
 
 
+
   </style>
+
+  <?php 
+
+function currentMonth($data){
+  $bulan = array (
+    1 =>   'Januari',
+    'Februari',
+    'Maret',
+    'April',
+    'Mei',
+    'Juni',
+    'Juli',
+    'Agustus',
+    'September',
+    'Oktober',
+    'November',
+    'Desember'
+  );
+
+  return $bulan[$data];
+}
+  
+  ?>
 
   <!-- END: Head-->
   <body class="vertical-layout page-header-light vertical-menu-collapsible vertical-dark-menu preload-transitions 2-columns   " data-open="click" data-menu="vertical-dark-menu" data-col="2-columns">

@@ -188,4 +188,54 @@ function getData_user($searchTerm="", $kdsatker){
    return $data;
 }
 
+function getData_Pegawai($searchTerm="", $Trigger){
+
+   // Fetch users
+   $this->db->select('nip');
+   $this->db->select('nama');
+   $this->db->select('jabatan');
+   $this->db->where("nama like '%".$searchTerm."%' ");
+   $fetched_records = $this->db->get('r_pegawai');
+   $users = $fetched_records->result_array();
+
+   // Initialize Array with fetched data
+   $data = array();
+   foreach($users as $user){
+      $data[] = array("id"=>$user['nip']."-".$user['jabatan']."-".$user['nama'], "text"=>$user['nama']);
+   }
+   return $data;
+}
+
+function getData_skomponen($searchTerm="", $Trigger){
+
+   $fetched_records = $this->db->query("
+         SELECT 
+         CONCAT(thang,kdsatker,kddept,kdunit,kdprogram,kdgiat,kdoutput,kdsoutput,kdkmpnen,kdskmpnen) AS idxskmpnen, 
+         urskmpnen FROM d_skmpnen");
+   $users = $fetched_records->result_array();
+
+   // Initialize Array with fetched data
+   $data = array();
+   foreach($users as $user){
+      $data[] = array("id"=>$user['idxskmpnen'], "text"=>$user['urskmpnen']);
+   }
+   return $data;
+}
+
+function getData_unitkerja($searchTerm="", $Trigger){
+
+   $this->db->select('id');
+   $this->db->select('nama_unit');
+   $this->db->where("nama_unit like '%".$searchTerm."%' ");
+   $fetched_records = $this->db->get('t_unitkerja');
+   $users = $fetched_records->result_array();
+
+   // Initialize Array with fetched data
+   $data = array();
+   foreach($users as $user){
+      $data[] = array("id"=>$user['id'], "text"=>$user['nama_unit']);
+   }
+   return $data;
+}
+
 }
