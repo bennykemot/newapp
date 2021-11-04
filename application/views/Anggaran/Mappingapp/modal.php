@@ -13,7 +13,7 @@
                 <div class="input-field col s2">Nama App</div>
 
                 <div class="input-field col s10 " >
-                  <select  id="app-select2" name="app" class="browser-default"></select>
+                  <select  id="app-select2" name="app" class="browser-default app"></select>
                   </div>
             </div>
 
@@ -96,7 +96,7 @@
         </div>
     </div>
     <div class="modal-footer">
-      <button id="TambahApp" class="btn"><i class="material-icons left">done</i> Simpan</button>
+      <button id="TambahApp" class="btn disabled"><i class="material-icons left">done</i> Simpan</button>
       <a class="modal-action modal-close  red btn">Batal</a>
     </div>
 </div>

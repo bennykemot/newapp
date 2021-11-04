@@ -12,14 +12,10 @@
      
     }
 
-    // $('.rupiah').formatter({
-    //     'pattern': '{{999}},{{999}},{{999}},{{999}}',
-    //     'persistent': true
-    //   });
-
-
-
-
+      $(".app").change(function() {
+        var button = document.getElementById("TambahApp");
+        button.classList.remove("disabled");
+      });
         // SELECT2 INSERT
 
         $("#app-select2").select2({
@@ -263,7 +259,8 @@
                         element.classList.remove("red");
                       element.classList.add("cyan");
        
-
+            var button = document.getElementById("TambahApp");
+            button.classList.add("disabled");
             $('#modal2').modal('open');   
             
           }
@@ -278,32 +275,9 @@
      });
 
 
-    //  if($('#myModal2').modal('close'))
-    //  {
-    //   location.reload();
-    //  }
-
      $('.multi-field-wrapper').each(function() {
 
-       
-        // var max  = 9;
-        // var x    = 1;
-        // var i    = 0;
         var $wrapper = $('.multi-fields', this);
-
-        
-        // var tahapan = [
-        //   "Pengumpulan Data", //0
-        //   "Penelitian Awal", //1
-        //   "Rapat/FGD Penyusunan Draft Pedoman", //2
-        //   "Diseminasi Draft Pedoman", //3
-        //   "Diseminasi Pedoman", //052
-        //   "Pemahaman Objek Penugasan Pengawasan serta Identifikasi dan Mitigasi Risiko", //5
-        //   "Evaluasi SPI Objek Pengawasan", //6
-        //   "Penyusunan Laporan Hasil Penugasan", //053
-        //   "Pendistribusian Laporan Hasil Penugasan"]; // 7];
-
-        // console.log(tahapan)
 
         i = 0
         x = 1
