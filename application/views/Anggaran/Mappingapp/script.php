@@ -1,7 +1,8 @@
 <script>
     var baseurl 	= "<?= base_url('Anggaran/Mappingapp/')?>";
-    var baseurl_detail 	= "<?= base_url('Anggaran/detail_Mappingapp/')?>";
+    var baseurl_detail 	= "<?= base_url('Anggaran/Detail_Mappingapp/')?>";
     var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";
+    var baseurl_master 	= "<?= base_url('Master/Master/')?>";
     var satker_session = "<?= $this->session->userdata("kdsatker")?>"
 
     function Reset(idForm) {
@@ -107,7 +108,14 @@
                     data: "nama_app"
                 },
                 {
-                    data: "tahapan"
+                    data: "nama_tahapan",
+                    render: function (data, type, row, meta) {
+                        if(data == "All"){
+                          return "-"
+                        }else{
+                          return data
+                        }
+                    }
                 },
 
                 {
@@ -196,7 +204,7 @@
                     }, 0 );
               // Update footer
               $( api.column( j ).footer() ).html(formatMoney(pageTotal));
-              $('#total').val(pageTotal);
+              $('#total_app').val(pageTotal);
           },
 
          
@@ -214,7 +222,7 @@
         return (Math.round(n * 100) / 100).toLocaleString();
     }
 
-     function Add(Id,Jumlah){
+     function Add(Id,Jumlah,Kdkmpnen){
 
       $.ajax({
       url : baseurl_detail + "Action",
@@ -225,7 +233,7 @@
           { 
             var jum = Jumlah;
             $('#kodeindex').val(Id);
-            if(data['rupiah_tahapan'] == null || data['rupiah_tahapan'] == 0 || data['rupiah_tahapan'] == "null"){
+            if(data['rupiah_tahapan'] == null || data['rupiah_tahapan'] == 0 || data['rupiah_tahapan'] == "0" || data['rupiah_tahapan'] == "null"){
               $('#jumlah').html(Jumlah);
             }else{
               var jum = Jumlah - data['rupiah_tahapan'];
@@ -233,42 +241,101 @@
             }
             $('#dummy').val(jum);
             $('#nilai_app').val(Jumlah);
+            $('#kdkmpnen').val(Kdkmpnen);
+
+            if(Kdkmpnen == "051" || Kdkmpnen == "052" || Kdkmpnen == "053"){
+              if(Kdkmpnen == "052"){
+                $(".tahapan_id_label").html("Tahapan Diseminasi Pedoman")
+              }else if(Kdkmpnen == "053"){
+                $(".tahapan_id_label").html("Tahapan Penyusunan Laporan Hasil Penugasan")
+              }else if(Kdkmpnen == "051"){
+                $(".tahapan_id_label").html("Tahapan Pengumpulan Data")
+              }
+              var element = document.getElementById("counting");
+                        element.classList.remove("d-none");
+            }else{
+              var element2 = document.getElementById("divRupiah");
+                        element2.classList.remove("d-none");
+
+            }
+
+            var element = document.getElementById("jumlah");
+                        element.classList.remove("red");
+                      element.classList.add("cyan");
+       
+
             $('#modal2').modal('open');   
+            
           }
       });
         
      }
 
-     $('.multi-field-wrapper').each(function() {
-        var max      = 9;
-        var $wrapper = $('.multi-fields', this);
-        var x = 1;
-        var i = 0;
-        var tahapan = [
-          "Pengumpulan Data",
-          "Penelitian Awal",
-          "Rapat/FGD Penyusunan Draft Pedoman", 
-          "Diseminasi Draft Pedoman", 
-          "Diseminasi Pedoman",
-          "Pemahaman Objek Penugasan Pengawasan serta Identifikasi dan Mitigasi Risiko", 
-          "Evaluasi SPI Objek Pengawasan", 
-          "Penyusunan Laporan Hasil Penugasan", 
-          "Pendistribusian Laporan Hasil Penugasan"];
-        console.log(tahapan)
-        $("#add-field", $(this)).click(function(e) {
-           if(x < max){
-              x++;
-              i++;
-              $($wrapper).append('<div class="multi-field">\
-                      <div class="input-field col s12">\
-                          <div class="input-field col s2">Tahapan '+tahapan[i]+'</div>\
-                          <div class="input-field col s10 " >\
-                            <input placeholder="00.000.000" class="rupiah" id="rupiah'+x+'" name="rupiah'+x+'" type="number" min="1000" onkeyup=AllCount() onkeypress="return validateNumber(event)">\
-                          </div>\
-                      </div>\
-                    </div>');
+     
 
-            }
+     $('.modal-close').on("click", function() {
+        location.reload(); 
+     });
+
+
+    //  if($('#myModal2').modal('close'))
+    //  {
+    //   location.reload();
+    //  }
+
+     $('.multi-field-wrapper').each(function() {
+
+       
+        // var max  = 9;
+        // var x    = 1;
+        // var i    = 0;
+        var $wrapper = $('.multi-fields', this);
+
+        
+        // var tahapan = [
+        //   "Pengumpulan Data", //0
+        //   "Penelitian Awal", //1
+        //   "Rapat/FGD Penyusunan Draft Pedoman", //2
+        //   "Diseminasi Draft Pedoman", //3
+        //   "Diseminasi Pedoman", //052
+        //   "Pemahaman Objek Penugasan Pengawasan serta Identifikasi dan Mitigasi Risiko", //5
+        //   "Evaluasi SPI Objek Pengawasan", //6
+        //   "Penyusunan Laporan Hasil Penugasan", //053
+        //   "Pendistribusian Laporan Hasil Penugasan"]; // 7];
+
+        // console.log(tahapan)
+
+        i = 0
+        x = 1
+        $("#add-field", $(this)).click(function(e) {
+
+          $.ajax({
+          url : baseurl_master + "Tahapan",
+          data: {"kdkmpnen": $('#kdkmpnen').val(),"Trigger": "getForMappingApp"},
+          type: "post",
+          dataType: "JSON",
+          success: function(data)
+              { 
+              max = data.length
+              
+              if(x < max){
+                  x++;
+                  i++;
+                  $($wrapper).append('<div class="multi-field">\
+                          <div class="input-field col s12">\
+                              <div class="input-field col s2">Tahapan '+data[i]['nama_tahapan']+'</div>\
+                              <input id="tahapan'+x+'" name="tahapan'+x+'" value="'+data[i]['id']+'" hidden>\
+                              <div class="input-field col s10 " >\
+                                <input placeholder="00.000.000" class="rupiah" id="rupiah'+x+'" name="rupiah'+x+'" type="number" min="1000" onkeyup=AllCount() onkeypress="return validateNumber(event)">\
+                              </div>\
+                          </div>\
+                        </div>');
+                        
+                }
+              }
+          });
+
+          
             
         });
 
@@ -286,15 +353,33 @@
 
 
   function Count(){
-    var nilai_tahapan = Number(document.getElementById('rupiah_tahapan_Edit').value)
-    var total  = Number($('#rupiah_Edit').val());
-    var sisa = Number(document.getElementById('sisa').value)
 
-    if(total < sisa){
-        $('#rupiah_Edit').html(sisa - nilai_tahapan); 
-      }else{
-        $('#rupiah_Edit').html(total - nilai_tahapan); 
-      }
+    var total_akun_hitung = Number($('#total_akun').val())
+    var total_app_hitung =  Number($('#total_app').val())
+    var rupiah_tahapan_hitung =  Number($('#rupiah_tahapan_Edit').val())
+    var rupiah_tahapan_dummy =  Number($('#rupiah_tahapan_dummy').val())
+
+    if(rupiah_tahapan_hitung < rupiah_tahapan_dummy){ //rupiah tahapan berkurang
+      selisih_rupiah = rupiah_tahapan_dummy - rupiah_tahapan_hitung
+      current_total_app = total_app_hitung - selisih_rupiah
+
+    }else if(rupiah_tahapan_hitung > rupiah_tahapan_dummy){ //rupiah tahapan bertambah
+      selisih_rupiah = rupiah_tahapan_hitung - rupiah_tahapan_dummy
+      current_total_app = total_app_hitung + selisih_rupiah
+
+    }else{
+      selisih_rupiah = 0
+      current_total_app = total_app_hitung
+    }
+
+    current_sisa_akun = total_akun_hitung - current_total_app
+
+    $('#rupiah_Edit').html(current_sisa_akun); 
+
+
+
+     
+    
 
       if($('#rupiah_Edit').html() < 0){
           swal({
@@ -309,8 +394,9 @@
         }else{
           var element = document.getElementById("rupiah_Edit");
                         element.classList.remove("red");
-                        element.classList.add("cyan");
+                      element.classList.add("cyan");
         }
+        
 
 
   }
@@ -318,8 +404,8 @@
   function AllCount(){
 
 
-      var nilai_app1 = document.getElementById('rupiah1').value
-      // var nilai_app1 = a.unmask();
+      var nilai_app1 = Number(document.getElementById('rupiah1').value)
+      var nilai_app_All = Number(document.getElementById('rupiahAll').value)
       var nilai_app = [];
       var total_nilaiapp = 0;
       for(i = 2 ; i < 8 ; i++){
@@ -338,9 +424,9 @@
       var dummy  = Number($('#dummy').val());
 
       if(total < dummy){
-        $('#jumlah').html(dummy - (nilai_app1 + total_nilaiapp)); 
+        $('#jumlah').html(dummy - ((nilai_app1 + nilai_app_All ) + total_nilaiapp)); 
       }else{
-        $('#jumlah').html(nilai_app - (nilai_app1 + total_nilaiapp)); 
+        $('#jumlah').html(nilai_app - ((nilai_app1 + nilai_app_All) + total_nilaiapp)); 
       }
         
 
@@ -371,7 +457,7 @@ $("#TambahApp").click(function (e) {
   var formData = new FormData($("#FormApp")[0]);
   var IdForm =  "FormApp";
   var countingDiv = document.getElementById('counting');
-  var countRupiah = countingDiv.getElementsByTagName('input').length;
+  var countRupiah = countingDiv.getElementsByClassName('rupiah').length;
 
   btn
     .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
@@ -408,17 +494,34 @@ function Edit(Id,Jumlah){
       dataType: "JSON",
       success: function(data)
           {    
-              $('#rupiah_tahapan_Edit').val(data['rupiah_tahapan']);
+              $('#rupiah_tahapan_Edit').val(data['rupiah_tahapan']); //rupiah per Tahapan
+              $('#rupiah_tahapan_dummy').val(data['rupiah_tahapan']); //rupiah per Tahapan UNTUK DUMMY TIDAK BERUBAH
+
+              var total_app = Number($('#total_app').val()); //Total App
+
+              var rupiah_Edit = Number(Jumlah) - total_app //Ini untuk hasil count kotak biru
+
+              $('#rupiah_Edit').val(rupiah_Edit);
+              $('#rupiah_Edit').html(rupiah_Edit); //hasil kotak biru
+
+              $('#total_akun').val(Number(Jumlah));
+
               $('#tahapan_Edit').val(data['tahapan']);
-              var sisa = Jumlah - $('#total').val();
-              $('#rupiah_Edit').html(sisa);
-              $('#sisa').val(sisa);
               $('#Id_Edit').val(Id);
               $('#th_pkpt_Edit').val(data['th_pkpt']);
               $('#kodeindex_Edit').val(data['kdindex']);
 
                 var app = $("<option selected='selected'></option>").val(data['id_app']).text(data['id_app']+' - '+data['nama_app'])
                 $("#app-select2_Edit").append(app).trigger('change');
+
+                if(data['tahapan'] == "All"){
+                  var element = document.getElementById("divTahapan_Edit");
+                            element.classList.add("d-none");
+                }
+
+                var element = document.getElementById("rupiah_Edit");
+                        element.classList.remove("red");
+                      element.classList.add("cyan");
 
               $('#modalEdit').modal('open');
           

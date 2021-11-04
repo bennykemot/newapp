@@ -3,6 +3,8 @@
 var  baseurl	= "<?= base_url('Anggaran/Transfer/')?>";
 var satker_session = "<?= $this->session->userdata("kdsatker")?>";
 
+var test = "<?= base_url("test")?>"
+
 
 
 
@@ -71,6 +73,10 @@ $('.btn-upload').click(function (e) {
         success : function(data) {
              var revisiKe = data[0].revisike;
 
+             if(revisiKe == ""){
+                revisiKe = 0
+             }
+
             var file = $('#shad_file').val();
             var name = file.split(".");
             var ext = name[1];
@@ -79,7 +85,7 @@ $('.btn-upload').click(function (e) {
 
              if(ext.length == 3){
                     formData.append("no_revisi", "00");
-                    no_revisi = "00";
+                    no_revisi = 0;
             }else{
                     formData.append("no_revisi", ext.substring(4, 5))
                     no_revisi = ext.substring(4, 5);
@@ -90,7 +96,10 @@ $('.btn-upload').click(function (e) {
                 return false;
                 }
             
+            
+            
             formData.append("revisike", revisiKe);
+            formData.append("dumNamaFile", name_file);
 
             var file = $('#shad_file').val();
             var name = file.split(".");
@@ -118,8 +127,7 @@ $('.btn-upload').click(function (e) {
             processData: false,
             contentType: false,
             success: function (data, textStatus, jqXHR) {
-                var res = JSON.parse(data)
-                show_msg(res.status, res.msg);
+                show_msg("success", "Berhasil Upload File");
                 $('#alert-Pagu').fadeIn()
                 $('#alert-Item').fadeIn()
                 $('#alert-SubOutput').fadeIn()
@@ -148,6 +156,21 @@ $('.btn-upload').click(function (e) {
 
    
 })
+
+// $('.btn-upload').click(function (e) {
+//     e.preventDefault();
+//     var zip = new JSZip();
+//     zip.file($('#file_').val());
+//     zip.generateAsync({type:"blob"})
+//     .then(function(content) {
+
+//         //var files = new File([content], "test.zip");
+//         // see FileSaver.js
+//         saveAs(content, "example.zip");
+//     });
+// });
+
+
 
 function show_msg(status,msg){
         swal({

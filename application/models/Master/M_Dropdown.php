@@ -103,6 +103,29 @@ function getData_komponen($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdoupu
    return $data;
 }
 
+function getData_sub_komponen($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdouput, $kdsoutput, $kdkomponen){
+
+   // Fetch users
+   $this->db->distinct();
+   $this->db->select('kdskmpnen');
+   $this->db->where("kdsatker", $kdsatker);
+   $this->db->where("kdprogram", $kdprogram);
+   $this->db->where("kdgiat", $kdgiat);
+   $this->db->where("kdoutput", $kdouput);
+   $this->db->where("kdsoutput", $kdsoutput);
+   $this->db->where("kdkmpnen", $kdkomponen);
+   $this->db->or_where("kdskmpnen like '%".$searchTerm."%' ");
+   $fetched_records = $this->db->get('d_pagu');
+   $users = $fetched_records->result_array();
+
+   // Initialize Array with fetched data
+   $data = array();
+   foreach($users as $user){
+      $data[] = array("id"=>$user['kdskmpnen'], "text"=>$user['kdskmpnen']);
+   }
+   return $data;
+}
+
 function getData_satker($searchTerm="", $kdsatker, $Trigger){
 
    // Fetch users
@@ -231,6 +254,19 @@ function getData_unitkerja($searchTerm="", $Trigger){
    $users = $fetched_records->result_array();
 
    // Initialize Array with fetched data
+   $data = array();
+   foreach($users as $user){
+      $data[] = array("id"=>$user['id'], "text"=>$user['nama_unit']);
+   }
+   return $data;
+}
+
+function getData_v_mapping($searchTerm="", $kdsatker){
+
+   $this->db->where("kdsatker", $kdsatker);
+   $this->db->where("nama_unit like '%".$searchTerm."%' ");
+   $fetched_records = $this->db->get('v_mapping');
+   $users = $fetched_records->result_array();
    $data = array();
    foreach($users as $user){
       $data[] = array("id"=>$user['id'], "text"=>$user['nama_unit']);

@@ -115,30 +115,30 @@ function Reset(idForm) {
 
 
 
-        $("#satker-select2").select2({
-          width: '100%',
-          placeholder: "Pilih Satker",
-          dropdownParent: "#modal2",
-          ajax: { 
-           url: dropdown_baseurl + 'satker',
-           type: "post",
-           dataType: 'json',
-           delay: 250,
-           data: function (params) {
-              return {
-                searchTerm: params.term ,
-                session_satker : satker_session,
-                Trigger : "user_profile"// search term
-              };
-           },
-           processResults: function (response) {
-              return {
-                 results: response
-              };
-           },
-           cache: true
-         }
-     });
+    //     $("#satker-select2").select2({
+    //       width: '100%',
+    //       placeholder: "Pilih Satker",
+    //       dropdownParent: "#modal2",
+    //       ajax: { 
+    //        url: dropdown_baseurl + 'satker',
+    //        type: "post",
+    //        dataType: 'json',
+    //        delay: 250,
+    //        data: function (params) {
+    //           return {
+    //             searchTerm: params.term ,
+    //             session_satker : satker_session,
+    //             Trigger : "user_profile"// search term
+    //           };
+    //        },
+    //        processResults: function (response) {
+    //           return {
+    //              results: response
+    //           };
+    //        },
+    //        cache: true
+    //      }
+    //  });
  
      $("#role-select2").select2({
           dropdownAutoWidth: true,
@@ -181,28 +181,28 @@ function Reset(idForm) {
 
     //EDIT
 
-    $("#satker-select2_Edit").select2({
-          width: '100%',
-          placeholder: "Pilih Satker",
-          dropdownParent: "#modalEdit",
-          ajax: { 
-           url: dropdown_baseurl + 'satker',
-           type: "post",
-           dataType: 'json',
-           delay: 250,
-           data: function (params) {
-              return {
-                searchTerm: params.term // search term
-              };
-           },
-           processResults: function (response) {
-              return {
-                 results: response
-              };
-           },
-           cache: true
-         }
-     });
+    // $("#satker-select2_Edit").select2({
+    //       width: '100%',
+    //       placeholder: "Pilih Satker",
+    //       dropdownParent: "#modalEdit",
+    //       ajax: { 
+    //        url: dropdown_baseurl + 'satker',
+    //        type: "post",
+    //        dataType: 'json',
+    //        delay: 250,
+    //        data: function (params) {
+    //           return {
+    //             searchTerm: params.term // search term
+    //           };
+    //        },
+    //        processResults: function (response) {
+    //           return {
+    //              results: response
+    //           };
+    //        },
+    //        cache: true
+    //      }
+    //  });
  
      $("#role-select2_Edit").select2({
           dropdownAutoWidth: true,

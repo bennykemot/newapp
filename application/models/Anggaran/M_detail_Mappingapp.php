@@ -1,6 +1,6 @@
 
     <?php
-    class M_detail_Mappingapp extends CI_Model{
+    class M_Detail_Mappingapp extends CI_Model{
 
         //////////////////////////
 
@@ -34,11 +34,17 @@
         $this->db->select('d_detailapp.th_pkpt');
         $this->db->select('d_detailapp.tahapan');
         $this->db->select('d_detailapp.rupiah_tahapan');
+
+        $this->db->select('r_tahapan.id as id_tahapan');
+        $this->db->select('r_tahapan.nama_tahapan as nama_tahapan');
+
+
         $this->db->select('t_app.nama_app');
         $this->db->select('v_mapping.jumlah');
 
         $this->db->from('d_detailapp');
         $this->db->join('t_app', 't_app.id = d_detailapp.id_app');
+        $this->db->join('r_tahapan', 'r_tahapan.id = d_detailapp.tahapan');
         $this->db->join('v_mapping', 'v_mapping.kdindex = d_detailapp.kdindex');
         $this->db->where('d_detailapp.kdindex', $kdindex);
  

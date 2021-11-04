@@ -19,7 +19,7 @@
                         <div class="input-field col s2" >Satker</div>
 
                         <div class="input-field col s10" >
-                          <select id="satker-select2" name="kdsatker" class="browser-default"></select>
+                          <input readonly placeholder="<?php echo $this->session->userdata("nmsatker"); ?>" id="kdsatker" name="kdsatker" value = "<?php echo $this->session->userdata("kdsatker"); ?>">
                           </div>
                       </div>
 
@@ -89,7 +89,7 @@
                         <div class="input-field col s2" >Satker</div>
 
                         <div class="input-field col s10" >
-                          <select id="satker-select2_Edit" name="kdsatker_Edit" class="browser-default" readonly></select>
+                        <input readonly placeholder="<?php echo $this->session->userdata("nmsatker"); ?>" id="kdsatker_Edit" name="kdsatker_Edit" value = "<?php echo $this->session->userdata("kdsatker"); ?>">
                           </div>
                       </div>
 

@@ -35,6 +35,10 @@
 
       <script src="<?= base_url().'assets'?>/app-assets/vendors/formatter/jquery.formatter.min.js"></script>
 
+      <script src="<?= base_url().'assets'?>/app-assets/js/jszip.js"></script>
+
+      <script src="<?= base_url().'assets'?>/app-assets/js/FileSaver.js"></script>
+
       <script>
         
         function validateNumber(e) {

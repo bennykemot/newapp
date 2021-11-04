@@ -20,6 +20,8 @@
                   </div>
               </div>
 
+              <button class="btn indigo" href="<?= site_url("Anggaran/Transfer/test")?>"> Simpan</button>
+
               <div class="col s12" id="account">
                 <div class="card">
                     <div class="card-content">
@@ -29,10 +31,7 @@
                             <div class="input-field col s12">
                                   <div class="input-field col s2">Upload File</div>
 
-                                  <div class="input-field col s2 ">
-                                      <a class="gradient-45deg-indigo-light-blue btn-large" onclick="Upload()"><i class="material-icons left">file_download</i>Upload File</a>
-                                      <input type="file" id="file_" name="file_" hidden>
-                                  </div>
+                                  
                                   <div class="input-field col s8 ">
                                       <input placeholder="File..." id="shad_file" name="shad_file" type="text"Readonly>
                                   </div>
@@ -40,8 +39,14 @@
 
                             <input value="<?= $this->session->userdata("kdsatker"); ?>" id="kdsatker" name="kdsatker" type="text" hidden>
 
+                            <div class="input-field col s2 ">
+                                      <a class="gradient-45deg-indigo-light-blue btn-large" onclick="Upload()"><i class="material-icons left">file_download</i>Upload File</a>
+                                      <input type="file" id="file_" name="file_" hidden>
+                                  </div>
+
                             <div class="col s12 display-flex justify-content-end mt-1">
                                 <button class="btn indigo btn-upload" id="btn-upload"> Simpan</button>
+                                <!-- <button class="btn indigo" id="btn-upload"> Simpan</button> -->
                             </div>
                           </form>
                         </div>
@@ -50,6 +55,8 @@
                   </div>
                 </div>
             </div>
+
+            
 
             <div class="card-alert card green" id="alert-Pagu" style="display: none">
                 <div class="card-content white-text">

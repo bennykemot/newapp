@@ -66,8 +66,13 @@
                         <div class="input-field col s12">
                             <div class="input-field col s2">Komponen/Sub Komp</div>
 
-                            <div class="input-field col s10 " >
-                            <select class="browser-default" id="idxskmpnen" name="idxskmpnen"></select>
+                            <div class="input-field col s8 " >
+                                <input type="text"  id="idxskmpnen" name="idxskmpnen" readonly>
+                                <!-- <select class="browser-default" id="idxskmpnen" name="idxskmpnen"></select> -->
+                            </div>
+
+                            <div class="input-field col s2 " >
+                                <button type="button" class="btn gradient-45deg-amber-amber col s12 modal-trigger" href="#modalidx" id ="modalIdx" name="modalIdx"><i class="material-icons left">search</i> Cari</button>
                             </div>
                         </div>
 
@@ -98,7 +103,6 @@
 
                                     <div class="input-field col s3 ">
                                         <button type="button" class="btn green col s12" id ="add-field" name="add-field"><i class="material-icons left">add</i> Tambah</button>
-                                        <!-- <button type="button" class="btn green col s12 modal-trigger" href="#modal3"><i class="material-icons left">add</i> Tambah</button> -->
                                     </div>
                                 </div>
 
@@ -129,5 +133,7 @@
 </div>
 
 
+
+<?php include('modal.php');?>
 <?php include(APPPATH . 'views/Footer/Footer.php') ?>
   <?php include('script.php');?>

@@ -12,6 +12,257 @@ function Reset(idForm) {
 }
 
 
+//SELECT2 VIEW
+// Loading array data
+var data = [
+    { id: 1, text: 'Januari' },
+    { id: 2, text: 'Februari' },
+    { id: 3, text: 'Maret' },
+    { id: 4, text: 'April' },
+    { id: 5, text: 'Mei' },
+    { id: 6, text: 'Juni' },
+    { id: 7, text: 'Juli' },
+    { id: 8, text: 'Agustus' },
+    { id: 9, text: 'September' },
+    { id: 10, text: 'Oktober' },
+    { id: 11, text: 'November' },
+    { id: 12, text: 'Desember' }
+];
+
+$("#bulan-Array").select2({
+    dropdownAutoWidth: true,
+    width: '100%',
+    data: data,
+    dropdownParent: "#head",
+});
+    
+
+// SELECT2 INSERT
+
+$("#user-select2").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih User",
+          dropdownParent: "#modalidx",
+         ajax: { 
+           url: dropdown_baseurl + 'user',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+                session_satker: satker_session,
+                searchTerm: params.term // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
+        $("#program-select2").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Program",
+          dropdownParent: "#modalidx",
+         ajax: { 
+           url: dropdown_baseurl + 'program_per_satker',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+                kdsatker: satker_session,
+                searchTerm: params.term // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+ 
+     $("#kegiatan-select2").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Kegiatan",
+          dropdownParent: "#modalidx",
+         ajax: { 
+           url: dropdown_baseurl + 'kegiatan_per_satker',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+                kdprogram: $('#program-select2').val(),
+                kdsatker: satker_session,
+                searchTerm: params.term
+                 // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
+     $("#kro-select2").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih KRO",
+          dropdownParent: "#modalidx",
+         ajax: { 
+           url: dropdown_baseurl + 'kro_per_satker',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+                kdprogram: $('#program-select2').val(),
+                kdgiat: $('#kegiatan-select2').val(),
+                kdsatker: satker_session,
+                searchTerm: params.term
+                 // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
+     $("#ro-select2").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih RO",
+          dropdownParent: "#modalidx",
+         ajax: { 
+           url: dropdown_baseurl + 'ro_per_satker',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+                kdprogram: $('#program-select2').val(),
+                kdgiat: $('#kegiatan-select2').val(),
+                kdoutput: $('#kro-select2').val(),
+                kdsatker: satker_session,
+                searchTerm: params.term
+                 // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
+     $("#komponen-select2").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Komponen",
+          dropdownParent: "#modalidx",
+         ajax: { 
+           url: dropdown_baseurl + 'komponen_per_satker',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+                kdprogram: $('#program-select2').val(),
+                kdgiat: $('#kegiatan-select2').val(),
+                kdoutput: $('#kro-select2').val(),
+                kdsoutput: $('#ro-select2').val(),
+                kdsatker: satker_session,
+                searchTerm: params.term
+                 // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
+     $("#sub_komponen-select2").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Sub Komponen",
+          dropdownParent: "#modalidx",
+         ajax: { 
+           url: dropdown_baseurl + 'sub_komponen_per_satker',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+                kdprogram: $('#program-select2').val(),
+                kdgiat: $('#kegiatan-select2').val(),
+                kdoutput: $('#kro-select2').val(),
+                kdsoutput: $('#ro-select2').val(),
+                kdkomponen: $('#komponen-select2').val(),
+                kdsatker: satker_session,
+                searchTerm: params.term
+                 // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
+     $( ".browser-default" ).change(function() {
+       var  Satker = $('#kdsatker').val()
+       var  Program = $('#program-select2').val()
+       var  Kegiatan = $('#kegiatan-select2').val()
+       var  KRO =  $('#kro-select2').val()
+       var  RO =  $('#ro-select2').val()
+       var  Komponen = $('#komponen-select2').val()
+       var  Sub_Komponen = $('#sub_komponen-select2').val()
+      $('#kdindex').val(''+Satker+''+Program+''+Kegiatan+''+KRO+''+RO+''+Komponen+''+Sub_Komponen+'')
+      $('#kdindex').html(''+Satker+''+Program+''+Kegiatan+''+KRO+''+RO+''+Komponen+''+Sub_Komponen+'')
+
+      var  kdindex = $('#kdindex').val()
+        if(kdindex.includes("null") || kdindex == ""){
+          $("#Tambah").addClass("disabled");
+        }else{
+          $("#Tambah").removeClass("disabled");
+        }
+    });
+
+    $("#Tambah").click(function (e) {
+      var kdindex = $('#kdindex').val()
+      $('#idxskmpnen').val(kdindex)
+      $('#idxskmpnen').html(kdindex)
+
+      $('#modalidx').modal('close');
+
+    })
+
+
 
 $("#ttd").select2({
           dropdownAutoWidth: true,
@@ -37,29 +288,29 @@ $("#ttd").select2({
          }
      });
 
-    $("#idxskmpnen").select2({
-        // dropdownAutoWidth: true,
-        width: '100%',
-        placeholder: "Pilih Komponen/Sub Komp",
-        ajax: { 
-        url: dropdown_baseurl + 'sub_komponen',
-        type: "post",
-        dataType: 'json',
-        delay: 250,
-        data: function (params) {
-            return {
-            Trigger : "sub_komponen_forST",
-            searchTerm: params.term // search term
-            };
-        },
-        processResults: function (response) {
-            return {
-                results: response
-            };
-        },
-        cache: true
-        }
-    });
+    // $("#idxskmpnen").select2({
+    //     // dropdownAutoWidth: true,
+    //     width: '100%',
+    //     placeholder: "Pilih Komponen/Sub Komp",
+    //     ajax: { 
+    //     url: dropdown_baseurl + 'sub_komponen',
+    //     type: "post",
+    //     dataType: 'json',
+    //     delay: 250,
+    //     data: function (params) {
+    //         return {
+    //         Trigger : "sub_komponen_forST",
+    //         searchTerm: params.term // search term
+    //         };
+    //     },
+    //     processResults: function (response) {
+    //         return {
+    //             results: response
+    //         };
+    //     },
+    //     cache: true
+    //     }
+    // });
 
     $("#beban_anggaran").select2({
         dropdownAutoWidth: true,

@@ -23,7 +23,7 @@ class SuratTugas extends CI_Controller {
         $jumlah_data = $this->SuratTugas->Jum();
         $config['base_url'] = base_url().'Transaksi/SuratTugas/Page';
 		$config['total_rows'] = $jumlah_data;
-		$config['per_page'] = 3;
+		$config['per_page'] = 10;
 
         $config['first_url'] = '1';
 

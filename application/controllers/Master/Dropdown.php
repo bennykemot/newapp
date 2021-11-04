@@ -82,6 +82,23 @@ class Dropdown extends CI_Controller {
         echo json_encode($response);
      }
 
+     public function sub_komponen_per_satker(){
+
+      // Search term
+      $searchTerm = $this->input->post('searchTerm');
+      $kdprogram = $this->input->post('kdprogram');
+      $kdsatker = $this->input->post('kdsatker');
+      $kdgiat = $this->input->post('kdgiat');
+      $kdoutput = $this->input->post('kdoutput');
+      $kdsoutput = $this->input->post('kdsoutput');
+      $kdkomponen = $this->input->post('kdkomponen');
+
+      // Get users
+      $response = $this->Dropdown->getData_sub_komponen($searchTerm, $kdsatker, $kdprogram, $kdgiat, $kdoutput, $kdsoutput, $kdkomponen);
+
+      echo json_encode($response);
+   }
+
      public function satker(){
 
       // Search term
@@ -167,6 +184,18 @@ class Dropdown extends CI_Controller {
 
       // Get users
       $response = $this->Dropdown->getData_unitkerja($searchTerm, $Trigger);
+
+      echo json_encode($response);
+   }
+
+   public function v_mapping(){
+
+      // Search term
+      $searchTerm = $this->input->post('searchTerm');
+      $kdsatker = $this->input->post('kdsatker');
+
+      // Get users
+      $response = $this->Dropdown->getData_v_mapping($searchTerm, $kdsatker);
 
       echo json_encode($response);
    }

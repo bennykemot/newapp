@@ -1,4 +1,4 @@
-<div id="modal2" class="modal">
+<div id="modal2" class="modal" >
     <div class="modal-content">
       <h4>Tambah Detail App Pagu</h4>
       <div style="padding-top: 10px"></div>
@@ -17,12 +17,21 @@
                   </div>
             </div>
 
-              <div id = "counting">
+            <div class="input-field col s12 d-none" id="divRupiah">
+                <div class="input-field col s2">Rupiah</div>
+
+                <div class="input-field col s10 " >
+                <input placeholder="00.000.000" class="rupiah" id="rupiahAll" name="rupiahAll"  onkeyup="AllCount()" onkeypress="return validateNumber(event)">
+                  </div>
+            </div>
+
+              <div id = "counting" class="d-none">
                 <div class="multi-field-wrapper">
-                  <div class="multi-fields">
+                  <div class="multi-fields" id="multi-fields">
                     <div class="multi-field">
                       <div class="input-field col s12">
-                          <div class="input-field col s2">Pengumpulan Data</div>
+                          <div class="input-field col s2 tahapan_id_label">Pengumpulan Data</div>
+                          <input id="tahapan1" name="tahapan1" value="1" hidden>
 
                           <div class="input-field col s10 " >
                             <input placeholder="00.000.000" class="rupiah" id="rupiah1" name="rupiah1"  onkeyup="AllCount()" onkeypress="return validateNumber(event)">
@@ -59,7 +68,7 @@
             </div>
 
             <input placeholder="00.000.000" id="nilai_app" name="nilai_app" type="number" readonly hidden>
-            <input placeholder="00.000.000" id="dummy" name="dummy" type="number" readonly hidden>
+            <input placeholder="00.000.000" id="dummy" name="dummy" type="number" readonly  hidden>
 
             <div class="input-field col s12">
                 <div class="input-field col s2">PKPT</div>
@@ -69,13 +78,16 @@
                 </div>
             </div>
 
-            <div class="input-field col s12" hidden>
+            <div class="input-field col s12">
                 <div class="input-field col s2">kodeindex</div>
 
                 <div class="input-field col s10 " >
                   <input placeholder="Nilai App" id="kodeindex" name="kodeindex" type="text" >
+                  <input placeholder="Nilai App" id="kdkmpnen" name="kdkmpnen" type="text" >
                 </div>
             </div>
+
+            
 
 
 
@@ -106,7 +118,7 @@
                   </div>
             </div>
 
-            <div class="input-field col s12">
+            <div class="input-field col s12" id="divTahapan_Edit">
                 <div class="input-field col s2">Tahapan</div>
 
                 <div class="input-field col s10 " >
@@ -122,8 +134,9 @@
                 </div>
             </div>
 
-            <input id="total" name="total" hidden>
-            <input id="sisa" name="sisa" hidden>
+            <input id="rupiah_tahapan_dummy" name="rupiah_tahapan_dummy" hidden>
+            <input id="total_app" name="total_app" hidden>
+            <input id="total_akun" name="total_akun" hidden>
 
             <div class="input-field col s12">
                 <div class="input-field col s2">Nilai App</div>

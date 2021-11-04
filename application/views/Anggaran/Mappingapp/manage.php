@@ -53,7 +53,7 @@
                                 <td><?php echo $u->uraian ?></td>
                                 <td class="text-right"><?php echo number_format($u->jumlah,0,',','.') ?></td>
                                 <?php if ($u->kdlevel == "7" && $u->kode != "521811"){ ?>
-                                <td style="text-align: center"><button type="button" class="btn-floating green" onclick="Add('<?= $u->kdindex ?>', '<?= $u->jumlah ?>')"><i class="material-icons">add</i></button></td>
+                                <td style="text-align: center"><button type="button" class="btn-floating green" onclick="Add('<?= $u->kdindex ?>', '<?= $u->jumlah ?>', '<?= $u->kdkmpnen ?>')"><i class="material-icons">add</i></button></td>
                                 <?php } else{ 
                                   echo '<td></td>';
 

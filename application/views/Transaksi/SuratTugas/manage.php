@@ -17,8 +17,8 @@ function getapprove($data){
  <div class="row">
 
  <div class="col s12">
-        <div class="card">
-          <div class="card-content" style="height: 90px; padding: 0px !important">
+        <div class="card" id="head">
+          <div class="card-content" style="height: 120px; padding: 0px !important">
             <div class="col s1 display-flex justify-content-end" style="height: 100%;padding: 24px;padding-right: 34px; border-radius: 10px" >
               <button type="button" class="btn-floating" style=""><i class="material-icons">
               email
@@ -26,7 +26,9 @@ function getapprove($data){
             </div>
             <div class="col s9" style="padding-top: 24px">
               <h6> Daftar Surat Tugas</h6>
-                  <p>Bulan : <?php echo currentMonth(date("m")) ?></p>
+                  <div class="col s1" style="padding-left: 0px ! important">Bulan : </div>
+                  <div class="col s11"><select class="browser-default" id="bulan-Array"><option selected><?php echo currentMonth(date("m")) ?></option></select>
+                  </div>
             </div>
             <div class="col s2" style="padding-top: 24px">
               <a class="btn modal-trigger" href="<?= site_url('Transaksi/SuratTugas/Tambah') ?>">Tambah Data</a>
