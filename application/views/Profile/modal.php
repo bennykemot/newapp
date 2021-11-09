@@ -1,6 +1,6 @@
 <div id="modal2" class="modal">
             <div class="modal-content">
-              <h4>Tambah User</h4>
+              <h6>Tambah User</h6>
               <div style="padding-top: 10px"></div>
                 <div class="row">
 
@@ -8,7 +8,7 @@
                     <div class="row">
 
                     <div class="input-field col s12">
-                        <div class="input-field col s2">Nama User</div>
+                        <div class="input-field col s2"><label>Nama User</label></div>
 
                         <div class="input-field col s10 " >
                           <input placeholder="Nama User" id="nama_user" name="nama_user" type="text" class="validate">
@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="input-field col s12">
-                        <div class="input-field col s2" >Satker</div>
+                        <div class="input-field col s2"><label>Satker</label></div>
 
                         <div class="input-field col s10" >
                           <input readonly placeholder="<?php echo $this->session->userdata("nmsatker"); ?>" id="kdsatker" name="kdsatker" value = "<?php echo $this->session->userdata("kdsatker"); ?>">
@@ -24,23 +24,21 @@
                       </div>
 
                       <div class="input-field col s12">
-                        <div class="input-field col s2" >Role</div>
+                        <div class="input-field col s2"><label>Role</label></div>
 
-                        <div class="input-field col s10 " >
-                          <select  id="role-select2" name="kdrole" class="browser-default"></select>
+                          <div class="input-field col s4 " >
+                            <select  id="role-select2" name="kdrole" class="select2-data-ajax select2-hidden-accessible browser-default"></select>
+                          </div>
+
+                          <div class="input-field col s2"><label>Status</label></div>
+
+                          <div class="input-field col s4 " >
+                            <select  id="status-select2" name="kdstatus" class="browser-default"></select>
                           </div>
                       </div>
 
                       <div class="input-field col s12">
-                        <div class="input-field col s2" >Status</div>
-
-                        <div class="input-field col s10 " >
-                          <select  id="status-select2" name="kdstatus" class="browser-default"></select>
-                          </div>
-                      </div>
-
-                      <div class="input-field col s12">
-                        <div class="input-field col s2">Password User</div>
+                        <div class="input-field col s2"><label>Password User</label></div>
 
                         <div class="input-field col s10 " >
                           <input placeholder="Password User" id="password" name="password" type="text" class="validate">
@@ -48,7 +46,7 @@
                     </div>
 
                     <div class="input-field col s12">
-                        <div class="input-field col s2">Keterangan User</div>
+                        <div class="input-field col s2"><label>Keterangan User</label></div>
 
                         <div class="input-field col s10 " >
                           <input placeholder="Keterangan User" id="keterangan" name="keterangan" type="text" class="validate">
@@ -70,7 +68,7 @@
 
           <div id="modalEdit" class="modal">
             <div class="modal-content">
-              <h4>Ubah User</h4>
+              <h6>Ubah User</h6>
               <div style="padding-top: 10px"></div>
                 <div class="row">
 
@@ -78,7 +76,7 @@
                     <div class="row">
 
                     <div class="input-field col s12">
-                        <div class="input-field col s2">Nama User</div>
+                        <div class="input-field col s2"><label>Nama User</label></div>
 
                         <div class="input-field col s10 " >
                           <input placeholder="Nama User" id="nama_user_Edit" name="nama_user_Edit" type="text" class="validate">
@@ -86,31 +84,37 @@
                     </div>
 
                     <div class="input-field col s12">
-                        <div class="input-field col s2" >Satker</div>
+                        <div class="input-field col s2"><label>Satker</label></div>
 
                         <div class="input-field col s10" >
                         <input readonly placeholder="<?php echo $this->session->userdata("nmsatker"); ?>" id="kdsatker_Edit" name="kdsatker_Edit" value = "<?php echo $this->session->userdata("kdsatker"); ?>">
                           </div>
-                      </div>
+                    </div>
 
                       <div class="input-field col s12">
-                        <div class="input-field col s2" >Role</div>
+                        <div class="input-field col s2"><label>Role</label></div>
 
-                        <div class="input-field col s10 " >
+                        <div class="input-field col s4 " >
                           <select  id="role-select2_Edit" name="kdrole_Edit" class="browser-default"></select>
                           </div>
-                      </div>
 
-                      <div class="input-field col s12">
-                        <div class="input-field col s2" >Status</div>
+                          <div class="input-field col s2"><label>Status</label></div>
 
-                        <div class="input-field col s10 " >
+                        <div class="input-field col s4 " >
                           <select  id="status-select2_Edit" name="kdstatus_Edit" class="browser-default"></select>
                           </div>
                       </div>
 
+                      <!-- <div class="input-field col s12">
+                        <div class="input-field col s2"><label>Status</label></div>
+
+                        <div class="input-field col s10 " >
+                          <select  id="status-select2_Edit" name="kdstatus_Edit" class="browser-default"></select>
+                          </div>
+                      </div> -->
+
                       <div class="input-field col s12">
-                        <div class="input-field col s2">Password User</div>
+                        <div class="input-field col s2"><label>Password User</label></div>
 
                         <div class="input-field col s10 " >
                           <input placeholder="Password User" id="password_Edit" name="password_Edit" type="text" class="validate">
@@ -118,7 +122,7 @@
                     </div>
 
                     <div class="input-field col s12">
-                        <div class="input-field col s2">Keterangan User</div>
+                        <div class="input-field col s2"><label>Keterangan User</label></div>
 
                         <div class="input-field col s10 " >
                           <input placeholder="Keterangan User" id="keterangan_Edit" name="keterangan_Edit" type="text" class="validate">

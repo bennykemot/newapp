@@ -18,6 +18,18 @@ class MappingApp extends CI_Controller {
         
 	}
 
+    // public function Page(){
+
+        
+    //     $kdsatker =  $this->uri->segment(4);
+    //     $data['mapp'] = $this->Mappingapp->getDataNew($kdsatker);
+    //     //echo json_encode($data);
+    //     // $data['mapp'] = $this->Page();
+        
+	// 	$this->load->view('Anggaran/Mappingapp/manage',$data);
+
+    // }
+
     public function Page(){
 
         $satker = $this->uri->segment(4);
@@ -28,6 +40,8 @@ class MappingApp extends CI_Controller {
 		$config['per_page'] = 10;
 
         $config['first_url'] = '1';
+        $config['first_link'] = false;
+        $config['last_link'] = false;
 
         $config['full_tag_open'] = "<ul class='pagination' >";
         $config['full_tag_close'] = '</ul>';
@@ -56,6 +70,10 @@ class MappingApp extends CI_Controller {
 
 		$from =  $this->uri->segment(5);
 		$this->pagination->initialize($config);
+
+        if($from == 1){
+            $from = 0;
+        };
 
         $kdsatker =  $satker;
         $data['mapp'] = $this->Mappingapp->getDataNew($kdsatker, $config['per_page'], $from);

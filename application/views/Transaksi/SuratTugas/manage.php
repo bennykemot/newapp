@@ -16,7 +16,7 @@ function getapprove($data){
 <!-- Page Length Options -->
  <div class="row">
 
- <div class="col s12">
+ <!-- <div class="col s12">
         <div class="card" id="head">
           <div class="card-content" style="height: 120px; padding: 0px !important">
             <div class="col s1 display-flex justify-content-end" style="height: 100%;padding: 24px;padding-right: 34px; border-radius: 10px" >
@@ -35,7 +35,26 @@ function getapprove($data){
             </div>
           </div>
         </div>
-  </div>
+  </div> -->
+
+  <div class="col s12">
+        <div class="card" id="head">
+            <div class="card-content" >
+                <div class="row">
+                    <div class="col s1">
+                        <button type="button" class="btn-floating" style=""><i class="material-icons">
+                        email</i></button>
+                    </div>
+                    <div class="col s9">
+                        <h6> Daftar Surat Tugas </h6>
+                    </div>
+                    <div class="col s2">
+                        <a class="btn modal-trigger" href="<?= site_url('Transaksi/SuratTugas/Tambah') ?>">Tambah Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="col s12">
       <div class="card">
@@ -76,7 +95,7 @@ function getapprove($data){
                             <td><?php echo $u->tglselesaist ?></td>
                             <td>
                                 <div class="col s12">
-                                    <button class="btn orange col s12">VIEW</button><br>
+                                    <button class="btn orange col s12" onclick="Print('<?= $u->id ?>')" target="_blank">VIEW</button><br>
                                     <div style="padding-bottom: 20px"></div>
                                     <button class="btn cyan col s12">UBAH</button><br>
                                     <div style="padding-bottom: 20px"></div>

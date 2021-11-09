@@ -8,12 +8,21 @@ class Pembagianpagu extends CI_Controller {
 		parent::__construct();
 		$this->load->helper("url");
 		$this->load->library("datatables");
+        $this->load->library('pagination');
 		$this->load->model('Anggaran/M_Pembagianpagu','Pembagianpagu');
 	}
 
-	public function index()
+    public function index()
+	{}
+
+	public function Page()
 	{
-		$this->load->view('Anggaran/Pembagianpagu/manage');
+
+        
+        $kdsatker =  $this->uri->segment(4);
+        $data['pp']= $this->Pembagianpagu->getDataNew($kdsatker);
+        //echo json_encode($data);
+		$this->load->view('Anggaran/Pembagianpagu/manage', $data);
 	}
 
 	public function getPembagianPagu()

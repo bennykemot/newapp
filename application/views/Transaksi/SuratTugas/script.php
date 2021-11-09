@@ -1,3 +1,5 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
 
 
@@ -504,6 +506,24 @@ $("#TambahST").click(function (e) {
           error: function (jqXHR, textStatus, errorThrown) { },
       });
 });
+
+function Print(Id){
+  swal({
+    title: "Apakah Yakin Ingin Dihapus?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Ya, Hapus!",
+    cancelButtonText: "Batal",
+    html:
+    '<label class="col-md-2">Kop</label><input id="kop1" name="kop1" class="swal2-input col-md-10" placeholder="TENTARA NASIONAL INDONESIA" value="TENTARA NASIONAL INDONESIA">'+
+    '<label class="col-md-2">Sub</label><input id="kop2" name="kop2" class="swal2-input col-md-10" placeholder="Sub Kop">',
+  }).then(function (result) {
+    if (result) {
+      Execute(Id);
+    }
+  });
+
+}
 
 function Delete(Id) {
     swal({

@@ -39,6 +39,8 @@
 
       <script src="<?= base_url().'assets'?>/app-assets/js/FileSaver.js"></script>
 
+      <script src="<?= base_url().'assets'?>/app-assets/vendors/select2/select2.full.min.js"></script>
+
       <script>
         
         function validateNumber(e) {

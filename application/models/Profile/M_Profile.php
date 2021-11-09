@@ -18,6 +18,28 @@ class M_Profile extends CI_Model{
         $this->load->database();
 	}
 
+    function getDataNew($kdsatker){
+        $this->db->select('t_satker.nmsatker');
+        $this->db->select('t_satker.kdsatker');
+
+        $this->db->select('user.id');
+        $this->db->select('user.username');
+        $this->db->select('user.role_id');
+        $this->db->select('user.keterangan');
+        $this->db->select('user.status');
+        $this->db->select('role.rolename');
+        
+        
+        $this->db->from($this->table);
+        $this->db->join('t_satker', 't_satker.kdsatker = user.kdsatker');
+        $this->db->join('role', 'role.id = user.role_id');
+        $this->db->where('user.kdsatker', $kdsatker);
+        $query = $this->db->get();
+
+        return $query->result();
+     
+    }
+
 
     private function _get_datatables_query($kdsatker)
     {

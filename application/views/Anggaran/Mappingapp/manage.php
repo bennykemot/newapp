@@ -4,20 +4,21 @@
  <div class="row">
 
  <div class="col s12">
-        <div class="card">
-          <div class="card-content" style="height: 90px; padding: 0px !important">
-            <div class="col s1 display-flex justify-content-end" style="height: 100%;padding: 24px;padding-right: 34px; border-radius: 10px" >
-              <button type="button" class="btn-floating" style=""><i class="material-icons">
-              view_comfy
-                </i></button>
+        <div class="card" id="head">
+            <div class="card-content" >
+                <div class="row">
+                    <div class="col s1">
+                        <button type="button" class="btn-floating" style=""><i class="material-icons">
+                        view_comfy</i></button>
+                    </div>
+                    <div class="col s11">
+                        <h6> Mapping APP Satker : <?php echo $this->session->userdata("nmsatker"); ?> </h6>
+                    </div>
+                  
+                </div>
             </div>
-            <div class="col s9" style="padding-top: 24px">
-              <h6> Mapping APP Satker : <?php echo $this->session->userdata("nmsatker"); ?></h6>
-                  <p><?php echo $this->session->userdata("keterangan"); ?></p>
-            </div>
-          </div>
         </div>
-  </div>
+    </div>
 
     <div class="col s12">
       <div class="card">
@@ -67,8 +68,10 @@
 
                   </tbody>
                 </table>
-               <?php 
-                echo $this->pagination->create_links(); ?>
+                <div id="page-length-option_paginate" class="dataTables_paginate paging_simple_numbers">
+                <?= $this->pagination->create_links(); ?>
+                </div>
+               
 
 
                 
@@ -78,13 +81,14 @@
       </div>
     </div>
 
+  <div class="section section-data-tables">
     <div class="col s12" id="DetailCard" style="display: none">
       <div class="card">
         <div class="card-content">
           <h4 class="card-title col s10">Detail App</h4>
           <div class="row">
             <div class="col s12">
-              <table id="tabel_mapping_detail" class="display" style="width: 100%">
+              <table id="tabel_mapping_detail" class="display table-responsive" style="width: 100%">
                   <thead>
                     <tr>
                         <th>No</th>
@@ -110,6 +114,7 @@
         </div>
       </div>
     </div>
+  </div>
 
 
   </div>

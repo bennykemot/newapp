@@ -12,8 +12,15 @@ class Profile extends CI_Controller {
 	}
 
 	public function index()
-	{
+	{   
 		$this->load->view('Profile/Profile');
+	}
+
+    public function Page()
+	{   
+        $kdsatker =  $this->uri->segment(4);
+        $data['user'] = $this->Profile->getDataNew($kdsatker);
+		$this->load->view('Profile/Profile',$data);
 	}
 
     public function getUser()

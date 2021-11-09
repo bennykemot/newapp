@@ -8,6 +8,7 @@ class SuratTugas extends CI_Controller {
 		parent::__construct();
 		$this->load->helper(array("url", "form"));
         $this->load->library('pagination');
+        $this->load->library('pdf');
         $this->load->model('Transaksi/M_SuratTugas','SuratTugas');
 	}
 
@@ -168,6 +169,26 @@ class SuratTugas extends CI_Controller {
 
         }
         
+    }
+
+    public function Export(){
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 
+        'format' => 'A4-P',
+        'default_font_size' => 11,
+        'default_font' => 'Arial Narrow',
+        'margin_left' => 26,
+        'margin_right' => 26,
+        'margin_top' => 16,
+        'margin_bottom' => 26,
+        ]);
+        $Assets			= $this->config->item('assets_url');
+        $path           = '<img src='.$Assets.'app-assets/images/logo/bpkp.jpg>';
+        $html = $this->load->view('Transaksi/SuratTugas/export.php',[],true);
+
+        $mpdf->WriteHTML($html);          
+        $mpdf->Output('yourFileName.pdf', 'I');
+     
+	
     }
 
 }

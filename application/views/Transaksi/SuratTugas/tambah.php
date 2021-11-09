@@ -2,16 +2,18 @@
 
 <div class="row">
 
-    <div class="col s12">
-        <div class="card">
-            <div class="card-content" style="height: 90px; padding: 0px !important">
-                <div class="col s1 display-flex justify-content-end" style="height: 100%;padding: 24px;padding-right: 34px; border-radius: 10px" >
-                    <button type="button" class="btn-floating" style=""><i class="material-icons">
-                    add
-                    </i></button>
-                </div>
-                <div class="col s9" style="padding-top: 24px">
-                    <h6> Input Surat Tugas : </h6>
+<div class="col s12">
+        <div class="card" id="head">
+            <div class="card-content" >
+                <div class="row">
+                    <div class="col s1">
+                        <button type="button" class="btn-floating" style=""><i class="material-icons">
+                        add</i></button>
+                    </div>
+                    <div class="col s11">
+                        <h6> Input Surat Tugas : </h6>
+                    </div>
+                  
                 </div>
             </div>
         </div>
@@ -24,7 +26,7 @@
                 <form id="FormST" name="FormST">
                     <div class="row">
                         <div class="input-field col s12">
-                            <div class="input-field col s2">Nomor ST</div>
+                            <div class="input-field col s2"><label>Nomor ST</label></div>
 
                             <div class="input-field col s10 " >
                             <input type="text" id="nost" name="nost">
@@ -32,7 +34,7 @@
                         </div>
 
                         <div class="input-field col s12">
-                            <div class="input-field col s2">Tanggal ST</div>
+                            <div class="input-field col s2"><label>Tanggal ST</label></div>
 
                             <div class="input-field col s10 " >
                             <input class="datepicker" id="tglst" name="tglst">
@@ -40,7 +42,7 @@
                         </div>
 
                         <div class="input-field col s12">
-                            <div class="input-field col s2">Uraian ST</div>
+                            <div class="input-field col s2"><label>Uraian ST</label></div>
 
                             <div class="input-field col s10 " >
                             <textarea class="materialize-textarea" id="uraianst" name="uraianst"></textarea>
@@ -48,7 +50,7 @@
                         </div>
 
                         <div class="input-field col s12">
-                            <div class="input-field col s2">Tanggal Mulai</div>
+                            <div class="input-field col s2"><label>Tanggal Mulai</label></div>
 
                             <div class="input-field col s10 " >
                             <input class="datepicker" id="tglst_mulai" name="tglst_mulai">
@@ -56,7 +58,7 @@
                         </div>
 
                         <div class="input-field col s12">
-                            <div class="input-field col s2">Tanggal Selesai</div>
+                            <div class="input-field col s2"><label>Tanggal Selesai</label></div>
 
                             <div class="input-field col s10 " >
                             <input class="datepicker" id="tglst_selesai" name="tglst_selesai">
@@ -64,7 +66,7 @@
                         </div>
 
                         <div class="input-field col s12">
-                            <div class="input-field col s2">Komponen/Sub Komp</div>
+                            <div class="input-field col s2"><label>Komponen/Sub Komp</label></div>
 
                             <div class="input-field col s8 " >
                                 <input type="text"  id="idxskmpnen" name="idxskmpnen" readonly>
@@ -77,7 +79,7 @@
                         </div>
 
                         <div class="input-field col s12">
-                            <div class="input-field col s2">Beban Anggaran</div>
+                            <div class="input-field col s2"><label>Beban Anggaran</label></div>
 
                             <div class="input-field col s10 " >
                             <select class="browser-default" id="beban_anggaran" name="beban_anggaran"></select>
@@ -85,7 +87,7 @@
                         </div>
 
                         <div class="input-field col s12">
-                            <div class="input-field col s2">Penandatangan</div>
+                            <div class="input-field col s2"><label>Penandatangan</label></div>
 
                             <div class="input-field col s10 " >
                             <select class="browser-default" id="ttd" name="ttd"></select>

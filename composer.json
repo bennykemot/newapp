@@ -15,7 +15,10 @@
 		"convertio/convertio-php": "^0.4.0",
 		"cloudconvert/cloudconvert-php": "^3.2",
 		"php-http/guzzle6-adapter": "^2.0",
-		"pclzip/pclzip": "^2.8"
+		"pclzip/pclzip": "^2.8",
+		"dompdf/dompdf": "^1.0",
+		"tecnickcom/tcpdf": "^6.4",
+		"mpdf/mpdf": "^8.0"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
@@ -23,8 +26,5 @@
 	"require-dev": {
 		"mikey179/vfsstream": "1.1.*",
 		"phpunit/phpunit": "4.* || 5.*"
-	},
-	"autoload": {
-        "classmap": ["pclzip.lib.php"]
-    }
+	}
 }

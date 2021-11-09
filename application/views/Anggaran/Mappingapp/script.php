@@ -81,7 +81,6 @@
             searchDelay: 500,
             searching: false,
             ordering: false,
-            responsive:!0,
             bDestroy: true,
            
             ajax: {
@@ -123,8 +122,8 @@
 
                 { data: 'id',
                   render: function(data, type, row) {
-                      return '<button type="button" class="btn-floating mb-1 green" onclick="Edit(\''+row.id+'\',\''+row.jumlah+'\')"><i class="material-icons">edit</i></button>\
-                      <button type="button" class="btn-floating mb-1 red" onclick="Delete(\''+row.id+'\',\''+row.kdindex+'\')"><i class="material-icons">delete</i></button>';
+                      return '<a href="javascript:;" onclick="Edit(\''+row.id+'\',\''+row.jumlah+'\')"><i class="material-icons">edit</i></a>\
+                      <a  href="javascript:;" onclick="Delete(\''+row.id+'\',\''+row.kdindex+'\')"><i class="material-icons">delete</i></a>';
                   }
                 },
                
@@ -132,10 +131,15 @@
             ],
             pageLength: 10,
             lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-            //order: [[3,'asc']],
+            responsive: !0,
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"],
+            ],
+            //scrollX: true,
             bFilter: false,
             scrollCollapse: true,
-            columnDefs: [{ visible: false, targets: 1 } ],
+            columnDefs: [{ visible: false, targets: 1 }, { width: "50%", targets: 2 }],
 
             drawCallback: function ( settings ) {
             var api = this.api();
@@ -279,7 +283,7 @@
 
         var $wrapper = $('.multi-fields', this);
 
-        i = 0
+        j = 0
         x = 1
         $("#add-field", $(this)).click(function(e) {
 
@@ -294,11 +298,11 @@
               
               if(x < max){
                   x++;
-                  i++;
+                  j++;
                   $($wrapper).append('<div class="multi-field">\
                           <div class="input-field col s12">\
-                              <div class="input-field col s2">Tahapan '+data[i]['nama_tahapan']+'</div>\
-                              <input id="tahapan'+x+'" name="tahapan'+x+'" value="'+data[i]['id']+'" hidden>\
+                              <div class="input-field col s2"><label>Tahapan '+data[j]['nama_tahapan']+'</label></div>\
+                              <input id="tahapan'+x+'" name="tahapan'+x+'" value="'+data[j]['id']+'" hidden>\
                               <div class="input-field col s10 " >\
                                 <input placeholder="00.000.000" class="rupiah" id="rupiah'+x+'" name="rupiah'+x+'" type="number" min="1000" onkeyup=AllCount() onkeypress="return validateNumber(event)">\
                               </div>\
@@ -315,9 +319,9 @@
 
         $("#remove-field").on("click", function() {  
             if ($('.multi-field', $wrapper).length > 1){
-              $(".multi-fields").children().last().remove();  x--; i--;
-                if(i == 0){
-                  i = 0;
+              $(".multi-fields").children().last().remove();  x--; j--;
+                if(j == 0){
+                  j = 0;
                 }
             }else{
               x = x
@@ -480,7 +484,7 @@ function Edit(Id,Jumlah){
 
               $('#total_akun').val(Number(Jumlah));
 
-              $('#tahapan_Edit').val(data['tahapan']);
+              $('#tahapan_Edit').val(data['nama_tahapan']);
               $('#Id_Edit').val(Id);
               $('#th_pkpt_Edit').val(data['th_pkpt']);
               $('#kodeindex_Edit').val(data['kdindex']);
@@ -582,5 +586,30 @@ function show_msg(textStatus){
             timer: 2000
             })
     }
+
+    $(function () {
+
+
+$("#page-length-option").DataTable({
+    responsive: !0,
+    lengthMenu: [
+        [10, 25, 50, -1],
+        [10, 25, 50, "All"],
+    ],
+    order: [[ 'kdindex']],
+    scrollX: true
+}),
+    $("#scroll-dynamic").DataTable({ responsive: !0, scrollY: "50vh", scrollCollapse: !0, paging: !1 }),
+    $("#scroll-vert-hor").DataTable({ scrollY: 200, scrollX: !0 }),
+    $("#multi-select").DataTable({ responsive: !0, paging: !0, ordering: !1, info: !1, columnDefs: [{ visible: !1, targets: 2 }] });
+}),
+$(window).on("load", function () {
+    $(".dropdown-content.select-dropdown li").on("click", function () {
+        var e = this;
+        setTimeout(function () {
+            $(e).parent().parent().find(".select-dropdown").hasClass("active") && ($(e).parent().parent().find(".select-dropdown").removeClass("active"), $(e).parent().hide());
+        }, 100);
+    });
+});
 
 </script>

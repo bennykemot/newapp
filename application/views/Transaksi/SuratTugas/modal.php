@@ -8,7 +8,7 @@
             <div class="row">
 
             <div class="input-field col s12" hidden>
-                <div class="input-field col s2">Satker</div>
+                <div class="input-field col s2"><label>Satker</label></div>
 
                 <div class="input-field col s10 " >
                   <input placeholder="Kode Satker" id="kdsatker" name="kdsatker" type="text" value="<?=$this->session->userdata("kdsatker")?>">
@@ -16,7 +16,7 @@
             </div>
 
               <div class="input-field col s12">
-                <div class="input-field col s2" >Program</div>
+                <div class="input-field col s2"><label>Program</label></div>
 
                 <div class="input-field col s10 " >
                   <select  id="program-select2" name="kdprogram" class="browser-default"></select>
@@ -24,7 +24,7 @@
               </div>
 
               <div class="input-field col s12">
-                <div class="input-field col s2" >Kegiatan</div>
+                <div class="input-field col s2"><label>Kegiatan</label></div>
 
                 <div class="input-field col s10 " >
                   <select  id="kegiatan-select2" name="kdgiat" class="browser-default"></select>
@@ -32,7 +32,7 @@
               </div>
 
               <div class="input-field col s12">
-                <div class="input-field col s2" >KRO</div>
+                <div class="input-field col s2"><label>KRO</label></div>
 
                 <div class="input-field col s10 " >
                   <select  id="kro-select2" name="kdoutput" class="browser-default"></select>
@@ -40,7 +40,7 @@
               </div>
 
               <div class="input-field col s12">
-                <div class="input-field col s2" >RO</div>
+                <div class="input-field col s2"><label>RO</label></div>
 
                 <div class="input-field col s10 " >
                   <select  id="ro-select2" name="kdsoutput" class="browser-default"></select>
@@ -48,7 +48,7 @@
               </div>
 
               <div class="input-field col s12">
-                <div class="input-field col s2" >Komponen</div>
+                <div class="input-field col s2"><label>Komponen</label></div>
 
                 <div class="input-field col s10 " >
                   <select  id="komponen-select2" name="kdkomponen" class="browser-default"></select>
@@ -56,7 +56,7 @@
               </div>
 
               <div class="input-field col s12">
-                <div class="input-field col s2" >Sub Komponen</div>
+                <div class="input-field col s2"><label>Sub Komponen</label></div>
 
                 <div class="input-field col s10 " >
                   <select  id="sub_komponen-select2" name="kdskomponen" class="browser-default"></select>

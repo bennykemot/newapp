@@ -3,128 +3,135 @@
     var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";
     var satker_session = "<?= $this->session->userdata("kdsatker")?>"
 
-var grid_detail = "#tabel_anggaran";
-    var is_set_grid_detail = false;
+    $('select').select2().on('select2:open', function() {
+      var container = $('.select2-container').last();
+  /*Add some css-class to container or reposition it*/
+});
+    //$("#page-length-option").DataTable({responsive:!0,lengthMenu:[[10,25,50,-1],[10,25,50,"All"]]})
+// var grid_detail = "#data-table-simple";
+//     var is_set_grid_detail = false;
 
-    var all;
-    set_grid_tabel(false);
+//     var all;
+//     set_grid_tabel(false);
 
-    function set_grid_tabel(is_current) {
-      if (!is_set_grid_detail) {
-        is_set_grid_detail = true;
-        $(grid_detail).DataTable({
-            serverSide: true,
-            processing: true,
-            searchDelay: 500,
-            searching: true,
-            ordering: true,
+//     function set_grid_tabel(is_current) {
+//       if (!is_set_grid_detail) {
+//         is_set_grid_detail = true;
+//         $(grid_detail).DataTable({
+//             serverSide: true,
+//             processing: true,
+//             // searchDelay: 500,
+//             searching: true,
+//             ordering: true,
+//             responsive:!0,
+//             lengthMenu:[[10,25,50,-1],[10,25,50,"All"]],
            
-            ajax: {
-                url: baseurl + 'getPembagianPagu',
-                type: "post",
-                data : {"kdsatker": satker_session}
-            },
+//             // ajax: {
+//             //     url: baseurl + 'getPembagianPagu',
+//             //     type: "post",
+//             //     data : {"kdsatker": satker_session}
+//             // },
                 
-            autoWidth: false,
-            columns: [
+//             // autoWidth: false,
+//             // columns: [
              
-                // {
-                //     data: null, class: "text-center",
-                //     render: function (data, type, row, meta) {
-                //         return meta.row + meta.settings._iDisplayStart + 1;
-                //     }
-                // },
+//             //     // {
+//             //     //     data: null, class: "text-center",
+//             //     //     render: function (data, type, row, meta) {
+//             //     //         return meta.row + meta.settings._iDisplayStart + 1;
+//             //     //     }
+//             //     // },
                
                 
-                { data: "thang",
-                render: function (data, type, row, meta) {
-                        return data;
-                    } 
-                  },
+//             //     { data: "thang",
+//             //     render: function (data, type, row, meta) {
+//             //             return data;
+//             //         } 
+//             //       },
 
-                { data: "kdsatker",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
-                },
+//             //     { data: "kdsatker",
+//             //   render: function (data, type, row, meta) {
+//             //           return data;
+//             //       } 
+//             //     },
 
-                { data: "kddept",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
-                },
+//             //     { data: "kddept",
+//             //   render: function (data, type, row, meta) {
+//             //           return data;
+//             //       } 
+//             //     },
 
-                { data: "kdunit",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
-                },
+//             //     { data: "kdunit",
+//             //   render: function (data, type, row, meta) {
+//             //           return data;
+//             //       } 
+//             //     },
 
-                { data: "kdprogram",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
-                },
+//             //     { data: "kdprogram",
+//             //   render: function (data, type, row, meta) {
+//             //           return data;
+//             //       } 
+//             //     },
 
-                { data: "kdgiat",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
-                },
+//             //     { data: "kdgiat",
+//             //   render: function (data, type, row, meta) {
+//             //           return data;
+//             //       } 
+//             //     },
 
-                { data: "kdoutput",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
-                },
+//             //     { data: "kdoutput",
+//             //   render: function (data, type, row, meta) {
+//             //           return data;
+//             //       } 
+//             //     },
 
-                { data: "kdsoutput",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
-                },
+//             //     { data: "kdsoutput",
+//             //   render: function (data, type, row, meta) {
+//             //           return data;
+//             //       } 
+//             //     },
 
-                { data: "kdkmpnen",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
-                },
+//             //     { data: "kdkmpnen",
+//             //   render: function (data, type, row, meta) {
+//             //           return data;
+//             //       } 
+//             //     },
 
-                { data: "username",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
-                },
+//             //     { data: "username",
+//             //   render: function (data, type, row, meta) {
+//             //           return data;
+//             //       } 
+//             //     },
 
-                { data: 'id',
-                  render: function(data, type, row) {
-                      return '<button type="button" class="btn-floating mb-1 green" onclick="Edit(\''+data+'\')"><i class="material-icons">edit</i></button>\
-                      <button type="button" class="btn-floating mb-1 red" onclick="Delete(\''+data+'\')"><i class="material-icons">delete</i></button>';
-                  }
-                },
+//             //     { data: 'id',
+//             //       render: function(data, type, row) {
+//             //           return '<button type="button" class="btn-floating mb-1 green" onclick="Edit(\''+data+'\')"><i class="material-icons">edit</i></button>\
+//             //           <button type="button" class="btn-floating mb-1 red" onclick="Delete(\''+data+'\')"><i class="material-icons">delete</i></button>';
+//             //       }
+//             //     },
 
   
 
  
-            ],
-            pageLength: 5,
-            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-            //order: [[1,'asc']],
-            bFilter: false,
-            ordering: false,
-            scrollCollapse: true,
-            columnDefs: [ ],
+//             // ],
+//             pageLength: 1,
+//             // lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+//             //order: [[1,'asc']],
+//             bFilter: true,
+//             ordering: true,
+//             scrollCollapse: true,
+//             columnDefs: [ ],
 
-            initComplete: function (settings, json) {
-                    $(grid_detail).wrap('<div class="table-responsive"></div>');
-                },
-            });
+//             // initComplete: function (settings, json) {
+//             //         $(grid_detail).wrap('<div class="table-responsive"></div>');
+//             //     },
+//             });
     
-            } else {
-        $(grid_detail).DataTable().search("");
-        $(grid_detail).DataTable().ajax.reload(null, !is_current);
-      }
-    }
+//             } else {
+//         $(grid_detail).DataTable().search("");
+//         $(grid_detail).DataTable().ajax.reload(null, !is_current);
+//       }
+//     }
 
 
         // SELECT2 INSERT
@@ -603,5 +610,31 @@ function show_msg(textStatus){
             timer: 2000
             })
     }
+
+    $(function () {
+
+
+    $("#page-length-option").DataTable({
+        responsive: !0,
+        lengthMenu: [
+            [10, 25, 50, -1],
+            [10, 25, 50, "All"],
+        ],
+        scrollX: true
+    }),
+        $("#scroll-dynamic").DataTable({ responsive: !0, scrollY: "50vh", scrollCollapse: !0, paging: !1 }),
+        $("#scroll-vert-hor").DataTable({ scrollY: 200, scrollX: !0 }),
+        $("#multi-select").DataTable({ responsive: !0, paging: !0, ordering: !1, info: !1, columnDefs: [{ visible: !1, targets: 2 }] });
+}),
+    $(window).on("load", function () {
+        $(".dropdown-content.select-dropdown li").on("click", function () {
+            var e = this;
+            setTimeout(function () {
+                $(e).parent().parent().find(".select-dropdown").hasClass("active") && ($(e).parent().parent().find(".select-dropdown").removeClass("active"), $(e).parent().hide());
+            }, 100);
+        });
+    });
+
+
 
 </script>

@@ -16,7 +16,7 @@
           <i class="navigation-header-icon material-icons">more_horiz</i>
           </li>
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="<?= site_url('Anggaran/Pembagianpagu')?>">
+        <li class="bold"><a class="waves-effect waves-cyan " href="<?= site_url('Anggaran/Pembagianpagu/Page/'.$this->session->userdata("kdsatker"))?>">
           <i class="material-icons">
           turned_in_not
           </i><span class="menu-title" data-i18n="Mail">Pembagian Pagu</span></a>
@@ -45,7 +45,7 @@
           </i><span class="menu-title" data-i18n="User Profile">Surat Tugas</span></a>
         </li>
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="user-profile-page.html">
+        <li class="bold"><a class="waves-effect waves-cyan " href="<?= site_url('Transaksi/NotaDinas')?>">
           <i class="material-icons">
           speaker_notes
           </i><span class="menu-title" data-i18n="User Profile">Nota Dinas</span></a>
@@ -114,7 +114,7 @@
         <li class="navigation-header"><a class="navigation-header-text">Pengaturan </a><i class="navigation-header-icon material-icons">more_horiz</i>
         </li>
         
-        <li class="bold"><a class="waves-effect waves-cyan " href="<?= site_url('Profile/Profile/')?>"><i class="material-icons">import_contacts</i><span class="menu-title" data-i18n="Documentation">Penggunan</span></a>
+        <li class="bold"><a class="waves-effect waves-cyan " href="<?= site_url('Profile/Profile/Page/'.$this->session->userdata("kdsatker"))?>"><i class="material-icons">import_contacts</i><span class="menu-title" data-i18n="Documentation">Pengguna</span></a>
         </li>
 
         <li class="bold"><a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)"><i class="material-icons">photo_filter</i><span class="menu-title" data-i18n="Menu levels">Utility</span></a>

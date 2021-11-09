@@ -3,6 +3,15 @@ class M_Mappingapp extends CI_Model{
 
     var $table ="v_mapping";
 
+    // function getDataNew($kdsatker){
+    //     $this->db->where('kdsatker', $kdsatker);
+    //     $this->db->from('v_mapping');
+    //     $this->db->order_by('kdsatker, kddept, kdunit, kdprogram, kdgiat, kdoutput,kdib, kdsoutput, kdkmpnen, kdskmpnen, kdakun');
+    //     $query = $this->db->get();
+
+    //     return $query->result();
+     
+    // }
 
     function getDataNew($kdsatker,$number,$offset){
         $this->db->where('kdsatker', $kdsatker);

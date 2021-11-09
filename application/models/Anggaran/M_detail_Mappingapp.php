@@ -121,7 +121,9 @@
             $query = $this->db->query("SELECT SUM(d_detailapp.rupiah_tahapan) as total ,
             d_detailapp.id, d_detailapp.kdindex, d_detailapp.id_app, 
             d_detailapp.rupiah, d_detailapp.th_pkpt, d_detailapp.tahapan, 
-            d_detailapp.rupiah_tahapan , t_app.id as id_app, t_app.nama_app FROM d_detailapp JOIN t_app ON t_app.id = d_detailapp.id_app
+            d_detailapp.rupiah_tahapan , t_app.id as id_app, t_app.nama_app , r_tahapan.nama_tahapan
+            FROM d_detailapp JOIN t_app ON t_app.id = d_detailapp.id_app
+            JOIN r_tahapan ON d_detailapp.tahapan = r_tahapan.id
             WHERE d_detailapp.id = '".$data."'");
     
             return $query->row();

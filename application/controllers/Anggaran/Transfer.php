@@ -90,13 +90,13 @@ class Transfer extends CI_Controller {
     }
 
             $config['upload_path']  = FCPATH.'/assets/temp_folder/'.$kdsatker.'/';
-            $config['file_name']    = $name;
+            $config['file_name']    = $filename;
             $config['max_size']     = 1024 * 8;
             $config['allowed_types'] = '*';
             $this->load->library('upload', $config);
 
-            if (file_exists(FCPATH.'/assets/temp_folder/'.$kdsatker.'/'.$name)) {
-                unlink(FCPATH.'/assets/temp_folder/'.$kdsatker.'/'.$name);
+            if (file_exists(FCPATH.'/assets/temp_folder/'.$kdsatker.'/'.$filename)) {
+                unlink(FCPATH.'/assets/temp_folder/'.$kdsatker.'/'.$filename);
             }
 
         if ( $this->upload->do_upload('file_'))
@@ -116,25 +116,25 @@ class Transfer extends CI_Controller {
         }
         echo json_encode(array('status' => $status, 'msg' => $msg));
 
-            $zip = new ZipArchive();
+            // $zip = new ZipArchive();
 
-            if ($zip->open($_SERVER['DOCUMENT_ROOT'].'/tst/newapp/assets/temp_folder/'.$kdsatker.'/'.$name.'', ZipArchive::CREATE) === TRUE)
-            {
-                // Add files to the zip file
-                $zip->addFile($filename);
-            }
+            // if ($zip->open($_SERVER['DOCUMENT_ROOT'].'/tst/newapp/assets/temp_folder/'.$kdsatker.'/'.$name.'', ZipArchive::CREATE) === TRUE)
+            // {
+            //     // Add files to the zip file
+            //     $zip->addFile($filename);
+            // }
 
-            echo "\n" .$zip->filename . "\n";
-            $zip->open(FCPATH.'/assets/temp_folder/'.$kdsatker.'/'.$name.'');
-            //var_dump($zip);
-            if (!$zip->extractTo(FCPATH.'/assets/temp_folder/' . $kdsatker .'')) {
-                echo "error!\n";
-                echo $zip->status . "\n";
-                echo $zip->statusSys . "\n";
+            // echo "\n" .$zip->filename . "\n";
+            // $zip->open(FCPATH.'/assets/temp_folder/'.$kdsatker.'/'.$name.'');
+            // //var_dump($zip);
+            // if (!$zip->extractTo(FCPATH.'/assets/temp_folder/' . $kdsatker .'')) {
+            //     echo "error!\n";
+            //     echo $zip->status . "\n";
+            //     echo $zip->statusSys . "\n";
 
-            }
+            // }
 
-            $zip->close();
+            // $zip->close();
 
 
 
@@ -144,24 +144,24 @@ class Transfer extends CI_Controller {
             // $zip->close();
 			
         
-        // $archive = RarArchive::open(FCPATH.'/assets/temp_folder/'.$kdsatker.'/'.$name.'');
-        // $entries = $archive->getEntries();
-        // foreach ($entries as $entry) {
-        //     $entry->extract(FCPATH.'/assets/temp_folder/'.$kdsatker.'/');
-        // }
-        // $archive->close();
+        $archive = RarArchive::open(FCPATH.'/assets/temp_folder/'.$kdsatker.'/'.$filename.'');
+        $entries = $archive->getEntries();
+        foreach ($entries as $entry) {
+            $entry->extract(FCPATH.'/assets/temp_folder/'.$kdsatker.'/');
+        }
+        $archive->close();
         
 
-        // if($no_revisi == $revisiKe){
-        //     $this->Transfer->d_pagu($kdsatker, $no_revisi, $revisiKe);
-        // }else{
-        //     $this->Transfer->h_pagu($kdsatker, $no_revisi, $revisiKe);
-        // }
+        if($no_revisi == $revisiKe){
+            $this->Transfer->d_pagu($kdsatker, $no_revisi, $revisiKe);
+        }else{
+            $this->Transfer->h_pagu($kdsatker, $no_revisi, $revisiKe);
+        }
 
-        // $this->Transfer->xml_d_item($kdsatker,$name);
-        // $this->Transfer->xml_d_soutput($kdsatker,$name);
-        // $this->Transfer->xml_d_kmpnen($kdsatker,$name);
-        // $this->Transfer->xml_d_skmpnen($kdsatker,$name);
+        $this->Transfer->xml_d_item($kdsatker,$filename);
+        $this->Transfer->xml_d_soutput($kdsatker,$filename);
+        $this->Transfer->xml_d_kmpnen($kdsatker,$filename);
+        $this->Transfer->xml_d_skmpnen($kdsatker,$filename);
 
     }
 }

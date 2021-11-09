@@ -13,6 +13,19 @@ function Reset(idForm) {
     var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";
     var satker_session = "<?= $this->session->userdata("kdsatker")?>"
 
+
+    // $('#modal2').on('scroll', function (event) {
+    //   $(this).find(".select2").each(function () {
+    //     $(this).select2({ dropdownParent: $(this).parent() });
+    //   });
+    // });
+
+    // $('#modalEdit').on('scroll', function (event) {
+    //   $(this).find(".select2").each(function () {
+    //     $(this).select2({ dropdownParent: $(this).parent() });
+    //   });
+    // });
+
     var grid_detail = "#tabel_user";
     var is_set_grid_detail = false;
 
@@ -270,6 +283,7 @@ $("#TambahUser").click(function (e) {
               $('#modal2').modal('close');
               set_grid_tabel(false);
               Reset(IdForm);
+              document.getElementById("TambahUser").disabled = false; 
               
               
           },
@@ -340,6 +354,7 @@ $("#EditUser").click(function (e) {
               $('#modalEdit').modal('close');
               set_grid_tabel(false);
               Reset(IdForm);
+              document.getElementById("EditUser").disabled = false; 
               
               
           },
@@ -391,6 +406,36 @@ function Execute(Id) {
             timer: 2000
             })
     }
+
+    var select2Instance = $(selectNode).data('select2');
+select2Instance.on('results:message', function(params){
+  this.dropdown._resizeDropdown();
+  this.dropdown._positionDropdown();
+});
+
+    $(function () {
+
+
+$("#page-length-option").DataTable({
+    responsive: !0,
+    lengthMenu: [
+        [10, 25, 50, -1],
+        [10, 25, 50, "All"],
+    ],
+    scrollX: true
+}),
+    $("#scroll-dynamic").DataTable({ responsive: !0, scrollY: "50vh", scrollCollapse: !0, paging: !1 }),
+    $("#scroll-vert-hor").DataTable({ scrollY: 200, scrollX: !0 }),
+    $("#multi-select").DataTable({ responsive: !0, paging: !0, ordering: !1, info: !1, columnDefs: [{ visible: !1, targets: 2 }] });
+}),
+$(window).on("load", function () {
+    $(".dropdown-content.select-dropdown li").on("click", function () {
+        var e = this;
+        setTimeout(function () {
+            $(e).parent().parent().find(".select-dropdown").hasClass("active") && ($(e).parent().parent().find(".select-dropdown").removeClass("active"), $(e).parent().hide());
+        }, 100);
+    });
+});
  
 
         
