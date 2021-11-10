@@ -1,17 +1,5 @@
 <?php include(APPPATH . 'views/Header/Aside.php') ?>
 
-<?php 
-
-function getapprove($data){
-
-  $res = "btn red col s2";
-  if($data == 1){
-    $res = "btn green col s2";
-  }
-  return $res;
-
-}
-?>
 
 <!-- Page Length Options -->
  <div class="row">
@@ -95,7 +83,7 @@ function getapprove($data){
                             <td><?php echo $u->tglselesaist ?></td>
                             <td>
                                 <div class="col s12">
-                                    <button class="btn orange col s12" onclick="Print('<?= $u->id ?>')" target="_blank">VIEW</button><br>
+                                    <a class="btn orange col s12" href="<?= site_url('Transaksi/SuratTugas/Export')?>" target="_blank">VIEW</a><br>
                                     <div style="padding-bottom: 20px"></div>
                                     <button class="btn cyan col s12">UBAH</button><br>
                                     <div style="padding-bottom: 20px"></div>

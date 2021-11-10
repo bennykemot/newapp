@@ -8,6 +8,12 @@ function Reset(idForm) {
   $('.status-select2').val(null).trigger('change');
 }
 
+// $('#exampleModal').on('scroll', function (event) {
+//   $(this).find(".select2").each(function () {
+//     $(this).select2({ dropdownParent: $(this).parent() });
+//   });
+// });
+
 
 	  var baseurl 	= "<?= base_url('Profile/Profile/')?>";
     var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";

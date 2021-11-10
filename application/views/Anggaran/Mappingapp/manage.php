@@ -3,22 +3,21 @@
 <!-- Page Length Options -->
  <div class="row">
 
- <div class="col s12">
-        <div class="card" id="head">
-            <div class="card-content" >
-                <div class="row">
-                    <div class="col s1">
-                        <button type="button" class="btn-floating" style=""><i class="material-icons">
-                        view_comfy</i></button>
-                    </div>
-                    <div class="col s11">
-                        <h6> Mapping APP Satker : <?php echo $this->session->userdata("nmsatker"); ?> </h6>
-                    </div>
-                  
-                </div>
-            </div>
-        </div>
-    </div>
+  <div class="col s12">
+      <div class="card" id="head">
+          <div class="card-content" >
+              <div class="row">
+                  <div class="col s1">
+                      <button type="button" class="btn-floating" style=""><i class="material-icons">
+                      view_comfy</i></button>
+                  </div>
+                  <div class="col s11">
+                      <h6> Mapping APP Satker : <?php echo $this->session->userdata("nmsatker"); ?> </h6>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 
     <div class="col s12">
       <div class="card">

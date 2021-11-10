@@ -186,7 +186,7 @@ class SuratTugas extends CI_Controller {
         $html = $this->load->view('Transaksi/SuratTugas/export.php',[],true);
 
         $mpdf->WriteHTML($html);          
-        $mpdf->Output('yourFileName.pdf', 'I');
+        $mpdf->Output('SuratTugas.pdf', 'I');
      
 	
     }

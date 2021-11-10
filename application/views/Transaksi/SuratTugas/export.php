@@ -29,8 +29,8 @@
                 <tr>
                     <td style="text-align: center" colspan="4" >
                     Gedung BPKP Lantai 4 Jalan Pramuka No 33 Jakarta Timur<br>
-                    Telepon: , Faximile: <br>
-                    Website: , Email:
+                    Telepon: (021) 85910512 , Faximile: (021) 85910512 <br>
+                    Web: http://www.bpkp.go.id , Email: keuangan@bpkp.go.id
                     
                     </td>
                 <tr>
@@ -66,15 +66,21 @@
 
                 <tr>
                     <td width="5%">1</td>
-                    <td width="30%">Testing Testing Testing Test</td>
-                    <td width="30%">1234509875645432</td>
-                    <td width="35%" colspan="2">Kepala BPKP</td>
+                    <td width="30%">Diantini</td>
+                    <td width="35%">1977031420031221001</td>
+                    <td width="30%" colspan="2">Auditor Muda</td>
                 </tr>
                 <tr>
-                    <td width="5%">1</td>
-                    <td width="35%">Testing Testing Testing Test</td>
-                    <td width="35%">1234509875645432</td>
-                    <td width="25%" colspan="2">Kepala BPKP</td>
+                    <td width="5%">2</td>
+                    <td width="30%">Fenny Shera Luckyartha</td>
+                    <td width="35%">198709262009112001</td>
+                    <td width="30%" colspan="2">Auditor Pertama</td>
+                </tr>
+                <tr>
+                    <td width="5%">3</td>
+                    <td width="30%">Nur Haryani</td>
+                    <td width="35%">199807242020122004</td>
+                    <td width="30%" colspan="2">Pranata Komputer Pelaksana</td>
                 </tr>
         </table>
         
@@ -103,7 +109,7 @@
                     <td style="text-align: left">Setia Pria Husada</td>
                 </tr>
                 <tr>
-                    <td style="text-align: left">NIP : 1119990099800000282727</td>
+                    <td style="text-align: left">NIP : 196610161988031002</td>
                 </tr>
         </table>
     </div>

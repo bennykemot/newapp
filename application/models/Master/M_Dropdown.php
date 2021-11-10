@@ -164,33 +164,49 @@ function getData_role($searchTerm=""){
 }
 
 
-function getData_app($searchTerm="", $kdindex){
+function getData_app($searchTerm="", $kdindex, $Trigger){
 
-   $getId_app = $this->db->query("SELECT distinct id_app from d_detailapp where kdindex = '".$kdindex."'");
-   //echo $getId_app;
-   $loop = [];
-   foreach ($getId_app->result_array() as $row)
-   {
-         $loop[] =  $row['id_app'];
+      if($Trigger == "SelectForKodeApp_NotaDinas"){
+
+         $this->db->where("nama_app like '%".$searchTerm."%' ");
+         $this->db->or_where("id like '%".$searchTerm."%' ");
+         $fetched_records = $this->db->get('t_app');
+         $users = $fetched_records->result_array();
+
+         // Initialize Array with fetched data
+         $data = array();
+         foreach($users as $user){
+            $data[] = array("id"=>$user['id'], "text"=>$user['nama_app']);
+         }
+         return $data;
+
+      }else{
+         $getId_app = $this->db->query("SELECT distinct id_app from d_detailapp where kdindex = '".$kdindex."'");
+         //echo $getId_app;
+         $loop = [];
+         foreach ($getId_app->result_array() as $row)
+         {
+               $loop[] =  $row['id_app'];
+               
+         }
+
+         $res = implode(",", $loop);
          
-   }
+         if(count($loop) <= 0){
+            $fetched_records = $this->db->query("SELECT id, nama_app FROM t_app");
+         }else{
+            $fetched_records = $this->db->query("SELECT id, nama_app FROM t_app where id NOT IN (".$res.")");
+         }
+         
+         $users = $fetched_records->result_array();
 
-   $res = implode(",", $loop);
-   
-   if(count($loop) <= 0){
-      $fetched_records = $this->db->query("SELECT id, nama_app FROM t_app");
-   }else{
-      $fetched_records = $this->db->query("SELECT id, nama_app FROM t_app where id NOT IN (".$res.")");
+         // Initialize Array with fetched data
+         $data = array();
+         foreach($users as $user){
+            $data[] = array("id"=>$user['id'], "text"=>$user['id']. ' - ' .$user['nama_app']);
+         }
+         return $data;
    }
-   
-   $users = $fetched_records->result_array();
-
-   // Initialize Array with fetched data
-   $data = array();
-   foreach($users as $user){
-      $data[] = array("id"=>$user['id'], "text"=>$user['id']. ' - ' .$user['nama_app']);
-   }
-   return $data;
 }
 
 function getData_user($searchTerm="", $kdsatker){
@@ -270,6 +286,38 @@ function getData_v_mapping($searchTerm="", $kdsatker){
    $data = array();
    foreach($users as $user){
       $data[] = array("id"=>$user['id'], "text"=>$user['nama_unit']);
+   }
+   return $data;
+}
+
+function getData_nost($searchTerm=""){
+
+   $this->db->select('id');
+   $this->db->select('nost');
+   $this->db->where("nost like '%".$searchTerm."%' ");
+   $fetched_records = $this->db->get('d_surattugas');
+   $users = $fetched_records->result_array();
+
+   // Initialize Array with fetched data
+   $data = array();
+   foreach($users as $user){
+      $data[] = array("id"=>$user['id'], "text"=>$user['nost']);
+   }
+   return $data;
+}
+
+function getData_pagu($searchTerm="",$Trigger,$kdsatker){
+
+   $fetched_records = $this->db->query("SELECT kdindex, 
+   CONCAT(kdprogram,'.',kdgiat,'.',kdoutput,'.',kdsoutput,'.',kdkmpnen,'.',kdskmpnen,'.',kdakun,'.',kdib) as text_kdindex 
+   FROM d_pagu where kdsatker = '".$kdsatker."'");
+
+   $users = $fetched_records->result_array();
+
+   // Initialize Array with fetched data
+   $data = array();
+   foreach($users as $user){
+      $data[] = array("id"=>$user['kdindex'], "text"=>$user['text_kdindex']);
    }
    return $data;
 }

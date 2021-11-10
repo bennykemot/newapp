@@ -143,6 +143,7 @@ label{
   vertical-align: text-bottom !important;
 }
 
+
   </style>
 
   <?php 
@@ -164,6 +165,16 @@ function currentMonth($data){
   );
 
   return $bulan[$data];
+}
+
+function getapprove($data){
+
+  $res = "btn red col s2";
+  if($data == 1){
+    $res = "btn green col s2";
+  }
+  return $res;
+
 }
   
   ?>
