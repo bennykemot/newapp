@@ -64,6 +64,14 @@ class SuratTugas extends CI_Controller {
 		$this->load->view('Transaksi/SuratTugas/tambah');
 	}
 
+    public function ubah()
+	{
+        $id =  $this->uri->segment(4);
+        $data['ubah'] = $this->SuratTugas->getDataUbah($id);
+        //echo json_encode($data);
+		$this->load->view('Transaksi/SuratTugas/ubah',$data);
+	}
+
 	public function Action()
     {
 
@@ -89,7 +97,7 @@ class SuratTugas extends CI_Controller {
                 'tglmulaist' => date("Y-m-d",strtotime($tglst_mulai)),
                 'tglselesaist' => date("Y-m-d",strtotime($tglst_selesai)),
                 'idxskmpnen' => $idxskmpnen,
-                'id_unit' => $idxskmpnen,
+                'id_unit' => $beban_anggaran,
                 'id_ttd' => $ttd,
                 'is_approved1' => 0,
                 'is_approved2' => 0,
@@ -147,18 +155,58 @@ class SuratTugas extends CI_Controller {
             
         }else if($Trigger == "U"){
 
-            $rupiah_tahapan = $this->input->post('rupiah_tahapan_Edit');
-            $th_pkpt = $this->input->post('th_pkpt_Edit');
+            $nost = $this->input->post('nost');
+            $tglst = str_replace("/", "-",$this->input->post('tglst'));
+            $uraianst = $this->input->post('uraianst');
+            $tglst_mulai = str_replace("/", "-",$this->input->post('tglst_mulai'));
+			$tglst_selesai = str_replace("/", "-",$this->input->post('tglst_selesai'));
+			$idxskmpnen = $this->input->post('idxskmpnen');
+			$beban_anggaran = $this->input->post('beban_anggaran');
+			$ttd = $this->input->post('ttd');
+            $countTim = $this->input->post('countTim');
+            $idst = $this->input->post('idst');
 
-            $data = array(
-                'rupiah_tahapan' => $rupiah_tahapan,
-                'th_pkpt' => $th_pkpt
+            
+
+            $data_st = array(
+                'nost' => $nost,
+                'tglst' => date("Y-m-d",strtotime($tglst)),
+                'uraianst' => $uraianst,
+                'tglmulaist' => date("Y-m-d",strtotime($tglst_mulai)),
+                'tglselesaist' => date("Y-m-d",strtotime($tglst_selesai)),
+                'idxskmpnen' => $idxskmpnen,
+                'id_unit' => $beban_anggaran,
+                'id_ttd' => $ttd,
                 
                 );
+            $where = array('id' => $idst);
 
-            $id = $this->input->post('Id_Edit');
-            $where = array('id' => $id);
-	        $this->SuratTugas->update($data,'d_detailapp', $where);
+            $this->SuratTugas->Update($data_st,'d_surattugas', $where);
+
+            ///DETAIL TIM///
+
+            $where = array('id_st' => $idst);
+            $this->SuratTugas->CRUD($where,'d_stdetail', 'D');
+        
+                $data = array();    
+                $j = 0;
+                $ArrX = $this->input->post('ArrX');
+                $urut = explode(",",$ArrX);
+                $Nourut = []; 
+
+                
+                for($i = 0 ; $i < $countTim; $i++){
+                    
+                    $data = array(
+                         'nourut' => $this->input->post('urut'.$urut[$i].''),
+                         'nama' => $this->input->post('nama'.$urut[$i].''),
+                         'nip' => $this->input->post('nip'.$urut[$i].''),
+                         'peran'  => $this->input->post('perjab'.$urut[$i].''),
+                         'id_st' => $this->input->post('idst')
+                         
+                    );
+                    $this->db->insert('d_stdetail',$data);
+             }
 
         }else if($Trigger == "getRupiahTahapan"){
 
@@ -183,7 +231,9 @@ class SuratTugas extends CI_Controller {
         ]);
         $Assets			= $this->config->item('assets_url');
         $path           = '<img src='.$Assets.'app-assets/images/logo/bpkp.jpg>';
-        $html = $this->load->view('Transaksi/SuratTugas/export.php',[],true);
+        $id             =  $this->uri->segment(4);
+        $data['ubah']   = $this->SuratTugas->getDataUbah($id);
+        $html = $this->load->view('Transaksi/SuratTugas/export.php',$data,true);
 
         $mpdf->WriteHTML($html);          
         $mpdf->Output('SuratTugas.pdf', 'I');

@@ -15,4 +15,18 @@ class M_Master extends CI_Model {
      }
      return $data;
   }
+
+  function getData_Pegawai($kdsatker){
+   $this->db->select('nip');
+   $this->db->select('nama');
+   $this->db->select('jabatan');
+
+   $this->db->from('r_pegawai');
+   $this->db->where('nip', '196401011985031001');
+   // $this->db->limit($number, $offset);
+   $query = $this->db->get();
+
+   return $query->result();
+
+}
 }

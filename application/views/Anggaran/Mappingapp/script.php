@@ -380,8 +380,8 @@
   }
 
   function AllCount(){
-
-
+      var rupiah = document.getElementsByClassName("rupiah");
+      rupiah.value = formatRupiah(this.value);
       var nilai_app1 = Number(document.getElementById('rupiah1').value)
       var nilai_app_All = Number(document.getElementById('rupiahAll').value)
       var nilai_app = [];

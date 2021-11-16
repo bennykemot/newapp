@@ -23,4 +23,14 @@ class Master extends CI_Controller {
         
         echo json_encode($response);
      }
+
+     public function Master_Pegawai(){
+
+        $kdsatker = $this->input->post('kdsatker');
+
+        
+            $response = $this->Master->getData_Pegawai($kdsatker);
+        
+        echo json_encode($response);
+     }
 }

@@ -1,22 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+    <title>View PDF Surat Tugas - <?= $ubah[0]['nost']?></title>
     </head>
     <style>
         body{
             font-family: Arial;
         }
 
-    /* table, td, th {
-        border: 1px solid black;
+    table, td, th {
+        vertical-align: top;
         }
 
         table {
-        width: 100%;
-        border-collapse: collapse;
-        } */
+            vertical-align: top;
+        }
         
     </style>
+
+<?php
+
+function cek_tgl($tanggal){
+    $bulan = array (
+        1 =>   'Januari',
+        'Februari',
+        'Maret',
+        'April',
+        'Mei',
+        'Juni',
+        'Juli',
+        'Agustus',
+        'September',
+        'Oktober',
+        'November',
+        'Desember'
+    );
+    $pecahkan = explode('-', $tanggal);
+    
+    // variabel pecahkan 0 = tanggal
+    // variabel pecahkan 1 = bulan
+    // variabel pecahkan 2 = tahun
+    
+    return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+    }
+
+?>
+
+
     <body>
     
     <div id="container">
@@ -43,7 +73,7 @@
         <table width="100%">
                 <tr>
                     <td style="text-align: center" colspan="5">
-                        SURAT TUGAS<br>NOMOR ST-02/009 ...
+                        SURAT TUGAS<br><?= $ubah[0]['nost']?>
                     </td>
                 </tr>
 
@@ -64,30 +94,20 @@
                     <td>Jabatan / Peran</td>
                 </tr>
 
+                <?php for($i = 0 ; $i < count($ubah); $i++){ ?>
                 <tr>
-                    <td width="5%">1</td>
-                    <td width="30%">Diantini</td>
-                    <td width="35%">1977031420031221001</td>
-                    <td width="30%" colspan="2">Auditor Muda</td>
+                    <td width="5%"><?= $ubah[$i]['nourut']?></td>
+                    <td width="30%"><?= $ubah[$i]['nama']?></td>
+                    <td width="35%"><?= $ubah[$i]['nip']?></td>
+                    <td width="30%" colspan="2"><?= $ubah[$i]['peran']?></td>
                 </tr>
-                <tr>
-                    <td width="5%">2</td>
-                    <td width="30%">Fenny Shera Luckyartha</td>
-                    <td width="35%">198709262009112001</td>
-                    <td width="30%" colspan="2">Auditor Pertama</td>
-                </tr>
-                <tr>
-                    <td width="5%">3</td>
-                    <td width="30%">Nur Haryani</td>
-                    <td width="35%">199807242020122004</td>
-                    <td width="30%" colspan="2">Pranata Komputer Pelaksana</td>
-                </tr>
+                <?php }?>
+                
         </table>
         
-        <p style="text-align: justify"> Untuk melaksanakan Koordinasi terkait Pendapatan PNBP pada Triwulan III
-                        setelah Penerapan PP 8 Tahun 2021 pada Pusdiklatwas BPKP. Kegiatan ini menjadi
-                        beban anggaran Biro Keuangan.<br>
-                        Penugasan ini dilaksanakan selama 4 (empat) hari kerja mulai tanggal 05 November 2021. <br>
+        <p style="text-align: justify"> Untuk melaksanakan <?= $ubah[0]['uraianst']?>. Kegiatan ini menjadi
+                        beban anggaran <?= $ubah[0]['nama_unit']?>.<br>
+                        Penugasan ini dilaksanakan selama <?= $ubah[0]['jmlhari']?> hari kerja mulai tanggal <?= cek_tgl($ubah[0]['tglmulaist'])?>. <br>
                         Demikian untuk dilaksanakan dengan penuh tanggung jawab.
         </p>
 
@@ -115,4 +135,6 @@
     </div>
     
     </body>
+
+   
 </html>

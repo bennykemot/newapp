@@ -83,9 +83,9 @@
                             <td><?php echo $u->tglselesaist ?></td>
                             <td>
                                 <div class="col s12">
-                                    <a class="btn orange col s12" href="<?= site_url('Transaksi/SuratTugas/Export')?>" target="_blank">VIEW</a><br>
+                                    <a class="btn orange col s12" href="<?= site_url('Transaksi/SuratTugas/Export/'.$u->id)?>" target="_blank">VIEW</a><br>
                                     <div style="padding-bottom: 20px"></div>
-                                    <button class="btn cyan col s12">UBAH</button><br>
+                                    <a class="btn cyan col s12" href="<?= site_url('Transaksi/SuratTugas/ubah/'.$u->id)?>">UBAH</a><br>
                                     <div style="padding-bottom: 20px"></div>
                                     <button class="btn green col s12">APPROVED</button><br>
                                     <div style="padding-bottom: 20px"></div>

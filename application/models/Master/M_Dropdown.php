@@ -239,9 +239,16 @@ function getData_Pegawai($searchTerm="", $Trigger){
 
    // Initialize Array with fetched data
    $data = array();
-   foreach($users as $user){
-      $data[] = array("id"=>$user['nip']."-".$user['jabatan']."-".$user['nama'], "text"=>$user['nama']);
+   if($Trigger == "pegawai_forST"){
+      foreach($users as $user){
+         $data[] = array("id"=>$user['nip'], "text"=>$user['nama']);
+      }
+   }else{
+      foreach($users as $user){
+         $data[] = array("id"=>$user['nip']."-".$user['jabatan']."-".$user['nama'], "text"=>$user['nama']);
+      }
    }
+   
    return $data;
 }
 

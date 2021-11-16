@@ -69,7 +69,37 @@
         </div>
     </div>
     <div class="modal-footer">
-      <button id="Tambah" class="waves-effect waves-light btn disabled"><i class="material-icons left">done</i> Simpan</button>
+      <button id="Tambah" class="btn disabled"><i class="material-icons left">done</i> Simpan</button>
+      <a class="modal-action modal-close  red btn">Batal</a>
+    </div>
+</div>
+
+<div id="modalTim" class="modal" style="max-height: 500px">
+    <div class="modal-content">
+      <h4>Komponen/Sub Komponen</h4>
+      <div style="padding-top: 10px"></div>
+        <div class="row">
+              <table id="multi-select" class="display">
+                <thead>
+                  <tr>
+                    <th>
+                      <label>
+                        <input type="checkbox" class="select-all">
+                        <span></span>
+                      </label>
+                    </th>
+                    <th>NIP</th>
+                    <th>Nama</th>
+                    <th>Peran</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button id="Tambah" class="btn disabled"><i class="material-icons left">done</i> Simpan</button>
       <a class="modal-action modal-close  red btn">Batal</a>
     </div>
 </div>

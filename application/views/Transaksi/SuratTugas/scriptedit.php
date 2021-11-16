@@ -1,12 +1,59 @@
 
-
 <script>
 
 
 var baseurl 	= "<?= base_url('Transaksi/SuratTugas/')?>";
 var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";
+var master_baseurl 	= "<?= base_url('Master/Master/')?>";
 var satker_session = "<?= $this->session->userdata("kdsatker")?>"
+var countingDiv = document.getElementById('counting');
+var countTimTable = countingDiv.getElementsByTagName('select').length;
+// var countTimTable = "<?= count($ubah)?>"
 
+//VARIABLE UPDATE//
+var BAvalue = "<?= $ubah[0]['id_unit'] ?>"
+var VAtext = "<?= $ubah[0]['nama_unit'] ?>"
+
+var TTDvalue = "<?= $ubah[0]['id_unit'] ?>"
+var TTDtext = "<?= $ubah[0]['nama_unit'] ?>"
+
+var idxskmpnen = "<?= $ubah[0]['idxskmpnen'] ?>"
+
+var PROvalue = idxskmpnen.substring(17,15)
+var PROtext = idxskmpnen.substring(17,15)
+
+var GIATvalue = idxskmpnen.substring(21,17)
+var GIATtext = idxskmpnen.substring(21,17)
+
+var KROvalue = idxskmpnen.substring(24,21)
+var KROtext = idxskmpnen.substring(24,21)
+
+var ROvalue = idxskmpnen.substring(27,24)
+var ROtext = idxskmpnen.substring(27,24)
+
+var KOMvalue = idxskmpnen.substring(30,27)
+var KOMtext = idxskmpnen.substring(30,27)
+
+var SKOMvalue = idxskmpnen.substring(32,30)
+var SKOMtext = idxskmpnen.substring(32,30)
+
+var $beban_anggaran = $("<option selected='selected'></option>").val(BAvalue).text(VAtext)
+$("#beban_anggaran").append($beban_anggaran).trigger('change');
+
+var $pro = $("<option selected='selected'></option>").val(PROvalue).text(PROtext)
+$("#program-select2").append($pro).trigger('change');
+var $giat = $("<option selected='selected'></option>").val(GIATvalue).text(GIATtext)
+$("#kegiatan-select2").append($giat).trigger('change');
+var $kro = $("<option selected='selected'></option>").val(KROvalue).text(KROtext)
+$("#kro-select2").append($kro).trigger('change');
+var $ro = $("<option selected='selected'></option>").val(ROvalue).text(ROtext)
+$("#ro-select2").append($ro).trigger('change');
+var $kom = $("<option selected='selected'></option>").val(KOMvalue).text(KOMtext)
+$("#komponen-select2").append($kom).trigger('change');
+var $skom = $("<option selected='selected'></option>").val(SKOMvalue).text(SKOMtext)
+$("#sub_komponen-select2").append($skom).trigger('change');
+
+$('#kdindex').val(idxskmpnen)
 
 function Reset(idForm) {
   document.getElementById(idForm).reset();
@@ -40,6 +87,54 @@ $("#bulan-Array").select2({
     
 
 // SELECT2 INSERT
+
+   $(".namaTimHardcode").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Nama",
+          dropdownParent: "#Tim",
+         ajax: { 
+           url: dropdown_baseurl + 'pegawai',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+                
+                searchTerm: params.term // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
+$('.namaTimHardcode').on('change', function() {
+
+var id =  $(this).attr("name")
+var res = id[9]
+
+var nip = this.value
+
+var val = nip.split("-")
+
+
+
+$('#niplabel'+res+'').html(val[0])
+$('#nip'+res+'').val(val[0])
+
+$('#perjablabel'+res+'').html(val[1])
+$('#perjab'+res+'').val(val[1])
+
+$('#nama'+res+'').html(val[2])
+$('#nama'+res+'').val(val[2])
+
+
+});
 
 $("#user-select2").select2({
           dropdownAutoWidth: true,
@@ -244,8 +339,8 @@ $("#user-select2").select2({
        var  RO =  $('#ro-select2').val()
        var  Komponen = $('#komponen-select2').val()
        var  Sub_Komponen = $('#sub_komponen-select2').val()
-      $('#kdindex').val('2021'+Satker+'08901'+Program+''+Kegiatan+''+KRO+''+RO+''+Komponen+''+Sub_Komponen+'')
-      $('#kdindex').html('2021'+Satker+'08901'+Program+''+Kegiatan+''+KRO+''+RO+''+Komponen+''+Sub_Komponen+'')
+       $('#kdindex').val('2021'+Satker+'08901'+Program+''+Kegiatan+''+KRO+''+RO+''+Komponen+''+Sub_Komponen+'')
+       $('#kdindex').html('2021'+Satker+'08901'+Program+''+Kegiatan+''+KRO+''+RO+''+Komponen+''+Sub_Komponen+'')
 
       var  kdindex = $('#kdindex').val()
         if(kdindex.includes("null") || kdindex == ""){
@@ -351,10 +446,10 @@ function selectRefresh(x){
 
     
 
-    $('#nip'+res+'').html(val[0])
+    $('#niplabel'+res+'').html(val[0])
     $('#nip'+res+'').val(val[0])
 
-    $('#perjab'+res+'').html(val[1])
+    $('#perjablabel'+res+'').html(val[1])
     $('#perjab'+res+'').val(val[1])
 
     $('#nama'+res+'').html(val[2])
@@ -365,59 +460,88 @@ function selectRefresh(x){
   
 }
 
+$('.namaTim').on('change', function() {
+
+var id =  $(this).attr("name")
+var res = id[9]
+
+var nip = this.value
+
+var val = nip.split("-")
+
+
+
+$('#nip'+res+'').html(val[0])
+$('#nip'+res+'').val(val[0])
+
+$('#perjab'+res+'').html(val[1])
+$('#perjab'+res+'').val(val[1])
+
+$('#nama'+res+'').html(val[2])
+$('#nama'+res+'').val(val[2])
+
+
+});
+
 
 $('.multi-field-wrapper').each(function() {
         var max      = 20;
-        var $wrapper = $('.multi-fields', this);
-        var x = 0;
-        var i = 0;
+        var $wrapper = $('.table-tim', this);
+        var x = countTimTable;
+        var i = countTimTable;
+        var a = countTimTable;
         var head = "";
         var end="";
         var arrX = [];
+
+        for(test = 1 ; test <= countTimTable ; test++){
+            countX = arrX.push(test);
+         }
+         $('#ArrX').val(arrX)
+
+
         $("#add-field", $(this)).click(function(e) {
            if(x < max){
               x++;
               i++;
                 
-              if(x == 1){
-                   head = '<table class="bordered wrap" style="width: 100%" id="tbUser"><tr>\
-                                <td style="width: 5%" >NO</td>\
-                                <td style="width: 30%" >NAMA</td>\
-                                <td style="width: 15%" >NIP</td>\
-                                <td style="width: 30%" >PERAN/JABATAN</td>\
-                                <td style="width: 15%" >AKSI</td>\
-                            </tr>';
+              if(x == a){
+                   head = '<table class="bordered wrap" style="width: 100%" id="tbUser">';
                 }else if(x == max){
                   end = '</table>'
               }
-              $($wrapper).append( head +'<tr>\
-                            <td style="width: 5%" ><input  type="number" id="urut'+x+'" name="urut'+x+'" min="1" max="20" value="'+x+'"></td>\
+              $($wrapper).append('<tr>\
+                           <td style="width: 5%" hidden>'+x+'</td>\
+                            <td style="width: 5%" >'+x+'</td>\
                             <td style="width: 30%" id="Tim" name="Tim">\
                                <select placeholder="Nama.." class="namaTim browser-default" name="namaDummy'+x+'"></select>\
                                <input name="nama'+x+'" id="nama'+x+'" hidden>\
                             </td>\
-                            <td style="width: 15%">\
-                                <input placeholder="NIP" class="nip" id="nip'+x+'" name="nip'+x+'" readonly>\
+                            <td style="width: 15%" id="niplabel'+x+'">\
+                                <input placeholder="NIP" class="nip" id="nip'+x+'" name="nip'+x+'" readonly hidden>\
                             </td>\
-                            <td style="width: 30%">\
-                                <textarea placeholder="Peran/Jabatan" class="perjab" id="perjab'+x+'" name="perjab'+x+'" readonly></textarea>\
+                            <td style="width: 30%" id="perjablabel'+x+'">\
+                                <textarea placeholder="Peran/Jabatan" class="perjab" id="perjab'+x+'" name="perjab'+x+'" readonly hidden></textarea>\
                             </td>\
-                            <td style="width: 15%">\
-                                <div class="col s12">\
-                                    <span class="btn red col s4 table-remove" style="padding: 0px !important" id="'+x+'" ><i class="material-icons">delete</i></span>\
-                                </div>\
-                            </td>\
-                        </tr>'+end+'');
+                            <td>\
+                                 <div class="col s12">\
+                                    <div class="col s2" style="padding-left: 2px; padding-right: 2px"></div>\
+                                    <span class="btn red col s5 table-remove" style="padding: 0px !important" id="'+x+'" ><i class="material-icons">delete</i></span>\
+                                 </div>\
+                           </td>\
+                        </tr>');
 
                         selectRefresh(x);
+                        
                         countX = arrX.push(x);
+                        
                        
 
                         $('.table-remove').click(function() {
-                            $(this).parents('table').detach();
+                            $(this).parents('tr').detach();
                             x--;
-                                if(x <=0 ){
-                                    x=0;
+                                if(x <=a ){
+                                    x=countTimTable;
                                 
                                 }
 
@@ -449,7 +573,7 @@ function removeItemAll(arr, value) {
 }
 
 
-$("#TambahST").click(function (e) {
+$("#UbahST").click(function (e) {
   e.preventDefault();
 
   var btn = $(this);
@@ -463,7 +587,7 @@ $("#TambahST").click(function (e) {
     .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
     .attr("disabled", true);
 
-  formData.append('Trigger', 'C')
+  formData.append('Trigger', 'U')
   formData.append('countTim', countTim)
 
   $.ajax({
@@ -483,60 +607,6 @@ $("#TambahST").click(function (e) {
       });
 });
 
-function Print(Id){
-  swal({
-    title: "Apakah Yakin Ingin Dihapus?",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonText: "Ya, Hapus!",
-    cancelButtonText: "Batal",
-    html:
-    '<label class="col-md-2">Kop</label><input id="kop1" name="kop1" class="swal2-input col-md-10" placeholder="TENTARA NASIONAL INDONESIA" value="TENTARA NASIONAL INDONESIA">'+
-    '<label class="col-md-2">Sub</label><input id="kop2" name="kop2" class="swal2-input col-md-10" placeholder="Sub Kop">',
-  }).then(function (result) {
-    if (result) {
-      Execute(Id);
-    }
-  });
-
-}
-
-function Delete(Id) {
-    swal({
-    title: "Apakah Yakin Ingin Dihapus?",
-    text: "Anda tidak bisa mengembalikan data yang telah dihapus!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonText: "Ya, Hapus!",
-    cancelButtonText: "Batal",
-  }).then(function (result) {
-    if (result) {
-      Execute(Id);
-    }
-  });
-}
-
-function Execute(Id) {
-  var formData = new FormData();
-  formData.append("Trigger", "D");
-  formData.append("id", Id);
-
-  $.ajax({
-    type: "POST",
-    data: formData,
-    url: baseurl + "Action",
-    processData: false,
-    contentType: false,
-    success: function (data, textStatus, jqXHR) {
-
-        show_msg(textStatus)
-        window.location.reload();
-    },
-    error: function (jqXHR, textStatus, errorThrown) { },
-  });
-}
-
-
 
 function show_msg(textStatus){
         swal({
@@ -545,6 +615,59 @@ function show_msg(textStatus){
             timer: 2000
             })
     }
+
+
+
+function Tim(){
+  $('#modalTim').modal('open');
+
+  $("#multi-select").DataTable({ 
+      responsive: !0, 
+      ajax: {
+                url: master_baseurl + 'Master_Pegawai',
+                type: "post",
+                data : {"kdsatker": satker_session}
+            },
+                
+            autoWidth: false,
+            columns: [
+             
+                {
+                    data: null, class: "text-center"
+                   
+                },
+               
+                
+                { data: "nip",
+                render: function (data, type, row, meta) {
+                        return data;
+                    } 
+                  },
+
+                { data: "nama",
+              render: function (data, type, row, meta) {
+                      return data;
+                  } 
+                },
+
+                { data: "jabatan",
+              render: function (data, type, row, meta) {
+                      return data;
+                  } 
+                },
+ 
+            ],
+            pageLength: 10,
+            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            bFilter: false,
+            ordering: false,
+            scrollCollapse: true,
+    
+    });
+}
+
+
+
 
 
 </script>
