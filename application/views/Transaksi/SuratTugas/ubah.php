@@ -30,7 +30,7 @@
 
                             <div class="input-field col s10 " >
                             <input type="text" id="nost" name="nost" value="<?= $ubah[0]['nost'] ?>">
-                            <input type="text" id="idst" name="idst" value="<?= $ubah[0]['idst'] ?>">
+                            
                             </div>
                         </div>
 
@@ -95,9 +95,9 @@
                             </div>
                         </div>
 
+
                         <div id = "counting" >
                             <div class="multi-field-wrapper">
-
 
                                 <div class="input-field col s12" >
                                     <div class="input-field col s9">
@@ -113,53 +113,82 @@
 
                                 <div class="multi-fields">
                                     <div class="multi-field">
-                                    <table class="bordered wrap table-tim" style="width: 100%" id="tbUser">
-                                    <tr>
-                                                <td style="width: 7%" >NO</td>
-                                                <td style="width: 30%" >NAMA</td>
-                                                <td style="width: 15%" >NIP</td>
-                                                <td style="width: 30%" >PERAN/JABATAN</td>
-                                                <td style="width: 15%" >AKSI</td>
-                                            </tr>
-                                    <?php $j=1; for($i = 0 ; $i < count($ubah); $i++){ ?>
-                                        
-                                           
-                                            <tr>
+                                        <table class="bordered wrap table-tim" style="width: 100%" id="tbUser">
+                                        <tr>
+                                                    <td style="width: 7%" >NO</td>
+                                                    <td style="width: 30%" >NAMA</td>
+                                                    <td style="width: 15%" >NIP</td>
+                                                    <td style="width: 30%" >PERAN/JABATAN</td>
+                                                    <td style="width: 15%" >AKSI</td>
+                                                </tr>
+                                        <?php $j=1; for($i = 0 ; $i < count($ubah); $i++){ ?>
                                             
-                                            <td style="width: 5%" ><?=$ubah[$i]['nourut']?></td>
-                                            <td style="width: 30%" id="Tim" name="Tim">
-                                                <select placeholder="Nama.." class="namaTimHardcode browser-default" name="namaDummy<?=$j?>" id="namaDummy<?=$j?>" >
-                                                    <option selected value="<?=$ubah[$i]['nip']?>"><?=$ubah[$i]['nama']?></option>
-                                                </select>
+                                            
+                                                <tr>
                                                 
-                                            </td>
-                                            <td style="width: 15%" id="niplabel<?=$j?>"><?=$ubah[$i]['nip']?></td>
-                                            <td style="width: 30%" id="perjablabel<?=$j?>"><?=$ubah[$i]['peran']?></td>
-                                            <td>
-                                                <div class="col s12">
-                                            <!-- <span class="btn green col s5 table-edit" style="padding: 0px !important" id="w" ><i class="material-icons">edit</i></span>  -->
-                                            <div class="col s2" style="padding-left: 2px; padding-right: 2px"></div>
-                                            <span class="btn red col s5 table-remove" style="padding: 0px !important" id="<?=$j?>" ><i class="material-icons">delete</i></span>
-                                                </div>
-                                            </td>
-                                            </tr>
+                                                <td style="width: 5%" ><?=$ubah[$i]['nourut']?></td>
+                                                <td style="width: 30%" id="Tim" name="Tim">
+                                                    <select placeholder="Nama.." class="namaTimHardcode browser-default" name="namaDummy<?=$j?>" id="namaDummy<?=$j?>" >
+                                                        <option selected value="<?=$ubah[$i]['nip']?>"><?=$ubah[$i]['nama']?></option>
+                                                    </select>
+                                                    
+                                                </td>
+                                                <td style="width: 15%" id="niplabel<?=$j?>"><?=$ubah[$i]['nip']?></td>
+                                                <td style="width: 30%" id="perjablabel<?=$j?>"><?=$ubah[$i]['peran']?></td>
+                                                <td>
+                                                    <div class="col s12">
+                                                <!-- <span class="btn green col s5 table-edit" style="padding: 0px !important" id="w" ><i class="material-icons">edit</i></span>  -->
+                                                <div class="col s2" style="padding-left: 2px; padding-right: 2px"></div>
+                                                <span class="btn red col s5 table-remove" style="padding: 0px !important" id="<?=$j?>" ><i class="material-icons">delete</i></span>
+                                                    </div>
+                                                </td>
+                                                </tr>
 
-                                            <tr hidden>
-                                                <td><input name="urut<?=$j?>" id="urut<?=$j?>" value="<?=$ubah[$i]['nourut']?>"></td>
-                                                <td><input name="nama<?=$j?>" id="nama<?=$j?>" value="<?=$ubah[$i]['nama']?>"></td>
-                                                <td><input class="nip" id="nip<?=$j?>" name="nip<?=$j?>" value="<?=$ubah[$i]['nip']?>"></td>
-                                                <td><input class="perjab" id="perjab<?=$j?>" name="perjab<?=$j?>" value="<?=$ubah[$i]['peran']?>"></td>
-                                            </tr>
-                                        
+                                                <tr hidden>
+                                                    <td><input type="text" id="idst" name="idst" value="<?= $ubah[0]['idst'] ?>"></td>
+                                                    <td><input name="urut<?=$j?>" id="urut<?=$j?>" value="<?=$ubah[$i]['nourut']?>"></td>
+                                                    <td><input name="nama<?=$j?>" id="nama<?=$j?>" value="<?=$ubah[$i]['nama']?>"></td>
+                                                    <td><input class="nip" id="nip<?=$j?>" name="nip<?=$j?>" value="<?=$ubah[$i]['nip']?>"></td>
+                                                    <td><input class="perjab" id="perjab<?=$j?>" name="perjab<?=$j?>" value="<?=$ubah[$i]['peran']?>"></td>
+                                                </tr>
+                                            
 
-                                    <?php $j++;} ?>
-                                    </table>
+                                        <?php $j++;} ?>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <input id="ArrX" name="ArrX" hidden>
+
+                                <!-- <div class="input-field col s12" style="padding-top: 10px">
+                                    <div class="input-field col s12">
+                                        <button type="button" class="btn col s12 grey darken-2"><i class="material-icons left">check</i> FORM PERSETUJUAN</button>
+                                    </div>
+                                </div>
+
+                                <table class="bordered wrap a" style="width: 100%" id="a">
+                                        <tr>
+                                            <td style="width: 7%" >Eselon I</td>
+                                            <td style="width: 7%" > <button class="<?= getapprove($ubah[0]['approved_eselon1'])?> col s12"></button></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="width: 7%" >Eselon II</td>
+                                            <td style="width: 7%" ><?= getapprove($ubah[0]['approved_eselon2'])?></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="width: 7%" >Eselon III</td>
+                                            <td style="width: 7%" ><?= getapprove($ubah[0]['approved_eselon3'])?></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="width: 7%" >Eselon IV</td>
+                                            <td style="width: 7%" ><?= getapprove($ubah[0]['approved_eselon4'])?></td>
+                                        </tr>
+                                </table> -->
 
                         <div class="col s12" style="padding-top: 10px">
                             <div class="col s9"></div>

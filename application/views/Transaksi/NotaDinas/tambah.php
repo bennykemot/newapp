@@ -27,14 +27,14 @@
                     <div class="row">
                         <div class="col s12">
                                 <div class="input-field col s2"><label>Nomor Surat Tugas</label></div>
-                                    <div class="col s3"><select class="browser-default" id="select-nost" name="select-nost"></select></div>
-                                        <div class="col s2"></div>
+                                    <div class="col s4"><select class="browser-default" id="select-nost" name="select-nost"></select></div>
+                                        <div class="col s1"></div>
                                 <div class="input-field col s2"><label>Pagu Anggaran</label></div>
                                     <div class="col s3"><input type="text" name="paguanggaran" id="paguanggaran" style="text-align: right"></div>
 
                                 <div class="input-field col s2"><label>Tanggal</label></div>
-                                    <div class="col s3"><input type="date" name="tglst" id="tglst"></div>
-                                        <div class="col s2"></div>
+                                    <div class="col s4"><input type="date" name="tglst" id="tglst"></div>
+                                        <div class="col s1"></div>
                                 <div class="input-field col s2"><label>Realisasi s.d Lalu </label></div>
                                     <div class="col s3"><input type="text" name="" id=""></div>
 
@@ -80,7 +80,6 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tabeltim">
-                                
                                 </tbody>
                             </table>
 

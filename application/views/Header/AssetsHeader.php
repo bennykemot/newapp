@@ -5,6 +5,7 @@
 
 $baseurl 	= $this->config->item('base_url');
 $assets 	= $this->config->item('assets_url');
+$url = 'javascript:window.history.go(-1);';
 
 ?>
 <html class="loading" lang="en" data-textdirection="ltr">

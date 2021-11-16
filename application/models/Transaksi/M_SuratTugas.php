@@ -22,7 +22,9 @@ class M_SuratTugas extends CI_Model{
     function getDataUbah($id){
             $query = $this->db->query('SELECT d_surattugas.nost, d_surattugas.tglst, d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.tglselesaist
             ,d_surattugas.id_unit, d_surattugas.idxskmpnen, d_surattugas.id_ttd, d_surattugas.id as idst,
-            d_stdetail.nourut, d_stdetail.nama, d_stdetail.nip, d_stdetail.peran, d_stdetail.id as idtim, t_unitkerja.nama_unit,
+            d_stdetail.nourut, d_stdetail.nama, d_stdetail.nip, d_stdetail.peran, d_stdetail.id as idtim, t_unitkerja.nama_unit
+            ,d_surattugas.is_approved1 as approved_eselon1 , d_surattugas.is_approved2 as approved_eselon2, 
+            d_surattugas.is_approved3 as approved_eselon3, d_surattugas.is_approved4 as approved_eselon4,
             DATEDIFF(d_surattugas.tglselesaist, d_surattugas.tglmulaist) as jmlhari
             FROM d_surattugas 
             JOIN d_stdetail ON d_surattugas.id = d_stdetail.id_st 

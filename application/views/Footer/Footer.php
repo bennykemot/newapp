@@ -1,3 +1,11 @@
+<!-- Add new todo popup -->
+<div style="bottom: 54px; right: 19px;" class="fixed-action-btn direction-top">
+  <a class="btn-floating btn-large gradient-45deg-purple-deep-orange gradient-shadow todo-sidebar-trigger" href="<?=$url?>">
+    <i class="material-icons">reply</i>
+  </a>
+</div>
+<!-- Add new todo popup Ends-->
+
 </div>
 </div>
 <div class="content-overlay"></div>

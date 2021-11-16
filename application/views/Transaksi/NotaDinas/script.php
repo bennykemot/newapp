@@ -4,6 +4,25 @@ var baseurl 	= "<?= base_url('Transaksi/NotaDinas/')?>";
 var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";
 var satker_session = "<?= $this->session->userdata("kdsatker")?>"
 
+
+      function formatRupiah(angka){
+        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+        split   		= number_string.split(','),
+        sisa     		= split[0].length % 3,
+        rupiah     		= split[0].substr(0, sisa),
+        ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+  
+        // tambahkan titik jika yang di input sudah menjadi angka ribuan
+        if(ribuan){
+          separator = sisa ? '.' : '';
+          rupiah += separator + ribuan.join('.');
+        }
+  
+        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+        return 'Rp. ' + rupiah;
+      }
+
+
     $("#select-nost").select2({
           dropdownAutoWidth: true,
           width: '100%',
@@ -99,9 +118,9 @@ var satker_session = "<?= $this->session->userdata("kdsatker")?>"
                             <td>'+data[i]['nama_golongan']+'</td>\
                             <td><input type="text"></td>\
                             <td><input type="text"></td>\
-                            <td><input type="date"></td>\
-                            <td><input type="date"></td>\
-                            <td><input type="number" onkeypress="return validateNumber(event)"></td>\
+                            <td><input type="date" onchange="dayCount('+i+')" id="tglberangkat'+i+'"></td>\
+                            <td><input type="date" onchange="dayCount('+i+')" class="tgl" id="tglkembali'+i+'"></td>\
+                            <td><input type="text" id="jmlhari'+i+'" readonly></td>\
                             <td><input type="number" onkeypress="return validateNumber(event)"></td>\
                             <td><input type="number" onkeypress="return validateNumber(event)"></td>\
                             <td><input type="number" onkeypress="return validateNumber(event)"></td>\
@@ -119,6 +138,49 @@ var satker_session = "<?= $this->session->userdata("kdsatker")?>"
         });
 
       });
+
+      function dayCount(id){
+        if ( ($("#tglberangkat"+id+"").val() != "") && ($("#tglkembali"+id+"").val() != "")) {
+            var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+            var firstDate = new Date($("#tglberangkat"+id+"").val());
+            var secondDate = new Date($("#tglkembali"+id+"").val());
+            var diffDays = Math.round(Math.round((secondDate.getTime() - firstDate.getTime()) / (oneDay)));
+            $("#jmlhari"+id+"").val(diffDays);
+
+            if(diffDays < 0){
+              swal({
+                title:"Jumlah Hari Minus !",
+                text: "Pastikan tanggal kembali tidak < tanggal berangkat", 
+                icon: "warning",
+                timer: 2000
+                })
+                $("#tglkembali"+id+"").val("")
+                $("#jmlhari"+id+"").val("");
+            }
+        }else{
+            $("#jmlhari"+id+"").val();
+        }
+      }
+
+      // $(".tgl").on('change', function() {
+
+      //     var id =  $(this).attr("name")
+      //     var res = id[12]
+
+      //   if ( ($("#tglberangkat"+res+"").val() != "") && ($("#tglkembali"+res+"").val() != "")) {
+      //       var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+      //       var firstDate = new Date($("#tglberangkat"+res+"").val());
+      //       var secondDate = new Date($("#tglkembali"+res+"").val());
+      //       var diffDays = Math.round(Math.round((secondDate.getTime() - firstDate.getTime()) / (oneDay)));
+      //       $("#jmlhari"+res+"").val(diffDays);
+      //   }
+
+         
+      //   //  var berangkat = $('#tglberangkat'+res+'').val();
+      //   //  var kembali = $('#tglkembali'+res+'').val();
+
+      // });
+
 
       $("#select-bebananggaran").change(function() {
          var id = $('#select-bebananggaran').val();

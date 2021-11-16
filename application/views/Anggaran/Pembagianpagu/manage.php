@@ -33,7 +33,7 @@
               <div class="row">
                 <div class="col s12">
                   
-                    <table id="page-length-option" class="display table-responsive">
+                    <table id="page-length-option" class="display">
                         <thead>
                             <tr>
                               <th>TA</th>
@@ -53,7 +53,7 @@
                                 <?php 
                                   foreach($pp as $u){ 
                                 ?>
-                                <tr>
+                                <tr style="white-space: nowrap !important;overflow: hidden;">
                                 <td><?php echo $u->thang ?></td>
                                 <td><?php echo $u->kdsatker ?></td>
                                 <td><?php echo $u->kddept ?></td>
@@ -65,8 +65,8 @@
                                 <td><?php echo $u->kdkmpnen ?></td>
                                 <td><?php echo $u->username ?></td>
                                 <td>
-                                  <a href="javascript:;" onclick="Edit('<?= $u->id ?>')"><i class="material-icons">edit</i></a>
-                                  <a href="javascript:;" onclick="Delete('<?= $u->id ?>')"><i class="material-icons">delete</i></a>
+                                  <a href="javascript:;" onclick="Edit('<?= $u->id ?>')"><i class="material-icons green-text">edit</i></a>
+                                  <a href="javascript:;" onclick="Delete('<?= $u->id ?>')"><i class="material-icons red-text">delete</i></a>
                                 </td>
                             </tr>
                               <?php } ?>
