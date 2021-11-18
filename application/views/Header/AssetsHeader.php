@@ -170,9 +170,9 @@ function currentMonth($data){
 
 function getapprove($data){
 
-  $res = "btn red col s2";
+  $res = "btn red col s3";
   if($data == 1){
-    $res = "btn green col s2";
+    $res = "btn green col s3";
   }
   return $res;
 

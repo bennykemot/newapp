@@ -5,6 +5,43 @@ var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";
 var satker_session = "<?= $this->session->userdata("kdsatker")?>"
 
 
+function viewModal(){
+  $('#modal1').modal('open');
+}
+
+function show(Id){
+  $('#no_st').val(Id);
+}
+
+$("#costsheet").click(function (e) {
+  e.preventDefault();
+
+  var btn = $(this);
+  var form = $(this).closest("form");
+  var formData = new FormData($("#FormView")[0]);
+
+  btn
+    .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
+    .attr("disabled", true);
+
+  formData.append('Trigger', 'costsheet')
+
+  $.ajax({
+    type: "POST",
+    data: formData,
+    url: baseurl + "Export",
+    processData: false,
+    contentType: false,
+    success: function (data, textStatus, jqXHR) {
+
+          },
+          error: function (jqXHR, textStatus, errorThrown) { },
+      });
+});
+
+
+
+
       function formatRupiah(angka){
         var number_string = angka.replace(/[^,\d]/g, '').toString(),
         split   		= number_string.split(','),
@@ -113,20 +150,23 @@ var satker_session = "<?= $this->session->userdata("kdsatker")?>"
                 for(i=0 ; i< data.length ; i++){
                     row = '<tr>\
                             <td>'+no+'</td>\
-                            <td width="30%">'+data[i]['nama']+'</td>\
+                            <td width="20%">'+data[i]['nama']+'</td>\
                             <td>'+data[i]['nip']+'</td>\
                             <td>'+data[i]['nama_golongan']+'</td>\
                             <td><input type="text"></td>\
                             <td><input type="text"></td>\
-                            <td><input type="date" onchange="dayCount('+i+')" id="tglberangkat'+i+'"></td>\
+                            <td><input type="date" onchange="dayCount(\''+i+'\',\'D\')" id="tglberangkat'+i+'"></td>\
                             <td><input type="date" onchange="dayCount('+i+')" class="tgl" id="tglkembali'+i+'"></td>\
                             <td><input type="text" id="jmlhari'+i+'" readonly></td>\
+                            <td><input type="text" id="uangharian'+i+'" readonly></td>\
+                            <td><input type="text" id="uangpenginapan'+i+'" readonly></td>\
                             <td><input type="number" onkeypress="return validateNumber(event)"></td>\
-                            <td><input type="number" onkeypress="return validateNumber(event)"></td>\
-                            <td><input type="number" onkeypress="return validateNumber(event)"></td>\
-                            <td><input type="number" onkeypress="return validateNumber(event)"></td>\
-                            <td><input type="number" onkeypress="return validateNumber(event)"></td>\
-                            <td><select></select></td>\
+                            <td><input type="text" onkeypress="return validateNumber(event)"></td>\
+                            <td><input type="text" id="total'+i+'"></td>\
+                            <td><select class="select2 browser-default">\
+                                  <option value="Pesawat Udara">Pesawat Udara</option>\
+                                  <option value="Kendaraan Umum">Kendaraan Umum</option>\
+                                </select</td>\
                             </tr>'
                     no++
                     $("#tabeltim").append(row);
@@ -139,47 +179,46 @@ var satker_session = "<?= $this->session->userdata("kdsatker")?>"
 
       });
 
-      function dayCount(id){
-        if ( ($("#tglberangkat"+id+"").val() != "") && ($("#tglkembali"+id+"").val() != "")) {
-            var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-            var firstDate = new Date($("#tglberangkat"+id+"").val());
-            var secondDate = new Date($("#tglkembali"+id+"").val());
-            var diffDays = Math.round(Math.round((secondDate.getTime() - firstDate.getTime()) / (oneDay)));
-            $("#jmlhari"+id+"").val(diffDays);
+      function validateNumber(e) {
+            const pattern = /^[0-9]$/;
 
-            if(diffDays < 0){
-              swal({
-                title:"Jumlah Hari Minus !",
-                text: "Pastikan tanggal kembali tidak < tanggal berangkat", 
-                icon: "warning",
-                timer: 2000
-                })
-                $("#tglkembali"+id+"").val("")
-                $("#jmlhari"+id+"").val("");
-            }
-        }else{
-            $("#jmlhari"+id+"").val();
+            return pattern.test(e.key )
         }
+        
+      function dayCount(id, trigger){
+            if ( ($("#tglberangkat"+id+"").val() != "") && ($("#tglkembali"+id+"").val() != "")) {
+              var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+              var firstDate = new Date($("#tglberangkat"+id+"").val());
+              var secondDate = new Date($("#tglkembali"+id+"").val());
+              var diffDays = (secondDate.getTime() - firstDate.getTime()) / (oneDay);
+              $("#jmlhari"+id+"").val(diffDays);
+
+              var totalUangHarian = ''+(diffDays * 430000)
+              $("#uangharian"+id+"").val(formatRupiah(totalUangHarian));
+
+              var totalUangPenginapan = ''+((diffDays-1) * 1200000)
+              $("#uangpenginapan"+id+"").val(formatRupiah(totalUangPenginapan));
+
+
+              //TOTAL
+              var total = ''+(Number(totalUangHarian)+Number(totalUangPenginapan))
+              $("#total"+id+"").val(formatRupiah(total));
+
+              if(diffDays < 0){
+                swal({
+                  title:"Jumlah Hari Minus !",
+                  text: "Pastikan tanggal kembali tidak < tanggal berangkat", 
+                  icon: "warning",
+                  timer: 2000
+                  })
+                  $("#tglkembali"+id+"").val("")
+                  $("#jmlhari"+id+"").val("");
+              }
+              }else{
+                  $("#jmlhari"+id+"").val();
+              }
+        
       }
-
-      // $(".tgl").on('change', function() {
-
-      //     var id =  $(this).attr("name")
-      //     var res = id[12]
-
-      //   if ( ($("#tglberangkat"+res+"").val() != "") && ($("#tglkembali"+res+"").val() != "")) {
-      //       var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-      //       var firstDate = new Date($("#tglberangkat"+res+"").val());
-      //       var secondDate = new Date($("#tglkembali"+res+"").val());
-      //       var diffDays = Math.round(Math.round((secondDate.getTime() - firstDate.getTime()) / (oneDay)));
-      //       $("#jmlhari"+res+"").val(diffDays);
-      //   }
-
-         
-      //   //  var berangkat = $('#tglberangkat'+res+'').val();
-      //   //  var kembali = $('#tglkembali'+res+'').val();
-
-      // });
 
 
       $("#select-bebananggaran").change(function() {
@@ -210,8 +249,7 @@ $("#page-length-option").DataTable({
         [10, 25, 50, -1],
         [10, 25, 50, "All"],
     ],
-    "scrollX": 10,
-    autoWidth: false
+    scrollX: true,
 
 }),
     $("#scroll-dynamic").DataTable({ responsive: !0, scrollCollapse: !0, paging: !1,autoWidth: false }),
@@ -226,4 +264,5 @@ $(window).on("load", function () {
         }, 100);
     });
 });
+
 </script>

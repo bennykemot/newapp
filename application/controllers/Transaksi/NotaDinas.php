@@ -28,4 +28,36 @@ class NotaDinas extends CI_Controller {
             $output = $this->NotaDinas->CRUD($id,'d_surattugas', $Trigger);
             echo json_encode($output);
 	}
+
+	public function Export(){
+		
+		$trigger             =  $this->uri->segment(4);
+		$style             =  $this->uri->segment(5);
+
+		$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 
+			'format' => 'A4-'.$style.'',
+			'default_font_size' => 9,
+			'default_font' => 'Calibri',
+			'margin_left' => 10,
+			'margin_right' => 10,
+			'margin_top' => 6,
+			'margin_bottom' => 6,
+			]);
+		if($trigger == "costsheet"){
+			
+			$html = $this->load->view('Transaksi/ExportViews/Costsheet.php',[],true);
+			$name = "Costsheet.pdf";
+		}else if($trigger == "spd"){
+			$html = $this->load->view('Transaksi/ExportViews/SPD.php',[],true);
+			$name = "SPD.pdf";
+
+		}else if($trigger == "spd_back"){
+			$html = $this->load->view('Transaksi/ExportViews/SPDBack.php',[],true);
+			$name = "SPD.pdf";
+		}
+        $mpdf->WriteHTML($html);          
+        $mpdf->Output($name, 'I');
+     
+	
+    }
 }

@@ -55,28 +55,27 @@
                                         <div class="col s1"></div>
                                 <div class="input-field col s2"><label>Saldo </label></div>
                                     <div class="col s3"><input type="text" name="saldo" id="saldo"></div>
-                            </div>
-                        </div>
+                            
 
                         
-                            <table id="input" class="display bordered" style="display: block;overflow: auto;padding-top: 5%;white-space: nowrap;">
+                            <table id="input" class="display bordered" style="display: block;overflow: auto;padding-top: 5%;white-space: nowrap;" width="200px">
                                 <thead>
                                     <tr>
                                         <th>NO</th>
                                         <th>NAMA</th>
                                         <th>NIP</th>
                                         <th>GOL</th>
-                                        <th>KOTA ASAL</th>
-                                        <th>KOTA TUJUAN</th>
-                                        <th>TGL BERANGKAT</th>
-                                        <th>TGL KEMBALI</th>
-                                        <th>JML HARI</th>
-                                        <th>UANG HARIAN</th>
+                                        <th>KOTA<br>ASAL</th>
+                                        <th>KOTA<br>TUJUAN</th>
+                                        <th>TGL<br>BERANGKAT</th>
+                                        <th>TGL<br>KEMBALI</th>
+                                        <th>JML<br>HARI</th>
+                                        <th>UANG<br>HARIAN</th>
                                         <th>PENGINAPAN</th>
                                         <th>TRANSPORTASI</th>
                                         <th>REPRESENTASI</th>
                                         <th>JUMLAH</th>
-                                        <th>JENIS TRANSPORTASI</th>
+                                        <th>JENIS<br>TRANSPORTASI</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tabeltim">
@@ -106,7 +105,15 @@
                                     </tr>
                                 </table>
 
-                                
+                                <div class="col s12" style="padding-top: 10px">
+                                    <div class="col s9"></div>
+
+                                    <div class="col s3">
+                                        <button id="TambahND" class="btn col s12"><i class="material-icons left">done</i> Simpan</button>
+                                    </div>
+                                </div>
+                        </div>
+                    </div> 
                 </form>
 
             </div>
