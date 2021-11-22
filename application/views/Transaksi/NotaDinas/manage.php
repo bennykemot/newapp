@@ -118,7 +118,7 @@
                       <span class="white-text">Daftar Pengeluaran Rill</span>
                     </div></a>
 
-                    <a href="<?= site_url('Transaksi/NotaDinas/Export/nominatif/P') ?>" target="blank"><div class="card-panel blue darken-1 btn col s12">
+                    <a href="<?= site_url('Transaksi/NotaDinas/Export/nominatif/L') ?>" target="blank"><div class="card-panel blue darken-1 btn col s12">
                       <span class="white-text">Daftar Nominatif</span>
                     </div></a>
 

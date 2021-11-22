@@ -59,17 +59,28 @@ class NotaDinas extends CI_Controller {
 			$html = $this->load->view('Transaksi/ExportViews/Kwitansi.php',[],true);
 			$name = "Kwitansi.pdf";
 		}else if($trigger == "rincian_biaya"){
-			$html = $this->load->view('Transaksi/ExportViews/RincianBiaya.php',[],true);
-			$name = "SPD-Back.pdf";
+			$html = $this->load->view('Transaksi/ExportViews/Rincianbiaya.php',[],true);
+			$name = "RincianBiaya.pdf";
 		}else if($trigger == "pengeluaran_rill"){
-			$html = $this->load->view('Transaksi/ExportViews/PengeluaranRill.php',[],true);
-			$name = "SPD-Back.pdf";
+			
+			$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 
+			'format' => 'A4-'.$style.'',
+			'default_font_size' => 9,
+			'default_font' => 'Calibri',
+			'margin_left' => 16,
+			'margin_right' => 16,
+			'margin_top' => 16,
+			'margin_bottom' => 16,
+			]);
+
+			$html = $this->load->view('Transaksi/ExportViews/Pengeluaranrill.php',[],true);
+			$name = "Pengeluaran-Rill.pdf";
 		}else if($trigger == "nominatif"){
 			$html = $this->load->view('Transaksi/ExportViews/Nominatif.php',[],true);
-			$name = "SPD-Back.pdf";
+			$name = "Nominatif.pdf";
 		}else if($trigger == "perhitungan_rampung"){
-			$html = $this->load->view('Transaksi/ExportViews/PerhitunganRampung.php',[],true);
-			$name = "SPD-Back.pdf";
+			$html = $this->load->view('Transaksi/ExportViews/Perhitunganrampung.php',[],true);
+			$name = "Perhitungan-Rampung.pdf";
 		}
         $mpdf->WriteHTML($html);          
         $mpdf->Output($name, 'I');
