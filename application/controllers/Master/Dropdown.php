@@ -225,5 +225,18 @@ class Dropdown extends CI_Controller {
       echo json_encode($response);
    }
 
+   public function kota(){
+
+      // Search term
+      $searchTerm = $this->input->post('searchTerm');
+      $Trigger = $this->input->post('Trigger');
+      $Jenistarif = $this->input->post('Jenistarif');
+
+      // Get users
+      $response = $this->Dropdown->getData_kota($searchTerm, $Trigger, $Jenistarif);
+
+      echo json_encode($response);
+   }
+
 
 }

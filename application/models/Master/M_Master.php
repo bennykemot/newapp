@@ -28,5 +28,12 @@ class M_Master extends CI_Model {
 
    return $query->result();
 
-}
+   }
+
+function getData_Uangharian($Trigger, $Tujuan){
+
+   $query = $this->db->query("SELECT * from r_uangharian where id = '".$Tujuan."' ");
+   return $query->result();
+
+   }
 }

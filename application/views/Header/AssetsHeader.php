@@ -21,21 +21,6 @@ $url = 'javascript:window.history.go(-1);';
     <link rel="apple-touch-icon" href="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2.png">
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2.png">
     <link href="<?= base_url().'assets'?>/icon.css?family=Material+Icons" rel="stylesheet">
-    <!-- <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/css/pages/login.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/vendors/vendors.min.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/vendors/flag-icon/css/flag-icon.min.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/vendors/data-tables/css/select.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/vendors/data-tables/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/css/pages/data-tables.min.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/vendors/flag-icon/css/flag-icon.min.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/css/themes/vertical-dark-menu-template/materialize.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/css/themes/vertical-dark-menu-template/style.min.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/css/pages/data-tables.min.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/css/pages/dashboard.min.css">
-    <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/css/custom/custom.css"> -->
-
-    <!-- BEGIN: VENDOR CSS-->
 <!-- BEGIN: VENDOR CSS-->
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/vendors/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/vendors/flag-icon/css/flag-icon.min.css">
@@ -49,18 +34,13 @@ $url = 'javascript:window.history.go(-1);';
 
     <link rel="stylesheet" href="<?= base_url().'assets'?>/app-assets/vendors/select2/select2.min.css" type="text/css">
     <link rel="stylesheet" href="<?= base_url().'assets'?>/app-assets/vendors/select2/select2-materialize.css" type="text/css">
+    
+    
+    
     <!-- END: Custom CSS-->
   </head>
 
   <style>
-/* .select-wrapper{
-  display: none !important;
-} */
-
-/* .input-field{
-  position: relative;
-  margin-top: 0 !important;
-} */
 
 .select{
   display: none;
@@ -136,13 +116,20 @@ table.dataTable tbody td {
     vertical-align: top;
 }
 
-/* .select2-dropdown--below {
-    top: -2.8rem; 
-} */
+
 
 label{
   vertical-align: text-bottom !important;
 }
+
+table.fixed { 
+  table-layout:fixed; 
+  display: block;
+  overflow: auto;
+  padding-top: 5%;
+  white-space: nowrap;
+  min-width:200px}
+table.fixed td { overflow: hidden; }
 
 
   </style>
@@ -170,9 +157,9 @@ function currentMonth($data){
 
 function getapprove($data){
 
-  $res = "btn red col s3";
+  $res = "btn red col s5";
   if($data == 1){
-    $res = "btn green col s3";
+    $res = "btn green col s5";
   }
   return $res;
 

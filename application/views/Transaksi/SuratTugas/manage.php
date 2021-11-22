@@ -72,12 +72,15 @@
                                 <br>
                                 <?php echo $u->uraianst ?>
                                 <br>
-                                <div class="col s12" style="padding-top: 10px">
-                                    <button class='<?= getapprove($u->is_approved1)?>' style="margin-right: 10px">Es 4</button>
-                                    <button class='<?= getapprove($u->is_approved2)?>' style="margin-right: 10px">Es 3</button>
-                                    <button class='<?= getapprove($u->is_approved3)?>' style="margin-right: 10px">Es 2</button>
-                                    <button class='<?= getapprove($u->is_approved4)?>'>Es 1</button>
-                                </div>
+                                    <div class="col s12" style="padding-top: 10px">
+                                        <a class='<?= getapprove($u->is_approved1)?> tooltipped' style="margin-right: 10px" data-position="bottom" data-tooltip="Eselon 4">Es 4</a>
+                                        <a class='<?= getapprove($u->is_approved2)?> tooltipped' style="margin-right: 10px" data-position="bottom" data-tooltip="Eselon 3">Es 3</a>
+                                    </div>
+
+                                    <div class="col s12" style="padding-top: 10px">
+                                        <a class='<?= getapprove($u->is_approved3)?> tooltipped' style="margin-right: 10px" data-position="bottom" data-tooltip="Eselon 2">Es 2</a>
+                                        <a class='<?= getapprove($u->is_approved4)?> tooltipped' data-position="bottom" data-tooltip="Eselon 1">Es 1</a>
+                                    </div>
                             </td>
                             <td><?php echo $u->tglmulaist ?></td>
                             <td><?php echo $u->tglselesaist ?></td>

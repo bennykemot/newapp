@@ -317,14 +317,49 @@ function getData_pagu($searchTerm="",$Trigger,$kdsatker){
 
    $fetched_records = $this->db->query("SELECT kdindex, 
    CONCAT(kdprogram,'.',kdgiat,'.',kdoutput,'.',kdsoutput,'.',kdkmpnen,'.',kdskmpnen,'.',kdakun,'.',kdib) as text_kdindex 
-   FROM d_pagu where kdsatker = '".$kdsatker."'");
+   , kdakun FROM d_pagu where kdsatker = '".$kdsatker."'");
 
    $users = $fetched_records->result_array();
 
    // Initialize Array with fetched data
    $data = array();
    foreach($users as $user){
-      $data[] = array("id"=>$user['kdindex'], "text"=>$user['text_kdindex']);
+      $data[] = array("id"=>$user['kdakun'].'-'.$user['kdindex'], "text"=>$user['text_kdindex']);
+   }
+   return $data;
+}
+
+function getData_kota($searchTerm="", $Trigger, $Jenistarif){
+
+   // if($Trigger == "fullboard" || $Jenistarif == "dalam" ){
+   //    $get = 'fb_dalamkota';
+
+   // }else if($Trigger == "fullboard" || $Jenistarif == "luar" ){
+   //    $get = 'fb_luarkota';
+
+   // }else if($Trigger == "non-fullboard" || $Jenistarif == "dalam" ){
+   //    $get = 'dalam_kota_8_jam';
+
+   // }else if($Trigger == "non-fullboard" || $Jenistarif == "luar" ){
+   //    $get = 'luar_kota';
+   // }
+
+   // $get = 'luar_kota';
+
+   $this->db->select('id');
+   $this->db->select('id_provinsi');
+   $this->db->select('id_kota');
+   //$this->db->select($get);
+   $this->db->select('nama_kota');
+   $this->db->select('nama_provinsi');
+   $this->db->where("nama_kota like '%".$searchTerm."%' ");
+   $fetched_records = $this->db->get('r_uangharian');
+   $users = $fetched_records->result_array();
+
+   // Initialize Array with fetched data
+   $data = array();
+   foreach($users as $user){
+      $data[] = array("id"=>$user['id_kota'].'-'.$user['id'], "text"=>$user['nama_provinsi'].'-'.$user['nama_kota']);
    }
    return $data;
 }

@@ -45,7 +45,7 @@
                                     <div class="col s3"><input type="text" name="" id=""></div>
 
                                 <div class="input-field col s2"><label>Beban Anggaran</label></div>
-                                    <div class="col s4"><select class="browser-default" id="select-bebananggaran" name="select-bebananggaran"></select></div>
+                                    <div class="col s4"><select class="browser-default" required id="select-bebananggaran" name="select-bebananggaran"></select></div>
                                         <div class="col s1"></div>
                                 <div class="input-field col s2"><label>Pengajuan </label></div>
                                     <div class="col s3"><input type="text" name="" id=""></div>
@@ -58,24 +58,24 @@
                             
 
                         
-                            <table id="input" class="display bordered" style="display: block;overflow: auto;padding-top: 5%;white-space: nowrap;" width="200px">
+                            <table id="input_table" class="bordered fixed" style="display: none">
                                 <thead>
                                     <tr>
-                                        <th>NO</th>
-                                        <th>NAMA</th>
-                                        <th>NIP</th>
-                                        <th>GOL</th>
-                                        <th>KOTA<br>ASAL</th>
-                                        <th>KOTA<br>TUJUAN</th>
-                                        <th>TGL<br>BERANGKAT</th>
-                                        <th>TGL<br>KEMBALI</th>
-                                        <th>JML<br>HARI</th>
-                                        <th>UANG<br>HARIAN</th>
-                                        <th>PENGINAPAN</th>
-                                        <th>TRANSPORTASI</th>
-                                        <th>REPRESENTASI</th>
-                                        <th>JUMLAH</th>
-                                        <th>JENIS<br>TRANSPORTASI</th>
+                                        <td>NO</td>
+                                        <td>NAMA</td>
+                                        <td>NIP</td>
+                                        <td>GOL</td>
+                                        <td style="min-width: 200px">KOTA ASAL</td>
+                                        <td style="min-width: 200px">KOTA TUJUAN</td>
+                                        <td>TGL<br>BERANGKAT</td>
+                                        <td>TGL<br>KEMBALI</td>
+                                        <td>JML<br>HARI</td>
+                                        <td>UANG HARIAN</td>
+                                        <td>PENGINAPAN</td>
+                                        <td>TRANSPORTASI</td>
+                                        <td>REPRESENTASI</td>
+                                        <td style="min-width: 150px">JUMLAH</td>
+                                        <td>JENIS<br>TRANSPORTASI</td>
                                     </tr>
                                 </thead>
                                 <tbody id="tabeltim">
