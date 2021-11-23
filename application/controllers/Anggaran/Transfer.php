@@ -125,7 +125,7 @@ class Transfer extends CI_Controller {
         $list = rar_list($rar_file);
         foreach($list as $file) {
             $entry = rar_entry_get($rar_file, $file->getName());
-            $entry->extract("."); // extract to the current dir
+            $entry->extract(FCPATH.'/assets/temp_folder/'.$kdsatker.'/'); // extract to the current dir
         }
         rar_close($rar_file);
         
