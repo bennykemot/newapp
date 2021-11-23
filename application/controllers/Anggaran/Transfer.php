@@ -116,40 +116,25 @@ class Transfer extends CI_Controller {
         }
         echo json_encode(array('status' => $status, 'msg' => $msg));
 
-            // $zip = new ZipArchive();
+        /* example by Erik Jenssen aka erix */
 
-            // if ($zip->open($_SERVER['DOCUMENT_ROOT'].'/tst/newapp/assets/temp_folder/'.$kdsatker.'/'.$name.'', ZipArchive::CREATE) === TRUE)
-            // {
-            //     // Add files to the zip file
-            //     $zip->addFile($filename);
-            // }
+        //$filename = "foobar.rar";
+        $filepath = FCPATH.'/assets/temp_folder/'.$kdsatker.'/';
 
-            // echo "\n" .$zip->filename . "\n";
-            // $zip->open(FCPATH.'/assets/temp_folder/'.$kdsatker.'/'.$name.'');
-            // //var_dump($zip);
-            // if (!$zip->extractTo(FCPATH.'/assets/temp_folder/' . $kdsatker .'')) {
-            //     echo "error!\n";
-            //     echo $zip->status . "\n";
-            //     echo $zip->statusSys . "\n";
-
-            // }
-
-            // $zip->close();
-
-
-
-			// $zip->open(FCPATH.'/assets/temp_folder/'.$kdsatker.'/'.$name.'') ;
-            // $zip->addFromString($dumNamaFile, $file);
-            // $zip->extractTo(FCPATH.'/assets/temp_folder/'.$kdsatker.'/');
-            // $zip->close();
-			
-        
-        $archive = RarArchive::open(FCPATH.'/assets/temp_folder/'.$kdsatker.'/'.$filename.'');
-        $entries = $archive->getEntries();
-        foreach ($entries as $entry) {
-            $entry->extract(FCPATH.'/assets/temp_folder/'.$kdsatker.'/');
+        $rar_file = rar_open($filepath.$filename);
+        $list = rar_list($rar_file);
+        foreach($list as $file) {
+            $entry = rar_entry_get($rar_file, $file->getName());
+            $entry->extract("."); // extract to the current dir
         }
-        $archive->close();
+        rar_close($rar_file);
+        
+        // $archive = RarArchive::open(FCPATH.'/assets/temp_folder/'.$kdsatker.'/'.$filename.'');
+        // $entries = $archive->getEntries();
+        // foreach ($entries as $entry) {
+        //     $entry->extract(FCPATH.'/assets/temp_folder/'.$kdsatker.'/');
+        // }
+        // $archive->close();
         
 
         if($no_revisi == $revisiKe){

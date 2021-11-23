@@ -13,6 +13,7 @@ class Auth extends CI_Controller{
 	function act_auth(){
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
+		$thang = $this->input->post('thang');
 		$where = array(
 			'username' => $username,
 			'password' => $password
@@ -28,6 +29,7 @@ class Auth extends CI_Controller{
 				'nmsatker' => $session[0]->nmsatker,
 				'user_id' => $session[0]->id,
 				'keterangan' => $session[0]->keterangan,
+				'thang'		=> $thang,
 				'status' => "login"
 				);
 

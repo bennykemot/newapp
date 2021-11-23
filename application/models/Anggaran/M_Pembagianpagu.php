@@ -28,7 +28,7 @@ class M_Pembagianpagu extends CI_Model{
         $this->load->database();
 	}
 
-    function getDataNew($kdsatker){
+    function getDataNew($kdsatker,$thang){
         $this->db->select('d_bagipagu.id');
         $this->db->select('d_bagipagu.user_id');
         $this->db->select('d_bagipagu.kdsatker');
@@ -45,6 +45,7 @@ class M_Pembagianpagu extends CI_Model{
         $this->db->from('d_bagipagu');
         $this->db->join('user', 'd_bagipagu.user_id = user.id');
         $this->db->where('d_bagipagu.kdsatker', $kdsatker);
+        $this->db->where('d_bagipagu.thang', $thang);
         // $this->db->limit($number, $offset);
         $query = $this->db->get();
 

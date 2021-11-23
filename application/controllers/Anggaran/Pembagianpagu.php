@@ -20,7 +20,8 @@ class Pembagianpagu extends CI_Controller {
 
         
         $kdsatker =  $this->uri->segment(4);
-        $data['pp']= $this->Pembagianpagu->getDataNew($kdsatker);
+        $thang =  $this->uri->segment(5);
+        $data['pp']= $this->Pembagianpagu->getDataNew($kdsatker,$thang);
         //echo json_encode($data);
 		$this->load->view('Anggaran/Pembagianpagu/manage', $data);
 	}

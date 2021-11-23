@@ -16,7 +16,7 @@
           <i class="navigation-header-icon material-icons">more_horiz</i>
           </li>
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="<?= site_url('Anggaran/Pembagianpagu/Page/'.$this->session->userdata("kdsatker"))?>">
+        <li class="bold"><a class="waves-effect waves-cyan " href="<?= site_url('Anggaran/Pembagianpagu/Page/'.$this->session->userdata("kdsatker").'/'.$this->session->userdata("thang"))?>">
           <i class="material-icons">
           turned_in_not
           </i><span class="menu-title" data-i18n="Mail">Pembagian Pagu</span></a>
