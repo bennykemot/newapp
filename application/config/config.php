@@ -23,7 +23,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-//$basepathurl 				= 'https://nuappanyadong.my.id/';
+
+$root = "http://".$_SERVER['HTTP_HOST'];
+$root .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+//$basepathurl = "$root";
+
+//$basepathurl 				= 'http://103.157.26.149:22/newapp/';
 $basepathurl 				= 'http://localhost/tst/newapp/';
 $config['base_url']         = $basepathurl;
 $config['assets_url']       = $basepathurl.'assets/';

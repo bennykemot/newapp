@@ -13,8 +13,6 @@
     <script src="<?= base_url().'assets'?>/app-assets/js/plugins.min.js"></script>
     <script src="<?= base_url().'assets'?>/app-assets/js/search.min.js"></script>
     <script src="<?= base_url().'assets'?>/app-assets/js/custom/custom-script.min.js"></script>
-    <!-- END THEME  JS-->
-    <!-- BEGIN PAGE LEVEL JS-->
-    <!-- END PAGE LEVEL JS-->
+    <script src="<?= base_url().'assets'?>/app-assets/vendors/select2/select2.full.min.js"></script>
   </body>
 </html>

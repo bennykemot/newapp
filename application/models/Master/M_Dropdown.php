@@ -364,4 +364,24 @@ function getData_kota($searchTerm="", $Trigger, $Jenistarif){
    return $data;
 }
 
+function getData_thang($searchTerm=""){
+
+   $fetched_records = $this->db->query("SELECT id, tahun from r_thang");
+
+   $users = $fetched_records->result_array();
+
+   // Initialize Array with fetched data
+   $data = array();
+   foreach($users as $user){
+      $data[] = array("id"=>$user['tahun'], "text"=>$user['tahun']);
+   }
+   return $data;
+}
+
+function getData_thang_nonAjax(){
+
+   $query = $this->db->query("SELECT * from r_thang ");
+   return $query->result();
+}
+
 }

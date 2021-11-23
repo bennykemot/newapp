@@ -220,7 +220,8 @@ class SuratTugas extends CI_Controller {
     }
 
     public function Export(){
-        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 
+        $mpdf = new \Mpdf\Mpdf(['tempDir' => __DIR__ . '/custom/temp/dir/path',
+        'mode' => 'utf-8', 
         'format' => 'A4-P',
         'default_font_size' => 11,
         'default_font' => 'Arial Narrow',
