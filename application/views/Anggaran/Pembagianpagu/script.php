@@ -7,6 +7,15 @@
       var container = $('.select2-container').last();
   /*Add some css-class to container or reposition it*/
 });
+
+   function Reset(idForm) {
+      document.getElementById(idForm).reset();
+      $('#app-select2').val(null).trigger('change');
+      document.getElementById("TambahPagu").disabled = false; 
+     
+    }
+
+
     //$("#page-length-option").DataTable({responsive:!0,lengthMenu:[[10,25,50,-1],[10,25,50,"All"]]})
 // var grid_detail = "#data-table-simple";
 //     var is_set_grid_detail = false;
@@ -494,8 +503,10 @@ $("#TambahPagu").click(function (e) {
     success: function (data, textStatus, jqXHR) {
               show_msg(textStatus);
               $('#modal2').modal('close');
-              set_grid_tabel(false);
+              //set_grid_tabel(false);
+              location.reload(); 
               Reset(IdForm);
+              document.getElementById("TambahPagu").disabled = false; 
               
               
           },
@@ -597,7 +608,8 @@ function Execute(Id) {
     success: function (data, textStatus, jqXHR) {
 
         show_msg(textStatus)
-        set_grid_tabel(true);
+       // set_grid_tabel(true);
+       location.reload(); 
     },
     error: function (jqXHR, textStatus, errorThrown) { },
   });
@@ -614,6 +626,7 @@ function show_msg(textStatus){
     $(function () {
 
 
+   
     $("#page-length-option").DataTable({
         responsive: !0,
         lengthMenu: [
