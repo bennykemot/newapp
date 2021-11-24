@@ -52,7 +52,7 @@ function cek_tgl($tanggal){
     <div id="container">
         <table width="100%" id="header">
                 <tr>
-                    <td width="20%" rowspan="2"><img src="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2.png" alt="materialize logo"></td>
+                    <td width="20%" rowspan="2"><img src="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2_jpg.jpg" alt="materialize logo"></td>
                     <td style="text-align: center" colspan="4"><b>BADAN PENGAWASAN KEUANGAN DAN PEMBANGUNAN<br>BIRO KEUANGAN</b></td>
                 </tr>
 

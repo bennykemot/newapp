@@ -19,7 +19,7 @@
                 <div class="input-field col s2"><label>Nama User</label></div>
 
                 <div class="input-field col s10 ">
-                  <select  id="user-select2" name="nama_user" class="browser-default"></select>
+                  <select  id="user-select2" name="nama_user" class="browser-default" required></select>
                   </div>
               </div>
 
@@ -35,7 +35,7 @@
                 <div class="input-field col s2" ><label>Program</label></div>
 
                 <div class="input-field col s10 " >
-                  <select  id="program-select2" name="kdprogram" class="browser-default"></select>
+                  <select  id="program-select2" name="kdprogram" class="browser-default" disabled></select>
                   </div>
               </div>
 
@@ -43,7 +43,7 @@
                 <div class="input-field col s2" ><label>Kegiatan</label></div>
 
                 <div class="input-field col s10 " >
-                  <select  id="kegiatan-select2" name="kdgiat" class="browser-default"></select>
+                  <select  id="kegiatan-select2" name="kdgiat" class="browser-default" disabled></select>
                   </div>
               </div>
 
@@ -51,7 +51,7 @@
                 <div class="input-field col s2" ><label>KRO</label></div>
 
                 <div class="input-field col s10 " >
-                  <select  id="kro-select2" name="kdoutput" class="browser-default"></select>
+                  <select  id="kro-select2" name="kdoutput" class="browser-default" disabled></select>
                   </div>
               </div>
 
@@ -59,7 +59,7 @@
                 <div class="input-field col s2" ><label>RO</label></div>
 
                 <div class="input-field col s10 " >
-                  <select  id="ro-select2" name="kdsoutput" class="browser-default"></select>
+                  <select  id="ro-select2" name="kdsoutput" class="browser-default" disabled></select>
                   </div>
               </div>
 
@@ -67,7 +67,7 @@
                 <div class="input-field col s2" ><label>Komponen</label></div>
 
                 <div class="input-field col s10 " >
-                  <select  id="komponen-select2" name="kdkomponen" class="browser-default"></select>
+                  <select  id="komponen-select2" name="kdkomponen" class="browser-default" disabled></select>
                   </div>
               </div>
 
@@ -77,7 +77,7 @@
         </div>
     </div>
     <div class="modal-footer">
-      <button id="TambahPagu" class="waves-effect waves-light btn"><i class="material-icons left">done</i> Simpan</button>
+      <button id="TambahPagu" disabled class="waves-effect waves-light btn"><i class="material-icons left">done</i> Simpan</button>
       <a class="modal-action modal-close  red btn">Batal</a>
     </div>
 </div>

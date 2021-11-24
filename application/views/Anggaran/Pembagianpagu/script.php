@@ -16,132 +16,6 @@
     }
 
 
-    //$("#page-length-option").DataTable({responsive:!0,lengthMenu:[[10,25,50,-1],[10,25,50,"All"]]})
-// var grid_detail = "#data-table-simple";
-//     var is_set_grid_detail = false;
-
-//     var all;
-//     set_grid_tabel(false);
-
-//     function set_grid_tabel(is_current) {
-//       if (!is_set_grid_detail) {
-//         is_set_grid_detail = true;
-//         $(grid_detail).DataTable({
-//             serverSide: true,
-//             processing: true,
-//             // searchDelay: 500,
-//             searching: true,
-//             ordering: true,
-//             responsive:!0,
-//             lengthMenu:[[10,25,50,-1],[10,25,50,"All"]],
-           
-//             // ajax: {
-//             //     url: baseurl + 'getPembagianPagu',
-//             //     type: "post",
-//             //     data : {"kdsatker": satker_session}
-//             // },
-                
-//             // autoWidth: false,
-//             // columns: [
-             
-//             //     // {
-//             //     //     data: null, class: "text-center",
-//             //     //     render: function (data, type, row, meta) {
-//             //     //         return meta.row + meta.settings._iDisplayStart + 1;
-//             //     //     }
-//             //     // },
-               
-                
-//             //     { data: "thang",
-//             //     render: function (data, type, row, meta) {
-//             //             return data;
-//             //         } 
-//             //       },
-
-//             //     { data: "kdsatker",
-//             //   render: function (data, type, row, meta) {
-//             //           return data;
-//             //       } 
-//             //     },
-
-//             //     { data: "kddept",
-//             //   render: function (data, type, row, meta) {
-//             //           return data;
-//             //       } 
-//             //     },
-
-//             //     { data: "kdunit",
-//             //   render: function (data, type, row, meta) {
-//             //           return data;
-//             //       } 
-//             //     },
-
-//             //     { data: "kdprogram",
-//             //   render: function (data, type, row, meta) {
-//             //           return data;
-//             //       } 
-//             //     },
-
-//             //     { data: "kdgiat",
-//             //   render: function (data, type, row, meta) {
-//             //           return data;
-//             //       } 
-//             //     },
-
-//             //     { data: "kdoutput",
-//             //   render: function (data, type, row, meta) {
-//             //           return data;
-//             //       } 
-//             //     },
-
-//             //     { data: "kdsoutput",
-//             //   render: function (data, type, row, meta) {
-//             //           return data;
-//             //       } 
-//             //     },
-
-//             //     { data: "kdkmpnen",
-//             //   render: function (data, type, row, meta) {
-//             //           return data;
-//             //       } 
-//             //     },
-
-//             //     { data: "username",
-//             //   render: function (data, type, row, meta) {
-//             //           return data;
-//             //       } 
-//             //     },
-
-//             //     { data: 'id',
-//             //       render: function(data, type, row) {
-//             //           return '<button type="button" class="btn-floating mb-1 green" onclick="Edit(\''+data+'\')"><i class="material-icons">edit</i></button>\
-//             //           <button type="button" class="btn-floating mb-1 red" onclick="Delete(\''+data+'\')"><i class="material-icons">delete</i></button>';
-//             //       }
-//             //     },
-
-  
-
- 
-//             // ],
-//             pageLength: 1,
-//             // lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-//             //order: [[1,'asc']],
-//             bFilter: true,
-//             ordering: true,
-//             scrollCollapse: true,
-//             columnDefs: [ ],
-
-//             // initComplete: function (settings, json) {
-//             //         $(grid_detail).wrap('<div class="table-responsive"></div>');
-//             //     },
-//             });
-    
-//             } else {
-//         $(grid_detail).DataTable().search("");
-//         $(grid_detail).DataTable().ajax.reload(null, !is_current);
-//       }
-//     }
-
 
         // SELECT2 INSERT
 
@@ -309,7 +183,45 @@
          }
      });
 
+     $("#user-select2").change(function() {
+        if($("#user-select2").val() != null){
+         document.getElementById("program-select2").disabled = false;
+        }
+      });
 
+
+     $("#program-select2").change(function() {
+        if($("#program-select2").val() != null){
+         document.getElementById("kegiatan-select2").disabled = false;
+        }
+      });
+
+      $("#kegiatan-select2").change(function() {
+        if($("#kegiatan-select2").val() != null){
+         document.getElementById("kro-select2").disabled = false;
+        }
+      });
+      
+
+      $("#kro-select2").change(function() {
+        if($("#kro-select2").val() != null){
+         document.getElementById("ro-select2").disabled = false;
+        }
+      });
+
+      $("#ro-select2").change(function() {
+        if($("#ro-select2").val() != null){
+         document.getElementById("komponen-select2").disabled = false;
+        }
+      });
+      
+
+      $("#komponen-select2").change(function() {
+        if($("#ro-select2").val() != null){
+         document.getElementById("TambahPagu").disabled = false;
+        }
+      });
+   
 
      // SELECT2 UPDATE
 
@@ -570,7 +482,7 @@ $("#EditPagu").click(function (e) {
     success: function (data, textStatus, jqXHR) {
               show_msg(textStatus);
               $('#modalEdit').modal('close');
-              set_grid_tabel(false);
+              location.reload(); 
               Reset(IdForm);
               
               

@@ -21,7 +21,8 @@ class Pembagianpagu extends CI_Controller {
         
         $kdsatker =  $this->uri->segment(4);
         $thang =  $this->uri->segment(5);
-        $data['pp']= $this->Pembagianpagu->getDataNew($kdsatker,$thang);
+        $userid =  $this->uri->segment(6);
+        $data['pp']= $this->Pembagianpagu->getDataNew($kdsatker,$thang,$userid);
         //echo json_encode($data);
 		$this->load->view('Anggaran/Pembagianpagu/manage', $data);
 	}
