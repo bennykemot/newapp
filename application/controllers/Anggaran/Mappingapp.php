@@ -33,11 +33,13 @@ class MappingApp extends CI_Controller {
     public function Page(){
 
         $satker = $this->uri->segment(4);
+        $userId =  $this->uri->segment(5);
+        $roleId = $this->uri->segment(6);
 
-        $jumlah_data = $this->Mappingapp->Jum($satker);
-        $config['base_url'] = base_url().'Anggaran/Mappingapp/Page/'.$satker.'';
+        $jumlah_data = $this->Mappingapp->Jum($satker,$userId, $roleId);
+        $config['base_url'] = base_url().'Anggaran/Mappingapp/Page/'.$satker.'/'.$userId.'/'.$roleId;
 		$config['total_rows'] = $jumlah_data;
-		$config['per_page'] = 10;
+		$config['per_page'] = 20;
 
         $config['first_url'] = '1';
         $config['first_link'] = false;
@@ -68,7 +70,7 @@ class MappingApp extends CI_Controller {
         $config['next_tag_close'] = '</li>';
 
 
-		$from =  $this->uri->segment(5);
+		$from =  $this->uri->segment(7);
 		$this->pagination->initialize($config);
 
         if($from == 1){
@@ -76,9 +78,11 @@ class MappingApp extends CI_Controller {
         };
 
         $kdsatker =  $satker;
-        $data['mapp'] = $this->Mappingapp->getDataNew($kdsatker, $config['per_page'], $from);
+        $data['mapp'] = $this->Mappingapp->getDataNew($kdsatker, $config['per_page'], $from, $userId, $roleId);
 
         //$data['mapp'] = $this->Page();
+
+        //echo json_encode($data)
         
 		$this->load->view('Anggaran/Mappingapp/manage',$data);
 

@@ -191,12 +191,14 @@
 
 
      $("#program-select2").change(function() {
+      $('#kegiatan-select2').val(null).trigger('change');
         if($("#program-select2").val() != null){
          document.getElementById("kegiatan-select2").disabled = false;
         }
       });
 
       $("#kegiatan-select2").change(function() {
+         $('#kro-select2').val(null).trigger('change');
         if($("#kegiatan-select2").val() != null){
          document.getElementById("kro-select2").disabled = false;
         }
@@ -204,12 +206,14 @@
       
 
       $("#kro-select2").change(function() {
+         $('#ro-select2').val(null).trigger('change');
         if($("#kro-select2").val() != null){
          document.getElementById("ro-select2").disabled = false;
         }
       });
 
       $("#ro-select2").change(function() {
+         $('#komponen-select2').val(null).trigger('change');
         if($("#ro-select2").val() != null){
          document.getElementById("komponen-select2").disabled = false;
         }
@@ -413,10 +417,13 @@ $("#TambahPagu").click(function (e) {
     processData: false,
     contentType: false,
     success: function (data, textStatus, jqXHR) {
-              show_msg(textStatus);
+               res = JSON.parse(data)
+              show_msg(res.status, res.message);
               $('#modal2').modal('close');
               //set_grid_tabel(false);
-              location.reload(); 
+              setTimeout(function() {
+                  location.reload();
+               }, 2000);
               Reset(IdForm);
               document.getElementById("TambahPagu").disabled = false; 
               
@@ -480,10 +487,13 @@ $("#EditPagu").click(function (e) {
     processData: false,
     contentType: false,
     success: function (data, textStatus, jqXHR) {
-              show_msg(textStatus);
-              $('#modalEdit').modal('close');
-              location.reload(); 
-              Reset(IdForm);
+               res = JSON.parse(data)
+               show_msg(res.status, res.message);
+               $('#modalEdit').modal('close');
+               setTimeout(function() {
+                  location.reload();
+               }, 2000);
+               Reset(IdForm);
               
               
           },
@@ -519,18 +529,21 @@ function Execute(Id) {
     contentType: false,
     success: function (data, textStatus, jqXHR) {
 
-        show_msg(textStatus)
+      res = JSON.parse(data)
+      show_msg(res.status, res.message);
        // set_grid_tabel(true);
-       location.reload(); 
+       setTimeout(function() {
+                  location.reload();
+               }, 2000);
     },
     error: function (jqXHR, textStatus, errorThrown) { },
   });
 }
 
-function show_msg(textStatus){
+function show_msg(status,message){
         swal({
-            title:textStatus, 
-            icon:textStatus,
+            title:message, 
+            icon:status,
             timer: 2000
             })
     }

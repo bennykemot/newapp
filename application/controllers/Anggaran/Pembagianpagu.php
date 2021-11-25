@@ -77,7 +77,7 @@ class Pembagianpagu extends CI_Controller {
             $kdkomponen = $this->input->post('kdkomponen');
             $trigger = $this->input->post('Trigger');
 
-            $data = array(
+            $datawhere = array(
                 'thang' => '2021',
                 'user_id' => $nama_user,
                 'kdsatker' => $kdsatker,
@@ -87,15 +87,61 @@ class Pembagianpagu extends CI_Controller {
                 'kdgiat' => $kdgiat,
                 'kdoutput' => $kdoutput,
                 'kdsoutput' => $kdsoutput,
-                'kdkmpnen' => $kdkomponen
-                
+                'kdkmpnen' => $kdkomponen);
+
+            $cek = $this->Pembagianpagu->CEK($datawhere,'d_bagipagu', 'R');
+
+            if(count($cek) <= 0 ){
+
+                $data = array(
+                    'thang' => '2021',
+                    'user_id' => $nama_user,
+                    'kdsatker' => $kdsatker,
+                    'kddept' => "089",
+                    'kdunit' => "01",
+                    'kdprogram' => $kdprogram,
+                    'kdgiat' => $kdgiat,
+                    'kdoutput' => $kdoutput,
+                    'kdsoutput' => $kdsoutput,
+                    'kdkmpnen' => $kdkomponen
+                    
+                    );
+                $this->Pembagianpagu->CRUD($data,'d_bagipagu', $Trigger);
+
+                $response = array(
+                    'status' => "success",
+                    'message' => 'Data Berhasil ditambah'
                 );
-            $this->Pembagianpagu->CRUD($data,'d_bagipagu', $Trigger);
+    
+                echo json_encode($response);
+
+            }else{
+
+                $response = array(
+                    'status' => "error",
+                    'message' => 'Data Duplikat'
+                );
+    
+                echo json_encode($response);
+
+            }
+
+           
+            
+            
+            
         }else if($Trigger == "D"){
 
             $id = $this->input->post('id');
             $where = array('id' => $id);
 	        $this->Pembagianpagu->CRUD($where,'d_bagipagu', $Trigger);
+
+            $response = array(
+                'status' => "success",
+                'message' => 'Data Berhasil dihapus'
+            );
+
+            echo json_encode($response);
 
         }else if($Trigger == "R"){
             $id = $this->input->post('id');
@@ -126,6 +172,13 @@ class Pembagianpagu extends CI_Controller {
                 );
             $where = array('id' => $id);
 	        $this->Pembagianpagu->update($data,'d_bagipagu', $where);
+
+            $response = array(
+                'status' => "success",
+                'message' => 'Data Berhasil diubah'
+            );
+
+            echo json_encode($response);
         }
         
     }

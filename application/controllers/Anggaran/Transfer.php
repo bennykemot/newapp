@@ -119,22 +119,22 @@ class Transfer extends CI_Controller {
         /* example by Erik Jenssen aka erix */
 
         //$filename = "foobar.rar";
-        $filepath = FCPATH.'/assets/temp_folder/'.$kdsatker.'/';
+        // $filepath = FCPATH.'/assets/temp_folder/'.$kdsatker.'/';
 
-        $rar_file = rar_open($filepath.$filename);
-        $list = rar_list($rar_file);
-        foreach($list as $file) {
-            $entry = rar_entry_get($rar_file, $file->getName());
-            $entry->extract(FCPATH.'/assets/temp_folder/'.$kdsatker.'/'); // extract to the current dir
-        }
-        rar_close($rar_file);
-        
-        // $archive = RarArchive::open(FCPATH.'/assets/temp_folder/'.$kdsatker.'/'.$filename.'');
-        // $entries = $archive->getEntries();
-        // foreach ($entries as $entry) {
-        //     $entry->extract(FCPATH.'/assets/temp_folder/'.$kdsatker.'/');
+        // $rar_file = rar_open($filepath.$filename);
+        // $list = rar_list($rar_file);
+        // foreach($list as $file) {
+        //     $entry = rar_entry_get($rar_file, $file->getName());
+        //     $entry->extract(FCPATH.'/assets/temp_folder/'.$kdsatker.'/'); // extract to the current dir
         // }
-        // $archive->close();
+        // rar_close($rar_file);
+        
+        $archive = RarArchive::open(FCPATH.'/assets/temp_folder/'.$kdsatker.'/'.$filename.'');
+        $entries = $archive->getEntries();
+        foreach ($entries as $entry) {
+            $entry->extract(FCPATH.'/assets/temp_folder/'.$kdsatker.'/');
+        }
+        $archive->close();
         
 
         if($no_revisi == $revisiKe){

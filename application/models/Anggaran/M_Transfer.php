@@ -74,9 +74,11 @@ class M_Transfer extends CI_Model{
         $this->db->delete('d_item');
 
         $dir = FCPATH.'assets/temp_folder/'.$kdsatker.'/';
+        
 
         $tmp= substr($name,4,17);
         $file = str_replace("_","",$tmp);
+        chmod($dir . "d_item".$file.".xml",0777);
 
         $my_xml = simplexml_load_file($dir . "d_item".$file.".xml");
         $jumlah2 = 0;
@@ -135,6 +137,7 @@ class M_Transfer extends CI_Model{
 
         $tmp= substr($name,4,17);
         $file = str_replace("_","",$tmp);
+        chmod($dir . "d_soutput".$file.".xml",0777);
 
         $my_xml = simplexml_load_file($dir . "d_soutput".$file.".xml");
 
@@ -163,6 +166,7 @@ class M_Transfer extends CI_Model{
 
         $tmp= substr($name,4,17);
         $file = str_replace("_","",$tmp);
+        chmod($dir . "d_kmpnen".$file.".xml",0777);
 
         $my_xml = simplexml_load_file($dir . "d_kmpnen".$file.".xml");
 
@@ -196,6 +200,7 @@ class M_Transfer extends CI_Model{
     
         $tmp= substr($name,4,17);
         $file = str_replace("_","",$tmp);
+        chmod($dir . "d_skmpnen".$file.".xml",0777);
     
         $my_xml = simplexml_load_file($dir . "d_skmpnen".$file.".xml");
     

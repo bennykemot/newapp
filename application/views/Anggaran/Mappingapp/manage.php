@@ -39,7 +39,9 @@
 
                   <?php 
                             $no = $this->uri->segment('4') + 1;
+                            $before ="";
                             foreach($mapp as $u){ 
+                              if($u->kode != $before){
                               ?>
                               <tr>
 
@@ -56,13 +58,13 @@
                                 <td style="text-align: center"><button type="button" class="btn-floating green" onclick="Add('<?= $u->kdindex ?>', '<?= $u->jumlah ?>', '<?= $u->kdkmpnen ?>')"><i class="material-icons">add</i></button></td>
                                 <?php } else{ 
                                   echo '<td></td>';
-
-                                }; ?>
+                              } ?>
                                 
                                 
                             </tr>
                           
-                         <?php } ?>
+                         <?php 
+                         $before = $u->kode;}} ?>
 
 
                   </tbody>
