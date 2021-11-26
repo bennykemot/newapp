@@ -3,7 +3,7 @@
 <!-- Page Length Options -->
  <div class="row">
 
- <div class="col s12">
+  <div class="col s12">
         <div class="card" id="head">
             <div class="card-content" >
                 <div class="row">

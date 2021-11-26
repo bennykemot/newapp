@@ -7,131 +7,14 @@
       var container = $('.select2-container').last();
   /*Add some css-class to container or reposition it*/
 });
-    //$("#page-length-option").DataTable({responsive:!0,lengthMenu:[[10,25,50,-1],[10,25,50,"All"]]})
-// var grid_detail = "#data-table-simple";
-//     var is_set_grid_detail = false;
 
-//     var all;
-//     set_grid_tabel(false);
+   function Reset(idForm) {
+      document.getElementById(idForm).reset();
+      $('#app-select2').val(null).trigger('change');
+      document.getElementById("TambahPagu").disabled = false; 
+     
+    }
 
-//     function set_grid_tabel(is_current) {
-//       if (!is_set_grid_detail) {
-//         is_set_grid_detail = true;
-//         $(grid_detail).DataTable({
-//             serverSide: true,
-//             processing: true,
-//             // searchDelay: 500,
-//             searching: true,
-//             ordering: true,
-//             responsive:!0,
-//             lengthMenu:[[10,25,50,-1],[10,25,50,"All"]],
-           
-//             // ajax: {
-//             //     url: baseurl + 'getPembagianPagu',
-//             //     type: "post",
-//             //     data : {"kdsatker": satker_session}
-//             // },
-                
-//             // autoWidth: false,
-//             // columns: [
-             
-//             //     // {
-//             //     //     data: null, class: "text-center",
-//             //     //     render: function (data, type, row, meta) {
-//             //     //         return meta.row + meta.settings._iDisplayStart + 1;
-//             //     //     }
-//             //     // },
-               
-                
-//             //     { data: "thang",
-//             //     render: function (data, type, row, meta) {
-//             //             return data;
-//             //         } 
-//             //       },
-
-//             //     { data: "kdsatker",
-//             //   render: function (data, type, row, meta) {
-//             //           return data;
-//             //       } 
-//             //     },
-
-//             //     { data: "kddept",
-//             //   render: function (data, type, row, meta) {
-//             //           return data;
-//             //       } 
-//             //     },
-
-//             //     { data: "kdunit",
-//             //   render: function (data, type, row, meta) {
-//             //           return data;
-//             //       } 
-//             //     },
-
-//             //     { data: "kdprogram",
-//             //   render: function (data, type, row, meta) {
-//             //           return data;
-//             //       } 
-//             //     },
-
-//             //     { data: "kdgiat",
-//             //   render: function (data, type, row, meta) {
-//             //           return data;
-//             //       } 
-//             //     },
-
-//             //     { data: "kdoutput",
-//             //   render: function (data, type, row, meta) {
-//             //           return data;
-//             //       } 
-//             //     },
-
-//             //     { data: "kdsoutput",
-//             //   render: function (data, type, row, meta) {
-//             //           return data;
-//             //       } 
-//             //     },
-
-//             //     { data: "kdkmpnen",
-//             //   render: function (data, type, row, meta) {
-//             //           return data;
-//             //       } 
-//             //     },
-
-//             //     { data: "username",
-//             //   render: function (data, type, row, meta) {
-//             //           return data;
-//             //       } 
-//             //     },
-
-//             //     { data: 'id',
-//             //       render: function(data, type, row) {
-//             //           return '<button type="button" class="btn-floating mb-1 green" onclick="Edit(\''+data+'\')"><i class="material-icons">edit</i></button>\
-//             //           <button type="button" class="btn-floating mb-1 red" onclick="Delete(\''+data+'\')"><i class="material-icons">delete</i></button>';
-//             //       }
-//             //     },
-
-  
-
- 
-//             // ],
-//             pageLength: 1,
-//             // lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-//             //order: [[1,'asc']],
-//             bFilter: true,
-//             ordering: true,
-//             scrollCollapse: true,
-//             columnDefs: [ ],
-
-//             // initComplete: function (settings, json) {
-//             //         $(grid_detail).wrap('<div class="table-responsive"></div>');
-//             //     },
-//             });
-    
-//             } else {
-//         $(grid_detail).DataTable().search("");
-//         $(grid_detail).DataTable().ajax.reload(null, !is_current);
-//       }
-//     }
 
 
         // SELECT2 INSERT
@@ -300,7 +183,49 @@
          }
      });
 
+     $("#user-select2").change(function() {
+        if($("#user-select2").val() != null){
+         document.getElementById("program-select2").disabled = false;
+        }
+      });
 
+
+     $("#program-select2").change(function() {
+      $('#kegiatan-select2').val(null).trigger('change');
+        if($("#program-select2").val() != null){
+         document.getElementById("kegiatan-select2").disabled = false;
+        }
+      });
+
+      $("#kegiatan-select2").change(function() {
+         $('#kro-select2').val(null).trigger('change');
+        if($("#kegiatan-select2").val() != null){
+         document.getElementById("kro-select2").disabled = false;
+        }
+      });
+      
+
+      $("#kro-select2").change(function() {
+         $('#ro-select2').val(null).trigger('change');
+        if($("#kro-select2").val() != null){
+         document.getElementById("ro-select2").disabled = false;
+        }
+      });
+
+      $("#ro-select2").change(function() {
+         $('#komponen-select2').val(null).trigger('change');
+        if($("#ro-select2").val() != null){
+         document.getElementById("komponen-select2").disabled = false;
+        }
+      });
+      
+
+      $("#komponen-select2").change(function() {
+        if($("#ro-select2").val() != null){
+         document.getElementById("TambahPagu").disabled = false;
+        }
+      });
+   
 
      // SELECT2 UPDATE
 
@@ -492,10 +417,15 @@ $("#TambahPagu").click(function (e) {
     processData: false,
     contentType: false,
     success: function (data, textStatus, jqXHR) {
-              show_msg(textStatus);
+               res = JSON.parse(data)
+              show_msg(res.status, res.message);
               $('#modal2').modal('close');
-              set_grid_tabel(false);
+              //set_grid_tabel(false);
+              setTimeout(function() {
+                  location.reload();
+               }, 2000);
               Reset(IdForm);
+              document.getElementById("TambahPagu").disabled = false; 
               
               
           },
@@ -557,10 +487,13 @@ $("#EditPagu").click(function (e) {
     processData: false,
     contentType: false,
     success: function (data, textStatus, jqXHR) {
-              show_msg(textStatus);
-              $('#modalEdit').modal('close');
-              set_grid_tabel(false);
-              Reset(IdForm);
+               res = JSON.parse(data)
+               show_msg(res.status, res.message);
+               $('#modalEdit').modal('close');
+               setTimeout(function() {
+                  location.reload();
+               }, 2000);
+               Reset(IdForm);
               
               
           },
@@ -596,17 +529,21 @@ function Execute(Id) {
     contentType: false,
     success: function (data, textStatus, jqXHR) {
 
-        show_msg(textStatus)
-        set_grid_tabel(true);
+      res = JSON.parse(data)
+      show_msg(res.status, res.message);
+       // set_grid_tabel(true);
+       setTimeout(function() {
+                  location.reload();
+               }, 2000);
     },
     error: function (jqXHR, textStatus, errorThrown) { },
   });
 }
 
-function show_msg(textStatus){
+function show_msg(status,message){
         swal({
-            title:textStatus, 
-            icon:textStatus,
+            title:message, 
+            icon:status,
             timer: 2000
             })
     }
@@ -614,6 +551,7 @@ function show_msg(textStatus){
     $(function () {
 
 
+   
     $("#page-length-option").DataTable({
         responsive: !0,
         lengthMenu: [

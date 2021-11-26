@@ -87,7 +87,7 @@ function cek_tgl($tanggal){
     <header>
             <table width="100%" id="head">
                 <tr>
-                    <td width="10%"><img src="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2.png" alt="materialize logo"></td>
+                    <td width="10%"><img src="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2_jpg.jpg" alt="materialize logo"></td>
                     <td style="text-align: center"><b>BADAN PENGAWASAN KEUANGAN DAN PEMBANGUNAN</td>
                 </tr>
             </table>

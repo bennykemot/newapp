@@ -24,10 +24,11 @@ class Auth extends CI_Controller{
 		if($cek > 0){
 
 			$data_session = array(
-				'username' => $username,
-				'kdsatker' => $session[0]->kdsatker,
-				'nmsatker' => $session[0]->nmsatker,
-				'user_id' => $session[0]->id,
+				'username' 	=> $username,
+				'kdsatker' 	=> $session[0]->kdsatker,
+				'nmsatker' 	=> $session[0]->nmsatker,
+				'role_id'	=> $session[0]->role_id,
+				'user_id' 	=> $session[0]->id,
 				'keterangan' => $session[0]->keterangan,
 				'thang'		=> $thang,
 				'status' => "login"

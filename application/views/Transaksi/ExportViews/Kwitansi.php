@@ -153,7 +153,7 @@ function cek_tgl($tanggal){
     <header>
         <table width="100%" id="head">
                 <tr>
-                    <td width="30%" rowspan="2"><img src="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2.png" alt="materialize logo"></td>
+                    <td width="30%" rowspan="2"><img src="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2_jpg.jpg" alt="materialize logo"></td>
                     <td style="text-align: center"><font style="font-size: 20px">BADAN PENGAWASAN KEUANGAN DAN PEMBANGUNAN<br>KWITANSI</font></td>
                 </tr>
             </table>

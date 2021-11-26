@@ -16,13 +16,13 @@
           <i class="navigation-header-icon material-icons">more_horiz</i>
           </li>
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="<?= site_url('Anggaran/Pembagianpagu/Page/'.$this->session->userdata("kdsatker").'/'.$this->session->userdata("thang"))?>">
+        <li class="bold"><a class="waves-effect waves-cyan " href="<?= site_url('Anggaran/Pembagianpagu/Page/'.$this->session->userdata("kdsatker").'/'.$this->session->userdata("thang").'/'.$this->session->userdata("user_id"))?>">
           <i class="material-icons">
           turned_in_not
           </i><span class="menu-title" data-i18n="Mail">Pembagian Pagu</span></a>
           </li>
 
-        <li class="bold"><a class="waves-effect waves-cyan " href="<?= site_url('Anggaran/Mappingapp/Page/'.$this->session->userdata("kdsatker").'/0')?>">
+        <li class="bold"><a class="waves-effect waves-cyan " href="<?= site_url('Anggaran/Mappingapp/Page/'.$this->session->userdata("kdsatker").'/'.$this->session->userdata("user_id").'/'.$this->session->userdata("role_id").'/0')?>">
           <i class="material-icons">
           view_comfy
           </i><span class="menu-title" data-i18n="Chat">Mapping App</span></a>
