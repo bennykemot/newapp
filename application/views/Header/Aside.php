@@ -6,7 +6,9 @@
         <h1 class="logo-wrapper"><a class="brand-logo darken-1" href="<?= site_url('Main/Home')?>"><img class="hide-on-med-and-down " src="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2.png" alt="materialize logo"><img class="show-on-medium-and-down hide-on-med-and-up" src="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2.png" alt="materialize logo"><span style="color: #000 !important; font-size: 25px !important; padding-left: 5px" >Materialize</span></a></h1>
       </div>
       <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="accordion">
-        <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
+        
+      
+      <!-- <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
           <i class="material-icons">
           home
           </i><span class="menu-title" data-i18n="Mail">Dashboard</span></a>
@@ -132,7 +134,7 @@
               </li>
             </ul>
           </div>
-        </li>
+        </li> -->
 
       </ul>
       <div class="navigation-background"></div><a class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only" href="#" data-target="slide-out"><i class="material-icons">menu</i></a>
@@ -145,3 +147,5 @@
 		<div class="col s12">
 			<div class="container">
 				<div class="section">
+
+        

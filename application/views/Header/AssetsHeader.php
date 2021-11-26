@@ -161,8 +161,17 @@ function getapprove($data){
     $res = "btn green col s5";
   }
   return $res;
-
 }
+
+
+  function menu_disable($hak){
+      $display = "d-none";
+    if($hak== 1 || $hak == "Aktif"){
+      $display="";
+    }
+    return $display;
+
+  }
   
   ?>
 

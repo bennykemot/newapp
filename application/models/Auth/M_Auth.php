@@ -6,10 +6,54 @@ class M_Auth extends CI_Model{
 		return $this->db->get_where($table,$where);
 	}
 	
-	function session_Auth($table,$where){	
-		$this->db->from($table);
-		$this->db->join('t_satker', 't_satker.kdsatker = '.$table.'.kdsatker');
-		$this->db->where($where);
-		return $this->db->get();
+	function session_Auth($table,$username,$password){	
+		return $this->db->query('SELECT 
+									'.$table.'.id,
+									'.$table.'.username,
+									'.$table.'.password,
+									'.$table.'.kdsatker as user_kdsatker,
+									'.$table.'.role_id,
+									'.$table.'.status,
+									'.$table.'.keterangan,
+
+									t_satker.kdsatker as kdsatker,
+									t_satker.nmsatker as nmsatker
+
+									FROM
+									'.$table.'
+
+									JOIN
+									t_satker ON t_satker.kdsatker = '.$table.'.kdsatker
+
+									WHERE
+									user.username = "'.$username.'"
+									AND
+									user.password = "'.$password.'"
+
+									');
+
+		
+	}
+
+	function session_Auth_hakakses($table,$username){	
+		return $this->db->query('SELECT 
+
+									'.$table.'.id as id_hakakses,
+									'.$table.'.id_user as id_user_hakakses,
+									'.$table.'.hak_menu as hak_menu,
+									'.$table.'.hak_c as C,
+									'.$table.'.hak_r as R,
+									'.$table.'.hak_u as U,
+									'.$table.'.hak_d as D
+
+									FROM
+									'.$table.'
+
+									WHERE
+									'.$table.'.id_user = "'.$username.'"
+
+									');
+
+		
 	}
 }

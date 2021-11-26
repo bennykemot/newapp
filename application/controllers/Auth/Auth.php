@@ -15,11 +15,23 @@ class Auth extends CI_Controller{
 		$password = $this->input->post('password');
 		$thang = $this->input->post('thang');
 		$where = array(
-			'username' => $username,
-			'password' => $password
+			'user.username' => $username,
+			'user.password' => $password
 			);
 		$cek = $this->Auth->cek_Auth("user",$where)->num_rows();
-		$session = $this->Auth->session_Auth("user",$where)->result();
+		$session = $this->Auth->session_Auth("user",$username,$password)->result();
+
+		
+		$hak_akses = $this->Auth->session_Auth_hakakses("t_hakakses",$username)->result();
+		$hak = array();
+
+		for($i=0;$i< count($hak_akses);$i++){
+			$hak[$hak_akses[$i]->hak_menu] = $hak_akses[$i];  
+		}
+
+		// echo "<pre>";
+		// print_r($hak);
+		// echo "</pre>";
 
 		if($cek > 0){
 
@@ -30,11 +42,19 @@ class Auth extends CI_Controller{
 				'role_id'	=> $session[0]->role_id,
 				'user_id' 	=> $session[0]->id,
 				'keterangan' => $session[0]->keterangan,
-				'thang'		=> $thang,
+
+				'hak_akses' => $hak,
+				'thang' => $thang,
 				'status' => "login"
 				);
 
 			$this->session->set_userdata($data_session);
+
+		// echo "<pre>";
+		// print_r($data_session);
+		// echo "</pre>";
+
+		// exit;
 
 			redirect(base_url("Main/Home"));
 

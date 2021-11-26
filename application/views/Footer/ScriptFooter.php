@@ -55,36 +55,63 @@
         
 
       function cek_tgl($tanggal){
-      $bulan = array (
-        1 =>   'Januari',
-        'Februari',
-        'Maret',
-        'April',
-        'Mei',
-        'Juni',
-        'Juli',
-        'Agustus',
-        'September',
-        'Oktober',
-        'November',
-        'Desember'
-      );
-      $pecahkan = explode('-', $tanggal);
+      // $bulan = array (
+      //   1 =>   'Januari',
+      //   2 =>  'Februari',
+      //   3 =>  'Maret',
+      //   4 =>  'April',
+      //   5 =>  'Mei',
+      //   6 =>  'Juni',
+      //   7 =>  'Juli',
+      //   8 =>  'Agustus',
+      //   9 =>  'September',
+      //   10 =>  'Oktober',
+      //   11 =>  'November',
+      //   12 =>  'Desember'
+      // );
+      // $pecahkan = explode('-', $tanggal);
       
-      // variabel pecahkan 0 = tanggal
-      // variabel pecahkan 1 = bulan
-      // variabel pecahkan 2 = tahun
+      // // variabel pecahkan 0 = tanggal
+      // // variabel pecahkan 1 = bulan
+      // // variabel pecahkan 2 = tahun
     
-      return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+      // return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
     }
 
     function goBack() {
         window.history.back();
     }
 
+      var baseurl_menu 	= "<?= base_url('Master/Menu/')?>";
+      var username     	= "<?= $this->session->userdata("username")?>"
+      var url = "<?= site_url()?>"
 
-        
-      
+      function url_base(string){
+        return url + string;
+      }
+
+
+      $.ajax({
+        url : baseurl_menu + "Master",
+        data: {"username": username},
+        type: "post",
+        dataType: "JSON",
+        success: function(data)
+            {
+              for(i=0 ; i< data.length ; i++){
+
+                row = '<li class="bold"><a class="waves-effect waves-cyan" href='+url_base(data[i]['link_menu']+'/'+kdsatker)+'>\
+                        <i class="material-icons">\
+                        '+data[i]['icon_menu']+'\
+                        </i><span class="menu-title" data-i18n="Mail">'+data[i]['nama_menu']+'</span></a>\
+                        </li>';
+
+                $("#slide-out").append(row);
+
+              }
+            }
+    });
+    
       </script>
 
   </body>
