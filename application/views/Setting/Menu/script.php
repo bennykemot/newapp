@@ -48,10 +48,13 @@
                 },
 
                 { data: 'status_menu'
-                //   render: function(data, type, row) {
-                //       return '<a href="javascript:;" onclick="Edit(\''+row.id+'\',\''+row.jumlah+'\')"><i class="material-icons">edit</i></a>\
-                //       <a  href="javascript:;" onclick="Delete(\''+row.id+'\',\''+row.kdindex+'\')"><i class="material-icons">delete</i></a>';
-                //   }
+                },
+
+                { data: 'id',
+                  render: function(data, type, row) {
+                      return '<a href="javascript:;" onclick="Edit(\''+row.id+'\')"><i class="material-icons">edit</i></a>\
+                      <a  href="javascript:;" onclick="Delete(\''+row.id+'\')"><i class="material-icons">delete</i></a>';
+                  }
                 },
                
  
@@ -64,7 +67,7 @@
             processing: true,
             searchDelay: 500,
             searching: false,
-            ordering: false,
+            ordering: true,
             bDestroy: true,
             bPaginate: false,
             bFilter: false,
@@ -80,7 +83,7 @@
             api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
                 if ( last !== group ) {
                     $(rows).eq( i ).before(
-                        '<tr class="group"><td colspan="7">'+group+'</td></tr>'
+                        '<tr class="group"><td></td><td colspan="7">'+group+'</td></tr>'
                     );
  
                     last = group;

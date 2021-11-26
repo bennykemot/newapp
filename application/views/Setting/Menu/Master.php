@@ -45,6 +45,7 @@
                                   <td>Link</td>
                                   <td>Parent</td>
                                   <td>Status</td>
+                                  <td>Aksi</td>
                                 </tr>
                           </thead>
                           
