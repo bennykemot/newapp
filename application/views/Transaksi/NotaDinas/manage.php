@@ -69,7 +69,11 @@
                                             <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/costsheet/L') ?>" target="blank">Costsheet</a></li>
                                             <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd/P') ?>" target="blank">SPD</a></li>
                                             <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd_back/P') ?>" target="blank">SPD Belakang</a></li>
-                                            <li><a style="font-size: 14px;" href="#" class="sidenav-trigger" data-target="theme-cutomizer-out" onclick="show('ST-3456/SU03/3/2021')">Kwitansi Rampung</a></li>
+                                            <li><a style="font-size: 14px;" href="#" class="sidenav-trigger" data-target="theme-cutomizer-out" onclick="show('ST-3456/SU03/3/2021')">Kwitansi Rampung</a>
+																							<ul class="subMenu">
+																								<li><a href="#">Kwitansi</a></li>
+																							</ul>
+																						</li>
                                           </ul>
 
                                           <div style="padding-bottom: 20px"></div>
