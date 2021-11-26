@@ -528,5 +528,33 @@ function show_msg(textStatus){
             })
     }
 
+(function(){
+	$('form > div > input').keyup(function(){
+		var empty = false;
+		$('form > div > input').each(function(){
+			if($(this).val() == ''){
+				empty = true;
+			}
+
+		});
+
+		if(empty){
+			$('#TambahST').attr('disabled','disabled');
+		}else{
+			$('#TambahST').removeAttr('disabled');
+		}
+	});
+})()
+
+// $('#nost, #tglst, #uraianst, #tglst_mulai, #tglst_selesai, #idxskmpnen, #modalIdx, #beban_anggaran, #ttd').bind('keyup', function(){
+// 	if(allFilled()) $('#TambahST').removeAttr('disabled');
+// });
+// function allFilled(){
+// 	var filled = true;
+// 	$('body input').each(function(){
+// 		if($(this).val() == '') filled = false;
+// 	});
+// 	return filled;
+// }
 
 </script>

@@ -451,6 +451,7 @@ $("#page-length-option").DataTable({
     $("#scroll-vert-hor").DataTable({ scrollY: 200, scrollX: !0 }),
     $("#multi-select").DataTable({ responsive: !0, paging: !0, ordering: !1, info: !1, columnDefs: [{ visible: !1, targets: 2 }] });
 }),
+
 $(window).on("load", function () {
     $(".dropdown-content.select-dropdown li").on("click", function () {
         var e = this;
@@ -458,6 +459,15 @@ $(window).on("load", function () {
             $(e).parent().parent().find(".select-dropdown").hasClass("active") && ($(e).parent().parent().find(".select-dropdown").removeClass("active"), $(e).parent().hide());
         }, 100);
     });
+});
+
+// Hide SubMenus.
+$(".subMenu").hide();
+
+// Shows SubMenu when it's parent is hovered.
+$(".subMenu").parent("li").hover(function () {
+  $(this).find(">.subMenu").not(':animated').slideDown(150);
+  $(this).toggleClass("active ");
 });
 
 </script>
