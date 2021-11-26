@@ -26,17 +26,16 @@ class M_Transfer extends CI_Model{
         $this->db->where('kdsatker', $kdsatker);
         $this->db->delete('d_pagu');
 
-        
-
         $this->db->query("
         INSERT INTO d_pagu
         SELECT 
         CONCAT(thang,kdsatker,kddept,kdunit,kdprogram,kdgiat,kdoutput,kdsoutput,kdkmpnen,kdskmpnen,kdakun,kdbeban,kdib) AS kdindex, 
-           
            thang,kdsatker,kddept,kdunit,kdprogram,kdgiat,kdoutput,kdsoutput,kdkmpnen,kdskmpnen,kdakun,kdbeban,kdib, SUM(jumlah) AS jumlah, 
            register,".$no_revisi." as revisike, ".$tglRevisi." AS tgrevisi,CONCAT('DIPA-',kddept,'.',kdunit,'.',kddekon,'.',kdsatker,'/',thang,' Revisi ke ',".$no_revisi.") AS norevisi
            FROM d_item WHERE kdsatker = '".$kdsatker."' GROUP BY thang,kdsatker,kddept,kdunit,kdprogram,kdgiat,kdoutput,kdsoutput,kdkmpnen,kdskmpnen,kdakun,kdbeban,kdib
         ");
+
+        exit;
     }
 
     function h_pagu($kdsatker, $no_revisi, $revisiKe){
@@ -78,7 +77,6 @@ class M_Transfer extends CI_Model{
 
         $tmp= substr($name,4,17);
         $file = str_replace("_","",$tmp);
-        chmod($dir . "d_item".$file.".xml",0777);
 
         $my_xml = simplexml_load_file($dir . "d_item".$file.".xml");
         $jumlah2 = 0;
@@ -137,7 +135,6 @@ class M_Transfer extends CI_Model{
 
         $tmp= substr($name,4,17);
         $file = str_replace("_","",$tmp);
-        chmod($dir . "d_soutput".$file.".xml",0777);
 
         $my_xml = simplexml_load_file($dir . "d_soutput".$file.".xml");
 
@@ -166,7 +163,6 @@ class M_Transfer extends CI_Model{
 
         $tmp= substr($name,4,17);
         $file = str_replace("_","",$tmp);
-        chmod($dir . "d_kmpnen".$file.".xml",0777);
 
         $my_xml = simplexml_load_file($dir . "d_kmpnen".$file.".xml");
 
@@ -200,8 +196,6 @@ class M_Transfer extends CI_Model{
     
         $tmp= substr($name,4,17);
         $file = str_replace("_","",$tmp);
-        chmod($dir . "d_skmpnen".$file.".xml",0777);
-    
         $my_xml = simplexml_load_file($dir . "d_skmpnen".$file.".xml");
     
         foreach($my_xml->c_skmpnen as $skmpnen) {
