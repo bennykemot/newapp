@@ -5,19 +5,25 @@
 <div class="row">
 
 <div class="col s12">
-    <div class="card" id="head">
-        <div class="card-content" >
-            <div class="row">
-                <div class="col s1">
-                    <button type="button" class="btn-floating" style=""><i class="material-icons">
-                    settings</i></button>
-                </div>
-                <div class="col s11">
-                    <h6>Setting Menu</h6>
-                </div>
-            </div>
-        </div>
-    </div>
+      <div class="card" id="head">
+          <div class="card-content" >
+              <div class="row">
+                  <div class="col s1">
+                      <button type="button" class="btn-floating" style=""><i class="material-icons">
+                      settings</i></button>
+                  </div>
+                  <div class="col s9">
+                      <h6> Setting Menu </h6>
+                  </div>
+                  <div class="col s2">
+                  <a class="btn modal-trigger" href="#modal2">Tambah Data</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+   <!-- Page Length Options -->
+   
 </div>
 
 
