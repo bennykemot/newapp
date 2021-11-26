@@ -45,8 +45,8 @@
               <li><a class="grey-text text-darken-1" href="<?= site_url('User/User/User/'.$this->session->userdata("user_id").'')?>"><i class="material-icons">person_outline</i> Profile</a></li>
               
               <li class="divider"></li>
-              <li><a class="grey-text text-darken-1" href="<?= site_url('Setting/Menu')?>"><i class="material-icons">help_outline</i>Menu</a></li>
-              <li><a class="grey-text text-darken-1" href="<?= site_url('Setting/Menu')?>"><i class="material-icons">accessibility</i>Akses</a></li>
+              <li><a class="grey-text text-darken-1" href="<?= site_url('Setting/Menu')?>"><i class="material-icons">settings</i>Menu</a></li>
+              <li><a class="grey-text text-darken-1" href="<?= site_url('Setting/Hakakses')?>"><i class="material-icons">accessibility</i>Akses</a></li>
               <li class="divider"></li>
               <li><a class="grey-text text-darken-1" href="<?= site_url('Auth/Auth/logout')?>"><i class="material-icons">keyboard_tab</i> Logout</a></li>
             </ul>

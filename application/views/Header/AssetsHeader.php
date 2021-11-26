@@ -36,7 +36,6 @@ $url = 'javascript:window.history.go(-1);';
     <link rel="stylesheet" href="<?= base_url().'assets'?>/app-assets/vendors/select2/select2-materialize.css" type="text/css">
     
     
-    
     <!-- END: Custom CSS-->
   </head>
 
