@@ -85,6 +85,11 @@
       var baseurl_menu 	= "<?= base_url('Master/Menu/')?>";
       var username     	= "<?= $this->session->userdata("username")?>"
       var url = "<?= site_url()?>"
+			var kdsatker = "<?= $this->session->userdata("kdsatker") ?>"
+			var thang = "<?= $this->session->userdata("thang") ?>"
+			var user_id = "<?= $this->session->userdata("user_id") ?>"
+			var role_id = "<?= $this->session->userdata("role_id") ?>"
+			
 
       function url_base(string){
         return url + string;
@@ -99,12 +104,27 @@
         success: function(data)
             {
               for(i=0 ; i< data.length ; i++){
-
-                row = '<li class="bold"><a class="waves-effect waves-cyan" href='+url_base(data[i]['link_menu']+'/'+kdsatker)+'>\
+								if(data[i]['kode_menu'] == 'menu_3'){
+									row = '<li class="bold"><a class="waves-effect waves-cyan" href='+url_base(data[i]['link_menu']+'/'+kdsatker+ '/'+thang+'/'+user_id)+'>\
                         <i class="material-icons">\
                         '+data[i]['icon_menu']+'\
                         </i><span class="menu-title" data-i18n="Mail">'+data[i]['nama_menu']+'</span></a>\
                         </li>';
+								}else if(data[i]['kode_menu'] == 'menu_4'){
+									row = '<li class="bold"><a class="waves-effect waves-cyan" href='+url_base(data[i]['link_menu']+'/'+kdsatker+ '/'+user_id+'/'+role_id)+'>\
+                        <i class="material-icons">\
+                        '+data[i]['icon_menu']+'\
+                        </i><span class="menu-title" data-i18n="Mail">'+data[i]['nama_menu']+'</span></a>\
+                        </li>';
+								}else{
+									row = '<li class="bold"><a class="waves-effect waves-cyan" href='+url_base(data[i]['link_menu'])+'>\
+                        <i class="material-icons">\
+                        '+data[i]['icon_menu']+'\
+                        </i><span class="menu-title" data-i18n="Mail">'+data[i]['nama_menu']+'</span></a>\
+                        </li>';
+								}
+
+                
 
                 $("#slide-out").append(row);
 
