@@ -2,6 +2,7 @@
 
 var  baseurl	= "<?= base_url('Anggaran/Transfer/')?>";
 var satker_session = "<?= $this->session->userdata("kdsatker")?>";
+var thang_session = "<?= $this->session->userdata("thang")?>";
 
 var test = "<?= base_url("test")?>"
 
@@ -91,7 +92,12 @@ $('.btn-upload').click(function (e) {
                     no_revisi = ext.substring(4, 5);
             }
 
-             if(no_revisi < revisiKe){
+             if(ext.substring(1, 4)!= thang_session.substring(2, 4)){
+                swal("Warning", "Tahun Anggaran Tidak Sesuai!", "warning")
+                return false;
+                }
+
+            if(no_revisi < revisiKe){
                 swal("Warning", "Nomor Revisi Harus >= Data Pagu", "warning")
                 return false;
                 }

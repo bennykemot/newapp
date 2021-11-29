@@ -84,7 +84,8 @@
 
       var baseurl_menu 	= "<?= base_url('Master/Menu/')?>";
       var username     	= "<?= $this->session->userdata("username")?>"
-      var url = "<?= site_url()?>"
+      var url           = "<?= site_url()?>"
+      var b_parent = "";
 
       function url_base(string){
         return url + string;
@@ -98,13 +99,18 @@
         dataType: "JSON",
         success: function(data)
             {
+             
               for(i=0 ; i< data.length ; i++){
 
-                row = '<li class="bold"><a class="waves-effect waves-cyan" href='+url_base(data[i]['link_menu']+'/'+kdsatker)+'>\
+                // if(b_parent != data[i]['parent_menu']){
+
+                row = '<li class="bold"><a class="waves-effect waves-cyan" href='+url_base(data[i]['link_menu'])+'>\
                         <i class="material-icons">\
                         '+data[i]['icon_menu']+'\
                         </i><span class="menu-title" data-i18n="Mail">'+data[i]['nama_menu']+'</span></a>\
                         </li>';
+                
+                b_parent = data[i]['parent_menu'] 
 
                 $("#slide-out").append(row);
 
