@@ -34,12 +34,12 @@
             <div class="card-content">
               <div class="row">
                 <div class="col s12">
-                        <table class="display" id="multi-select">
+                        <table class="display" id="table">
                           <thead>
                                 <tr>
                                   <td>No</td>
-                                  <td>Id</td>
-                                  <td>Username</td>
+                                  <!-- <td>Id</td> -->
+                                  <!-- <td>Username</td> -->
                                   <td>Menu</td>
                                   <td>C</td>
                                   <td>R</td>
@@ -50,8 +50,27 @@
                           </thead>
                           
                           <tbody>
+													<?php 
+														foreach($hakakses as $ha){
+													?>
+														<tr style="white-space: nowrap !important;overflow: hidden;">
+														<td><?php echo $ha->id_hakakses ?></td>
+														<td><?php echo $ha->nama_menu ?></td>
+														<td><?php echo hakAkses($ha->C)?></td>
+														<td><?php echo hakAkses($ha->R)?></td>
+														<td><?php echo hakAkses($ha->U)?></td>
+														<td><?php echo hakAkses($ha->D)?></td>
+														<td>
+                                  <a href="javascript:;" onclick="Edit('<?= $ha->id_hakakses ?>')"><i class="material-icons green-text">edit</i></a>
+                                  <a href="javascript:;" onclick="Delete('<?= $ha->id_hakakses ?>')"><i class="material-icons red-text">delete</i></a>
+                                </td>
+													<?php
+														}
+													?>
                           </tbody>
                         </table>
+											<div id="page-length-option_paginate" class="dataTables_paginate paging_simple_numbers">
+                			<?= $this->pagination->create_links(); ?>
                   </div>
                 </div>
               </div>

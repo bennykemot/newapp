@@ -102,4 +102,20 @@
         }
             });
 
+function addMenu(){
+	$('#modalAdd').modal('open');
+}
+
+
+$("#TambahMenu").click(function (e){
+	e.preventDefault();
+
+	var btn = $(this);
+	var form 
+});
+
+
+
+
+
     </script>
