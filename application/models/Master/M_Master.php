@@ -36,4 +36,17 @@ function getData_Uangharian($Trigger, $Tujuan){
    return $query->result();
 
    }
+
+   function getData_Menu($triggerdetail){
+
+      if($triggerdetail == 'InsertForPenggunaAdmin'){
+
+         $query = $this->db->query("SELECT kode_menu from r_menu");
+      }else{
+         $query = $this->db->query("SELECT kode_menu from r_menu where kode_menu IN ('menu_04','menu_02') ");
+
+      }
+      return $query->result_array();
+   
+      }
 }

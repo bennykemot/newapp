@@ -68,6 +68,57 @@ class Profile extends CI_Controller {
             $password = $this->input->post('password');
             $keterangan = $this->input->post('keterangan');
 
+            $getUsername= $this->db->query("SELECT username from user where username = '". $nama_user."' ")->result_array();
+            if(count($getUsername) > 0){
+                $status = "warning";
+                $msg = "Username Sudah Ada !";
+                echo json_encode(array('status' => $status, 'msg' => $msg));
+            }else{
+            if($kdrole == 1){
+
+            $triggerdetail = 'InsertForPenggunaAdmin';
+            $getMenu = $this->db->query("SELECT kode_menu from r_menu")->result_array();
+
+
+            for($i=0; $i < count($getMenu) ; $i++){
+
+                $hakAkses = array(
+                    'id_user' => $nama_user,
+                    'hak_menu' => $getMenu[$i]['kode_menu'],
+                    'hak_c' => 1,
+                    'hak_r' => 1,
+                    'hak_u' => 1,
+                    'hak_d' => 1,
+                    );
+
+                $this->Profile->Hak_Akses($hakAkses,'t_hakakses', $Trigger);
+
+                }
+
+            }else if($kdrole == 9){
+
+                $triggerdetail = 'InsertForPenggunaOperator';
+                $getMenu = $this->db->query("SELECT kode_menu from r_menu where kode_menu IN ('menu_04','menu_02') ")->result_array();
+
+
+                
+
+                for($i=0; $i < count($getMenu) ; $i++){
+
+                    $hakAkses = array(
+                        'id_user' => $nama_user,
+                        'hak_menu' => $getMenu[$i]['kode_menu'],
+                        'hak_c' => 1,
+                        'hak_r' => 1,
+                        'hak_u' => 1,
+                        'hak_d' => 1,
+                        );
+                        $this->Profile->Hak_Akses($hakAkses,'t_hakakses', $Trigger);
+
+                    }
+
+            }
+
             $data = array(
                 'username' => $nama_user,
                 'kdsatker' => $kdsatker,
@@ -80,11 +131,23 @@ class Profile extends CI_Controller {
                 );
             $this->Profile->CRUD($data,'user', $Trigger);
 
-        }else if($Trigger == "D"){
+            $status = "success";
+            $msg = "Data Berhasil Ditambah !";
+            echo json_encode(array('status' => $status, 'msg' => $msg));
+            }
 
+        }else if($Trigger == "D"){
             $id = $this->input->post('id');
+
+            $getUsername= $this->db->query("SELECT username from user where id = '". $id."' ")->result_array();
             $where = array('id' => $id);
+            $where2 = array('id_user' => $getUsername[0]['username']);
 	        $this->Profile->CRUD($where,'user', $Trigger);
+            $this->Profile->Hak_Akses($where2,'t_hakakses', $Trigger);
+
+            $status = "success";
+            $msg = "Data Berhasil Dihapus !";
+            echo json_encode(array('status' => $status, 'msg' => $msg));
 
         }else if($Trigger == "R"){
             $id = $this->input->post('id');
@@ -113,6 +176,10 @@ class Profile extends CI_Controller {
                 );
             $where = array('id' => $id);
 	        $this->Profile->update($data,'user', $where);
+
+            $status = "success";
+            $msg = "Data Berhasil DiUbah !";
+            echo json_encode(array('status' => $status, 'msg' => $msg));
         }
 
         

@@ -41,7 +41,7 @@
                 {
                     data: "link_menu",
                     render: function(data, type, row) {
-                        var result = '<i class="material-icons">'+data+'</i>';
+                        var result = data;
                         if(data == "pageMissing/pageMissing"){
                             result ='';
 

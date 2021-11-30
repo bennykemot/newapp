@@ -14,8 +14,20 @@
 
       $(".app").change(function() {
         var button = document.getElementById("TambahApp");
-        //button.classList.remove("disabled");
+        button.classList.remove("disabled");
+
+        if($(".rupiah").val() == null || $(".rupiah").val() == 0 || $(".rupiah").val() == "0"){
+          button.classList.add("disabled");
+        }
       });
+
+      // if($(".app").val() == null){
+
+      //   var button = document.getElementById("TambahApp");
+      //   button.classList.add("disabled");
+
+      // }
+
         // SELECT2 INSERT
 
         $("#app-select2").select2({
@@ -311,11 +323,11 @@
                   j++;
                   $($wrapper).append('<div class="multi-field">\
                           <div class="input-field col s12">\
-                              <div class="input-field col s2"><label>Tahapan '+data[j]['nama_tahapan']+'</label></div>\
+                          <div class="input-field col s2"></div>\
                               <input id="tahapan'+x+'" name="tahapan'+x+'" value="'+data[j]['id']+'" hidden>\
                               <div class="input-field col s10 " >\
-                                <input placeholder="00.000.000" class="rupiah" id="rupiah'+x+'" name="rupiah'+x+'" type="number" min="1000" onkeyup=AllCount() onkeypress="return validateNumber(event)">\
-                              </div>\
+                                <input placeholder="00.000.000" class="rupiah validate" id="rupiah'+x+'" name="rupiah'+x+'" type="text" min="1000" onkeyup=AllCount() onkeypress="return validateNumber(event)">\
+                                <label class="active" for="rupiah'+x+'">Tahapan '+data[j]['nama_tahapan']+'</label></div>\
                           </div>\
                         </div>');
 
@@ -454,6 +466,11 @@
 
       var buttonadd = document.getElementById("add-field");
       buttonadd.classList.remove("disabled");
+
+      if($('#jumlah').html() == 0){
+        var buttonadd = document.getElementById("add-field");
+            buttonadd.classList.add("disabled");
+      }
         
 
     if($('#jumlah').html() < 0){
@@ -469,6 +486,8 @@
 
             var buttonadd = document.getElementById("add-field");
             buttonadd.classList.add("disabled");
+
+            
 
 
             var element = document.getElementById("jumlah");

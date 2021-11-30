@@ -285,7 +285,8 @@ $("#TambahUser").click(function (e) {
       processData: false,
       contentType: false,
       success: function (data, textStatus, jqXHR) {
-              show_msg(textStatus);
+        var res = JSON.parse(data)
+              show_msg(res.status, res.msg);
               $('#modal2').modal('close');
               setTimeout(function() {
                   location.reload();
@@ -358,9 +359,12 @@ $("#EditUser").click(function (e) {
     processData: false,
     contentType: false,
     success: function (data, textStatus, jqXHR) {
-              show_msg(textStatus);
+              var res = JSON.parse(data)
+              show_msg(res.status, res.msg);
               $('#modalEdit').modal('close');
-              set_grid_tabel(false);
+              setTimeout(function() {
+                  location.reload();
+               }, 2000);
               Reset(IdForm);
               document.getElementById("EditUser").disabled = false; 
               
@@ -398,8 +402,11 @@ function Execute(Id) {
     contentType: false,
     success: function (data, textStatus, jqXHR) {
 
-        show_msg(textStatus)
-        set_grid_tabel(true);
+              var res = JSON.parse(data)
+              show_msg(res.status, res.msg);
+        setTimeout(function() {
+                  location.reload();
+               }, 2000);
     },
     error: function (jqXHR, textStatus, errorThrown) { },
   });
@@ -407,10 +414,10 @@ function Execute(Id) {
 
 
 
-    function show_msg(textStatus){
+    function show_msg(status, msg){
         swal({
-            title:textStatus, 
-            icon:textStatus,
+            title:msg, 
+            icon:status,
             timer: 2000
             })
     }
