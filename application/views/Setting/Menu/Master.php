@@ -38,7 +38,6 @@
                           <thead>
                                 <tr>
                                   <td>No</td>
-                                  <td>Id</td>
                                   <td>Kode</td>
                                   <td>Nama</td>
                                   <td>Icon</td>
@@ -60,5 +59,6 @@
         </div>
     </div>
 
+<?php include('modal.php');?>
 <?php include(APPPATH . 'views/Footer/Footer.php') ?>
 <?php include('script.php');?>

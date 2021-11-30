@@ -23,28 +23,17 @@
                 },
 
                 {
-                    data: "id"
+                    data: "id_hakakses"
                 },
                 {
                     data: "id_user",
                 },
 
                 {
-                    data: "hak_menu"
+                    data: "nama_menu"
                 },
                 {
-                    data: "hak_c", 
-                      render: function(data, type, row) {
-                          if(data == 0){
-                                return '<i class="material-icons red-text">close</i>';
-                          }else{
-                                return '<i class="material-icons cyan-text">check</i>';
-                          }
-                        }
-                },
-
-                {
-                    data: "hak_r", 
+                    data: "C", 
                       render: function(data, type, row) {
                           if(data == 0){
                                 return '<i class="material-icons red-text">close</i>';
@@ -55,7 +44,7 @@
                 },
 
                 {
-                    data: "hak_u", 
+                    data: "R", 
                       render: function(data, type, row) {
                           if(data == 0){
                                 return '<i class="material-icons red-text">close</i>';
@@ -65,7 +54,8 @@
                         }
                 },
 
-                { data: 'hak_d', 
+                {
+                    data: "U", 
                       render: function(data, type, row) {
                           if(data == 0){
                                 return '<i class="material-icons red-text">close</i>';
@@ -75,10 +65,20 @@
                         }
                 },
 
-                { data: 'id',
+                { data: 'D', 
+                      render: function(data, type, row) {
+                          if(data == 0){
+                                return '<i class="material-icons red-text">close</i>';
+                          }else{
+                                return '<i class="material-icons cyan-text">check</i>';
+                          }
+                        }
+                },
+
+                { data: 'id_hakakses',
                   render: function(data, type, row) {
-                      return '<a href="javascript:;" onclick="Edit(\''+row.id+'\')"><i class="material-icons">edit</i></a>\
-                      <a  href="javascript:;" onclick="Delete(\''+row.id+'\')"><i class="material-icons">delete</i></a>';
+                      return '<a href="javascript:;" onclick="Edit(\''+row.id_hakakses+'\')"><i class="material-icons">edit</i></a>\
+                      <a  href="javascript:;" onclick="Delete(\''+row.id_hakakses+'\')"><i class="material-icons">delete</i></a>';
                   }
                 },
                
@@ -105,6 +105,7 @@
             bFilter: false,
             bInfo: false,
             scrollCollapse: true,
+            columnDefs: [{ visible: false, targets: 1 },{ visible: false, targets: 2 }],
             drawCallback: function ( settings ) {
             var api = this.api();
             var rows = api.rows( {page:'current'} ).nodes();

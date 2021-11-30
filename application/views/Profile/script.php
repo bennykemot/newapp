@@ -287,7 +287,9 @@ $("#TambahUser").click(function (e) {
       success: function (data, textStatus, jqXHR) {
               show_msg(textStatus);
               $('#modal2').modal('close');
-              set_grid_tabel(false);
+              setTimeout(function() {
+                  location.reload();
+               }, 2000);
               Reset(IdForm);
               document.getElementById("TambahUser").disabled = false; 
               

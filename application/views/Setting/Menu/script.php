@@ -3,7 +3,9 @@
     var satker_session  = "<?= $this->session->userdata("kdsatker")?>"
     
     var grid_table = "#page-length-option";
-    var groupColumn = 6;
+    var groupColumn = 5;
+
+
       $(grid_table).DataTable({
 
             ajax: {
@@ -23,9 +25,6 @@
                 },
 
                 {
-                    data: "id"
-                },
-                {
                     data: "kode_menu",
                 },
 
@@ -40,7 +39,15 @@
                 },
 
                 {
-                    data: "link_menu"
+                    data: "link_menu",
+                    render: function(data, type, row) {
+                        var result = '<i class="material-icons">'+data+'</i>';
+                        if(data == "pageMissing/pageMissing"){
+                            result ='';
+
+                        }
+                      return result;
+                        }
                 },
 
                 {
@@ -52,8 +59,8 @@
 
                 { data: 'id',
                   render: function(data, type, row) {
-                      return '<a href="javascript:;" onclick="Edit(\''+row.id+'\')"><i class="material-icons">edit</i></a>\
-                      <a  href="javascript:;" onclick="Delete(\''+row.id+'\')"><i class="material-icons">delete</i></a>';
+                      return '<a href="javascript:;" onclick="Edit(\''+row.id+'\')"><i class="material-icons green-text">edit</i></a>\
+                      <a  href="javascript:;" onclick="Delete(\''+row.id+'\')"><i class="material-icons red-text">delete</i></a>';
                   }
                 },
                
@@ -73,17 +80,20 @@
             bFilter: false,
             bInfo: false,
             scrollCollapse: true,
-            columnDefs: [{ visible: false, targets: 6 }],
+            columnDefs: [ { "visible": false, "targets": 5 }],
             
             drawCallback: function ( settings ) {
             var api = this.api();
             var rows = api.rows( {page:'current'} ).nodes();
             var last=null;
+            
+
  
             api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
+                var vals = api.column(api.column($(rows).eq(i)).index()).data();
                 if ( last !== group ) {
                     $(rows).eq( i ).before(
-                        '<tr class="group"><td></td><td colspan="7">'+group+'</td></tr>'
+                        '<tr class="group"><td  style="background-color: #bbdefb"></td><td style="background-color: #bbdefb" colspan="7"><h6>'+group+'</h6></td></tr>'
                     );
  
                     last = group;
