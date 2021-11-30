@@ -95,7 +95,7 @@ class Pembagianpagu extends CI_Controller {
             if(count($cek) <= 0 ){
 
                 $data = array(
-                    'thang' => '2021',
+                    'thang' => $thang,
                     'user_id' => $nama_user,
                     'kdsatker' => $kdsatker,
                     'kddept' => "089",

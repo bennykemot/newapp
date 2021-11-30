@@ -76,7 +76,7 @@ class Transfer extends CI_Controller {
         $revisiKe = $this->input->post('revisike');
 
         if (!file_exists(FCPATH.'/assets/temp_folder/'.$kdsatker.'')) {
-            mkdir(FCPATH.'/assets/temp_folder/'.$kdsatker.'', 0666, true);
+            mkdir(FCPATH.'/assets/temp_folder/'.$kdsatker.'', 0777, true);
         }else{
 
             $files = glob(FCPATH.'/assets/temp_folder/'.$kdsatker.'/*'); // get all file names
