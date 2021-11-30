@@ -75,10 +75,11 @@ class Pembagianpagu extends CI_Controller {
             $kdoutput = $this->input->post('kdoutput');
             $kdsoutput = $this->input->post('kdsoutput');
             $kdkomponen = $this->input->post('kdkomponen');
+            $thang = $this->input->post('thang');
             $trigger = $this->input->post('Trigger');
 
             $datawhere = array(
-                'thang' => '2021',
+                'thang' => $thang,
                 'user_id' => $nama_user,
                 'kdsatker' => $kdsatker,
                 'kddept' => "089",

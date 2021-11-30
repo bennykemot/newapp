@@ -71,6 +71,8 @@
                   </div>
               </div>
 
+              <input hidden value="<?= $this->session->userdata("thang")?>">
+
 
             </div>
           </form>

@@ -23,8 +23,11 @@ class M_Transfer extends CI_Model{
     function d_pagu($kdsatker, $no_revisi, $revisiKe){
 
         $tglRevisi = date("Y-m-d");
-        $this->db->where('kdsatker', $kdsatker);
-        $this->db->delete('d_pagu');
+        $cek = $this->db->query("select kdsatker from d_pagu where kdsatker = '".$kdsatker."' ")->result_array();
+        if($cek != 0){
+            $this->db->where('kdsatker', $kdsatker);
+            $this->db->delete('d_pagu');
+        }
 
         $this->db->query("
         INSERT INTO d_pagu

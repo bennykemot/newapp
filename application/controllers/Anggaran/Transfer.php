@@ -135,18 +135,19 @@ class Transfer extends CI_Controller {
             $entry->extract(FCPATH.'/assets/temp_folder/'.$kdsatker.'/');
         }
         $archive->close();
-        
 
+        $this->Transfer->xml_d_item($kdsatker,$filename);
+        $this->Transfer->xml_d_soutput($kdsatker,$filename);
+        $this->Transfer->xml_d_kmpnen($kdsatker,$filename);
+        $this->Transfer->xml_d_skmpnen($kdsatker,$filename);
+        
         if($no_revisi == $revisiKe){
             $this->Transfer->d_pagu($kdsatker, $no_revisi, $revisiKe);
         }else{
             $this->Transfer->h_pagu($kdsatker, $no_revisi, $revisiKe);
         }
 
-        $this->Transfer->xml_d_item($kdsatker,$filename);
-        $this->Transfer->xml_d_soutput($kdsatker,$filename);
-        $this->Transfer->xml_d_kmpnen($kdsatker,$filename);
-        $this->Transfer->xml_d_skmpnen($kdsatker,$filename);
+        
 
     }
 }

@@ -27,12 +27,12 @@ class M_Profile extends CI_Model{
         $this->db->select('user.role_id');
         $this->db->select('user.keterangan');
         $this->db->select('user.status');
-        $this->db->select('role.rolename');
+        $this->db->select('t_role.rolename');
         
         
         $this->db->from($this->table);
         $this->db->join('t_satker', 't_satker.kdsatker = user.kdsatker');
-        $this->db->join('role', 'role.id = user.role_id');
+        $this->db->join('t_role', 't_role.id = user.role_id');
         $this->db->where('user.kdsatker', $kdsatker);
         $query = $this->db->get();
 
@@ -51,12 +51,12 @@ class M_Profile extends CI_Model{
         $this->db->select('user.role_id');
         $this->db->select('user.keterangan');
         $this->db->select('user.status');
-        $this->db->select('role.rolename');
+        $this->db->select('t_role.rolename');
         
         
         $this->db->from($this->table);
         $this->db->join('t_satker', 't_satker.kdsatker = user.kdsatker');
-        $this->db->join('role', 'role.id = user.role_id');
+        $this->db->join('t_role', 't_role.id = user.role_id');
         $this->db->where('user.kdsatker', $kdsatker);
  
         $i = 0;
@@ -138,12 +138,12 @@ class M_Profile extends CI_Model{
             $this->db->select('user.role_id');
             $this->db->select('user.keterangan');
             $this->db->select('user.status');
-            $this->db->select('role.rolename');
+            $this->db->select('t_role.rolename');
             
             
             $this->db->from($table);
             $this->db->join('t_satker', 't_satker.kdsatker = user.kdsatker');
-            $this->db->join('role', 'role.id = user.role_id');
+            $this->db->join('t_role', 't_role.id = user.role_id');
             $this->db->where($data);
             $query = $this->db->get();
     

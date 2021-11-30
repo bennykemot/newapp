@@ -72,7 +72,14 @@ $('.btn-upload').click(function (e) {
         async: false,
         data : {"kdsatker" : satker_session},
         success : function(data) {
-             var revisiKe = data[0].revisike;
+
+            if(data.length == 0){
+                revisiKe = 0
+            }else{
+                var revisiKe = data[0].revisike;
+            }
+
+             
 
              if(revisiKe == ""){
                 revisiKe = 0

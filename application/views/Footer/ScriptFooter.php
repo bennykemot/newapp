@@ -126,6 +126,13 @@
                               '+data[i]['icon_menu']+'\
                               </i><span class="menu-title" data-i18n="Mail">'+data[i]['nama_menu']+'</span></a>\
                               </li>';
+                      }else if(data[i]['kode_menu'] == 'menu_18'){
+                        row = '<li class="bold"><a class="waves-effect waves-cyan" href='+url_base(data[i]['link_menu']+'/'+kdsatker)+'>\
+                              <i class="material-icons">\
+                              '+data[i]['icon_menu']+'\
+                              </i><span class="menu-title" data-i18n="Mail">'+data[i]['nama_menu']+'</span></a>\
+                              </li>';
+                      
                       }else{
                         row = '<li class="bold"><a class="waves-effect waves-cyan" href='+url_base(data[i]['link_menu'])+'>\
                               <i class="material-icons">\

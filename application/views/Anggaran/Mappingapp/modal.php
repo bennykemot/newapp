@@ -151,7 +151,7 @@
                 <div class="input-field col s2"><label>PKPT</label></div>
 
                 <div class="input-field col s10 " >
-                  <input placeholder="Nilai App" id="th_pkpt_Edit" name="th_pkpt_Edit" type="text" value="2021">
+                  <input placeholder="Nilai App" id="th_pkpt_Edit" name="th_pkpt_Edit" type="text" value="<?= $this->session->userdata("thang")?>" readonly>
                 </div>
             </div>
 
