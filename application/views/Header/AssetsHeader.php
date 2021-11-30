@@ -163,6 +163,13 @@ function getapprove($data){
   return $res;
 }
 
+function hakAkses($data){
+	$icon = '<i class="material-icons red-text">close</i>';
+	if($data == 1){
+		$icon = '<i class="material-icons cyan-text">check</i>';
+	}
+	return $icon;
+}
 
   function menu_disable($hak){
       $display = "d-none";

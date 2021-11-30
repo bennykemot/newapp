@@ -89,10 +89,9 @@
                 style: 'os',
                 selector: 'td:not(:last-child)' // no row selection on last column
             },
-
-
             pageLength: 10,
-            lengthChange: false,
+			lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            lengthChange: true,
             responsive: !0,
             select: true,
             serverSide: true,
@@ -101,7 +100,7 @@
             searching: false,
             ordering: true,
             bDestroy: true,
-            bPaginate: false,
+            bPaginate: true,
             bFilter: false,
             bInfo: false,
             scrollCollapse: true,
