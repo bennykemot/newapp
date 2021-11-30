@@ -62,7 +62,7 @@
                 <div class="input-field col s2"><label>Jumlah</label></div>
 
                 <div class="input-field col s10 " >
-                <button class="btn cyan col s12" style="text-align: left;font-weight: bold;cursor: default;" id ="jumlah" name="jumlah"></button>
+                <a class="btn cyan col s12" style="text-align: left;font-weight: bold;cursor: default;" id ="jumlah" name="jumlah"></a>
                
                 </div>
             </div>
@@ -74,7 +74,7 @@
                 <div class="input-field col s2"><label>PKPT</label></div>
 
                 <div class="input-field col s10 " >
-                  <input placeholder="Nilai App" id="th_pkpt" name="th_pkpt" type="text" value="<?= date("Y");?>">
+                  <input placeholder="Nilai App" id="th_pkpt" name="th_pkpt" type="text" readonly value="<?= $this->session->userdata("thang")?>">
                 </div>
             </div>
 

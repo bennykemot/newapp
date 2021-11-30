@@ -14,7 +14,7 @@
 
       $(".app").change(function() {
         var button = document.getElementById("TambahApp");
-        button.classList.remove("disabled");
+        //button.classList.remove("disabled");
       });
         // SELECT2 INSERT
 
@@ -259,6 +259,13 @@
 
             }
 
+            if( $('#jumlah').html() == 0){
+              $(".rupiah").attr('disabled','disabled');
+
+              var button = document.getElementById("add-field");
+                button.classList.add("disabled");
+            }
+
             var element = document.getElementById("jumlah");
                         element.classList.remove("red");
                       element.classList.add("cyan");
@@ -280,12 +287,15 @@
 
 
      $('.multi-field-wrapper').each(function() {
+       
 
         var $wrapper = $('.multi-fields', this);
 
         j = 0
         x = 1
         $("#add-field", $(this)).click(function(e) {
+
+          
 
           $.ajax({
           url : baseurl_master + "Tahapan",
@@ -308,6 +318,10 @@
                               </div>\
                           </div>\
                         </div>');
+
+                        if( $('#jumlah').html() == 0){
+                          $(".rupiah").attr('disabled','disabled');
+                        }
                         
                 }
               }
@@ -332,8 +346,15 @@
 
   function Count(){
 
+    if($('#rupiah_tahapan_Edit').val() == "0" ||$('#rupiah_tahapan_Edit').val() == 0|| $('#rupiah_tahapan_Edit').val() == "0" || $('#rupiah_tahapan_Edit').val() ==0){
+      document.getElementById("EditMapping").disabled = true;
+    }else{
+
+    
+
     var total_akun_hitung = Number($('#total_akun').val())
     var total_app_hitung =  Number($('#total_app').val())
+    
     var rupiah_tahapan_hitung =  Number($('#rupiah_tahapan_Edit').val())
     var rupiah_tahapan_dummy =  Number($('#rupiah_tahapan_dummy').val())
 
@@ -355,7 +376,11 @@
     $('#rupiah_Edit').html(current_sisa_akun); 
 
 
-
+    // if($('#rupiah_Edit').html() == 0){
+    //     document.getElementById("EditMapping").disabled = true;
+    //   }else{
+    //     document.getElementById("EditMapping").disabled = false;
+    //   }
      
     
 
@@ -366,20 +391,34 @@
             timer: 2000
             })
 
+            var button = document.getElementById("EditMapping");
+            button.classList.add("disabled");
+
+          
+
             var element = document.getElementById("rupiah_Edit");
                         element.classList.remove("cyan");
                         element.classList.add("red");
         }else{
+          var button = document.getElementById("EditMapping");
+            button.classList.remove("disabled");
           var element = document.getElementById("rupiah_Edit");
                         element.classList.remove("red");
                       element.classList.add("cyan");
         }
+    }
         
 
 
   }
-
   function AllCount(){
+
+    // if($('#jumlah').html() == "0" ||$('#jumlah').html() == 0){
+    //   var button = document.getElementById("TambahApp");
+    //         button.classList.add("disabled");
+    // }else{
+      var button = document.getElementById("TambahApp");
+            button.classList.remove("disabled");
       var rupiah = document.getElementsByClassName("rupiah");
       //rupiah.value = formatRupiah(this.value);
       var nilai_app1 = Number(document.getElementById('rupiah1').value)
@@ -406,6 +445,15 @@
       }else{
         $('#jumlah').html(nilai_app - ((nilai_app1 + nilai_app_All) + total_nilaiapp)); 
       }
+
+      // if($('#jumlah').html() <= 0){
+      //   document.getElementById("TambahApp").disabled = true;
+      // }else{
+      //   document.getElementById("TambahApp").disabled = false;
+      // }
+
+      var buttonadd = document.getElementById("add-field");
+      buttonadd.classList.remove("disabled");
         
 
     if($('#jumlah').html() < 0){
@@ -415,20 +463,33 @@
             timer: 2000
             })
 
+            
+            var button = document.getElementById("TambahApp");
+            button.classList.add("disabled");
+
+            var buttonadd = document.getElementById("add-field");
+            buttonadd.classList.add("disabled");
+
+
             var element = document.getElementById("jumlah");
                         element.classList.remove("cyan");
                         element.classList.add("red");
         }else{
+          var button = document.getElementById("TambahApp");
+            button.classList.remove("disabled");
           var element = document.getElementById("jumlah");
                         element.classList.remove("red");
                         element.classList.add("cyan");
         }
+
+    // }
   }
 
 
 
 $("#TambahApp").click(function (e) {
   e.preventDefault();
+
 
   var btn = $(this);
   var form = $(this).closest("form");
@@ -444,6 +505,8 @@ $("#TambahApp").click(function (e) {
   formData.append('Trigger', 'C')
   formData.append('countRupiah', countRupiah)
   // formData.append('app', $('#app').val())
+
+  
 
   $.ajax({
     type: "POST",
