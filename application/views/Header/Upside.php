@@ -6,10 +6,11 @@
             <div class="header-search-wrapper hide-on-med-and-down">
               <h6><?php echo $this->session->userdata("nmsatker"); ?></h6>
             </div>
-            <ul class="navbar-list right">
-							<li><a class="waves-effect waves-block waves-light"><span class="new badge gradient-45deg-light-blue-cyan" data-badge-caption="<?php echo $this->session->userdata("thang"); ?>">Tahun : </span></a></li>
+            <ul class="right hide-on-med-and-down">
+							<!-- <li><a class="waves-effect waves-block waves-light"><span><?php echo $this->session->userdata("username"); ?></span></a></li> -->
+							<li><a class="waves-effect waves-light"><span class="new badge gradient-45deg-light-blue-cyan" data-badge-caption="<?php echo $this->session->userdata("thang"); ?>">Tahun : </span></a></li>
               <!-- <li><a class="waves-effect waves-block waves-light notification-button" href="javascript:void(0);" data-target="notifications-dropdown"><i class="material-icons">notifications_none<small class="notification-badge">5</small></i></a></li> -->
-              <li><a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown"><span class="avatar-status avatar-online"><img src="<?= base_url().'assets'?>/app-assets/images/avatar/avatar-7.png" alt="avatar"><i></i></span></a></li>
+              <li><a class="waves-effect waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown"><span class="avatar-status avatar-online"><img src="<?= base_url().'assets'?>/app-assets/images/avatar/avatar-7.png" alt="avatar"><i></i></span></a></li>
             </ul>
             <!-- translation-button-->
             <ul class="dropdown-content" id="translation-dropdown">
@@ -42,6 +43,7 @@
             </ul> -->
             <!-- profile-dropdown-->
             <ul class="dropdown-content" id="profile-dropdown">
+							<li><a class="blue-text text-darken-1"><?php echo $this->session->userdata("username"); ?></a></li>
               <li><a class="grey-text text-darken-1" href="<?= site_url('User/User/User/'.$this->session->userdata("user_id").'')?>"><i class="material-icons">person_outline</i> Profile</a></li>
               
               <li class="divider"></li>
