@@ -22,7 +22,7 @@ class Auth extends CI_Controller{
 		$session = $this->Auth->session_Auth("user",$username,$password)->result();
 
 		
-		$hak_akses = $this->Auth->session_Auth_hakakses("t_hakakses",$username)->result();
+		$hak_akses = $this->Auth->session_Auth_hakakses("t_hakakses",$session[0]->role_id)->result();
 		$hak = array();
 
 		for($i=0;$i< count($hak_akses);$i++){

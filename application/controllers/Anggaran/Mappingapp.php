@@ -79,7 +79,7 @@ class MappingApp extends CI_Controller {
 
         $kdsatker =  $satker;
         $data['mapp'] = $this->Mappingapp->getDataNew($satker, $config['per_page'], $from, $userId, $roleId);
-
+        
         //$data['mapp'] = $this->Page();
 
         //echo json_encode($data)

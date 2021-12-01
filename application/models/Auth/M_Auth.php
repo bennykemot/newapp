@@ -35,11 +35,11 @@ class M_Auth extends CI_Model{
 		
 	}
 
-	function session_Auth_hakakses($table,$username){	
+	function session_Auth_hakakses($table,$role_id){	
 		return $this->db->query('SELECT 
 
 									'.$table.'.id as id_hakakses,
-									'.$table.'.id_user as id_user_hakakses,
+									'.$table.'.role_id as role_id_hakakses,
 									'.$table.'.hak_menu as hak_menu,
 									'.$table.'.hak_c as C,
 									'.$table.'.hak_r as R,
@@ -50,7 +50,7 @@ class M_Auth extends CI_Model{
 									'.$table.'
 
 									WHERE
-									'.$table.'.id_user = "'.$username.'"
+									'.$table.'.role_id = '.$role_id.'
 
 									');
 

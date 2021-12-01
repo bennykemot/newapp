@@ -11,12 +11,12 @@ class M_Menu extends CI_Model{
         return $query->result();
     }
 
-    public function get_Menu($Username){
+    public function get_Menu($role_id){
 
         $query = $this->db->query('SELECT 
 
 									t_hakakses.id as id_hakakses,
-									t_hakakses.id_user as id_user_hakakses,
+									t_hakakses.role_id as role_id_hakakses,
 									t_hakakses.hak_menu as hak_menu,
 									t_hakakses.hak_c as C,
 									t_hakakses.hak_r as R,
@@ -38,14 +38,9 @@ class M_Menu extends CI_Model{
                                     r_menu ON r_menu.kode_menu = t_hakakses.hak_menu
 
 									WHERE
-									t_hakakses.id_user = "'.$Username.'"
+									t_hakakses.role_id = "'.$role_id.'"
 
 									');
-
-
-        // $this->db->from('t_hakakses');
-        // $this->db->where('id_user', $Username);
-        // $query = $this->db->get();
 
         return $query->result();
     }

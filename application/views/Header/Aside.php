@@ -8,13 +8,13 @@
       <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="accordion">
         
       
-      <!-- <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
+      <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
           <i class="material-icons">
           home
           </i><span class="menu-title" data-i18n="Mail">Dashboard</span></a>
           </li>
 
-        <li class="navigation-header"><a class="navigation-header-text">Anggaran</a>
+        <!-- <li class="navigation-header"><a class="navigation-header-text">Anggaran</a>
           <i class="navigation-header-icon material-icons">more_horiz</i>
           </li>
 

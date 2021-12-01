@@ -71,7 +71,7 @@
                   </div>
               </div>
 
-              <input id="thang" name="thang" hidden value="<?= $this->session->userdata("thang")?>">
+              <input id="thang" name="thang" value="<?= $this->session->userdata("thang")?>">
 
 
             </div>

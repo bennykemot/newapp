@@ -51,7 +51,12 @@
                           
                           <tbody>
 													<?php 
+                          $before = "";
 														foreach($hakakses as $ha){
+                              if($before != $ha->id_user){
+                                echo '<td colspan="7">'.$ha->id_user.'</td>';
+                                $before = $ha->id_user;
+                              }
 													?>
 														<tr style="white-space: nowrap !important;overflow: hidden;">
 														<td><?php echo $ha->id_hakakses ?></td>

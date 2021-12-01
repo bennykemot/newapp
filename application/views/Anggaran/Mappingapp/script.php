@@ -87,6 +87,10 @@
 
      var grid_detail_app = "#tabel_mapping_detail";
      function showDetailapp(Id){
+
+      $('html,body').animate({
+        scrollTop: $("#DetailCard").offset().top},
+        'slow');
       $(grid_detail_app).DataTable({
             serverSide: true,
             processing: true,

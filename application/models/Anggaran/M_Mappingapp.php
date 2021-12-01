@@ -13,6 +13,12 @@ class M_Mappingapp extends CI_Model{
      
     // }
 
+    // function getData_detailapp($kdsatker){
+    //     $query = $this->db->query("Select SUM(rupiah_tahapan) as jumlah_tahapan, kdindex from d_detailapp where
+    //     kdsatker = ".$kdsatker." ");
+    //     return $query->result();
+    // }
+
     function getDataNew($kdsatker,$number,$offset, $userId, $roleId){
 
         if($roleId == 1){
