@@ -25,12 +25,12 @@ class Hakakses extends CI_Controller {
 	}
 
 	public function Page(){
-		$satker = $this->uri->segment(4);
+		//$satker = $this->uri->segment(4);
 		//$userId = $this->uri->segment(5);
 		//$roleId = $this->uri->segment(6);
 
-		$jumlah = $this->Hakakses->Jum($satker);
-		$config['base_url'] = base_url().'Setting/Hakakses/Page/'.$satker;
+		$jumlah = $this->Hakakses->Jum();
+		$config['base_url'] = base_url().'Setting/Hakakses/Page/0';
 
 		$config['total_rows'] = $jumlah;
 		$config['per_page'] = 20;
@@ -61,16 +61,16 @@ class Hakakses extends CI_Controller {
         $config['next_tag_open'] = '<li >';
         $config['next_tag_close'] = '</li>';
 
-		$from = $this->uri->segment(5);
+		$from = $this->uri->segment(4);
 		$this->pagination->initialize($config);
 
 		if($from == 1){
 			$from = 0;
 		};
 
-		$data['hakakses'] = $this->Hakakses->Master($satker, $config['per_page'],$from);
+		$data['hakakses'] = $this->Hakakses->Master($config['per_page'],$from);
 
-		$this->load->view('Setting/Menu/Hakakses/Master',$data);
+		$this->load->view('Setting/Hakakses/Master',$data);
 	}
 
 }

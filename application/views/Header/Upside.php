@@ -44,12 +44,18 @@
             <!-- profile-dropdown-->
             <ul class="dropdown-content" id="profile-dropdown">
 							<li><a class="blue-text text-darken-1"><?php echo $this->session->userdata("username"); ?></a></li>
+							<li class="divider"></li>
               <li><a class="grey-text text-darken-1" href="<?= site_url('User/User/User/'.$this->session->userdata("user_id").'')?>"><i class="material-icons">person_outline</i> Profile</a></li>
+              <?php 
+								if($this->session->userdata('role_id') == "11"){
+							?>
+								<li><a class="grey-text text-darken-1" href="<?= site_url('Setting/Menu')?>"><i class="material-icons">settings</i>Menu</a></li>
+								<li><a class="grey-text text-darken-1" href="<?= site_url('Setting/Hakakses/Page/0')?>"><i class="material-icons">accessibility</i>Akses</a></li>
+								<li class="divider"></li>
+							<?php
+								}
+							?>
               
-              <li class="divider"></li>
-              <li><a class="grey-text text-darken-1" href="<?= site_url('Setting/Menu')?>"><i class="material-icons">settings</i>Menu</a></li>
-              <li><a class="grey-text text-darken-1" href="<?= site_url('Setting/Hakakses/Page/'.$this->session->userdata("kdsatker").'/0')?>"><i class="material-icons">accessibility</i>Akses</a></li>
-              <li class="divider"></li>
               <li><a class="grey-text text-darken-1" href="<?= site_url('Auth/Auth/logout')?>"><i class="material-icons">keyboard_tab</i> Logout</a></li>
             </ul>
           </div>

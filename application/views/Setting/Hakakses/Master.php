@@ -39,7 +39,7 @@
                                 <tr>
                                   <td>No</td>
                                   <!-- <td>Id</td> -->
-                                  <!-- <td>Username</td> -->
+                                  <td>Role</td>
                                   <td>Menu</td>
                                   <td>C</td>
                                   <td>R</td>
@@ -50,16 +50,17 @@
                           </thead>
                           
                           <tbody>
-													<?php 
+													<!-- <?php 
                           $before = "";
 														foreach($hakakses as $ha){
-                              if($before != $ha->id_user){
-                                echo '<td colspan="7">'.$ha->id_user.'</td>';
-                                $before = $ha->id_user;
+                              if($before != $ha->role_name){
+                                echo '<td colspan="7">'.$ha->role_name.'</td>';
+                                $before = $ha->role_name;
                               }
-													?>
+													?> -->
 														<tr style="white-space: nowrap !important;overflow: hidden;">
 														<td><?php echo $ha->id_hakakses ?></td>
+														<td><?php echo $ha->role_name ?></td>
 														<td><?php echo $ha->nama_menu ?></td>
 														<td><?php echo hakAkses($ha->C)?></td>
 														<td><?php echo hakAkses($ha->R)?></td>
@@ -69,9 +70,9 @@
                                   <a href="javascript:;" onclick="Edit('<?= $ha->id_hakakses ?>')"><i class="material-icons green-text">edit</i></a>
                                   <a href="javascript:;" onclick="Delete('<?= $ha->id_hakakses ?>')"><i class="material-icons red-text">delete</i></a>
                                 </td>
-													<?php
+													<!-- <?php
 														}
-													?>
+													?> -->
                           </tbody>
                         </table>
 											<div id="page-length-option_paginate" class="dataTables_paginate paging_simple_numbers">

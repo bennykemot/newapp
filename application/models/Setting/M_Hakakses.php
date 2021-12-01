@@ -3,37 +3,39 @@ class M_Hakakses extends CI_Model{
 
 
 
-    public function Master($kdsatker,$number,$offset){
+    public function Master($number,$offset){
 
-        $query = $this->db->query('SELECT 
-
+        $query = $this->db->query('SELECT
 									t_hakakses.id as id_hakakses,
-									t_hakakses.id_user as id_user,
+									t_hakakses.role_id as role_id_hakakses,
 									t_hakakses.hak_menu as hak_menu,
 									t_hakakses.hak_c as C,
 									t_hakakses.hak_r as R,
 									t_hakakses.hak_u as U,
 									t_hakakses.hak_d as D,
 
-                                    r_menu.kode_menu as kode_menu,
-                                    r_menu.nama_menu as nama_menu,
-                                    r_menu.icon_menu as icon_menu,
-                                    r_menu.link_menu as link_menu,
-                                    r_menu.parent_menu as parent_menu,
-                                    r_menu.status_menu as status_menu
+									r_menu.kode_menu as kode_menu,
+									r_menu.nama_menu as nama_menu,
+									r_menu.icon_menu as icon_menu,
+									r_menu.link_menu as link_menu,
+									r_menu.parent_menu as parent_menu,
+									r_menu.status_menu as status_menu,
+
+									t_role.rolename as role_name
 
 									FROM
 									t_hakakses
 
-                                    JOIN
+									JOIN
 
-                                    r_menu ON r_menu.kode_menu = t_hakakses.hak_menu
+									r_menu ON r_menu.kode_menu = t_hakakses.hak_menu
 
 									JOIN
 
-									user ON user.username = t_hakakses.id_user
+									t_role ON t_role.id = t_hakakses.role_id
 
-									WHERE user.kdsatker = '.$kdsatker.'
+									ORDER BY t_hakakses.role_id
+
 									LIMIT '.$number.' OFFSET '.$offset.'
 									');
 
@@ -50,39 +52,39 @@ class M_Hakakses extends CI_Model{
         return $query->result();
     }
 
-	function Jum($kdsatker){
-		$query = $this->db->query('SELECT 
+	
 
-			t_hakakses.id as id_hakakses,
-			t_hakakses.id_user as id_user,
-			t_hakakses.hak_menu as hak_menu,
-			t_hakakses.hak_c as C,
-			t_hakakses.hak_r as R,
-			t_hakakses.hak_u as U,
-			t_hakakses.hak_d as D,
+	function Jum(){
+		$query = $this->db->query('SELECT
+					t_hakakses.id as id_hakakses,
+					t_hakakses.role_id as role_id_hakakses,
+					t_hakakses.hak_menu as hak_menu,
+					t_hakakses.hak_c as C,
+					t_hakakses.hak_r as R,
+					t_hakakses.hak_u as U,
+					t_hakakses.hak_d as D,
 
-			r_menu.kode_menu as kode_menu,
-			r_menu.nama_menu as nama_menu,
-			r_menu.icon_menu as icon_menu,
-			r_menu.link_menu as link_menu,
-			r_menu.parent_menu as parent_menu,
-			r_menu.status_menu as status_menu,
+					r_menu.kode_menu as kode_menu,
+					r_menu.nama_menu as nama_menu,
+					r_menu.icon_menu as icon_menu,
+					r_menu.link_menu as link_menu,
+					r_menu.parent_menu as parent_menu,
+					r_menu.status_menu as status_menu,
 
-			user.kdsatker as kdsatker,
-            user.role_id as role_id
+					t_role.rolename as role_name
 
-			FROM
-			t_hakakses
+					FROM
+					t_hakakses
 
-			JOIN
+					JOIN
 
-			r_menu ON r_menu.kode_menu = t_hakakses.hak_menu
+					r_menu ON r_menu.kode_menu = t_hakakses.hak_menu
 
-			JOIN
+					JOIN
 
-			user ON user.username = t_hakakses.id_user
+					t_role ON t_role.id = t_hakakses.role_id
 
-			WHERE user.kdsatker = '.$kdsatker.'
+					ORDER BY t_hakakses.role_id
 		');
 
 		return $query->num_rows();
