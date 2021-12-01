@@ -31,7 +31,7 @@
                     <tr>
                         <th style="width: 20%" >Kode</th>
                         <th style="width: 50%" >Uraian</th>
-                        <th style="width: 20%" >Jumlah</th>
+                        <th style="width: 20%" >Saldo App</th>
                         <th style="width: 10%" >Aksi</th>
                     </tr>
                   </thead>
