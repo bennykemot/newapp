@@ -87,10 +87,12 @@
 
      var grid_detail_app = "#tabel_mapping_detail";
      function showDetailapp(Id){
-
+      
       $('html,body').animate({
-        scrollTop: $("#DetailCard").offset().top},
-        'slow');
+        scrollTop: $("#mydiv").offset().top},
+        2000);
+
+        
       $(grid_detail_app).DataTable({
             serverSide: true,
             processing: true,
@@ -605,7 +607,7 @@ $("#EditMapping").click(function (e) {
 
   btn
     .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
-    .attr("disabled", false);
+    .attr("disabled", true);
 
   formData.append('Trigger', 'U')
 

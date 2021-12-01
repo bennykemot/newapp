@@ -82,7 +82,7 @@
       </div>
     </div>
 
-  <div class="section section-data-tables">
+  <div class="section section-data-tables" id="mydiv">
     <div class="col s12" id="DetailCard" style="display: none">
       <div class="card">
         <div class="card-content">
