@@ -98,7 +98,7 @@
 
       $.ajax({
         url : baseurl_menu + "Master",
-        data: {"username": username},
+        data: {"role_id": role_id},
         type: "post",
         dataType: "JSON",
         success: function(data)
@@ -115,7 +115,7 @@
                   }else{
 
                       if(data[i]['kode_menu'] == 'menu_03'){
-                        row = '<li class="bold"><a class="waves-effect waves-cyan" href='+url_base(data[i]['link_menu']+'/'+kdsatker+ '/'+thang+'/'+user_id)+'>\
+                        row = '<li class="bold"><a class="waves-effect waves-cyan" href='+url_base(data[i]['link_menu']+'/'+kdsatker+ '/'+thang+'/'+user_id+'/'+role_id)+'>\
                               <i class="material-icons">\
                               '+data[i]['icon_menu']+'\
                               </i><span class="menu-title" data-i18n="Mail">'+data[i]['nama_menu']+'</span></a>\
@@ -151,6 +151,40 @@
               }
             }
     });
+
+    (function() {
+    const idleDurationSecs = 600;
+    const redirectUrl = '<?= site_url('Auth/Auth/logout')?>';
+    let idleTimeout;
+
+    const resetIdleTimeout = function() {
+        if(idleTimeout) clearTimeout(idleTimeout);
+        idleTimeout = setTimeout(() => location.href = redirectUrl, idleDurationSecs * 1000);
+    };
+	
+	// Key events for reset time
+    resetIdleTimeout();
+    window.onmousemove = resetIdleTimeout;
+    window.onkeypress = resetIdleTimeout;
+    window.click = resetIdleTimeout;
+    window.onclick = resetIdleTimeout;
+    window.touchstart = resetIdleTimeout;
+    window.onfocus = resetIdleTimeout;
+    window.onchange = resetIdleTimeout;
+    window.onmouseover = resetIdleTimeout;
+    window.onmouseout = resetIdleTimeout;
+    window.onmousemove = resetIdleTimeout;
+    window.onmousedown = resetIdleTimeout;
+    window.onmouseup = resetIdleTimeout;
+    window.onkeypress = resetIdleTimeout;
+    window.onkeydown = resetIdleTimeout;
+    window.onkeyup = resetIdleTimeout;
+    window.onsubmit = resetIdleTimeout;
+    window.onreset = resetIdleTimeout;
+    window.onselect = resetIdleTimeout;
+    window.onscroll = resetIdleTimeout;
+
+})();
     
       </script>
 

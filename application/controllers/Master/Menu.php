@@ -14,10 +14,10 @@ class Menu extends CI_Controller {
 
 	public function Master(){
 
-        $Username = $this->input->post('username');
+        $role_id = $this->input->post('role_id');
 
         
-            $response = $this->Master->get_Menu($Username);
+            $response = $this->Master->get_Menu($role_id);
         
         echo json_encode($response);
      }

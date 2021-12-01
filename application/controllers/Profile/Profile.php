@@ -74,50 +74,8 @@ class Profile extends CI_Controller {
                 $msg = "Username Sudah Ada !";
                 echo json_encode(array('status' => $status, 'msg' => $msg));
             }else{
-            if($kdrole == 1){
 
-            $triggerdetail = 'InsertForPenggunaAdmin';
-            $getMenu = $this->db->query("SELECT kode_menu from r_menu")->result_array();
-
-
-            for($i=0; $i < count($getMenu) ; $i++){
-
-                $hakAkses = array(
-                    'id_user' => $nama_user,
-                    'hak_menu' => $getMenu[$i]['kode_menu'],
-                    'hak_c' => 1,
-                    'hak_r' => 1,
-                    'hak_u' => 1,
-                    'hak_d' => 1,
-                    );
-
-                $this->Profile->Hak_Akses($hakAkses,'t_hakakses', $Trigger);
-
-                }
-
-            }else if($kdrole == 9){
-
-                $triggerdetail = 'InsertForPenggunaOperator';
-                $getMenu = $this->db->query("SELECT kode_menu from r_menu where kode_menu IN ('menu_04','menu_02') ")->result_array();
-
-
-                
-
-                for($i=0; $i < count($getMenu) ; $i++){
-
-                    $hakAkses = array(
-                        'id_user' => $nama_user,
-                        'hak_menu' => $getMenu[$i]['kode_menu'],
-                        'hak_c' => 1,
-                        'hak_r' => 1,
-                        'hak_u' => 1,
-                        'hak_d' => 1,
-                        );
-                        $this->Profile->Hak_Akses($hakAkses,'t_hakakses', $Trigger);
-
-                    }
-
-            }
+            
 
             $data = array(
                 'username' => $nama_user,
@@ -135,6 +93,7 @@ class Profile extends CI_Controller {
             $msg = "Data Berhasil Ditambah !";
             echo json_encode(array('status' => $status, 'msg' => $msg));
             }
+            
 
         }else if($Trigger == "D"){
             $id = $this->input->post('id');
