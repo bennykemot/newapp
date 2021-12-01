@@ -582,7 +582,7 @@ $("#EditMapping").click(function (e) {
 
   btn
     .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
-    .attr("disabled", true);
+    .attr("disabled", false);
 
   formData.append('Trigger', 'U')
 
