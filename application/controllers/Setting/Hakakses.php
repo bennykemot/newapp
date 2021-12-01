@@ -30,7 +30,7 @@ class Hakakses extends CI_Controller {
 		//$roleId = $this->uri->segment(6);
 
 		$jumlah = $this->Hakakses->Jum($satker);
-		$config['base_url'] = base_url().'Setting/Hakakses/Page'.$satker;
+		$config['base_url'] = base_url().'Setting/Hakakses/Page/'.$satker;
 
 		$config['total_rows'] = $jumlah;
 		$config['per_page'] = 20;
@@ -70,7 +70,7 @@ class Hakakses extends CI_Controller {
 
 		$data['hakakses'] = $this->Hakakses->Master($satker, $config['per_page'],$from);
 
-		$this->load->view('Setting/Hakakses/Master',$data);
+		$this->load->view('Setting/Menu/Hakakses/Master',$data);
 	}
 
 }

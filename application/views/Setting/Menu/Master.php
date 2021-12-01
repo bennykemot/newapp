@@ -16,7 +16,7 @@
                       <h6> Setting Menu </h6>
                   </div>
                   <div class="col s2">
-                  <a class="btn modal-trigger" href="#modal2">Tambah Data</a>
+                  		<a class="btn modal-trigger" href="javascript:;" onclick="addMenu()">Tambah Data</a>
                   </div>
               </div>
           </div>
