@@ -34,7 +34,7 @@ class M_Transfer extends CI_Model{
         SELECT 
         CONCAT(thang,kdsatker,kddept,kdunit,kdprogram,kdgiat,kdoutput,kdsoutput,kdkmpnen,kdskmpnen,kdakun,kdbeban,kdib) AS kdindex, 
            thang,kdsatker,kddept,kdunit,kdprogram,kdgiat,kdoutput,kdsoutput,kdkmpnen,kdskmpnen,kdakun,kdbeban,kdib, SUM(jumlah) AS jumlah, 
-           register,".$no_revisi." as revisike, ".$tglRevisi." AS tgrevisi,CONCAT('DIPA-',kddept,'.',kdunit,'.',kddekon,'.',kdsatker,'/',thang,' Revisi ke ',".$no_revisi.") AS norevisi
+           register,".$no_revisi." as revisike, NOW() AS tgrevisi,CONCAT('DIPA-',kddept,'.',kdunit,'.',kddekon,'.',kdsatker,'/',thang,' Revisi ke ',".$no_revisi.") AS norevisi
            FROM d_item WHERE kdsatker = '".$kdsatker."' GROUP BY thang,kdsatker,kddept,kdunit,kdprogram,kdgiat,kdoutput,kdsoutput,kdkmpnen,kdskmpnen,kdakun,kdbeban,kdib
         ");
 
@@ -65,7 +65,7 @@ class M_Transfer extends CI_Model{
         CONCAT(thang,kdsatker,kddept,kdunit,kdprogram,kdgiat,kdoutput,kdsoutput,kdkmpnen,kdskmpnen,kdakun,kdbeban,kdib) AS kdindex, 
            
            thang,kdsatker,kddept,kdunit,kdprogram,kdgiat,kdoutput,kdsoutput,kdkmpnen,kdskmpnen,kdakun,kdbeban,kdib, SUM(jumlah) AS jumlah, 
-           register,".$no_revisi." as revisike, ".$tglRevisi." AS tgrevisi,CONCAT('DIPA-',kddept,'.',kdunit,'.',kddekon,'.',kdsatker,'/',thang,' Revisi ke ',".$no_revisi.") AS norevisi
+           register,".$no_revisi." as revisike, NOW() AS tgrevisi,CONCAT('DIPA-',kddept,'.',kdunit,'.',kddekon,'.',kdsatker,'/',thang,' Revisi ke ',".$no_revisi.") AS norevisi
            FROM d_item WHERE kdsatker = '".$kdsatker."' GROUP BY thang,kdsatker,kddept,kdunit,kdprogram,kdgiat,kdoutput,kdsoutput,kdkmpnen,kdskmpnen,kdakun,kdbeban,kdib
         ");
     }

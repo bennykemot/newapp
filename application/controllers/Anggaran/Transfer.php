@@ -103,7 +103,7 @@ class Transfer extends CI_Controller {
         {       
             
 
-           $data = $this->upload->data();
+            $data = $this->upload->data();
             $status = "success";
             $msg = "File Berhasil di Upload";
 

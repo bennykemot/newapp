@@ -23,4 +23,34 @@ class User extends CI_Controller {
 		$this->load->view('User/User', $data);
 
 	}
+
+	public function Action(){
+		$Trigger        = $this->input->post('Trigger');
+
+		if($Trigger == "R"){
+            $id = $this->input->post('id');
+            $where = array('id' => $id);
+            $output = $this->User->CRUD($where,'user', $Trigger);
+            echo json_encode($output);
+		}else{
+
+			$id        = $this->input->post('idUser');
+            $username  = $this->input->post('username');
+            $password  = $this->input->post('password');
+
+			$data = array(
+                'username' => $username,
+                'password' => $password
+                
+                );
+            $where = array('id' => $id);
+	        $this->User->update($data,'user', $where);
+
+            $status = "success";
+            $msg = "Data Berhasil DiUbah !";
+            echo json_encode(array('status' => $status, 'msg' => $msg));
+
+		}
+
+	}
 }

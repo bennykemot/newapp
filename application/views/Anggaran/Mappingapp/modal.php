@@ -1,4 +1,4 @@
-<div id="modal2" class="modal" >
+<div id="modal2" class="modal modal-fixed-footer" >
     <div class="modal-content">
       <h4>Tambah Detail App Pagu</h4>
       <div style="padding-top: 10px"></div>
@@ -30,13 +30,12 @@
                   <div class="multi-fields" id="multi-fields">
                     <div class="multi-field">
                       <div class="input-field col s12">
-                          <div class="input-field col s2 tahapan_id_label"><label>Pengumpulan Data</label></div>
+                          <div class="input-field col s2 "></div>
                           <input id="tahapan1" name="tahapan1" value="1" hidden>
 
                           <div class="input-field col s10 " >
-                            <input placeholder="00.000.000" class="rupiah" id="rupiah1" name="rupiah1"  onkeyup="AllCount()" >
-                            <!-- <input placeholder="00.000.000" id="nilai_app2" name="nilai_app[]" type="number" min="1000" > -->
-                          </div>
+                            <input placeholder="00.000.000" class="rupiah" id="rupiah1" name="rupiah1"  onkeyup="AllCount()" onkeypress="return validateNumber(event)">
+                            <label class="active tahapan_id_label" for="rupiah1" >Pengumpulan Data</label></div>
                       </div>
                     </div>
                   </div>

@@ -155,5 +155,20 @@ class M_Profile extends CI_Model{
         $this->db->update($table, $data, $where); 
     }
 
+    function Hak_Akses($data,$table, $Trigger){
+
+        if($Trigger == "R"){
+
+            $this->db->insert($table,$data);
+            
+        }else if($Trigger == "D"){
+
+            $this->db->where($data);
+            $this->db->delete($table);
+
+        }
+
+    }
+
 
 }

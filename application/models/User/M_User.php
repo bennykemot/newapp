@@ -22,5 +22,21 @@ class M_User extends CI_Model{
             
         return $query->row();
     }
+
+    function CRUD($data,$table,$Trigger){
+
+        if($Trigger == "R"){
+
+            $this->db->from($table);
+            $this->db->where($data);
+            $query = $this->db->get();
+    
+            return $query->row();
+        }
+	}
+
+    public function Update($data, $table, $where){
+        $this->db->update($table, $data, $where); 
+    }
 }
 
