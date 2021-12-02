@@ -121,4 +121,45 @@
             } );
         },
             });
-    </script>
+
+	$("#role-select2").select2({
+		dropdownAutoWidth: true,
+		width: '100%',
+		placeholder: "Pilih Role",
+		dropdownParent: "#modal2",
+		ajax: {
+			url: dropdown_baseurl + 'role',
+			type: "post",
+			dataType: 'json',
+			delay: 250,
+			data: function(params){
+				return{
+					searchTerm: params.term
+				};
+			},
+			processResults: function(response){
+				return{
+					results: response
+				};
+			},
+			cache: true
+		}
+	});
+	
+	
+	$("#TambahHakAkses").click(function (e){
+		e.preventDefault();
+
+		var btn = $(this);
+		var form = $(this).closest("form");
+		var formData = new FormData($("#FormHakAkses")[0]);
+		var IdForm = "FormHakAkses";
+
+		btn
+			.addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")	
+			.attr("disabled", true);
+		
+		
+	})
+	
+	</script>

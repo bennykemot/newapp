@@ -39,7 +39,7 @@
                                 <tr>
                                   <td>No</td>
                                   <!-- <td>Id</td> -->
-                                  <!-- <td>Username</td> -->
+                                  <td>Role</td>
                                   <td>Menu</td>
                                   <td>C</td>
                                   <td>R</td>
@@ -50,18 +50,18 @@
                           </thead>
                           
                           <tbody>
-													<?php 
+													<!-- <?php 
                           $before = "";
                           $no = 1;
 														foreach($hakakses as $ha){
-                              if($before != $ha->role_id_hakakses){
-                                echo '<tr><td colspan="7" style="background-color: ##bbdefb">'.$ha->role_name.'</td></tr>';
-                                $before = $ha->role_id_hakakses;
-                                $no = 1;
+                              if($before != $ha->role_name){
+                                echo '<td colspan="7">'.$ha->role_name.'</td>';
+                                $before = $ha->role_name;
                               }
-													?>
+													?> -->
 														<tr style="white-space: nowrap !important;overflow: hidden;">
-														<td><?php echo $no++;?></td>
+														<td><?php echo $ha->id_hakakses ?></td>
+														<td><?php echo $ha->role_name ?></td>
 														<td><?php echo $ha->nama_menu ?></td>
 														<td><?php echo hakAkses($ha->C)?></td>
 														<td><?php echo hakAkses($ha->R)?></td>
@@ -71,9 +71,9 @@
                                   <a href="javascript:;" onclick="Edit('<?= $ha->id_hakakses ?>')"><i class="material-icons green-text">edit</i></a>
                                   <a href="javascript:;" onclick="Delete('<?= $ha->id_hakakses ?>')"><i class="material-icons red-text">delete</i></a>
                                 </td>
-													<?php
+													<!-- <?php
 														}
-													?>
+													?> -->
                           </tbody>
                         </table>
 											<div id="page-length-option_paginate" class="dataTables_paginate paging_simple_numbers">
@@ -86,5 +86,7 @@
         </div>
     </div>
 
+	
+<?php include('modal.php'); ?>
 <?php include(APPPATH . 'views/Footer/Footer.php') ?>
 <?php include('script.php');?>

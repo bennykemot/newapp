@@ -461,7 +461,7 @@ $("#TambahST").click(function (e) {
 
   btn
     .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
-    .attr("disabled", true);
+    .attr("disabled", false);
 
   formData.append('Trigger', 'C')
   formData.append('countTim', countTim)
@@ -528,23 +528,23 @@ function show_msg(textStatus){
             })
     }
 
-(function(){
-	$('form > div > input').keyup(function(){
-		var empty = false;
-		$('form > div > input').each(function(){
-			if($(this).val() == ''){
-				empty = true;
-			}
+// (function(){
+// 	$('form > div > input').keyup(function(){
+// 		var empty = false;
+// 		$('form > div > input').each(function(){
+// 			if($(this).val() == ''){
+// 				empty = true;
+// 			}
 
-		});
+// 		});
 
-		if(empty){
-			$('#TambahST').attr('disabled','disabled');
-		}else{
-			$('#TambahST').removeAttr('disabled');
-		}
-	});
-})()
+// 		if(empty){
+// 			$('#TambahST').attr('disabled','disabled');
+// 		}else{
+// 			$('#TambahST').removeAttr('disabled');
+// 		}
+// 	});
+// })()
 
 // $('#nost, #tglst, #uraianst, #tglst_mulai, #tglst_selesai, #idxskmpnen, #modalIdx, #beban_anggaran, #ttd').bind('keyup', function(){
 // 	if(allFilled()) $('#TambahST').removeAttr('disabled');
