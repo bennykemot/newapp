@@ -122,7 +122,7 @@
                             <div class="col s9"></div>
 
                             <div class="col s3">
-                                <button id="TambahST" class="btn col s12" disabled="disabled"><i class="material-icons left">done</i> Simpan</button>
+                                <button id="TambahST" class="btn col s12"><i class="material-icons left">done</i> Simpan</button>
                             </div>
                         </div>
                         

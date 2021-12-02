@@ -73,4 +73,13 @@ class Hakakses extends CI_Controller {
 		$this->load->view('Setting/Hakakses/Master',$data);
 	}
 
+	public function Action(){
+		$Trigger = $this->input->post('Trigger');
+		if($Trigger == "C"){
+			$roleId = $this->input->post('role');
+
+		}
+
+	}	
+
 }

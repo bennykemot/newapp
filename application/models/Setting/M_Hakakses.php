@@ -90,5 +90,12 @@ class M_Hakakses extends CI_Model{
 		return $query->num_rows();
 	}
 
+	function getDataRole(){
+		$query = $this->db->query('SELECT * FROM t_role');
+
+		return $query->result();
+	}	
+
+
 }
 
