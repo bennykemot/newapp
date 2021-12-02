@@ -52,14 +52,16 @@
                           <tbody>
 													<?php 
                           $before = "";
+                          $no = 1;
 														foreach($hakakses as $ha){
-                              if($before != $ha->id_user){
-                                echo '<td colspan="7">'.$ha->id_user.'</td>';
-                                $before = $ha->id_user;
+                              if($before != $ha->role_id_hakakses){
+                                echo '<tr><td colspan="7" style="background-color: ##bbdefb">'.$ha->role_name.'</td></tr>';
+                                $before = $ha->role_id_hakakses;
+                                $no = 1;
                               }
 													?>
 														<tr style="white-space: nowrap !important;overflow: hidden;">
-														<td><?php echo $ha->id_hakakses ?></td>
+														<td><?php echo $no++;?></td>
 														<td><?php echo $ha->nama_menu ?></td>
 														<td><?php echo hakAkses($ha->C)?></td>
 														<td><?php echo hakAkses($ha->R)?></td>

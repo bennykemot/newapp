@@ -49,7 +49,7 @@
                               <th>Aksi</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="height: 0 !important">
                                 <?php 
                                   foreach($pp as $u){ 
                                 ?>

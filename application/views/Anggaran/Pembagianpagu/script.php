@@ -397,6 +397,19 @@
 
 
 $("#TambahPagu").click(function (e) {
+
+   if($("#komponen-select2").val() == null){
+
+      swal({
+            title:"Komponen Masih Kosong", 
+            icon:"warning",
+            timer: 2000
+            })
+    
+    return false;
+
+
+   }
   e.preventDefault();
 
   var btn = $(this);
@@ -426,6 +439,11 @@ $("#TambahPagu").click(function (e) {
                }, 2000);
               Reset(IdForm);
               document.getElementById("TambahPagu").disabled = false; 
+              document.getElementById("program-select2").disabled = true;
+              document.getElementById("kegiatan-select2").disabled = true;
+              document.getElementById("kro-select2").disabled = true;
+              document.getElementById("ro-select2").disabled = true;
+              document.getElementById("komponen-select2").disabled = true;
               
               
           },
@@ -494,6 +512,12 @@ $("#EditPagu").click(function (e) {
                   location.reload();
                }, 2000);
                Reset(IdForm);
+               document.getElementById("TambahPagu").disabled = false; 
+              document.getElementById("program-select2").disabled = true;
+              document.getElementById("kegiatan-select2").disabled = true;
+              document.getElementById("kro-select2").disabled = true;
+              document.getElementById("ro-select2").disabled = true;
+              document.getElementById("komponen-select2").disabled = true;
               
               
           },
@@ -535,6 +559,12 @@ function Execute(Id) {
        setTimeout(function() {
                   location.reload();
                }, 2000);
+               document.getElementById("TambahPagu").disabled = false; 
+              document.getElementById("program-select2").disabled = true;
+              document.getElementById("kegiatan-select2").disabled = true;
+              document.getElementById("kro-select2").disabled = true;
+              document.getElementById("ro-select2").disabled = true;
+              document.getElementById("komponen-select2").disabled = true;
     },
     error: function (jqXHR, textStatus, errorThrown) { },
   });

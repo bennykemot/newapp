@@ -17,9 +17,10 @@ class Master extends CI_Controller {
         $Trigger = $this->input->post('Trigger');
 
         $kdkmpnen = $this->input->post('kdkmpnen');
+        $kdskmpnen = $this->input->post('kdskmpnen');
 
         
-            $response = $this->Master->getData_tahapan($Trigger, $kdkmpnen);
+            $response = $this->Master->getData_tahapan($Trigger, $kdkmpnen, $kdskmpnen);
         
         echo json_encode($response);
      }

@@ -1,4 +1,4 @@
-<div id="modal2" class="modal modal-fixed-footer" >
+<div id="modal2" class="modal modal-fixed-footer"  >
     <div class="modal-content">
       <h4>Tambah Detail App Pagu</h4>
       <div style="padding-top: 10px"></div>
@@ -13,7 +13,7 @@
                 <div class="input-field col s2"><label>Nama App</label></div>
 
                 <div class="input-field col s10 " >
-                  <select  id="app-select2" name="app" class="browser-default app"></select>
+                  <select  id="app-select2" name="app" class="browser-default app" required ></select>
                   </div>
             </div>
 
@@ -35,7 +35,7 @@
 
                           <div class="input-field col s10 " >
                             <input placeholder="00.000.000" class="rupiah" id="rupiah1" name="rupiah1"  onkeyup="AllCount()" onkeypress="return validateNumber(event)">
-                            <label class="active tahapan_id_label" for="rupiah1" >Pengumpulan Data</label></div>
+                            <label style="font-size: 13px !Important" class="active tahapan_id_label" for="rupiah1" >Pengumpulan Data</label></div>
                       </div>
                     </div>
                   </div>
@@ -83,6 +83,7 @@
                 <div class="input-field col s10 " >
                   <input placeholder="Nilai App" id="kodeindex" name="kodeindex" type="text" >
                   <input placeholder="Nilai App" id="kdkmpnen" name="kdkmpnen" type="text" >
+                  <input placeholder="Nilai App" id="kdskmpnen" name="kdskmpnen" type="text" >
                 </div>
             </div>
 

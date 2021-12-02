@@ -13,10 +13,33 @@ class MappingApp extends CI_Controller {
 		$this->load->model('Anggaran/M_Mappingapp','Mappingapp');
 	}
 
-	public function index()
+	public function Pagea()
 	{
+
+        $this->load->view('Anggaran/Mappingapp/manage');
         
 	}
+
+    function get_table(){
+
+            $satker = $this->input->post('satker');
+            // $userId = $this->input->post('userId');
+            // $roleId = $this->input->post('roleId');
+            $number = 20;
+            $from = 0;
+
+            $data = $this->Mappingapp->datatablesdata($satker);
+            $output = array(
+                "draw" => $_POST['draw'],
+                "recordsTotal" => $this->Mappingapp->count_all($satker),
+                "recordsFiltered" => $this->Mappingapp->count_filtered($satker),
+                "data" => $data,
+                );
+
+            
+            echo json_encode($output);
+
+    }
 
     // public function Page(){
 

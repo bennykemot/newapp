@@ -3,8 +3,9 @@
 class M_Master extends CI_Model {
 
    // Fetch users
-   function getData_tahapan($Trigger, $kdkmpnen){
-       $this->db->where('kdkmpnen', $kdkmpnen);
+   function getData_tahapan($Trigger, $kdkmpnen,$kdskmpnen){
+         $this->db->where('kdkmpnen', $kdkmpnen);
+         $this->db->where('kdskmpnen', $kdskmpnen);
         $fetched_records = $this->db->get('r_tahapan');
         $users = $fetched_records->result_array();
 

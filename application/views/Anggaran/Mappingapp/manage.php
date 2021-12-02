@@ -19,7 +19,31 @@
       </div>
   </div>
 
-    <div class="col s12">
+  <div class="col s12" hidden>
+      <div class="card">
+        <div class="card-content">
+          <h4 class="card-title col s10"></h4>
+            <div class="row">
+              <div class="col s12">
+                <table id="tabel-mapping" class="bordered striped responsive-table" style="width: 100%">
+                  <thead>
+                    <tr>
+                        <th style="width: 20%" >Kode</th>
+                        <th style="width: 50%" >Uraian</th>
+                        <th style="width: 20%" >Saldo App</th>
+                        <th style="width: 10%" >Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12" >
       <div class="card">
         <div class="card-content">
           <h4 class="card-title col s10"></h4>
@@ -55,7 +79,7 @@
                                 <td><?php echo $u->uraian ?></td>
                                 <td class="text-right"><?php echo number_format($u->jumlah,0,',','.') ?></td>
                                 <?php if ($u->kdlevel == "7" && $u->kode != "521811"){ ?>
-                                <td style="text-align: center"><button type="button" class="btn-floating green" onclick="Add('<?= $u->kdindex ?>', '<?= $u->jumlah ?>', '<?= $u->kdkmpnen ?>')"><i class="material-icons">add</i></button></td>
+                                <td style="text-align: center"><button type="button" class="btn-floating green" onclick="Add('<?= $u->kdindex ?>', '<?= $u->jumlah ?>', '<?= $u->kdkmpnen ?>', '<?= $u->kdskmpnen ?>')" ><i class="material-icons">add</i></button></td>
                                 <?php } else{ 
                                   echo '<td></td>';
                               } ?>
@@ -89,7 +113,7 @@
           <h4 class="card-title col s10">Detail App</h4>
           <div class="row">
             <div class="col s12">
-              <table id="tabel_mapping_detail" class="display table-responsive" style="width: 100%">
+              <table id="tabel_mapping_detail" class="display table-responsive" style="width: 100%; max-height: 50px;">
                   <thead>
                     <tr>
                         <th>No</th>
@@ -100,11 +124,11 @@
                         <th>Aksi</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody style="height: 0 !important">
                   </tbody>
                     <tfoot style="background-color: #faf8a6;">
                       <tr>
-                      <td>TOTAL </td><td></td><td></td>
+                      <td colspan="3" style="text-align: left">TOTAL </td>
                         <td style="text-align: right; padding-right: 10px !important"></td>
                         <td></td><td></td>
                       </tr>

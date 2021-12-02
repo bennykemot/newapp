@@ -70,7 +70,7 @@ class Hakakses extends CI_Controller {
 
 		$data['hakakses'] = $this->Hakakses->Master($satker, $config['per_page'],$from);
 
-		$this->load->view('Setting/Menu/Hakakses/Master',$data);
+		$this->load->view('Setting/Hakakses/Master',$data);
 	}
 
 }

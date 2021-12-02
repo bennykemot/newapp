@@ -19,6 +19,34 @@ class M_Mappingapp extends CI_Model{
     //     return $query->result();
     // }
 
+    function datatablesdata($kdsatker){
+
+            $this->db->where('kdsatker', $kdsatker);
+            $this->db->order_by('kdsatker, kddept, kdunit, kdprogram, kdgiat, kdoutput,kdib, kdsoutput, kdkmpnen, kdskmpnen, kdakun');
+            //$this->db->limit($number, $offset);
+            $query =  $this->db->get($this->table);
+
+            return $query->result();
+
+
+    }
+
+    function count_filtered($satker)
+    {
+        $this->db->where('kdsatker', $kdsatker);
+            $this->db->order_by('kdsatker, kddept, kdunit, kdprogram, kdgiat, kdoutput,kdib, kdsoutput, kdkmpnen, kdskmpnen, kdakun');
+            //$this->db->limit($number, $offset);
+            $query =  $this->db->get($this->table);
+
+        return $query->num_rows();
+    }
+ 
+    public function count_all($satker)
+    {
+        $this->db->from($this->table);
+        return $this->db->count_all_results();
+    }
+
     function getDataNew($kdsatker,$number,$offset, $userId, $roleId){
 
         if($roleId == 1){

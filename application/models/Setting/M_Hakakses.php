@@ -8,7 +8,7 @@ class M_Hakakses extends CI_Model{
         $query = $this->db->query('SELECT 
 
 									t_hakakses.id as id_hakakses,
-									t_hakakses.id_user as id_user,
+									t_hakakses.role_id as role_id_hakakses,
 									t_hakakses.hak_menu as hak_menu,
 									t_hakakses.hak_c as C,
 									t_hakakses.hak_r as R,
@@ -20,7 +20,9 @@ class M_Hakakses extends CI_Model{
                                     r_menu.icon_menu as icon_menu,
                                     r_menu.link_menu as link_menu,
                                     r_menu.parent_menu as parent_menu,
-                                    r_menu.status_menu as status_menu
+                                    r_menu.status_menu as status_menu,
+
+									t_role.rolename as role_name
 
 									FROM
 									t_hakakses
@@ -31,9 +33,11 @@ class M_Hakakses extends CI_Model{
 
 									JOIN
 
-									user ON user.username = t_hakakses.id_user
+									t_role ON t_role.id = t_hakakses.role_id
 
-									WHERE user.kdsatker = '.$kdsatker.'
+									ORDER BY t_hakakses.role_id
+
+									
 									LIMIT '.$number.' OFFSET '.$offset.'
 									');
 
@@ -54,7 +58,7 @@ class M_Hakakses extends CI_Model{
 		$query = $this->db->query('SELECT 
 
 			t_hakakses.id as id_hakakses,
-			t_hakakses.id_user as id_user,
+			t_hakakses.role_id as role_id_hakakses,
 			t_hakakses.hak_menu as hak_menu,
 			t_hakakses.hak_c as C,
 			t_hakakses.hak_r as R,
@@ -68,8 +72,7 @@ class M_Hakakses extends CI_Model{
 			r_menu.parent_menu as parent_menu,
 			r_menu.status_menu as status_menu,
 
-			user.kdsatker as kdsatker,
-            user.role_id as role_id
+			t_role.rolename as role_name
 
 			FROM
 			t_hakakses
@@ -80,9 +83,11 @@ class M_Hakakses extends CI_Model{
 
 			JOIN
 
-			user ON user.username = t_hakakses.id_user
+			t_role ON t_role.id = t_hakakses.role_id
 
-			WHERE user.kdsatker = '.$kdsatker.'
+			ORDER BY t_hakakses.role_id
+
+			
 		');
 
 		return $query->num_rows();
