@@ -6,16 +6,15 @@ class M_NotaDinas extends CI_Model{
         $this->load->database();
 	}
 
-    function getDataNew(){
-        $this->db->order_by('tglst');
-        $query = $this->db->get('d_surattugas');
+    function getDataNew($number,$offset){
+       $query = $this->db->query('SELECT d_surattugas.id as idsurattugas, d_surattugas.nost, d_surattugas.uraianst, d_surattugas.tglst, d_surattugas.tglmulaist, d_surattugas.tglselesaist, d_costsheet.tujuanst, d_costsheet.biaya, d_costsheet.id as idcostsheet FROM `d_surattugas` JOIN d_costsheet ON d_surattugas.id = d_costsheet.nost  LIMIT '.$number.' OFFSET '.$offset.'');
 
         return $query->result();
      
     }
 
     function Jum(){
-         return $this->db->get('d_surattugas')->num_rows();
+         return $this->db->query('SELECT * FROM d_surattugas JOIN d_costsheet ON d_surattugas.id = d_costsheet.nost')->num_rows();
 	}
     
     function CRUD($data,$table,$Trigger){
@@ -74,38 +73,120 @@ class M_NotaDinas extends CI_Model{
         return $this->db->get_where($table,$data);
     }
 
-    function getData_export(){
-        if($Trigger == "costsheet"){
-            $this->db->select('d_surattugas.id as idst');
-            $this->db->select('d_surattugas.tglst');
-            $this->db->select('d_surattugas.uraianst');
-            $this->db->select('d_surattugas.tglmulaist');
-            $this->db->select('d_surattugas.tglselesaist');
-            $this->db->select('d_surattugas.id_unit');
-            $this->db->select('d_surattugas.id_ttd');
-            $this->db->select('d_surattugas.idxskmpnen');
-
-            $this->db->select('d_stdetail.id as id');
-            $this->db->select('d_stdetail.nourut');
-            $this->db->select('d_stdetail.nama');
-            $this->db->select('d_stdetail.nip');
-
-            $this->db->select('r_pegawai.gol_id');
+    function getData_export($Trigger,$Id_st){
+        if($Trigger == "costsheet" || $Trigger == "spd" || $Trigger == "nominatif"){
+            $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, 
+            d_surattugas.uraianst, d_surattugas.tglmulaist, 
+            d_surattugas.tglselesaist, d_surattugas.idxskmpnen, 
+            t_unitkerja.nama_unit , d_itemcs.nourut, d_itemcs.nama, 
+            d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan, 
+            d_itemcs.tglberangkat, d_itemcs.tglkembali, d_itemcs.kotaasal, 
+            d_itemcs.kotatujuan, d_itemcs.jmlhari, d_itemcs.totaluangharian, 
+            d_itemcs.totalinap, d_itemcs.totalrep, d_itemcs.totaltravel , d_itemcs.jnstransportasi,
+            d_itemcs.jumlah
             
-            $this->db->select('r_golongan.new_id_golongan as id_golongan');
-            $this->db->select('r_golongan.kode as nama_golongan');
+            FROM d_surattugas JOIN t_unitkerja ON t_unitkerja.id = d_surattugas.id_unit 
+            JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
+            
+            WHERE d_surattugas.id = ".$Id_st." ");
 
-            $this->db->from('d_surattugas');
-            $this->db->join('d_stdetail', 'd_surattugas.id = d_stdetail.id_st');
-            $this->db->join('r_pegawai', 'r_pegawai.nip = d_stdetail.nip');
+            return $query->result();
+            
+        }else if($Trigger == "spd_back" ){
 
-            $this->db->join('r_golongan', 'r_golongan.new_id_golongan = r_pegawai.gol_id');
+            $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, 
+            d_surattugas.uraianst, d_surattugas.tglmulaist, 
+            d_surattugas.tglselesaist, d_surattugas.idxskmpnen, 
+            t_unitkerja.nama_unit , d_itemcs.nourut, d_itemcs.nama, 
+            d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan, 
+            d_itemcs.tglberangkat, d_itemcs.tglkembali, d_itemcs.kotaasal, 
+            d_itemcs.kotatujuan, d_itemcs.jmlhari, d_itemcs.totaluangharian, 
+            d_itemcs.totalinap, d_itemcs.totalrep, d_itemcs.totaltravel , d_itemcs.jnstransportasi,
+            d_itemcs.jumlah 
+            
+            FROM d_surattugas JOIN t_unitkerja ON t_unitkerja.id = d_surattugas.id_unit 
+            JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
+            
+            WHERE d_surattugas.id = ".$Id_st." ");
 
-            $this->db->where('d_surattugas.id', $data);
-            $query = $this->db->get();
+            return $query->result();
 
-            return $query->result_array();
-        }
+        }else if($Trigger == "kwitansi" ){
+
+            $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, 
+            d_surattugas.uraianst, d_surattugas.tglmulaist, 
+            d_surattugas.tglselesaist, d_surattugas.idxskmpnen, 
+            t_unitkerja.nama_unit , d_itemcs.nourut, d_itemcs.nama, 
+            d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan, 
+            d_itemcs.tglberangkat, d_itemcs.tglkembali, d_itemcs.kotaasal, 
+            d_itemcs.kotatujuan, d_itemcs.jmlhari, d_itemcs.totaluangharian, 
+            d_itemcs.totalinap, d_itemcs.totalrep, d_itemcs.totaltravel ,
+            d_itemcs.tarifuangharian, 
+            d_itemcs.tarifinap, d_itemcs.tarifrep, d_itemcs.transport ,
+            d_itemcs.jnstransportasi,
+            d_itemcs.jumlah 
+            
+            FROM d_surattugas JOIN t_unitkerja ON t_unitkerja.id = d_surattugas.id_unit 
+            JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
+            
+            WHERE d_surattugas.id = ".$Id_st." ");
+
+            return $query->result();
+
+        }else if($Trigger == "rincian_biaya" ){
+
+            $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, 
+            d_surattugas.uraianst, d_surattugas.tglmulaist, 
+            d_surattugas.tglselesaist, d_surattugas.idxskmpnen, 
+            t_unitkerja.nama_unit , d_itemcs.nourut, d_itemcs.nama, 
+            d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan, 
+            d_itemcs.tglberangkat, d_itemcs.tglkembali, d_itemcs.kotaasal, 
+            d_itemcs.kotatujuan, d_itemcs.jmlhari, d_itemcs.totaluangharian, 
+            d_itemcs.totalinap, d_itemcs.totalrep, d_itemcs.totaltravel ,
+            d_itemcs.tarifuangharian, 
+            d_itemcs.tarifinap, d_itemcs.tarifrep, d_itemcs.transport ,
+            d_itemcs.jnstransportasi,
+            d_itemcs.jumlah 
+            
+            FROM d_surattugas JOIN t_unitkerja ON t_unitkerja.id = d_surattugas.id_unit 
+            JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
+            
+            WHERE d_surattugas.id = ".$Id_st." ");
+
+            return $query->result();
+
+        }else if($Trigger == "pengeluaran_rill" ){
+
+            $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, 
+            d_surattugas.uraianst, d_surattugas.tglmulaist, 
+            d_surattugas.tglselesaist, d_surattugas.idxskmpnen, 
+            d_itemcs.nourut, d_itemcs.nama, 
+            d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan
+            
+            FROM d_surattugas
+            JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
+            
+            WHERE d_surattugas.id = ".$Id_st." ");
+
+            return $query->result();
+
+        }else if($Trigger == "perhitungan_rampung" ){
+
+                $query = $this->db->query("SELECT 
+                d_surattugas.nost, d_surattugas.tglst, 
+                d_surattugas.uraianst, d_surattugas.tglmulaist, 
+                d_surattugas.tglselesaist, d_surattugas.idxskmpnen, 
+                d_itemcs.nourut, d_itemcs.nama, 
+                d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan, d_itemcs.jumlah
+                
+                FROM d_surattugas
+                JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
+                
+                WHERE d_surattugas.id = ".$Id_st." ");
+    
+                return $query->result();
+    
+            }
     }
 
 }

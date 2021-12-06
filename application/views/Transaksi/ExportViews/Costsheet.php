@@ -45,18 +45,18 @@
 
 function cek_tgl($tanggal){
     $bulan = array (
-        1 =>   'Januari',
-        'Februari',
-        'Maret',
-        'April',
+        1 =>   'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
         'Mei',
-        'Juni',
-        'Juli',
-        'Agustus',
-        'September',
-        'Oktober',
-        'November',
-        'Desember'
+        'Jun',
+        'Jul',
+        'Agust',
+        'Sep',
+        'Okt',
+        'Nov',
+        'Des'
     );
     $pecahkan = explode('-', $tanggal);
     
@@ -66,6 +66,29 @@ function cek_tgl($tanggal){
     
     return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
     }
+
+    function Explodekota($kota){
+        $data = explode("-",$kota);
+        $result  = $data[2];
+        return $result;
+      
+      }
+      
+      function rupiah($angka){
+          
+          $hasil_rupiah = "Rp " . number_format($angka,0,',','.');
+          return $hasil_rupiah;
+       
+      }
+
+      foreach($export as $j){
+        $sumhari +=$j->jmlhari;
+        $sumuangharian +=$j->totaluangharian;
+        $sumutravel +=$j->totaltravel;
+        $sumuinap +=$j->totalinap;
+        $sumurep +=$j->totalrep;
+        $sumtotal +=$j->jumlah;
+        }
 
 ?>
 
@@ -88,12 +111,11 @@ function cek_tgl($tanggal){
                      <td></td><td>Relasi Pagu</td> <td>:</td> <td style="text-align: right">111296319</td>
                 </tr>
                 <tr>
-                    <td>Pembebanan</td> <td>:</td> <td>089.01.01.3667.EAC.SU0.201.A.524111</td>
+                    <td>Pembebanan</td> <td>:</td> <td><?=$export[0]->idxskmpnen?></td>
                      <td></td><td>Saldo Lalu</td> <td>:</td> <td style="text-align: right">1978787681</td>
                 </tr>
                 <tr>
-                    <td>Maksud Perjalanan</td> <td>:</td> <td >Melaksanakan pendampingan Pemeriksaan BPK RI atas Laporan Keuangan BPKP
-                                                                Tahun 2020 pada Perwakilan BPKP Provinsi Jawa Barat</td>
+                    <td>Maksud Perjalanan</td> <td>:</td> <td ><?=$export[0]->uraianst?></td>
                      <td></td><td>Pengajuan</td> <td>:</td> <td style="text-align: right">13810000</td>
                 </tr>
                 <tr>
@@ -107,7 +129,7 @@ function cek_tgl($tanggal){
         <div style="padding-top: 30px"></div>
 
         <table width="100%" style="border: 1px" >
-                <thead style="text-align: center; vertical-align: middle">
+                <thead style="text-align: center; vertical-align: middle; height:1px !important;">
                     <tr>
                         <td rowspan="2" width="3%">No</td>
                         <td rowspan="2" width="13%">Nama</td>
@@ -135,53 +157,34 @@ function cek_tgl($tanggal){
                 </thead>
 
                 <tbody>
+                    <?php $no=1; foreach($export as $e){ ?>
                     <tr>
-                        <td style="text-align: center;">1</td>
-                        <td>Nita Safitri</td>
-                        <td>198701122008012001</td>
-                        <td style="text-align: center;">III.b</td>
-                        <td>Jakarta</td>
-                        <td>Bandung</td>
-                        <td>01-Mar-2021</td>
-                        <td>05-Mar-2021</td>
-                        <td style="text-align: center;">5</td>
-                        <td style="text-align: right;">2,150,000</td>
-                        <td style="text-align: right;">2,280,000</td>
-                        <td style="text-align: right;">115,000</td>
-                        <td style="text-align: right;">0</td>
-                        <td style="text-align: right;">4,545,000</td>
+                        <td style="text-align: center;"><?=$no++?></td>
+                        <td><?=$e->nama?></td>
+                        <td><?=$e->nip?></td>
+                        <td style="text-align: center;"><?=$e->golongan?></td>
+                        <td><?=Explodekota($e->kotaasal)?></td>
+                        <td><?=Explodekota($e->kotatujuan)?></td>
+                        <td><?=cek_tgl($e->tglberangkat)?></td>
+                        <td><?=cek_tgl($e->tglkembali)?></td>
+                        <td style="text-align: center;"><?=$e->jmlhari?></td>
+                        <td style="text-align: right;"><?=rupiah($e->totaluangharian)?></td>
+                        <td style="text-align: right;"><?=rupiah($e->totalinap)?></td>
+                        <td style="text-align: right;"><?=rupiah($e->totaltravel)?></td>
+                        <td style="text-align: right;"><?=rupiah($e->totalrep)?></td>
+                        <td style="text-align: right;"><?=rupiah($e->jumlah)?></td>
                     </tr>
+                    <?php } ?>
+                
                     <tr>
-                        <td style="text-align: center;">2</td>
-                        <td>Nita Safitri</td>
-                        <td>198701122008012001</td>
-                        <td style="text-align: center;">III.b</td>
-                        <td>Jakarta</td>
-                        <td>Bandung</td>
-                        <td>01-Mar-2021</td>
-                        <td>05-Mar-2021</td>
-                        <td style="text-align: center;">5</td>
-                        <td style="text-align: right;">2,150,000</td>
-                        <td style="text-align: right;">2,280,000</td>
-                        <td style="text-align: right;">115,000</td>
-                        <td style="text-align: right;">0</td>
-                        <td style="text-align: right;">4,545,000</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: center;">3</td>
-                        <td>Nita Safitri</td>
-                        <td>198701122008012001</td>
-                        <td style="text-align: center;">III.b</td>
-                        <td>Jakarta</td>
-                        <td>Bandung</td>
-                        <td>01-Mar-2021</td>
-                        <td>05-Mar-2021</td>
-                        <td style="text-align: center;">5</td>
-                        <td style="text-align: right;">2,150,000</td>
-                        <td style="text-align: right;">2,280,000</td>
-                        <td style="text-align: right;">115,000</td>
-                        <td style="text-align: right;">0</td>
-                        <td style="text-align: right;">4,545,000</td>
+                        <td colspan="7"></td>
+                        <td>Jumlah</td>
+                        <td style="text-align: center;"><?=$sumhari?></td>
+                        <td style="text-align: right;"><?=rupiah($sumuangharian)?></td>
+                        <td style="text-align: right;"><?=rupiah($sumutravel)?></td>
+                        <td style="text-align: right;"><?=rupiah($sumuinap)?></td>
+                        <td style="text-align: right;"><?=rupiah($sumurep)?></td>
+                        <td style="text-align: right;"><?=rupiah($sumtotal)?></td>
                     </tr>
                     
                 </tbody>
@@ -207,10 +210,10 @@ function cek_tgl($tanggal){
                 </thead>
 
                     <tr>
-                        <td style="border-right-style: none; border-bottom-style: none;">Tanggal <br> Catatan </td><td style="border-left-style: none; border-bottom-style: none;"><?= date("d-M-Y")?><br>The example below formats today's date in three different ways</td>
-                        <td style="border-right-style: none; border-bottom-style: none;">Tanggal <br> Catatan </td><td style="border-left-style: none; border-bottom-style: none;"><?= date("d-M-Y")?><br>The example below formats today's date in three different ways</td>
-                        <td style="border-right-style: none; border-bottom-style: none;">Tanggal <br> Catatan </td><td style="border-left-style: none; border-bottom-style: none;"><?= date("d-M-Y")?><br>The example below formats today's date in three different ways</td>
-                        <td style="border-right-style: none; border-bottom-style: none;">Tanggal <br> Catatan </td><td style="border-left-style: none; border-bottom-style: none;"><?= date("d-M-Y")?><br>The example below formats today's date in three different ways</td>
+                        <td style="border-right-style: none; border-bottom-style: none;">Tanggal <br> Catatan </td><td style="border-left-style: none; border-bottom-style: none;"></td>
+                        <td style="border-right-style: none; border-bottom-style: none;">Tanggal <br> Catatan </td><td style="border-left-style: none; border-bottom-style: none;"></td>
+                        <td style="border-right-style: none; border-bottom-style: none;">Tanggal <br> Catatan </td><td style="border-left-style: none; border-bottom-style: none;"></td>
+                        <td style="border-right-style: none; border-bottom-style: none;">Tanggal <br> Catatan </td><td style="border-left-style: none; border-bottom-style: none;"></td>
                     </tr>
 
                     <tr>

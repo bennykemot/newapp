@@ -82,7 +82,7 @@
                             <div class="input-field col s2"><label>Beban Anggaran</label></div>
 
                             <div class="input-field col s10 " >
-                            <select class="browser-default" id="beban_anggaran" name="beban_anggaran"></select>
+                            <select class="browser-default" id="select-bebananggaran" name="select-bebananggaran"></select>
                             </div>
                         </div>
 
@@ -100,7 +100,7 @@
 
                                 <div class="input-field col s12" >
                                     <div class="input-field col s9">
-                                        <button type="button" class="btn warning col s12"><i class="material-icons left">face</i> DAFTAR TIM</button>
+                                        <a  class="btn warning col s12"><i class="material-icons left">face</i> DAFTAR TIM</a>
                                     </div>
 
                                     <div class="input-field col s3 ">

@@ -179,6 +179,22 @@ function hakAkses($data){
     return $display;
 
   }
+
+  function Explodekota($kota){
+  $data = explode("-",$kota);
+  $result  = $data[2];
+  return $result;
+
+}
+
+function rupiah($angka){
+	
+	$hasil_rupiah = "Rp " . number_format($angka,0,',','.');
+	return $hasil_rupiah;
+ 
+}
+
+  
   
   ?>
 

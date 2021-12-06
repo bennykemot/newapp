@@ -41,11 +41,18 @@
                             </tr>
                         </thead>
                         <tbody>
+
+                        <?php 
+                            $no = $this->uri->segment('4') + 1;
+                            foreach($NotaDinas as $u){ 
+                              ?>
+
+
                             <tr>
-                                <td>1</td>
-                                <td><b>ST-3456/SU03/3/2021    22-11-2021</b>
+                                <td><?php echo $no ?></td>
+                                <td><b><?php echo $u->nost ?>   <?php echo $u->tglst ?></b>
                                     <br>
-                                    Perjalanan Dinas dalam rangka penyusunan revisi RKAKL Satker di lingkungan BPKP
+                                    <?php echo $u->uraianst ?>
                                     <br>
                                     <div class="col s12" style="padding-top: 10px">
                                         <a class='<?= getapprove(0)?> tooltipped' style="margin-right: 10px" data-position="top" data-tooltip="Eselon 4">Es 4</a>
@@ -57,22 +64,23 @@
                                         <a class='<?= getapprove(0)?> tooltipped' data-position="bottom" data-tooltip="Eselon 1">Es 1</a>
                                     </div>
                                 </td>
-                                <td>Bandung</td>
-                                <td>Rp25.000.000</td>
-                                <td>29-11-2021</td>
-                                <td>29-11-2021</td>
+                                <td><?php echo Explodekota($u->tujuanst) ?></td>
+                                <td><?php echo rupiah($u->biaya) ?></td>
+                                <td><?php echo $u->tglmulaist ?></td>
+                                <td><?php echo $u->tglselesaist ?></td>
                                 <td>
                                     <div class="col s12">
                                         <!-- <a href="#" class="btn btn-customizer orange col s12 sidenav-trigger" data-target="theme-cutomizer-out" onclick="show('ST-3456/SU03/3/2021')">VIEW</a><br> -->
                                           <a href="#" class="btn dropdown-trigger orange col s12" href="#" data-target="dropdown1">VIEW</a><br>
                                           <ul id='dropdown1' class='dropdown-content' style="min-width: 170px !important;">
-                                            <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/costsheet/L') ?>" target="blank">Costsheet</a></li>
-                                            <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd/P') ?>" target="blank">SPD</a></li>
-                                            <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd_back/P') ?>" target="blank">SPD Belakang</a></li>
-                                            <li><a style="font-size: 14px;" href="#" class="sidenav-trigger" data-target="theme-cutomizer-out" onclick="show('ST-3456/SU03/3/2021')">Kwitansi Rampung</a>
-																							<ul class="subMenu">
+                                            <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/SuratTugas/Export/'.$u->idsurattugas) ?>" target="blank">Surat Tugas</a></li>
+                                            <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/costsheet/L/'.$u->idsurattugas) ?>" target="blank">Costsheet</a></li>
+                                            <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd/P/'.$u->idsurattugas) ?>" target="blank">SPD</a></li>
+                                            <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd_back/P/'.$u->idsurattugas) ?>" target="blank">SPD Belakang</a></li>
+                                            <li><a style="font-size: 14px;" href="#" class="sidenav-trigger" data-target="theme-cutomizer-out" onclick="show('<?=$u->idsurattugas?>')">Kwitansi Rampung</a>
+																							<!-- <ul class="subMenu">
 																								<li><a href="#">Kwitansi</a></li>
-																							</ul>
+																							</ul> -->
 																						</li>
                                           </ul>
 
@@ -86,11 +94,12 @@
                                 </td>
                             </tr>
 
-                            <!-- Dropdown Structure -->
+                            <?php $no++;} ?>
                             
                             
                           </tbody>
                     </table>
+                    <?php echo $this->pagination->create_links(); ?>
 
                 </div>
               </div>
@@ -105,28 +114,29 @@
    <div class="col s12">
       <a class="sidenav-close" href="#!"><i class="material-icons">close</i></a>
       <h5 class="theme-cutomizer-title">Cetak Kwitansi</h5>
-        <input type="text" id="no_st" name="no_st" hidden>
+        <input type="text" id="id_st" name="id_st" >
           <div class="menu-options">
             <hr class="customize-devider">
             <div class="menu-options-form row">
                 <div class="input-field col s12 menu-bg-color mb-0">
-                  <a href="<?= site_url('Transaksi/NotaDinas/Export/kwitansi/P') ?>" target="blank"><div class="card-panel green darken-1 btn col s12">
+                  
+                  <a onclick="kwitansiRampung('Export/kwitansi/P/','kwitansi')" href="javascript:;" ><div class="card-panel green darken-1 btn col s12">
                       <span class="white-text">Kwitansi</span>
                     </div></a>
 
-                    <a href="<?= site_url('Transaksi/NotaDinas/Export/rincian_biaya/P') ?>" target="blank"><div class="card-panel orange darken-1 btn col s12">
+                    <a onclick="kwitansiRampung('Export/rincian_biaya/P/','rincian_biaya')" href="javascript:;"><div class="card-panel orange darken-1 btn col s12">
                       <span class="white-text">Rincian Biaya</span>
                     </div></a>
 
-                    <a href="<?= site_url('Transaksi/NotaDinas/Export/pengeluaran_rill/P') ?>" target="blank"><div class="card-panel red darken-1 btn col s12">
+                    <a  onclick="kwitansiRampung('Export/pengeluaran_rill/P/','pengeluaran_rill')" href="javascript:;"><div class="card-panel red darken-1 btn col s12">
                       <span class="white-text">Daftar Pengeluaran Rill</span>
                     </div></a>
 
-                    <a href="<?= site_url('Transaksi/NotaDinas/Export/nominatif/L') ?>" target="blank"><div class="card-panel blue darken-1 btn col s12">
+                    <a onclick="kwitansiRampung('Export/nominatif/L/','nominatif')" href="javascript:;"><div class="card-panel blue darken-1 btn col s12">
                       <span class="white-text">Daftar Nominatif</span>
                     </div></a>
 
-                    <a href="<?= site_url('Transaksi/NotaDinas/Export/perhitungan_rampung/P') ?>" target="blank"><div class="card-panel deep-purple darken-1 btn col s12">
+                    <a onclick="kwitansiRampung('Export/perhitungan_rampung/P/','perhitungan_rampung')" href="javascript:;"><div class="card-panel deep-purple darken-1 btn col s12">
                       <span class="white-text">Perhitungan Rampung</span>
                     </div></a>
 

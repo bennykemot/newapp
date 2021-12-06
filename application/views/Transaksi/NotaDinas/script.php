@@ -11,7 +11,13 @@ function viewModal(){
 }
 
 function show(Id){
-  $('#no_st').val(Id);
+  $('#id_st').val(Id);
+}
+
+function kwitansiRampung(url,trigger){
+  var id = $('#id_st').val()
+  window.open(baseurl + url + id, '_blank')
+
 }
 
 $("#costsheet").click(function (e) {

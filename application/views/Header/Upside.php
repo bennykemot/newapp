@@ -43,7 +43,7 @@
             </ul> -->
             <!-- profile-dropdown-->
             <ul class="dropdown-content" id="profile-dropdown">
-							<li><a class="blue-text text-darken-1"><?php echo $this->session->userdata("username"); ?></a></li>
+							<li style="background-color: #fff3e0"><a class="grey-text text-darken-1"><?php echo $this->session->userdata("username"); ?></a></li>
 							<li class="divider"></li>
               <li><a class="grey-text text-darken-1" href="<?= site_url('User/User/User/'.$this->session->userdata("user_id").'')?>"><i class="material-icons">person_outline</i> Profile</a></li>
               <?php 

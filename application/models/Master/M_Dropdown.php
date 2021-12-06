@@ -233,8 +233,9 @@ function getData_Pegawai($searchTerm="", $Trigger){
    $this->db->select('nip');
    $this->db->select('nama');
    $this->db->select('jabatan');
+   $this->db->select('golruang');
    $this->db->where("nama like '%".$searchTerm."%' ");
-   $fetched_records = $this->db->get('r_pegawai');
+   $fetched_records = $this->db->get('t_pegawai');
    $users = $fetched_records->result_array();
 
    // Initialize Array with fetched data
@@ -245,7 +246,7 @@ function getData_Pegawai($searchTerm="", $Trigger){
       }
    }else{
       foreach($users as $user){
-         $data[] = array("id"=>$user['nip']."-".$user['jabatan']."-".$user['nama'], "text"=>$user['nama']);
+         $data[] = array("id"=>$user['nip']."-".$user['jabatan']."-".$user['nama']."-".$user['golruang'], "text"=>$user['nama']);
       }
    }
    
@@ -359,7 +360,7 @@ function getData_kota($searchTerm="", $Trigger, $Jenistarif){
    // Initialize Array with fetched data
    $data = array();
    foreach($users as $user){
-      $data[] = array("id"=>$user['id_kota'].'-'.$user['id'], "text"=>$user['nama_provinsi'].'-'.$user['nama_kota']);
+      $data[] = array("id"=>$user['id_kota'].'-'.$user['id'].'-'.$user['nama_kota'], "text"=>$user['nama_provinsi'].'-'.$user['nama_kota']);
    }
    return $data;
 }

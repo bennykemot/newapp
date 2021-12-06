@@ -77,12 +77,35 @@ function cek_tgl($tanggal){
     return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
     }
 
+    function terbilang($nilai) {
+		if($nilai<0) {
+			$hasil = "minus ". trim(penyebut($nilai));
+		} else {
+			$hasil = trim(penyebut($nilai));
+		}     		
+		return $hasil;
+	}
+
+    function Explodekota($kota){
+        $data = explode("-",$kota);
+        $result  = $data[2];
+        return $result;
+      
+      }
+
+      function rupiah($angka){
+          
+        $hasil_rupiah = "Rp " . number_format($angka,0,',','.');
+        return $hasil_rupiah;
+     
+    }
+
 ?>
 
    
 
     <body>
-    <?php for($i=0 ; $i < 3 ; $i++){?>
+    <?php foreach($export as $e){?>
 
     <header>
             <table width="100%" id="head">
@@ -104,23 +127,23 @@ function cek_tgl($tanggal){
             <tr>
                 <td width="10%">Nama</td>
                 <td width="2%">:</td>
-                <td> Fenny Shera Luckyartha</td>
+                <td><?=$e->nama?></td>
             </tr>
 
             <tr>
                 <td width="10%">NIP</td>
                 <td width="2%">:</td>
-                <td>198709262009112001</td>
+                <td><?=$e->nip?></td>
             </tr>
 
             <tr>
                 <td width="10%">Jabatan</td>
                 <td width="2%">:</td>
-                <td>Auditor Pertama</td>
+                <td><?=$e->jabatan?></td>
             </tr>
 
         </table>
-        <p>Berdasarkan Surat Pejalanan Dinas (SPD) tanggal 15 March 2021 Nomor 645/SU03/3/2021<br>
+        <p>Berdasarkan Surat Pejalanan Dinas (SPD) tanggal <?=cek_tgl($e->tglst)?> Nomor <?=$e->nost?><br>
             Dengan ini kami menyatakan sesungguhnya bahwa : <br>
             1. Biaya transport Pegawai dan/atau biaya penginapan di bawah ini yang tidak dapat diperoleh
             bukti - bukti pengeluarannya, meliputi :</p>
@@ -152,7 +175,7 @@ function cek_tgl($tanggal){
                     <tr>
                         <td >Mengetahui/Menyetujui,</td>
                         <td width="10%"></td>
-                        <td width="25%">Jakarta, 15 March 2021</td>
+                        <td width="25%">Jakarta, <?=cek_tgl($e->tglst)?></td>
                     </tr>
 
                     <tr>
@@ -170,13 +193,13 @@ function cek_tgl($tanggal){
                     <tr>
                         <td >Sumardi</td>
                         <td width="10%"></td>
-                        <td width="25%">Fenny Shera Luckyartha</td>
+                        <td width="25%"><?=$e->nama?></td>
                     </tr>
 
                     <tr>
                         <td >NIP.197307251994021001</td>
                         <td width="10%"></td>
-                        <td width="25%">NIP.198709262009112001</td>
+                        <td width="25%">NIP.<?=$e->nip?></td>
                     </tr>
 
                 </tbody>

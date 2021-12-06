@@ -86,7 +86,22 @@
                             <td><?php echo $u->tglselesaist ?></td>
                             <td>
                                 <div class="col s12">
-                                    <a class="btn orange col s12" href="<?= site_url('Transaksi/SuratTugas/Export/'.$u->id)?>" target="_blank">VIEW</a><br>
+
+                                <a href="#" class="btn dropdown-trigger orange col s12" href="#" data-target="dropdown1">VIEW</a><br>
+                                          <ul id='dropdown1' class='dropdown-content' style="min-width: 170px !important;">
+                                            <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/SuratTugas/Export/'.$u->id) ?>" target="blank">Surat Tugas</a></li>
+                                            <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/costsheet/L/'.$u->id) ?>" target="blank">Costsheet</a></li>
+                                            <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd/P/'.$u->id) ?>" target="blank">SPD</a></li>
+                                            <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd_back/P/'.$u->id) ?>" target="blank">SPD Belakang</a></li>
+                                            <li><a style="font-size: 14px;" href="#" class="sidenav-trigger" data-target="theme-cutomizer-out" onclick="show('<?=$u->id?>')">Kwitansi Rampung</a>
+																							<!-- <ul class="subMenu">
+																								<li><a href="#">Kwitansi</a></li>
+																							</ul> -->
+																						</li>
+                                          </ul>
+
+
+                                    <!-- <a class="btn orange col s12" href="<?= site_url('Transaksi/SuratTugas/Export/'.$u->id)?>" target="_blank">VIEW</a><br> -->
                                     <div style="padding-bottom: 20px"></div>
                                     <a class="btn cyan col s12" href="<?= site_url('Transaksi/SuratTugas/ubah/'.$u->id)?>">UBAH</a><br>
                                     <div style="padding-bottom: 20px"></div>
@@ -109,8 +124,41 @@
     </div>
 
 
+    <div id="theme-cutomizer-out" class="theme-cutomizer sidenav row">
+   <div class="col s12">
+      <a class="sidenav-close" href="#!"><i class="material-icons">close</i></a>
+      <h5 class="theme-cutomizer-title">Cetak Kwitansi</h5>
+        <input type="text" id="id_st" name="id_st" >
+          <div class="menu-options">
+            <hr class="customize-devider">
+            <div class="menu-options-form row">
+                <div class="input-field col s12 menu-bg-color mb-0">
+                  
+                  <a onclick="kwitansiRampung('Export/kwitansi/P/','kwitansi')" href="javascript:;" ><div class="card-panel green darken-1 btn col s12">
+                      <span class="white-text">Kwitansi</span>
+                    </div></a>
 
-  </div>
+                    <a onclick="kwitansiRampung('Export/rincian_biaya/P/','rincian_biaya')" href="javascript:;"><div class="card-panel orange darken-1 btn col s12">
+                      <span class="white-text">Rincian Biaya</span>
+                    </div></a>
+
+                    <a  onclick="kwitansiRampung('Export/pengeluaran_rill/P/','pengeluaran_rill')" href="javascript:;"><div class="card-panel red darken-1 btn col s12">
+                      <span class="white-text">Daftar Pengeluaran Rill</span>
+                    </div></a>
+
+                    <a onclick="kwitansiRampung('Export/nominatif/L/','nominatif')" href="javascript:;"><div class="card-panel blue darken-1 btn col s12">
+                      <span class="white-text">Daftar Nominatif</span>
+                    </div></a>
+
+                    <a onclick="kwitansiRampung('Export/perhitungan_rampung/P/','perhitungan_rampung')" href="javascript:;"><div class="card-panel deep-purple darken-1 btn col s12">
+                      <span class="white-text">Perhitungan Rampung</span>
+                    </div></a>
+
+                </div>
+            </div>
+          </div>
+   </div>
+</div>
   <?php include('modal.php');?>
   <?php include(APPPATH . 'views/Footer/Footer.php') ?>
   <?php include('script.php');?>

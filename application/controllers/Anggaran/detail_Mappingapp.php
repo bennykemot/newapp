@@ -66,7 +66,7 @@ class Detail_Mappingapp extends CI_Controller {
 
             if(count($cek) == 0){
 
-                if( $kdkmpnen == "051" || $kdkmpnen == "052" || $kdkmpnen == "053" ){
+                if( $kdkmpnen == "051" || $kdkmpnen == "052"){
 
                     $data = array();    
                     $j = 1;

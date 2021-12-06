@@ -8,9 +8,9 @@
     <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google.">
     <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
     <meta name="author" content="ThemeSelect">
-    <title>User Login | Materialize - Material Design Admin Template</title>
-    <link rel="apple-touch-icon" href="<?= base_url().'assets'?>/app-assets/images/favicon/apple-touch-icon-152x152.png">
-    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url().'assets'?>/app-assets/images/favicon/favicon-32x32.png">
+    <title>Manajemen Keuangan - 2022</title>
+    <link rel="apple-touch-icon" href="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2.png">
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2.png">
     <link href="<?= base_url().'assets'?>/icon.css?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/vendors/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url().'assets'?>/app-assets/css/themes/vertical-dark-menu-template/materialize.min.css">

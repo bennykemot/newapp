@@ -77,12 +77,27 @@ function cek_tgl($tanggal){
     return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
     }
 
+    
+        function Explodekota($kota){
+            $data = explode("-",$kota);
+            $result  = $data[2];
+            return $result;
+          
+          }
+          
+          function rupiah($angka){
+              
+              $hasil_rupiah = "Rp " . number_format($angka,0,',','.');
+              return $hasil_rupiah;
+           
+          }
+
 ?>
 
    
 
     <body>
-    <?php for($i=0 ; $i < 3 ; $i++){?>
+    <?php $no=1; foreach($export as $e){ ?>
 
     <header>
         <table width="100%" id="head">
@@ -93,7 +108,7 @@ function cek_tgl($tanggal){
 
                 <tr>
                     <td style="text-align: center">
-                    Nomor : SPD-644/SU03/3/2021
+                    Nomor : <?=$e->nost?>
                     </td>
                 <tr>
             </table>
@@ -104,6 +119,7 @@ function cek_tgl($tanggal){
         
         
         <div style="padding-top: 30px"></div>
+        
 
         <table width="100%" style="border: 1px" id="body" cellpadding="6">
 
@@ -116,44 +132,42 @@ function cek_tgl($tanggal){
                     <tr>
                         <td style="text-align: center;">2</td>
                         <td>Nama /NIP Pegawai yang melaksanakan perjalanan dinas</td>
-                        <td colspan="2">Nita Safitri <br> 198701122008012001</td>
+                        <td colspan="2"><?=$e->nama?> <br> <?=$e->nip?></td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">3</td>
                         <td>a. Pangkat dan golongan<br>
                             b. Jabatan / Instansi<br>
                             c. Tingkat Biaya Perjalanan Dinas</td>
-                        <td colspan="2">III/b<br>
-                            Auditor Muda selaku Subkoordinator Analisis dan Evaluasi<br>
-                            C</td>
+                        <td colspan="2"><?=$e->golongan?><br>
+                        <?=$e->jabatan?><br>
+                            C *masih hardcode</td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">4</td>
                         <td>Maksud perjalanan dinas</td>
-                        <td colspan="2">Melaksanakan pendampingan Pemeriksaan BPK RI atas Laporan
-                            Keuangan BPKP Tahun 2020 pada Perwakilan BPKP Provinsi Jawa
-                            Barat</td>
+                        <td colspan="2"><?=$e->uraianst?></td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">5</td>
                         <td>Alat angkutan yang dipergunakan</td>
-                        <td colspan="2">Kendaraan Umum</td>
+                        <td colspan="2"><?=$e->jnstransportasi?></td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">6</td>
-                        <td>a. Tempat berangka<br>
+                        <td>a. Tempat berangkat<br>
                             b. Tempat tujuan</td>
-                        <td colspan="2">Jakarta<br>
-                            Bandung</td>
+                        <td colspan="2"><?=Explodekota($e->kotaasal)?><br>
+                        <?=Explodekota($e->kotatujuan)?></td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">7</td>
                         <td>a. Lamanya perjalanan<br>
                             b. Tanggal<br>
                             c. Tanggal harus kembali / (tiba di tempat)</td>
-                        <td colspan="2">5 hari<br>
-                            01 Maret 2021<br>
-                            05 Maret 2021</td>
+                        <td colspan="2"><?=$e->jmlhari?> hari<br>
+                        <?=cek_tgl($e->tglberangkat)?><br>
+                        <?=cek_tgl($e->tglkembali)?></td>
                     </tr>
                     <tr>
                         <td style="text-align: center;" rowspan="2">8</td>
@@ -177,7 +191,7 @@ function cek_tgl($tanggal){
 
                     <tr>
                         <td style="border-top-style: none;">a. Instansi<br> b. Akun</td>
-                        <td style="border-top-style: none;" colspan="2">Biro Keuangan <br>089.01.01.3667.EAC.SU0.201.A.524111</td>
+                        <td style="border-top-style: none;" colspan="2"><?=$e->nama_unit?> <br><?=$e->idxskmpnen?></td>
                     </tr>
 
                     <tr>

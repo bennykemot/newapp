@@ -14,14 +14,14 @@
      
     }
 
-      $(".app").change(function() {
-        var button = document.getElementById("TambahApp");
-        button.classList.remove("disabled");
+      // $(".app").change(function() {
+      //   var button = document.getElementById("TambahApp");
+      //   button.classList.remove("disabled");
 
-        // if($(".rupiah").val() == null || $(".rupiah").val() == 0 || $(".rupiah").val() == "0"){
-        //   button.classList.add("disabled");
-        // }
-      });
+      //   // if($(".rupiah").val() == null || $(".rupiah").val() == 0 || $(".rupiah").val() == "0"){
+      //   //   button.classList.add("disabled");
+      //   // }
+      // });
         // SELECT2 INSERT
 
         $("#app-select2").select2({
@@ -613,7 +613,7 @@ $("#TambahApp").click(function (e) {
     success: function (data, textStatus, jqXHR) {
               show_msg(textStatus);
               $('#modal2').modal('close');
-              showDetailapp($('#kodeindex').val());
+              location.reload();
               Reset(IdForm);
               
               

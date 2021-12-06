@@ -143,6 +143,24 @@ function cek_tgl($tanggal){
 		return $hasil;
 	}
 
+    function Explodekota($kota){
+        $data = explode("-",$kota);
+        $result  = $data[2];
+        return $result;
+      
+      }
+      
+      function rupiah($angka){
+          
+          $hasil_rupiah = "Rp " . number_format($angka,0,',','.');
+          return $hasil_rupiah;
+       
+      }
+
+      foreach($export as $j){
+      $total += $j->jumlah;
+      }
+
 ?>
 
    
@@ -203,42 +221,26 @@ function cek_tgl($tanggal){
                 <td style="text-align: center;" class="ttop tbottom" width="15%">Tanggal</td>
             </tr>
 
-            <tr>
-                <td class="ttop tbottom" >1</td>
-                <td class="ttop tbottom" >Nita Safitri</td>
-                <td class="ttop tbottom" >SPD-644/SU03/3/2021 </td>
-                <td class="ttop tbottom" >15/03/2021</td>
-                <td style="text-align: right;" class="ttop tbottom" >4,545,000</td>
-                <td style="text-align: right;" class="ttop tbottom" >4,545,000</td>
-                <td style="text-align: right;" class="ttop tbottom" >0</td>
-            </tr>
+            <?php $no=1; foreach($export as $e){ ?>
 
             <tr>
-                <td class="ttop tbottom" >2</td>
-                <td class="ttop tbottom" >Fenny Shera Luckyartha </td>
-                <td class="ttop tbottom" >SPD-644/SU03/3/2021 </td>
-                <td class="ttop tbottom" >15/03/2021</td>
-                <td style="text-align: right;" class="ttop tbottom" >4,545,000</td>
-                <td style="text-align: right;" class="ttop tbottom" >4,545,000</td>
-                <td style="text-align: right;" class="ttop tbottom" >0</td>
+                <td class="ttop tbottom" ><?=$no++?></td>
+                <td class="ttop tbottom" ><?=$e->nama?></td>
+                <td class="ttop tbottom" ><?=$e->nost?></td>
+                <td class="ttop tbottom" ><?=cek_tgl($e->tglst)?></td>
+                <td style="text-align: right;" class="ttop tbottom" ><?=rupiah($e->jumlah)?></td>
+                <td style="text-align: right;" class="ttop tbottom" ><?=rupiah($e->jumlah)?></td>
+                <td style="text-align: right;" class="ttop tbottom" ><?=rupiah($e->jumlah - $e->jumlah)?></td>
             </tr>
-
-            <tr>
-                <td class="ttop tbottom" >3</td>
-                <td class="ttop tbottom" >Danang Bayuaji </td>
-                <td class="ttop tbottom" >SPD-644/SU03/3/2021 </td>
-                <td class="ttop tbottom" >15/03/2021</td>
-                <td style="text-align: right;" class="ttop tbottom" >4,545,000</td>
-                <td style="text-align: right;" class="ttop tbottom" >4,545,000</td>
-                <td style="text-align: right;" class="ttop tbottom" >0</td>
-            </tr>
-
+           
+            <?php } ?>
             <tr>
                 <td style="text-align: center;" colspan="4" class="ttop tbottom" >TOTAL</td>
-                <td style="text-align: right;" class="ttop tbottom" >13,810,000</td>
-                <td style="text-align: right;" class="ttop tbottom" >13,810,000</td>
-                <td style="text-align: right;" class="ttop tbottom" >0</td>
+                <td style="text-align: right;" class="ttop tbottom" ><?=rupiah($total)?></td>
+                <td style="text-align: right;" class="ttop tbottom" ><?=rupiah($total)?></td>
+                <td style="text-align: right;" class="ttop tbottom" ><?=rupiah($total - $total)?></td>
             </tr>
+          
 
             
         </table>

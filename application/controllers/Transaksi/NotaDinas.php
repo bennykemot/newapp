@@ -13,8 +13,49 @@ class NotaDinas extends CI_Controller {
 
 	public function index()
 	{
-		$data['NotaDinas']= $this->NotaDinas->getDataNew();
-		$this->load->view('Transaksi/NotaDinas/manage',$data);
+		//$data['NotaDinas']= $this->NotaDinas->getDataNew();
+		//$this->load->view('Transaksi/NotaDinas/manage');
+	}
+
+	public function Page()
+	{
+        
+        $jumlah_data = $this->NotaDinas->Jum();
+        $config['base_url'] = base_url().'Transaksi/NotaDinas/Page';
+		$config['total_rows'] = $jumlah_data;
+		$config['per_page'] = 10;
+
+        $config['first_url'] = '1';
+
+        $config['full_tag_open'] = "<ul class='pagination' >";
+        $config['full_tag_close'] = '</ul>';
+        $config['num_tag_open'] = '<li >';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li><a class="active" >';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['prev_tag_open'] = '<li >';
+        $config['prev_tag_close'] = '</li>';
+        $config['first_tag_open'] = '<li >';
+        $config['first_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li >';
+        $config['last_tag_close'] = '</li>';
+
+
+
+        $config['prev_link'] = '<i style="font-size: 0px !important" ></i> Previous';
+        $config['prev_tag_open'] = '<li >';
+        $config['prev_tag_close'] = '</li>';
+
+
+        $config['next_link'] = 'Next <i style="font-size: 0px !important" ></i>';
+        $config['next_tag_open'] = '<li >';
+        $config['next_tag_close'] = '</li>';
+
+
+		$from =  $this->uri->segment(4);
+		$this->pagination->initialize($config);
+        $data['NotaDinas'] = $this->NotaDinas->getDataNew($config['per_page'], $from);
+        $this->load->view('Transaksi/NotaDinas/manage',$data);
 	}
 
 	public function tambah()
@@ -33,10 +74,11 @@ class NotaDinas extends CI_Controller {
 		
 		$trigger         =  $this->uri->segment(4);
 		$style           =  $this->uri->segment(5);
+		$id_st           =  $this->uri->segment(6);
 
 		$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 
 			'format' => 'A4-'.$style.'',
-			'default_font_size' => 9,
+			'default_font_size' => 8,
 			'default_font' => 'Calibri',
 			'margin_left' => 10,
 			'margin_right' => 10,
@@ -44,22 +86,27 @@ class NotaDinas extends CI_Controller {
 			'margin_bottom' => 6,
 			]);
 		if($trigger == "costsheet"){
-			
-			$html = $this->load->view('Transaksi/ExportViews/Costsheet.php',[],true);
+
+			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
+			$html = $this->load->view('Transaksi/ExportViews/Costsheet.php',$data,true);
 			$name = "Costsheet.pdf";
 		}else if($trigger == "spd"){
-			$html = $this->load->view('Transaksi/ExportViews/SPD.php',[],true);
+			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
+			$html = $this->load->view('Transaksi/ExportViews/SPD.php',$data,true);
 			$name = "SPD.pdf";
 
 		}else if($trigger == "spd_back"){
-			$html = $this->load->view('Transaksi/ExportViews/SPDBack.php',[],true);
+			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
+			$html = $this->load->view('Transaksi/ExportViews/SPDBack.php',$data,true);
 			$name = "SPD-Back.pdf";
 
 		}else if($trigger == "kwitansi"){
-			$html = $this->load->view('Transaksi/ExportViews/Kwitansi.php',[],true);
+			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
+			$html = $this->load->view('Transaksi/ExportViews/Kwitansi.php',$data,true);
 			$name = "Kwitansi.pdf";
 		}else if($trigger == "rincian_biaya"){
-			$html = $this->load->view('Transaksi/ExportViews/Rincianbiaya.php',[],true);
+			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
+			$html = $this->load->view('Transaksi/ExportViews/Rincianbiaya.php',$data,true);
 			$name = "RincianBiaya.pdf";
 		}else if($trigger == "pengeluaran_rill"){
 			
@@ -73,13 +120,16 @@ class NotaDinas extends CI_Controller {
 			'margin_bottom' => 16,
 			]);
 
-			$html = $this->load->view('Transaksi/ExportViews/Pengeluaranrill.php',[],true);
+			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
+			$html = $this->load->view('Transaksi/ExportViews/Pengeluaranrill.php',$data,true);
 			$name = "Pengeluaran-Rill.pdf";
 		}else if($trigger == "nominatif"){
-			$html = $this->load->view('Transaksi/ExportViews/Nominatif.php',[],true);
+			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
+			$html = $this->load->view('Transaksi/ExportViews/Nominatif.php',$data,true);
 			$name = "Nominatif.pdf";
 		}else if($trigger == "perhitungan_rampung"){
-			$html = $this->load->view('Transaksi/ExportViews/Perhitunganrampung.php',[],true);
+			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
+			$html = $this->load->view('Transaksi/ExportViews/Perhitunganrampung.php',$data,true);
 			$name = "Perhitungan-Rampung.pdf";
 		}
         $mpdf->WriteHTML($html);          

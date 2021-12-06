@@ -68,12 +68,26 @@ function cek_tgl($tanggal){
     return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
     }
 
+    function Explodekota($kota){
+        $data = explode("-",$kota);
+        $result  = $data[2];
+        return $result;
+      
+      }
+      
+      function rupiah($angka){
+          
+          $hasil_rupiah = "Rp " . number_format($angka,0,',','.');
+          return $hasil_rupiah;
+       
+      }
+
 ?>
 
    
 
     <body>
-    <?php for($i=0 ; $i < 3 ; $i++){?>  
+    <?php $no=1; foreach($export as $e){ ?>
         <div class="body">
 
             <table width="100%" id="body" cellpadding="6">
@@ -86,25 +100,25 @@ function cek_tgl($tanggal){
                             <!-- BATES KIRI -->
                             <td width="4%" rowspan="4" style="border-left-style: none;border-right-style: none; border-bottom-style: none">I.</td>
                             <td width="30%" style="border-left-style: none;border-right-style: none; border-bottom-style: none">
-                                Berangkat dari (Tempat)<br>
+                                Berangkat dari<br>
                                 ke<br>
                                 pada tanggal
                             </td>
                             <td width="10%" colspan="2" style="border-left-style: none;border-right-style: none; border-bottom-style: none">
-                                : Jakarta<br>
-                                : Bandung<br>
-                                : 29 Desember 2021
+                                : <?=Explodekota($e->kotaasal)?><br>
+                                : <?=Explodekota($e->kotatujuan)?><br>
+                                : <?=cek_tgl($e->tglberangkat)?>
                             </td>
                         </tr>
 
                         <tr>
-                            <td colspan="4" style="text-align: center;border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none">Kepala Bagian Pelaporan Keuangan</td>
+                            <td colspan="3" style="text-align: center;border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none">Kepala Bagian Pelaporan Keuangan</td>
                         </tr>
                         <tr>
-                            <td colspan="4" style="text-align: center; padding-top: 2%;border-left-style: none;border-right-style: none; border-bottom-style: none;border-top-style: none"></td>
+                            <td colspan="3" style="text-align: center; padding-top: 2%;border-left-style: none;border-right-style: none; border-bottom-style: none;border-top-style: none"></td>
                         </tr>
                         <tr>
-                            <td colspan="4" style="text-align: center;border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none">Muslim Ridha Muthaher<br>NIP 196802161993031001</td>
+                            <td colspan="3" style="text-align: center;border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none">Muslim Ridha Muthaher<br>NIP 196802161993031001</td>
                         </tr>
 
                         <!-- ---- -->
@@ -142,15 +156,15 @@ function cek_tgl($tanggal){
 
                         <tr>
                             <td style="border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none"></td>
-                            <td colspan="4" style="border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none"></td>
+                            <td colspan="3" style="border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none"></td>
                         </tr>
                         <tr>
                             <td style="padding-top: 2%;border-left-style: none;border-right-style: none; border-bottom-style: none;border-top-style: none"></td>
-                            <td colspan="4" style="padding-top: 5%;border-left-style: none;border-right-style: none; border-bottom-style: none;border-top-style: none"></td>
+                            <td colspan="3" style="padding-top: 5%;border-left-style: none;border-right-style: none; border-bottom-style: none;border-top-style: none"></td>
                         </tr>
                         <tr>
                             <td style="border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .<br>NIP.</td>
-                            <td colspan="4" style="border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .<br>NIP.</td>
+                            <td colspan="3" style="border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .<br>NIP.</td>
                             
                         </tr>
 
@@ -194,7 +208,7 @@ function cek_tgl($tanggal){
                         <tr>
                             <td width="5%" ></td>
                             <td width="5%" style="border-left-style: none;border-right-style: none; border-bottom-style: none">VII.</td>
-                            <td colspan="6" style="border-left-style: none;border-bottom-style: none">
+                            <td colspan="5" style="border-left-style: none;border-bottom-style: none">
                                Catatan lain-lain<br>
                             </td>
 
@@ -203,7 +217,7 @@ function cek_tgl($tanggal){
                         <tr>
                             <td width="5%" style="border-bottom-style: none;"></td>
                             <td width="5%" style="border-left-style: none;border-right-style: none; border-bottom-style: none">VIII.</td>
-                            <td colspan="6" style="border-left-style: none;border-bottom-style: none">
+                            <td colspan="5" style="border-left-style: none;border-bottom-style: none">
                                PERHATIAN<br>
                             </td>
 
@@ -212,7 +226,7 @@ function cek_tgl($tanggal){
                         <tr>
                             <td width="5%" style="border-bottom-style: none;border-top-style: none"></td>
                             <td width="5%" style="border-left-style: none;border-right-style: none; border-bottom-style: none;border-top-style: none"></td>
-                            <td colspan="6" style="border-left-style: none;border-bottom-style: none;border-top-style: none">
+                            <td colspan="5" style="border-left-style: none;border-bottom-style: none;border-top-style: none">
                             <p style="text-align: justify">
                             PPK yang menerbitkan SPD, Pegawai yang melakukan perjalanan Dinas, para pejabat yang mengesahkan tanggal
                             berangkat/tiba, serta bendahara pengeluaran bertanggung jawab berdasarkan peraturan-peraturan Keuangan negara

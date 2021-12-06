@@ -143,12 +143,27 @@ function cek_tgl($tanggal){
 		return $hasil;
 	}
 
+    function rupiah($angka){
+          
+        $hasil_rupiah = "Rp " . number_format($angka,0,',','.');
+        return $hasil_rupiah;
+     
+    }
+
+    function Explodekota($kota){
+        $data = explode("-",$kota);
+        $result  = $data[2];
+        return $result;
+      
+      
+      }
+
 ?>
 
    
 
     <body>
-    <?php for($i=0 ; $i < 3 ; $i++){?>
+    <?php $no=1; foreach($export as $e){ ?>
 
     <header>
         <table width="100%" id="head">
@@ -173,19 +188,19 @@ function cek_tgl($tanggal){
             <tr>
                 <td width="30%">Uang Sebesar</td>
                 <td width="2%">:</td>
-                <td style="border-collapse: collapse;border: 1px solid black;">Rp4,545,000</td>
+                <td style="border-collapse: collapse;border: 1px solid black;"><?=rupiah($e->jumlah)?></td>
             </tr>
 
             <tr>
                 <td width="30%">Terbilang</td>
                 <td width="2%">:</td>
-                <td style="border-collapse: collapse;border: 1px solid black;"><?=terbilang("4545000")?></td>
+                <td style="border-collapse: collapse;border: 1px solid black;"><?=terbilang($e->jumlah)?></td>
             </tr>
 
             <tr>
                 <td width="30%">Untuk Pembayaran</td>
                 <td width="2%">:</td>
-                <td>Biaya perjalanan dinas menurut</td>
+                <td>Biaya perjalanan dinas <?=$e->uraianst?></td>
             </tr>
 
             <tr>
@@ -197,19 +212,19 @@ function cek_tgl($tanggal){
             <tr>
                 <td width="30%">Nomor / Tanggal</td>
                 <td width="2%">:</td>
-                <td>SPD-644/SU03/3/2021 / 15 Maret 2021</td>
+                <td><?=$e->nost?> /<?=cek_tgl($e->tglst)?></td>
             </tr>
 
             <tr>
                 <td width="30%">Untuk Perjalanan Dinas dari</td>
                 <td width="2%">:</td>
-                <td>Jakarta</td>
+                <td><?=Explodekota($e->kotaasal)?></td>
             </tr>
 
             <tr>
                 <td width="30%">Ke</td>
                 <td width="2%">:</td>
-                <td>Bandung</td>
+                <td><?=Explodekota($e->kotatujuan)?></td>
             </tr>
 
         </table>
@@ -229,38 +244,38 @@ function cek_tgl($tanggal){
 
             <tr>
                 <td></td>
-                <td>Biaya Perjalanan Dinas Pegawai<br>Dari tanggal 01 March 2021 s.d. 05 March 2021</td>
+                <td>Biaya Perjalanan Dinas Pegawai<br>Dari tanggal <?=cek_tgl($e->tglberangkat)?> s.d. <?=cek_tgl($e->tglkembali)?></td>
                 <td></td>
                 <td></td>
             </tr>
             <tr>
                 <td>1</td>
-                <td>Uang Harian<br>- Bandung : 5 hari x Rp.430,000</td>
-                <td style="text-align: right"><br>2,150,000</td>
+                <td>Uang Harian<br>- <?=Explodekota($e->kotatujuan)?> : <?= $e->jmlhari ?> hari x <?=rupiah($e->tarifuangharian)?></td>
+                <td style="text-align: right"><br><?=rupiah($e->totaluangharian)?></td>
                 <td></td>
             </tr>
             <tr>
                 <td>2</td>
-                <td>Uang Hotel<br>- Bandung : 4 hari = Rp.2,280,000</td>
-                <td style="text-align: right"><br>2,280,000</td>
+                <td>Uang Hotel<br>- <?=Explodekota($e->kotatujuan)?> : <?= ($e->jmlhari - 1) ?> hari = <?=rupiah($e->totalinap)?></td>
+                <td style="text-align: right"><br><?=rupiah($e->totalinap)?></td>
                 <td></td>
             </tr>
             <tr>
                 <td>3</td>
-                <td>Uang Transport<br>- Jakarta - Bandung</td>
-                <td style="text-align: right"><br>115,000</td>
+                <td>Uang Transport<br>- <?=Explodekota($e->kotaasal)?> - <?=Explodekota($e->kotatujuan)?></td>
+                <td style="text-align: right"><br><?=rupiah($e->totaltravel)?></td>
                 <td></td>
             </tr>
             <tr>
                 <td>4</td>
                 <td>Uang Representatif</td>
-                <td style="text-align: right">0</td>
+                <td style="text-align: right"><?=rupiah($e->tarifrep)?></td>
                 <td></td>
             </tr>
             <tr class="ttop">
                 <td class="ttop tbottom"></td>
                 <td class="ttop tbottom" style="text-align: center">TOTAL</td>
-                <td class="ttop tbottom" style="text-align: right">4,545,000</td>
+                <td class="ttop tbottom" style="text-align: right"><?=rupiah($e->jumlah)?></td>
                 <td class="ttop tbottom" ></td>
             </tr>
         </table>
@@ -270,7 +285,7 @@ function cek_tgl($tanggal){
         <table width="100%"  id="borderedless" cellpadding="2">
             <tr>
                 <td colspan="2"></td>
-                <td width="30%">Jakarta, 15 Maret 2021</td>
+                <td width="30%">Jakarta, <?=cek_tgl($e->tglst)?></td>
             </tr>
 
             <tr>
@@ -279,13 +294,13 @@ function cek_tgl($tanggal){
             </tr>
 
             <tr>
-                <td colspan="2">Rp 4,545,000 </td>
-                <td width="30%">Rp 4,545,000</td>
+                <td colspan="2"><?=rupiah($e->jumlah)?></td>
+                <td width="30%"><?=rupiah($e->jumlah)?></td>
             </tr>
 
             <tr>
                 <td>Mengetahui/Menyetujui</td>
-                <td colspan="2">Lunas Tanggal: 15 Maret 2021</td>
+                <td colspan="2">Lunas Tanggal: <?=cek_tgl($e->tglst)?></td>
             </tr>
 
             <tr>
@@ -303,12 +318,12 @@ function cek_tgl($tanggal){
             <tr>
                 <td><u>Sumardi</u></td>
                 <td><u>Aditya Kurniawan</u></td>
-                <td><u>Nita Safitri</u></td>
+                <td><u><?=$e->nama?></u></td>
             </tr>
             <tr>
                 <td>NIP. 197307251994021001</td>
                 <td>NIP. 198503272007011002</td>
-                <td>NIP. 198701122008012001</td>
+                <td>NIP. <?=$e->nip?></td>
             </tr>
 
         </table>
