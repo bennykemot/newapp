@@ -290,6 +290,7 @@ $("#user-select2").select2({
       $('#idxskmpnen').html(kdindex)
 
       $('#modalidx').modal('close');
+			
 
     })
 

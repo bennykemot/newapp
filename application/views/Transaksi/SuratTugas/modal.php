@@ -1,5 +1,5 @@
 <div id="modalidx" class="modal">
-    <div class="modal-content">
+    <div class="modal-content" style="min-height: 400px;">
       <h4>Komponen/Sub Komponen</h4>
       <div style="padding-top: 10px"></div>
         <div class="row">
@@ -14,8 +14,49 @@
                   <input placeholder="Kode Satker" id="kdsatker" name="kdsatker" type="text" value="<?=$this->session->userdata("kdsatker")?>">
                 </div>
             </div>
+						
+						<div class="input-field col s12">
+							
+								<table>
+									<thead>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<label>Program</label>
+												<select  id="program-select2" name="kdprogram" class="browser-default"></select>
+											</td>
+											<td>.</td>
+											<td>
+												<label>Kegiatan</label>
+												<select  id="kegiatan-select2" name="kdgiat" class="browser-default"></select>
+											</td>
+											<td>.</td>
+											<td>
+												<label>KRO</label>
+												<select  id="kro-select2" name="kdoutput" class="browser-default"></select>
+											</td>
+											<td>.</td>
+											<td>
+												<label>RO</label>
+												<select  id="ro-select2" name="kdsoutput" class="browser-default"></select>
+											</td>
+											<td>.</td>
+											<td>
+												<label>Komponen</label>
+												<select  id="komponen-select2" name="kdkomponen" class="browser-default"></select>
+											</td>
+											<td>.</td>
+											<td>
+												<label>Sub Komponen</label>
+												<select  id="sub_komponen-select2" name="kdskomponen" class="browser-default"></select>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+						</div>
 
-              <div class="input-field col s12">
+              <!-- <div class="input-field col s12">
                 <div class="input-field col s2"><label>Program</label></div>
 
                 <div class="input-field col s10 " >
@@ -61,8 +102,8 @@
                 <div class="input-field col s10 " >
                   <select  id="sub_komponen-select2" name="kdskomponen" class="browser-default"></select>
                   </div>
-              </div>
-
+              </div> -->
+							
              <input type="text" name="kdindex" id="kdindex" hidden>
             </div>
           </form>
