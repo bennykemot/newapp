@@ -77,7 +77,7 @@ class M_NotaDinas extends CI_Model{
         if($Trigger == "costsheet" || $Trigger == "spd" || $Trigger == "nominatif"){
             $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, 
             d_surattugas.uraianst, d_surattugas.tglmulaist, 
-            d_surattugas.tglselesaist, d_surattugas.idxskmpnen, 
+            d_surattugas.tglselesaist, d_surattugas.idxskmpnen, d_surattugas.id_ttd,
             t_unitkerja.nama_unit , d_itemcs.nourut, d_itemcs.nama, 
             d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan, 
             d_itemcs.tglberangkat, d_itemcs.tglkembali, d_itemcs.kotaasal, 
@@ -85,8 +85,10 @@ class M_NotaDinas extends CI_Model{
             d_itemcs.totalinap, d_itemcs.totalrep, d_itemcs.totaltravel , d_itemcs.jnstransportasi,
             d_itemcs.jumlah
             
+            
             FROM d_surattugas JOIN t_unitkerja ON t_unitkerja.id = d_surattugas.id_unit 
             JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
+            LEFT JOIN t_pegawai ON d_surattugas.id_ttd = t_pegawai.nip 
             
             WHERE d_surattugas.id = ".$Id_st." ");
 

@@ -7,6 +7,7 @@ var baseurl 	= "<?= base_url('Transaksi/SuratTugas/')?>";
 var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";
 var master_baseurl 	= "<?= base_url('Master/Master/')?>";
 var satker_session = "<?= $this->session->userdata("kdsatker")?>"
+var user_session = "<?= $this->session->userdata("user_id")?>"
 
 
 function Reset(idForm) {
@@ -21,6 +22,18 @@ function show(Id){
 function kwitansiRampung(url,trigger){
   var id = $('#id_st').val()
   window.open(baseurl + url + id, '_blank')
+
+}
+
+function Min_datemulai(){
+  var min_date_st = $('#tglst').val()
+  document.getElementById("tglst_mulai").setAttribute("min", min_date_st);
+
+}
+
+function Min_dateselesai(){
+  var min_date_mulai = $('#tglst_mulai').val()
+  document.getElementById("tglst_selesai").setAttribute("min", min_date_mulai);
 
 }
 
@@ -108,6 +121,8 @@ $("#user-select2").select2({
            data: function (params) {
               return {
                 kdsatker: satker_session,
+                userid : user_session,
+                trigger : "program_for_ST",
                 searchTerm: params.term // search term
               };
            },
@@ -134,6 +149,8 @@ $("#user-select2").select2({
               return {
                 kdprogram: $('#program-select2').val(),
                 kdsatker: satker_session,
+                userid : user_session,
+                trigger : "kegiatan_for_ST",
                 searchTerm: params.term
                  // search term
               };
@@ -162,6 +179,8 @@ $("#user-select2").select2({
                 kdprogram: $('#program-select2').val(),
                 kdgiat: $('#kegiatan-select2').val(),
                 kdsatker: satker_session,
+                userid : user_session,
+                trigger : "kro_for_ST",
                 searchTerm: params.term
                  // search term
               };
@@ -191,6 +210,8 @@ $("#user-select2").select2({
                 kdgiat: $('#kegiatan-select2').val(),
                 kdoutput: $('#kro-select2').val(),
                 kdsatker: satker_session,
+                userid : user_session,
+                trigger : "ro_for_ST",
                 searchTerm: params.term
                  // search term
               };
@@ -221,6 +242,8 @@ $("#user-select2").select2({
                 kdoutput: $('#kro-select2').val(),
                 kdsoutput: $('#ro-select2').val(),
                 kdsatker: satker_session,
+                userid : user_session,
+                trigger : "komponen_for_ST",
                 searchTerm: params.term
                  // search term
               };
@@ -252,6 +275,8 @@ $("#user-select2").select2({
                 kdsoutput: $('#ro-select2').val(),
                 kdkomponen: $('#komponen-select2').val(),
                 kdsatker: satker_session,
+                userid : user_session,
+                trigger : "skomponen_for_ST",
                 searchTerm: params.term
                  // search term
               };
@@ -352,6 +377,20 @@ $("#ttd").select2({
 
 
 function selectRefresh(x){
+
+         // $(document).ready(function(){
+          // Date Object
+              $('#tglberangkat'+i+'').datepicker({
+                dateFormat: "yyyy-mm-dd",
+                maxDate: new Date($('#tglst_selesai').val()),
+                minDate: new Date($('#tglst_mulai').val())
+              });
+
+              $('#tglkembali'+i+'').datepicker({
+                dateFormat: "yyyy-mm-dd",
+                maxDate: new Date($('#tglst_selesai').val()),
+                minDate: new Date($('#tglst_mulai').val())
+          });
     
         $(".namaTim").select2({
           dropdownAutoWidth: true,
@@ -494,6 +533,8 @@ $('.multi-field-wrapper').each(function() {
                 }else if(x == max){
                   end = '</table>'
               }
+              var minDate = $('#tglst_mulai').val()
+              var maxDate = $('#tglst_selesai').val()
               $($wrapper).append( head +'<tr>\
                             <td><input  type="number" id="urut'+x+'" name="urut'+x+'" min="1" max="20" value="'+x+'"></td>\
                             <td id="Tim" name="Tim">\
@@ -509,14 +550,14 @@ $('.multi-field-wrapper').each(function() {
                             <td><input type="text" id="gol'+x+'" name="gol'+x+'" readonly></td>\
                             <td><select class="browser-default kota" name="kotaasal'+x+'" id="kotaasal'+x+'" onchange="cityCount('+x+')"></select></td>\
                               <td><select class="browser-default kota"  name="kotatujuan'+x+'" id="kotatujuan'+x+'" onchange="cityCount('+x+')"></select></td>\
-                              <td><input type="date" onchange="dayCount(\''+x+'\',\'D\')" id="tglberangkat'+x+'" name="tglberangkat'+x+'"></td>\
-                              <td><input type="date" onchange="dayCount('+x+')" class="tgl" id="tglkembali'+x+'" name="tglkembali'+x+'"></td>\
+                              <td><input type="date" min="'+minDate+'" max="'+maxDate+'" onchange="dayCount(\''+x+'\',\'D\')" id="tglberangkat'+x+'" name="tglberangkat'+x+'"></td>\
+                              <td><input type="date" max="'+maxDate+'" min="'+minDate+'" onchange="dayCount('+x+')" class="tgl" id="tglkembali'+x+'" name="tglkembali'+x+'"></td>\
                               <td><input type="text" id="jmlhari'+x+'" name="jmlhari'+x+'" readonly></td>\
-                              <td><input type="text" id="uangharian'+x+'" name="uangharian'+x+'" readonly></td>\
-                              <td><input type="text" id="uangpenginapan'+x+'" name="uangpenginapan'+x+'" readonly></td>\
-                              <td><input type="text" onkeypress="return validateNumber(event)" readonly></td>\
-                              <td><input type="text" onkeypress="return validateNumber(event)" readonly></td>\
-                              <td><input type="text" id="total'+x+'"  name="total'+x+'" readonly></td>\
+                              <td><input type="text" id="uangharian'+x+'" name="uangharian'+x+'" ></td>\
+                              <td><input type="text" id="uangpenginapan'+x+'" name="uangpenginapan'+x+'" ></td>\
+                              <td><input type="text" onkeypress="return validateNumber(event)" ></td>\
+                              <td><input type="text" onkeypress="return validateNumber(event)" ></td>\
+                              <td><input type="text" id="total'+x+'"  name="total'+x+'" ></td>\
                               <td><select class="select2 browser-default" id="jnstransportasi'+x+'" name="jnstransportasi'+x+'">\
                                     <option value="Pesawat Udara">Pesawat Udara</option>\
                                     <option value="Kendaraan Umum">Kendaraan Umum</option>\
@@ -625,10 +666,10 @@ $.ajax({
                 var diffDays = (secondDate.getTime() - firstDate.getTime()) / (oneDay);
                 $("#jmlhari"+id+"").val(diffDays);
 
-                var totalUangHarian = ''+(diffDays * tarif)
+                var totalUangHarian = ''+((diffDays+1) * tarif)
                 $("#uangharian"+id+"").val(formatRupiah(totalUangHarian));
 
-                var totalUangPenginapan = ''+((diffDays-1) * 1200000)
+                var totalUangPenginapan = ''+((diffDays) * 1200000)
                 $("#uangpenginapan"+id+"").val(formatRupiah(totalUangPenginapan));
 
 
@@ -708,7 +749,7 @@ if ( $("#idxskmpnen").val() != null){
                 var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
                 var firstDate = new Date($("#tglberangkat"+id+"").val());
                 var secondDate = new Date($("#tglkembali"+id+"").val());
-                var diffDays = (secondDate.getTime() - firstDate.getTime()) / (oneDay);
+                var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay)+1);
                 $("#jmlhari"+id+"").val(diffDays);
 
                 // var kotatujuan = $("#kotatujuan"+id+"").val()

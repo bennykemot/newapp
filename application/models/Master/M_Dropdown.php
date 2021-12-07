@@ -3,26 +3,49 @@
 class M_Dropdown extends CI_Model {
 
    // Fetch users
-   function getData_program($searchTerm="", $kdsatker){
+   function getData_program($searchTerm="", $kdsatker, $userid,$trigger){
 
-     // Fetch users
-     $this->db->distinct();
-     $this->db->select('kdprogram');
-     $this->db->where("kdsatker", $kdsatker);
-     $this->db->or_where("kdprogram like '%".$searchTerm."%' ");
-     $fetched_records = $this->db->get('d_pagu');
-     $users = $fetched_records->result_array();
+      if($trigger == "program_for_ST"){
+         // Fetch users
+         $this->db->distinct();
+         $this->db->select('kdprogram');
+         $this->db->where("kdsatker", $kdsatker);
+         $this->db->where("user_id", $userid);
+         $this->db->where("kdprogram like '%".$searchTerm."%' ");
+         $fetched_records = $this->db->get('d_bagipagu');
+         $users = $fetched_records->result_array();
 
-     // Initialize Array with fetched data
-     $data = array();
-     foreach($users as $user){
-        $data[] = array("id"=>$user['kdprogram'], "text"=>$user['kdprogram']);
-     }
+      }else{
+
+         // Fetch users
+            $this->db->distinct();
+            $this->db->select('kdprogram');
+            $this->db->where("kdsatker", $kdsatker);
+            $this->db->or_where("kdprogram like '%".$searchTerm."%' ");
+            $fetched_records = $this->db->get('d_pagu');
+            $users = $fetched_records->result_array();
+      }
+
+      $data = array();
+            foreach($users as $user){
+               $data[] = array("id"=>$user['kdprogram'], "text"=>$user['kdprogram']);
+            }
+     
      return $data;
   }
 
-  function getData_kegiatan($searchTerm="",$kdsatker, $kdprogram){
+  function getData_kegiatan($searchTerm="",$kdsatker, $kdprogram, $userid,$trigger){
+   if($trigger == "kegiatan_per_satker"){
+      // Fetch users
+      $this->db->distinct();
+      $this->db->select('kdgiat');
+      $this->db->where("kdsatker", $kdsatker);
+      $this->db->where("user_id", $userid);
+      $this->db->where("kdprogram like '%".$searchTerm."%' ");
+      $fetched_records = $this->db->get('d_bagipagu');
+      $users = $fetched_records->result_array();
 
+   }else{
    // Fetch users
    $this->db->distinct();
    $this->db->select('kdgiat');
@@ -31,6 +54,7 @@ class M_Dropdown extends CI_Model {
    $this->db->where("kdgiat like '%".$searchTerm."%' ");
    $fetched_records = $this->db->get('d_pagu');
    $users = $fetched_records->result_array();
+   }
 
    // Initialize Array with fetched data
    $data = array();
@@ -40,8 +64,21 @@ class M_Dropdown extends CI_Model {
    return $data;
 }
 
-function getData_kro($searchTerm="",$kdsatker, $kdprogram, $kdgiat){
+function getData_kro($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $userid,$trigger){
 
+   if($trigger == "kro_for_ST"){
+      // Fetch users
+      $this->db->distinct();
+      $this->db->select('kdoutput');
+      $this->db->where("kdsatker", $kdsatker);
+      $this->db->where("user_id", $userid);
+      $this->db->where("kdprogram", $kdprogram);
+      $this->db->where("kdgiat", $kdgiat);
+      $this->db->where("kdoutput like '%".$searchTerm."%' ");
+      $fetched_records = $this->db->get('d_bagipagu');
+      $users = $fetched_records->result_array();
+
+   }else{
    // Fetch users
    $this->db->distinct();
    $this->db->select('kdoutput');
@@ -51,6 +88,7 @@ function getData_kro($searchTerm="",$kdsatker, $kdprogram, $kdgiat){
    $this->db->where("kdoutput like '%".$searchTerm."%' ");
    $fetched_records = $this->db->get('d_pagu');
    $users = $fetched_records->result_array();
+   }
 
    // Initialize Array with fetched data
    $data = array();
@@ -60,8 +98,22 @@ function getData_kro($searchTerm="",$kdsatker, $kdprogram, $kdgiat){
    return $data;
 }
 
-function getData_ro($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdouput){
+function getData_ro($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdouput, $userid,$trigger){
 
+   if($trigger == "ro_for_ST"){
+      // Fetch users
+      $this->db->distinct();
+      $this->db->select('kdsoutput');
+      $this->db->where("kdsatker", $kdsatker);
+      $this->db->where("user_id", $userid);
+      $this->db->where("kdprogram", $kdprogram);
+      $this->db->where("kdgiat", $kdgiat);
+      $this->db->where("kdoutput", $kdouput);
+      $this->db->where("kdsoutput like '%".$searchTerm."%' ");
+      $fetched_records = $this->db->get('d_bagipagu');
+      $users = $fetched_records->result_array();
+
+   }else{
    // Fetch users
    $this->db->distinct();
    $this->db->select('kdsoutput');
@@ -72,6 +124,7 @@ function getData_ro($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdouput){
    $this->db->where("kdsoutput like '%".$searchTerm."%' ");
    $fetched_records = $this->db->get('d_pagu');
    $users = $fetched_records->result_array();
+   }
 
    // Initialize Array with fetched data
    $data = array();
@@ -81,8 +134,23 @@ function getData_ro($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdouput){
    return $data;
 }
 
-function getData_komponen($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdouput, $kdsoutput){
+function getData_komponen($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdouput, $kdsoutput, $userid,$trigger){
 
+   if($trigger == "komponen_for_ST"){
+      // Fetch users
+      $this->db->distinct();
+      $this->db->select('kdkmpnen');
+      $this->db->where("kdsatker", $kdsatker);
+      $this->db->where("user_id", $userid);
+      $this->db->where("kdprogram", $kdprogram);
+      $this->db->where("kdgiat", $kdgiat);
+      $this->db->where("kdoutput", $kdouput);
+      $this->db->where("kdsoutput", $kdsoutput);
+      $this->db->where("kdkmpnen like '%".$searchTerm."%' ");
+      $fetched_records = $this->db->get('d_bagipagu');
+      $users = $fetched_records->result_array();
+
+   }else{
    // Fetch users
    $this->db->distinct();
    $this->db->select('kdkmpnen');
@@ -94,6 +162,7 @@ function getData_komponen($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdoupu
    $this->db->where("kdkmpnen like '%".$searchTerm."%' ");
    $fetched_records = $this->db->get('d_pagu');
    $users = $fetched_records->result_array();
+   }
 
    // Initialize Array with fetched data
    $data = array();
@@ -103,8 +172,24 @@ function getData_komponen($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdoupu
    return $data;
 }
 
-function getData_sub_komponen($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdouput, $kdsoutput, $kdkomponen){
+function getData_sub_komponen($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdouput, $kdsoutput, $kdkomponen, $userid,$trigger){
 
+   // if($trigger == "skomponen_for_ST"){
+   //    // Fetch users
+   //    $this->db->distinct();
+   //    $this->db->select('kdskmpnen');
+   //    $this->db->where("kdsatker", $kdsatker);
+   //    $this->db->where("user_id", $userid);
+   //    $this->db->where("kdprogram", $kdprogram);
+   //    $this->db->where("kdgiat", $kdgiat);
+   //    $this->db->where("kdoutput", $kdouput);
+   //    $this->db->where("kdsoutput", $kdsoutput);
+   //    $this->db->where("kdkmpnen", $kdkomponen);
+   //    $this->db->where("kdskmpnen like '%".$searchTerm."%' ");
+   //    $fetched_records = $this->db->get('d_bagipagu');
+   //    $users = $fetched_records->result_array();
+
+   // }else{
    // Fetch users
    $this->db->distinct();
    $this->db->select('kdskmpnen');
@@ -117,6 +202,7 @@ function getData_sub_komponen($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kd
    $this->db->where("kdskmpnen like '%".$searchTerm."%' ");
    $fetched_records = $this->db->get('d_pagu');
    $users = $fetched_records->result_array();
+  // }
 
    // Initialize Array with fetched data
    $data = array();

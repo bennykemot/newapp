@@ -17,9 +17,11 @@ class Dropdown extends CI_Controller {
         // Search term
         $searchTerm = $this->input->post('searchTerm');
         $kdsatker = $this->input->post('kdsatker');
+        $userid = $this->input->post('userid');
+        $trigger = $this->input->post('trigger');
   
         // Get users
-        $response = $this->Dropdown->getData_program($searchTerm,$kdsatker);
+        $response = $this->Dropdown->getData_program($searchTerm,$kdsatker, $userid,$trigger);
   
         echo json_encode($response);
      }
@@ -30,9 +32,11 @@ class Dropdown extends CI_Controller {
         $searchTerm = $this->input->post('searchTerm');
         $kdsatker = $this->input->post('kdsatker');
         $kdprogram = $this->input->post('kdprogram');
+        $userid = $this->input->post('userid');
+        $trigger = $this->input->post('trigger');
   
         // Get users
-        $response = $this->Dropdown->getData_kegiatan($searchTerm, $kdsatker,$kdprogram);
+        $response = $this->Dropdown->getData_kegiatan($searchTerm, $kdsatker,$kdprogram, $userid,$trigger);
   
         echo json_encode($response);
      }
@@ -44,9 +48,11 @@ class Dropdown extends CI_Controller {
         $kdprogram = $this->input->post('kdprogram');
         $kdsatker = $this->input->post('kdsatker');
         $kdgiat = $this->input->post('kdgiat');
+        $userid = $this->input->post('userid');
+        $trigger = $this->input->post('trigger');
   
         // Get users
-        $response = $this->Dropdown->getData_kro($searchTerm, $kdsatker, $kdprogram, $kdgiat);
+        $response = $this->Dropdown->getData_kro($searchTerm, $kdsatker, $kdprogram, $kdgiat, $userid,$trigger);
   
         echo json_encode($response);
      }
@@ -59,9 +65,11 @@ class Dropdown extends CI_Controller {
         $kdsatker = $this->input->post('kdsatker');
         $kdgiat = $this->input->post('kdgiat');
         $kdoutput = $this->input->post('kdoutput');
+        $userid = $this->input->post('userid');
+        $trigger = $this->input->post('trigger');
   
         // Get users
-        $response = $this->Dropdown->getData_ro($searchTerm, $kdsatker, $kdprogram, $kdgiat, $kdoutput);
+        $response = $this->Dropdown->getData_ro($searchTerm, $kdsatker, $kdprogram, $kdgiat, $kdoutput, $userid,$trigger);
   
         echo json_encode($response);
      }
@@ -75,9 +83,11 @@ class Dropdown extends CI_Controller {
         $kdgiat = $this->input->post('kdgiat');
         $kdoutput = $this->input->post('kdoutput');
         $kdsoutput = $this->input->post('kdsoutput');
+        $userid = $this->input->post('userid');
+        $trigger = $this->input->post('trigger');
   
         // Get users
-        $response = $this->Dropdown->getData_komponen($searchTerm, $kdsatker, $kdprogram, $kdgiat, $kdoutput, $kdsoutput);
+        $response = $this->Dropdown->getData_komponen($searchTerm, $kdsatker, $kdprogram, $kdgiat, $kdoutput, $kdsoutput, $userid,$trigger);
   
         echo json_encode($response);
      }
@@ -92,9 +102,11 @@ class Dropdown extends CI_Controller {
       $kdoutput = $this->input->post('kdoutput');
       $kdsoutput = $this->input->post('kdsoutput');
       $kdkomponen = $this->input->post('kdkomponen');
+      $userid = $this->input->post('userid');
+      $trigger = $this->input->post('trigger');
 
       // Get users
-      $response = $this->Dropdown->getData_sub_komponen($searchTerm, $kdsatker, $kdprogram, $kdgiat, $kdoutput, $kdsoutput, $kdkomponen);
+      $response = $this->Dropdown->getData_sub_komponen($searchTerm, $kdsatker, $kdprogram, $kdgiat, $kdoutput, $kdsoutput, $kdkomponen, $userid,$trigger);
 
       echo json_encode($response);
    }
