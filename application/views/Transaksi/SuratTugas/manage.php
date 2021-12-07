@@ -87,8 +87,8 @@
                             <td>
                                 <div class="col s12">
 
-                                <a href="#" class="btn dropdown-trigger orange col s12" href="#" data-target="dropdown1">VIEW</a><br>
-                                          <ul id='dropdown1' class='dropdown-content' style="min-width: 170px !important;">
+                                <a href="#" class="btn dropdown-trigger orange col s12" href="#" data-target="dropdown'<?=$u->id?>'">VIEW</a><br>
+                                          <ul id="dropdown'<?=$u->id?>'" class='dropdown-content' style="min-width: 170px !important;">
                                             <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/SuratTugas/Export/'.$u->id) ?>" target="blank">Surat Tugas</a></li>
                                             <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/costsheet/L/'.$u->id) ?>" target="blank">Costsheet</a></li>
                                             <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd/P/'.$u->id) ?>" target="blank">SPD</a></li>
@@ -107,7 +107,7 @@
                                     <div style="padding-bottom: 20px"></div>
                                     <button class="btn green col s12">APPROVED</button><br>
                                     <div style="padding-bottom: 20px"></div>
-                                    <button class="btn red col s12" onclick="Delete('<?= $u->id ?>')">HAPUS</button><br>
+                                    <button class="btn red col s12" onclick="Delete(<?= $u->id ?>)">HAPUS</button><br>
                                 </div>
                             </td>
                         </tr>
@@ -128,7 +128,7 @@
    <div class="col s12">
       <a class="sidenav-close" href="#!"><i class="material-icons">close</i></a>
       <h5 class="theme-cutomizer-title">Cetak Kwitansi</h5>
-        <input type="text" id="id_st" name="id_st" >
+        <input type="text" id="id_st" name="id_st" hidden>
           <div class="menu-options">
             <hr class="customize-devider">
             <div class="menu-options-form row">

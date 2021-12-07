@@ -20,6 +20,9 @@ function kwitansiRampung(url,trigger){
 
 }
 
+
+
+
 $("#costsheet").click(function (e) {
   e.preventDefault();
 
@@ -196,6 +199,8 @@ $("#costsheet").click(function (e) {
       });
 
       function selectRefresh(i){
+
+        
 
         var idkota_asal = $('#kotaasal'+i+'').val()
         var idkota_tujuan = $('#kotatujuan'+i+'').val()

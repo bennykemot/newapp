@@ -70,26 +70,28 @@
                                 <td><?php echo $u->tglselesaist ?></td>
                                 <td>
                                     <div class="col s12">
-                                        <!-- <a href="#" class="btn btn-customizer orange col s12 sidenav-trigger" data-target="theme-cutomizer-out" onclick="show('ST-3456/SU03/3/2021')">VIEW</a><br> -->
-                                          <a href="#" class="btn dropdown-trigger orange col s12" href="#" data-target="dropdown1">VIEW</a><br>
-                                          <ul id='dropdown1' class='dropdown-content' style="min-width: 170px !important;">
-                                            <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/SuratTugas/Export/'.$u->idsurattugas) ?>" target="blank">Surat Tugas</a></li>
-                                            <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/costsheet/L/'.$u->idsurattugas) ?>" target="blank">Costsheet</a></li>
-                                            <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd/P/'.$u->idsurattugas) ?>" target="blank">SPD</a></li>
-                                            <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd_back/P/'.$u->idsurattugas) ?>" target="blank">SPD Belakang</a></li>
-                                            <li><a style="font-size: 14px;" href="#" class="sidenav-trigger" data-target="theme-cutomizer-out" onclick="show('<?=$u->idsurattugas?>')">Kwitansi Rampung</a>
-																							<!-- <ul class="subMenu">
-																								<li><a href="#">Kwitansi</a></li>
-																							</ul> -->
-																						</li>
-                                          </ul>
 
-                                          <div style="padding-bottom: 20px"></div>
-                                        <a class="btn cyan col s12">UBAH</a><br>
-                                            <div style="padding-bottom: 20px"></div>
-                                        <a class="btn green col s12">APPROVED</a><br>
-                                            <div style="padding-bottom: 20px"></div>
-                                        <a class="btn red col s12" onclick="Delete()">HAPUS</a><br>
+                                        <a href="#" class="btn dropdown-trigger orange col s12" href="#" data-target="dropdown'<?=$u->idsurattugas?>'">VIEW</a><br>
+                                              <ul id="dropdown'<?=$u->idsurattugas?>'" class='dropdown-content' style="min-width: 170px !important;">
+                                                <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/SuratTugas/Export/'.$u->idsurattugas) ?>" target="blank">Surat Tugas</a></li>
+                                                <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/costsheet/L/'.$u->idsurattugas) ?>" target="blank">Costsheet</a></li>
+                                                <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd/P/'.$u->idsurattugas) ?>" target="blank">SPD</a></li>
+                                                <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd_back/P/'.$u->idsurattugas) ?>" target="blank">SPD Belakang</a></li>
+                                                <li><a style="font-size: 14px;" href="#" class="sidenav-trigger" data-target="theme-cutomizer-out" onclick="show('<?=$u->idsurattugas?>')">Kwitansi Rampung</a>
+                                                  <!-- <ul class="subMenu">
+                                                    <li><a href="#">Kwitansi</a></li>
+                                                  </ul> -->
+                                                </li>
+                                              </ul>
+
+
+                                        <!-- <a class="btn orange col s12" href="<?= site_url('Transaksi/SuratTugas/Export/'.$u->idsurattugas)?>" target="_blank">VIEW</a><br> -->
+                                        <div style="padding-bottom: 20px"></div>
+                                        <a class="btn cyan col s12" href="<?= site_url('Transaksi/SuratTugas/ubah/'.$u->idsurattugas)?>">UBAH</a><br>
+                                        <div style="padding-bottom: 20px"></div>
+                                        <button class="btn green col s12">APPROVED</button><br>
+                                        <div style="padding-bottom: 20px"></div>
+                                        <button class="btn red col s12" onclick="Delete(<?= $u->idsurattugas ?>)">HAPUS</button><br>
                                     </div>
                                 </td>
                             </tr>
@@ -114,7 +116,7 @@
    <div class="col s12">
       <a class="sidenav-close" href="#!"><i class="material-icons">close</i></a>
       <h5 class="theme-cutomizer-title">Cetak Kwitansi</h5>
-        <input type="text" id="id_st" name="id_st" >
+        <input type="text" id="id_st" name="id_st" hidden>
           <div class="menu-options">
             <hr class="customize-devider">
             <div class="menu-options-form row">

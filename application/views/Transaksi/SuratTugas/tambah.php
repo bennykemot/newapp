@@ -37,7 +37,7 @@
                             <div class="input-field col s2"><label>Tanggal ST</label></div>
 
                             <div class="input-field col s10 " >
-                            <input class="datepicker" id="tglst" name="tglst">
+                            <input type="date" id="tglst" name="tglst">
                             </div>
                         </div>
 
@@ -53,7 +53,7 @@
                             <div class="input-field col s2"><label>Tanggal Mulai</label></div>
 
                             <div class="input-field col s10 " >
-                            <input class="datepicker" id="tglst_mulai" name="tglst_mulai">
+                            <input type="date" id="tglst_mulai" name="tglst_mulai" onclick="Min_datemulai()">
                             </div>
                         </div>
 
@@ -61,7 +61,7 @@
                             <div class="input-field col s2"><label>Tanggal Selesai</label></div>
 
                             <div class="input-field col s10 " >
-                            <input class="datepicker" id="tglst_selesai" name="tglst_selesai">
+                            <input type="date" id="tglst_selesai" name="tglst_selesai" onclick="Min_dateselesai()">
                             </div>
                         </div>
 
