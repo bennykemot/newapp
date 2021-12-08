@@ -20,15 +20,33 @@ class M_SuratTugas extends CI_Model{
 	}
 
     function getDataUbah($id){
-            $query = $this->db->query('SELECT d_surattugas.nost, d_surattugas.tglst, d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.tglselesaist
-            ,d_surattugas.id_unit, d_surattugas.idxskmpnen, d_surattugas.id_ttd, d_surattugas.id as idst,
-            d_stdetail.nourut, d_stdetail.nama, d_stdetail.nip, d_stdetail.peran, d_stdetail.id as idtim, t_unitkerja.nama_unit
-            ,d_surattugas.is_approved1 as approved_eselon1 , d_surattugas.is_approved2 as approved_eselon2, 
-            d_surattugas.is_approved3 as approved_eselon3, d_surattugas.is_approved4 as approved_eselon4,
-            DATEDIFF(d_surattugas.tglselesaist, d_surattugas.tglmulaist) as jmlhari
+            $query = $this->db->query('SELECT d_surattugas.nost, d_surattugas.tglst, 
+            d_surattugas.uraianst, d_surattugas.tglmulaist, 
+            d_surattugas.tglselesaist ,d_surattugas.id_unit,
+            
+            t_unitkerja.nama_unit, 
+            
+            d_surattugas.idxskmpnen, 
+            d_surattugas.id_ttd, 
+            
+            t_pegawai.nama as nama_ttd, 
+            d_surattugas.id as idst, 
+            
+            d_itemcs.nourut, d_itemcs.jabatan,
+            d_itemcs.nama, d_itemcs.nip, 
+            d_itemcs.jabatan, d_itemcs.golongan, 
+            d_itemcs.tglberangkat, d_itemcs.tglkembali, 
+            d_itemcs.jmlhari,d_itemcs.totaluangharian, 
+            d_itemcs.totalinap, d_itemcs.totalrep, 
+            d_itemcs.totaltravel, d_itemcs.jumlah, 
+            d_itemcs.jnstransportasi,
+
+            d_itemcs.kotaasal,d_itemcs.kotatujuan
+            
             FROM d_surattugas 
-            JOIN d_stdetail ON d_surattugas.id = d_stdetail.id_st 
-            JOIN t_unitkerja ON d_surattugas.id_unit = t_unitkerja.id WHERE d_surattugas.id = "'.$id.'"');
+            JOIN t_unitkerja ON d_surattugas.id_unit = t_unitkerja.id 
+            JOIN t_pegawai ON d_surattugas.id_ttd = t_pegawai.nip 
+            JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st WHERE d_surattugas.id = '.$id.'');
             return $query->result_array();
 
     }

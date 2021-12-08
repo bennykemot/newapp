@@ -111,7 +111,7 @@ $("#user-select2").select2({
         $("#program-select2").select2({
           dropdownAutoWidth: true,
           width: '100%',
-          placeholder: "Pilih Program",
+          placeholder: "Pilih",
           dropdownParent: "#modalidx",
          ajax: { 
            url: dropdown_baseurl + 'program_per_satker',
@@ -138,7 +138,7 @@ $("#user-select2").select2({
      $("#kegiatan-select2").select2({
           dropdownAutoWidth: true,
           width: '100%',
-          placeholder: "Pilih Kegiatan",
+          placeholder: "Pilih",
           dropdownParent: "#modalidx",
          ajax: { 
            url: dropdown_baseurl + 'kegiatan_per_satker',
@@ -167,7 +167,7 @@ $("#user-select2").select2({
      $("#kro-select2").select2({
           dropdownAutoWidth: true,
           width: '100%',
-          placeholder: "Pilih KRO",
+          placeholder: "Pilih",
           dropdownParent: "#modalidx",
          ajax: { 
            url: dropdown_baseurl + 'kro_per_satker',
@@ -197,7 +197,7 @@ $("#user-select2").select2({
      $("#ro-select2").select2({
           dropdownAutoWidth: true,
           width: '100%',
-          placeholder: "Pilih RO",
+          placeholder: "Pilih",
           dropdownParent: "#modalidx",
          ajax: { 
            url: dropdown_baseurl + 'ro_per_satker',
@@ -228,7 +228,7 @@ $("#user-select2").select2({
      $("#komponen-select2").select2({
           dropdownAutoWidth: true,
           width: '100%',
-          placeholder: "Pilih Komponen",
+          placeholder: "Pilih",
           dropdownParent: "#modalidx",
          ajax: { 
            url: dropdown_baseurl + 'komponen_per_satker',
@@ -260,7 +260,7 @@ $("#user-select2").select2({
      $("#sub_komponen-select2").select2({
           dropdownAutoWidth: true,
           width: '100%',
-          placeholder: "Pilih Sub Komponen",
+          placeholder: "Pilih",
           dropdownParent: "#modalidx",
          ajax: { 
            url: dropdown_baseurl + 'sub_komponen_per_satker',
@@ -379,19 +379,8 @@ $("#ttd").select2({
 
 function selectRefresh(x){
 
-         // $(document).ready(function(){
-          // Date Object
-              $('#tglberangkat'+i+'').datepicker({
-                dateFormat: "yyyy-mm-dd",
-                maxDate: new Date($('#tglst_selesai').val()),
-                minDate: new Date($('#tglst_mulai').val())
-              });
+              // M.textareaAutoResize($('#perjab'+x+''));
 
-              $('#tglkembali'+i+'').datepicker({
-                dateFormat: "yyyy-mm-dd",
-                maxDate: new Date($('#tglst_selesai').val()),
-                minDate: new Date($('#tglst_mulai').val())
-          });
     
         $(".namaTim").select2({
           dropdownAutoWidth: true,
@@ -419,82 +408,80 @@ function selectRefresh(x){
 
 
 
-     $('.namaTim').on('change', function() {
+    $('.namaTim').on('change', function() {
 
-    var id =  $(this).attr("name")
-    var res = id[9]
+        var id =  $(this).attr("name")
+        var res = id[9]
 
-    var nip = this.value
+        var nip = this.value
 
-    var val = nip.split("-")
+        var val = nip.split("-")
 
-    
+        
 
-    $('#nip'+res+'').html(val[0])
-    $('#nip'+res+'').val(val[0])
+        $('#nip'+res+'').html(val[0])
+        $('#nip'+res+'').val(val[0])
 
-    $('#perjab'+res+'').html(val[1])
-    $('#perjab'+res+'').val(val[1])
+        $('#perjablabel'+res+'').html(val[1])
+        $('#perjab'+res+'').val(val[1])
 
-    $('#nama'+res+'').html(val[2])
-    $('#nama'+res+'').val(val[2])
+        $('#nama'+res+'').html(val[2])
+        $('#nama'+res+'').val(val[2])
 
-    $('#gol'+res+'').html(val[3])
-    $('#gol'+res+'').val(val[3])
+        $('#gol'+res+'').html(val[3])
+        $('#gol'+res+'').val(val[3])
 
 
-});
+    });
 
-var idkota_asal = $('#kotaasal'+x+'').val()
-var idkota_tujuan = $('#kotatujuan'+x+'').val()
+    var idkota_asal = $('#kotaasal'+x+'').val()
+    var idkota_tujuan = $('#kotatujuan'+x+'').val()
 
-  if($('#idxskmpnen').val() != null){
+      if($('#idxskmpnen').val() != null){
 
-    var id = $('#idxskmpnen').val();
-    var split_id = id.split("-")
-    var kdakun = split_id[0]
+        var id = $('#idxskmpnen').val();
+        var split_id = id.split("-")
+        var kdakun = split_id[0]
 
-    var trigger = "non-fullboard"
-    var jenistarif = "luar"
+        var trigger = "non-fullboard"
+        var jenistarif = "luar"
 
-      if(kdakun.search("524") == 0){
-          trigger = "fullboard"
+          if(kdakun.search("524") == 0){
+              trigger = "fullboard"
+          }
+
+          if(idkota_asal == idkota_tujuan){
+              jenistarif = "dalam"
+        }
+
       }
+    
+      $(".kota").select2({
+        dropdownAutoWidth: true,
+        width: '100%',
+        placeholder: "Pilih Kota",
+      ajax: { 
+        url: dropdown_baseurl + 'kota',
+        type: "post",
+        dataType: 'json',
+        delay: 250,
+        data: function (params) {
+            return {
+              searchTerm: params.term,
+              Trigger : trigger,
+              Jenistarif : jenistarif // search term
+            };
+          
+        },
+        processResults: function (response) {
+            return {
+              results: response
+            };
+        },
+        cache: true
+      }
+      });
 
-      if(idkota_asal == idkota_tujuan){
-          jenistarif = "dalam"
-    }
-
-  }
- 
-$(".kota").select2({
-  dropdownAutoWidth: true,
-  width: '100%',
-  placeholder: "Pilih Kota",
- ajax: { 
-   url: dropdown_baseurl + 'kota',
-   type: "post",
-   dataType: 'json',
-   delay: 250,
-   data: function (params) {
-      return {
-        searchTerm: params.term,
-        Trigger : trigger,
-        Jenistarif : jenistarif // search term
-      };
-     
-   },
-   processResults: function (response) {
-      return {
-         results: response
-      };
-   },
-   cache: true
- }
-});
-
-
-  
 }
 
 
@@ -510,30 +497,6 @@ $('.multi-field-wrapper').each(function() {
            if(x < max){
               x++;
               i++;
-                
-              if(x == 1){
-                   head = '<table class="bordered fixed" id="tbUser"><tr>\
-                                <td style="width: 5%" >NO</td>\
-                                <td style="width: 30%" >NAMA</td>\
-                                <td style="width: 15%" >NIP</td>\
-                                <td style="width: 30%" >PERAN/JABATAN</td>\
-                                <td>GOL</td>\
-                                <td style="min-width: 200px">KOTA ASAL</td>\
-                                <td style="min-width: 200px">KOTA TUJUAN</td>\
-                                <td>TGL<br>BERANGKAT</td>\
-                                <td>TGL<br>KEMBALI</td>\
-                                <td>JML<br>HARI</td>\
-                                <td>UANG HARIAN</td>\
-                                <td>PENGINAPAN</td>\
-                                <td>TRANSPORTASI</td>\
-                                <td>REPRESENTASI</td>\
-                                <td style="min-width: 150px">JUMLAH</td>\
-                                <td>JENIS<br>TRANSPORTASI</td>\
-                                <td style="min-width: 15px" >AKSI</td>\
-                            </tr>';
-                }else if(x == max){
-                  end = '</table>'
-              }
               var minDate = $('#tglst_mulai').val()
               var maxDate = $('#tglst_selesai').val()
               $($wrapper).append( head +'<tr>\
@@ -552,7 +515,7 @@ $('.multi-field-wrapper').each(function() {
                             <td><select class="browser-default kota" name="kotaasal'+x+'" id="kotaasal'+x+'" onchange="cityCount('+x+')"></select></td>\
                               <td><select class="browser-default kota"  name="kotatujuan'+x+'" id="kotatujuan'+x+'" onchange="cityCount('+x+')"></select></td>\
                               <td><input type="date" min="'+minDate+'" max="'+maxDate+'" onchange="dayCount(\''+x+'\',\'D\')" id="tglberangkat'+x+'" name="tglberangkat'+x+'"></td>\
-                              <td><input type="date" max="'+maxDate+'" min="'+minDate+'" onchange="dayCount('+x+')" class="tgl" id="tglkembali'+x+'" name="tglkembali'+x+'"></td>\
+                              <td><input type="date" max="'+maxDate+'" min="'+minDate+'" onchange="dayCount('+x+')" id="tglkembali'+x+'" name="tglkembali'+x+'"></td>\
                               <td><input type="text" id="jmlhari'+x+'" name="jmlhari'+x+'" readonly></td>\
                               <td><input type="text" id="uangharian'+x+'" name="uangharian'+x+'" ></td>\
                               <td><input type="text" id="uangpenginapan'+x+'" name="uangpenginapan'+x+'" ></td>\
@@ -664,13 +627,13 @@ $.ajax({
                 var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
                 var firstDate = new Date($("#tglberangkat"+id+"").val());
                 var secondDate = new Date($("#tglkembali"+id+"").val());
-                var diffDays = (secondDate.getTime() - firstDate.getTime()) / (oneDay);
+                var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay) )+ 1;
                 $("#jmlhari"+id+"").val(diffDays);
 
-                var totalUangHarian = ''+((diffDays+1) * tarif)
+                var totalUangHarian = ''+((diffDays) * tarif)
                 $("#uangharian"+id+"").val(formatRupiah(totalUangHarian));
 
-                var totalUangPenginapan = ''+((diffDays) * 1200000)
+                var totalUangPenginapan = ''+((diffDays-1) * 1200000)
                 $("#uangpenginapan"+id+"").val(formatRupiah(totalUangPenginapan));
 
 
@@ -750,7 +713,7 @@ if ( $("#idxskmpnen").val() != null){
                 var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
                 var firstDate = new Date($("#tglberangkat"+id+"").val());
                 var secondDate = new Date($("#tglkembali"+id+"").val());
-                var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay)+1);
+                var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay)) + 1;
                 $("#jmlhari"+id+"").val(diffDays);
 
                 // var kotatujuan = $("#kotatujuan"+id+"").val()

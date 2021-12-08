@@ -224,7 +224,7 @@ function cek_tgl($tanggal){
             <?php $no=1; foreach($export as $e){ ?>
 
             <tr>
-                <td class="ttop tbottom" ><?=$no++?></td>
+                <td class="ttop tbottom" ><?=$e->nourut?></td>
                 <td class="ttop tbottom" ><?=$e->nama?></td>
                 <td class="ttop tbottom" ><?=$e->nost?></td>
                 <td class="ttop tbottom" ><?=cek_tgl($e->tglst)?></td>

@@ -108,11 +108,28 @@
                                     </div>
                                 </div>
 
-
-                                <div class="multi-fields">
-                                    <div class="multi-field">
-                                    </div>
-                                </div>
+                                    <table class="bordered fixed multi-fields" id="tbUser">
+                                        <thead><tr>
+                                            <td style="width: 5px" >NO</td>
+                                            <td style="width: 30px" >NAMA</td>
+                                            <td style="min-width: 200px" >NIP</td>
+                                            <td style="min-width: 250px" >PERAN/JABATAN</td>
+                                            <td>GOL</td>
+                                            <td style="min-width: 200px">KOTA ASAL</td>
+                                            <td style="min-width: 200px">KOTA TUJUAN</td>
+                                            <td>TGL<br>BERANGKAT</td>
+                                            <td>TGL<br>KEMBALI</td>
+                                            <td>JML<br>HARI</td>
+                                            <td>UANG HARIAN</td>
+                                            <td>PENGINAPAN</td>
+                                            <td>TRANSPORTASI</td>
+                                            <td>REPRESENTASI</td>
+                                            <td style="min-width: 150px">JUMLAH</td>
+                                            <td style="min-width: 250px">JENIS<br>TRANSPORTASI</td>
+                                            <td style="min-width: 15px" >AKSI</td>
+                                        </tr></thead>
+                                        <tbody class="multi-field"></tbody>
+                                    </table>
                             </div>
                         </div>
 

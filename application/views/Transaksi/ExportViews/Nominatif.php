@@ -129,7 +129,7 @@ function cek_tgl($tanggal){
                 <tbody>
                     <?php $no=1; foreach($export as $e){ ?>
                         <tr>
-                            <td style="text-align: center;"><?=$no++?></td>
+                            <td style="text-align: center;"><?=$e->nourut?></td>
                             <td><?=$e->nama?></td>
                             <td><?=$e->nip?></td>
                             <td style="text-align: center;"><?=$e->golongan?></td>
