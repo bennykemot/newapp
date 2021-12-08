@@ -2,7 +2,7 @@
 
 
 					<!-- card stats start -->
-					<div id="card-stats" class="pt-0">
+					<!-- <div id="card-stats" class="pt-0">
 						<div class="row">
 						<?php echo $this->session->userdata("last_visited"); ?>
 							<div class="col s12 m6 l3">
@@ -60,9 +60,7 @@
 							</div>
 						</div>
 					</div>
-					<!--card stats end-->
 
-					<!--chart dashboard start-->
 					<div id="chart-dashboard">
 						<div class="row">
 							<div class="col s12 m8 l8">
@@ -284,7 +282,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<!--chart dashboard end-->
           
 				

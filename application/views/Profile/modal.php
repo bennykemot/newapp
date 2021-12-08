@@ -53,6 +53,14 @@
                         </div>
                     </div>
 
+                    <div class="input-field col s12">
+                        <div class="input-field col s2"><label>Unit Kerja</label></div>
+
+                        <div class="input-field col s10 " >
+                          <select  id="unitkerja-select2" name="kdunitkerja" class="select2-data-ajax select2-hidden-accessible browser-default"></select>
+                        </div>
+                    </div>
+
 
 
 
@@ -126,6 +134,14 @@
 
                         <div class="input-field col s10 " >
                           <input placeholder="Keterangan User" id="keterangan_Edit" name="keterangan_Edit" type="text" class="validate">
+                        </div>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <div class="input-field col s2"><label>Unit Kerja</label></div>
+
+                        <div class="input-field col s10 " >
+                          <select  id="unitkerja-select2_Edit" name="kdunitkerja_Edit" class="select2-data-ajax select2-hidden-accessible browser-default"></select>
                         </div>
                     </div>
 

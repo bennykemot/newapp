@@ -99,7 +99,7 @@ function cek_tgl($tanggal){
                     <td width="5%"><?= $ubah[$i]['nourut']?></td>
                     <td width="30%"><?= $ubah[$i]['nama']?></td>
                     <td width="35%"><?= $ubah[$i]['nip']?></td>
-                    <td width="30%" colspan="2"><?= $ubah[$i]['peran']?></td>
+                    <td width="30%" colspan="2"><?= $ubah[$i]['jabatan']?></td>
                 </tr>
                 <?php }?>
                 

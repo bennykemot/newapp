@@ -355,10 +355,13 @@ function getData_skomponen($searchTerm="", $Trigger){
    return $data;
 }
 
-function getData_unitkerja($searchTerm="", $Trigger){
+function getData_unitkerja($searchTerm="", $Trigger, $kdsatker){
 
    $this->db->select('id');
    $this->db->select('nama_unit');
+      if($Trigger == "Persatker_forPengguna"){
+         $this->db->where("satker_id", $kdsatker);
+      }
    $this->db->where("nama_unit like '%".$searchTerm."%' ");
    $fetched_records = $this->db->get('t_unitkerja');
    $users = $fetched_records->result_array();

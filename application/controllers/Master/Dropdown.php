@@ -193,10 +193,11 @@ class Dropdown extends CI_Controller {
 
       // Search term
       $searchTerm = $this->input->post('searchTerm');
-      $Trigger = $this->input->post('Trigger');
+      $Trigger = $this->input->post('trigger');
+      $kdsatker = $this->input->post('kdsatker');
 
       // Get users
-      $response = $this->Dropdown->getData_unitkerja($searchTerm, $Trigger);
+      $response = $this->Dropdown->getData_unitkerja($searchTerm, $Trigger, $kdsatker);
 
       echo json_encode($response);
    }
@@ -260,6 +261,18 @@ class Dropdown extends CI_Controller {
 
       echo json_encode($response);
    }
+
+   // public function unitkerja(){
+
+   //    // Search term
+   //    $searchTerm = $this->input->post('searchTerm');
+   //    $kdsatker = $this->input->post('kdsatker');
+
+   //    // Get users
+   //    $response = $this->Dropdown->getData_unitkerja($searchTerm, $kdsatker);
+
+   //    echo json_encode($response);
+   // }
 
 
 }

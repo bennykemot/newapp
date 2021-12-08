@@ -262,6 +262,60 @@ function Reset(idForm) {
         }]
     })
 
+    $("#unitkerja-select2").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Unit Kerja",
+          dropdownParent: "#modal2",
+         ajax: { 
+           url: dropdown_baseurl + 'unitkerja',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+                searchTerm: params.term,
+                kdsatker: satker_session,
+                trigger : "Persatker_forPengguna"
+                 // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
+     $("#unitkerja-select2_Edit").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Unit Kerja",
+          dropdownParent: "#modalEdit",
+         ajax: { 
+           url: dropdown_baseurl + 'unitkerja',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+                searchTerm: params.term,
+                kdsatker: satker_session,
+                trigger : "Persatker_forPengguna"
+                 // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
      
 
 $("#TambahUser").click(function (e) {

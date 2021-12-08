@@ -67,6 +67,7 @@ class Profile extends CI_Controller {
             $kdrole = $this->input->post('kdrole');
             $password = $this->input->post('password');
             $keterangan = $this->input->post('keterangan');
+            $unit_id = $this->input->post('kdunitkerja');
 
             $getUsername= $this->db->query("SELECT username from user where username = '". $nama_user."' ")->result_array();
             if(count($getUsername) > 0){
@@ -84,6 +85,7 @@ class Profile extends CI_Controller {
                 'role_id' => $kdrole,
                 'keterangan' => $keterangan,
                 'password' => $password,
+                'unit_id' => $unit_id,
 
                 
                 );
@@ -123,6 +125,7 @@ class Profile extends CI_Controller {
             $kdstatus  = $this->input->post('kdstatus_Edit');
             $password     = $this->input->post('password_Edit');
             $keterangan   = $this->input->post('keterangan_Edit');
+            $unit_id = $this->input->post('kdunitkerja_Edit');
 
             $data = array(
                 'username' => $username,
@@ -130,7 +133,8 @@ class Profile extends CI_Controller {
                 'kdsatker' => $kdsatker,
                 'role_id' => $kdrole,
                 'status' => $kdstatus,
-                'keterangan' => $keterangan
+                'keterangan' => $keterangan,
+                'unit_id' => $unit_id,
                 
                 );
             $where = array('id' => $id);
