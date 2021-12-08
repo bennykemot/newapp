@@ -41,6 +41,12 @@
 
       <script src="<?= base_url().'assets'?>/app-assets/vendors/select2/select2.full.min.js"></script>
 
+
+      <!-- <script src="<?= base_url().'assets'?>/design/js/bootstrap.js"></script>
+      <script src="<?= base_url().'assets'?>/design/js/bootstrap-grid.js"></script>
+      <script src="<?= base_url().'assets'?>/design/datatables/datatables.js"></script>
+      <script src="<?= base_url().'assets'?>/design/datatables/DataTables-1.11.3/js/jquery.dataTables"></script> -->
+
      
       
 

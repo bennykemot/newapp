@@ -25,7 +25,7 @@
      
   </div>
 
-  <div class="section section-data-tables">
+  <!-- <div class="section section-data-tables"> -->
       <div class="row">
         <div class="col s12">
           <div class="card">
@@ -33,7 +33,7 @@
               <div class="row">
                 <div class="col s12">
                   
-                    <table id="page-length-option" class="display">
+                    <table id="tb-pembagianpagu" class="display nowrap" style="width:100%">
                         <thead>
                             <tr>
                               <th>TA</th>
@@ -78,7 +78,7 @@
           </div>
         </div>
       </div>
-  </div>
+  <!-- </div> -->
 
   <?php include('modal.php');?>
   <?php include(APPPATH . 'views/Footer/Footer.php') ?>

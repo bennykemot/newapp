@@ -15,6 +15,18 @@
      
     }
 
+    $(document).ready(function() {
+    $('#tb-pembagianpagu').DataTable( {
+
+      lengthMenu: [
+            [10, 25, 50, -1],
+            [10, 25, 50, "All"],
+        ],
+        "scrollX": true,
+        "info": false
+         } );
+      } );
+
 
 
         // SELECT2 INSERT
