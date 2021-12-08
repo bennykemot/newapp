@@ -15,19 +15,6 @@
      
     }
 
-    $(document).ready(function() {
-    $('#tb-pembagianpagu').DataTable( {
-
-      lengthMenu: [
-            [10, 25, 50, -1],
-            [10, 25, 50, "All"],
-        ],
-        responsive: true,
-        scrollX: true,
-        info: false
-         } );
-      } );
-
 
 
         // SELECT2 INSERT
@@ -601,10 +588,9 @@ function show_msg(status,message){
             [10, 25, 50, -1],
             [10, 25, 50, "All"],
         ],
-		  paging: !0,
-        scrollX: !0,
+        scrollX: true
     }),
-        $("#scroll-dynamic").DataTable({ responsive: !0, scrollX: "50vh", scrollCollapse: !0, paging: !1 }),
+        $("#scroll-dynamic").DataTable({ responsive: !0, scrollY: "50vh", scrollCollapse: !0, paging: !1 }),
         $("#scroll-vert-hor").DataTable({ scrollY: 200, scrollX: !0 }),
         $("#multi-select").DataTable({ responsive: !0, paging: !0, ordering: !1, info: !1, columnDefs: [{ visible: !1, targets: 2 }] });
 }),
