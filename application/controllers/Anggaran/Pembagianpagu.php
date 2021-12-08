@@ -23,8 +23,8 @@ class Pembagianpagu extends CI_Controller {
         $thang =  $this->uri->segment(5);
         $userid =  $this->uri->segment(6);
         $roleid =  $this->uri->segment(7);
-        $data['pp']= $this->Pembagianpagu->getDataNew($kdsatker,$thang,$userid,$roleid);
-        //echo json_encode($data);
+        $data['pp'] = $this->Pembagianpagu->getDataNew($kdsatker,$thang,$userid,$roleid);
+        $data['head'] = $this->db->query("SELECT SUM(rupiah) as jumlah, norevisi, tgrevisi from d_pagu WHERE d_pagu.kdsatker = ".$kdsatker." AND d_pagu.thang = ".$thang." ")->result();
 		$this->load->view('Anggaran/Pembagianpagu/manage', $data);
 	}
 
@@ -69,27 +69,35 @@ class Pembagianpagu extends CI_Controller {
 
         $Trigger = $this->input->post('Trigger');
         if($Trigger == "C"){
-            $nama_user = $this->input->post('nama_user');
+            $ppk = $this->input->post('ppk');
+            $unitkerja = $this->input->post('unitkerja');
+            $kewenangan = $this->input->post('kewenangan');
+            $kdindex = $this->input->post('kdindex');
             $kdsatker = $this->input->post('kdsatker');
+            $kddept = $this->input->post('kddept');
+            $kdunit = $this->input->post('kdunit');
             $kdprogram = $this->input->post('kdprogram');
             $kdgiat = $this->input->post('kdgiat');
             $kdoutput = $this->input->post('kdoutput');
             $kdsoutput = $this->input->post('kdsoutput');
-            $kdkomponen = $this->input->post('kdkomponen');
+            $kdkmpnen = $this->input->post('kdkmpnen');
             $thang = $this->input->post('thang');
             $trigger = $this->input->post('Trigger');
 
             $datawhere = array(
                 'thang' => $thang,
-                'user_id' => $nama_user,
                 'kdsatker' => $kdsatker,
-                'kddept' => "089",
-                'kdunit' => "01",
+                'kddept' => $kddept,
+                'kdunit' => $kdunit,
                 'kdprogram' => $kdprogram,
                 'kdgiat' => $kdgiat,
                 'kdoutput' => $kdoutput,
                 'kdsoutput' => $kdsoutput,
-                'kdkmpnen' => $kdkomponen);
+                'kdkmpnen' => $kdkmpnen,
+                'ppk_id' => $ppk,
+                'role_id' => $kewenangan,
+                'unit_id' => $unitkerja,
+                'kdindex' => $kdindex);
 
             $cek = $this->Pembagianpagu->CEK($datawhere,'d_bagipagu', 'R');
 
@@ -97,15 +105,18 @@ class Pembagianpagu extends CI_Controller {
 
                 $data = array(
                     'thang' => $thang,
-                    'user_id' => $nama_user,
                     'kdsatker' => $kdsatker,
-                    'kddept' => "089",
-                    'kdunit' => "01",
+                    'kddept' => $kddept,
+                    'kdunit' => $kdunit,
                     'kdprogram' => $kdprogram,
                     'kdgiat' => $kdgiat,
                     'kdoutput' => $kdoutput,
                     'kdsoutput' => $kdsoutput,
-                    'kdkmpnen' => $kdkomponen
+                    'kdkmpnen' => $kdkmpnen,
+                    'ppk_id' => $ppk,
+                    'role_id' => $kewenangan,
+                    'unit_id' => $unitkerja,
+                    'kdindex' => $kdindex
                     
                     );
                 $this->Pembagianpagu->CRUD($data,'d_bagipagu', $Trigger);
@@ -187,6 +198,12 @@ class Pembagianpagu extends CI_Controller {
 
 	public function tambah()
 		{
-			$this->load->view('Anggaran/Pembagianpagu/tambah');
+            $var =  $this->uri->segment(4);
+
+            $kdindex = str_replace("%20", " ", $var);
+            $data['tambahpp'] = $this->Pembagianpagu->CRUD($kdindex,'d_pagu','R');
+            $data['readpp'] = $this->Pembagianpagu->CRUD($kdindex,'d_bagi','R-table');
+
+			$this->load->view('Anggaran/Pembagianpagu/tambah', $data);
 		}
 }

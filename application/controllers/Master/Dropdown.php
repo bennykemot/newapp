@@ -262,17 +262,17 @@ class Dropdown extends CI_Controller {
       echo json_encode($response);
    }
 
-   // public function unitkerja(){
+   public function ppk(){
 
-   //    // Search term
-   //    $searchTerm = $this->input->post('searchTerm');
-   //    $kdsatker = $this->input->post('kdsatker');
+      // Search term
+      $searchTerm = $this->input->post('searchTerm');
+      $kdsatker = $this->input->post('kdsatker');
 
-   //    // Get users
-   //    $response = $this->Dropdown->getData_unitkerja($searchTerm, $kdsatker);
+      // Get users
+      $response = $this->Dropdown->getData_ppk($searchTerm, $kdsatker);
 
-   //    echo json_encode($response);
-   // }
+      echo json_encode($response);
+   }
 
 
 }

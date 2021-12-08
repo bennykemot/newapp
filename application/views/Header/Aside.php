@@ -26,7 +26,7 @@ $role_id = $this->session->userdata("role_id");
           </li>
 
           <!-- DIGRUP ANGGARAN -->
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
           <i class="material-icons">
           home
           </i><span class="menu-title" data-i18n="Mail">Mapping Lembur</span></a>
@@ -34,19 +34,19 @@ $role_id = $this->session->userdata("role_id");
 
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Pembagianpagu/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id)?>">
           <i class="material-icons">
-          home
+          turned_in_not
           </i><span class="menu-title" data-i18n="Mail">Pembagian Pagu</span></a>
           </li>
 
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Mappingapp/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id)?>">
           <i class="material-icons">
-          home
+          view_comfy
           </i><span class="menu-title" data-i18n="Mail">Mapping App</span></a>
           </li>
 
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Transfer')?>">
           <i class="material-icons">
-          home
+          get_app
           </i><span class="menu-title" data-i18n="Mail">Transfer Pagu</span></a>
           </li>
 
@@ -58,31 +58,31 @@ $role_id = $this->session->userdata("role_id");
           <!-- DIGRUP RENCANA KEGIATAN -->
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/SuratTugas/Page')?>">
           <i class="material-icons">
-          home
+          email
           </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>
           </li>
 
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
           <i class="material-icons">
-          home
+          speaker_notes
           </i><span class="menu-title" data-i18n="Mail">Perjadin Diklat</span></a>
           </li>
 
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
           <i class="material-icons">
-          home
+          book
           </i><span class="menu-title" data-i18n="Mail">ST Non-Biaya</span></a>
           </li>
 
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
           <i class="material-icons">
-          home
+          business_center
           </i><span class="menu-title" data-i18n="Mail">Lembur</span></a>
           </li>
 
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
           <i class="material-icons">
-          home
+          call_to_action
           </i><span class="menu-title" data-i18n="Mail">PBJ</span></a>
           </li>
 
@@ -93,7 +93,7 @@ $role_id = $this->session->userdata("role_id");
           <!-- DIGRUP RENCANA KEGIATAN -->
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Profile/Profile/Page/'.$kdsatker)?>">
           <i class="material-icons">
-          home
+          import_contacts
           </i><span class="menu-title" data-i18n="Mail">Pengguna</span></a>
           </li>
 

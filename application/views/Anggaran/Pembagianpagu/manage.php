@@ -21,7 +21,7 @@
 								<div class="row">
 										<div class="col s1">
                     </div>
-                    <div class="col s9">
+                    <div class="col s11">
                         <!-- <div class="col s4">
 													<p>DIPA-089.01.2.418119/2021 Revisi ke 0</p>
 												</div>
@@ -31,13 +31,13 @@
 												<div class="col s4">
 													<h6>Rp 1.625.000.000,-</h6>
 												</div> -->
-												<table class="mt-1">
+												<table class="mt-1" width="100%">
 													<thead></thead>
 													<tbody>
 														<tr>
-															<td>DIPA-089.01.2.418119/2021 Revisi ke 0</td>
-															<td>Tanggal: 20 November 2021</td>
-															<td>Rp 1.625.000.000,-</td>
+															<td width="300px"><?=$head[0]->norevisi?></td>
+															<td width="300px" class="text-right"><?=cek_tgl($head[0]->tgrevisi)?></td>
+															<td width="300px" class="text-right"><?=rupiah($head[0]->jumlah)?></td>
 														</tr>
 													</tbody>
 												</table>
@@ -58,16 +58,15 @@
               <div class="row">
                 <div class="col s12">
                   
-                    <table id="tb-pembagianpagu" class="display" style="width:100%">
+                    <table id="tb-pembagianpagu" class="display" style="width:100%;white-space: nowrap !important;overflow: hidden;">
                         <thead>
                             <tr>
+                              <th>Program</th>
                               <th>Kegiatan</th>
                               <th>Output</th>
                               <th>Sub<br>Output</th>
                               <th>Komponen</th>
-                              <th style="width: 30%;">Uraian</th>
                               <th>Sub<br>Komponen</th>
-                              <th style="width: 20%;">Uraian</th>
                               <th>Akun</th>
                               <th style="width: 20%;">Uraian</th>
                               <th style="width: 15%;">Jumlah (Rp)</th>
@@ -75,22 +74,25 @@
                           </tr>
                         </thead>
                         <tbody>
+
+                        <?php foreach($pp as $p){?>
 												
-														<tr style="white-space: nowrap !important;overflow: hidden;">
-														<td>3667</td>
-														<td>AEA</td>
-														<td>960</td>
-														<td>001</td>
-														<td>Pembayaran Gaji dan Tunjangan</td>
-														<td>SU3</td>
-														<td>Biro Keuangan</td>
-														<td>511111</td>
-														<td>Belanja Gaji Pokok PNS</td>
-														<td>100.000.000</td>
-														<td>
-														<a href="<?= site_url() ?>Anggaran/Pembagianpagu/Tambah"><i class="material-icons green-text">edit</i></a>
-														
-                            
+														<tr>
+                              <td><?=$p->kdprogram?></td>
+                              <td><?=$p->kdgiat?></td>
+                              <td><?=$p->kdoutput?></td>
+                              <td><?=$p->kdsoutput?></td>
+                              <td><?=$p->kdkmpnen?></td>
+                              <td><?=$p->kdskmpnen?></td>
+                              <td><?=$p->kdakun?></td>
+                              <td><?=$p->nmakun?></td>
+                              <td class="text-right"><?=rupiah($p->rupiah)?></td>
+                              <td class="text-center">
+                                <a href="<?= site_url('Anggaran/Pembagianpagu/Tambah/'.$p->kdindex) ?>"><i class="material-icons green-text">edit</i></a>
+                              </td>
+                            </tr>
+                        
+                        <?php } ?>
                                 
                               
                       </tbody>
