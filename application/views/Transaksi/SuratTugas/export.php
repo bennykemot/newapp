@@ -105,10 +105,12 @@ function cek_tgl($tanggal){
                 
         </table>
         
-        <p style="text-align: justify"> Untuk melaksanakan <?= $ubah[0]['uraianst']?>. Kegiatan ini menjadi
-                        beban anggaran <?= $ubah[0]['nama_unit']?>.<br>
-                        Penugasan ini dilaksanakan selama <?= $ubah[0]['jmlhari']?> hari kerja mulai tanggal <?= cek_tgl($ubah[0]['tglmulaist'])?>. <br>
-                        Demikian untuk dilaksanakan dengan penuh tanggung jawab.
+        <p style="text-align: justify"> Untuk melaksanakan <?= $ubah[0]['uraianst']?>. <br>
+						Penugasan ini dilaksanakan selama <?= $ubah[0]['jmlhari']?> hari kerja mulai tanggal <?= cek_tgl($ubah[0]['tglmulaist'])?> sampai dengan <?= cek_tgl($ubah[0]['tglselesaist'])?>. <br>
+						Biaya kegiatan ini dibebankan pada anggaran <?= $ubah[0]['nama_unit']?>.<br>
+						Demikian untuk dilaksanakan dengan penuh tanggung jawab.
+                        
+                        
         </p>
 
         <table width="100%">
@@ -122,7 +124,7 @@ function cek_tgl($tanggal){
                 </tr>
 
                 <tr>
-                    <td style="text-align: left; padding-top: 30%"></td>
+                    <td style="text-align: left; padding-top: 10%"></td>
                 </tr>
 
                 <tr>
