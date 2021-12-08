@@ -1,12 +1,5 @@
 <?php include 'AssetsHeader.php';?>
 <?php include 'Upside.php';?>
-
-<?php 
-$kdsatker = $this->session->userdata("kdsatker");
-$thang = $this->session->userdata("thang");
-$user_id = $this->session->userdata("user_id");
-$role_id = $this->session->userdata("role_id");
-?>
     <!-- BEGIN: SideNav-->
     <aside class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-dark sidenav-active-rounded">
       <div class="brand-sidebar" style="background: #fff !important">
@@ -20,85 +13,6 @@ $role_id = $this->session->userdata("role_id");
           home
           </i><span class="menu-title" data-i18n="Mail">Dashboard</span></a>
           </li>
-
-          <li class="navigation-header"><a class="navigation-header-text">Anggaran</a>
-          <i class="navigation-header-icon material-icons">more_horiz</i>
-          </li>
-
-          <!-- DIGRUP ANGGARAN -->
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
-          <i class="material-icons">
-          home
-          </i><span class="menu-title" data-i18n="Mail">Mapping Lembur</span></a>
-          </li>
-
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Pembagianpagu/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id)?>">
-          <i class="material-icons">
-          home
-          </i><span class="menu-title" data-i18n="Mail">Pembagian Pagu</span></a>
-          </li>
-
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Mappingapp/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id)?>">
-          <i class="material-icons">
-          home
-          </i><span class="menu-title" data-i18n="Mail">Mapping App</span></a>
-          </li>
-
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Transfer')?>">
-          <i class="material-icons">
-          home
-          </i><span class="menu-title" data-i18n="Mail">Transfer Pagu</span></a>
-          </li>
-
-
-          <li class="navigation-header"><a class="navigation-header-text">Rencana Kegiatan</a>
-          <i class="navigation-header-icon material-icons">more_horiz</i>
-          </li>
-
-          <!-- DIGRUP RENCANA KEGIATAN -->
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/SuratTugas/Page')?>">
-          <i class="material-icons">
-          home
-          </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>
-          </li>
-
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
-          <i class="material-icons">
-          home
-          </i><span class="menu-title" data-i18n="Mail">Perjadin Diklat</span></a>
-          </li>
-
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
-          <i class="material-icons">
-          home
-          </i><span class="menu-title" data-i18n="Mail">ST Non-Biaya</span></a>
-          </li>
-
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
-          <i class="material-icons">
-          home
-          </i><span class="menu-title" data-i18n="Mail">Lembur</span></a>
-          </li>
-
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
-          <i class="material-icons">
-          home
-          </i><span class="menu-title" data-i18n="Mail">PBJ</span></a>
-          </li>
-
-          <li class="navigation-header"><a class="navigation-header-text">Pengaturan</a>
-          <i class="navigation-header-icon material-icons">more_horiz</i>
-          </li>
-
-          <!-- DIGRUP RENCANA KEGIATAN -->
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Profile/Profile/Page/'.$kdsatker)?>">
-          <i class="material-icons">
-          home
-          </i><span class="menu-title" data-i18n="Mail">Pengguna</span></a>
-          </li>
-
-
-
 
         <!-- <li class="navigation-header"><a class="navigation-header-text">Anggaran</a>
           <i class="navigation-header-icon material-icons">more_horiz</i>
