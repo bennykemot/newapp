@@ -12,12 +12,37 @@
                         turned_in_not</i></button>
                     </div>
                     <div class="col s9">
-                        <h6> Pembagian Pagu Satker : <?php echo $this->session->userdata("nmsatker"); ?> </h6>
+                        <h6> Pembagian Pagu Anggaran </h6>
                     </div>
-                    <div class="col s2">
+                    <!-- <div class="col s2">
                     <a class="btn modal-trigger" href="#modal2">Tambah Data</a>
-                    </div>
+                    </div> -->
                 </div>
+								<div class="row">
+										<div class="col s1">
+                    </div>
+                    <div class="col s9">
+                        <!-- <div class="col s4">
+													<p>DIPA-089.01.2.418119/2021 Revisi ke 0</p>
+												</div>
+												<div class="col s4">
+													<h6>Tanggal: 20 November 2021</h6>
+												</div>
+												<div class="col s4">
+													<h6>Rp 1.625.000.000,-</h6>
+												</div> -->
+												<table class="mt-1">
+													<thead></thead>
+													<tbody>
+														<tr>
+															<td>DIPA-089.01.2.418119/2021 Revisi ke 0</td>
+															<td>Tanggal: 20 November 2021</td>
+															<td>Rp 1.625.000.000,-</td>
+														</tr>
+													</tbody>
+												</table>
+                    </div>
+										</div>
             </div>
         </div>
     </div>
@@ -36,40 +61,38 @@
                     <table id="tb-pembagianpagu" class="display" style="width:100%">
                         <thead>
                             <tr>
-                              <th>TA</th>
-                              <th>Kd<br>Satker</th>
-                              <th>Kd<br>Kementrian</th>
-                              <th>Kd<br>Unit</th>
-                              <th>Kd<br>Program</th>
-                              <th>Kd<br>Kegiatan</th>
-                              <th>Kd<br>Output</th>
-                              <th>Kd<br>Sub Output</th>
-                              <th>Kd<br>Komponen</th>
-                              <th>User</th>
-                              <th>Aksi</th>
+                              <th>Kegiatan</th>
+                              <th>Output</th>
+                              <th>Sub<br>Output</th>
+                              <th>Komponen</th>
+                              <th style="width: 30%;">Uraian</th>
+                              <th>Sub<br>Komponen</th>
+                              <th style="width: 20%;">Uraian</th>
+                              <th>Akun</th>
+                              <th style="width: 20%;">Uraian</th>
+                              <th style="width: 15%;">Jumlah (Rp)</th>
+                              <th>Alokasi</th>
                           </tr>
                         </thead>
-                        <tbody style="height: 0 !important">
-                                <?php 
-                                  foreach($pp as $u){ 
-                                ?>
-                                <tr style="white-space: nowrap !important;overflow: hidden;">
-                                <td><?php echo $u->thang ?></td>
-                                <td><?php echo $u->kdsatker ?></td>
-                                <td><?php echo $u->kddept ?></td>
-                                <td><?php echo $u->kdunit ?></td>
-                                <td><?php echo $u->kdprogram ?></td>
-                                <td><?php echo $u->kdgiat ?></td>
-                                <td><?php echo $u->kdoutput ?></td>
-                                <td><?php echo $u->kdsoutput ?></td>
-                                <td><?php echo $u->kdkmpnen ?></td>
-                                <td><?php echo $u->username ?></td>
-                                <td>
-                                  <a href="javascript:;" onclick="Edit('<?= $u->id ?>')"><i class="material-icons green-text">edit</i></a>
-                                  <a href="javascript:;" onclick="Delete('<?= $u->id ?>')"><i class="material-icons red-text">delete</i></a>
-                                </td>
-                            </tr>
-                              <?php } ?>
+                        <tbody>
+												
+														<tr style="white-space: nowrap !important;overflow: hidden;">
+														<td>3667</td>
+														<td>AEA</td>
+														<td>960</td>
+														<td>001</td>
+														<td>Pembayaran Gaji dan Tunjangan</td>
+														<td>SU3</td>
+														<td>Biro Keuangan</td>
+														<td>511111</td>
+														<td>Belanja Gaji Pokok PNS</td>
+														<td>100.000.000</td>
+														<td>
+														<a href="<?= site_url() ?>Anggaran/Pembagianpagu/Tambah"><i class="material-icons green-text">edit</i></a>
+														
+                            
+                                
+                              
                       </tbody>
                     </table>
                 </div>

@@ -184,4 +184,9 @@ class Pembagianpagu extends CI_Controller {
         }
         
     }
+
+	public function tambah()
+		{
+			$this->load->view('Anggaran/Pembagianpagu/tambah');
+		}
 }
