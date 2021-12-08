@@ -90,7 +90,7 @@ class M_NotaDinas extends CI_Model{
             JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
             LEFT JOIN t_pegawai ON d_surattugas.id_ttd = t_pegawai.nip 
             
-            WHERE d_surattugas.id = ".$Id_st." ");
+            WHERE d_surattugas.id = ".$Id_st." ORDER BY d_itemcs.nourut ");
 
             return $query->result();
             
@@ -109,7 +109,7 @@ class M_NotaDinas extends CI_Model{
             FROM d_surattugas JOIN t_unitkerja ON t_unitkerja.id = d_surattugas.id_unit 
             JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
             
-            WHERE d_surattugas.id = ".$Id_st." ");
+            WHERE d_surattugas.id = ".$Id_st." ORDER BY d_itemcs.nourut ");
 
             return $query->result();
 
@@ -131,7 +131,7 @@ class M_NotaDinas extends CI_Model{
             FROM d_surattugas JOIN t_unitkerja ON t_unitkerja.id = d_surattugas.id_unit 
             JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
             
-            WHERE d_surattugas.id = ".$Id_st." ");
+            WHERE d_surattugas.id = ".$Id_st." ORDER BY d_itemcs.nourut ");
 
             return $query->result();
 
@@ -153,7 +153,7 @@ class M_NotaDinas extends CI_Model{
             FROM d_surattugas JOIN t_unitkerja ON t_unitkerja.id = d_surattugas.id_unit 
             JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
             
-            WHERE d_surattugas.id = ".$Id_st." ");
+            WHERE d_surattugas.id = ".$Id_st." ORDER BY d_itemcs.nourut ");
 
             return $query->result();
 
@@ -168,7 +168,7 @@ class M_NotaDinas extends CI_Model{
             FROM d_surattugas
             JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
             
-            WHERE d_surattugas.id = ".$Id_st." ");
+            WHERE d_surattugas.id = ".$Id_st." ORDER BY d_itemcs.nourut ");
 
             return $query->result();
 
@@ -184,7 +184,7 @@ class M_NotaDinas extends CI_Model{
                 FROM d_surattugas
                 JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
                 
-                WHERE d_surattugas.id = ".$Id_st." ");
+                WHERE d_surattugas.id = ".$Id_st." ORDER BY d_itemcs.nourut ");
     
                 return $query->result();
     

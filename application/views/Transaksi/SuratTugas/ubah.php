@@ -38,7 +38,7 @@
                             <div class="input-field col s2"><label>Tanggal ST</label></div>
 
                             <div class="input-field col s10 " >
-                            <input class="datepicker" id="tglst" name="tglst" value="<?= date("d/m/Y",strtotime($ubah[0]['tglst'])); ?>">
+                            <input type="date" id="tglst" name="tglst" value="<?= $ubah[0]['tglst']; ?>">
                             </div>
                         </div>
 
@@ -54,7 +54,7 @@
                             <div class="input-field col s2"><label>Tanggal Mulai</label></div>
 
                             <div class="input-field col s10 " >
-                            <input class="datepicker" id="tglst_mulai" name="tglst_mulai" value="<?= date("d/m/Y",strtotime($ubah[0]['tglmulaist'])); ?>">
+                            <input type="date" id="tglst_mulai" name="tglst_mulai" onclick="Min_datemulai()" value="<?=$ubah[0]['tglmulaist']; ?>">
                             </div>
                         </div>
 
@@ -62,7 +62,7 @@
                             <div class="input-field col s2"><label>Tanggal Selesai</label></div>
 
                             <div class="input-field col s10 " >
-                            <input class="datepicker" id="tglst_selesai" name="tglst_selesai" value="<?= date("d/m/Y",strtotime($ubah[0]['tglselesaist'])); ?>">
+                            <input type="date" id="tglst_selesai" name="tglst_selesai" onclick="Min_dateselesai()" value="<?= $ubah[0]['tglselesaist']; ?>">
                             </div>
                         </div>
 
@@ -83,7 +83,7 @@
                             <div class="input-field col s2"><label>Beban Anggaran</label></div>
 
                             <div class="input-field col s10 " >
-                            <select class="browser-default" id="beban_anggaran" name="beban_anggaran"></select>
+                            <select class="browser-default" id="select-bebananggaran" name="select-bebananggaran"></select>
                             </div>
                         </div>
 
@@ -113,20 +113,81 @@
 
                                 <div class="multi-fields">
                                     <div class="multi-field">
-                                        <table class="bordered wrap table-tim" style="width: 100%" id="tbUser">
-                                        <tr>
-                                                    <td style="width: 7%" >NO</td>
-                                                    <td style="width: 30%" >NAMA</td>
-                                                    <td style="width: 15%" >NIP</td>
-                                                    <td style="width: 30%" >PERAN/JABATAN</td>
-                                                    <td style="width: 15%" >AKSI</td>
-                                                </tr>
-                                        <?php $j=1; for($i = 0 ; $i < count($ubah); $i++){ ?>
+                                        <table class="bordered table-tim fixed"id="tbUser">
+                                        <thead><tr>
+                                            <td style="width: 5px" >NO</td>
+                                            <td style="min-width: 200px" >NAMA</td>
+                                            <td style="min-width: 200px" >NIP</td>
+                                            <td style="min-width: 250px" >PERAN/JABATAN</td>
+                                            <td>GOL</td>
+                                            <td style="min-width: 200px">KOTA ASAL</td>
+                                            <td style="min-width: 200px">KOTA TUJUAN</td>
+                                            <td>TGL<br>BERANGKAT</td>
+                                            <td>TGL<br>KEMBALI</td>
+                                            <td>JML<br>HARI</td>
+                                            <td>UANG HARIAN</td>
+                                            <td>PENGINAPAN</td>
+                                            <td>TRANSPORTASI</td>
+                                            <td>REPRESENTASI</td>
+                                            <td style="min-width: 150px">JUMLAH</td>
+                                            <td style="min-width: 250px">JENIS<br>TRANSPORTASI</td>
+                                            <td style="min-width: 15px" >AKSI</td>
+                                        </tr></thead>
+                                                <?php   $j=1; 
+                                                        
+                                                        for($i = 0 ; $i < count($ubah); $i++){ 
+                                                          $kotaasal   = explode("-",$ubah[$i]['kotaasal']);
+                                                          $kotatujuan = explode("-",$ubah[$i]['kotatujuan']);
+                                                            
+                                                ?>
                                             
-                                            
-                                                <tr>
+                                            <tr>
+                                                <td><input  type="number" id="urut<?=$j?>" name="urut<?=$j?>" min="1" max="20" value="<?=$j?>"></td>
+                                                <td id="Tim" name="Tim">
+                                                    <select placeholder="Nama.." class="namaTimHardcode browser-default" name="namaDummy<?=$j?>" id="namaDummy<?=$j?>" >
+                                                        <option selected value="<?=$ubah[$i]['nip']?>"><?=$ubah[$i]['nama']?></option>
+                                                    </select>
+                                                <input name="nama<?=$j?>" id="nama<?=$j?>" hidden>
+                                                </td>
+                                                <td>
+                                                    <input placeholder="NIP" class="nip" id="niplabel<?=$j?>" name="niplabel<?=$j?>" value="<?=$ubah[$i]['nip']?>" readonly>
+                                                </td>
+                                                <td>
+                                                    <textarea placeholder="Peran/Jabatan" class="perjab" id="perjab<?=$j?>" name="perjab<?=$j?>" readonly><?=$ubah[$i]['jabatan']?></textarea>
+                                                </td>
+                                                <td><input type="text" id="gol<?=$j?>" name="gol<?=$j?>" readonly value="<?=$ubah[$i]['golongan']?>"></td>
+                                                <td>
+                                                    <select class="browser-default kota" name="kotaasal<?=$j?>" id="kotaasal<?=$j?>" onchange="cityCount(<?=$j?>)">
+                                                        <option selected value="<?=$ubah[$i]['kotaasal']?>"><?=$kotaasal[2]?></option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select class="browser-default kota"  name="kotatujuan<?=$j?>" id="kotatujuan<?=$j?>" onchange="cityCount(<?=$j?>)">
+                                                        <option selected value="<?=$ubah[$i]['kotatujuan']?>"><?=$kotatujuan[2]?></option>
+                                                    </select>
+                                                </td>
+                                                <td><input type="date" min="<?=$ubah[$i]['tglmulaist']?>" max="<?=$ubah[$i]['tglselesaist']?>" onchange="dayCount('<?=$j?>','D')" id="tglberangkat<?=$j?>" name="tglberangkat<?=$j?>" value="<?=$ubah[$i]['tglberangkat']?>"></td>
+                                                <td><input type="date" max="<?=$ubah[$i]['tglselesaist']?>" min="<?=$ubah[$i]['tglmulaist']?>" onchange="dayCount(<?=$j?>)" id="tglkembali<?=$j?>" name="tglkembali<?=$j?>" value="<?=$ubah[$i]['tglkembali']?>"></td>
+                                                <td><input type="text" id="jmlhari<?=$j?>" name="jmlhari<?=$j?>" readonly value="<?=$ubah[$i]['jmlhari']?>"></td>
+                                                <td><input type="text" id="uangharian<?=$j?>" name="uangharian<?=$j?>" value="<?=rupiah($ubah[$i]['totaluangharian'])?>"></td>
+                                                <td><input type="text" id="uangpenginapan<?=$j?>" name="uangpenginapan<?=$j?>" value="<?=rupiah($ubah[$i]['totalinap'])?>"></td>
+                                                <td><input type="text" onkeypress="return validateNumber(event)" value="<?=rupiah($ubah[$i]['totaltravel'])?>"></td>
+                                                <td><input type="text" onkeypress="return validateNumber(event)" value="<?=rupiah($ubah[$i]['totalrep'])?>"></td>
+                                                <td><input type="text" id="total<?=$j?>"  name="total<?=$j?>" value="<?=rupiah($ubah[$i]['jumlah'])?>"></td>
+                                                <td><select class="select2 browser-default" id="jnstransportasi<?=$j?>" name="jnstransportasi<?=$j?>">
+                                                        <option value="Pesawat Udara">Pesawat Udara</option>
+                                                        <option value="Kendaraan Umum">Kendaraan Umum</option>
+                                                    </select</td>
+                                                <td>
+                                                    <div class="col s12">
+                                                        <a><span class="col s4 table-remove" style="padding: 0px !important" id="<?=$j?>" ><i class="material-icons">delete</i></span></a>
+                                                    </div>
+                                                </td>
+                                                <td hidden><input type="text" id="tarifuangpenginapan<?=$j?>" name="tarifuangpenginapan<?=$j?>"></td>
+                                                <td hidden><input type="text" id="tarifuangharian<?=$j?>" name="tarifuangharian<?=$j?>" ></td>
+                                            </tr>
                                                 
-                                                <td style="width: 5%" ><?=$ubah[$i]['nourut']?></td>
+                                                <!-- <td style="width: 5%" ><input id="nourut<?=$j?>" name="nourut<?=$j?>" value="<?=$ubah[$i]['nourut']?>"></td>
                                                 <td style="width: 30%" id="Tim" name="Tim">
                                                     <select placeholder="Nama.." class="namaTimHardcode browser-default" name="namaDummy<?=$j?>" id="namaDummy<?=$j?>" >
                                                         <option selected value="<?=$ubah[$i]['nip']?>"><?=$ubah[$i]['nama']?></option>
@@ -134,22 +195,22 @@
                                                     
                                                 </td>
                                                 <td style="width: 15%" id="niplabel<?=$j?>"><?=$ubah[$i]['nip']?></td>
-                                                <td style="width: 30%" id="perjablabel<?=$j?>"><?=$ubah[$i]['peran']?></td>
+                                                <td style="width: 30%" id="perjablabel<?=$j?>"><?=$ubah[$i]['jabatan']?></td>
                                                 <td>
                                                     <div class="col s12">
-                                                <!-- <span class="btn green col s5 table-edit" style="padding: 0px !important" id="w" ><i class="material-icons">edit</i></span>  -->
+                                             
                                                 <div class="col s2" style="padding-left: 2px; padding-right: 2px"></div>
-                                                <span class="btn red col s5 table-remove" style="padding: 0px !important" id="<?=$j?>" ><i class="material-icons">delete</i></span>
+                                                <a><span class="col s4 table-remove" style="padding: 0px !important" id="<?=$j?>" ><i class="material-icons">delete</i></span></a>
                                                     </div>
                                                 </td>
-                                                </tr>
+                                                </tr> -->
 
                                                 <tr hidden>
                                                     <td><input type="text" id="idst" name="idst" value="<?= $ubah[0]['idst'] ?>"></td>
                                                     <td><input name="urut<?=$j?>" id="urut<?=$j?>" value="<?=$ubah[$i]['nourut']?>"></td>
                                                     <td><input name="nama<?=$j?>" id="nama<?=$j?>" value="<?=$ubah[$i]['nama']?>"></td>
                                                     <td><input class="nip" id="nip<?=$j?>" name="nip<?=$j?>" value="<?=$ubah[$i]['nip']?>"></td>
-                                                    <td><input class="perjab" id="perjab<?=$j?>" name="perjab<?=$j?>" value="<?=$ubah[$i]['peran']?>"></td>
+                                                    <td><input class="perjab" id="perjab<?=$j?>" name="perjab<?=$j?>" value="<?=$ubah[$i]['jabatan']?>"></td>
                                                 </tr>
                                             
 
