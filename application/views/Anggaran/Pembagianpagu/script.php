@@ -22,8 +22,9 @@
             [10, 25, 50, -1],
             [10, 25, 50, "All"],
         ],
-        "scrollX": true,
-        "info": false
+        responsive: true,
+        scrollX: true,
+        info: false
          } );
       } );
 
