@@ -1,9 +1,41 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class M_Jabatan extends CI_Model {
+class M_Pejabat extends CI_Model {
 
-  	function getJabatan(){		
-		$query = $this->db->get('r_jabatan');
+  	function getPejabat(){		
+		
+
+
+		$query = $this->db->query('SELECT
+									t_pejabat.id as id,
+									
+									t_pejabat.unitkerja_id as unit_id,
+									t_pejabat.nama as nama,
+									t_pejabat.nip as nip,
+									t_pejabat.jabatan_id as id_jab,
+
+									t_unitkerja.nama_unit as unit,
+
+									r_jabatan.jabatan as jabatan,
+
+									t_satker.nmsatker as satker
+
+									FROM
+									t_pejabat
+
+									JOIN 
+
+									t_unitkerja ON t_unitkerja.id = t_pejabat.unitkerja_id
+
+									JOIN
+
+									r_jabatan ON r_jabatan.id = t_pejabat.jabatan_id
+
+									JOIN
+
+									t_satker ON t_satker.kdsatker = t_pejabat.kdsatker
+		
+									');
 
 		return $query->result();
 
