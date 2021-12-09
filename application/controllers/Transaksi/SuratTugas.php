@@ -69,7 +69,7 @@ class SuratTugas extends CI_Controller {
     public function ubah()
 	{
         $id =  $this->uri->segment(4);
-        $data['ubah'] = $this->SuratTugas->getDataUbah($id);
+        $data['ubah'] = $this->SuratTugas->getDataUbah($id, 'Ubah_ST');
         //echo json_encode($data);
 		$this->load->view('Transaksi/SuratTugas/ubah',$data);
 	}
@@ -93,7 +93,7 @@ class SuratTugas extends CI_Controller {
 			$idxskmpnen = $this->input->post('idxskmpnen');
 			$beban_anggaran = $this->input->post('select-bebananggaran');
 			$ttd = $this->input->post('ttd');
-            $countTim = $this->input->post('countTim');
+            //$countTim = $this->input->post('countTim');
 
             
 
@@ -113,104 +113,101 @@ class SuratTugas extends CI_Controller {
                 
                 );
 
-            $kota = [];
-
-            
-
-
             $this->SuratTugas->CRUD($data_st,'d_surattugas', $Trigger);
-
-            $where = array('nost' => $nost);
-            $cek = $this->SuratTugas->cek($where,'d_surattugas')->result_array();
         
-                $data = array();    
-                $j = 1;
-                $ArrX = $this->input->post('ArrX');
-                $urut = explode(",",$ArrX);
-                $Nourut = []; 
-                $total = [];
-                $totaluangharian = 0;
-                $totaluanginap = 0;
-                $sum=0;
+            
+            //$kota = [];
+            // $where = array('nost' => $nost);
+            // $cek = $this->SuratTugas->cek($where,'d_surattugas')->result_array();
+        
+            //     $data = array();    
+            //     $j = 1;
+            //     $ArrX = $this->input->post('ArrX');
+            //     $urut = explode(",",$ArrX);
+            //     $Nourut = []; 
+            //     $total = [];
+            //     $totaluangharian = 0;
+            //     $totaluanginap = 0;
+            //     $sum=0;
                 
-                for($i = 0 ; $i < $countTim; $i++){
+            //     for($i = 0 ; $i < $countTim; $i++){
                     
-                       $data = array(
-                            'nourut' => $this->input->post('urut'.$urut[$i].''),
-                            'nama' => $this->input->post('nama'.$urut[$i].''),
-                            'nip' => $this->input->post('nip'.$urut[$i].''),
-                            'peran'  => $this->input->post('perjab'.$urut[$i].''),
-                            'id_st' => $cek[0]['id']
+            //            $data = array(
+            //                 'nourut' => $this->input->post('urut'.$urut[$i].''),
+            //                 'nama' => $this->input->post('nama'.$urut[$i].''),
+            //                 'nip' => $this->input->post('nip'.$urut[$i].''),
+            //                 'peran'  => $this->input->post('perjab'.$urut[$i].''),
+            //                 'id_st' => $cek[0]['id']
                             
-                       );
+            //            );
 
-                       $data_ItemCS = array(
-                        'nourut' => $this->input->post('urut'.$urut[$i].''),
-                        'nama' => $this->input->post('nama'.$urut[$i].''),
-                        'nip' => $this->input->post('nip'.$urut[$i].''),
-                        'jabatan'  => $this->input->post('perjab'.$urut[$i].''),
-                        'golongan'  => $this->input->post('gol'.$urut[$i].''),
-                        'tglberangkat'  => date("Y-m-d",strtotime($this->input->post('tglberangkat'.$urut[$i].''))),
-                        'tglkembali'  => date("Y-m-d",strtotime($this->input->post('tglkembali'.$urut[$i].''))),
-                        'jmlhari'  => $this->input->post('jmlhari'.$urut[$i].''),
-                        'kotaasal'  => $this->input->post('kotaasal'.$urut[$i].''),
-                        'kotatujuan'  => $this->input->post('kotatujuan'.$urut[$i].''),
+            //            $data_ItemCS = array(
+            //             'nourut' => $this->input->post('urut'.$urut[$i].''),
+            //             'nama' => $this->input->post('nama'.$urut[$i].''),
+            //             'nip' => $this->input->post('nip'.$urut[$i].''),
+            //             'jabatan'  => $this->input->post('perjab'.$urut[$i].''),
+            //             'golongan'  => $this->input->post('gol'.$urut[$i].''),
+            //             'tglberangkat'  => date("Y-m-d",strtotime($this->input->post('tglberangkat'.$urut[$i].''))),
+            //             'tglkembali'  => date("Y-m-d",strtotime($this->input->post('tglkembali'.$urut[$i].''))),
+            //             'jmlhari'  => $this->input->post('jmlhari'.$urut[$i].''),
+            //             'kotaasal'  => $this->input->post('kotaasal'.$urut[$i].''),
+            //             'kotatujuan'  => $this->input->post('kotatujuan'.$urut[$i].''),
 
-                        'tarifuangharian'  => $this->pregChar($this->input->post('tarifuangharian'.$urut[$i].'')),
-                        'totaluangharian'  => $this->pregChar($this->input->post('uangharian'.$urut[$i].'')),
-                        'tarifinap'  => $this->pregChar($this->input->post('tarifuangpenginapan'.$urut[$i].'')),
-                        'totalinap'  => $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].'')),
-                        // 'tarifrep'  => $this->pregChar("0"),
-                        // 'totalrep'  => $this->pregChar("0"),
-                        // 'taksiasal'  => $this->pregChar("0"),
-                        // 'taksitujuan'  => $this->pregChar("0"),
-                        // 'lain'  => $this->pregChar($this->input->post('gol'.$urut[$i].'')),
-                        //'transport'  => 0,
-                        // 'totaltravel'  => $this->pregChar($this->input->post('gol'.$urut[$i].'')),
-                        // 'pengeluaranrill'  => $this->pregChar($this->input->post('gol'.$urut[$i].'')),
+            //             'tarifuangharian'  => $this->pregChar($this->input->post('tarifuangharian'.$urut[$i].'')),
+            //             'totaluangharian'  => $this->pregChar($this->input->post('uangharian'.$urut[$i].'')),
+            //             'tarifinap'  => $this->pregChar($this->input->post('tarifuangpenginapan'.$urut[$i].'')),
+            //             'totalinap'  => $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].'')),
+            //             // 'tarifrep'  => $this->pregChar("0"),
+            //             // 'totalrep'  => $this->pregChar("0"),
+            //             // 'taksiasal'  => $this->pregChar("0"),
+            //             // 'taksitujuan'  => $this->pregChar("0"),
+            //             // 'lain'  => $this->pregChar($this->input->post('gol'.$urut[$i].'')),
+            //             //'transport'  => 0,
+            //             // 'totaltravel'  => $this->pregChar($this->input->post('gol'.$urut[$i].'')),
+            //             // 'pengeluaranrill'  => $this->pregChar($this->input->post('gol'.$urut[$i].'')),
 
-                        'jnstransportasi'  => $this->input->post('jnstransportasi'.$urut[$i].''),
+            //             'jnstransportasi'  => $this->input->post('jnstransportasi'.$urut[$i].''),
 
-                        'jumlah'  => $this->pregChar($this->input->post('total'.$urut[$i].'')),
+            //             'jumlah'  => $this->pregChar($this->input->post('total'.$urut[$i].'')),
                         
-                        'id_st'  => $cek[0]['id'],
+            //             'id_st'  => $cek[0]['id'],
                         
-                   );
+            //        );
 
-                   $totaluangharian += $this->pregChar($this->input->post('uangharian'.$urut[$i].''));
-                   $totaluanginap += $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
-                   $sum += $this->pregChar($this->input->post('uangharian'.$urut[$i].'')) + $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
+            //        $totaluangharian += $this->pregChar($this->input->post('uangharian'.$urut[$i].''));
+            //        $totaluanginap += $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
+            //        $sum += $this->pregChar($this->input->post('uangharian'.$urut[$i].'')) + $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
 
-                //    $totaluangharian = $this->pregChar($this->input->post('uangharian'.$urut[$i].''));
-                //    $totaluangpenginapan = $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
-                   //$totaluangpenginapan += $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
+            //     //    $totaluangharian = $this->pregChar($this->input->post('uangharian'.$urut[$i].''));
+            //     //    $totaluangpenginapan = $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
+            //        //$totaluangpenginapan += $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
                    
 
-                //    $sumHarian +=$this->pregChar($this->input->post('totaluangharian'.$urut[$i].''));
-                //    $sumInap += $this->pregChar($this->input->post('totalinap'.$urut[$i].''));
-                //    $sumTransport += 0;
+            //     //    $sumHarian +=$this->pregChar($this->input->post('totaluangharian'.$urut[$i].''));
+            //     //    $sumInap += $this->pregChar($this->input->post('totalinap'.$urut[$i].''));
+            //     //    $sumTransport += 0;
 
-                //    $total[$i] += $this->pregChar($this->input->post('totaluangharian'.$urut[$i].'')) + $this->pregChar($this->input->post('totalinap'.$urut[$i].'')) + 0;
-                //    $sum += $total[$i];
+            //     //    $total[$i] += $this->pregChar($this->input->post('totaluangharian'.$urut[$i].'')) + $this->pregChar($this->input->post('totalinap'.$urut[$i].'')) + 0;
+            //     //    $sum += $total[$i];
 
-                        $this->db->insert('d_stdetail',$data);
-                       $this->db->insert('d_itemcs',$data_ItemCS);
-                }
+            //             $this->db->insert('d_stdetail',$data);
+            //            $this->db->insert('d_itemcs',$data_ItemCS);
+            //     }
 
-                $data_cs = array(
-                    'nost' => $cek[0]['id'],
-                    'uraianst' => $uraianst,
-                    'tglst' => date("Y-m-d",strtotime($tglst)),
-                    'tujuanst' =>  $this->input->post('kotatujuan1'),
-                    'totaluangharian' =>  $totaluangharian,
-                    'totaluanginap ' =>  $totaluanginap,
-                    'biaya' =>  $sum
-                    );
+            //     $data_cs = array(
+            //         'nost' => $cek[0]['id'],
+            //         'uraianst' => $uraianst,
+            //         'tglst' => date("Y-m-d",strtotime($tglst)),
+            //         'tujuanst' =>  $this->input->post('kotatujuan1'),
+            //         'totaluangharian' =>  $totaluangharian,
+            //         'totaluanginap ' =>  $totaluanginap,
+            //         'biaya' =>  $sum
+            //         );
 
                     
-                    $this->db->insert('d_costsheet',$data_cs);
+            //         $this->db->insert('d_costsheet',$data_cs);
               
-                //$this->db->insert_batch('d_stdetail', $data);
+            //     //$this->db->insert_batch('d_stdetail', $data);
              
             
         }else if($Trigger == "D"){

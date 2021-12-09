@@ -3,14 +3,16 @@
 class M_Dropdown extends CI_Model {
 
    // Fetch users
-   function getData_program($searchTerm="", $kdsatker, $userid,$trigger){
+   function getData_program($searchTerm="", $kdsatker, $unitid,$trigger){
 
       if($trigger == "program_for_ST"){
          // Fetch users
          $this->db->distinct();
          $this->db->select('kdprogram');
          $this->db->where("kdsatker", $kdsatker);
-         $this->db->where("user_id", $userid);
+         if($unitid != 0){
+            $this->db->where("unit_id", $unitid);
+         }
          $this->db->where("kdprogram like '%".$searchTerm."%' ");
          $fetched_records = $this->db->get('d_bagipagu');
          $users = $fetched_records->result_array();
@@ -36,13 +38,15 @@ class M_Dropdown extends CI_Model {
 
 
   function getData_kegiatan($searchTerm="",$kdsatker, $kdprogram, $userid,$trigger){
-   if($trigger == "kegiatan_per_satker"){
+   if($trigger == "kegiatan_for_ST"){
       // Fetch users
       $this->db->distinct();
       $this->db->select('kdgiat');
       $this->db->where("kdsatker", $kdsatker);
-      $this->db->where("user_id", $userid);
-      $this->db->where("kdprogram like '%".$searchTerm."%' ");
+      if($unitid != 0){
+         $this->db->where("unit_id", $unitid);
+      }
+      $this->db->where("kdgiat like '%".$searchTerm."%' ");
       $fetched_records = $this->db->get('d_bagipagu');
       $users = $fetched_records->result_array();
 
@@ -65,14 +69,16 @@ class M_Dropdown extends CI_Model {
    return $data;
 }
 
-function getData_kro($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $userid,$trigger){
+function getData_kro($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $unitid,$trigger){
 
    if($trigger == "kro_for_ST"){
       // Fetch users
       $this->db->distinct();
       $this->db->select('kdoutput');
       $this->db->where("kdsatker", $kdsatker);
-      $this->db->where("user_id", $userid);
+      if($unitid != 0){
+         $this->db->where("unit_id", $unitid);
+      }
       $this->db->where("kdprogram", $kdprogram);
       $this->db->where("kdgiat", $kdgiat);
       $this->db->where("kdoutput like '%".$searchTerm."%' ");
@@ -99,14 +105,16 @@ function getData_kro($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $userid,$tri
    return $data;
 }
 
-function getData_ro($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdouput, $userid,$trigger){
+function getData_ro($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdouput, $unitid,$trigger){
 
    if($trigger == "ro_for_ST"){
       // Fetch users
       $this->db->distinct();
       $this->db->select('kdsoutput');
       $this->db->where("kdsatker", $kdsatker);
-      $this->db->where("user_id", $userid);
+      if($unitid != 0){
+         $this->db->where("unit_id", $unitid);
+      }
       $this->db->where("kdprogram", $kdprogram);
       $this->db->where("kdgiat", $kdgiat);
       $this->db->where("kdoutput", $kdouput);
@@ -135,14 +143,16 @@ function getData_ro($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdouput, $us
    return $data;
 }
 
-function getData_komponen($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdouput, $kdsoutput, $userid,$trigger){
+function getData_komponen($searchTerm="",$kdsatker, $kdprogram, $kdgiat, $kdouput, $kdsoutput, $unitid,$trigger){
 
    if($trigger == "komponen_for_ST"){
       // Fetch users
       $this->db->distinct();
       $this->db->select('kdkmpnen');
       $this->db->where("kdsatker", $kdsatker);
-      $this->db->where("user_id", $userid);
+      if($unitid != 0){
+         $this->db->where("unit_id", $unitid);
+      }
       $this->db->where("kdprogram", $kdprogram);
       $this->db->where("kdgiat", $kdgiat);
       $this->db->where("kdoutput", $kdouput);
@@ -299,12 +309,11 @@ function getData_golongan($searchTerm){
 
 
 
-function getData_app($searchTerm="", $kdindex, $Trigger){
+function getData_app($searchTerm="", $kdindex, $Trigger, $kdsoutput){
 
       if($Trigger == "SelectForKodeApp_NotaDinas"){
-
+         
          $this->db->where("nama_app like '%".$searchTerm."%' ");
-         $this->db->where("id like '%".$searchTerm."%' ");
          $fetched_records = $this->db->get('t_app');
          $users = $fetched_records->result_array();
 
@@ -316,22 +325,24 @@ function getData_app($searchTerm="", $kdindex, $Trigger){
          return $data;
 
       }else{
-         $getId_app = $this->db->query("SELECT distinct id_app from d_detailapp where kdindex = '".$kdindex."'");
-         //echo $getId_app;
-         $loop = [];
-         foreach ($getId_app->result_array() as $row)
-         {
-               $loop[] =  $row['id_app'];
+         // $getId_app = $this->db->query("SELECT distinct id_app from d_detailapp where kdindex = '".$kdindex."'");
+         // //echo $getId_app;
+         // $loop = [];
+         // foreach ($getId_app->result_array() as $row)
+         // {
+         //       $loop[] =  $row['id_app'];
                
-         }
+         // }
 
-         $res = implode(",", $loop);
+         // $res = implode(",", $loop);
          
-         if(count($loop) <= 0){
-            $fetched_records = $this->db->query("SELECT id, nama_app FROM t_app");
-         }else{
-            $fetched_records = $this->db->query("SELECT id, nama_app FROM t_app where id NOT IN (".$res.")");
-         }
+         // if(count($loop) <= 0){
+         //    $fetched_records = $this->db->query("SELECT id, nama_app FROM t_app");
+         // }else{
+         //    $fetched_records = $this->db->query("SELECT id, nama_app FROM t_app where id NOT IN (".$res.")");
+         // }
+
+         $fetched_records = $this->db->query("SELECT id, nama_app FROM t_app where kdsoutput = '".$kdsoutput."' AND nama_app like '%".$searchTerm."%' ");
          
          $users = $fetched_records->result_array();
 
@@ -536,7 +547,26 @@ function getData_ppk($searchTerm="",$kdsatker){
    return $data;
 }
 
-function getData_tahapan($searchTerm="",$kdkmpnen, $kdskmpnen){
+function getData_tahapan($searchTerm="",$kdkmpnen, $kdskmpnen, $kdindex){
+
+   // $getId_app = $this->db->query("SELECT distinct tahapan from d_detailapp where kdindex = '".$kdindex."'");
+   //       //echo $getId_app;
+   //       $loop = [];
+   //       foreach ($getId_app->result_array() as $row)
+   //       {
+   //             $loop[] =  $row['tahapan'];
+               
+   //       }
+
+   //       $res = implode(",", $loop);
+         
+   //       if(count($loop) <= 0){
+   //          $fetched_records = $this->db->query("SELECT id, nama_tahapan FROM r_tahapan 
+   //                            WHERE kdkmpnen =".$kdkmpnen." AND kdskmpnen=".$kdskmpnen." AND nama_tahapan like '%".$searchTerm."%' ");
+   //       }else{
+   //          $fetched_records = $this->db->query("SELECT id, nama_tahapan FROM r_tahapan 
+   //                            where kdkmpnen =".$kdkmpnen." AND kdskmpnen=".$kdskmpnen." AND nama_tahapan like '%".$searchTerm."%'  AND id NOT IN (".$res.")");
+   //       }
 
    $this->db->select('id');
    $this->db->select('nama_tahapan');
