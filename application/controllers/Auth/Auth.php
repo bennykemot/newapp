@@ -42,6 +42,7 @@ class Auth extends CI_Controller{
 				'role_id'	=> $session[0]->role_id,
 				'user_id' 	=> $session[0]->id,
 				'keterangan' => $session[0]->keterangan,
+				'unit_id' => $session[0]->unit_id,
 
 				'hak_akses' => $hak,
 				'thang' => $thang,

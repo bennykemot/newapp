@@ -31,7 +31,7 @@ class M_Pembagianpagu extends CI_Model{
     function getDataNew($kdsatker,$thang, $userid, $roleid){
 
         $query =  $this->db->query('SELECT d_pagu.*, t_akun.nmakun from d_pagu JOIN t_akun ON d_pagu.kdakun = t_akun.kdakun
-        WHERE d_pagu.kdsatker = '.$kdsatker.' AND d_pagu.thang = '.$thang.'');
+        WHERE d_pagu.kdsatker = '.$kdsatker.' AND d_pagu.thang = '.$thang.'  ');
 
         return $query->result();
      
@@ -59,7 +59,7 @@ class M_Pembagianpagu extends CI_Model{
             return $query->result();
 
         }else if($Trigger == "R-table"){
-            $query = $this->db->query("SELECT d_bagipagu.id, d_bagipagu.unit_id, d_bagipagu.role_id, d_pagu.rupiah , t_unitkerja.nama_unit, d_ppk.uraian_ppk 
+            $query = $this->db->query("SELECT d_bagipagu.id, d_bagipagu.unit_id, d_bagipagu.role_id, d_pagu.rupiah, d_pagu.kdbeban , t_unitkerja.nama_unit, d_bagipagu.ppk_id , d_ppk.uraian_ppk 
                                         FROM d_bagipagu 
                                         JOIN t_unitkerja ON d_bagipagu.unit_id = t_unitkerja.id 
                                         JOIN d_ppk ON d_bagipagu.ppk_id = d_ppk.id 

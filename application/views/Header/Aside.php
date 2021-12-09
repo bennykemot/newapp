@@ -6,6 +6,7 @@ $kdsatker = $this->session->userdata("kdsatker");
 $thang = $this->session->userdata("thang");
 $user_id = $this->session->userdata("user_id");
 $role_id = $this->session->userdata("role_id");
+$unit_id = $this->session->userdata("unit_id");
 ?>
     <!-- BEGIN: SideNav-->
     <aside class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-dark sidenav-active-rounded">
@@ -32,13 +33,13 @@ $role_id = $this->session->userdata("role_id");
           </i><span class="menu-title" data-i18n="Mail">Mapping Lembur</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Pembagianpagu/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id)?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Pembagianpagu/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id.'/'.$unit_id)?>">
           <i class="material-icons">
           turned_in_not
           </i><span class="menu-title" data-i18n="Mail">Pembagian Pagu</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Mappingapp/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id)?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Mappingapp/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id.'/'.$unit_id)?>">
           <i class="material-icons">
           view_comfy
           </i><span class="menu-title" data-i18n="Mail">Mapping App</span></a>

@@ -490,4 +490,22 @@ function getData_ppk($searchTerm="",$kdsatker){
    return $data;
 }
 
+function getData_tahapan($searchTerm="",$kdkmpnen, $kdskmpnen){
+
+   $this->db->select('id');
+   $this->db->select('nama_tahapan');
+   $this->db->where("nama_tahapan like '%".$searchTerm."%' ");
+   $this->db->where("kdkmpnen",$kdkmpnen);
+   $this->db->where("kdskmpnen",$kdskmpnen);
+   $fetched_records = $this->db->get('r_tahapan');
+   $users = $fetched_records->result_array();
+
+   // Initialize Array with fetched data
+   $data = array();
+   foreach($users as $user){
+      $data[] = array("id"=>$user['id'], "text"=>$user['nama_tahapan']);
+   }
+   return $data;
+}
+
 }

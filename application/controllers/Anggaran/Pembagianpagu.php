@@ -23,7 +23,8 @@ class Pembagianpagu extends CI_Controller {
         $thang =  $this->uri->segment(5);
         $userid =  $this->uri->segment(6);
         $roleid =  $this->uri->segment(7);
-        $data['pp'] = $this->Pembagianpagu->getDataNew($kdsatker,$thang,$userid,$roleid);
+        $unit_id =  $this->uri->segment(8);
+        $data['pp'] = $this->Pembagianpagu->getDataNew($kdsatker,$thang,$userid,$roleid,$unit_id);
         $data['head'] = $this->db->query("SELECT SUM(rupiah) as jumlah, norevisi, tgrevisi from d_pagu WHERE d_pagu.kdsatker = ".$kdsatker." AND d_pagu.thang = ".$thang." ")->result();
 		$this->load->view('Anggaran/Pembagianpagu/manage', $data);
 	}
@@ -164,23 +165,15 @@ class Pembagianpagu extends CI_Controller {
             
         }else if($Trigger == "U"){
 
-            $id         = $this->input->post('idPagu');
-            $nama_user  = $this->input->post('nama_user');
-            $kdsatker   = $this->input->post('kdsatker_Edit');
-            $kdprogram  = $this->input->post('kdprogram_Edit');
-            $kdgiat     = $this->input->post('kdgiat_Edit');
-            $kdoutput   = $this->input->post('kdoutput_Edit');
-            $kdsoutput  = $this->input->post('kdsoutput_Edit');
-            $kdkomponen = $this->input->post('kdkomponen_Edit');
+            $id             = $this->input->post('idbagipagu');
+            $ppk            = $this->input->post('ppk');
+            $unitkerja      = $this->input->post('unitkerja');
+            $kewenangan     = $this->input->post('kewenangan');
 
             $data = array(
-                'user_id' => $nama_user,
-                'kdsatker' => $kdsatker,
-                'kdprogram' => $kdprogram,
-                'kdgiat' => $kdgiat,
-                'kdoutput' => $kdoutput,
-                'kdsoutput' => $kdsoutput,
-                'kdkmpnen' => $kdkomponen
+                    'ppk_id' => $ppk,
+                    'role_id' => $kewenangan,
+                    'unit_id' => $unitkerja,
                 
                 );
             $where = array('id' => $id);
@@ -196,7 +189,7 @@ class Pembagianpagu extends CI_Controller {
         
     }
 
-	public function tambah()
+	public function Tambah()
 		{
             $var =  $this->uri->segment(4);
 

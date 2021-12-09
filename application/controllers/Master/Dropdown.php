@@ -274,5 +274,18 @@ class Dropdown extends CI_Controller {
       echo json_encode($response);
    }
 
+   public function tahapan(){
+
+      // Search term
+      $searchTerm = $this->input->post('searchTerm');
+      $kdkmpnen = $this->input->post('kdkmpnen');
+      $kdskmpnen = $this->input->post('kdskmpnen');
+
+      // Get users
+      $response = $this->Dropdown->getData_tahapan($searchTerm,$kdkmpnen, $kdskmpnen);
+
+      echo json_encode($response);
+   }
+
 
 }

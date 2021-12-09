@@ -55,7 +55,7 @@ class Detail_Mappingapp extends CI_Controller {
             
             $nilai_app = $this->input->post('nilai_app');
             $th_pkpt = $this->input->post('th_pkpt');
-            $kodeindex = $this->input->post('kodeindex');
+            $kodeindex = str_replace("%20", " ", $this->input->post('kdindex'));
             $app = $this->input->post('app');
             $countRupiah = $this->input->post('countRupiah');
             $kdkmpnen = $this->input->post('kdkmpnen');

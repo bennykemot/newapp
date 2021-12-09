@@ -63,13 +63,13 @@
                             <tr>
                               <th>Program</th>
                               <th>Kegiatan</th>
-                              <th>Output</th>
-                              <th>Sub<br>Output</th>
-                              <th>Komponen</th>
-                              <th>Sub<br>Komponen</th>
+                              <th>KRO</th>
+                              <th>RO</th>
+                              <th>Komp</th>
+                              <th>Sub<br>Komp</th>
                               <th>Akun</th>
                               <th style="width: 20%;">Uraian</th>
-                              <th style="width: 15%;">Jumlah (Rp)</th>
+                              <th style="width: 15%;">Anggaran</th>
                               <th>Alokasi</th>
                           </tr>
                         </thead>

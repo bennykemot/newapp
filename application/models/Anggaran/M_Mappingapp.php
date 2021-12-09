@@ -3,21 +3,31 @@ class M_Mappingapp extends CI_Model{
 
     var $table ="v_mapping";
 
-    // function getDataNew($kdsatker){
-    //     $this->db->where('kdsatker', $kdsatker);
-    //     $this->db->from('v_mapping');
-    //     $this->db->order_by('kdsatker, kddept, kdunit, kdprogram, kdgiat, kdoutput,kdib, kdsoutput, kdkmpnen, kdskmpnen, kdakun');
-    //     $query = $this->db->get();
 
-    //     return $query->result();
+    function getData_Mapping($kdsatker,$thang, $userid,$roleid, $unitid){
+        $whereUnitid ="";
+        if($roleid != 1){
+           $whereUnitid = "AND d_bagipagu.unit_id ='.$unitid.'";
+        }
+
+        $query = $this->db->query("SELECT a.*,b.alokasi 
+        FROM 
+        (SELECT d_pagu.*,t_akun.nmakun FROM bsmart.d_pagu JOIN bsmart.t_akun ON d_pagu.kdakun=t_akun.kdakun 
+            WHERE d_pagu.thang=".$thang." AND d_pagu.kdprogram='CH' AND d_pagu.kdsatker=".$kdsatker.") as a 
+         left JOIN 
+            (SELECT d_detailapp.kdindex, SUM(d_detailapp.rupiah_tahapan) AS alokasi FROM d_detailapp GROUP BY d_detailapp.kdindex) as b
+            ON a.kdindex=b.kdindex");
+
+        // $query =  $this->db->query('SELECT d_pagu.*, t_akun.nmakun from d_pagu 
+        // JOIN t_akun ON d_pagu.kdakun = t_akun.kdakun
+        // JOIN d_bagipagu ON d_bagipagu.kdsatker = d_pagu.kdsatker 
+        
+        // WHERE d_bagipagu.kdsatker = '.$kdsatker.' AND d_bagipagu.thang = '.$thang.'  '.$whereUnitid.'
+        // AND d_pagu.kdprogram = "CH"');
+
+        return $query->result();
      
-    // }
-
-    // function getData_detailapp($kdsatker){
-    //     $query = $this->db->query("Select SUM(rupiah_tahapan) as jumlah_tahapan, kdindex from d_detailapp where
-    //     kdsatker = ".$kdsatker." ");
-    //     return $query->result();
-    // }
+    }
 
     function datatablesdata($kdsatker){
 
@@ -107,8 +117,19 @@ class M_Mappingapp extends CI_Model{
             $this->db->delete($table);
 
         }else if($Trigger == "R"){
+            
+            
 
-            return $this->db->get_where($table,$data);
+        }else if($Trigger == "R-table"){
+
+            $query = $this->db->query("SELECT d_detailapp.* ,t_app.nama_app ,r_tahapan.nama_tahapan 
+            
+            FROM d_detailapp JOIN t_app ON d_detailapp.id_app = t_app.id
+            JOIN r_tahapan ON d_detailapp.tahapan = r_tahapan.id 
+            
+            where d_detailapp.kdindex = '".$data."'");
+    
+            return $query->result();
 
         }
 	}

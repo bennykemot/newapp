@@ -8,6 +8,8 @@
   /*Add some css-class to container or reposition it*/
 });
 
+
+
    function Reset(idForm) {
       document.getElementById(idForm).reset();
       $('#app-select2').val(null).trigger('change');
@@ -100,6 +102,77 @@
             text: "Subag Kepegawaian"
         }]
     })
+
+    $("#ppk-select2-edit").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih PPK",
+         ajax: { 
+           url: dropdown_baseurl + 'ppk',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+                session_satker: satker_session,
+                searchTerm: params.term // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
+     $("#unitkerja-select2-edit").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Unit Kerja",
+         ajax: { 
+           url: dropdown_baseurl + 'unitkerja',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+                searchTerm: params.term,
+                kdsatker: satker_session,
+                trigger : "Persatker_forPengguna"
+                 // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
+     $("#kewenangan-select2-edit").select2({
+        dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Kewenangan",
+        data: [{
+            id: 3,
+            text: "Subag Keuangan"
+        }, {
+            id: 5,
+            text: "PPK"
+        }, {
+            id: 9,
+            text: "Subag Umum"
+        }, {
+            id: 10,
+            text: "Subag Kepegawaian"
+        }]
+    })
+
+   
 
         $("#user-select2").select2({
           dropdownAutoWidth: true,
@@ -571,8 +644,8 @@ $("#EditPagu").click(function (e) {
 
   var btn = $(this);
   var form = $(this).closest("form");
-  var formData = new FormData($("#FormPagu_Edit")[0]);
-  var IdForm =  "FormPagu_Edit";
+  var formData = new FormData($("#FormPaguEdit")[0]);
+  
 
   btn
     .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
@@ -589,17 +662,10 @@ $("#EditPagu").click(function (e) {
     success: function (data, textStatus, jqXHR) {
                res = JSON.parse(data)
                show_msg(res.status, res.message);
-               $('#modalEdit').modal('close');
                setTimeout(function() {
                   location.reload();
                }, 2000);
-               Reset(IdForm);
-               document.getElementById("TambahPagu").disabled = false; 
-              document.getElementById("program-select2").disabled = true;
-              document.getElementById("kegiatan-select2").disabled = true;
-              document.getElementById("kro-select2").disabled = true;
-              document.getElementById("ro-select2").disabled = true;
-              document.getElementById("komponen-select2").disabled = true;
+               document.getElementById("EditPagu").disabled = false; 
               
               
           },
