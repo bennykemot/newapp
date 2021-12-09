@@ -98,6 +98,12 @@ $unit_id = $this->session->userdata("unit_id");
           </i><span class="menu-title" data-i18n="Mail">Pengguna</span></a>
           </li>
 
+					<li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Master/Pegawai/Page/')?>">
+          <i class="material-icons">
+          face
+          </i><span class="menu-title" data-i18n="Mail">Pegawai</span></a>
+          </li>
+
 
 
 

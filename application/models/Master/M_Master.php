@@ -18,22 +18,22 @@ class M_Master extends CI_Model {
   }
 
   function getData_Pegawai($kdsatker){
-   $this->db->select('nip');
-   $this->db->select('nama');
-   $this->db->select('jabatan');
-   $this->db->select('tempat_lahir');
-   $this->db->select('tanggal_lahir');
-   $this->db->select('jenis_kelamin');
-   $this->db->select('golruang');
-   $this->db->select('nama_pangkat');
-   $this->db->select('tmt_jab');
-   $this->db->select('namaunit');
+		$this->db->select('nip');
+		$this->db->select('nama');
+		$this->db->select('jabatan');
+		$this->db->select('tempat_lahir');
+		$this->db->select('tanggal_lahir');
+		$this->db->select('jenis_kelamin');
+		$this->db->select('golruang');
+		$this->db->select('nama_pangkat');
+		$this->db->select('tmt_jab');
+		$this->db->select('namaunit');
 
-   $this->db->from('r_pegawai');
-   $this->db->where('satker_id', $kdsatker);
-   $query = $this->db->get();
+		$this->db->from('r_pegawai');
+		$this->db->where('satker_id', $kdsatker);
+		$query = $this->db->get();
 
-   return $query->result();
+		return $query->result();
 
    }
 

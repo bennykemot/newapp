@@ -140,6 +140,15 @@ class Dropdown extends CI_Controller {
       echo json_encode($response);
    }
 
+	public function menu(){
+		//Search term
+		$searchTerm = $this->input->post('searchTerm');
+
+		$response = $this->Dropdown->getData_menu($searchTerm);
+
+		echo json_encode($response);
+	}
+
    public function app(){
 
       // Search term
@@ -194,11 +203,10 @@ class Dropdown extends CI_Controller {
 
       // Search term
       $searchTerm = $this->input->post('searchTerm');
-      $Trigger = $this->input->post('trigger');
-      $kdsatker = $this->input->post('kdsatker');
+      $Trigger = $this->input->post('Trigger');
 
       // Get users
-      $response = $this->Dropdown->getData_unitkerja($searchTerm, $Trigger, $kdsatker);
+      $response = $this->Dropdown->getData_unitkerja($searchTerm, $Trigger);
 
       echo json_encode($response);
    }
@@ -271,9 +279,8 @@ class Dropdown extends CI_Controller {
 
       // Get users
       $response = $this->Dropdown->getData_ppk($searchTerm, $kdsatker);
-
-      echo json_encode($response);
-   }
+		echo json_encode($response);
+	}
 
    public function tahapan(){
 
@@ -284,10 +291,35 @@ class Dropdown extends CI_Controller {
       $kdindex = $this->input->post('kdindex');
 
       // Get users
-      $response = $this->Dropdown->getData_tahapan($searchTerm,$kdkmpnen, $kdskmpnen, $kdindex);
+      $response = $this->Dropdown->getData_tahapan($searchTerm,$kdkmpnen, $kdskmpnen,$kdindex);
+		echo json_encode($response);
+
+   }
+
+	public function golongan(){
+
+      // Search term
+      $searchTerm = $this->input->post('searchTerm');
+
+      // Get users
+      $response = $this->Dropdown->getData_golongan($searchTerm);
+
+      echo json_encode($response);
+	}
+
+	public function agama(){
+		
+
+      // Search term
+      $searchTerm = $this->input->post('searchTerm');
+
+      // Get users
+      $response = $this->Dropdown->getData_agama($searchTerm);
 
       echo json_encode($response);
    }
+
+
 
 
 }

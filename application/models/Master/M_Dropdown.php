@@ -36,7 +36,8 @@ class M_Dropdown extends CI_Model {
      return $data;
   }
 
-  function getData_kegiatan($searchTerm="",$kdsatker, $kdprogram, $unitid,$trigger){
+
+  function getData_kegiatan($searchTerm="",$kdsatker, $kdprogram, $userid,$trigger){
    if($trigger == "kegiatan_for_ST"){
       // Fetch users
       $this->db->distinct();
@@ -259,6 +260,54 @@ function getData_role($searchTerm=""){
    return $data;
 }
 
+function getData_menu($searchTerm=""){
+	$this->db->select('id');
+	$this->db->select('kode_menu');
+	$this->db->select('nama_menu');
+	$this->db->where("nama_menu like '%".$searchTerm."%' ");
+	$fetched_records = $this->db->get('r_menu');
+	$menus = $fetched_records->result_array();
+
+	$data = array();
+	foreach($menus as $menu){
+		$data[] = array("id"=>$menu['id'], "text"=>$menu['id']. ' - ' .$menu['nama_menu']);
+	}
+	return $data;
+
+}
+
+function getData_agama($searchTerm){
+	$this->db->select('id');
+	$this->db->select('agama');
+	$this->db->where("agama like '%".$searchTerm."%' ");
+	$fetched_records = $this->db->get('r_agama');
+	$agamas = $fetched_records->result_array();
+
+	$data = array();
+	foreach($agamas as $agama){
+		$data[] = array("id"=>$agama['agama'], "text"=>$agama['agama']);
+	}
+	
+	return $data;
+}
+
+function getData_golongan($searchTerm){
+	$this->db->select('id');
+	$this->db->select('golongan');
+	$this->db->select('nama');
+	$this->db->where("golongan like '%".$searchTerm."%' ");
+	$fetched_records = $this->db->get('r_golruang');
+	$gols = $fetched_records->result_array();
+
+	$data = array();
+	foreach($gols as $gol){
+		$data[] = array("id"=>$gol['nama']. ', ' .$gol['golongan'], "text"=>$gol['nama']. ', ' .$gol['golongan']);
+	}
+	
+	return $data;
+}
+
+
 
 function getData_app($searchTerm="", $kdindex, $Trigger, $kdsoutput){
 
@@ -366,13 +415,10 @@ function getData_skomponen($searchTerm="", $Trigger){
    return $data;
 }
 
-function getData_unitkerja($searchTerm="", $Trigger, $kdsatker){
+function getData_unitkerja($searchTerm="", $Trigger){
 
    $this->db->select('id');
    $this->db->select('nama_unit');
-      if($Trigger == "Persatker_forPengguna"){
-         $this->db->where("satker_id", $kdsatker);
-      }
    $this->db->where("nama_unit like '%".$searchTerm."%' ");
    $fetched_records = $this->db->get('t_unitkerja');
    $users = $fetched_records->result_array();
