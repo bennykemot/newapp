@@ -270,7 +270,6 @@ class Dropdown extends CI_Controller {
       echo json_encode($response);
    }
 
-<<<<<<< Updated upstream
    public function ppk(){
 
       // Search term
@@ -279,20 +278,9 @@ class Dropdown extends CI_Controller {
 
       // Get users
       $response = $this->Dropdown->getData_ppk($searchTerm, $kdsatker);
-=======
-	public function agama(){
+		echo json_encode($response);
+	}
 
-      // Search term
-      $searchTerm = $this->input->post('searchTerm');
-
-      // Get users
-      $response = $this->Dropdown->getData_agama($searchTerm);
->>>>>>> Stashed changes
-
-      echo json_encode($response);
-   }
-
-<<<<<<< Updated upstream
    public function tahapan(){
 
       // Search term
@@ -302,7 +290,10 @@ class Dropdown extends CI_Controller {
 
       // Get users
       $response = $this->Dropdown->getData_tahapan($searchTerm,$kdkmpnen, $kdskmpnen);
-=======
+		echo json_encode($response);
+
+   }
+
 	public function golongan(){
 
       // Search term
@@ -310,15 +301,23 @@ class Dropdown extends CI_Controller {
 
       // Get users
       $response = $this->Dropdown->getData_golongan($searchTerm);
->>>>>>> Stashed changes
+
+      echo json_encode($response);
+	}
+
+	public function agama(){
+		
+
+      // Search term
+      $searchTerm = $this->input->post('searchTerm');
+
+      // Get users
+      $response = $this->Dropdown->getData_agama($searchTerm);
 
       echo json_encode($response);
    }
 
-<<<<<<< Updated upstream
-=======
 
 
->>>>>>> Stashed changes
 
 }

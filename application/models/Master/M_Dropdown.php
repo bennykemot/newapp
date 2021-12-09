@@ -520,7 +520,6 @@ function getData_thang_nonAjax(){
    return $query->result();
 }
 
-<<<<<<< Updated upstream
 function getData_ppk($searchTerm="",$kdsatker){
 
    $this->db->select('id');
@@ -556,8 +555,3 @@ function getData_tahapan($searchTerm="",$kdkmpnen, $kdskmpnen){
 }
 
 }
-=======
-
-
-}
->>>>>>> Stashed changes
