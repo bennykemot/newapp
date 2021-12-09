@@ -34,6 +34,7 @@ class M_Dropdown extends CI_Model {
      return $data;
   }
 
+
   function getData_kegiatan($searchTerm="",$kdsatker, $kdprogram, $userid,$trigger){
    if($trigger == "kegiatan_per_satker"){
       // Fetch users
@@ -248,6 +249,54 @@ function getData_role($searchTerm=""){
    }
    return $data;
 }
+
+function getData_menu($searchTerm=""){
+	$this->db->select('id');
+	$this->db->select('kode_menu');
+	$this->db->select('nama_menu');
+	$this->db->where("nama_menu like '%".$searchTerm."%' ");
+	$fetched_records = $this->db->get('r_menu');
+	$menus = $fetched_records->result_array();
+
+	$data = array();
+	foreach($menus as $menu){
+		$data[] = array("id"=>$menu['id'], "text"=>$menu['id']. ' - ' .$menu['nama_menu']);
+	}
+	return $data;
+
+}
+
+function getData_agama($searchTerm){
+	$this->db->select('id');
+	$this->db->select('agama');
+	$this->db->where("agama like '%".$searchTerm."%' ");
+	$fetched_records = $this->db->get('r_agama');
+	$agamas = $fetched_records->result_array();
+
+	$data = array();
+	foreach($agamas as $agama){
+		$data[] = array("id"=>$agama['agama'], "text"=>$agama['agama']);
+	}
+	
+	return $data;
+}
+
+function getData_golongan($searchTerm){
+	$this->db->select('id');
+	$this->db->select('golongan');
+	$this->db->select('nama');
+	$this->db->where("golongan like '%".$searchTerm."%' ");
+	$fetched_records = $this->db->get('r_golruang');
+	$gols = $fetched_records->result_array();
+
+	$data = array();
+	foreach($gols as $gol){
+		$data[] = array("id"=>$gol['nama']. ', ' .$gol['golongan'], "text"=>$gol['nama']. ', ' .$gol['golongan']);
+	}
+	
+	return $data;
+}
+
 
 
 function getData_app($searchTerm="", $kdindex, $Trigger){
@@ -471,6 +520,7 @@ function getData_thang_nonAjax(){
    return $query->result();
 }
 
+<<<<<<< Updated upstream
 function getData_ppk($searchTerm="",$kdsatker){
 
    $this->db->select('id');
@@ -506,3 +556,8 @@ function getData_tahapan($searchTerm="",$kdkmpnen, $kdskmpnen){
 }
 
 }
+=======
+
+
+}
+>>>>>>> Stashed changes

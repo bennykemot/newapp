@@ -39,8 +39,6 @@ class Master extends CI_Controller {
 
         $Trigger = $this->input->post('Trigger');
         $Tujuan = $this->input->post('Tujuan');
-
-        
         
             $response = $this->Master->getData_Uangharian($Trigger, $Tujuan);
         
