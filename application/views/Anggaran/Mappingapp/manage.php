@@ -43,11 +43,69 @@
       </div>
     </div>
 
-    <div class="col s12" >
+    <div class="row">
+        <div class="col s12">
+          <div class="card">
+            <div class="card-content">
+              <div class="row">
+                <div class="col s12">
+                  
+                    <table id="tb-mappingapp" class="display" style="width:100%;white-space: nowrap !important;overflow: hidden;">
+                        <thead>
+                            <tr>
+                              <th>Kegiatan</th>
+                              <th>KRO</th>
+                              <th>RO</th>
+                              <th>Komp</th>
+                              <th>Sub<br>Komp</th>
+                              <th>Akun</th>
+                              <th style="width: 20%;">Uraian</th>
+                              <th style="width: 15%;">Anggaran</th>
+                              <th style="width: 15%;">Alokasi</th>
+                              <th>aksi</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                        <?php foreach($mapp as $p){?>
+												
+														<tr>
+                              <td><?=$p->kdgiat?></td>
+                              <td><?=$p->kdoutput?></td>
+                              <td><?=$p->kdsoutput?></td>
+                              <td><?=$p->kdkmpnen?></td>
+                              <td><?=$p->kdskmpnen?></td>
+                              <td><?=$p->kdakun?></td>
+                              <td><?=$p->nmakun?></td>
+                              <td class="text-right"><?=rupiah($p->rupiah)?></td>
+                              <td class="text-right"><?=rupiah($p->alokasi)?></td>
+
+                              <?php if ( $p->kdakun != "521811"){ ?>
+                                <td class="text-center">
+                                <a href="<?= site_url('Anggaran/Mappingapp/Tambah/'.$p->kdindex.'/'.$p->kdkmpnen.'/'.$p->kdskmpnen.'/'.$p->rupiah) ?>"><i class="material-icons green-text">edit</i></a>
+                              </td>
+                                <?php } else{ 
+                                  echo '<td></td>';
+                              } ?>
+                              
+                            </tr>
+                        
+                        <?php } ?>
+                                
+                              
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- <div class="col s12" >
       <div class="card">
         <div class="card-content">
           <h4 class="card-title col s10"></h4>
-          <!-- <a class="btn modal-trigger col s2" href="#modal2">Tambah Data</a> -->
           <div class="row">
             <div class="col s12">
               <table id="tabel" class="bordered striped responsive-table" style="width: 100%">
@@ -104,7 +162,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
   <div class="section section-data-tables" id="mydiv">
     <div class="col s12" id="DetailCard" style="display: none">

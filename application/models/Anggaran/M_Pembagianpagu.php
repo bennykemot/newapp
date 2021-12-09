@@ -30,31 +30,8 @@ class M_Pembagianpagu extends CI_Model{
 
     function getDataNew($kdsatker,$thang, $userid, $roleid){
 
-        
-        $this->db->select('d_bagipagu.id');
-        $this->db->select('d_bagipagu.user_id');
-        $this->db->select('d_bagipagu.kdsatker');
-        $this->db->select('d_bagipagu.kddept');
-        $this->db->select('d_bagipagu.kdunit');
-        $this->db->select('d_bagipagu.thang');
-        $this->db->select('d_bagipagu.kdprogram');
-        $this->db->select('d_bagipagu.kdgiat');
-        $this->db->select('d_bagipagu.kdoutput');
-        $this->db->select('d_bagipagu.kdsoutput');
-        $this->db->select('d_bagipagu.kdkmpnen');
-        $this->db->select('user.username');
-
-        $this->db->from('d_bagipagu');
-        $this->db->join('user', 'd_bagipagu.user_id = user.id');
-        $this->db->where('d_bagipagu.kdsatker', $kdsatker);
-        $this->db->where('d_bagipagu.thang', $thang);
-        if($roleid != 1){
-            $this->db->where('d_bagipagu.user_id', $userid);
-        }
-        
-        $this->db->order_by('d_bagipagu.id');
-        // $this->db->limit($number, $offset);
-        $query = $this->db->get();
+        $query =  $this->db->query('SELECT d_pagu.*, t_akun.nmakun from d_pagu JOIN t_akun ON d_pagu.kdakun = t_akun.kdakun
+        WHERE d_pagu.kdsatker = '.$kdsatker.' AND d_pagu.thang = '.$thang.'  ');
 
         return $query->result();
      
@@ -74,13 +51,22 @@ class M_Pembagianpagu extends CI_Model{
 
         }else if($Trigger == "R"){
 
-            
-            $this->db->from($table);
-            $this->db->join('user', 'user.id = '.$table.'.user_id');
-            $this->db->where($data);
-            $query = $this->db->get();
+            $query = $this->db->query("SELECT 
+            CONCAT(kdgiat,'.',kdoutput,'.','[IB.',kdib,']','.',kdsoutput,'.',kdkmpnen,'.',kdskmpnen,'.',kdakun) as mata_anggaran 
+            , rupiah, kdindex, thang,kdsatker,kddept,kdunit,kdprogram,kdgiat,kdoutput,kdsoutput,kdkmpnen
+             FROM d_pagu where kdindex = '".$data."'");
     
-            return $query->row();
+            return $query->result();
+
+        }else if($Trigger == "R-table"){
+            $query = $this->db->query("SELECT d_bagipagu.id, d_bagipagu.unit_id, d_bagipagu.role_id, d_pagu.rupiah, d_pagu.kdbeban , t_unitkerja.nama_unit, d_bagipagu.ppk_id , d_ppk.uraian_ppk 
+                                        FROM d_bagipagu 
+                                        JOIN t_unitkerja ON d_bagipagu.unit_id = t_unitkerja.id 
+                                        JOIN d_ppk ON d_bagipagu.ppk_id = d_ppk.id 
+                                        JOIN d_pagu ON d_bagipagu.kdindex = d_pagu.kdindex 
+                                        where d_bagipagu.kdindex = '".$data."'");
+    
+            return $query->result();
 
         }
 	}

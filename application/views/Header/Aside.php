@@ -1,5 +1,13 @@
 <?php include 'AssetsHeader.php';?>
 <?php include 'Upside.php';?>
+
+<?php 
+$kdsatker = $this->session->userdata("kdsatker");
+$thang = $this->session->userdata("thang");
+$user_id = $this->session->userdata("user_id");
+$role_id = $this->session->userdata("role_id");
+$unit_id = $this->session->userdata("unit_id");
+?>
     <!-- BEGIN: SideNav-->
     <aside class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-dark sidenav-active-rounded">
       <div class="brand-sidebar" style="background: #fff !important">
@@ -13,6 +21,91 @@
           home
           </i><span class="menu-title" data-i18n="Mail">Dashboard</span></a>
           </li>
+
+          <li class="navigation-header"><a class="navigation-header-text">Anggaran</a>
+          <i class="navigation-header-icon material-icons">more_horiz</i>
+          </li>
+
+          <!-- DIGRUP ANGGARAN -->
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
+          <i class="material-icons">
+          home
+          </i><span class="menu-title" data-i18n="Mail">Mapping Lembur</span></a>
+          </li>
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Pembagianpagu/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id.'/'.$unit_id)?>">
+          <i class="material-icons">
+          turned_in_not
+          </i><span class="menu-title" data-i18n="Mail">Pembagian Pagu</span></a>
+          </li>
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Mappingapp/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id.'/'.$unit_id)?>">
+          <i class="material-icons">
+          view_comfy
+          </i><span class="menu-title" data-i18n="Mail">Mapping App</span></a>
+          </li>
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Transfer')?>">
+          <i class="material-icons">
+          get_app
+          </i><span class="menu-title" data-i18n="Mail">Transfer Pagu</span></a>
+          </li>
+
+
+          <li class="navigation-header"><a class="navigation-header-text">Rencana Kegiatan</a>
+          <i class="navigation-header-icon material-icons">more_horiz</i>
+          </li>
+
+          <!-- DIGRUP RENCANA KEGIATAN -->
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/SuratTugas/Page')?>">
+          <i class="material-icons">
+          email
+          </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>
+          </li>
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
+          <i class="material-icons">
+          speaker_notes
+          </i><span class="menu-title" data-i18n="Mail">Perjadin Diklat</span></a>
+          </li>
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
+          <i class="material-icons">
+          book
+          </i><span class="menu-title" data-i18n="Mail">ST Non-Biaya</span></a>
+          </li>
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
+          <i class="material-icons">
+          business_center
+          </i><span class="menu-title" data-i18n="Mail">Lembur</span></a>
+          </li>
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
+          <i class="material-icons">
+          call_to_action
+          </i><span class="menu-title" data-i18n="Mail">PBJ</span></a>
+          </li>
+
+          <li class="navigation-header"><a class="navigation-header-text">Pengaturan</a>
+          <i class="navigation-header-icon material-icons">more_horiz</i>
+          </li>
+
+          <!-- DIGRUP RENCANA KEGIATAN -->
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Profile/Profile/Page/'.$kdsatker)?>">
+          <i class="material-icons">
+          import_contacts
+          </i><span class="menu-title" data-i18n="Mail">Pengguna</span></a>
+          </li>
+
+					<li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Master/Pegawai/Page/')?>">
+          <i class="material-icons">
+          import_contacts
+          </i><span class="menu-title" data-i18n="Mail">Pegawai</span></a>
+          </li>
+
+
+
 
         <!-- <li class="navigation-header"><a class="navigation-header-text">Anggaran</a>
           <i class="navigation-header-icon material-icons">more_horiz</i>

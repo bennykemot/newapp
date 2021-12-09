@@ -15,6 +15,7 @@ class M_Auth extends CI_Model{
 									'.$table.'.role_id,
 									'.$table.'.status,
 									'.$table.'.keterangan,
+									'.$table.'.unit_id,
 
 									t_satker.kdsatker as kdsatker,
 									t_satker.nmsatker as nmsatker

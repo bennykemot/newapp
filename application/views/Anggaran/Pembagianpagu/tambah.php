@@ -1,5 +1,46 @@
 <?php include(APPPATH . 'views/Header/Aside.php') ?>
 
+<?php
+
+function kdbeban($kdbeban){
+	
+	if($kdbeban =="A"){
+		$res="Rupiah Murni";
+	}else if($kdbeban =="B"){
+		$res="Pinjaman Luar Negeri";
+	}else{
+		$res="PNBP";
+	}
+
+	return $res;
+}
+
+function edit($countread){
+	$res="";
+	if($countread == 1){
+		$res="-edit";
+	}
+
+	return $res;
+}
+
+function kewenanganText($kewenangan){
+
+	if($kewenangan == 3){
+		$res= "Subag Keuangan";
+
+		}else if($kewenangan == 5){
+			$res= "PPK";
+		}else if($kewenangan == 9){
+			$res= "PPK";
+		}else if($kewenangan == 10){
+			$res= "PPK";
+		}
+		return $res;
+	}
+
+?>
+
 <div class="row">
 
 <div class="col s12">
@@ -18,78 +59,130 @@
 					<div class="col s1">
                     </div>
                     <div class="col s11">
-						<!-- <div class="row">
-							<div class="col s4">
-								<p>Mata Anggaran</p>
-							</div>
-							<div class="col s4">
-								<p>3667.AEA.[IB.00].960.051.A.524111</p>
-							</div>
-							<div class="col s4">
-								<p>Rp 100.000.000,-</p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s12">
-								<div class="input-field col s4"><label>PPK</label></div>
-								<div class="input-field col s8">
-									<select class="select2 browser-default">
-										<option value="ppk">Rupiah Murni/Gaji dan Tunjangan</option>
-									</select>
-								</div>
-
-							</div>
-						</div> -->
-						
-							
-						
                         <div>
+							<?php if(count($readpp) < 1){?>
+							<form id="FormPagu">
 							<table class="mt-0">
 								<thead>
 									<tr>
 										<td>Mata Anggaran</td>
-										<td>3667.AEA.[IB.00].960.051.A.524111</td>
-										<td>Rp 100.000.000,-</td>
+										<td><?=$tambahpp[0]->mata_anggaran?></td>
+										<td><?=rupiah($tambahpp[0]->rupiah)?></td>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td>PPK</td>
 										<td>
-											<select class="select2 browser-default">
-												<option value="ppk">Rupiah Murni/Gaji dan Tunjangan</option>
-											</select>
+											<select class="select2 browser-default" id="ppk-select2" name="ppk"></select>
 										</td>
 										<td></td>
 									</tr>
 									<tr>
 										<td>Unit Kerja</td>
 										<td>
-											<select class="select2 browser-default">
-												<option value="unit">Biro Keuangan</option>
-											</select>
+										<select class="browser-default" id="unitkerja-select2" name="unitkerja"></select>
 										</td>
 										<td></td>
 									</tr>
 									<tr>
 										<td>Kewenangan</td>
 										<td>
-											<select class="select2 browser-default">
-												<option value="ppk">Bagian Anggaran</option>
+											<select class="browser-default" id="kewenangan-select2" name="kewenangan"></select>
+										</td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+							<div hidden>
+									<input id="kdindex" name="kdindex" value="<?=$tambahpp[0]->kdindex?>">
+									<input id="thang" name="thang" value="<?=$tambahpp[0]->thang?>">
+									<input id="kdsatker" name="kdsatker" value="<?=$tambahpp[0]->kdsatker?>">
+									<input id="kddept" name="kddept" value="<?=$tambahpp[0]->kddept?>">
+									<input id="kdunit" name="kdunit" value="<?=$tambahpp[0]->kdunit?>">
+									<input id="kdprogram" name="kdprogram" value="<?=$tambahpp[0]->kdprogram?>">
+									<input id="kdgiat" name="kdgiat" value="<?=$tambahpp[0]->kdgiat?>">
+									<input id="kdoutput" name="kdoutput" value="<?=$tambahpp[0]->kdoutput?>">	
+									<input id="kdsoutput" name="kdsoutput" value="<?=$tambahpp[0]->kdsoutput?>">
+									<input id="kdkmpnen" name="kdkmpnen" value="<?=$tambahpp[0]->kdkmpnen?>">
+							</div>
+								<div class="input-field col s12" >
+                                    <div class="input-field col s9">
+                                    </div>
+
+                                    <div class="input-field col s3 " style="padding-top: 20px">
+                                        <button type="button" class="btn green col s12" id ="TambahPagu" name="add-field"><i class="material-icons left">add</i> Rekam</button>
+                                    </div>
+                                </div>
+							</form>
+							<?php }else{?>
+
+								<form id="FormPaguEdit">
+							<table class="mt-0">
+								<thead>
+									<tr>
+										<td>Mata Anggaran</td>
+										<td><?=$tambahpp[0]->mata_anggaran?></td>
+										<td><?=rupiah($tambahpp[0]->rupiah)?></td>
+									</tr>
+								</thead>
+								<tbody>
+
+								<tr>
+										<td>Unit Kerja</td>
+										<td>
+										<select class="browser-default" id="unitkerja-select2-edit" name="unitkerja">
+										<option selected='selected' value="<?=$readpp[0]->unit_id?>"><?=$readpp[0]->nama_unit?></option>
+										</select>
+										</td>
+										<td></td>
+									</tr>
+
+									<tr>
+										<td>PPK</td>
+										<td>
+											<select class="select2 browser-default" id="ppk-select2-edit" name="ppk">
+												<option selected='selected' value="<?=$readpp[0]->ppk_id?>"><?=$readpp[0]->uraian_ppk?></option>
+											</select>
+										</td>
+										<td></td>
+									</tr>
+									
+									<tr>
+										<td>Kewenangan Pengajuan</td>
+										<td>
+											<select class="browser-default" id="kewenangan-select2-edit" name="kewenangan">
+											<option selected='selected' value="<?=$readpp[0]->role_id?>"><?= kewenanganText($readpp[0]->role_id)?></option>
 											</select>
 										</td>
 										<td></td>
 									</tr>
 								</tbody>
 							</table>
-							<div class="input-field col s12" >
+							<div hidden>
+									<input id="idbagipagu" name="idbagipagu" value="<?=$readpp[0]->id?>">
+									<input id="kdindex" name="kdindex" value="<?=$tambahpp[0]->kdindex?>">
+									<input id="thang" name="thang" value="<?=$tambahpp[0]->thang?>">
+									<input id="kdsatker" name="kdsatker" value="<?=$tambahpp[0]->kdsatker?>">
+									<input id="kddept" name="kddept" value="<?=$tambahpp[0]->kddept?>">
+									<input id="kdunit" name="kdunit" value="<?=$tambahpp[0]->kdunit?>">
+									<input id="kdprogram" name="kdprogram" value="<?=$tambahpp[0]->kdprogram?>">
+									<input id="kdgiat" name="kdgiat" value="<?=$tambahpp[0]->kdgiat?>">
+									<input id="kdoutput" name="kdoutput" value="<?=$tambahpp[0]->kdoutput?>">	
+									<input id="kdsoutput" name="kdsoutput" value="<?=$tambahpp[0]->kdsoutput?>">
+									<input id="kdkmpnen" name="kdkmpnen" value="<?=$tambahpp[0]->kdkmpnen?>">
+							</div>
+								<div class="input-field col s12" >
                                     <div class="input-field col s9">
                                     </div>
 
                                     <div class="input-field col s3 " style="padding-top: 20px">
-                                        <button type="button" class="btn green col s12" id ="add-field" name="add-field"><i class="material-icons left">add</i> Rekam</button>
+                                        <button type="button" class="btn green col s12" id ="EditPagu" name="add-field"><i class="material-icons left">edit</i> Rekam</button>
                                     </div>
                                 </div>
+							</form>
+								
+							<?php } ?>
 						</div>
                     </div>
 				</div>
@@ -105,19 +198,21 @@
 						<tr>
 							<th>Sumber Dana</th>
 							<th>Unit Kerja</th>
-							<th>Kewenangan</th>
+							<th>PPK</th>
 							<th>Rupiah</th>
-							<th>Aksi</th>
+							<!-- <th>Aksi</th> -->
 						</tr>
 					</thead>
 					<tbody>
+						<?php foreach($readpp as $read){?>
 						<tr>
-							<td>Rupiah Murni</td>
-							<td>Biro Keuangan</td>
-							<td>Bagian Anggaran</td>
-							<td>100.000.000</td>
-							<td><a href="<?= site_url('Anggaran/Pembagianpagu/Tambah') ?>"><i class="material-icons green-text">edit</i></a></td>
+							<td><?=kdbeban($read->kdbeban)?></td>
+							<td><?=$read->nama_unit?></td>
+							<td><?=$read->uraian_ppk?></td>
+							<td><?=rupiah($read->rupiah)?></td>
+							<!-- <td><a href="<?= site_url('Anggaran/Pembagianpagu/Tambah') ?>"><i class="material-icons green-text">edit</i></a></td> -->
 						</tr>
+						<?php } ?>
 					</tbody>
 				</table>
             </div>
