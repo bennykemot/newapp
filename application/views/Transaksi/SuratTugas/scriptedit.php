@@ -7,6 +7,11 @@ var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";
 var master_baseurl 	= "<?= base_url('Master/Master/')?>";
 var satker_session = "<?= $this->session->userdata("kdsatker")?>"
 var user_session = "<?= $this->session->userdata("user_id")?>"
+var role_session = "<?= $this->session->userdata("role_id")?>"
+var unit_session = "<?= $this->session->userdata("unit_id")?>"
+if(role_session == 1){
+  unit_session = 0;
+}
 
 var countingDiv = document.getElementById('counting');
 var countTimTable = countingDiv.getElementsByClassName('namaTim').length;
@@ -214,7 +219,7 @@ $("#user-select2").select2({
            data: function (params) {
               return {
                 kdsatker: satker_session,
-                userid : user_session,
+                unitid : unit_session,
                 trigger : "program_for_ST",
                 searchTerm: params.term // search term
               };
@@ -242,7 +247,7 @@ $("#user-select2").select2({
               return {
                 kdprogram: $('#program-select2').val(),
                 kdsatker: satker_session,
-                userid : user_session,
+                unitid : unit_session,
                 trigger : "kegiatan_for_ST",
                 searchTerm: params.term
                  // search term
@@ -272,7 +277,7 @@ $("#user-select2").select2({
                 kdprogram: $('#program-select2').val(),
                 kdgiat: $('#kegiatan-select2').val(),
                 kdsatker: satker_session,
-                userid : user_session,
+                unitid : unit_session,
                 trigger : "kro_for_ST",
                 searchTerm: params.term
                  // search term
@@ -303,7 +308,7 @@ $("#user-select2").select2({
                 kdgiat: $('#kegiatan-select2').val(),
                 kdoutput: $('#kro-select2').val(),
                 kdsatker: satker_session,
-                userid : user_session,
+                unitid : unit_session,
                 trigger : "ro_for_ST",
                 searchTerm: params.term
                  // search term
@@ -335,7 +340,7 @@ $("#user-select2").select2({
                 kdoutput: $('#kro-select2').val(),
                 kdsoutput: $('#ro-select2').val(),
                 kdsatker: satker_session,
-                userid : user_session,
+                unitid : unit_session,
                 trigger : "komponen_for_ST",
                 searchTerm: params.term
                  // search term
@@ -368,7 +373,7 @@ $("#user-select2").select2({
                 kdsoutput: $('#ro-select2').val(),
                 kdkomponen: $('#komponen-select2').val(),
                 kdsatker: satker_session,
-                userid : user_session,
+                unitid : unit_session,
                 trigger : "skomponen_for_ST",
                 searchTerm: params.term
                  // search term

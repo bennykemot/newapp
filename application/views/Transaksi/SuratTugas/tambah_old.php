@@ -93,7 +93,48 @@
                             <select class="browser-default" id="ttd" name="ttd"></select>
                             </div>
                         </div>
-                        
+
+                        <div id = "counting" >
+                            <div class="multi-field-wrapper">
+
+
+                                <div class="input-field col s12" >
+                                    <div class="input-field col s9">
+                                        <a  class="btn warning col s12"><i class="material-icons left">face</i> DAFTAR TIM</a>
+                                    </div>
+
+                                    <div class="input-field col s3 ">
+                                        <button type="button" class="btn green col s12" id ="add-field" name="add-field"><i class="material-icons left">add</i> Tambah</button>
+                                    </div>
+                                </div>
+
+                                    <table class="bordered fixed multi-fields" id="tbUser">
+                                        <thead><tr>
+                                            <td style="width: 5px" >NO</td>
+                                            <td style="width: 30px" >NAMA</td>
+                                            <td style="min-width: 200px" >NIP</td>
+                                            <td style="min-width: 250px" >PERAN/JABATAN</td>
+                                            <td>GOL</td>
+                                            <td style="min-width: 200px">KOTA ASAL</td>
+                                            <td style="min-width: 200px">KOTA TUJUAN</td>
+                                            <td>TGL<br>BERANGKAT</td>
+                                            <td>TGL<br>KEMBALI</td>
+                                            <td>JML<br>HARI</td>
+                                            <td>UANG HARIAN</td>
+                                            <td>PENGINAPAN</td>
+                                            <td>TRANSPORTASI</td>
+                                            <td>REPRESENTASI</td>
+                                            <td style="min-width: 150px">JUMLAH</td>
+                                            <td style="min-width: 250px">JENIS<br>TRANSPORTASI</td>
+                                            <td style="min-width: 15px" >AKSI</td>
+                                        </tr></thead>
+                                        <tbody class="multi-field"></tbody>
+                                    </table>
+                            </div>
+                        </div>
+
+                        <input id="ArrX" name="ArrX" hidden>
+
                         <div class="col s12" style="padding-top: 10px">
                             <div class="col s9"></div>
 

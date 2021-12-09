@@ -6,6 +6,7 @@ function Reset(idForm) {
   $('.satker-select2').val(null).trigger('change');
   $('.role-select2').val(null).trigger('change');
   $('.status-select2').val(null).trigger('change');
+  $('.unitkerja-select2').val(null).trigger('change');
 }
 
 // $('#exampleModal').on('scroll', function (event) {
@@ -372,6 +373,9 @@ $.ajax({
 
                 var role = $("<option selected='selected'></option>").val(data['role_id']).text(data['role_id']+' - '+data['rolename'])
                 $("#role-select2_Edit").append(role).trigger('change');
+
+                var unit = $("<option selected='selected'></option>").val(data['unit_id']).text(data['nama_unit'])
+                $("#unitkerja-select2_Edit").append(unit).trigger('change');
 
                 if(data['status'] == 1){
                   var textt = "Aktif"

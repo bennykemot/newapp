@@ -82,7 +82,7 @@
 
                               <?php if ( $p->kdakun != "521811"){ ?>
                                 <td class="text-center">
-                                <a href="<?= site_url('Anggaran/Mappingapp/Tambah/'.$p->kdindex.'/'.$p->kdkmpnen.'/'.$p->kdskmpnen.'/'.$p->rupiah) ?>"><i class="material-icons green-text">edit</i></a>
+                                <a href="<?= site_url('Anggaran/Mappingapp/Tambah/'.$p->kdindex.'/'.$p->kdkmpnen.'/'.$p->kdskmpnen.'/'.$p->rupiah.'/'.$p->kdsoutput) ?>"><i class="material-icons green-text">edit</i></a>
                               </td>
                                 <?php } else{ 
                                   echo '<td></td>';

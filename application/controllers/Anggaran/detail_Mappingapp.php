@@ -18,7 +18,9 @@ class Detail_Mappingapp extends CI_Controller {
 
     public function getMappingApp_detail()
     {
-		$kdindex = $_POST['kdindex'];
+		$var =  $this->uri->segment(4);
+        $kdindex = str_replace("%20", " ", $var);
+        $data['readmapp'] = $this->detail_Mappingapp->CRUD($kdindex,'d_detailapp','R-table');
         $list = $this->detail_Mappingapp->get_datatables($kdindex);
         $data = array();
         $no = $_POST['start'];
@@ -59,6 +61,7 @@ class Detail_Mappingapp extends CI_Controller {
             $app = $this->input->post('app');
             $countRupiah = $this->input->post('countRupiah');
             $kdkmpnen = $this->input->post('kdkmpnen');
+            $kdskmpnen = str_replace("%20", " ", $this->input->post('kdskmpnen'));
             $where = array('id_app' => $app, 'kdindex' => $kodeindex);
 
             $cek = $this->detail_Mappingapp->cek($where,'d_detailapp')->result_array();
@@ -66,7 +69,7 @@ class Detail_Mappingapp extends CI_Controller {
 
             if(count($cek) == 0){
 
-                if( $kdkmpnen == "051" || $kdkmpnen == "052"){
+                if( $kdkmpnen == "051" && $kdskmpnen ==" A" || $kdkmpnen == "052" && $kdskmpnen ==" A" || $kdkmpnen == "052" && $kdskmpnen ==" C"){
 
                     $data = array();    
                     $j = 1;
@@ -121,11 +124,13 @@ class Detail_Mappingapp extends CI_Controller {
             $where = array('id' => $id);
 	        $this->detail_Mappingapp->CRUD($where,'d_detailapp', $Trigger);
 
-        }else if($Trigger == "R"){
+        }else if($Trigger == "R-Ubah"){
+            
             $id = $this->input->post('id');
+            $kdindex = $this->input->post('kdindex');
             
            
-            $output = $this->detail_Mappingapp->CRUD($id,'d_detailapp', $Trigger);
+            $output = $this->detail_Mappingapp->getUbah_detail($id,$kdindex);
             // $total = $this->detail_Mappingapp->getTotalRupiah($kdindex);
             echo json_encode($output);
             

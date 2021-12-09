@@ -96,7 +96,7 @@
                         </div>
 
 
-                        <div id = "counting" >
+                        <!-- <div id = "counting" >
                             <div class="multi-field-wrapper">
 
                                 <div class="input-field col s12" >
@@ -187,23 +187,6 @@
                                                 <td hidden><input type="text" id="tarifuangharian<?=$j?>" name="tarifuangharian<?=$j?>" ></td>
                                             </tr>
                                                 
-                                                <!-- <td style="width: 5%" ><input id="nourut<?=$j?>" name="nourut<?=$j?>" value="<?=$ubah[$i]['nourut']?>"></td>
-                                                <td style="width: 30%" id="Tim" name="Tim">
-                                                    <select placeholder="Nama.." class="namaTimHardcode browser-default" name="namaDummy<?=$j?>" id="namaDummy<?=$j?>" >
-                                                        <option selected value="<?=$ubah[$i]['nip']?>"><?=$ubah[$i]['nama']?></option>
-                                                    </select>
-                                                    
-                                                </td>
-                                                <td style="width: 15%" id="niplabel<?=$j?>"><?=$ubah[$i]['nip']?></td>
-                                                <td style="width: 30%" id="perjablabel<?=$j?>"><?=$ubah[$i]['jabatan']?></td>
-                                                <td>
-                                                    <div class="col s12">
-                                             
-                                                <div class="col s2" style="padding-left: 2px; padding-right: 2px"></div>
-                                                <a><span class="col s4 table-remove" style="padding: 0px !important" id="<?=$j?>" ><i class="material-icons">delete</i></span></a>
-                                                    </div>
-                                                </td>
-                                                </tr> -->
 
                                                 <tr hidden>
                                                     <td><input type="text" id="idst" name="idst" value="<?= $ubah[0]['idst'] ?>"></td>
@@ -219,7 +202,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <input id="ArrX" name="ArrX" hidden>
 

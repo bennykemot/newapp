@@ -3,7 +3,7 @@
 <script>
 
 
-var baseurl 	= "<?= base_url('Transaksi/SuratTugas/')?>";
+var baseurl 	= "<?= base_url('Transaksi/TambahTim/')?>";
 var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";
 var master_baseurl 	= "<?= base_url('Master/Master/')?>";
 var satker_session = "<?= $this->session->userdata("kdsatker")?>"
@@ -21,15 +21,6 @@ function Reset(idForm) {
   $('.browser-default').val(null).trigger('change');
 }
 
-function show(Id){
-  $('#id_st').val(Id);
-}
-
-function kwitansiRampung(url,trigger){
-  var id = $('#id_st').val()
-  window.open(baseurl + url + id, '_blank')
-
-}
 
 function Min_datemulai(){
   var min_date_st = $('#tglst').val()
@@ -324,63 +315,6 @@ $("#user-select2").select2({
 			
 
     })
-
-
-
-$("#ttd").select2({
-          dropdownAutoWidth: true,
-          width: '100%',
-          placeholder: "Pilih Nama",
-         ajax: { 
-           url: dropdown_baseurl + 'pegawai',
-           type: "post",
-           dataType: 'json',
-           delay: 250,
-           data: function (params) {
-              return {
-                Trigger : "pegawai_forST",
-                searchTerm: params.term // search term
-              };
-           },
-           processResults: function (response) {
-              return {
-                 results: response
-              };
-           },
-           cache: true
-         }
-     });
-
-     $("#select-bebananggaran").select2({
-          dropdownAutoWidth: true,
-          placeholder: "Pilih Beban Anggaran",
-         ajax: { 
-           url: dropdown_baseurl + 'unitkerja',
-           type: "post",
-           dataType: 'json',
-           delay: 250,
-           data: function (params) {
-              return {
-                Trigger: "SelectForBebanAnggaran_NotaDinas",
-                kdsatker: satker_session,
-                searchTerm: params.term // search term
-              };
-           },
-           processResults: function (response) {
-              return {
-                 results: response
-                 
-              };
-           },
-           cache: true
-         }
-     });
-
-    //  $("#idxskmpnen").change(function() {
-    //   document.getElementById("add-field").style.display = "";
-    //  });
-
-     
 
 
 function selectRefresh(x){
@@ -770,13 +704,13 @@ function removeItemAll(arr, value) {
 }
 
 
-$("#TambahST").click(function (e) {
+$("#TambahTim").click(function (e) {
   e.preventDefault();
 
   var btn = $(this);
   var form = $(this).closest("form");
-  var formData = new FormData($("#FormST")[0]);
-  var IdForm =  "FormST";
+  var formData = new FormData($("#FormTim")[0]);
+  var IdForm =  "FormTim";
   // var countingDiv = document.getElementById('counting');
   // var countTim = countingDiv.getElementsByClassName('namaTim').length;
 
@@ -785,7 +719,6 @@ $("#TambahST").click(function (e) {
     .attr("disabled", false);
 
   formData.append('Trigger', 'C')
-  // formData.append('countTim', countTim)
 
   $.ajax({
     type: "POST",
@@ -796,49 +729,13 @@ $("#TambahST").click(function (e) {
     success: function (data, textStatus, jqXHR) {
               show_msg(textStatus);
               Reset(IdForm);
-             window.history.back();
+             //window.history.back();
               
               
           },
           error: function (jqXHR, textStatus, errorThrown) { },
       });
 });
-
-function Delete(Id) {
-    swal({
-    title: "Apakah Yakin Ingin Dihapus?",
-    text: "Anda tidak bisa mengembalikan data yang telah dihapus!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonText: "Ya, Hapus!",
-    cancelButtonText: "Batal",
-  }).then(function (result) {
-    if (result) {
-      Execute(Id);
-    }
-  });
-}
-
-function Execute(Id) {
-  var formData = new FormData();
-  formData.append("Trigger", "D");
-  formData.append("id", Id);
-
-  $.ajax({
-    type: "POST",
-    data: formData,
-    url: baseurl + "Action",
-    processData: false,
-    contentType: false,
-    success: function (data, textStatus, jqXHR) {
-
-        show_msg(textStatus)
-        window.location.reload();
-    },
-    error: function (jqXHR, textStatus, errorThrown) { },
-  });
-}
-
 
 
 function show_msg(textStatus){

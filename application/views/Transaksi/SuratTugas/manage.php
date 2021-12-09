@@ -58,7 +58,7 @@
                         <th style="width: 50%" >NOMOR SURAT TUGAS/URAIAN/STATUS</th>
                         <th style="width: 15%" >MULAI</th>
                         <th style="width: 15%" >SELESAI</th>
-                        <th style="width: 15%" >AKSI</th>
+                        <th style="width: 15%" class="text-center">AKSI</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -87,28 +87,41 @@
                             <td>
                                 <div class="col s12">
 
-                                <a href="#" class="btn dropdown-trigger orange col s12" href="#" data-target="dropdown'<?=$u->id?>'">VIEW</a><br>
+                                <div class="row">
+
+                                <div class="col s4">
+                                    <a href="<?= site_url('Transaksi/TambahTim/TambahTim/'.$u->id)?>"><i class="material-icons cyan-text">people</i></a>
+                                  </div>
+                                  <div class="col s4">
+                                    <a href="#" class="dropdown-trigger" href="#" data-target="dropdown'<?=$u->id?>'"><i class="material-icons orange-text">remove_red_eye</i></a>
                                           <ul id="dropdown'<?=$u->id?>'" class='dropdown-content' style="min-width: 170px !important;">
                                             <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/SuratTugas/Export/'.$u->id) ?>" target="blank">Surat Tugas</a></li>
                                             <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/costsheet/L/'.$u->id) ?>" target="blank">Costsheet</a></li>
                                             <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd/P/'.$u->id) ?>" target="blank">SPD</a></li>
                                             <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd_back/P/'.$u->id) ?>" target="blank">SPD Belakang</a></li>
                                             <li><a style="font-size: 14px;" href="#" class="sidenav-trigger" data-target="theme-cutomizer-out" onclick="show('<?=$u->id?>')">Kwitansi Rampung</a>
-																							<!-- <ul class="subMenu">
-																								<li><a href="#">Kwitansi</a></li>
-																							</ul> -->
 																						</li>
                                           </ul>
-
-
-                                    <!-- <a class="btn orange col s12" href="<?= site_url('Transaksi/SuratTugas/Export/'.$u->id)?>" target="_blank">VIEW</a><br> -->
-                                    <div style="padding-bottom: 20px"></div>
-                                    <a class="btn cyan col s12" href="<?= site_url('Transaksi/SuratTugas/ubah/'.$u->id)?>">UBAH</a><br>
-                                    <div style="padding-bottom: 20px"></div>
-                                    <button class="btn green col s12">APPROVED</button><br>
-                                    <div style="padding-bottom: 20px"></div>
-                                    <button class="btn red col s12" onclick="Delete(<?= $u->id ?>)">HAPUS</button><br>
+                                  </div>
+                                  <div class="col s4">
+                                    <a href="#"><i class="material-icons teal-text">check_box</i></a>
+                                  </div>  
                                 </div>
+
+                                <li class="divider"></li>
+
+                                <div class="row" style="padding-top: 10px">
+                                  <div class="col s6">
+                                    <a href="<?= site_url('Transaksi/SuratTugas/ubah/'.$u->id)?>"><i class="material-icons green-text">edit</i></a>
+                                  </div>
+
+                                  <div class="col s6">
+                                    <a href="javascript:;" onclick="Delete(<?= $u->id ?>)"><i class="material-icons red-text">delete</i></a>
+                                  </div>
+                                  
+
+                                </div>
+                            </div>
                             </td>
                         </tr>
                         <?php $no++;} ?>

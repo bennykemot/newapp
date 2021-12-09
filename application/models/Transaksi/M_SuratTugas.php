@@ -19,7 +19,27 @@ class M_SuratTugas extends CI_Model{
          return $this->db->get('d_surattugas')->num_rows();
 	}
 
-    function getDataUbah($id){
+    function getDataUbah($id, $trigger){
+
+        if($trigger == "Tambah_Tim"){
+
+            $query = $this->db->query('SELECT d_surattugas.nost, d_surattugas.tglst, 
+            d_surattugas.uraianst, d_surattugas.tglmulaist, 
+            d_surattugas.tglselesaist ,d_surattugas.id_unit,
+            
+            t_unitkerja.nama_unit, 
+            
+            d_surattugas.idxskmpnen, 
+            d_surattugas.id_ttd, 
+            
+            t_pegawai.nama as nama_ttd, 
+            d_surattugas.id as idst
+            
+            FROM d_surattugas 
+            JOIN t_unitkerja ON d_surattugas.id_unit = t_unitkerja.id 
+            JOIN t_pegawai ON d_surattugas.id_ttd = t_pegawai.nip WHERE d_surattugas.id = '.$id.'');
+
+        }else{
             $query = $this->db->query('SELECT d_surattugas.nost, d_surattugas.tglst, 
             d_surattugas.uraianst, d_surattugas.tglmulaist, 
             d_surattugas.tglselesaist ,d_surattugas.id_unit,
@@ -47,6 +67,7 @@ class M_SuratTugas extends CI_Model{
             JOIN t_unitkerja ON d_surattugas.id_unit = t_unitkerja.id 
             JOIN t_pegawai ON d_surattugas.id_ttd = t_pegawai.nip 
             JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st WHERE d_surattugas.id = '.$id.'');
+        }
             return $query->result_array();
 
     }

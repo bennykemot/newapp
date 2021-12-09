@@ -126,27 +126,70 @@
     <div class="col s12">
         <div class="card">
             <div class="card-content">
-				<table id="tb-app" class="display" style="width:100%;white-space: nowrap !important;overflow: hidden;">
+				<table id="tb-app" class="display" style="width:100%;white-space: normal !important;overflow: hidden;">
 					<thead>
 						<tr>
 							<th width="30%">APP</th>
-							<th width="30%">Rupiah</th>
 							<th>Tahapan</th>
 							<th>Rupiah Tahapan</th>
 							<th>Aksi</th>
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach($readmapp as $read){?>
+					<?php $before = "";$beforeSum = "";$total = 0;$sumApp = 0;
+						foreach($readmapp as $read){
+							if($before != $read->nama_app){
+                                echo '<tr><td colspan="4" style="background-color: #b9f6d8; color: #000"><b>'.$read->nama_app.'</b></td></tr>';
+                                $before = $read->nama_app;}
+                              ?>
 						<tr>
 							<td><?=$read->nama_app?></td>
-							<td><?=rupiah($read->rupiah)?></td>
 							<td><?=$read->nama_tahapan?></td>
-							<td><?=rupiah($read->rupiah_tahapan)?></td>
-							<td><a href="javascript:;" onclick="Delete('<?=$read->id?>', '<?=$read->kdindex?>')"><i class="material-icons green-text">delete</i></a></td>
+							<td class="text-right"><?=rupiah($read->rupiah_tahapan)?></td>
+							<td><a href="<?=site_url('Anggaran/Mappingapp/Ubah/'.$read->id.'/'.$this->uri->segment('7').'/'.$read->kdindex)?>"><i class="material-icons green-text">edit</i></a>
+							<a href="javascript:;" onclick="Delete('<?=$read->id?>', '<?=$read->kdindex?>')"><i class="material-icons red-text">delete</i></a></td>
 						</tr>
-						<?php } ?>
+						<?php 	$hide=""; if(count($readmapp) == 1){
+									$hide="hidden";};
+								if($beforeSum== ""){
+									$sumApp += $read->rupiah_tahapan;
+									echo'<tr style="color: #000">
+									<td colspan="2">TOTAL</td>
+									<td class="text-right">'.rupiah($sumApp).'</td>
+									<td></td>
+									</tr>';
+									$sumApp=0;
+									$beforeSum = $read->nama_app;
+								}else if($beforeSum != $read->nama_app){
+									$sumApp += $read->rupiah_tahapan;
+									echo'<tr style="color: #000" '.$hide.'>
+									<td colspan="2">TOTAL</td>
+									<td class="text-right">'.rupiah($sumApp).'</td>
+									<td></td>
+									</tr>';$beforeSum = $read->nama_app;$sumApp=$read->rupiah_tahapan;
+								}else{
+									$sumApp += $read->rupiah_tahapan;
+									echo'<tr style="color: #000">
+									<td colspan="2">TOTAL</td>
+									<td class="text-right">'.rupiah($sumApp).'</td>
+									<td></td>
+									</tr>';$beforeSum = $read->nama_app;$sumApp=$read->rupiah_tahapan;
+									
+								}?>
+										
+						
+									
+						
+						
+						<?php $total+=$read->rupiah_tahapan;} ?>
 					</tbody>
+					<tfoot>
+						<tr style="background-color: #b9f6d8; color: #000">
+								<td colspan="2">TOTAL</td>
+								<td class="text-right"><?=rupiah($total)?></td>
+								<td></td>
+						</tr>
+					</tfoot>
 				</table>
             </div>
         </div>

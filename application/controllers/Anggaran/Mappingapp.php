@@ -38,6 +38,12 @@ class MappingApp extends CI_Controller {
 			$this->load->view('Anggaran/Mappingapp/tambah', $data);
 		}
 
+    public function Ubah()
+		{
+
+			$this->load->view('Anggaran/Mappingapp/ubah');
+		}
+
     
 
     // public function Page(){
