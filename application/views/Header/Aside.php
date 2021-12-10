@@ -60,10 +60,11 @@ $unit_id = $this->session->userdata("unit_id");
           </li>
 
           <!-- DIGRUP ANGGARAN -->
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Transfer')?>">
           <i class="material-icons">
-          home
-          </i><span class="menu-title" data-i18n="Mail">Mapping Lembur</span></a>
+          get_app
+          </i><span class="menu-title" data-i18n="Mail">Transfer Pagu</span></a>
           </li>
 
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Mappingapp/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id.'/'.$unit_id)?>">
@@ -72,11 +73,15 @@ $unit_id = $this->session->userdata("unit_id");
           </i><span class="menu-title" data-i18n="Mail">Mapping App</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Transfer')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
           <i class="material-icons">
-          get_app
-          </i><span class="menu-title" data-i18n="Mail">Transfer Pagu</span></a>
+          home
+          </i><span class="menu-title" data-i18n="Mail">Mapping Lembur</span></a>
           </li>
+
+         
+
+          
 
 
           <li class="navigation-header"><a class="navigation-header-text">Rencana Kegiatan</a>
@@ -128,12 +133,14 @@ $unit_id = $this->session->userdata("unit_id");
           </li>
 
           <!-- DIGRUP ANGGARAN -->
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Transfer')?>">
           <i class="material-icons">
-          home
-          </i><span class="menu-title" data-i18n="Mail">Mapping Lembur</span></a>
+          get_app
+          </i><span class="menu-title" data-i18n="Mail">Transfer Pagu</span></a>
           </li>
 
+          
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Pembagianpagu/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id.'/'.$unit_id)?>">
           <i class="material-icons">
           turned_in_not
@@ -146,10 +153,11 @@ $unit_id = $this->session->userdata("unit_id");
           </i><span class="menu-title" data-i18n="Mail">Mapping App</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Transfer')?>">
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
           <i class="material-icons">
-          get_app
-          </i><span class="menu-title" data-i18n="Mail">Transfer Pagu</span></a>
+          home
+          </i><span class="menu-title" data-i18n="Mail">Mapping Lembur</span></a>
           </li>
 
 

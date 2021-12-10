@@ -97,66 +97,66 @@
 			var role_id = "<?= $this->session->userdata("role_id") ?>"
 			
 
-      function url_base(string){
-        return url + string;
-      }
+    //   function url_base(string){
+    //     return url + string;
+    //   }
 
 
-      $.ajax({
-        url : baseurl_menu + "Master",
-        data: {"role_id": role_id},
-        type: "post",
-        dataType: "JSON",
-        success: function(data)
-            {
+    //   $.ajax({
+    //     url : baseurl_menu + "Master",
+    //     data: {"role_id": role_id},
+    //     type: "post",
+    //     dataType: "JSON",
+    //     success: function(data)
+    //         {
              
-              for(i=0 ; i< data.length ; i++){
+    //           for(i=0 ; i< data.length ; i++){
 
-                if(data[i]['parent_menu'] == 'menu_0'){
+    //             if(data[i]['parent_menu'] == 'menu_0'){
 
-                  row = '<li class="navigation-header"><a class="navigation-header-text">'+data[i]['nama_menu']+'</a>\
-                          <i class="navigation-header-icon material-icons">more_horiz</i>\
-                          </li>';
+    //               row = '<li class="navigation-header"><a class="navigation-header-text">'+data[i]['nama_menu']+'</a>\
+    //                       <i class="navigation-header-icon material-icons">more_horiz</i>\
+    //                       </li>';
 
-                  }else{
+    //               }else{
 
-                      if(data[i]['kode_menu'] == 'menu_03'){
-                        row = '<li class="bold"><a class="waves-effect waves-cyan" href='+url_base(data[i]['link_menu']+'/'+kdsatker+ '/'+thang+'/'+user_id+'/'+role_id)+'>\
-                              <i class="material-icons">\
-                              '+data[i]['icon_menu']+'\
-                              </i><span class="menu-title" data-i18n="Mail">'+data[i]['nama_menu']+'</span></a>\
-                              </li>';
-                      }else if(data[i]['kode_menu'] == 'menu_04'){
-                        row = '<li class="bold"><a class="waves-effect waves-cyan" href='+url_base(data[i]['link_menu']+'/'+kdsatker+ '/'+user_id+'/'+role_id+'/0')+'>\
-                              <i class="material-icons">\
-                              '+data[i]['icon_menu']+'\
-                              </i><span class="menu-title" data-i18n="Mail">'+data[i]['nama_menu']+'</span></a>\
-                              </li>';
-                      }else if(data[i]['kode_menu'] == 'menu_18'){
-                        row = '<li class="bold"><a class="waves-effect waves-cyan" href='+url_base(data[i]['link_menu']+'/'+kdsatker)+'>\
-                              <i class="material-icons">\
-                              '+data[i]['icon_menu']+'\
-                              </i><span class="menu-title" data-i18n="Mail">'+data[i]['nama_menu']+'</span></a>\
-                              </li>';
+    //                   if(data[i]['kode_menu'] == 'menu_03'){
+    //                     row = '<li class="bold"><a class="waves-effect waves-cyan" href='+url_base(data[i]['link_menu']+'/'+kdsatker+ '/'+thang+'/'+user_id+'/'+role_id)+'>\
+    //                           <i class="material-icons">\
+    //                           '+data[i]['icon_menu']+'\
+    //                           </i><span class="menu-title" data-i18n="Mail">'+data[i]['nama_menu']+'</span></a>\
+    //                           </li>';
+    //                   }else if(data[i]['kode_menu'] == 'menu_04'){
+    //                     row = '<li class="bold"><a class="waves-effect waves-cyan" href='+url_base(data[i]['link_menu']+'/'+kdsatker+ '/'+user_id+'/'+role_id+'/0')+'>\
+    //                           <i class="material-icons">\
+    //                           '+data[i]['icon_menu']+'\
+    //                           </i><span class="menu-title" data-i18n="Mail">'+data[i]['nama_menu']+'</span></a>\
+    //                           </li>';
+    //                   }else if(data[i]['kode_menu'] == 'menu_18'){
+    //                     row = '<li class="bold"><a class="waves-effect waves-cyan" href='+url_base(data[i]['link_menu']+'/'+kdsatker)+'>\
+    //                           <i class="material-icons">\
+    //                           '+data[i]['icon_menu']+'\
+    //                           </i><span class="menu-title" data-i18n="Mail">'+data[i]['nama_menu']+'</span></a>\
+    //                           </li>';
                       
-                      }else{
-                        row = '<li class="bold"><a class="waves-effect waves-cyan" href='+url_base(data[i]['link_menu'])+'>\
-                              <i class="material-icons">\
-                              '+data[i]['icon_menu']+'\
-                              </i><span class="menu-title" data-i18n="Mail">'+data[i]['nama_menu']+'</span></a>\
-                              </li>';
-                      }
-                  }
+    //                   }else{
+    //                     row = '<li class="bold"><a class="waves-effect waves-cyan" href='+url_base(data[i]['link_menu'])+'>\
+    //                           <i class="material-icons">\
+    //                           '+data[i]['icon_menu']+'\
+    //                           </i><span class="menu-title" data-i18n="Mail">'+data[i]['nama_menu']+'</span></a>\
+    //                           </li>';
+    //                   }
+    //               }
 
                 
 
                 
 
-                $("#slide-out").append(row);
+    //             $("#slide-out").append(row);
 
-              }
-            }
-    });
+    //           }
+    //         }
+    // });
 
     (function() {
     const idleDurationSecs = 600;
