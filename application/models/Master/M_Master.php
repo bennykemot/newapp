@@ -55,5 +55,9 @@ class M_Master extends CI_Model {
       }
       return $query->result_array();
    
-      }
+   }
+
+	
+
+
    }

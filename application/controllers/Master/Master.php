@@ -44,4 +44,6 @@ class Master extends CI_Controller {
         
         echo json_encode($response);
      }
+
+	 
 }

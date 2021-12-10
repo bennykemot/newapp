@@ -37,7 +37,7 @@
                             <tr>
 								<th>No</th>
 								<th>Jabatan</th>
-								<th>Aksi</th>
+								<!-- <th>Aksi</th> -->
                           	</tr>
                         </thead>
                         <tbody>
@@ -48,9 +48,9 @@
 								<tr style="white-space: normal; overflow: hidden;">
 								<td style="width: 5%;"><?php echo $no ?></td>
 								<td style="width: 60%;"><?php echo $jbtn->jabatan ?></td>
-								<td>
+								<!-- <td>
 									<a href="<?= site_url('Master/Pegawai/ubah/'.$jbtn->id) ?>"><i class="material-icons green-text">edit</i></a>
-								</td> 
+								</td>  -->
 							<?php
 								$no++;
 								}
@@ -65,6 +65,7 @@
         </div>
       </div>
   </div>
+
 
   <?php include(APPPATH . 'views/Footer/Footer.php') ?>
   <?php include('script.php');?>

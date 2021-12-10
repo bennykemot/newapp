@@ -31,53 +31,75 @@ class Pejabat extends CI_Controller {
 	public function Action()
 	{
 		$Trigger = $this->input->post('Trigger');
+
 		if($Trigger == "C"){
+			$kdsatker = $this->input->post('kdsatker');
+			$nama_pejabat = $this->input->post('getPejabat');
+			$nip = $this->input->post('nip');
+			$jabatan = $this->input->post('jabatanText');
+			$unit = $this->input->post('unit');
+			$jabatan_id = $this->input->post('jabatan_id');
+
+			$data = array(
+				'kdsatker' => $kdsatker,
+				'unitkerja_id' => $unit,
+				'nama' => $nama_pejabat,
+				'nip' => $nip,
+				'nama_jabatan' => $jabatan,
+				'jabatan_id' => $jabatan_id,
+			);
 			
+			$this->Pejabat->CRUD($data,'t_pejabat',$Trigger);
+
+			$status = "success";
+            $msg = "Data Berhasil Ditambah !";
+            echo json_encode(array('status' => $status, 'msg' => $msg));
+
+
+
 		}else if($Trigger == "R"){
 			$id = $this->input->post('id');
-			$where = array('t_pegawai.id' => $id);
-			$output = $this->Pegawai->CRUD($where,'t_pegawai',$Trigger);
+			$where = array('t_pejabat.id' => $id);
+			$output = $this->Pejabat->CRUD($where,'t_pejabat',$Trigger);
 			echo json_encode($output);
 
 		}else if($Trigger == "U"){
-			$niplama = $this->input->post('niplama');
-			$nipbaru = $this->input->post('nipbaru');
-			$nama_lengkap = $this->input->post('nama_lengkap');
-			$tempat = $this->input->post('tempat_lahir');
-			$tgl_lahir = $this->input->post('tgl_lahir');
-			$jk = $this->input->post('jk');
-			$agama = $this->input->post('agama');
-			$pangkat = $this->input->post('pangkat');
-			$jbtn = $this->input->post('jbtn');
-			$tmt = $this->input->post('tmt');
-			$unit = $this->input->post('unit');
-			$id = $this->input->post('id');
+			$id = $this->input->post('idPejabat');
+			$kdsatker = $this->input->post('kdsatker_Edit');
+			$nama_pejabat = $this->input->post('nama_pejabat');
+			$nip = $this->input->post('nip_Edit');
+			$jabatan = $this->input->post('jabatanEditText');
+			$unit = $this->input->post('unit_Edit');
+			$jabatan_id = $this->input->post('jabatan_Edit');
+			
 
-			$data_pegawai = array(
-				'niplama' => $niplama,
-				'nip' => $nipbaru,
-				'nama_lengkap' => $nama_lengkap,
-				'tempat_lahir' => $tempat,
-				'tgl_lahir' => date("Y-m-d",strtotime($tgl_lahir)),
-				'jenis_kelamin' => $jk,
-				'agama' => $agama,
-				'nama_pangkat' => $pangkat,
-				'jabatan' => $jbtn,
-				'tmt_jab' => $tmt,
-				'namaunit_lengkap' => $unit,
+			$data = array(
+				'kdsatker' => $kdsatker,
+				'unitkerja_id' => $unit,
+				'nama' => $nama_pejabat,
+				'nip' => $nip,
+				'nama_jabatan' => $jabatan,
+				'jabatan_id' => $jabatan_id,
 			);
 
 			$where = array('id' => $id);
-			$this->Pegawai->update($data_pegawai,'t_pegawai',$where);
+			$this->Pejabat->update($data,'t_pejabat',$where);
 
-			$response = array(
-                'status' => "success",
-                'message' => 'Data Berhasil diubah'
-            );
-
-			echo json_encode($response);
+			$status = "success";
+            $msg = "Data Berhasil DiUbah !";
+            echo json_encode(array('status' => $status, 'msg' => $msg));
 
 
+		}else if($Trigger == "D"){
+			$id = $this->input->post('id');
+
+			//$getPejabat = $this->db->query("SELECT * from t_pejabat where id = '". $id."' ")->result_array();
+			$where = array('id' => $id);
+			$this->Pejabat->CRUD($where,'t_pejabat', $Trigger);
+
+			$status = "success";
+            $msg = "Data Berhasil Dihapus !";
+            echo json_encode(array('status' => $status, 'msg' => $msg));
 		}
 	}
 

@@ -41,15 +41,16 @@ class M_Pejabat extends CI_Model {
 
 	}
 
-	function getJabatanUbah($id){
-		$query = $this->db->query('SELECT * FROM 
-					t_pegawai
-					WHERE id = '.$id.' ');
-		return $query->result_array();
+	// function getJabatanUbah($id){
+	// 	$query = $this->db->query('SELECT * FROM 
+	// 				t_pegawai
+	// 				WHERE id = '.$id.' ');
+	// 	return $query->result_array();
 
-	}
+	// }
 
 	function CRUD($data,$table,$Trigger){
+
 		if($Trigger == "C"){
 
 			$this->db->insert($table,$data);
@@ -61,20 +62,34 @@ class M_Pejabat extends CI_Model {
 
 		}else if($Trigger == "R"){
 
-			$this->db->select('id');
-			$this->db->from('t_pegawai');
-			$this->db->where('id',$data);
-			$query = $this->db->get();
+			$this->db->select('t_pejabat.id');
+			$this->db->select('t_pejabat.kdsatker');
+            $this->db->select('t_pejabat.unitkerja_id');
+            $this->db->select('t_pejabat.nama');
+            $this->db->select('t_pejabat.nip');
+			$this->db->select('t_pejabat.nama_jabatan');
+            $this->db->select('t_pejabat.jabatan_id');
 
-			return $query->row();
+            $this->db->select('t_unitkerja.nama_unit');
+            $this->db->select('r_jabatan.jabatan');
+            $this->db->select('t_satker.nmsatker');
+            
+            $this->db->from($table);
+            $this->db->join('t_unitkerja', 't_unitkerja.id = t_pejabat.unitkerja_id');
+            $this->db->join('r_jabatan', 'r_jabatan.id = t_pejabat.jabatan_id');
+            $this->db->join('t_satker', 't_satker.kdsatker = t_pejabat.kdsatker');
+
+            $this->db->where($data);
+            $query = $this->db->get();
+    
+            return $query->row();
 
 		}
 	}
 
-	function Update($data,$table,$where){
-		$this->db->where($where);
-		$this->db->update($table,$data);
-	}
+    public function Update($data, $table, $where){
+        $this->db->update($table, $data, $where); 
+    }
 
 	function cek($data,$table){
         return $this->db->get_where($table,$data);

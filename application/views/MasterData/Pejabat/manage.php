@@ -55,8 +55,8 @@
 								<td style="width: 15%;"><?php echo $p->jabatan ?></td>
 								<td style="width: 25%;"><?php echo $p->unit ?></td>
 								<td style="width: 10%;">
-									<a href="<?= site_url('Master/Pejabat/ubah/'.$p->id) ?>"><i class="material-icons green-text">edit</i></a>
-									<a href="<?= site_url('Master/Pejabat/delete/'.$p->id) ?>"><i class="material-icons red-text">delete</i></a>
+									<a href="javascript:;" onclick="Edit('<?= $p->id ?>')"><i class="material-icons green-text">edit</i></a>
+									<a href="javascript:;" onclick="Delete('<?= $p->id ?>')"><i class="material-icons red-text">delete</i></a>
 								</td> 
 							
 						<?php
@@ -73,6 +73,7 @@
       </div>
   <!-- </div> -->
 
+	<?php include('modal.php');?>
   <?php include(APPPATH . 'views/Footer/Footer.php') ?>
   <?php include('script.php');?>
 	
