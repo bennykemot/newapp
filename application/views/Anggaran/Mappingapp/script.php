@@ -318,8 +318,6 @@
             var index = 0;
             
             api.column(1, {page:'current'} ).data().each( function ( group, i ) {
-            	
-              // console.log(group+">>>"+i);
             
               var vals = api.row(api.row($(rows).eq(i)).index()).data();
               var salary = vals['rupiah_tahapan'] ? parseFloat(vals['rupiah_tahapan']) : 0;
