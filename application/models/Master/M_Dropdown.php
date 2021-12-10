@@ -37,7 +37,7 @@ class M_Dropdown extends CI_Model {
   }
 
 
-  function getData_kegiatan($searchTerm="",$kdsatker, $kdprogram, $userid,$trigger){
+  function getData_kegiatan($searchTerm="",$kdsatker, $kdprogram, $unitid,$trigger){
    if($trigger == "kegiatan_for_ST"){
       // Fetch users
       $this->db->distinct();

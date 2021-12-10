@@ -203,7 +203,7 @@ function cek_tgl($tanggal){
                 <thead style="text-align: center">
                     <tr >
                         <td colspan="2" width="25%">Menyetujui :</td>
-                        <td colspan="2" width="25%">Memverifikasi :</td>
+                        
                         <td colspan="2" width="25%">Pejabat Pembuat Komitmen :</td>
                         <td colspan="2" width="25%">Yang Mengajukan :</td>
                     </tr>
@@ -211,14 +211,14 @@ function cek_tgl($tanggal){
 
                     <tr>
                         <td style="border-right-style: none; border-bottom-style: none;">Tanggal <br> Catatan </td><td style="border-left-style: none; border-bottom-style: none;"></td>
-                        <td style="border-right-style: none; border-bottom-style: none;">Tanggal <br> Catatan </td><td style="border-left-style: none; border-bottom-style: none;"></td>
+                       
                         <td style="border-right-style: none; border-bottom-style: none;">Tanggal <br> Catatan </td><td style="border-left-style: none; border-bottom-style: none;"></td>
                         <td style="border-right-style: none; border-bottom-style: none;">Tanggal <br> Catatan </td><td style="border-left-style: none; border-bottom-style: none;"></td>
                     </tr>
 
                     <tr>
                         <td style="padding-bottom: 10%;border-top-style: none;border-bottom-style: none;" colspan="2"></td>
-                        <td style="padding-bottom: 10%;border-top-style: none;border-bottom-style: none;" colspan="2"></td>
+                        
                         <td style="padding-bottom: 10%;border-top-style: none;border-bottom-style: none;" colspan="2"></td>
                         <td style="padding-bottom: 10%;border-top-style: none;border-bottom-style: none;" colspan="2"></td>
                     </tr>
@@ -226,14 +226,14 @@ function cek_tgl($tanggal){
                     <tfoot style="text-align: center">
                         <tr>
                             <td style="border-right-style: none;border-bottom-style: none;border-top-style: none;b"></td><td style="border-bottom-style: none;border-top-style: none;border-left-style: none;">Ernadhi Sudarmanto </td>
-                            <td style="border-right-style: none;border-bottom-style: none;border-top-style: none;b"></td><td style="border-bottom-style: none;border-top-style: none;border-left-style: none;">Kwinhatmaka </td>
+                            
                             <td style="border-right-style: none;border-bottom-style: none;border-top-style: none;b"></td><td style="border-bottom-style: none;border-top-style: none;border-left-style: none;">Sumardi </td>
                             <td style="border-right-style: none;border-bottom-style: none;border-top-style: none;b"></td><td style="border-bottom-style: none;border-top-style: none;border-left-style: none;">Muslim Ridha Muthaher </td>
                         </tr>
 
                         <tr>
                             <td style="border-right-style: none;border-top-style: none;">NIP</td><td style="border-left-style: none;border-top-style: none;">196507041985031001 </td>
-                            <td style="border-right-style: none;border-top-style: none;">NIP</td><td style="border-left-style: none;border-top-style: none;">196507241986031001 </td>
+                            
                             <td style="border-right-style: none;border-top-style: none;">NIP</td><td style="border-left-style: none;border-top-style: none;">197307251994021001 </td>
                             <td style="border-right-style: none;border-top-style: none;">NIP</td><td style="border-left-style: none;border-top-style: none;">196802161993031001 </td>
                         </tr>

@@ -50,14 +50,14 @@ function cek_tgl($tanggal){
     <body>
     
     <div id="container">
-        <table width="100%" id="header">
+        <table width="100%" id="header" >
                 <tr>
                     <td width="20%" rowspan="2"><img src="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2_jpg.jpg" alt="materialize logo"></td>
-                    <td style="text-align: center" colspan="4"><b>BADAN PENGAWASAN KEUANGAN DAN PEMBANGUNAN<br>BIRO KEUANGAN</b></td>
+                    <td style="text-align: center;" colspan="4"><b><h4>BADAN PENGAWASAN KEUANGAN DAN PEMBANGUNAN<br>BIRO KEUANGAN</h4></b></td>
                 </tr>
 
                 <tr>
-                    <td style="text-align: center" colspan="4" >
+                    <td style="text-align: center;" colspan="4" >
                     Gedung BPKP Lantai 4 Jalan Pramuka No 33 Jakarta Timur<br>
                     Telepon: (021) 85910512 , Faximile: (021) 85910512 <br>
                     Web: http://www.bpkp.go.id , Email: keuangan@bpkp.go.id
@@ -99,7 +99,7 @@ function cek_tgl($tanggal){
                     <td width="5%"><?= $ubah[$i]['nourut']?></td>
                     <td width="30%"><?= $ubah[$i]['nama']?></td>
                     <td width="35%"><?= $ubah[$i]['nip']?></td>
-                    <td width="30%" colspan="2"><?= $ubah[$i]['peran']?></td>
+                    <td width="30%" colspan="2"><?= $ubah[$i]['jabatan']?></td>
                 </tr>
                 <?php }?>
                 

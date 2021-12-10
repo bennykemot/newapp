@@ -37,7 +37,7 @@
                         <h6> Daftar Surat Tugas </h6>
                     </div>
                     <div class="col s2">
-                        <a class="btn modal-trigger" href="<?= site_url('Transaksi/SuratTugas/Tambah') ?>">Tambah Data</a>
+                        <a class="btn modal-trigger" href="<?= site_url('Transaksi/SuratTugas/Tambah/'.$kdsatker.'/'.$unit_id.'/'.$role_id) ?>">Tambah Data</a>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,8 @@
                   <thead>
                     <tr>
                         <th style="width: 5%" >NO URUT</th>
-                        <th style="width: 50%" >NOMOR SURAT TUGAS/URAIAN/STATUS</th>
+                        <th>STATUS</th>
+                        <th style="width: 50%" >NOMOR, TANGGAL, URAIAN SURAT TUGAS</th>
                         <th style="width: 15%" >MULAI</th>
                         <th style="width: 15%" >SELESAI</th>
                         <th style="width: 15%" class="text-center">AKSI</th>
@@ -68,7 +69,8 @@
                               ?>
                         <tr>
                             <td><?php echo $no ?></td>
-                            <td><b><?php echo $u->nost ?>   <?php echo $u->tglst ?></b>
+                            <td></td>
+                            <td><b><?php echo $u->nost ?>   <?php echo cek_tgl_st($u->tglst) ?></b>
                                 <br>
                                 <?php echo $u->uraianst ?>
                                 <!-- <br>
@@ -82,8 +84,8 @@
                                         <a class='<?= getapprove($u->is_approved4)?> tooltipped' data-position="bottom" data-tooltip="Eselon 1">Es 1</a>
                                     </div> -->
                             </td>
-                            <td><?php echo $u->tglmulaist ?></td>
-                            <td><?php echo $u->tglselesaist ?></td>
+                            <td><?php echo cek_tgl_st($u->tglmulaist) ?></td>
+                            <td><?php echo cek_tgl_st($u->tglselesaist) ?></td>
                             <td>
                                 <div class="col s12">
 
@@ -112,11 +114,11 @@
 
                                 <div class="row" style="padding-top: 10px">
                                   <div class="col s6">
-                                    <a href="<?= site_url('Transaksi/SuratTugas/ubah/'.$u->id)?>"><i class="material-icons green-text">edit</i></a>
+                                    <a href="<?= site_url('Transaksi/SuratTugas/ubah/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id)?>"><i class="material-icons green-text">edit</i></a>
                                   </div>
 
                                   <div class="col s6">
-                                    <a href="javascript:;" onclick="Delete(<?= $u->id ?>)"><i class="material-icons red-text">delete</i></a>
+                                    <a href="javascript:;" onclick="Delete('<?= $u->id ?>')"><i class="material-icons red-text">delete</i></a>
                                   </div>
                                   
 

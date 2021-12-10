@@ -21,6 +21,11 @@ class TambahTim extends CI_Controller {
 		$this->load->view('Transaksi/SuratTugas/TambahTim/manage', $data);
 	}
 
+	public function pregChar($str){
+        $res = preg_replace('/[^A-Za-z0-9\-]/', '', $str);
+        return (int)preg_replace('/[Rp]/', '', $res);
+    }
+
 	public function Action()
     {
 
@@ -30,8 +35,8 @@ class TambahTim extends CI_Controller {
             $nost = $this->input->post('nost');
 			$idst = $this->input->post('id_st');
 			$uraianst = $this->input->post('uraianst');
-            
-            $kota = [];
+			$countTim = $this->input->post('countTim');
+			$tglst = str_replace("/", "-",$this->input->post('tglst'));
         
                 $data = array();    
                 $j = 1;
@@ -107,18 +112,37 @@ class TambahTim extends CI_Controller {
                        $this->db->insert('d_itemcs',$data_ItemCS);
                 }
 
-                $data_cs = array(
-                    'nost' => $idst,
-                    'uraianst' => $uraianst,
-                    'tglst' => date("Y-m-d",strtotime($tglst)),
-                    'tujuanst' =>  $this->input->post('kotatujuan1'),
-                    'totaluangharian' =>  $totaluangharian,
-                    'totaluanginap ' =>  $totaluanginap,
-                    'biaya' =>  $sum
-                    );
+				
+            	$cekCS = $this->db->query("select nost from d_costsheet where nost = ".$idst."")->result_array();
 
-                    
-                    $this->db->insert('d_costsheet',$data_cs);
+				if($cekCS > 0){
+
+					$data_cs = array(
+						'tujuanst' =>  $this->input->post('kotatujuan1'),
+						'totaluangharian' =>  $totaluangharian,
+						'totaluanginap ' =>  $totaluanginap,
+						'biaya' =>  $sum
+						);
+						$this->db->where("nost", $idst);
+						$this->db->update("d_costsheet",$data_cs);
+
+				}else{
+
+					$data_cs = array(
+						'nost' => $idst,
+						'uraianst' => $uraianst,
+						'tglst' => date("Y-m-d",strtotime($tglst)),
+						'tujuanst' =>  $this->input->post('kotatujuan1'),
+						'totaluangharian' =>  $totaluangharian,
+						'totaluanginap ' =>  $totaluanginap,
+						'biaya' =>  $sum
+						);
+	
+						
+						$this->db->insert('d_costsheet',$data_cs);
+
+				}
+                
               
                 //$this->db->insert_batch('d_stdetail', $data);
              

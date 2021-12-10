@@ -4,6 +4,7 @@
 
 
 var baseurl 	= "<?= base_url('Transaksi/SuratTugas/')?>";
+var baseurl_export 	= "<?= base_url('Transaksi/NotaDinas/')?>";
 var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";
 var master_baseurl 	= "<?= base_url('Master/Master/')?>";
 var satker_session = "<?= $this->session->userdata("kdsatker")?>"
@@ -27,7 +28,7 @@ function show(Id){
 
 function kwitansiRampung(url,trigger){
   var id = $('#id_st').val()
-  window.open(baseurl + url + id, '_blank')
+  window.open(baseurl_export + url + id, '_blank')
 
 }
 
@@ -42,6 +43,57 @@ function Min_dateselesai(){
   document.getElementById("tglst_selesai").setAttribute("min", min_date_mulai);
 
 }
+
+function PilihKode(Id, kdindex){
+  $('#idxskmpnenlabel').val(Id);
+  $('#idxskmpnen').val(kdindex);
+  $('#modalidx').modal('close');
+  
+}
+
+$(document).ready(function() {
+    // $('#KomponenSub').DataTable( {
+    //         //serverSide: true,
+    //         //processing: true,
+    //         searchDelay: 500,
+    //         searching: false,
+    //         ordering: false,
+    //         bDestroy: true,
+
+    //       ajax: {
+    //             url: master_baseurl + 'getKomponenSub',
+    //             type: "post",
+    //             dataType: 'json',
+    //             data : {
+    //             kdsatker: "<?= $this->session->userdata("kdsatker")?>",
+    //             unitid : <?= $this->session->userdata("unit_id")?>},
+    //             dataSrc: "",
+                
+    //         },
+    //         autoWidth: false,
+    //         columns: [
+             
+    //             {
+    //                 data: null, class: "text-center",
+    //                 render: function (data, type, row, meta) {
+    //                     return meta.row + meta.settings._iDisplayStart + 1;
+    //                 }
+    //             },
+
+    //             {data: "kdindex"}
+               
+ 
+    //         ],
+
+    //     lengthMenu: [
+    //         [10, 25, 50, -1],
+    //         [10, 25, 50, "All"],
+    //     ],
+    //     responsive: true,
+    //     scrollX: true,
+    //     info: false
+    //      } );
+      } );
 
 
 function formatRupiah(angka){

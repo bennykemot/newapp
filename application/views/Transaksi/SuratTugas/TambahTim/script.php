@@ -10,6 +10,8 @@ var satker_session = "<?= $this->session->userdata("kdsatker")?>"
 var user_session = "<?= $this->session->userdata("user_id")?>"
 var role_session = "<?= $this->session->userdata("role_id")?>"
 var unit_session = "<?= $this->session->userdata("unit_id")?>"
+var count_tim = "<?= count($ST) ?>"
+
 if(role_session == 1){
   unit_session = 0;
 }
@@ -429,6 +431,10 @@ $('.multi-field-wrapper').each(function() {
         var max      = 20;
         var $wrapper = $('.multi-fields', this);
         var x = 0;
+        if(count_tim > 0){
+          var x = count_tim;
+        }
+        
         var i = 0;
         var head = "";
         var end="";
@@ -480,10 +486,13 @@ $('.multi-field-wrapper').each(function() {
                        
 
                         $('.table-remove').click(function() {
-                            $(this).parents('table').detach();
+                            $(this).parents('tr').detach();
                             x--;
                                 if(x <=0 ){
-                                    x=0;
+                                  x=0;
+                                  if(count_tim > 0){
+                                    x = count_tim;
+                                  }
                                 
                                 }
 
@@ -711,14 +720,15 @@ $("#TambahTim").click(function (e) {
   var form = $(this).closest("form");
   var formData = new FormData($("#FormTim")[0]);
   var IdForm =  "FormTim";
-  // var countingDiv = document.getElementById('counting');
-  // var countTim = countingDiv.getElementsByClassName('namaTim').length;
+  var countingDiv = document.getElementById('counting');
+  var countTim = countingDiv.getElementsByClassName('namaTim').length;
 
   btn
     .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
     .attr("disabled", false);
 
   formData.append('Trigger', 'C')
+  formData.append('countTim', countTim)
 
   $.ajax({
     type: "POST",
@@ -729,7 +739,7 @@ $("#TambahTim").click(function (e) {
     success: function (data, textStatus, jqXHR) {
               show_msg(textStatus);
               Reset(IdForm);
-             //window.history.back();
+            window.history.back();
               
               
           },

@@ -66,10 +66,11 @@
                         </div>
 
                         <div class="input-field col s12">
-                            <div class="input-field col s2"><label>Komponen/Sub Komp</label></div>
+                            <div class="input-field col s2"><label>MAK</label></div>
 
                             <div class="input-field col s8 " >
-                                <input type="text"  id="idxskmpnen" name="idxskmpnen" readonly>
+                                <input type="text"  id="idxskmpnenlabel" name="idxskmpnenlabel" readonly>
+                                <input type="text"  id="idxskmpnen" name="idxskmpnen" readonly hidden>
                                 <!-- <select class="browser-default" id="idxskmpnen" name="idxskmpnen"></select> -->
                             </div>
 
@@ -109,6 +110,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 

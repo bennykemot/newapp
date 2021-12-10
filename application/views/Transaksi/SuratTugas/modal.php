@@ -16,8 +16,20 @@
             </div>
 						
 						<div class="input-field col s12">
+
+            <table id="KomponenSub" class="display">
+              
+              <tbody>
+                <?php $a=1;foreach($subkomp as $sk){?>
+                <tr>
+                  <td width="20%"><a class="btn cyan" href="javascript:;" onclick="PilihKode('<?=$sk->kode?>', '<?=$sk->kdindex?>')" id="Pilih">Pilih</a></td>
+                  <td><?=$sk->kode?></td>
+                </tr></a>
+                <?php $a++;}?>
+              </tbody>
+            </table>
 							
-								<table>
+								<!-- <table>
 									<thead>
 									</thead>
 									<tbody>
@@ -53,7 +65,7 @@
 											</td>
 										</tr>
 									</tbody>
-								</table>
+								</table> -->
 						</div>
 
               <!-- <div class="input-field col s12">
@@ -109,13 +121,13 @@
           </form>
         </div>
     </div>
-    <div class="modal-footer">
+    <!-- <div class="modal-footer">
       <button id="Tambah" class="btn disabled"><i class="material-icons left">done</i> Simpan</button>
       <a class="modal-action modal-close  red btn">Batal</a>
-    </div>
+    </div> -->
 </div>
 
-<div id="modalTim" class="modal" style="max-height: 500px">
+<!-- <div id="modalTim" class="modal" style="max-height: 500px">
     <div class="modal-content">
       <h4>Komponen/Sub Komponen</h4>
       <div style="padding-top: 10px"></div>
@@ -143,4 +155,4 @@
       <button id="Tambah" class="btn disabled"><i class="material-icons left">done</i> Simpan</button>
       <a class="modal-action modal-close  red btn">Batal</a>
     </div>
-</div>
+</div> -->

@@ -10,6 +10,7 @@ class SuratTugas extends CI_Controller {
         $this->load->library('pagination');
         $this->load->library('pdf');
         $this->load->model('Transaksi/M_SuratTugas','SuratTugas');
+        $this->load->model('Master/M_Master','Master');
 	}
 
 	public function index()
@@ -62,15 +63,22 @@ class SuratTugas extends CI_Controller {
 	}
 
 	public function tambah()
-	{
-		$this->load->view('Transaksi/SuratTugas/tambah');
+	{   
+        $kdsatker = $this->uri->segment(4);
+        $unitid =$this->uri->segment(5);
+        $roleid =$this->uri->segment(6);
+        $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unitid, $roleid);
+		$this->load->view('Transaksi/SuratTugas/tambah', $data);
 	}
 
     public function ubah()
 	{
         $id =  $this->uri->segment(4);
         $data['ubah'] = $this->SuratTugas->getDataUbah($id, 'Ubah_ST');
-        //echo json_encode($data);
+        $kdsatker = $this->uri->segment(5);
+        $unitid =$this->uri->segment(6);
+        $roleid =$this->uri->segment(7);
+        $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unitid, $roleid);
 		$this->load->view('Transaksi/SuratTugas/ubah',$data);
 	}
 
@@ -91,6 +99,7 @@ class SuratTugas extends CI_Controller {
             $tglst_mulai = str_replace("/", "-",$this->input->post('tglst_mulai'));
 			$tglst_selesai = str_replace("/", "-",$this->input->post('tglst_selesai'));
 			$idxskmpnen = $this->input->post('idxskmpnen');
+            $idxskmpnenlabel = $this->input->post('idxskmpnenlabel');
 			$beban_anggaran = $this->input->post('select-bebananggaran');
 			$ttd = $this->input->post('ttd');
             //$countTim = $this->input->post('countTim');
@@ -104,6 +113,7 @@ class SuratTugas extends CI_Controller {
                 'tglmulaist' => date("Y-m-d",strtotime($tglst_mulai)),
                 'tglselesaist' => date("Y-m-d",strtotime($tglst_selesai)),
                 'idxskmpnen' => $idxskmpnen,
+                'idx_temp' => $idxskmpnenlabel,
                 'id_unit' => $beban_anggaran,
                 'id_ttd' => $ttd,
                 'is_approved1' => 0,
@@ -215,8 +225,10 @@ class SuratTugas extends CI_Controller {
             $id = $this->input->post('id');
             $where = array('id' => $id);
             $where2 = array('id_st' => $id);
+            $where3 = array('no_st' => $id);
 	        $this->SuratTugas->CRUD($where,'d_surattugas', $Trigger);
-            $this->SuratTugas->CRUD($where2,'d_stdetail', $Trigger);
+            $this->SuratTugas->CRUD($where2,'d_itemcs', $Trigger);
+            $this->SuratTugas->CRUD($where3,'d_costsheet', $Trigger);
 
         }else if($Trigger == "R"){
             $id = $this->input->post('id');
@@ -233,12 +245,12 @@ class SuratTugas extends CI_Controller {
             $tglst_mulai = str_replace("/", "-",$this->input->post('tglst_mulai'));
 			$tglst_selesai = str_replace("/", "-",$this->input->post('tglst_selesai'));
 			$idxskmpnen = $this->input->post('idxskmpnen');
-			$beban_anggaran = $this->input->post('beban_anggaran');
+			$beban_anggaran = $this->input->post('select-bebananggaran');
 			$ttd = $this->input->post('ttd');
             $countTim = $this->input->post('countTim');
             $idst = $this->input->post('idst');
+            $idxskmpnenlabel = $this->input->post('idxskmpnenlabel');
 
-            
 
             $data_st = array(
                 'nost' => $nost,
@@ -248,6 +260,7 @@ class SuratTugas extends CI_Controller {
                 'tglselesaist' => date("Y-m-d",strtotime($tglst_selesai)),
                 'idxskmpnen' => $idxskmpnen,
                 'id_unit' => $beban_anggaran,
+                'idx_temp' => $idxskmpnenlabel,
                 'id_ttd' => $ttd,
                 
                 );
@@ -257,28 +270,111 @@ class SuratTugas extends CI_Controller {
 
             ///DETAIL TIM///
 
-            $where = array('id_st' => $idst);
-            $this->SuratTugas->CRUD($where,'d_stdetail', 'D');
-        
+            if($countTim > 0){
+
                 $data = array();    
-                $j = 0;
+                $j = 1;
                 $ArrX = $this->input->post('ArrX');
                 $urut = explode(",",$ArrX);
                 $Nourut = []; 
+                $total = [];
+                $totaluangharian = 0;
+                $totaluanginap = 0;
+                $sum=0;
 
+                    $this->db->where("id_st", $idst);
+                    $this->db->delete("d_itemcs");
                 
                 for($i = 0 ; $i < $countTim; $i++){
-                    
-                    $data = array(
-                         'nourut' => $this->input->post('urut'.$urut[$i].''),
-                         'nama' => $this->input->post('nama'.$urut[$i].''),
-                         'nip' => $this->input->post('nip'.$urut[$i].''),
-                         'peran'  => $this->input->post('perjab'.$urut[$i].''),
-                         'id_st' => $this->input->post('idst')
-                         
-                    );
-                    $this->db->insert('d_stdetail',$data);
-             }
+
+                       $data_ItemCS = array(
+                        'nourut' => $this->input->post('urut'.$urut[$i].''),
+                        'nama' => $this->input->post('nama'.$urut[$i].''),
+                        'nip' => $this->input->post('nip'.$urut[$i].''),
+                        'jabatan'  => $this->input->post('perjab'.$urut[$i].''),
+                        'golongan'  => $this->input->post('gol'.$urut[$i].''),
+                        'tglberangkat'  => date("Y-m-d",strtotime($this->input->post('tglberangkat'.$urut[$i].''))),
+                        'tglkembali'  => date("Y-m-d",strtotime($this->input->post('tglkembali'.$urut[$i].''))),
+                        'jmlhari'  => $this->input->post('jmlhari'.$urut[$i].''),
+                        'kotaasal'  => $this->input->post('kotaasal'.$urut[$i].''),
+                        'kotatujuan'  => $this->input->post('kotatujuan'.$urut[$i].''),
+
+                        'tarifuangharian'  => $this->pregChar($this->input->post('tarifuangharian'.$urut[$i].'')),
+                        'totaluangharian'  => $this->pregChar($this->input->post('uangharian'.$urut[$i].'')),
+                        'tarifinap'  => $this->pregChar($this->input->post('tarifuangpenginapan'.$urut[$i].'')),
+                        'totalinap'  => $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].'')),
+                        // 'tarifrep'  => $this->pregChar("0"),
+                        // 'totalrep'  => $this->pregChar("0"),
+                        // 'taksiasal'  => $this->pregChar("0"),
+                        // 'taksitujuan'  => $this->pregChar("0"),
+                        // 'lain'  => $this->pregChar($this->input->post('gol'.$urut[$i].'')),
+                        //'transport'  => 0,
+                        // 'totaltravel'  => $this->pregChar($this->input->post('gol'.$urut[$i].'')),
+                        // 'pengeluaranrill'  => $this->pregChar($this->input->post('gol'.$urut[$i].'')),
+
+                        'jnstransportasi'  => $this->input->post('jnstransportasi'.$urut[$i].''),
+
+                        'jumlah'  => $this->pregChar($this->input->post('total'.$urut[$i].'')),
+                        
+                        'id_st'  => $idst,
+                        
+                   );
+
+                   $totaluangharian += $this->pregChar($this->input->post('uangharian'.$urut[$i].''));
+                   $totaluanginap += $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
+                   $sum += $this->pregChar($this->input->post('uangharian'.$urut[$i].'')) + $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
+
+                //    $totaluangharian = $this->pregChar($this->input->post('uangharian'.$urut[$i].''));
+                //    $totaluangpenginapan = $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
+                   //$totaluangpenginapan += $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
+                   
+
+                //    $sumHarian +=$this->pregChar($this->input->post('totaluangharian'.$urut[$i].''));
+                //    $sumInap += $this->pregChar($this->input->post('totalinap'.$urut[$i].''));
+                //    $sumTransport += 0;
+
+                //    $total[$i] += $this->pregChar($this->input->post('totaluangharian'.$urut[$i].'')) + $this->pregChar($this->input->post('totalinap'.$urut[$i].'')) + 0;
+                //    $sum += $total[$i];
+
+                        // $this->db->where("id", $this->input->post('idtim'.$urut[$i].''));
+                        // $this->db->update('d_itemcs',$data_ItemCS);
+
+                        //$this->db->insert('d_stdetail',$data);
+                       $this->db->insert('d_itemcs',$data_ItemCS);
+                }
+
+				
+            	$cekCS = $this->db->query("select nost from d_costsheet where nost = ".$idst."")->result_array();
+
+				if($cekCS > 0){
+
+					$data_cs = array(
+						'tujuanst' =>  $this->input->post('kotatujuan1'),
+						'totaluangharian' =>  $totaluangharian,
+						'totaluanginap ' =>  $totaluanginap,
+						'biaya' =>  $sum
+						);
+						$this->db->where("nost", $idst);
+						$this->db->update("d_costsheet",$data_cs);
+
+				}else{
+
+					$data_cs = array(
+						'nost' => $idst,
+						'uraianst' => $uraianst,
+						'tglst' => date("Y-m-d",strtotime($tglst)),
+						'tujuanst' =>  $this->input->post('kotatujuan1'),
+						'totaluangharian' =>  $totaluangharian,
+						'totaluanginap ' =>  $totaluanginap,
+						'biaya' =>  $sum
+						);
+	
+						
+						$this->db->insert('d_costsheet',$data_cs);
+
+				}
+            }
+
 
         }else if($Trigger == "getRupiahTahapan"){
 
@@ -295,8 +391,8 @@ class SuratTugas extends CI_Controller {
         $mpdf = new \Mpdf\Mpdf([
         'mode' => 'utf-8', 
         'format' => 'A4-P',
-        'default_font_size' => 11,
-        'default_font' => 'Arial Narrow',
+        'default_font_size' => 12,
+        'default_font' => 'Arial',
         'margin_left' => 26,
         'margin_right' => 26,
         'margin_top' => 16,
@@ -305,7 +401,9 @@ class SuratTugas extends CI_Controller {
         $Assets			= $this->config->item('assets_url');
         $path           = '<img src='.$Assets.'app-assets/images/logo/bpkp.jpg>';
         $id             =  $this->uri->segment(4);
-        $data['ubah']   = $this->SuratTugas->getDataUbah($id);
+        $trigger        = "export";
+        $data['ubah']   = $this->SuratTugas->getDataUbah($id,$trigger);
+       
         $html = $this->load->view('Transaksi/SuratTugas/export.php',$data,true);
 
         $mpdf->WriteHTML($html);          

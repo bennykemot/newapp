@@ -9,12 +9,26 @@ var satker_session = "<?= $this->session->userdata("kdsatker")?>"
 var user_session = "<?= $this->session->userdata("user_id")?>"
 var role_session = "<?= $this->session->userdata("role_id")?>"
 var unit_session = "<?= $this->session->userdata("unit_id")?>"
+var id_st_session = "<?=$this->uri->segment('4')?>";
 if(role_session == 1){
   unit_session = 0;
 }
 
-var countingDiv = document.getElementById('counting');
-var countTimTable = countingDiv.getElementsByClassName('namaTim').length;
+if(document.getElementById('counting') != null){
+  var countingDiv = document.getElementById('counting');
+  var countTimTable = countingDiv.getElementsByClassName('namaTimHardcode').length;
+}else{
+  
+  var countTimTable = 0
+}
+
+function PilihKode(Id, kdindex){
+  $('#idxskmpnenlabel').val(Id);
+  $('#idxskmpnen').val(kdindex);
+  $('#modalidx').modal('close');
+  
+}
+
 // var countTimTable = "<?= count($ubah)?>"
 
 //VARIABLE UPDATE//
@@ -666,7 +680,28 @@ $('.multi-field-wrapper').each(function() {
                         
                        
 
-                        $('.table-remove').click(function() {
+                        // $('.table-remove').click(function() {
+                        //     $(this).parents('tr').detach();
+                        //     x--;
+                        //         if(x <=a ){
+                        //             x=countTimTable;
+                                
+                        //         }
+
+                        //         var nm =  $(this).attr("id")
+                        //         var d = removeItemAll(arrX, parseInt(nm))
+                        //         $('#ArrX').val(d)
+                                
+                            
+                        // });
+
+                        // $('#ArrX').val(arrX)
+                        //console.log(arrX)
+            }
+            
+        });
+
+        $('.table-remove').click(function() {
                             $(this).parents('tr').detach();
                             x--;
                                 if(x <=a ){
@@ -682,10 +717,6 @@ $('.multi-field-wrapper').each(function() {
                         });
 
                         $('#ArrX').val(arrX)
-                        //console.log(arrX)
-            }
-            
-        });
         
     });
 
@@ -898,8 +929,14 @@ $("#UbahST").click(function (e) {
   var form = $(this).closest("form");
   var formData = new FormData($("#FormST")[0]);
   var IdForm =  "FormST";
+
+  if(document.getElementById('counting') != null){
   var countingDiv = document.getElementById('counting');
-  var countTim = countingDiv.getElementsByTagName('select').length;
+  var countTim = countingDiv.getElementsByClassName('namaTimHardcode').length;
+}else{
+  
+  var countTim = 0
+}
 
   btn
     .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
@@ -907,6 +944,7 @@ $("#UbahST").click(function (e) {
 
   formData.append('Trigger', 'U')
   formData.append('countTim', countTim)
+  formData.append('idst', id_st_session)
 
   $.ajax({
     type: "POST",
