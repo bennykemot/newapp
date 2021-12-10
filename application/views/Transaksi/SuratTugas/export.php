@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <title>View PDF Surat Tugas - <?= $ubah[0]['nost']?></title>
+    	<title>View PDF Surat Tugas - <?= $ubah[0]['nost']?></title>
     </head>
     <style>
         body{
             font-family: Arial;
         }
 
-    table, td, th {
-        vertical-align: top;
-        }
+		table, td, th {
+			vertical-align: center;
+			
+			}
 
         table {
             vertical-align: top;
         }
+
+		
+
         
     </style>
 
@@ -52,16 +56,19 @@ function cek_tgl($tanggal){
     <div id="container">
         <table width="100%" id="header" >
                 <tr>
-                    <td width="20%" rowspan="2"><img src="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2_jpg.jpg" alt="materialize logo"></td>
-                    <td style="text-align: center;" colspan="4"><b><h4>BADAN PENGAWASAN KEUANGAN DAN PEMBANGUNAN<br>BIRO KEUANGAN</h4></b></td>
+                    <td width="20%" rowspan="2">
+						<img src="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2_jpg.jpg" alt="materialize logo">
+					</td>
+                    <td style="text-align: center;" colspan="4">
+						<h4>BADAN PENGAWASAN KEUANGAN DAN PEMBANGUNAN<br>BIRO KEUANGAN</h4>
+					</td>
                 </tr>
 
                 <tr>
                     <td style="text-align: center;" colspan="4" >
-                    Gedung BPKP Lantai 4 Jalan Pramuka No 33 Jakarta Timur<br>
-                    Telepon: (021) 85910512 , Faximile: (021) 85910512 <br>
-                    Web: http://www.bpkp.go.id , Email: keuangan@bpkp.go.id
-                    
+						<p style="font-size: 11px;"> Gedung BPKP Lantai 4 Jalan Pramuka No 33 Jakarta Timur<br>
+							Telepon: (021) 85910512 , Faximile: (021) 85910512 <br>
+							Web: http://www.bpkp.go.id , Email: keuangan@bpkp.go.id</p>
                     </td>
                 <tr>
 
@@ -81,7 +88,7 @@ function cek_tgl($tanggal){
 
                 <tr>
                     <td style="text-align: justify" colspan="5">
-                        Kepala Biro Keuangan BPKP dengan ini menugasi :
+                        Kepala Biro Keuangan BPKP dengan ini menugasi:
                     </td>
                 </tr>
 
