@@ -1,6 +1,15 @@
 <?php include 'AssetsHeader.php';?>
 <?php include 'Upside.php';?>
 
+<style>
+	.table-nav, td{
+  	margin-top: -10px;
+		padding-left: 8px;
+		height: 40px !important;
+		vertical-align: center !important;
+}
+</style>
+
 <?php 
 $kdsatker = $this->session->userdata("kdsatker");
 $thang = $this->session->userdata("thang");
@@ -10,9 +19,31 @@ $unit_id = $this->session->userdata("unit_id");
 ?>
     <!-- BEGIN: SideNav-->
     <aside class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-dark sidenav-active-rounded">
-      <div class="brand-sidebar" style="background: #fff !important">
-        <h1 class="logo-wrapper"><a class="brand-logo darken-1" href="<?= site_url('Main/Home')?>"><img class="hide-on-med-and-down " src="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2.png" alt="materialize logo"><img class="show-on-medium-and-down hide-on-med-and-up" src="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2.png" alt="materialize logo"><span style="color: #000 !important; font-size: 25px !important; padding-left: 5px" >Materialize</span></a></h1>
+      <div class="brand-sidebar" style="background: #fff !important;">
+				<table class="table-nav">
+					<tr>
+						<td style="width: 20%;">
+								<img class="hide-on-med-and-down" src="<?= base_url().'assets'?>/app-assets/images/logo/logo-bisma_2.png" alt="materialize logo" height="60"></a>
+						</td>
+						<td style="width: 80%;">
+								<span style="color: #000 !important; font-size: 25px !important; margin-left: -5px !important;" >BISMA</span>
+						</td>
+					</tr>
+				</table>
+        <!-- <h1 class="logo-wrapper"><a class="brand-logo darken-1" href="<?= site_url('Main/Home')?>"><img class="hide-on-med-and-down " src="<?= base_url().'assets'?>/app-assets/images/logo/logo-bisma_2.png" alt="materialize logo"><img class="show-on-medium-and-down hide-on-med-and-up" src="<?= base_url().'assets'?>/app-assets/images/logo/logo-bisma_2.png" alt="materialize logo">
+				<span style="color: #000 !important; font-size: 20px !important; padding-left: 10px;" >BISMA</span>
+				</a></h1>
+				<div class="col s12">
+					<div class="col s4">
+							<a class="brand-logo darken-1" href="<?= site_url('Main/Home')?>"><img class="hide-on-med-and-down " src="<?= base_url().'assets'?>/app-assets/images/logo/logo-bisma_2.png" alt="materialize logo"><img class="show-on-medium-and-down hide-on-med-and-up" src="<?= base_url().'assets'?>/app-assets/images/logo/logo-bisma_2.png" alt="materialize logo"></a>
+					</div>
+					<div class="col s8">
+					<span style="color: #000 !important; font-size: 20px !important; padding-left: 10px;" >BISMA</span>
+					</div>
+				</div> -->
+				
       </div>
+
       <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="accordion">
         
       <?php
@@ -97,11 +128,10 @@ $unit_id = $this->session->userdata("unit_id");
           </li>
 
           <!-- DIGRUP ANGGARAN -->
-
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Transfer')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
           <i class="material-icons">
-          get_app
-          </i><span class="menu-title" data-i18n="Mail">Transfer Pagu</span></a>
+          home
+          </i><span class="menu-title" data-i18n="Mail">Mapping Lembur</span></a>
           </li>
 
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Pembagianpagu/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id.'/'.$unit_id)?>">
@@ -116,11 +146,10 @@ $unit_id = $this->session->userdata("unit_id");
           </i><span class="menu-title" data-i18n="Mail">Mapping App</span></a>
           </li>
 
-
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Transfer')?>">
           <i class="material-icons">
-          home
-          </i><span class="menu-title" data-i18n="Mail">Mapping Lembur</span></a>
+          get_app
+          </i><span class="menu-title" data-i18n="Mail">Transfer Pagu</span></a>
           </li>
 
 
