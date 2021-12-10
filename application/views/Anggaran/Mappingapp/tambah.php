@@ -149,31 +149,38 @@
 							<td><a href="<?=site_url('Anggaran/Mappingapp/Ubah/'.$read->id.'/'.$this->uri->segment('7').'/'.$read->kdindex)?>"><i class="material-icons green-text">edit</i></a>
 							<a href="javascript:;" onclick="Delete('<?=$read->id?>')"><i class="material-icons red-text">delete</i></a></td>
 						</tr>
-						<?php 	$hide=""; if(count($readmapp) == 1){
-									$hide="hidden";};
+						<?php 	$hide=""; 
+								if(count($readmapp) == 1){
+									$hide="hidden";
+								}
+
 								if($beforeSum== ""){
 									$sumApp += $read->rupiah_tahapan;
-									echo'<tr style="color: #000">
+									echo'<tr style="color: #000" hidden>
 									<td colspan="2">Sub Total</td>
 									<td class="text-right">'.rupiah($sumApp).'</td>
 									<td></td>
 									</tr>';
-									$sumApp=0;
+									$sumApp=$read->rupiah_tahapan;
 									$beforeSum = $read->nama_app;
-								}else if($beforeSum != $read->nama_app){
-									$sumApp += $read->rupiah_tahapan;
+								}
+								else if($beforeSum != $read->nama_app){
+									$sumApp = $read->rupiah_tahapan;
 									echo'<tr style="color: #000" '.$hide.'>
 									<td colspan="2">Sub Total</td>
 									<td class="text-right">'.rupiah($sumApp).'</td>
 									<td></td>
 									</tr>';$beforeSum = $read->nama_app;$sumApp=$read->rupiah_tahapan;
-								}else{
+								}
+								else{
+									
 									$sumApp += $read->rupiah_tahapan;
 									echo'<tr style="color: #000" >
 									<td colspan="2">Sub Total</td>
 									<td class="text-right">'.rupiah($sumApp).'</td>
 									<td></td>
-									</tr>';$beforeSum = $read->nama_app;$sumApp=$read->rupiah_tahapan;
+									</tr>';
+									$beforeSum = "";$sumApp=0;
 									
 								}?>
 										

@@ -127,7 +127,7 @@ class M_Mappingapp extends CI_Model{
             FROM d_detailapp JOIN t_app ON d_detailapp.id_app = t_app.id
             JOIN r_tahapan ON d_detailapp.tahapan = r_tahapan.id 
             
-            where d_detailapp.kdindex = '".$data."' ORDER BY d_detailapp.id_app");
+            where d_detailapp.kdindex = '".$data."' ORDER BY d_detailapp.id_app, d_detailapp.tahapan ASC");
     
             return $query->result();
 
