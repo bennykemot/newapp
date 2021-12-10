@@ -3,7 +3,7 @@
 
 <style>
 	.table-nav, td{
-  	margin-top: -10px;
+  	margin-top: -15px;
 		padding-left: 8px;
 		height: 40px !important;
 		vertical-align: center !important;
