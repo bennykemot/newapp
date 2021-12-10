@@ -228,7 +228,9 @@ function getData_satker($searchTerm="", $kdsatker, $Trigger){
    // Fetch users
    $this->db->select('kdsatker');
    $this->db->select('nmsatker');
-   $this->db->where("kdsatker",$kdsatker);
+	if($Trigger != "satker_forPPK"){
+		$this->db->where("kdsatker",$kdsatker);
+	}
    $this->db->where("nmsatker like '%".$searchTerm."%' ");
    $this->db->where("kdsatker like '%".$searchTerm."%' ");
    $fetched_records = $this->db->get('t_satker');
@@ -399,6 +401,24 @@ function getData_Pegawai($searchTerm="", $Trigger){
    return $data;
 }
 
+function getData_Pejabat($searchTerm="", $Trigger){
+
+   // Fetch users
+   $this->db->select('nip');
+   $this->db->select('nama');
+   $this->db->where("nama like '%".$searchTerm."%' ");
+   $fetched_records = $this->db->get('t_pegawai');
+   $users = $fetched_records->result_array();
+
+   // Initialize Array with fetched data
+   $data = array();
+   foreach($users as $user){
+       $data[] = array("id"=>$user['nip'], "text"=>$user['nama']);
+   }
+   
+   return $data;
+}
+
 function getData_skomponen($searchTerm="", $Trigger){
 
    $fetched_records = $this->db->query("
@@ -427,6 +447,22 @@ function getData_unitkerja($searchTerm="", $Trigger){
    $data = array();
    foreach($users as $user){
       $data[] = array("id"=>$user['id'], "text"=>$user['nama_unit']);
+   }
+   return $data;
+}
+
+function getData_jabatan($searchTerm="", $Trigger){
+
+   $this->db->select('id');
+   $this->db->select('jabatan');
+   $this->db->where("jabatan like '%".$searchTerm."%' ");
+   $fetched_records = $this->db->get('r_jabatan');
+   $jabatans = $fetched_records->result_array();
+
+   // Initialize Array with fetched data
+   $data = array();
+   foreach($jabatans as $jabatan){
+      $data[] = array("id"=>$jabatan['id'], "text"=>$jabatan['jabatan']);
    }
    return $data;
 }

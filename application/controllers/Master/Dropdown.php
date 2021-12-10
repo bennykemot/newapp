@@ -119,7 +119,12 @@ class Dropdown extends CI_Controller {
       $Trigger = $this->input->post('Trigger');
       if($Trigger == "user_profile"){
          $kdsatker = $this->input->post('session_satker');
-      }else{
+			//$userId = "";
+      }if($Trigger == "satker_forPPK"){
+			$kdsatker = "";
+			//$userId = $this->input->post('userId');
+		}else{
+			//$userId = "";
          $kdsatker = "";
       }
 
@@ -187,6 +192,18 @@ class Dropdown extends CI_Controller {
       echo json_encode($response);
    }
 
+	public function pejabat(){
+
+      // Search term
+      $searchTerm = $this->input->post('searchTerm');
+      $Trigger = $this->input->post('Trigger');
+
+      // Get users
+      $response = $this->Dropdown->getData_Pejabat($searchTerm, $Trigger);
+
+      echo json_encode($response);
+   }
+
    public function sub_komponen(){
 
       // Search term
@@ -207,6 +224,18 @@ class Dropdown extends CI_Controller {
 
       // Get users
       $response = $this->Dropdown->getData_unitkerja($searchTerm, $Trigger);
+
+      echo json_encode($response);
+   }
+
+	public function jabatan(){
+
+      // Search term
+      $searchTerm = $this->input->post('searchTerm');
+      $Trigger = $this->input->post('Trigger');
+
+      // Get users
+      $response = $this->Dropdown->getData_jabatan($searchTerm, $Trigger);
 
       echo json_encode($response);
    }

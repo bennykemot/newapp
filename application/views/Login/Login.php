@@ -25,15 +25,17 @@
       <div class="row margin">
         <div class="input-field col s12">
             <i class="material-icons prefix">date_range</i>
+						<input id="thang" name ="thang" type="number" value="2022" readonly>
             <div class="input-field col s12">
-              <select id="thang" name="thang" class="browser-default" placeholder="Tahun Anggaran" required>
+						
+              <!-- <select id="thang" name="thang" class="browser-default" placeholder="Tahun Anggaran" required>
                 <?php $selectted=""; foreach($thang as $u){ 
                   if(date("Y") == $u->tahun)
                         {$selectted="selected";}
                     else{$selectted="";}?>
                   <option <?=$selectted?> ><?= $u->tahun?></option>
                   <?php }?>
-              </select>
+              </select> -->
             </div>
         </div>
       </div>
