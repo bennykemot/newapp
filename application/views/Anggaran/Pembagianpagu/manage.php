@@ -61,6 +61,7 @@
                     <table id="tb-pembagianpagu" class="display" style="width:100%;white-space: nowrap !important;overflow: hidden;">
                         <thead>
                             <tr>
+                              <th></th>
                               <th>Program</th>
                               <th>Kegiatan</th>
                               <th>KRO</th>
@@ -78,6 +79,7 @@
                         <?php foreach($pp as $p){?>
 												
 														<tr>
+                              <td><?=getBagipagu($p->unit_id)?></td>
                               <td><?=$p->kdprogram?></td>
                               <td><?=$p->kdgiat?></td>
                               <td><?=$p->kdoutput?></td>

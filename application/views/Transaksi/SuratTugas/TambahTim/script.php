@@ -431,7 +431,7 @@ $('.multi-field-wrapper').each(function() {
         var max      = 20;
         var $wrapper = $('.multi-fields', this);
         var x = 0;
-        if(count_tim > 0){
+        if(count_tim > 1){
           var x = count_tim;
         }
         

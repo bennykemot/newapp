@@ -348,6 +348,19 @@ class Dropdown extends CI_Controller {
       echo json_encode($response);
    }
 
+   public function ttd(){
+		
+
+      // Search term
+      $searchTerm = $this->input->post('searchTerm');
+      //$kdsatker = $this->input->post('kdsatker');
+
+      // Get users
+      $response = $this->Dropdown->getData_ttd($searchTerm);
+
+      echo json_encode($response);
+   }
+
 
 
 

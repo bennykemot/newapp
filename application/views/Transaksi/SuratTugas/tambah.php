@@ -70,7 +70,20 @@
 
                             <div class="input-field col s8 " >
                                 <input type="text"  id="idxskmpnenlabel" name="idxskmpnenlabel" readonly>
-                                <input type="text"  id="idxskmpnen" name="idxskmpnen" readonly hidden>
+                                <div hidden>
+                                    <input type="text"  id="idxskmpnen" name="idxskmpnen" readonly>
+                                    <input type="text"  id="kdindex" name="kdindex" readonly>
+                                    <input type="text"  id="thang" name="thang" readonly>
+                                    <input type="text"  id="kdgiat" name="kdgiat" readonly>
+                                    <input type="text"  id="kdoutput" name="kdoutput" readonly>
+                                    <input type="text"  id="kdsoutput" name="kdsoutput" readonly>
+                                    <input type="text"  id="kdkmpnen" name="kdkmpnen" readonly>
+                                    <input type="text"  id="kdskmpnen" name="kdskmpnen" readonly>
+                                    <input type="text"  id="kdakun" name="kdakun" readonly>
+                                    <input type="text"  id="kdbeban" name="kdbeban" readonly>
+
+                                    <input type="text"  id="kdsatker" name="kdsatker" value="<?=$kdsatker?>">
+                                </div>
                                 <!-- <select class="browser-default" id="idxskmpnen" name="idxskmpnen"></select> -->
                             </div>
 

@@ -65,17 +65,31 @@ class Detail_Mappingapp extends CI_Controller {
             $where = array('id_app' => $app, 'kdindex' => $kodeindex);
 
             $cek = $this->detail_Mappingapp->cek($where,'d_detailapp')->result_array();
+
+            
             
 
-            if(count($cek) == 0){
+            //if(count($cek) == 0){
 
                 if( $kdkmpnen == "051" && $kdskmpnen ==" A" || $kdkmpnen == "052" && $kdskmpnen ==" A" || $kdkmpnen == "052" && $kdskmpnen ==" C"){
 
-                    $data = array();    
+                    $data = array();
+                    $dataU = array();    
                     $j = 1;
                     for($i = 0 ; $i < $countRupiah; $i++){
-                        
-                            //$rupiah_tahapan[$i] = $this->input->post('rupiah'.$j.'');
+                        $wheretahapan = array(  'kdindex'=>$kodeindex,
+                                                'id_app'=>$app,
+                                                'tahapan' => $this->input->post('tahapan'.$j.''));
+                        $cektahapan = $this->db->get_where('d_detailapp',$wheretahapan)->result_array();
+
+
+                        if($this->input->post('rupiah'.$j.'') != ""){
+
+                            if(count($cektahapan)>0){
+                                $whereU = array('id_app' => $app, 'kdindex' => $kodeindex, 'tahapan' => $this->input->post('tahapan'.$j.''),);
+                                $dataU = array('rupiah_tahapan' => $this->input->post('rupiah'.$j.''));
+                                $this->db->update('d_detailapp', $dataU, $whereU); 
+                            }else{
                             array_push($data , array(
                                 'id_app' => $app,
                                 'rupiah' => $nilai_app,
@@ -85,10 +99,21 @@ class Detail_Mappingapp extends CI_Controller {
                                 'rupiah_tahapan'  => $this->input->post('rupiah'.$j.'')
                                 
                                 ));
+                                $this->db->insert_batch('d_detailapp', $data);
+                            }
+                        }
+                        //     $where = array('id_app' => $app, 'kdindex' => $kodeindex, 'tahapan' => $this->input->post('tahapan'.$j.''),);
+                        //     $dataU = array('rupiah_tahapan' => $this->input->post('rupiah'.$j.''));
+                        //     $this->db->update('d_detailapp', $dataU, $where); 
+                        // }
+                        
+
+                            //$rupiah_tahapan[$i] = $this->input->post('rupiah'.$j.'');
+                            
                         $j++;
                     }
                     //$this->detail_Mappingapp->CRUD($data,'d_detailapp', $Trigger);
-                    $this->db->insert_batch('d_detailapp', $data);
+                    
                 }else{
                     
                     $data = array(
@@ -105,18 +130,15 @@ class Detail_Mappingapp extends CI_Controller {
                 }
                
 
-            }else{
-                $data = array(
-                    'rupiah' => $nilai_app,
-                    'th_pkpt' => $th_pkpt
+            // }else{
+            //     $data = array(
+            //         'rupiah' => $nilai_app,
+            //         'th_pkpt' => $th_pkpt
                     
-                    );
-                $cekwhere = array('id'  => $cek[0]['id'] );
-                $this->detail_Mappingapp->update($data,'d_detailapp', $cekwhere);
-
-                
-
-            }
+            //         );
+            //     $cekwhere = array('id'  => $cek[0]['id'] );
+            //     $this->detail_Mappingapp->update($data,'d_detailapp', $cekwhere);
+            // }
             
         }else if($Trigger == "D"){
 

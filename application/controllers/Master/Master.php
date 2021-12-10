@@ -47,9 +47,10 @@ class Master extends CI_Controller {
 
      public function getKomponenSub(){
 
-        $kdsatker = $this->input->post('kdsatker');
-        $unitid = $this->input->post('unitid');
+        $kdindex = $this->input->post('kdindex');
         
-        $list = $this->Master->getKomponenSub($kdsatker, $unitid);
+        $response = $this->Master->getKomponenSub_forJson($kdindex);
+
+        echo json_encode($response);
      }
 }

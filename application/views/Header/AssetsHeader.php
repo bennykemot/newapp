@@ -244,6 +244,14 @@ function cek_tgl_st($tanggal){
   
 }
 
+function getBagipagu($data){
+	$icon = '<i class="material-icons cyan-text">check_box</i>';
+	if($data == NULL){
+		$icon = '';
+	}
+	return $icon;
+}
+
   
   
   ?>

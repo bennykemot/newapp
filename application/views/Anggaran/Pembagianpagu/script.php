@@ -89,16 +89,16 @@
           width: '100%',
           placeholder: "Pilih Kewenangan",
         data: [{
-            id: 3,
+            id: 4,
             text: "Subag Keuangan"
         }, {
-            id: 5,
-            text: "PPK"
+            id: 2,
+            text: "Pegawai"
         }, {
-            id: 9,
+            id: 8,
             text: "Subag Umum"
         }, {
-            id: 10,
+            id: 9,
             text: "Subag Kepegawaian"
         }]
     })
@@ -157,17 +157,17 @@
         dropdownAutoWidth: true,
           width: '100%',
           placeholder: "Pilih Kewenangan",
-        data: [{
-            id: 3,
+          data: [{
+            id: 4,
             text: "Subag Keuangan"
         }, {
-            id: 5,
-            text: "PPK"
+            id: 2,
+            text: "Pegawai"
         }, {
-            id: 9,
+            id: 8,
             text: "Subag Umum"
         }, {
-            id: 10,
+            id: 9,
             text: "Subag Kepegawaian"
         }]
     })

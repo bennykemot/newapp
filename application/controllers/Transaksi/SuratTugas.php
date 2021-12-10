@@ -102,12 +102,35 @@ class SuratTugas extends CI_Controller {
             $idxskmpnenlabel = $this->input->post('idxskmpnenlabel');
 			$beban_anggaran = $this->input->post('select-bebananggaran');
 			$ttd = $this->input->post('ttd');
+
+            $kdsatker = $this->input->post('kdsatker');
+            
+            $kdindex = $this->input->post('kdindex');
+            $thang = $this->input->post('thang');
+            $kdgiat = $this->input->post('kdgiat');
+            $kdoutput = $this->input->post('kdoutput');
+            $kdsoutput = $this->input->post('kdsoutput');
+            $kdkmpnen = $this->input->post('kdkmpnen');
+            $kdskmpnen = $this->input->post('kdskmpnen');
+            $kdakun = $this->input->post('kdakun');
+            $kdbeban = $this->input->post('kdbeban');
             //$countTim = $this->input->post('countTim');
 
             
 
             $data_st = array(
+                'kdindex' => $kdindex,
+                'thang' => $thang,
+                'kdgiat' => $kdgiat,
+                'kdoutput' => $kdoutput,
+                'kdsoutput' => $kdsoutput,
+                'kdkmpnen' => $kdkmpnen,
+                'kdskmpnen' => $kdskmpnen,
+                'kdakun' => $kdakun,
+                'kdbeban' => $kdbeban,
+
                 'nost' => $nost,
+                'kdsatker' => $kdsatker,
                 'tglst' => date("Y-m-d",strtotime($tglst)),
                 'uraianst' => $uraianst,
                 'tglmulaist' => date("Y-m-d",strtotime($tglst_mulai)),
@@ -115,11 +138,7 @@ class SuratTugas extends CI_Controller {
                 'idxskmpnen' => $idxskmpnen,
                 'idx_temp' => $idxskmpnenlabel,
                 'id_unit' => $beban_anggaran,
-                'id_ttd' => $ttd,
-                'is_approved1' => 0,
-                'is_approved2' => 0,
-                'is_approved3' => 0,
-                'is_approved4' => 0
+                'id_ttd' => $ttd
                 
                 );
 
@@ -224,11 +243,14 @@ class SuratTugas extends CI_Controller {
 
             $id = $this->input->post('id');
             $where = array('id' => $id);
-            $where2 = array('id_st' => $id);
-            $where3 = array('no_st' => $id);
-	        $this->SuratTugas->CRUD($where,'d_surattugas', $Trigger);
-            $this->SuratTugas->CRUD($where2,'d_itemcs', $Trigger);
-            $this->SuratTugas->CRUD($where3,'d_costsheet', $Trigger);
+            $data = array('is_aktif' => 0);
+            $this->db->where($where);
+            $this->db->update('d_surattugas',$data);
+            // $where2 = array('id_st' => $id);
+            // $where3 = array('no_st' => $id);
+	        //$this->SuratTugas->CRUD($where,'d_surattugas', $Trigger);
+            // $this->SuratTugas->CRUD($where2,'d_itemcs', $Trigger);
+            // $this->SuratTugas->CRUD($where3,'d_costsheet', $Trigger);
 
         }else if($Trigger == "R"){
             $id = $this->input->post('id');
@@ -251,8 +273,31 @@ class SuratTugas extends CI_Controller {
             $idst = $this->input->post('idst');
             $idxskmpnenlabel = $this->input->post('idxskmpnenlabel');
 
+            $kdsatker = $this->input->post('kdsatker');
+            
+            $kdindex = $this->input->post('kdindex');
+            $thang = $this->input->post('thang');
+            $kdgiat = $this->input->post('kdgiat');
+            $kdoutput = $this->input->post('kdoutput');
+            $kdsoutput = $this->input->post('kdsoutput');
+            $kdkmpnen = $this->input->post('kdkmpnen');
+            $kdskmpnen = $this->input->post('kdskmpnen');
+            $kdakun = $this->input->post('kdakun');
+            $kdbeban = $this->input->post('kdbeban');
+            //$countTim = $this->input->post('countTim');
+
+            
 
             $data_st = array(
+                'kdindex' => $kdindex,
+                'thang' => $thang,
+                'kdgiat' => $kdgiat,
+                'kdoutput' => $kdoutput,
+                'kdsoutput' => $kdsoutput,
+                'kdkmpnen' => $kdkmpnen,
+                'kdskmpnen' => $kdskmpnen,
+                'kdakun' => $kdakun,
+                'kdbeban' => $kdbeban,
                 'nost' => $nost,
                 'tglst' => date("Y-m-d",strtotime($tglst)),
                 'uraianst' => $uraianst,
@@ -403,12 +448,24 @@ class SuratTugas extends CI_Controller {
         $id             =  $this->uri->segment(4);
         $trigger        = "export";
         $data['ubah']   = $this->SuratTugas->getDataUbah($id,$trigger);
-       
-        $html = $this->load->view('Transaksi/SuratTugas/export.php',$data,true);
 
-        $mpdf->WriteHTML($html);          
-        $mpdf->Output('SuratTugas.pdf', 'I');
-     
+
+        if($data['ubah'][0]['nip'] > 0){
+            $html = $this->load->view('Transaksi/SuratTugas/export.php',$data,true);
+            $mpdf->WriteHTML($html);          
+            $mpdf->Output('SuratTugas.pdf', 'I');
+        }else{
+           ?> <script type="text/javascript">
+                    setTimeout(function() {
+                        window.close();
+                        window.history.back();
+                    }, 100);
+                    
+                    
+                </script>
+                <?php 
+            
+        }
 	
     }
 
