@@ -8,6 +8,7 @@
     var user_session = "<?= $this->session->userdata("user_id")?>"
     var rupiah_session = "<?= $this->uri->segment('7')?>"
     var kdsoutput_session = "<?= $this->uri->segment('8')?>"
+    var alokasi_session = "<?= $this->uri->segment('9')?>"
 
     function Reset(idForm) {
       document.getElementById(idForm).reset();
@@ -45,7 +46,15 @@
       var Kdkmpnen = $('#kdkmpnen').val()
       var kodesbkmpnen =$('#kdskmpnen').val().replace('%20', '')
       var Id = $('#kdindex').val().replace('%20', ' ');
-      var Jumlah =$('#jumlah').val()
+      if(alokasi_session == "1" || alokasi_session == 1){
+        var a = $('#jumlah').val(Number(rupiah_session))
+        var Jumlah =  $('#jumlah').val();
+        var Alokasi =$('#alokasi').val(0)
+      }else{
+        var Alokasi =$('#alokasi').val(alokasi_session)
+        var Jumlah = $('#jumlah').val(Number(rupiah_session - alokasi_session))
+      }
+      
 
       $.ajax({
       url : baseurl_detail + "Action",
@@ -564,7 +573,7 @@
             
       }
 
-      var nilai_app = Number($('#nilai_app').val())
+      var nilai_app = Number(rupiah_session - alokasi_session)
       var total  = Number($('#jumlah').val());
       var dummy  = Number($('#dummy').val());
 
@@ -633,6 +642,16 @@ $("#TambahApp").click(function (e) {
     
     return false;
   }
+
+  if($('#jumlah').val() < 0){
+          swal({
+            title: "JUMLAH AKUN MINUS ! ", 
+            icon: "warning",
+            timer: 2000
+            })
+            return false;
+
+          }
   e.preventDefault();
 
 

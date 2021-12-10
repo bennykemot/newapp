@@ -179,6 +179,16 @@ var form = $(this).closest("form");
 var formData = new FormData($("#FormMapping_Edit")[0]);
 var IdForm =  "FormMapping_Edit";
 
+if($('#jumlah').val() < 0){
+          swal({
+            title: "JUMLAH AKUN MINUS ! ", 
+            icon: "warning",
+            timer: 2000
+            })
+            return false;
+
+          }
+
 btn
   .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
   .attr("disabled", true);

@@ -78,10 +78,10 @@
 									<tr>
 										<td width="30%">Jumlah Saldo App</td>
 										<td>
-											<input readonly class="btn cyan col s12" style="border-radius: 6px;text-align: left;font-weight: bold;cursor: default;" id ="jumlah" name="jumlah" value="<?=$this->uri->segment('7')?>">
-											<input hidden placeholder="00.000.000" id="nilai_app" name="nilai_app" type="number" readonly>
-            								<input hidden placeholder="00.000.000" id="dummy" name="dummy" type="number" readonly >
-											<!-- <input style="border-radius: 6px" placeholder="000.000.00" id="jumlah" name="jumlah" value="<?=$this->uri->segment('7')?>" > -->
+											<input readonly class="btn cyan col s12" style="border-radius: 6px;text-align: left;font-weight: bold;cursor: default;" id ="jumlah" name="jumlah">
+											<input placeholder="00.000.000" id="nilai_app" name="nilai_app" type="number" readonly hidden>
+            								<input placeholder="00.000.000" id="dummy" name="dummy" type="number" readonly  hidden>
+											<input placeholder="00.000.000" id="alokasi" name="alokasi" type="number" readonly  hidden>
 										</td>
 										<td></td>
 									</tr>
@@ -146,7 +146,7 @@
 							<td><?=$read->nama_app?></td>
 							<td><?=$read->nama_tahapan?></td>
 							<td class="text-right"><?=rupiah($read->rupiah_tahapan)?></td>
-							<td><a href="<?=site_url('Anggaran/Mappingapp/Ubah/'.$read->id.'/'.$this->uri->segment('7').'/'.$read->kdindex)?>"><i class="material-icons green-text">edit</i></a>
+							<td><a href="<?=site_url('Anggaran/Mappingapp/Ubah/'.$read->id.'/'.$this->uri->segment('7').'/'.$read->kdindex.'/'.$this->uri->segment('9'))?>"><i class="material-icons green-text">edit</i></a>
 							<a href="javascript:;" onclick="Delete('<?=$read->id?>')"><i class="material-icons red-text">delete</i></a></td>
 						</tr>
 						<?php 	$hide=""; 
