@@ -45,9 +45,33 @@ function Min_dateselesai(){
 }
 
 function PilihKode(Id, kdindex){
-  $('#idxskmpnenlabel').val(Id);
-  $('#idxskmpnen').val(kdindex);
-  $('#modalidx').modal('close');
+
+  $.ajax({
+        url : master_baseurl + "getKomponenSub",
+        data: {kdindex: kdindex},
+        type: "post",
+        dataType: "JSON",
+        success: function(data)
+            {    
+
+              $('#idxskmpnenlabel').val(Id);
+              $('#kdindex').val(data[0]['kdindex']);
+              $('#thang').val(data[0]['thang']);
+              $('#kdgiat').val(data[0]['kdgiat']);
+              $('#kdoutput').val(data[0]['kdoutput']);
+              $('#kdsoutput').val(data[0]['kdsoutput']);
+              $('#kdkmpnen').val(data[0]['kdkmpnen']);
+              $('#kdskmpnen').val(data[0]['kdskmpnen']);
+              $('#kdakun').val(data[0]['kdakun']);
+              $('#kdbeban').val(data[0]['kdbeban']);
+
+              $('#modalidx').modal('close');
+              
+
+            }
+    });
+
+  
   
 }
 
@@ -377,20 +401,17 @@ $("#user-select2").select2({
 
     })
 
-
-
-$("#ttd").select2({
+    $("#ttd").select2({
           dropdownAutoWidth: true,
           width: '100%',
-          placeholder: "Pilih Nama",
+          placeholder: "Pilih Penandatangan",
          ajax: { 
-           url: dropdown_baseurl + 'pegawai',
+           url: dropdown_baseurl + 'ttd',
            type: "post",
            dataType: 'json',
            delay: 250,
            data: function (params) {
               return {
-                Trigger : "pegawai_forST",
                 searchTerm: params.term // search term
               };
            },
@@ -402,6 +423,30 @@ $("#ttd").select2({
            cache: true
          }
      });
+
+// $("#ttd").select2({
+//           dropdownAutoWidth: true,
+//           width: '100%',
+//           placeholder: "Pilih Nama",
+//          ajax: { 
+//            url: dropdown_baseurl + 'pegawai',
+//            type: "post",
+//            dataType: 'json',
+//            delay: 250,
+//            data: function (params) {
+//               return {
+//                 Trigger : "pegawai_forST",
+//                 searchTerm: params.term // search term
+//               };
+//            },
+//            processResults: function (response) {
+//               return {
+//                  results: response
+//               };
+//            },
+//            cache: true
+//          }
+//      });
 
      $("#select-bebananggaran").select2({
           dropdownAutoWidth: true,

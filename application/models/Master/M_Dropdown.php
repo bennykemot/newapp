@@ -570,15 +570,16 @@ function getData_thang_nonAjax(){
 function getData_ppk($searchTerm="",$kdsatker){
 
    $this->db->select('id');
-   $this->db->select('uraian_ppk');
-   $this->db->where("uraian_ppk like '%".$searchTerm."%' ");
-   $fetched_records = $this->db->get('d_ppk');
+   $this->db->select('nama');
+   $this->db->where("nama like '%".$searchTerm."%' ");
+   $this->db->where("jabatan_id", 4);
+   $fetched_records = $this->db->get('t_pejabat');
    $users = $fetched_records->result_array();
 
    // Initialize Array with fetched data
    $data = array();
    foreach($users as $user){
-      $data[] = array("id"=>$user['id'], "text"=>$user['uraian_ppk']);
+      $data[] = array("id"=>$user['id'], "text"=>$user['nama']);
    }
    return $data;
 }
@@ -616,6 +617,25 @@ function getData_tahapan($searchTerm="",$kdkmpnen, $kdskmpnen, $kdindex){
    $data = array();
    foreach($users as $user){
       $data[] = array("id"=>$user['id'], "text"=>$user['nama_tahapan']);
+   }
+   return $data;
+}
+
+function getData_ttd($searchTerm="",$kdsatker){
+
+   $this->db->select('id');
+   $this->db->select('nama');
+   $this->db->select('nip');
+   $this->db->where("nama like '%".$searchTerm."%' ");
+   //$this->db->where("kdsatker", $kdsatker);
+   $this->db->where("jabatan_id", 6);
+   $fetched_records = $this->db->get('t_pejabat');
+   $users = $fetched_records->result_array();
+
+   // Initialize Array with fetched data
+   $data = array();
+   foreach($users as $user){
+      $data[] = array("id"=>$user['id'], "text"=>$user['nama']);
    }
    return $data;
 }

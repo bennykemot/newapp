@@ -32,7 +32,7 @@
 									<tr class="d-none" id="divRupiah">
 										<td width="30%">Rupiah</td>
 											<td>
-												<input placeholder="00.000.000" class="rupiah" id="rupiahAll" name="rupiahAll"  onkeyup="AllCount()" onkeypress="return validateNumber(event)">
+												<input placeholder="00.000.000"  autocomplete="off" class="rupiah" id="rupiahAll" name="rupiahAll"  onkeyup="AllCount()" onkeypress="return validateNumber(event)">
 											</td>
 										<td></td>
 									</tr>
@@ -50,7 +50,7 @@
 															<input id="tahapan1" name="tahapan1" value="1" hidden>
 
 															<div class="input-field" >
-																<input placeholder="00.000.000" class="rupiah" id="rupiah1" name="rupiah1"  onkeyup="AllCount()" onkeypress="return validateNumber(event)">
+																<input placeholder="00.000.000"  autocomplete="off" class="rupiah" id="rupiah1" name="rupiah1"  onkeyup="AllCount()" onkeypress="return validateNumber(event)">
 																<label style="font-size: 13px !Important" class="active tahapan_id_label" for="rupiah1" >Pengumpulan Data</label></div>
 															</div>
 														</div>
@@ -147,14 +147,14 @@
 							<td><?=$read->nama_tahapan?></td>
 							<td class="text-right"><?=rupiah($read->rupiah_tahapan)?></td>
 							<td><a href="<?=site_url('Anggaran/Mappingapp/Ubah/'.$read->id.'/'.$this->uri->segment('7').'/'.$read->kdindex)?>"><i class="material-icons green-text">edit</i></a>
-							<a href="javascript:;" onclick="Delete('<?=$read->id?>', '<?=$read->kdindex?>')"><i class="material-icons red-text">delete</i></a></td>
+							<a href="javascript:;" onclick="Delete('<?=$read->id?>')"><i class="material-icons red-text">delete</i></a></td>
 						</tr>
 						<?php 	$hide=""; if(count($readmapp) == 1){
 									$hide="hidden";};
 								if($beforeSum== ""){
 									$sumApp += $read->rupiah_tahapan;
 									echo'<tr style="color: #000">
-									<td colspan="2">TOTAL</td>
+									<td colspan="2">Sub Total</td>
 									<td class="text-right">'.rupiah($sumApp).'</td>
 									<td></td>
 									</tr>';
@@ -163,14 +163,14 @@
 								}else if($beforeSum != $read->nama_app){
 									$sumApp += $read->rupiah_tahapan;
 									echo'<tr style="color: #000" '.$hide.'>
-									<td colspan="2">TOTAL</td>
+									<td colspan="2">Sub Total</td>
 									<td class="text-right">'.rupiah($sumApp).'</td>
 									<td></td>
 									</tr>';$beforeSum = $read->nama_app;$sumApp=$read->rupiah_tahapan;
 								}else{
 									$sumApp += $read->rupiah_tahapan;
-									echo'<tr style="color: #000">
-									<td colspan="2">TOTAL</td>
+									echo'<tr style="color: #000" >
+									<td colspan="2">Sub Total</td>
 									<td class="text-right">'.rupiah($sumApp).'</td>
 									<td></td>
 									</tr>';$beforeSum = $read->nama_app;$sumApp=$read->rupiah_tahapan;

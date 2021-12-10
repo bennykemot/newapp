@@ -129,7 +129,7 @@
                             </div>
                         </div>
 
-                        <input id="ArrX" name="ArrX" >
+                        <input id="ArrX" name="ArrX" hidden>
                         <input id="id_st" name="id_st" value="<?= $ST[0]['idst'] ?>" hidden>
 
                         <div class="col s12" style="padding-top: 10px">

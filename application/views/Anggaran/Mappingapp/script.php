@@ -318,8 +318,6 @@
             var index = 0;
             
             api.column(1, {page:'current'} ).data().each( function ( group, i ) {
-            	
-              // console.log(group+">>>"+i);
             
               var vals = api.row(api.row($(rows).eq(i)).index()).data();
               var salary = vals['rupiah_tahapan'] ? parseFloat(vals['rupiah_tahapan']) : 0;
@@ -511,7 +509,7 @@
                           <div class="input-field"></div>\
                               <input id="tahapan'+x+'" name="tahapan'+x+'" value="'+data[j]['id']+'" hidden>\
                               <div class="input-field" >\
-                                <input placeholder="00.000.000" class="rupiah validate" id="rupiah'+x+'" name="rupiah'+x+'" type="text" min="1000" onkeyup=AllCount() onkeypress="return validateNumber(event)">\
+                                <input placeholder="00.000.000"  autocomplete="off" class="rupiah validate" id="rupiah'+x+'" name="rupiah'+x+'" type="text" min="1000" onkeyup=AllCount() onkeypress="return validateNumber(event)">\
                                 <label style="font-size: 13px !Important" class="active" for="rupiah'+x+'">Tahapan '+data[j]['nama_tahapan']+'</label></div>\
                           </div>\
                         </div>');
