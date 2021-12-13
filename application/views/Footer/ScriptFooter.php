@@ -158,14 +158,14 @@
     //         }
     // });
 
-    (function() {
-    const idleDurationSecs = 600;
+    $(document).ready(function() { 
+    //const idleDurationSecs = 600; 60000
     const redirectUrl = '<?= site_url('Auth/Auth/logout')?>';
     let idleTimeout;
 
     const resetIdleTimeout = function() {
         if(idleTimeout) clearTimeout(idleTimeout);
-        idleTimeout = setTimeout(() => location.href = redirectUrl, idleDurationSecs * 1000);
+        idleTimeout = setTimeout(() => location.href = redirectUrl, 3600000);
     };
 	
 	// Key events for reset time
@@ -190,7 +190,7 @@
     window.onselect = resetIdleTimeout;
     window.onscroll = resetIdleTimeout;
 
-})();
+});
     
       </script>
 

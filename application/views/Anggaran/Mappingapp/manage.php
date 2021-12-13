@@ -80,13 +80,9 @@
                               <td class="text-right"><?=rupiah($p->rupiah)?></td>
                               <td class="text-right"><?=rupiah($p->alokasi)?></td>
 
-                              <?php if ( $p->kdakun != "521811"){ 
-                                        $alokasi = $p->alokasi; 
-                                    if($p->alokasi == null ){
-                                        $alokasi = 1;
-                                    }?>
+                              <?php if ( $p->kdakun != "521811"){ ?>
                                 <td class="text-center">
-                                <a href="<?= site_url('Anggaran/Mappingapp/Tambah/'.$p->kdindex.'/'.$p->kdkmpnen.'/'.$p->kdskmpnen.'/'.$p->rupiah.'/'.$p->kdsoutput.'/'.$alokasi) ?>"><i class="material-icons green-text">edit</i></a>
+                                <a href="<?= site_url('Anggaran/Mappingapp/Tambah/'.$p->kdindex) ?>"><i class="material-icons green-text">edit</i></a>
                               </td>
                                 <?php } else{ 
                                   echo '<td></td>';

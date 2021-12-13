@@ -18,9 +18,8 @@ class Detail_Mappingapp extends CI_Controller {
 
     public function getMappingApp_detail()
     {
-		$var =  $this->uri->segment(4);
-        $kdindex = str_replace("%20", " ", $var);
-        $data['readmapp'] = $this->detail_Mappingapp->CRUD($kdindex,'d_detailapp','R-table');
+		$a = $this->input->post('kdindex');
+        $kdindex = str_replace("%20", " ", $a);
         $list = $this->detail_Mappingapp->get_datatables($kdindex);
         $data = array();
         $no = $_POST['start'];
@@ -55,7 +54,7 @@ class Detail_Mappingapp extends CI_Controller {
         
         if($Trigger == "C"){
             
-            $nilai_app = $this->input->post('nilai_app');
+            $nilaiakun = $this->input->post('nilaiakun');
             $th_pkpt = $this->input->post('th_pkpt');
             $kodeindex = str_replace("%20", " ", $this->input->post('kdindex'));
             $app = $this->input->post('app');
@@ -92,7 +91,7 @@ class Detail_Mappingapp extends CI_Controller {
                             }else{
                             array_push($data , array(
                                 'id_app' => $app,
-                                'rupiah' => $nilai_app,
+                                'rupiah' => $nilaiakun,
                                 'kdindex' => $kodeindex,
                                 'th_pkpt' => $th_pkpt,
                                 'tahapan' => $this->input->post('tahapan'.$j.''),
@@ -118,10 +117,10 @@ class Detail_Mappingapp extends CI_Controller {
                     
                     $data = array(
                         'id_app' => $app,
-                        'rupiah' => $nilai_app,
+                        'rupiah' => $nilaiakun,
                         'kdindex' => $kodeindex,
                         'th_pkpt' => $th_pkpt,
-                        'tahapan' => "All",
+                        'tahapan' => 11,
                         'rupiah_tahapan'  => $this->input->post('rupiahAll')
                         
                         );
@@ -153,13 +152,17 @@ class Detail_Mappingapp extends CI_Controller {
             
            
             $output = $this->detail_Mappingapp->getUbah_detail($id,$kdindex);
-            // $total = $this->detail_Mappingapp->getTotalRupiah($kdindex);
             echo json_encode($output);
             
         }else if($Trigger == "U"){
 
-            $rupiah_tahapan = $this->input->post('rupiah_tahapan_Edit');
-            $th_pkpt = $this->input->post('th_pkpt_Edit');
+            $rupiah_tahapan = $this->input->post('rupiah1');
+            $th_pkpt = $this->input->post('th_pkpt');
+            $app = $this->input->post('app');
+            $tahapan = $this->input->post('tahapan1');
+            $a = $this->input->post('kdindex');
+            $kdindex = str_replace("%20", " ", $a);
+            $nilaiakun = $this->input->post('nilaiakun');
 
             $data = array(
                 'rupiah_tahapan' => $rupiah_tahapan,
@@ -169,7 +172,9 @@ class Detail_Mappingapp extends CI_Controller {
 
             $id = $this->input->post('Id_Edit');
             $where = array('id' => $id);
-	        $this->detail_Mappingapp->update($data,'d_detailapp', $where);
+            $this->detail_Mappingapp->update($data,'d_detailapp', $where);
+
+            
 
         }else if($Trigger == "getRupiahTahapan"){
 
@@ -181,4 +186,40 @@ class Detail_Mappingapp extends CI_Controller {
         }
         
     }
+
+    public function Alokasi()
+    {
+            $a = $this->input->post('kdindex');
+            $kdindex = str_replace("%20", " ", $a);
+
+            $output = $this->db->query("SELECT a.*,b.alokasi 
+            FROM (SELECT d_pagu.* FROM d_pagu WHERE d_pagu.kdindex='".$kdindex."') as a 
+            left JOIN (SELECT d_detailapp.kdindex, SUM(d_detailapp.rupiah_tahapan) AS alokasi
+            FROM d_detailapp  GROUP BY d_detailapp.kdindex) as b ON a.kdindex=b.kdindex")->result();
+        echo json_encode($output);
+            
+    }
+
+    public function Ubah()
+		{
+
+            $Trigger = $this->input->post('Trigger');
+            if($Trigger == "Edit"){
+                $a = $this->input->post('kdindex');
+                $kdindex = str_replace("%20", " ", $a);
+                $Id = $this->input->post('id');
+
+                $output = $this->detail_Mappingapp->getUbah_detail($Id, $kdindex, 'Json');
+                echo json_encode($output);
+
+            }else{
+                $Id = $this->uri->segment(4);
+                $a = $this->uri->segment(5);
+                $kdindex = str_replace("%20", " ", $a);
+                $data['ubah']=  $this->detail_Mappingapp->getUbah_detail($Id, $kdindex, 'Php');
+                $this->load->view('Anggaran/Mappingapp/ubah',$data);
+            }
+        
+            
+		}
 }
