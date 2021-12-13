@@ -153,6 +153,7 @@ $('.btn-upload').click(function (e) {
                 $('#alert-Komponen').addClass('animated fadeOutUp delay-4s');
                 $('#alert-SubKomponen').addClass('animated fadeOutUp delay-5s');
                 Reset(IdForm)
+                location.reload();
             },
             error: function (jqXHR, textStatus, errorThrown) { },
         });

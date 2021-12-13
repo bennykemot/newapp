@@ -74,16 +74,15 @@
                                 <input type="text"  id="idxskmpnen" name="idxskmpnen" value="<?= $ubah[0]['idxskmpnen'] ?>" readonly hidden>
                                 
                                 <div hidden>
-                                    <input type="text"  id="idxskmpnen" name="idxskmpnen" readonly>
-                                    <input type="text"  id="kdindex" name="kdindex" readonly>
-                                    <input type="text"  id="thang" name="thang" readonly>
-                                    <input type="text"  id="kdgiat" name="kdgiat" readonly>
-                                    <input type="text"  id="kdoutput" name="kdoutput" readonly>
-                                    <input type="text"  id="kdsoutput" name="kdsoutput" readonly>
-                                    <input type="text"  id="kdkmpnen" name="kdkmpnen" readonly>
-                                    <input type="text"  id="kdskmpnen" name="kdskmpnen" readonly>
-                                    <input type="text"  id="kdakun" name="kdakun" readonly>
-                                    <input type="text"  id="kdbeban" name="kdbeban" readonly>
+                                    <input type="text"  id="kdindex" name="kdindex" value="<?= $ubah[0]['idxskmpnen'] ?>" readonly>
+                                    <input type="text"  id="thang" name="thang" value="<?= $ubah[0]['thang'] ?>" readonly>
+                                    <input type="text"  id="kdgiat" name="kdgiat" value="<?= $ubah[0]['kdgiat'] ?>" readonly>
+                                    <input type="text"  id="kdoutput" name="kdoutput" value="<?= $ubah[0]['kdoutput'] ?>" readonly>
+                                    <input type="text"  id="kdsoutput" name="kdsoutput" value="<?= $ubah[0]['kdsoutput'] ?>" readonly>
+                                    <input type="text"  id="kdkmpnen" name="kdkmpnen" value="<?= $ubah[0]['kdkmpnen'] ?>" readonly>
+                                    <input type="text"  id="kdskmpnen" name="kdskmpnen" value="<?= $ubah[0]['kdskmpnen'] ?>" readonly>
+                                    <input type="text"  id="kdakun" name="kdakun" value="<?= $ubah[0]['kdakun'] ?>" readonly>
+                                    <input type="text"  id="kdbeban" name="kdbeban" value="<?= $ubah[0]['kdbeban'] ?>" readonly>
 
                                     <input type="text"  id="kdsatker" name="kdsatker" value="<?=$kdsatker?>">
                                 </div>

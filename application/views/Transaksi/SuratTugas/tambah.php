@@ -70,7 +70,7 @@
 
                             <div class="input-field col s8 " >
                                 <input type="text"  id="idxskmpnenlabel" name="idxskmpnenlabel" readonly>
-                                <div hidden>
+                                <div>
                                     <input type="text"  id="idxskmpnen" name="idxskmpnen" readonly>
                                     <input type="text"  id="kdindex" name="kdindex" readonly>
                                     <input type="text"  id="thang" name="thang" readonly>

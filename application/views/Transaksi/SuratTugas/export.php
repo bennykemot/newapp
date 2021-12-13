@@ -101,9 +101,9 @@ function cek_tgl($tanggal){
                     <td>Jabatan / Peran</td>
                 </tr>
 
-                <?php for($i = 0 ; $i < count($ubah); $i++){ ?>
+                <?php $no=1;for($i = 0 ; $i < count($ubah); $i++){ ?>
                 <tr>
-                    <td width="5%"><?= $ubah[$i]['nourut']?></td>
+                    <td width="5%"><?= $no++?></td>
                     <td width="30%"><?= $ubah[$i]['nama']?></td>
                     <td width="35%"><?= $ubah[$i]['nip']?></td>
                     <td width="30%" colspan="2"><?= $ubah[$i]['jabatan']?></td>
@@ -123,11 +123,11 @@ function cek_tgl($tanggal){
         <table width="100%">
                 <tr>
                     <td width="60%" rowspan="5" colspan="5"></td>
-                    <td style="text-align: left" width="40%">02 November 2021</td>
+                    <td style="text-align: left" width="40%"><?= cek_tgl($ubah[0]['tglst'])?></td>
                 </tr>
 
                 <tr>
-                    <td style="text-align: left">Kepala Biro</td>
+                    <td style="text-align: left"><?= $ubah[0]['jabatan_ttd']?></td>
                 </tr>
 
                 <tr>
@@ -135,10 +135,10 @@ function cek_tgl($tanggal){
                 </tr>
 
                 <tr>
-                    <td style="text-align: left">Setia Pria Husada</td>
+                    <td style="text-align: left"> <?= $ubah[0]['nama_ttd']?></td>
                 </tr>
                 <tr>
-                    <td style="text-align: left">NIP : 196610161988031002</td>
+                    <td style="text-align: left">NIP : <?= $ubah[0]['nip_ttd']?></td>
                 </tr>
         </table>
     </div>

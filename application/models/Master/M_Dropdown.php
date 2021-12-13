@@ -621,7 +621,7 @@ function getData_tahapan($searchTerm="",$kdkmpnen, $kdskmpnen, $kdindex){
    return $data;
 }
 
-function getData_ttd($searchTerm="",$kdsatker){
+function getData_ttd($searchTerm=""){
 
    $this->db->select('id');
    $this->db->select('nama');

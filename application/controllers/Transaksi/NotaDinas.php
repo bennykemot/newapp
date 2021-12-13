@@ -100,7 +100,7 @@ class NotaDinas extends CI_Controller {
 		if($trigger == "costsheet"){
 
 			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
-			if($data['export'][0]['nip'] > 0){
+			if(count($data['export']) > 0){
 				$html = $this->load->view('Transaksi/ExportViews/Costsheet.php',$data,true);
 				$name = "Costsheet.pdf";
 				}else{
@@ -111,7 +111,7 @@ class NotaDinas extends CI_Controller {
 		}else if($trigger == "spd"){
 
 			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
-			if($data['export'][0]['nip'] > 0){
+			if(count($data['export']) > 0){
 				$html = $this->load->view('Transaksi/ExportViews/SPD.php',$data,true);
 			$name = "SPD.pdf";
 				}else{
@@ -122,7 +122,7 @@ class NotaDinas extends CI_Controller {
 		}else if($trigger == "spd_back"){
 
 			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
-			if($data['export'][0]['nip'] > 0){
+			if(count($data['export']) > 0){
 				$html = $this->load->view('Transaksi/ExportViews/SPDBack.php',$data,true);
 				$name = "SPD-Back.pdf";
 				}else{
@@ -132,7 +132,7 @@ class NotaDinas extends CI_Controller {
 		}else if($trigger == "kwitansi"){
 
 			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
-			if($data['export'][0]['nip'] > 0){
+			if(count($data['export']) > 0){
 				$html = $this->load->view('Transaksi/ExportViews/Kwitansi.php',$data,true);
 				$name = "Kwitansi.pdf";
 				}else{
@@ -141,7 +141,7 @@ class NotaDinas extends CI_Controller {
 		}else if($trigger == "rincian_biaya"){
 
 			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
-			if($data['export'][0]['nip'] > 0){
+			if(count($data['export']) > 0){
 				$html = $this->load->view('Transaksi/ExportViews/Rincianbiaya.php',$data,true);
 			$name = "RincianBiaya.pdf";
 				}else{
@@ -160,7 +160,7 @@ class NotaDinas extends CI_Controller {
 			]);
 
 			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
-			if($data['export'][0]['nip'] > 0){
+			if(count($data['export']) > 0){
 				$html = $this->load->view('Transaksi/ExportViews/Pengeluaranrill.php',$data,true);
 			$name = "Pengeluaran-Rill.pdf";
 				}else{
@@ -170,7 +170,7 @@ class NotaDinas extends CI_Controller {
 		}else if($trigger == "nominatif"){
 			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
 
-			if($data['export'][0]['nip'] > 0){
+			if(count($data['export']) > 0){
 				$html = $this->load->view('Transaksi/ExportViews/Nominatif.php',$data,true);
 				$name = "Nominatif.pdf";
 				}else{
@@ -182,7 +182,7 @@ class NotaDinas extends CI_Controller {
 			
 			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
 
-			if($data['export'][0]['nip'] > 0){
+			if(count($data['export']) > 0){
 				$html = $this->load->view('Transaksi/ExportViews/Perhitunganrampung.php',$data,true);
 				$name = "Perhitungan-Rampung.pdf";
 				}else{

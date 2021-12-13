@@ -104,23 +104,23 @@ function cek_tgl($tanggal){
         <table width="100%" id="head">
                 <tr>
                     <td width="15%">Nomor Cost Sheet</td> <td width="1%">:</td> <td width="60%">ISIANNYA</td>
-                    <td width="2%"></td><td width="15%">Jumlah</td> <td width="1%">:</td> <td width="10%" style="text-align: right">2090084000</td>
+                    <td width="2%"></td><td width="15%">Jumlah</td> <td width="1%">:</td> <td width="10%" style="text-align: right"><?=rupiah($export[0]->rupiah)?></td>
                 </tr>
                 <tr>
                     <td>Nomor RKT/ Non RKT</td> <td>:</td> <td>ISIANNYA</td>
-                     <td></td><td>Relasi Pagu</td> <td>:</td> <td style="text-align: right">111296319</td>
+                     <td></td><td>Relasi Pagu</td> <td>:</td> <td style="text-align: right"><?=rupiah($export[0]->jumlah)?></td>
                 </tr>
                 <tr>
                     <td>Pembebanan</td> <td>:</td> <td><?=$export[0]->idxskmpnen?></td>
-                     <td></td><td>Saldo Lalu</td> <td>:</td> <td style="text-align: right">1978787681</td>
+                     <td></td><td>Saldo Lalu</td> <td>:</td> <td style="text-align: right">-</td>
                 </tr>
                 <tr>
                     <td>Maksud Perjalanan</td> <td>:</td> <td ><?=$export[0]->uraianst?></td>
-                     <td></td><td>Pengajuan</td> <td>:</td> <td style="text-align: right">13810000</td>
+                     <td></td><td>Pengajuan</td> <td>:</td> <td style="text-align: right">-</td>
                 </tr>
                 <tr>
                     <td colspan="3"></td>
-                     <td></td><td>Saldo Sekarang</td> <td>:</td> <td style="text-align: right">1964977681</td>
+                     <td></td><td>Saldo Sekarang</td> <td>:</td> <td style="text-align: right">-</td>
                 </tr>
 
                 
@@ -159,7 +159,7 @@ function cek_tgl($tanggal){
                 <tbody>
                     <?php $no=1; foreach($export as $e){ ?>
                     <tr>
-                        <td style="text-align: center;"><?=$e->nourut?></td>
+                        <td style="text-align: center;"><?=$no?></td>
                         <td><?=$e->nama?></td>
                         <td><?=$e->nip?></td>
                         <td style="text-align: center;"><?=$e->golongan?></td>

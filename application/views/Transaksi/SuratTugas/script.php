@@ -55,6 +55,7 @@ function PilihKode(Id, kdindex){
             {    
 
               $('#idxskmpnenlabel').val(Id);
+              $('#idxskmpnen').val(data[0]['kdindex']);
               $('#kdindex').val(data[0]['kdindex']);
               $('#thang').val(data[0]['thang']);
               $('#kdgiat').val(data[0]['kdgiat']);

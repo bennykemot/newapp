@@ -141,7 +141,7 @@ function cek_tgl($tanggal){
                             c. Tingkat Biaya Perjalanan Dinas</td>
                         <td colspan="2"><?=$e->golongan?><br>
                         <?=$e->jabatan?><br>
-                            C *masih hardcode</td>
+                        <?=$e->kdbeban?></td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">4</td>

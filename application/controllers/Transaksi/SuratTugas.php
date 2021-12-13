@@ -72,9 +72,11 @@ class SuratTugas extends CI_Controller {
 	}
 
     public function ubah()
-	{
+	{   
+        $a = $this->uri->segment(8);
+        $kdindex = str_replace("%20", " ", $a);
         $id =  $this->uri->segment(4);
-        $data['ubah'] = $this->SuratTugas->getDataUbah($id, 'Ubah_ST');
+        $data['ubah'] = $this->SuratTugas->getDataUbah($kdindex, $id, 'Ubah_ST');
         $kdsatker = $this->uri->segment(5);
         $unitid =$this->uri->segment(6);
         $roleid =$this->uri->segment(7);
@@ -119,7 +121,7 @@ class SuratTugas extends CI_Controller {
             
 
             $data_st = array(
-                'kdindex' => $kdindex,
+                'kdindex' => $idxskmpnen,
                 'thang' => $thang,
                 'kdgiat' => $kdgiat,
                 'kdoutput' => $kdoutput,
@@ -275,7 +277,7 @@ class SuratTugas extends CI_Controller {
 
             $kdsatker = $this->input->post('kdsatker');
             
-            $kdindex = $this->input->post('kdindex');
+            $kdindex = $this->input->post('idxskmpnen');
             $thang = $this->input->post('thang');
             $kdgiat = $this->input->post('kdgiat');
             $kdoutput = $this->input->post('kdoutput');
@@ -289,7 +291,7 @@ class SuratTugas extends CI_Controller {
             
 
             $data_st = array(
-                'kdindex' => $kdindex,
+                'kdindex' => $idxskmpnen,
                 'thang' => $thang,
                 'kdgiat' => $kdgiat,
                 'kdoutput' => $kdoutput,
@@ -360,14 +362,13 @@ class SuratTugas extends CI_Controller {
                         'jnstransportasi'  => $this->input->post('jnstransportasi'.$urut[$i].''),
 
                         'jumlah'  => $this->pregChar($this->input->post('total'.$urut[$i].'')),
-                        
-                        'id_st'  => $idst,
+                        'id_st' => $idst
                         
                    );
 
-                   $totaluangharian += $this->pregChar($this->input->post('uangharian'.$urut[$i].''));
-                   $totaluanginap += $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
-                   $sum += $this->pregChar($this->input->post('uangharian'.$urut[$i].'')) + $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
+                   $totaluangharian += $this->pregChar($this->input->post('uangharian'.$urut[$j].''));
+                   $totaluanginap += $this->pregChar($this->input->post('uangpenginapan'.$urut[$j].''));
+                   $sum += $this->pregChar($this->input->post('uangharian'.$urut[$j].'')) + $this->pregChar($this->input->post('uangpenginapan'.$urut[$j].''));
 
                 //    $totaluangharian = $this->pregChar($this->input->post('uangharian'.$urut[$i].''));
                 //    $totaluangpenginapan = $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
@@ -385,7 +386,7 @@ class SuratTugas extends CI_Controller {
                         // $this->db->update('d_itemcs',$data_ItemCS);
 
                         //$this->db->insert('d_stdetail',$data);
-                       $this->db->insert('d_itemcs',$data_ItemCS);
+                       $this->db->insert('d_itemcs',$data_ItemCS);$j++;
                 }
 
 				
@@ -445,12 +446,15 @@ class SuratTugas extends CI_Controller {
         ]);
         $Assets			= $this->config->item('assets_url');
         $path           = '<img src='.$Assets.'app-assets/images/logo/bpkp.jpg>';
-        $id             =  $this->uri->segment(4);
+        $a              = $this->uri->segment(5);
+        $kdindex        = str_replace("%20", " ", $a);
+        $id        =  $this->uri->segment(4);
         $trigger        = "export";
-        $data['ubah']   = $this->SuratTugas->getDataUbah($id,$trigger);
+        $data['ubah']   = $this->SuratTugas->getDataUbah($kdindex, $id, $trigger);
+        
 
 
-        if($data['ubah'][0]['nip'] > 0){
+        if(count($data['ubah']) > 0){
             $html = $this->load->view('Transaksi/SuratTugas/export.php',$data,true);
             $mpdf->WriteHTML($html);          
             $mpdf->Output('SuratTugas.pdf', 'I');

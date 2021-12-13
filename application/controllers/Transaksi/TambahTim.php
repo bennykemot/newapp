@@ -16,8 +16,10 @@ class TambahTim extends CI_Controller {
 	public function TambahTim()
 	{
         $id = $this->uri->segment(4);
+        $a = $this->uri->segment(5);
+        $kdindex = str_replace("%20", " ", $a);
         $trigger = "Tambah_Tim";
-        $data['ST'] = $this->SuratTugas->getDataUbah($id,$trigger);
+        $data['ST'] = $this->SuratTugas->getDataUbah($kdindex, $id,$trigger);
 		$this->load->view('Transaksi/SuratTugas/TambahTim/manage', $data);
 	}
 

@@ -33,6 +33,7 @@ $.ajax({
           {    
 
             $('#idxskmpnenlabel').val(Id);
+            $('#idxskmpnen').val(data[0]['kdindex']);
             $('#kdindex').val(data[0]['kdindex']);
             $('#thang').val(data[0]['thang']);
             $('#kdgiat').val(data[0]['kdgiat']);
@@ -204,7 +205,7 @@ var val = nip.split("-")
 
 
 
-$('#niplabel'+res+'').html(val[0])
+$('#niplabel'+res+'').val(val[0])
 $('#nip'+res+'').val(val[0])
 
 $('#perjablabel'+res+'').html(val[1])

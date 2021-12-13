@@ -48,12 +48,12 @@
                                                     <select placeholder="Nama.." class="namaTimHardcode browser-default" name="namaDummy<?=$j?>" id="namaDummy<?=$j?>" >
                                                         <option selected value="<?=$ubah[$i]['nip']?>"><?=$ubah[$i]['nama']?></option>
                                                     </select><br>
-                                                <input class="namaTim" name="nama<?=$j?>" id="nama<?=$j?>" hidden>
+                                                <input class="namaTim" name="nama<?=$j?>" id="nama<?=$j?>" value="<?=$ubah[$i]['nama']?>" hidden>
                                                 <input name="idtim<?=$j?>" id="idtim<?=$j?>" value="<?=$ubah[$i]['idtim']?>"hidden>
                                                 </td>
                                                 <td>
                                                     <input placeholder="NIP" class="nip" id="niplabel<?=$j?>" name="niplabel<?=$j?>" value="<?=$ubah[$i]['nip']?>" readonly>
-                                                    <input class="nip" name="nip<?=$j?>" id="nip<?=$j?>" hidden>       
+                                                    <input class="nip" name="nip<?=$j?>" id="nip<?=$j?>" value="<?=$ubah[$i]['nip']?>" hidden>       
                                                 </td>
                                                 <td>
                                                     <textarea placeholder="Peran/Jabatan" class="perjab" id="perjab<?=$j?>" name="perjab<?=$j?>" readonly><?=$ubah[$i]['jabatan']?></textarea>
