@@ -256,6 +256,43 @@
             scrollCollapse: true,
             columnDefs: [{ visible: false, targets: 0 }, { width: "50%", targets: 2 }],
 
+        //     "drawCallback": function ( settings ) {
+        //     var api = this.api();
+        //     var rows = api.rows( {page:'all'} ).nodes();
+        //     var last=null;
+            
+        //     // Remove the formatting to get integer data for summation
+	      //     var intVal = function ( i ) {
+	      //     	return typeof i === 'string' ?
+			  //         i.replace(/[\$,]/g, '')*1 :
+			  //         typeof i === 'number' ?
+				//                i : 0;
+	      //     };
+          
+        //     total=[];
+        //     api.column(0, {page:'all'} ).data().each( function ( group, i ) {
+        //     var vals = api.row(api.row($(rows).eq(i)).index()).data();
+
+        //       group_assoc=group.replace(' ',"_");
+        //       //console.log(group_assoc);
+        //       if(typeof total[group_assoc] != 'undefined'){
+        //     total[group_assoc]=total[group_assoc]+parseFloat(vals['rupiah_tahapan']);
+        // }else{
+        //     total[group_assoc]=parseFloat(vals['rupiah_tahapan']);
+        // }
+        //       if ( last !== group ) {
+        //             $(rows).eq( i ).before(
+        //                 '<tr class="group" style="background-color: #b9f6d8 !important; color: #000"><td>'+group+'</td><td class="text-right">'+total[group_assoc]+'</td><td></td></tr>'
+        //             );
+ 
+        //             last = group;
+        //         }
+        //     } );
+        //   for(var key in total) {
+        //       $("."+key).html("$"+total[key]);
+        //     }
+        // },
+
             drawCallback: function ( settings ) {
             var api = this.api();
             var rows = api.rows( {page:'current'} ).nodes();

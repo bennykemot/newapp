@@ -160,6 +160,7 @@ function kewenanganText($kewenangan){
 								</tbody>
 							</table>
 							<div hidden>
+									
 									<input id="idbagipagu" name="idbagipagu" value="<?=$readpp[0]->id?>">
 									<input id="kdindex" name="kdindex" value="<?=$tambahpp[0]->kdindex?>">
 									<input id="thang" name="thang" value="<?=$tambahpp[0]->thang?>">

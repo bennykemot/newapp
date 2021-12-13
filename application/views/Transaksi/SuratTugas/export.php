@@ -138,7 +138,7 @@ function cek_tgl($tanggal){
                     <td style="text-align: left"> <?= $ubah[0]['nama_ttd']?></td>
                 </tr>
                 <tr>
-                    <td style="text-align: left">NIP : <?= $ubah[0]['nip_ttd']?></td>
+                    <td style="text-align: left">NIP <?= $ubah[0]['nip_ttd']?></td>
                 </tr>
         </table>
     </div>
