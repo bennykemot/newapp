@@ -1,5 +1,6 @@
 <?php
 	$kdsatker = $this->session->userdata("kdsatker");
+	$nmsatker = $this->session->userdata("nmsatker");
 ?>
 
 <div id="modal2" class="modal" style="min-height: 500px">
@@ -14,9 +15,9 @@
 							<div class="input-field col s2"><label>Satuan Kerja</label></div>
 
 							<div class="input-field col s10" >
-								<select id="satker-select2" name="kdsatker" class="select2-data-ajax select2-hidden-accessible browser-default">
-								</select>
-								<input type="text" id="kdsatker" name="kdsatker" value="<?= $kdsatker ?>" readonly> 
+								<!-- <select id="satker-select2" name="kdsatker" class="select2-data-ajax select2-hidden-accessible browser-default">
+								</select> -->
+								<input type="text" id="kdsatker" name="kdsatker" value="<?php echo $kdsatker .' - '. $nmsatker ?>" readonly> 
 							</div>
 						</div>
 
@@ -36,7 +37,7 @@
                           </div>
                       </div>
 
-                      	<div class="input-field col s12">
+            <div class="input-field col s12">
 							<div class="input-field col s2"><label>Jabatan</label></div>
 
 							<div class="input-field col s10 " >
