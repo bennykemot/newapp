@@ -12,7 +12,6 @@ $('select').select2().on('select2:open', function() {
 
 function Reset(idForm) {
   document.getElementById(idForm).reset();
-  $('.satker-select2').val(null).trigger('change');
   $('.pejabat-select2').val(null).trigger('change');
   $('.jabatan-select2').val(null).trigger('change');
   $('.unit-select2').val(null).trigger('change');
@@ -127,8 +126,10 @@ $(function () {
            delay: 250,
            data: function (params) {
               return {
-                searchTerm: params.term
-                 // search term
+					Trigger : "unit_forPejabat",
+					satkerId: "<?= $this->session->userdata("kdsatker")?>",
+               searchTerm: params.term
+               // search term
               };
            },
            processResults: function (response) {
@@ -294,17 +295,12 @@ $(function () {
      });
 
 
-// AUTO FILLED TAMBAH
-
-$('#satker-select2').on('change', function(){
-	kdsatker = $("#satker-select2").val(kdsatker)
-	
-});
+// AUTO FILLED TAMBAH 
 
 $('#pejabat-select2').on('change', function() {
 
-var nip =  $("#pejabat-select2").val()
-$('#nip').val(nip)
+	var nip =  $("#pejabat-select2").val()
+	$('#nip').val(nip)
 
 });
 
@@ -348,6 +344,7 @@ $("#TambahPejabat").click(function (e) {
 
   formData.append('Trigger', 'C')
   formData.append('getPejabat', $("#pejabat-select2 option:selected").text())
+  formData.append('kdsatker', satker_session)
 
     $.ajax({
       type: "POST",
@@ -421,7 +418,7 @@ $.ajax({
               
               $('#nip_Edit').val(data['nip']);
 			  
-			  	var kdsatker = $("<option selected='selected'></option>").val(data['kdsatker']).text(data['kdsatker']+' - '+data['nmsatker'])
+			  		var kdsatker = $("<option selected='selected'></option>").val(data['kdsatker']).text(data['kdsatker']+' - '+data['nmsatker'])
                 $("#satker-select2_Edit").append(kdsatker).trigger('change');
 
                 var pejabat = $("<option selected='selected'></option>").val(data['nip']).text(data['nama'])
