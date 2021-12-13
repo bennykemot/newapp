@@ -138,9 +138,9 @@ class Dropdown extends CI_Controller {
 
       // Search term
       $searchTerm = $this->input->post('searchTerm');
-
+		$Trigger = $this->input->post('Trigger');
       // Get users
-      $response = $this->Dropdown->getData_role($searchTerm);
+      $response = $this->Dropdown->getData_role($searchTerm, $Trigger);
 
       echo json_encode($response);
    }

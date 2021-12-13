@@ -1,3 +1,7 @@
+<?php
+	$kdsatker = $this->session->userdata("kdsatker");
+?>
+
 <div id="modal2" class="modal" style="min-height: 500px">
             <div class="modal-content">
               <h6>Tambah Pejabat</h6>
@@ -7,12 +11,12 @@
                   <form class="col s12" id="FormPejabat">
                     <div class="row">
 						<div class="input-field col s12">
-							<div class="input-field col s2"><label>Satker</label></div>
+							<div class="input-field col s2"><label>Satuan Kerja</label></div>
 
 							<div class="input-field col s10" >
 								<select id="satker-select2" name="kdsatker" class="select2-data-ajax select2-hidden-accessible browser-default">
 								</select>
-								<!-- <input type="text" name="kdsatker"> -->
+								<input type="text" id="kdsatker" name="kdsatker" value="<?= $kdsatker ?>" readonly> 
 							</div>
 						</div>
 

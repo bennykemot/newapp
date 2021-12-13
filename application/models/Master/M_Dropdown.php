@@ -244,23 +244,58 @@ function getData_satker($searchTerm="", $kdsatker, $Trigger){
    return $data;
 }
 
-function getData_role($searchTerm=""){
+function getData_role($searchTerm="", $Trigger){
+	if($Trigger == "rolePengusul"){
+		$fetched_records = $this->db->query("SELECT id, rolename FROM t_role WHERE id IN (2,4,9,10) ");
+		$users = $fetched_records->result_array();
 
-   // Fetch users
-   $this->db->select('id');
-   $this->db->select('rolename');
-   $this->db->where("rolename like '%".$searchTerm."%' ");
-   $this->db->where("id like '%".$searchTerm."%' ");
-   $fetched_records = $this->db->get('t_role');
-   $users = $fetched_records->result_array();
+		$data = array();
+		foreach($users as $user){
+			$data[] = array("id"=>$user['id'], "text"=>$user['id']. ' - ' .$user['rolename']);
+		}
+		return $data;
 
-   // Initialize Array with fetched data
-   $data = array();
-   foreach($users as $user){
-      $data[] = array("id"=>$user['id'], "text"=>$user['id']. ' - ' .$user['rolename']);
-   }
-   return $data;
+	}else{
+
+		// Fetch users
+		$this->db->select('id');
+		$this->db->select('rolename');
+		$this->db->where("rolename like '%".$searchTerm."%' ");
+		$this->db->where("id like '%".$searchTerm."%' ");
+		$fetched_records = $this->db->get('t_role');
+		$users = $fetched_records->result_array();
+	
+		// Initialize Array with fetched data
+		$data = array();
+		foreach($users as $user){
+			$data[] = array("id"=>$user['id'], "text"=>$user['id']. ' - ' .$user['rolename']);
+		}
+		return $data;
+	}
+
+   
 }
+
+// function getData_roleppk($searchTerm=""){
+// 	$query = $this->db->query("SELECT id, nama_app FROM t_app where id IN (2, 4, 8, 9)");
+
+//    // Fetch users
+//    $this->db->select('id');
+//    $this->db->select('rolename');
+// 	$this->db->where('id like "2"')
+
+//    $this->db->where("rolename like '%".$searchTerm."%' ");
+//    $this->db->where("id like '%".$searchTerm."%' ");
+//    $fetched_records = $this->db->get('t_role');
+//    $users = $fetched_records->result_array();
+
+//    // Initialize Array with fetched data
+//    $data = array();
+//    foreach($users as $user){
+//       $data[] = array("id"=>$user['id'], "text"=>$user['id']. ' - ' .$user['rolename']);
+//    }
+//    return $data;
+// }
 
 function getData_menu($searchTerm=""){
 	$this->db->select('id');

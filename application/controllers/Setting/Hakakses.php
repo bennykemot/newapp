@@ -72,14 +72,50 @@ class Hakakses extends CI_Controller {
 
 		$this->load->view('Setting/Hakakses/Master',$data);
 	}
-
+	
 	public function Action(){
 		$Trigger = $this->input->post('Trigger');
 		if($Trigger == "C"){
-			$roleId = $this->input->post('role');
+			$kdrole = $this->input->post('kdrole');
+			$menu = $this->input->post('menu');
+			$create = $this->input->post('create');
+			$read = $this->input->post('read');
+			$update = $this->input->post('update');
+			$delete = $this->input->post('delete');
 
+			$data_hakakses = array(
+				'role_id' => $kdrole,
+				'hak_menu' => $menu,
+				'hak_c' => $create,
+				'hak_r' => $read,
+				'hak_u' => $update,
+				'hak_d' => $delete
+			);
+
+			$this->HakAkses->CRUD($data_hakakses,'t_hakakses',$Trigger);
+
+			
+		}else if($Trigger == "D"){
+			$id = $this->input->post('id');
+			$where = array('id' => $id);
+			$this->HakAkses->CRUD($where,'t_hakakses',$Trigger);
+
+		}else if($Trigger == "R"){
+			$id = $this->input->post('id');
+
+			$output = $this->HakAkses->CRUD($id,'t_hakakses',$Trigger);
+			echo json_encode($output);
+
+		}else if($Trigger == "U"){
+			$kdrole = $this->input->post('kdrole');
+			$menu = $this->input->post('menu');
+			$create = $this->input->post('create');
+			$read = $this->input->post('read');
+			$update = $this->input->post('update');
+			$delete = $this->input->post('delete');
+
+		
 		}
-
-	}	
+	}
 
 }

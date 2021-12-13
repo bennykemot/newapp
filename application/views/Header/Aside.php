@@ -95,25 +95,25 @@ $unit_id = $this->session->userdata("unit_id");
           </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
           <i class="material-icons">
           speaker_notes
           </i><span class="menu-title" data-i18n="Mail">Perjadin Diklat</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
           <i class="material-icons">
           book
           </i><span class="menu-title" data-i18n="Mail">ST Non-Biaya</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
           <i class="material-icons">
           business_center
           </i><span class="menu-title" data-i18n="Mail">Lembur</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
           <i class="material-icons">
           call_to_action
           </i><span class="menu-title" data-i18n="Mail">PBJ</span></a>
@@ -172,25 +172,25 @@ $unit_id = $this->session->userdata("unit_id");
           </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
           <i class="material-icons">
           speaker_notes
           </i><span class="menu-title" data-i18n="Mail">Perjadin Diklat</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
           <i class="material-icons">
           book
           </i><span class="menu-title" data-i18n="Mail">ST Non-Biaya</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
           <i class="material-icons">
           business_center
           </i><span class="menu-title" data-i18n="Mail">Lembur</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>f">
           <i class="material-icons">
           call_to_action
           </i><span class="menu-title" data-i18n="Mail">PBJ</span></a>
