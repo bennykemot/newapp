@@ -225,6 +225,12 @@ $unit_id = $this->session->userdata("unit_id");
           </i><span class="menu-title" data-i18n="Mail">Jabatan</span></a>
           </li>
 
+					<li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Master/PPK/Page/')?>">
+          <i class="material-icons">
+          confirmation_number
+          </i><span class="menu-title" data-i18n="Mail">PPK</span></a>
+          </li>
+
 
 			<?php		
 				}
