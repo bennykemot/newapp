@@ -17,7 +17,7 @@
 <!-- BEGIN: Footer-->
 <footer class="page-footer footer footer-static footer-light navbar-border navbar-shadow">
 	<div class="footer-copyright">
-		<div class="container"><span>&copy; 2021 <a href="../../../../user/pixinvent/portfolio.html?ref=pixinvent" target="_blank">BIRO KEUANGAN</a> All rights reserved.</span>
+		<div class="container"><span>&copy; 2021 <a href="http://www.bpkp.go.id/" target="_blank">BIRO KEUANGAN</a> All rights reserved.</span>
 		</div>
 	</div>
 </footer>

@@ -25,6 +25,6 @@
           
 				
 <?php include(APPPATH . 'views/Footer/Footer.php') ?>
-<script src="<?= base_url().'assets'?>/app-assets/js/scripts/dashboard-analytics.min.js"></script>
+<!-- <script src="<?= base_url().'assets'?>/app-assets/js/scripts/dashboard-analytics.min.js"></script>
 <script src="<?= base_url().'assets'?>/app-assets/vendors/sparkline/jquery.sparkline.min.js"></script>
-<script src="<?= base_url().'assets'?>/app-assets/vendors/chartjs/chart.min.js"></script>
+<script src="<?= base_url().'assets'?>/app-assets/vendors/chartjs/chart.min.js"></script> -->
