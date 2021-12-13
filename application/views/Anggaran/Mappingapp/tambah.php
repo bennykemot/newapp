@@ -37,7 +37,7 @@
 										<td></td>
 									</tr>
 
-									<tr>
+									<tr id="divTahapan" >
 										<td width="30%">Tahapan</td>
 										<td>
 										<!-- <select class="select2 browser-default" id="tahapan-select2" name="tahapan"></select> -->
@@ -79,12 +79,12 @@
 										<td width="30%">Jumlah Saldo App</td>
 										<td>
 											<input readonly class="btn cyan col s12" style="border-radius: 6px;text-align: left;font-weight: bold;cursor: default;" id ="jumlah" name="jumlah">
-											<input placeholder="00.000.000" id="nilai_app" name="nilai_app" type="number" readonly hidden>
-            								<input placeholder="00.000.000" id="dummy" name="dummy" type="number" readonly  hidden>
-											<input placeholder="00.000.000" id="alokasi" name="alokasi" type="number" readonly  hidden>
+										
 										</td>
 										<td></td>
 									</tr>
+
+									
 
 									<tr>
 										<td width="30%">PKPT</td>
@@ -93,19 +93,32 @@
 											</td>
 										<td></td>
 									</tr>
+
+										<tr hidden>
+											<td>alokasi<br> nilaiakun<br></td>
+											<td>
+												<input placeholder="00.000.000" id="alokasi" name="alokasi" type="number" readonly ><br>
+												<input placeholder="00.000.000" id="nilaiakun" name="nilaiakun" type="number" readonly ><br>
+												<input placeholder="00.000.000" id="sisa" name="sisa" type="number" readonly ></td>
+												
+											<td></td>
+										</tr>
+
+										<tr hidden>
+											<td>kdindex<br> kdkmpnen <br> kdskmpnen <br> kdsoutput</td>
+											<td><input placeholder="Nilai App" id="kdindex" name="kdindex" value="<?= $this->uri->segment('4')?>"><br>
+											<input placeholder="Nilai App" id="kdkmpnen" name="kdkmpnen"><br>
+											<input placeholder="Nilai App" id="kdskmpnen" name="kdskmpnen"><br>
+											<input placeholder="Nilai App" id="kdsoutput" name="kdsoutput"></td>
+											<td></td>
+
+										</tr>
 									
 								</tbody>
 							</table>
 
-							<div class="input-field col s12" hidden >
-								<div class="input-field col s2">kodeindex</div>
-								<div class="input-field col s10 " >
-								<input placeholder="Nilai App" id="kdindex" name="kdindex" value="<?=$this->uri->segment('4')?>" >
-								<input placeholder="Nilai App" id="kdkmpnen" name="kdkmpnen" value="<?=$this->uri->segment('5')?>" >
-								<input placeholder="Nilai App" id="kdskmpnen" name="kdskmpnen" value="<?=$this->uri->segment('6')?>" >
-								
-								</div>
-							</div>
+							
+
 								<div class="input-field col s12" >
                                     <div class="input-field col s9">
                                     </div>
@@ -127,76 +140,23 @@
         <div class="card">
             <div class="card-content">
 				<table id="tb-app" class="display" style="width:100%;white-space: normal !important;overflow: hidden;">
-					<thead>
-						<tr>
-							<th width="30%">APP</th>
-							<th>Tahapan</th>
-							<th>Rupiah Tahapan</th>
-							<th>Aksi</th>
-						</tr>
-					</thead>
-					<tbody>
-					<?php $before = "";$beforeSum = "";$total = 0;$sumApp = 0;
-						foreach($readmapp as $read){
-							if($before != $read->nama_app){
-                                echo '<tr><td colspan="4" style="background-color: #b9f6d8; color: #000"><b>'.$read->nama_app.'</b></td></tr>';
-                                $before = $read->nama_app;}
-                              ?>
-						<tr>
-							<td><?=$read->nama_app?></td>
-							<td><?=$read->nama_tahapan?></td>
-							<td class="text-right"><?=rupiah($read->rupiah_tahapan)?></td>
-							<td><a href="<?=site_url('Anggaran/Mappingapp/Ubah/'.$read->id.'/'.$this->uri->segment('7').'/'.$read->kdindex.'/'.$this->uri->segment('9'))?>"><i class="material-icons green-text">edit</i></a>
-							<a href="javascript:;" onclick="Delete('<?=$read->id?>')"><i class="material-icons red-text">delete</i></a></td>
-						</tr>
-						<?php 	$hide=""; 
-								if(count($readmapp) == 1){
-									$hide="hidden";
-								}
-
-								if($beforeSum== ""){
-									$sumApp += $read->rupiah_tahapan;
-									echo'<tr style="color: #000" hidden>
-									<td colspan="2">Sub Total</td>
-									<td class="text-right">'.rupiah($sumApp).'</td>
-									<td></td>
-									</tr>';
-									$sumApp=$read->rupiah_tahapan;
-									$beforeSum = $read->nama_app;
-								}
-								else if($beforeSum != $read->nama_app){
-									$sumApp = $read->rupiah_tahapan;
-									echo'<tr style="color: #000" '.$hide.'>
-									<td colspan="2">Sub Total</td>
-									<td class="text-right">'.rupiah($sumApp).'</td>
-									<td></td>
-									</tr>';$beforeSum = $read->nama_app;$sumApp=$read->rupiah_tahapan;
-								}
-								else{
-									
-									$sumApp += $read->rupiah_tahapan;
-									echo'<tr style="color: #000" >
-									<td colspan="2">Sub Total</td>
-									<td class="text-right">'.rupiah($sumApp).'</td>
-									<td></td>
-									</tr>';
-									$beforeSum = "";$sumApp=0;
-									
-								}?>
-										
-						
-									
-						
-						
-						<?php $total+=$read->rupiah_tahapan;} ?>
-					</tbody>
-					<tfoot>
-						<tr style="background-color: #b9f6d8; color: #000">
-								<td colspan="2">TOTAL</td>
-								<td class="text-right"><?=rupiah($total)?></td>
+						<thead>
+							<tr>
+								<th width="30%">APP</th>
+								<th>Tahapan</th>
+								<th width="20%" class="text-right">Rupiah</th>
+								<th width="10%" class="text-center">Aksi</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+						<tfoot style="background-color: #faf8a6;">
+							<tr>
+								<td style="text-align: left">TOTAL </td>
+								<td style="text-align: right; padding-right: 10px !important"></td>
 								<td></td>
-						</tr>
-					</tfoot>
+								<td></td>
+							</tr>
+                  </tfoot>
 				</table>
             </div>
         </div>

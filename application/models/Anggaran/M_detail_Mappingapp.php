@@ -118,13 +118,12 @@
             $this->db->delete($table);
 
         }else if($Trigger == "R"){
-            $query = $this->db->query("SELECT d_detailapp.* ,t_app.nama_app ,r_tahapan.nama_tahapan,
-            SUM(d_detailapp.rupiah_tahapan) as total 
+            $query = $this->db->query("SELECT d_detailapp.* ,t_app.nama_app ,r_tahapan.nama_tahapan 
             
             FROM d_detailapp JOIN t_app ON d_detailapp.id_app = t_app.id
             JOIN r_tahapan ON d_detailapp.tahapan = r_tahapan.id 
             
-            where d_detailapp.kdindex = '".$data."'");
+            where d_detailapp.kdindex = '".$data."' ORDER BY d_detailapp.id_app, d_detailapp.tahapan ASC");
     
             return $query->row();
         }else if($Trigger == "R-Ubah"){
@@ -164,16 +163,29 @@
         $this->db->update($table, $data, $where); 
     }
 
-    function getUbah_detail($id, $kdindex){
-        $query = $this->db->query("SELECT SUM(d_detailapp.rupiah_tahapan) as total ,
-            d_detailapp.id, d_detailapp.kdindex, d_detailapp.id_app, 
-            d_detailapp.rupiah, d_detailapp.th_pkpt, d_detailapp.tahapan, (Select SUM(d_detailapp.rupiah_tahapan) FROM d_detailapp where d_detailapp.kdindex = '".$kdindex."') as total_tahapan
-            ,d_detailapp.rupiah_tahapan , t_app.id as id_app, t_app.nama_app , r_tahapan.nama_tahapan
-            FROM d_detailapp JOIN t_app ON t_app.id = d_detailapp.id_app
-            JOIN r_tahapan ON d_detailapp.tahapan = r_tahapan.id
-            WHERE d_detailapp.id = ".$id."");
-    
-            return $query->row();
+    function getUbah_detail($Id, $Kdindex, $Trigger){
+
+        if($Trigger == "Json"){
+            $query = $this->db->query("SELECT d_pagu.kdkmpnen,d_pagu.kdsoutput, d_detailapp.*,
+             r_tahapan.nama_tahapan , (SELECT SUM(d_detailapp.rupiah_tahapan) 
+             FROM d_detailapp where d_detailapp.kdindex ='".$Kdindex."') as alokasi 
+             FROM d_detailapp LEFT JOIN r_tahapan ON d_detailapp.tahapan = r_tahapan.id 
+             LEFT JOIN d_pagu ON d_pagu.kdindex = d_detailapp.kdindex where d_detailapp.id = ".$Id."");
+        
+                return $query->result();
+
+        }else{
+
+            $query = $this->db->query("SELECT d_detailapp.*, 
+            r_tahapan.nama_tahapan, r_app.uraian_app 
+            FROM d_detailapp JOIN r_tahapan ON r_tahapan.id = d_detailapp.tahapan 
+            JOIN r_app ON r_app.id = d_detailapp.id_app 
+            WHERE d_detailapp.id = ".$Id." ");
+
+            return $query->result();
+
+        }
+        
     }
 
 
