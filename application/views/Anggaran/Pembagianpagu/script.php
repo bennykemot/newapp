@@ -87,21 +87,28 @@
      $("#kewenangan-select2").select2({
         dropdownAutoWidth: true,
           width: '100%',
-          placeholder: "Pilih Kewenangan",
-        data: [{
-            id: 4,
-            text: "Subag Keuangan"
-        }, {
-            id: 2,
-            text: "Pegawai"
-        }, {
-            id: 8,
-            text: "Subag Umum"
-        }, {
-            id: 9,
-            text: "Subag Kepegawaian"
-        }]
-    })
+          placeholder: "Pilih Role Pengusul",
+			 ajax: { 
+           url: dropdown_baseurl + 'role',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+                searchTerm: params.term,
+                //kdsatker: satker_session,
+                Trigger : "rolePengusul"
+                 // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+    });
 
     $("#ppk-select2-edit").select2({
           dropdownAutoWidth: true,
@@ -156,21 +163,28 @@
      $("#kewenangan-select2-edit").select2({
         dropdownAutoWidth: true,
           width: '100%',
-          placeholder: "Pilih Kewenangan",
-          data: [{
-            id: 4,
-            text: "Subag Keuangan"
-        }, {
-            id: 2,
-            text: "Pegawai"
-        }, {
-            id: 8,
-            text: "Subag Umum"
-        }, {
-            id: 9,
-            text: "Subag Kepegawaian"
-        }]
-    })
+          placeholder: "Pilih Role Pengusul",
+			 ajax: { 
+           url: dropdown_baseurl + 'role',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+                searchTerm: params.term,
+                //kdsatker: satker_session,
+                Trigger : "rolePengusul"
+                 // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+    });
 
    
 

@@ -86,9 +86,9 @@ function kewenanganText($kewenangan){
 										<td></td>
 									</tr>
 									<tr>
-										<td>Kewenangan</td>
+										<td>Role Pengusul</td>
 										<td>
-											<select class="browser-default" id="kewenangan-select2" name="kewenangan"></select>
+											<select class="select2-data-ajax select2-hidden-accessible browser-default" id="kewenangan-select2" name="kewenangan"></select>
 										</td>
 										<td></td>
 									</tr>
@@ -149,9 +149,9 @@ function kewenanganText($kewenangan){
 									</tr>
 									
 									<tr>
-										<td>Kewenangan Pengajuan</td>
+										<td>Role Pengusul</td>
 										<td>
-											<select class="browser-default" id="kewenangan-select2-edit" name="kewenangan">
+											<select class="select2-data-ajax select2-hidden-accessible browser-default" id="kewenangan-select2-edit" name="kewenangan">
 											<option selected='selected' value="<?=$readpp[0]->role_id?>"><?= kewenanganText($readpp[0]->role_id)?></option>
 											</select>
 										</td>

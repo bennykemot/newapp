@@ -1,6 +1,6 @@
 <script>
-    var baseurl 	= "<?= base_url('Master/Pejabat/')?>";
-    var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";
+   var baseurl 	= "<?= base_url('Master/Pejabat/')?>";
+   var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";
 	var satker_session = "<?= $this->session->userdata("kdsatker")?>";
 	//var nip = document.getElementById("nip").value(nip.options[nip.selectedIndex].value);
     
@@ -93,7 +93,7 @@ $(function () {
 	$("#pejabat-select2").select2({
           dropdownAutoWidth: true,
           width: '100%',
-          placeholder: "Pilih Pegawai",
+          placeholder: "Pilih Nama",
           dropdownParent: "#modal2",
          ajax: { 
            url: dropdown_baseurl + 'pejabat',
@@ -118,7 +118,7 @@ $(function () {
 	 $("#unit-select2").select2({
           dropdownAutoWidth: true,
           width: '100%',
-          placeholder: "Pilih Satker",
+          placeholder: "Pilih Unit Kerja",
           dropdownParent: "#modal2",
          ajax: { 
            url: dropdown_baseurl + 'unitkerja',
@@ -271,7 +271,7 @@ $(function () {
 	 $("#unit-select2_Edit").select2({
           dropdownAutoWidth: true,
           width: '100%',
-          placeholder: "Pilih Unit",
+          placeholder: "Pilih Unit Kerja",
           dropdownParent: "#modalEdit",
          ajax: { 
            url: dropdown_baseurl + 'unitkerja',
@@ -296,6 +296,11 @@ $(function () {
 
 // AUTO FILLED TAMBAH
 
+$('#satker-select2').on('change', function(){
+	kdsatker = $("#satker-select2").val(kdsatker)
+	
+});
+
 $('#pejabat-select2').on('change', function() {
 
 var nip =  $("#pejabat-select2").val()
@@ -309,6 +314,7 @@ $('#jabatan-select2').on('change', function() {
 	$('#jabatanText').val(jabatanText)
 
 });
+
 
 // AUTO FILLED EDIT
 
