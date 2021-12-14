@@ -156,7 +156,7 @@ $unit_id = $this->session->userdata("unit_id");
 
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
           <i class="material-icons">
-          home
+          photo_filter
           </i><span class="menu-title" data-i18n="Mail">Mapping Lembur</span></a>
           </li>
 
