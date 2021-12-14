@@ -211,8 +211,108 @@
                 type: "post",
                 data : {"kdindex": kdindex_session}
             },
+
                 
             autoWidth: false,
+
+        //     drawCallback: function ( settings ) {
+        //     var api = this.api();
+        //     var rows = api.rows( {page:'current'} ).nodes();
+        //     var last=null;
+        //     var subTotal = new Array();
+        //     var groupID = -1;
+        //     var aData = new Array();
+        //     var index = 0;
+            
+        //     api.column(0, {page:'current'} ).data().each( function ( group, i ) {
+            
+        //       var vals = api.row(api.row($(rows).eq(i)).index()).data();
+        //       var salary = vals['rupiah_tahapan'] ? parseFloat(vals['rupiah_tahapan']) : 0;
+               
+        //       if (typeof aData[group] == 'undefined') {
+        //          aData[group] = new Array();
+        //          aData[group].rows = [];
+        //          aData[group].salary = [];
+        //       }
+          
+        //    		aData[group].rows.push(i); 
+        // 			aData[group].salary.push(salary); 
+                
+        //     } );
+    
+
+        //     var idx= 0;
+
+      
+        //   	for(var office in aData){
+       
+				// 					 idx =  Math.max.apply(Math,aData[office].rows);
+      
+        //            var sum = 0; 
+        //            $.each(aData[office].salary,function(k,v){
+        //                 sum = sum + v;
+        //            });
+  			// 						// console.log(aData[office].salary);
+        //            $(rows).eq( idx ).after(
+        //                 '<tr class="group" style="background-color: #b9f6d8 !important; color: #000"><td>'+office+'</td>'+
+        //                 '<td style="text-align: right" >'+formatMoney(sum)+'</td><td></td></tr>'
+                        
+        //             );
+                    
+                    
+        //     };
+
+        // },
+
+        "drawCallback": function ( settings ) {
+	var api = this.api(),data;
+	var rows = api.rows( {page:'current'} ).nodes();
+	var last=null;
+	
+	// Remove the formatting to get integer data for summation
+	var intVal = function ( i ) {
+		return typeof i === 'string' ?
+			i.replace(/[\$,]/g, '')*1 :
+			typeof i === 'number' ?
+				i : 0;
+	};
+
+	total=new Array();
+	api.column(0, {page:'current'} ).data().each( function ( group, i ) {
+	    group_assoc=group.replace(' ',"_");
+        if(typeof total[group_assoc] != 'undefined'){
+            total[group_assoc]=total[group_assoc]+intVal(api.column(2).data()[i]);
+        }else{
+            total[group_assoc]=intVal(api.column(2).data()[i]);
+        }
+		if ( last !== group ) {
+			$(rows).eq( i ).before(
+				'<tr class="group"><td colspan="4">'+group+'</td><td class="'+i+'"></td></tr>'
+			);
+			
+			last = group;
+		}
+	} );
+    for(var key in total) {
+        $("."+key).html("$"+total[key]);
+    }
+},
+
+            // drawCallback: function(settings) {
+            //   var api = this.api();
+            //   var rows = api.rows({page: 'current'}).nodes();
+            //   var last = null;
+
+            //   api.column(0, {page: 'current'}).data().each(function(group, i) {
+            //                     if (last !== group) {
+            //                       $(rows).eq(i).before(
+            //                           '<tr class="group" style="background-color: #b9f6d8 !important; color: #000"><td>'+group+'</td></tr>',
+            //                               );
+                                  
+            //                               }
+            //       last = group;
+            //   });
+            // },
             columns: [
              
               
@@ -256,91 +356,6 @@
             scrollCollapse: true,
             columnDefs: [{ visible: false, targets: 0 }, { width: "50%", targets: 2 }],
 
-        //     "drawCallback": function ( settings ) {
-        //     var api = this.api();
-        //     var rows = api.rows( {page:'all'} ).nodes();
-        //     var last=null;
-            
-        //     // Remove the formatting to get integer data for summation
-	      //     var intVal = function ( i ) {
-	      //     	return typeof i === 'string' ?
-			  //         i.replace(/[\$,]/g, '')*1 :
-			  //         typeof i === 'number' ?
-				//                i : 0;
-	      //     };
-          
-        //     total=[];
-        //     api.column(0, {page:'all'} ).data().each( function ( group, i ) {
-        //     var vals = api.row(api.row($(rows).eq(i)).index()).data();
-
-        //       group_assoc=group.replace(' ',"_");
-        //       //console.log(group_assoc);
-        //       if(typeof total[group_assoc] != 'undefined'){
-        //     total[group_assoc]=total[group_assoc]+parseFloat(vals['rupiah_tahapan']);
-        // }else{
-        //     total[group_assoc]=parseFloat(vals['rupiah_tahapan']);
-        // }
-        //       if ( last !== group ) {
-        //             $(rows).eq( i ).before(
-        //                 '<tr class="group" style="background-color: #b9f6d8 !important; color: #000"><td>'+group+'</td><td class="text-right">'+total[group_assoc]+'</td><td></td></tr>'
-        //             );
- 
-        //             last = group;
-        //         }
-        //     } );
-        //   for(var key in total) {
-        //       $("."+key).html("$"+total[key]);
-        //     }
-        // },
-
-            drawCallback: function ( settings ) {
-            var api = this.api();
-            var rows = api.rows( {page:'current'} ).nodes();
-            var last=null;
-            var subTotal = new Array();
-            var groupID = -1;
-            var aData = new Array();
-            var index = 0;
-            
-            api.column(0, {page:'current'} ).data().each( function ( group, i ) {
-            
-              var vals = api.row(api.row($(rows).eq(i)).index()).data();
-              var salary = vals['rupiah_tahapan'] ? parseFloat(vals['rupiah_tahapan']) : 0;
-               
-              if (typeof aData[group] == 'undefined') {
-                 aData[group] = new Array();
-                 aData[group].rows = [];
-                 aData[group].salary = [];
-              }
-          
-           		aData[group].rows.push(i); 
-        			aData[group].salary.push(salary); 
-                
-            } );
-    
-
-            var idx= 0;
-
-      
-          	for(var office in aData){
-       
-									 idx =  Math.max.apply(Math,aData[office].rows);
-      
-                   var sum = 0; 
-                   $.each(aData[office].salary,function(k,v){
-                        sum = sum + v;
-                   });
-  									// console.log(aData[office].salary);
-                   $(rows).eq( idx ).after(
-                        '<tr class="group" style="background-color: #b9f6d8 !important; color: #000"><td>'+office+'</td>'+
-                        '<td style="text-align: right" >'+formatMoney(sum)+'</td><td></td></tr>'
-                        
-                    );
-                    
-                    
-            };
-
-        },
 
         footerCallback: function ( row, data, start, end, display ) {
 				var api = this.api();
