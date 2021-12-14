@@ -67,7 +67,7 @@ class Pejabat extends CI_Controller {
 
 		}else if($Trigger == "U"){
 			$id = $this->input->post('idPejabat');
-			$kdsatker = $this->input->post('kdsatker_Edit');
+			$kdsatker = $this->input->post('kdsatker');
 			$nama_pejabat = $this->input->post('nama_pejabat');
 			$nip = $this->input->post('nip_Edit');
 			$jabatan = $this->input->post('jabatanEditText');
