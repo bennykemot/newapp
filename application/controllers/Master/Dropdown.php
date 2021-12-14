@@ -306,7 +306,7 @@ class Dropdown extends CI_Controller {
 
       // Search term
       $searchTerm = $this->input->post('searchTerm');
-      $kdsatker = $this->input->post('kdsatker');
+      $kdsatker = $this->input->post('session_satker');
 
       // Get users
       $response = $this->Dropdown->getData_ppk($searchTerm, $kdsatker);

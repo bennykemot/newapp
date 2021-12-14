@@ -632,6 +632,7 @@ function getData_ppk($searchTerm="",$kdsatker){
    $this->db->select('nama');
    $this->db->where("nama like '%".$searchTerm."%' ");
    $this->db->where("jabatan_id", 4);
+	$this->db->where("kdsatker", $kdsatker);
    $fetched_records = $this->db->get('t_pejabat');
    $users = $fetched_records->result_array();
 
