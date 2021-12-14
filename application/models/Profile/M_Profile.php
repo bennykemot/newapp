@@ -139,6 +139,7 @@ class M_Profile extends CI_Model{
             $this->db->select('user.keterangan');
             $this->db->select('user.status');
             $this->db->select('user.unit_id');
+			$this->db->select('user.unit_kerja');
             $this->db->select('t_unitkerja.nama_unit');
             $this->db->select('t_role.rolename');
             

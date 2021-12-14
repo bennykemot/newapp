@@ -23,6 +23,15 @@
                           </div>
                       </div>
 
+											<div class="input-field col s12">
+                        <div class="input-field col s2"><label>Unit</label></div>
+
+                        <div class="input-field col s10" >
+														<select  id="unit-select2" name="unit_id" class="select2-data-ajax select2-hidden-accessible browser-default"></select>
+														<input type="text" id="unitText" name="unitText" hidden>
+                          </div>
+                      </div>
+
                       <div class="input-field col s12">
                         <div class="input-field col s2"><label>Role</label></div>
 
@@ -90,6 +99,15 @@
                         <input readonly placeholder="<?php echo $this->session->userdata("nmsatker"); ?>" id="kdsatker_Edit" name="kdsatker_Edit" value = "<?php echo $this->session->userdata("kdsatker"); ?>">
                           </div>
                     </div>
+
+										<div class="input-field col s12">
+                        <div class="input-field col s2"><label>Unit</label></div>
+
+                        <div class="input-field col s10" >
+														<select  id="unit-select2_Edit" name="unit_id_Edit" class="select2-data-ajax select2-hidden-accessible browser-default"></select>
+														<input type="text" id="unitText_Edit" name="unitText_Edit" hidden>
+                          </div>
+                      </div>
 
                       <div class="input-field col s12">
                         <div class="input-field col s2"><label>Role</label></div>
