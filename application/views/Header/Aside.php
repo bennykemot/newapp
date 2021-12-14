@@ -16,6 +16,19 @@ $thang = $this->session->userdata("thang");
 $user_id = $this->session->userdata("user_id");
 $role_id = $this->session->userdata("role_id");
 $unit_id = $this->session->userdata("unit_id");
+
+function mappingD_none($data){
+  $class="";
+  if($data == "604435" || 
+  $data == "636702" || 
+  $data == "636778" || 
+  $data == "450460" || 
+  $data == "651994" ){
+    $class="d-none";
+  }
+  return $class;
+
+}
 ?>
     <!-- BEGIN: SideNav-->
     <aside class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-dark sidenav-active-rounded">
@@ -61,7 +74,7 @@ $unit_id = $this->session->userdata("unit_id");
 
           <!-- DIGRUP ANGGARAN -->
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Mappingapp/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id.'/'.$unit_id)?>">
+          <li class="bold <?=mappingD_none($kdsatker)?>"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Mappingapp/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id.'/'.$unit_id)?>">
           <i class="material-icons">
           view_comfy
           </i><span class="menu-title" data-i18n="Mail">Mapping App</span></a>
@@ -141,7 +154,7 @@ $unit_id = $this->session->userdata("unit_id");
           </i><span class="menu-title" data-i18n="Mail">Pembagian Pagu</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Mappingapp/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id.'/'.$unit_id)?>">
+          <li class="bold <?=mappingD_none($kdsatker)?>"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Mappingapp/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id.'/'.$unit_id)?>">
           <i class="material-icons">
           view_comfy
           </i><span class="menu-title" data-i18n="Mail">Mapping App</span></a>

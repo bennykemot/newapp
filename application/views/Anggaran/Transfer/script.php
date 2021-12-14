@@ -94,12 +94,14 @@ $('.btn-upload').click(function (e) {
              if(ext.length == 3){
                     formData.append("no_revisi", "00");
                     no_revisi = 0;
+                    sbstring = 4
             }else{
                     formData.append("no_revisi", ext.substring(4, 5))
                     no_revisi = ext.substring(4, 5);
+                    sbstring = 3
             }
 
-             if(ext.substring(1, 4)!= thang_session.substring(2, 4)){
+             if(ext.substring(1, sbstring)!= thang_session.substring(2, 4)){
                 swal("Warning", "Tahun Anggaran Tidak Sesuai!", "warning")
                 return false;
                 }
