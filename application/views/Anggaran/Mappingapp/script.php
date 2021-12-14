@@ -198,7 +198,11 @@
             ////////TABLE BAWAH
 
       var grid_detail_app = "#tb-app";
+      var collapsedGroups = [];
+	var groupParent = [];
+    var counter = 1;
       $(grid_detail_app).DataTable({
+        
             serverSide: true,
             processing: true,
             searchDelay: 500,
@@ -308,6 +312,12 @@
             bFilter: false,
             scrollCollapse: true,
             columnDefs: [{ visible: false, targets: 0 }, { width: "50%", targets: 2 }],
+            rowGroup: {
+                dataSrc: 'nama_app'
+            },
+
+           
+      
 
             drawCallback: function ( settings ) {
             var api = this.api();
@@ -348,7 +358,7 @@
                    });
   									// console.log(aData[office].salary);
                    $(rows).eq( idx ).after(
-                        '<tr class="group" style="background-color: #b9f6d8 !important; color: #000"><td>'+office+'</td>'+
+                        '<tr class="group" style="background-color: #b9f6d8 !important; color: #000"><td>SUB TOTAL</td>'+
                         '<td style="text-align: right" >'+formatMoney(sum)+'</td><td></td></tr>'
                         
                     );
