@@ -14,9 +14,9 @@
                     <div class="col s9">
                         <h6>Data Jabatan</h6>
                     </div>
-                    <div class="col s2">
-                    <a class="btn modal-trigger" href="#modal2">Tambah Data</a>
-                    </div>
+                    <!-- <div class="col s2">
+                    	<a class="btn modal-trigger" href="#modal2">Tambah Data</a>
+                    </div> -->
                 </div>
             </div>
         </div>

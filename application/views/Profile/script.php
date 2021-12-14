@@ -159,7 +159,41 @@ function Reset(idForm) {
     //        cache: true
     //      }
     //  });
- 
+		
+		$("#unit-select2").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Unit Kerja",
+          dropdownParent: "#modal2",
+         ajax: { 
+           url: dropdown_baseurl + 'unitkerja',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+										Trigger : "unit_forPejabat",
+										kdsatker: "<?= $this->session->userdata("kdsatker")?>",
+										searchTerm: params.term
+										// search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
+		$('#unit-select2').on('change', function() {
+				$('#unitText').val()
+				var unitText =  $("#unit-select2 option:selected").text()
+				$('#unitText').val(unitText)
+
+		});
+
      $("#role-select2").select2({
           dropdownAutoWidth: true,
           width: '100%',
@@ -223,6 +257,40 @@ function Reset(idForm) {
     //        cache: true
     //      }
     //  });
+
+		$("#unit-select2_Edit").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Unit Kerja",
+          dropdownParent: "#modalEdit",
+         ajax: { 
+           url: dropdown_baseurl + 'unitkerja',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+										Trigger : "unit_forPejabat",
+										kdsatker: "<?= $this->session->userdata("kdsatker")?>",
+										searchTerm: params.term
+										// search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
+		$('#unit-select2_Edit').on('change', function() {
+				$('#unitText_Edit').val()
+				var unitText_Edit =  $("#unit-select2_Edit option:selected").text()
+				$('#unitText_Edit').val(unitText_Edit)
+
+		});
  
      $("#role-select2_Edit").select2({
           dropdownAutoWidth: true,
@@ -313,6 +381,7 @@ $.ajax({
               $('#nama_user_Edit').val(data['username']);
               $('#password_Edit').val(data['password']);
               $('#keterangan_Edit').val(data['keterangan']);
+							$('#unitText_Edit').val(data['unit_kerja']);
 
                 var satker = $("<option selected='selected'></option>").val(data['kdsatker']).text(data['kdsatker']+' - '+data['nmsatker'])
                 $("#satker-select2_Edit").append(satker).trigger('change');
@@ -320,8 +389,8 @@ $.ajax({
                 var role = $("<option selected='selected'></option>").val(data['role_id']).text(data['role_id']+' - '+data['rolename'])
                 $("#role-select2_Edit").append(role).trigger('change');
 
-                var unit = $("<option selected='selected'></option>").val(data['unit_id']).text(data['nama_unit'])
-                $("#unitkerja-select2_Edit").append(unit).trigger('change');
+                var unit = $("<option selected='selected'></option>").val(data['unit_id']).text(data['unit_kerja'])
+                $("#unit-select2_Edit").append(unit).trigger('change');
 
                 if(data['status'] == 1){
                   var textt = "Aktif"
