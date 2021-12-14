@@ -487,10 +487,21 @@ function getData_unitkerja($searchTerm="", $Trigger, $kdsatker){
 		// Initialize Array with fetched data
 		$data = array();
 		foreach($users as $user){
-			$data[] = array("id"=>$user['id'], "text"=>$user['nama_unit']);
+			$data[] = array("id"=>$user['id'], "text"=> $user['nama_unit']);
 		}
 		return $data;
 		
+	}elseif($Trigger == "unit_forPengguna"){
+		$fetched_records = $this->db->query("SELECT * FROM t_unitkerja WHERE (kel_jab = 'E.II' OR kel_jab = 'E.III') AND satker_id = '".$kdsatker."' AND nama_unit like '%".$searchTerm."%' ");
+		$users = $fetched_records->result_array();
+
+		// Initialize Array with fetched data
+		$data = array();
+		foreach($users as $user){
+			$data[] = array("id"=>$user['id'], "text"=> $user['grup_id'] ." - ". $user['nama_unit']);
+		}
+		return $data;
+
 	}else{
 
 		$this->db->select('id');

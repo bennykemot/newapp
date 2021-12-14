@@ -37,7 +37,7 @@ class PPK extends CI_Controller {
 			$uraian = $this->input->post('uraianppk');
 
 			$data = array(
-				'id_satker' => $kdsatker,
+				'kdsatker' => $kdsatker,
 				'uraian_ppk' => $uraian,
 			);
 			
@@ -52,30 +52,22 @@ class PPK extends CI_Controller {
 		}else if($Trigger == "R"){
 			$id = $this->input->post('id');
 			$where = array('d_ppk.id' => $id);
-			$output = $this->PPK->CRUD($where,'t_ppk',$Trigger);
+			$output = $this->PPK->CRUD($where,'d_ppk',$Trigger);
 			echo json_encode($output);
 
 		}else if($Trigger == "U"){
 			$id = $this->input->post('id');
 			$kdsatker = $this->input->post('kdsatker_Edit');
-			$nama_pejabat = $this->input->post('nama_pejabat');
-			$nip = $this->input->post('nip_Edit');
-			$jabatan = $this->input->post('jabatanEditText');
-			$unit = $this->input->post('unit_Edit');
-			$jabatan_id = $this->input->post('jabatan_Edit');
+			$uraian = $this->input->post('uraianppk_Edit');
 			
 
 			$data = array(
 				'kdsatker' => $kdsatker,
-				'unitkerja_id' => $unit,
-				'nama' => $nama_pejabat,
-				'nip' => $nip,
-				'nama_jabatan' => $jabatan,
-				'jabatan_id' => $jabatan_id,
+				'uraian_ppk' => $uraian,
 			);
 
 			$where = array('id' => $id);
-			$this->Pejabat->update($data,'t_pejabat',$where);
+			$this->PPK->update($data,'d_ppk',$where);
 
 			$status = "success";
             $msg = "Data Berhasil DiUbah !";

@@ -172,7 +172,7 @@ function Reset(idForm) {
            delay: 250,
            data: function (params) {
               return {
-										Trigger : "unit_forPejabat",
+										Trigger : "unit_forPengguna",
 										kdsatker: "<?= $this->session->userdata("kdsatker")?>",
 										searchTerm: params.term
 										// search term
@@ -270,7 +270,7 @@ function Reset(idForm) {
            delay: 250,
            data: function (params) {
               return {
-										Trigger : "unit_forPejabat",
+										Trigger : "unit_forPengguna",
 										kdsatker: "<?= $this->session->userdata("kdsatker")?>",
 										searchTerm: params.term
 										// search term

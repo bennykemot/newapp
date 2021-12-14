@@ -36,7 +36,7 @@
                         <thead>
                             <tr>
 								<th>No</th>
-								<th>Nama PPK</th>
+								<th>Uraian PPK</th>
 								<th>Aksi</th>
                           	</tr>
                         </thead>
