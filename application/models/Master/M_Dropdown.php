@@ -436,11 +436,12 @@ function getData_Pegawai($searchTerm="", $Trigger){
    return $data;
 }
 
-function getData_Pejabat($searchTerm="", $Trigger){
+function getData_Pejabat($searchTerm="", $kdsatker){
 
    // Fetch users
    $this->db->select('nip');
    $this->db->select('nama');
+	$this->db->where("satker_id",$kdsatker);
    $this->db->where("nama like '%".$searchTerm."%' ");
    $fetched_records = $this->db->get('t_pegawai');
    $users = $fetched_records->result_array();
@@ -471,20 +472,42 @@ function getData_skomponen($searchTerm="", $Trigger){
 }
 
 function getData_unitkerja($searchTerm="", $Trigger, $kdsatker){
+	if($Trigger == "unit_forPejabat"){
+		$this->db->select('id');
+		$this->db->select('grup_id');
+		$this->db->select('nama_unit');
+		$this->db->select('kel_jab');
+		$this->db->where("satker_id", $kdsatker);
+		$this->db->where("kel_jab", "E.II");
+		$this->db->where("nama_unit like '%".$searchTerm."%' ");
 
-   $this->db->select('id');
-   $this->db->select('nama_unit');
-	$this->db->select('kel_jab');
-   $this->db->where("nama_unit like '%".$searchTerm."%' ");
-   $fetched_records = $this->db->get('t_unitkerja');
-   $users = $fetched_records->result_array();
+		$fetched_records = $this->db->get('t_unitkerja');
+		$users = $fetched_records->result_array();
 
-   // Initialize Array with fetched data
-   $data = array();
-   foreach($users as $user){
-      $data[] = array("id"=>$user['id'], "text"=>$user['nama_unit']);
-   }
-   return $data;
+		// Initialize Array with fetched data
+		$data = array();
+		foreach($users as $user){
+			$data[] = array("id"=>$user['id'], "text"=>$user['nama_unit']);
+		}
+		return $data;
+		
+	}else{
+
+		$this->db->select('id');
+		$this->db->select('nama_unit');
+		$this->db->select('kel_jab');
+		$this->db->where("nama_unit like '%".$searchTerm."%' ");
+		$fetched_records = $this->db->get('t_unitkerja');
+		$users = $fetched_records->result_array();
+
+		// Initialize Array with fetched data
+		$data = array();
+		foreach($users as $user){
+			$data[] = array("id"=>$user['id'], "text"=>$user['nama_unit']);
+		}
+		return $data;
+
+	}   
 }
 
 function getData_jabatan($searchTerm="", $Trigger){
