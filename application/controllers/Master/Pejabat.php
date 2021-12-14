@@ -16,7 +16,9 @@ class Pejabat extends CI_Controller {
 
 	public function Page()
 	{
-		$data['pejabat'] = $this->Pejabat->getPejabat();
+		$kdsatker = $this->session->userdata("kdsatker");
+
+		$data['pejabat'] = $this->Pejabat->getPejabat($kdsatker);
 		$this->load->view('MasterData/Pejabat/manage',$data);
 	}
 

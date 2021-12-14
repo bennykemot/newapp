@@ -137,7 +137,7 @@ $.ajax({
               
               $('#nip_Edit').val(data['nip']);
 			  
-			  	var kdsatker = $("<option selected='selected'></option>").val(data['kdsatker']).text(data['kdsatker']+' - '+data['nmsatker'])
+			  				var kdsatker = $("<option selected='selected'></option>").val(data['kdsatker']).text(data['kdsatker']+' - '+data['nmsatker'])
                 $("#satker-select2_Edit").append(kdsatker).trigger('change');
 
                 var pejabat = $("<option selected='selected'></option>").val(data['nip']).text(data['nama'])

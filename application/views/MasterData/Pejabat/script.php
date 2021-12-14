@@ -101,7 +101,9 @@ $(function () {
            delay: 250,
            data: function (params) {
               return {
-                searchTerm: params.term
+					  //Trigger: pejabat_forSatker,
+					  kdsatker: "<?= $this->session->userdata("kdsatker")?>",
+					  searchTerm: params.term
                  // search term
               };
            },
@@ -127,7 +129,7 @@ $(function () {
            data: function (params) {
               return {
 					Trigger : "unit_forPejabat",
-					satkerId: "<?= $this->session->userdata("kdsatker")?>",
+					kdsatker: "<?= $this->session->userdata("kdsatker")?>",
                searchTerm: params.term
                // search term
               };
@@ -231,7 +233,8 @@ $(function () {
            delay: 250,
            data: function (params) {
               return {
-                searchTerm: params.term
+					kdsatker: "<?= $this->session->userdata("kdsatker")?>",
+					searchTerm: params.term,
                  // search term
               };
            },
@@ -281,7 +284,9 @@ $(function () {
            delay: 250,
            data: function (params) {
               return {
-                searchTerm: params.term
+					Trigger : "unit_forPejabat",
+					kdsatker: "<?= $this->session->userdata("kdsatker")?>",
+					searchTerm: params.term
                  // search term
               };
            },

@@ -3,7 +3,7 @@
 	$nmsatker = $this->session->userdata("nmsatker");
 ?>
 
-<div id="modal2" class="modal" style="min-height: 500px">
+<div id="modal2" class="modal" style="min-height: 600px">
             <div class="modal-content">
               <h6>Tambah Pejabat</h6>
               <div style="padding-top: 10px"></div>
@@ -72,7 +72,7 @@
             </div>
           </div>
 
-          <div id="modalEdit" class="modal">
+          <div id="modalEdit" class="modal" style="min-height: 600px">
             <div class="modal-content">
               <h6>Ubah Pejabat</h6>
               <div style="padding-top: 10px"></div>
@@ -85,7 +85,7 @@
                         <div class="input-field col s2"><label>Satker</label></div>
 
                         <div class="input-field col s10 " >
-						<select  id="satker-select2_Edit" name="kdsatker_Edit" class="browser-default"></select>
+													<input type="text" id="kdsatker" name="kdsatker" value="<?php echo $kdsatker .' - '. $nmsatker ?>" readonly> 
                         </div>
                     </div>
 

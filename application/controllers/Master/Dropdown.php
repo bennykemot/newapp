@@ -196,10 +196,11 @@ class Dropdown extends CI_Controller {
 
       // Search term
       $searchTerm = $this->input->post('searchTerm');
-      $Trigger = $this->input->post('Trigger');
+      //$Trigger = $this->input->post('Trigger');
+		$kdsatker = $this->input->post('kdsatker');
 
       // Get users
-      $response = $this->Dropdown->getData_Pejabat($searchTerm, $Trigger);
+      $response = $this->Dropdown->getData_Pejabat($searchTerm, $kdsatker);
 
       echo json_encode($response);
    }
@@ -305,7 +306,7 @@ class Dropdown extends CI_Controller {
 
       // Search term
       $searchTerm = $this->input->post('searchTerm');
-      $kdsatker = $this->input->post('kdsatker');
+      $kdsatker = $this->input->post('session_satker');
 
       // Get users
       $response = $this->Dropdown->getData_ppk($searchTerm, $kdsatker);

@@ -2,40 +2,35 @@
 
 class M_Pejabat extends CI_Model {
 
-  	function getPejabat(){		
+  	function getPejabat($kdsatker){		
 		
+		$query = $this->db->query("SELECT
+										t_pejabat.id as id,
+										t_pejabat.kdsatker as kdsatker,
+										t_pejabat.unitkerja_id as unit_id,
+										t_pejabat.nama as nama,
+										t_pejabat.nip as nip,
+										t_pejabat.jabatan_id as id_jab,
+										t_pejabat.nama_jabatan as jabatan,
 
+										t_unitkerja.nama_unit as unit,
+										
+										t_satker.nmsatker as nama_satker
 
-		$query = $this->db->query('SELECT
-									t_pejabat.id as id,
-									
-									t_pejabat.unitkerja_id as unit_id,
-									t_pejabat.nama as nama,
-									t_pejabat.nip as nip,
-									t_pejabat.jabatan_id as id_jab,
+										FROM
+										t_pejabat
 
-									t_unitkerja.nama_unit as unit,
+										JOIN 
 
-									r_jabatan.jabatan as jabatan,
-
-									t_satker.nmsatker as satker
-
-									FROM
-									t_pejabat
-
-									JOIN 
-
-									t_unitkerja ON t_unitkerja.id = t_pejabat.unitkerja_id
-
-									JOIN
-
-									r_jabatan ON r_jabatan.id = t_pejabat.jabatan_id
-
-									JOIN
-
-									t_satker ON t_satker.kdsatker = t_pejabat.kdsatker
+										t_unitkerja ON t_unitkerja.id = t_pejabat.unitkerja_id
+										
+										JOIN 
+										
+										t_satker ON t_satker.kdsatker = t_pejabat.kdsatker
+										
+										WHERE t_pejabat.kdsatker = '".$kdsatker."'
 		
-									');
+									");
 
 		return $query->result();
 

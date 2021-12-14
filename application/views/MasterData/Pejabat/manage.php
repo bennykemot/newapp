@@ -1,4 +1,7 @@
 <?php include(APPPATH . 'views/Header/Aside.php') ?>
+<?php
+	$kdsatker = $this->session->userdata("kdsatker");
+?>
 
 <!-- Page Length Options -->
  <div class="row">
