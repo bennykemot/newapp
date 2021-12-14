@@ -289,7 +289,7 @@
                 },
 
                 {
-                    data: "rupiah_tahapan", className: "text-right", render: $.fn.dataTable.render.number( ',', '.', 0 )
+                    data: "rupiah_tahapan", className: "text-right", render: $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
                 },
 
                 { data: 'id', class:"text-center",
@@ -312,61 +312,87 @@
             bFilter: false,
             scrollCollapse: true,
             columnDefs: [{ visible: false, targets: 0 }, { width: "50%", targets: 2 }],
+
             rowGroup: {
-                dataSrc: 'nama_app'
+            startRender: null,
+            endRender: function ( rows, group ) {
+                var salaryAvg = rows
+                    .data()
+                    .pluck('rupiah_tahapan')
+                    .reduce( function (a, b) {
+                        return a + b.replace(/[^\d]/g, '')*1;
+                    }, 0) / rows.count();
+                salaryAvg = $.fn.dataTable.render.number(',', '.', 0, 'Rp ').display( salaryAvg );
+ 
+                var ageAvg = rows
+                    .data()
+                    .pluck('nama_app')
+                    .reduce( function (a, b) {
+                        return a + b*1;
+                    }, 0) / rows.count();
+ 
+                return $('<tr style="background-color: #b9f6d8 !important; color: #000" />')
+                    .append( '<td >'+group+'</td>' )
+                    .append( '<td class="text-right">'+salaryAvg+'</td>' )
+                    .append( '<td ></td>' );
             },
+            dataSrc: 'nama_app'
+        },
+        //     rowGroup: {
+        //         dataSrc: 'nama_app'
+        //     },
 
            
       
 
-            drawCallback: function ( settings ) {
-            var api = this.api();
-            var rows = api.rows( {page:'current'} ).nodes();
-            var last=null;
-            var subTotal = new Array();
-            var groupID = -1;
-            var aData = new Array();
-            var index = 0;
+        //     drawCallback: function ( settings ) {
+        //     var api = this.api();
+        //     var rows = api.rows( {page:'current'} ).nodes();
+        //     var last=null;
+        //     var subTotal = new Array();
+        //     var groupID = -1;
+        //     var aData = new Array();
+        //     var index = 0;
             
-            api.column(0, {page:'current'} ).data().each( function ( group, i ) {
+        //     api.column(0, {page:'current'} ).data().each( function ( group, i ) {
             
-              var vals = api.row(api.row($(rows).eq(i)).index()).data();
-              var salary = vals['rupiah_tahapan'] ? parseFloat(vals['rupiah_tahapan']) : 0;
+        //       var vals = api.row(api.row($(rows).eq(i)).index()).data();
+        //       var salary = vals['rupiah_tahapan'] ? parseFloat(vals['rupiah_tahapan']) : 0;
                
-              if (typeof aData[group] == 'undefined') {
-                 aData[group] = new Array();
-                 aData[group].rows = [];
-                 aData[group].salary = [];
-              }
+        //       if (typeof aData[group] == 'undefined') {
+        //          aData[group] = new Array();
+        //          aData[group].rows = [];
+        //          aData[group].salary = [];
+        //       }
           
-           		aData[group].rows.push(i); 
-        			aData[group].salary.push(salary); 
+        //    		aData[group].rows.push(i); 
+        // 			aData[group].salary.push(salary); 
                 
-            } );
+        //     } );
     
 
-            var idx= 0;
+        //     var idx= 0;
 
       
-          	for(var office in aData){
+        //   	for(var office in aData){
        
-									 idx =  Math.max.apply(Math,aData[office].rows);
+				// 					 idx =  Math.max.apply(Math,aData[office].rows);
       
-                   var sum = 0; 
-                   $.each(aData[office].salary,function(k,v){
-                        sum = sum + v;
-                   });
-  									// console.log(aData[office].salary);
-                   $(rows).eq( idx ).after(
-                        '<tr class="group" style="background-color: #b9f6d8 !important; color: #000"><td>SUB TOTAL</td>'+
-                        '<td style="text-align: right" >'+formatMoney(sum)+'</td><td></td></tr>'
+        //            var sum = 0; 
+        //            $.each(aData[office].salary,function(k,v){
+        //                 sum = sum + v;
+        //            });
+  			// 						// console.log(aData[office].salary);
+        //            $(rows).eq( idx ).after(
+        //                 '<tr class="group" style="background-color: #b9f6d8 !important; color: #000"><td>SUB TOTAL</td>'+
+        //                 '<td style="text-align: right" >'+formatMoney(sum)+'</td><td></td></tr>'
                         
-                    );
+        //             );
                     
                     
-            };
+        //     };
 
-        },
+        // },
 
 
         footerCallback: function ( row, data, start, end, display ) {
