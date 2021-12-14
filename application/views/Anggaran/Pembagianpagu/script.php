@@ -71,7 +71,7 @@
               return {
                 searchTerm: params.term,
                 kdsatker: satker_session,
-                trigger : "Persatker_forPengguna"
+                Trigger : "unit_forPejabat"
                  // search term
               };
            },
@@ -147,7 +147,7 @@
               return {
                 searchTerm: params.term,
                 kdsatker: satker_session,
-                trigger : "Persatker_forPengguna"
+                Trigger : "unit_forPejabat"
                  // search term
               };
            },
