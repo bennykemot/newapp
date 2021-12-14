@@ -9,7 +9,7 @@ class pageMissing extends CI_Controller {
 		$this->load->helper("url");
 	}
 
-	public function pageMissing()
+	public function index()
 	{
 		$this->load->view('Error404');
 	}

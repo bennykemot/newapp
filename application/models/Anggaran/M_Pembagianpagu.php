@@ -28,10 +28,14 @@ class M_Pembagianpagu extends CI_Model{
         $this->load->database();
 	}
 
-    function getDataNew($kdsatker,$thang, $userid, $roleid){
+    function getDataNew($kdsatker,$thang, $userid, $roleid,$unitid){
+        $whereUnitid ="";
+        if($roleid != 1){
+           $whereUnitid = "AND d_bagipagu.unit_id ='.$unitid.'";
+        }
 
         $query =  $this->db->query('SELECT d_pagu.*, t_akun.nmakun, d_bagipagu.unit_id from d_pagu JOIN t_akun ON d_pagu.kdakun = t_akun.kdakun LEFT JOIN d_bagipagu on d_bagipagu.kdindex = d_pagu.kdindex
-        WHERE d_pagu.kdsatker = '.$kdsatker.' AND d_pagu.thang = '.$thang.'  ORDER BY d_pagu.kdindex');
+        WHERE d_pagu.kdsatker = '.$kdsatker.' AND d_pagu.thang = '.$thang.' '.$whereUnitid.'  ORDER BY d_pagu.kdindex');
 
         return $query->result();
      

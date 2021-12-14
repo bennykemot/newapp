@@ -47,7 +47,7 @@ $unit_id = $this->session->userdata("unit_id");
       <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="accordion">
         
       <?php
-				if($role_id == 2){
+				if($role_id != 1){
 			?>
 				<li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
           <i class="material-icons">
@@ -60,12 +60,6 @@ $unit_id = $this->session->userdata("unit_id");
           </li>
 
           <!-- DIGRUP ANGGARAN -->
-
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Transfer')?>">
-          <i class="material-icons">
-          get_app
-          </i><span class="menu-title" data-i18n="Mail">Transfer Pagu</span></a>
-          </li>
 
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Mappingapp/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id.'/'.$unit_id)?>">
           <i class="material-icons">
@@ -154,7 +148,7 @@ $unit_id = $this->session->userdata("unit_id");
           </li>
 
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing')?>">
           <i class="material-icons">
           home
           </i><span class="menu-title" data-i18n="Mail">Mapping Lembur</span></a>
