@@ -63,10 +63,12 @@ class M_Pembagianpagu extends CI_Model{
             return $query->result();
 
         }else if($Trigger == "R-table"){
-            $query = $this->db->query("SELECT d_bagipagu.id, d_bagipagu.unit_id, d_bagipagu.role_id, d_pagu.rupiah, d_pagu.kdbeban , t_unitkerja.nama_unit, d_bagipagu.ppk_id , d_ppk.uraian_ppk 
+            $query = $this->db->query("SELECT d_bagipagu.id, d_bagipagu.unit_id, d_bagipagu.role_id, 
+            d_pagu.rupiah, d_pagu.kdbeban , t_unitkerja.nama_unit, d_bagipagu.ppk_id , t_pejabat.nama , t_role.rolename
                                         FROM d_bagipagu 
                                         JOIN t_unitkerja ON d_bagipagu.unit_id = t_unitkerja.id 
-                                        JOIN d_ppk ON d_bagipagu.ppk_id = d_ppk.id 
+                                        JOIN t_pejabat ON d_bagipagu.ppk_id = t_pejabat.id
+                                        JOIN t_role ON d_bagipagu.role_id = t_role.id
                                         JOIN d_pagu ON d_bagipagu.kdindex = d_pagu.kdindex 
                                         where d_bagipagu.kdindex = '".$data."'");
     

@@ -87,17 +87,6 @@ class Pembagianpagu extends CI_Controller {
 
             $datawhere = array(
                 'thang' => $thang,
-                'kdsatker' => $kdsatker,
-                'kddept' => $kddept,
-                'kdunit' => $kdunit,
-                'kdprogram' => $kdprogram,
-                'kdgiat' => $kdgiat,
-                'kdoutput' => $kdoutput,
-                'kdsoutput' => $kdsoutput,
-                'kdkmpnen' => $kdkmpnen,
-                'ppk_id' => $ppk,
-                'role_id' => $kewenangan,
-                'unit_id' => $unitkerja,
                 'kdindex' => $kdindex);
 
             $cek = $this->Pembagianpagu->CEK($datawhere,'d_bagipagu', 'R');
@@ -192,10 +181,9 @@ class Pembagianpagu extends CI_Controller {
 	public function Tambah()
 		{
             $var =  $this->uri->segment(4);
-
             $kdindex = str_replace("%20", " ", $var);
             $data['tambahpp'] = $this->Pembagianpagu->CRUD($kdindex,'d_pagu','R');
-            $data['readpp'] = $this->Pembagianpagu->CRUD($kdindex,'d_bagi','R-table');
+            $data['readpp'] = $this->Pembagianpagu->CRUD($kdindex,'d_bagipagu','R-table');
 
 			$this->load->view('Anggaran/Pembagianpagu/tambah', $data);
 		}

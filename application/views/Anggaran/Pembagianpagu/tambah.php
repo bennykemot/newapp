@@ -24,20 +24,20 @@ function edit($countread){
 	return $res;
 }
 
-function kewenanganText($kewenangan){
+// function kewenanganText($kewenangan){
 
-	if($kewenangan == 3){
-		$res= "Subag Keuangan";
+// 	if($kewenangan == 3){
+// 		$res= "Subag Keuangan";
 
-		}else if($kewenangan == 5){
-			$res= "PPK";
-		}else if($kewenangan == 9){
-			$res= "PPK";
-		}else if($kewenangan == 10){
-			$res= "PPK";
-		}
-		return $res;
-	}
+// 		}else if($kewenangan == 5){
+// 			$res= "PPK";
+// 		}else if($kewenangan == 9){
+// 			$res= "PPK";
+// 		}else if($kewenangan == 10){
+// 			$res= "PPK";
+// 		}
+// 		return $res;
+// 	}
 
 ?>
 
@@ -142,7 +142,7 @@ function kewenanganText($kewenangan){
 										<td>PPK</td>
 										<td>
 											<select class="select2 browser-default" id="ppk-select2-edit" name="ppk">
-												<option selected='selected' value="<?=$readpp[0]->ppk_id?>"><?=$readpp[0]->uraian_ppk?></option>
+												<option selected='selected' value="<?=$readpp[0]->ppk_id?>"><?=$readpp[0]->nama?></option>
 											</select>
 										</td>
 										<td></td>
@@ -152,7 +152,7 @@ function kewenanganText($kewenangan){
 										<td>Role Pengusul</td>
 										<td>
 											<select class="select2-data-ajax select2-hidden-accessible browser-default" id="kewenangan-select2-edit" name="kewenangan">
-											<option selected='selected' value="<?=$readpp[0]->role_id?>"><?= kewenanganText($readpp[0]->role_id)?></option>
+											<option selected='selected' value="<?=$readpp[0]->role_id?>"><?= $readpp[0]->rolename?></option>
 											</select>
 										</td>
 										<td></td>
@@ -209,7 +209,7 @@ function kewenanganText($kewenangan){
 						<tr>
 							<td><?=kdbeban($read->kdbeban)?></td>
 							<td><?=$read->nama_unit?></td>
-							<td><?=$read->uraian_ppk?></td>
+							<td><?=$read->nama?></td>
 							<td><?=rupiah($read->rupiah)?></td>
 							<!-- <td><a href="<?= site_url('Anggaran/Pembagianpagu/Tambah') ?>"><i class="material-icons green-text">edit</i></a></td> -->
 						</tr>

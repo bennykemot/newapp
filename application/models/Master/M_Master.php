@@ -60,13 +60,19 @@ class M_Master extends CI_Model {
       function getKomponenSub($kdsatker, $unitid, $roleid){
          $where="";
          if($roleid != 1){
-            $where = "where d_bagipagu.unit_id = ".$unitid." ";
+            $where = "AND d_bagipagu.unit_id = ".$unitid." ";
          }
+
+         if($kdsatker == "450491"){
+            $kdgiat = "WHERE d_pagu.kdgiat > 4206 AND d_pagu.kdgiat < 4230";
+        }else{
+            $kdgiat = "WHERE d_pagu.kdgiat = 3701";
+        }
          
 
          $query = $this->db->query("SELECT d_pagu.*, CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode
           FROM d_bagipagu 
-         JOIN d_pagu ON d_pagu.kdindex = d_bagipagu.kdindex ".$where."
+         JOIN d_pagu ON d_pagu.kdindex = d_bagipagu.kdindex ".$kdgiat." ".$where." 
          ");
          return $query->result();
    

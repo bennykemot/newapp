@@ -124,10 +124,6 @@
     </div>
 </div>
 
-
-
-
-
 <?php include('modal.php');?>
 <?php include(APPPATH . 'views/Footer/Footer.php') ?>
 <?php include('script.php');?>

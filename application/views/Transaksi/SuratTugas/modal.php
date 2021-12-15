@@ -16,143 +16,23 @@
             </div>
 						
 						<div class="input-field col s12">
-
-            <table id="KomponenSub" class="display">
-              
+            <table id="KomponenSub" style="width:100%;display: block;height: 400px;overflow-y: scroll;">
               <tbody>
-                <?php $a=1;foreach($subkomp as $sk){?>
+              <?php $a=1;foreach($subkomp as $sk){?>
                 <tr>
                   <td width="20%"><a class="btn cyan" href="javascript:;" onclick="PilihKode('<?=$sk->kode?>', '<?=$sk->kdindex?>')" id="Pilih">Pilih</a></td>
-                  <td><?=$sk->kode?></td>
+                  <td width="80%"><?=$sk->kode?></td>
                 </tr></a>
                 <?php $a++;}?>
               </tbody>
             </table>
-							
-								<!-- <table>
-									<thead>
-									</thead>
-									<tbody>
-										<tr>
-											<td>
-												<label>Program</label>
-												<select  id="program-select2" name="kdprogram" class="browser-default"></select>
-											</td>
-											<td>.</td>
-											<td>
-												<label>Kegiatan</label>
-												<select  id="kegiatan-select2" name="kdgiat" class="browser-default"></select>
-											</td>
-											<td>.</td>
-											<td>
-												<label>KRO</label>
-												<select  id="kro-select2" name="kdoutput" class="browser-default"></select>
-											</td>
-											<td>.</td>
-											<td>
-												<label>RO</label>
-												<select  id="ro-select2" name="kdsoutput" class="browser-default"></select>
-											</td>
-											<td>.</td>
-											<td>
-												<label>Komponen</label>
-												<select  id="komponen-select2" name="kdkomponen" class="browser-default"></select>
-											</td>
-											<td>.</td>
-											<td>
-												<label>Sub Komponen</label>
-												<select  id="sub_komponen-select2" name="kdskomponen" class="browser-default"></select>
-											</td>
-										</tr>
-									</tbody>
-								</table> -->
+
+            
 						</div>
-
-              <!-- <div class="input-field col s12">
-                <div class="input-field col s2"><label>Program</label></div>
-
-                <div class="input-field col s10 " >
-                  <select  id="program-select2" name="kdprogram" class="browser-default"></select>
-                  </div>
-              </div>
-
-              <div class="input-field col s12">
-                <div class="input-field col s2"><label>Kegiatan</label></div>
-
-                <div class="input-field col s10 " >
-                  <select  id="kegiatan-select2" name="kdgiat" class="browser-default"></select>
-                  </div>
-              </div>
-
-              <div class="input-field col s12">
-                <div class="input-field col s2"><label>KRO</label></div>
-
-                <div class="input-field col s10 " >
-                  <select  id="kro-select2" name="kdoutput" class="browser-default"></select>
-                  </div>
-              </div>
-
-              <div class="input-field col s12">
-                <div class="input-field col s2"><label>RO</label></div>
-
-                <div class="input-field col s10 " >
-                  <select  id="ro-select2" name="kdsoutput" class="browser-default"></select>
-                  </div>
-              </div>
-
-              <div class="input-field col s12">
-                <div class="input-field col s2"><label>Komponen</label></div>
-
-                <div class="input-field col s10 " >
-                  <select  id="komponen-select2" name="kdkomponen" class="browser-default"></select>
-                  </div>
-              </div>
-
-              <div class="input-field col s12">
-                <div class="input-field col s2"><label>Sub Komponen</label></div>
-
-                <div class="input-field col s10 " >
-                  <select  id="sub_komponen-select2" name="kdskomponen" class="browser-default"></select>
-                  </div>
-              </div> -->
 							
              <input type="text" name="kdindex" id="kdindex" hidden>
             </div>
           </form>
         </div>
     </div>
-    <!-- <div class="modal-footer">
-      <button id="Tambah" class="btn disabled"><i class="material-icons left">done</i> Simpan</button>
-      <a class="modal-action modal-close  red btn">Batal</a>
-    </div> -->
 </div>
-
-<!-- <div id="modalTim" class="modal" style="max-height: 500px">
-    <div class="modal-content">
-      <h4>Komponen/Sub Komponen</h4>
-      <div style="padding-top: 10px"></div>
-        <div class="row">
-              <table id="multi-select" class="display">
-                <thead>
-                  <tr>
-                    <th>
-                      <label>
-                        <input type="checkbox" class="select-all">
-                        <span></span>
-                      </label>
-                    </th>
-                    <th>NIP</th>
-                    <th>Nama</th>
-                    <th>Peran</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-        </div>
-    </div>
-    <div class="modal-footer">
-      <button id="Tambah" class="btn disabled"><i class="material-icons left">done</i> Simpan</button>
-      <a class="modal-action modal-close  red btn">Batal</a>
-    </div>
-</div> -->
