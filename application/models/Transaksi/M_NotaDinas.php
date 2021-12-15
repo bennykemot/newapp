@@ -83,13 +83,16 @@ class M_NotaDinas extends CI_Model{
             d_itemcs.tglberangkat, d_itemcs.tglkembali, d_itemcs.kotaasal, 
             d_itemcs.kotatujuan, d_itemcs.jmlhari, d_itemcs.totaluangharian, 
             d_itemcs.totalinap, d_itemcs.totalrep, d_itemcs.totaltravel , d_itemcs.jnstransportasi,
-            d_itemcs.jumlah ,d_pagu.rupiah,d_pagu.kdbeban
+            d_itemcs.jumlah ,d_pagu.rupiah,d_pagu.kdbeban,
+			t_pejabat.nama as ppk_ttd, 
+			t_pejabat.nip as nip_ttd
             
             
             FROM d_surattugas JOIN t_unitkerja ON t_unitkerja.id = d_surattugas.id_unit 
             JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
             LEFT JOIN t_pegawai ON d_surattugas.id_ttd = t_pegawai.nip 
             JOIN d_pagu ON d_pagu.kdindex = d_surattugas.kdindex
+			JOIN t_pejabat ON d_surattugas.id_ttd = t_pejabat.id 
             
             WHERE d_surattugas.id = ".$Id_st." ORDER BY d_itemcs.nourut ");
 

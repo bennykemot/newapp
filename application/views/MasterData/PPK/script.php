@@ -135,11 +135,13 @@ $.ajax({
       success: function(data)
           {    
               
-              $('#uraianppk_Edit').val(data['uraianppk']);
+              $('#uraianppk_Edit').val(data['uraian_ppk']);
 
-                $('#id').val(Id);
+							$('#kdsatker').val(data['kdsatker']);
 
-              	$('#modalEdit').modal('open');
+              $('#idPPK').val(Id);
+
+              $('#modalEdit').modal('open');
           
           
           }

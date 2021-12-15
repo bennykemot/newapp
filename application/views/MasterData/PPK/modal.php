@@ -5,7 +5,7 @@
 
 <div id="modal2" class="modal">
             <div class="modal-content">
-              <h6>Tambah PPK</h6>
+              <h6>Tambah Uraian PPK</h6>
               <div style="padding-top: 10px"></div>
                 <div class="row">
 
@@ -39,7 +39,7 @@
 
           <div id="modalEdit" class="modal">
             <div class="modal-content">
-              <h6>Ubah PPK</h6>
+              <h6>Ubah Uraian PPK</h6>
               <div style="padding-top: 10px"></div>
                 <div class="row">
 
@@ -50,7 +50,7 @@
                         <div class="input-field col s2"><label>Uraian PPK</label></div>
 
                         <div class="input-field col s10 " >
-													<input type="text" id="uraianppk" name="uraianppk" value="">
+													<input type="text" id="uraianppk_Edit" name="uraianppk_Edit" class="validate">
                         </div>
                     </div>
 

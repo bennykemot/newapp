@@ -227,14 +227,14 @@ function cek_tgl($tanggal){
                         <tr>
                             <td style="border-right-style: none;border-bottom-style: none;border-top-style: none;b"></td><td style="border-bottom-style: none;border-top-style: none;border-left-style: none;">Ernadhi Sudarmanto </td>
                             
-                            <td style="border-right-style: none;border-bottom-style: none;border-top-style: none;b"></td><td style="border-bottom-style: none;border-top-style: none;border-left-style: none;">Sumardi </td>
+                            <td style="border-right-style: none;border-bottom-style: none;border-top-style: none;b"></td><td style="border-bottom-style: none;border-top-style: none;border-left-style: none;"><?= $e->ppk_ttd ?> </td>
                             <td style="border-right-style: none;border-bottom-style: none;border-top-style: none;b"></td><td style="border-bottom-style: none;border-top-style: none;border-left-style: none;">Muslim Ridha Muthaher </td>
                         </tr>
 
                         <tr>
                             <td style="border-right-style: none;border-top-style: none;">NIP</td><td style="border-left-style: none;border-top-style: none;">196507041985031001 </td>
                             
-                            <td style="border-right-style: none;border-top-style: none;">NIP</td><td style="border-left-style: none;border-top-style: none;">197307251994021001 </td>
+                            <td style="border-right-style: none;border-top-style: none;">NIP</td><td style="border-left-style: none;border-top-style: none;"><?= $e->nip_ttd ?> </td>
                             <td style="border-right-style: none;border-top-style: none;">NIP</td><td style="border-left-style: none;border-top-style: none;">196802161993031001 </td>
                         </tr>
                     </tfoot>

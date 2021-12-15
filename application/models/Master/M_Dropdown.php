@@ -714,7 +714,7 @@ function getData_ttd($searchTerm=""){
    $this->db->select('nip');
    $this->db->where("nama like '%".$searchTerm."%' ");
    //$this->db->where("kdsatker", $kdsatker);
-   $this->db->where("jabatan_id", 6);
+   $this->db->where("jabatan_id", 5);
    $fetched_records = $this->db->get('t_pejabat');
    $users = $fetched_records->result_array();
 
