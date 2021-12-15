@@ -135,7 +135,9 @@ $.ajax({
       success: function(data)
           {    
               
-              $('#uraianppk_Edit').val(data['uraianppk']);
+              $('#uraianppk_Edit').val(data['uraian_ppk']);
+
+							$('#kdsatker').val(data['kdsatker']);
 
               $('#idPPK').val(Id);
 

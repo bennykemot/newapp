@@ -127,7 +127,7 @@ function cek_tgl($tanggal){
                     <tr>
                         <td style="text-align: center;">1</td>
                         <td>Pejabat Pembuat Komitmen</td>
-                        <td colspan="2">Sumardi</td>
+                        <td colspan="2"><?= $e->ppk_ttd ?></td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">2</td>
@@ -216,7 +216,7 @@ function cek_tgl($tanggal){
                     </tr>
                     <tr >
                         <td width="10%">Tanggal</td>
-                        <td width="25%">15 Maret 2021</td>
+                        <td width="25%"><?= cek_tgl($e->tglst) ?></td>
                     </tr>
                     <tr >
                         <td></td>
@@ -227,11 +227,11 @@ function cek_tgl($tanggal){
                     </tr>
                     <tr >
                         <td></td>
-                        <td width="10%" style="text-align: center;">Sumardi</td>
+                        <td width="10%" style="text-align: center;"><?= $e->ppk_ttd ?></td>
                     </tr>
                     <tr >
                         <td></td>
-                        <td width="10%" style="text-align: center;">NIP.197307251994021001</td>
+                        <td width="10%" style="text-align: center;"><?= $e->nip_ttd ?></td>
                     </tr>
                 </tbody>
             </table>

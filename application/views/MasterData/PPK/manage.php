@@ -35,9 +35,9 @@
                     <table id="tb-ppk" class="display" style="width: 100%;">
                         <thead>
                             <tr>
-								<th>No</th>
-								<th>Uraian PPK</th>
-								<th>Aksi</th>
+															<th>No</th>
+															<th>Uraian PPK</th>
+															<th>Aksi</th>
                           	</tr>
                         </thead>
                         <tbody>
