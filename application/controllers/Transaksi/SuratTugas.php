@@ -23,9 +23,9 @@ class SuratTugas extends CI_Controller {
 
     public function Page()
 	{
-        
-        $jumlah_data = $this->SuratTugas->Jum();
-        $config['base_url'] = base_url().'Transaksi/SuratTugas/Page';
+        $kdsatker           =  $this->uri->segment(4);
+        $jumlah_data = $this->SuratTugas->Jum($kdsatker);
+        $config['base_url'] = base_url().'Transaksi/SuratTugas/Page/'.$kdsatker;
 		$config['total_rows'] = $jumlah_data;
 		$config['per_page'] = 10;
 
@@ -58,7 +58,7 @@ class SuratTugas extends CI_Controller {
 
 		$from =  $this->uri->segment(3);
 		$this->pagination->initialize($config);
-        $data['SuratTugas'] = $this->SuratTugas->getDataNew($config['per_page'], $from);
+        $data['SuratTugas'] = $this->SuratTugas->getDataNew($config['per_page'], $from, $kdsatker);
         $this->load->view('Transaksi/SuratTugas/manage',$data);
 	}
 
@@ -350,14 +350,15 @@ class SuratTugas extends CI_Controller {
                         'totaluangharian'  => $this->pregChar($this->input->post('uangharian'.$urut[$i].'')),
                         'tarifinap'  => $this->pregChar($this->input->post('tarifuangpenginapan'.$urut[$i].'')),
                         'totalinap'  => $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].'')),
-                        // 'tarifrep'  => $this->pregChar("0"),
-                        // 'totalrep'  => $this->pregChar("0"),
+                        'tarifrep'  => $this->pregChar($this->input->post('uangrep'.$urut[$i].'')),
+                        'totalrep'  => $this->pregChar($this->input->post('uangrep'.$urut[$i].'')),
                         // 'taksiasal'  => $this->pregChar("0"),
                         // 'taksitujuan'  => $this->pregChar("0"),
                         // 'lain'  => $this->pregChar($this->input->post('gol'.$urut[$i].'')),
                         //'transport'  => 0,
                         // 'totaltravel'  => $this->pregChar($this->input->post('gol'.$urut[$i].'')),
                         // 'pengeluaranrill'  => $this->pregChar($this->input->post('gol'.$urut[$i].'')),
+                        'transport'  => $this->pregChar($this->input->post('uangtransportasi'.$urut[$i].'')),
 
                         'jnstransportasi'  => $this->input->post('jnstransportasi'.$urut[$i].''),
 

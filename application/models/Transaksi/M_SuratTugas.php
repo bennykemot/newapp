@@ -6,7 +6,8 @@ class M_SuratTugas extends CI_Model{
         $this->load->database();
 	}
 
-    function getDataNew($number,$offset){
+    function getDataNew($number,$offset, $kdsatker){
+        $this->db->where('kdsatker', $kdsatker);
         $this->db->where('is_aktif', 1);
         $this->db->order_by('tglst');
         $this->db->limit($number, $offset);
@@ -16,8 +17,8 @@ class M_SuratTugas extends CI_Model{
      
     }
 
-    function Jum(){
-         return $this->db->get('d_surattugas')->num_rows();
+    function Jum($kdsatker){
+         return $this->db->query("select id from d_surattugas where kdsatker = ".$kdsatker."")->num_rows();
 	}
 
     function getDataUbah($kdindex, $id, $trigger){
@@ -72,7 +73,7 @@ class M_SuratTugas extends CI_Model{
                             d_itemcs.tglberangkat, d_itemcs.tglkembali, 
                             d_itemcs.jmlhari,d_itemcs.totaluangharian, 
                             d_itemcs.totalinap, d_itemcs.totalrep, 
-                            d_itemcs.totaltravel, d_itemcs.jumlah, 
+                            d_itemcs.totaltravel, d_itemcs.jumlah, d_itemcs.transport,
                             d_itemcs.jnstransportasi, CONCAT('WithTim') as tim, d_itemcs.id as idtim,
                 
                             d_itemcs.kotaasal,d_itemcs.kotatujuan,";

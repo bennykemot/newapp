@@ -502,6 +502,21 @@ function getData_unitkerja($searchTerm="", $Trigger, $kdsatker){
 		}
 		return $data;
 
+   }elseif($Trigger == "SelectForBebanAnggaran_NotaDinas"){
+		$this->db->select('id');
+		$this->db->select('nama_unit');
+      $this->db->where("satker_id", $kdsatker);
+		$this->db->where("nama_unit like '%".$searchTerm."%' ");
+		$fetched_records = $this->db->get('t_unitkerja');
+		$users = $fetched_records->result_array();
+
+		// Initialize Array with fetched data
+		$data = array();
+		foreach($users as $user){
+			$data[] = array("id"=>$user['id'], "text"=>$user['nama_unit']);
+		}
+		return $data;
+
 	}else{
 
 		$this->db->select('id');

@@ -66,7 +66,7 @@
                         </div>
 
                         <div class="input-field col s12">
-                            <div class="input-field col s2"><label>Komponen/Sub Komp</label></div>
+                            <div class="input-field col s2"><label>MAK</label></div>
 
                             <div class="input-field col s10 " >
                                 <input type="text"  id="idxskmpnen" name="idxskmpnen"  value="<?= $ST[0]['idxskmpnen'] ?>" readonly>

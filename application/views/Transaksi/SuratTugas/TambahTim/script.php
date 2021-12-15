@@ -10,7 +10,7 @@ var satker_session = "<?= $this->session->userdata("kdsatker")?>"
 var user_session = "<?= $this->session->userdata("user_id")?>"
 var role_session = "<?= $this->session->userdata("role_id")?>"
 var unit_session = "<?= $this->session->userdata("unit_id")?>"
-var count_tim = "<?= count($ST) ?>"
+var count_tim = "<?= count($countST) ?>"
 
 if(role_session == 1){
   unit_session = 0;
@@ -53,6 +53,7 @@ function formatRupiah(angka){
         rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
         return 'Rp. ' + rupiah;
       }
+
 
 
 //SELECT2 VIEW
@@ -463,11 +464,11 @@ $('.multi-field-wrapper').each(function() {
                               <td><input type="date" min="'+minDate+'" max="'+maxDate+'" onchange="dayCount(\''+x+'\',\'D\')" id="tglberangkat'+x+'" name="tglberangkat'+x+'"></td>\
                               <td><input type="date" max="'+maxDate+'" min="'+minDate+'" onchange="dayCount('+x+')" id="tglkembali'+x+'" name="tglkembali'+x+'"></td>\
                               <td><input type="text" id="jmlhari'+x+'" name="jmlhari'+x+'" readonly></td>\
-                              <td><input type="text" id="uangharian'+x+'" name="uangharian'+x+'" ></td>\
-                              <td><input type="text" id="uangpenginapan'+x+'" name="uangpenginapan'+x+'" ></td>\
-                              <td><input type="text" onkeypress="return validateNumber(event)" ></td>\
-                              <td><input type="text" onkeypress="return validateNumber(event)" ></td>\
-                              <td><input type="text" id="total'+x+'"  name="total'+x+'" ></td>\
+                              <td><input type="text" id="uangharian'+x+'" name="uangharian'+x+'" onkeyup="AllCount('+x+')"></td>\
+                              <td><input type="text" id="uangpenginapan'+x+'" name="uangpenginapan'+x+'" onkeyup="AllCount('+x+')"></td>\
+                              <td><input type="text" id="uangtransportasi'+x+'" name="uangtransportasi'+x+'" onkeyup="AllCount('+x+')"></td>\
+                              <td><input type="text" id="uangrep'+x+'" name="uangrep'+x+'" onkeyup="AllCount('+x+')"></td>\
+                              <td><input type="text" readonly id="total'+x+'"  name="total'+x+'" ></td>\
                               <td><select class="select2 browser-default" id="jnstransportasi'+x+'" name="jnstransportasi'+x+'">\
                                     <option value="Pesawat Udara">Pesawat Udara</option>\
                                     <option value="Kendaraan Umum">Kendaraan Umum</option>\
@@ -515,6 +516,34 @@ function validateNumber(e) {
     const pattern = /^[0-9]$/;
 
     return pattern.test(e.key )
+}
+
+function AllCount(i){
+    var harian = $("#uangharian"+i+"").val()
+    var inap = $("#uangpenginapan"+i+"").val()
+
+    var transport = $("#uangtransportasi"+i+"").val()
+    var rep = $("#uangrep"+i+"").val()
+
+    var a = harian.replace(/[^0-9\.]+/g, "");
+    var b = inap.replace(/[^0-9\.]+/g, "");
+    var c = transport.replace(/[^0-9\.]+/g, "");
+    var d = rep.replace(/[^0-9\.]+/g, "");
+
+    var uangharian = a.replace(/\./g, "");
+    var uangpenginapan = b.replace(/\./g, "");
+    var uangtransport = c.replace(/\./g, "");
+    var uangrep = d.replace(/\./g, "");
+
+    // $("#uangharianDum"+i+"").val(uangharian)
+    // $("#uangpenginapanDum"+i+"").val(uangpenginapan)
+
+    var e = Number(uangharian) + Number(uangpenginapan) + Number(uangtransport) + Number(uangrep)
+    var total = ""+e+""
+
+    $("#total"+i+"").val(formatRupiah(total))
+  
+
 }
 
 
@@ -581,9 +610,11 @@ $.ajax({
 
                 var totalUangHarian = ''+((diffDays) * tarif)
                 $("#uangharian"+id+"").val(formatRupiah(totalUangHarian));
+                $("#uangharianDum"+id+"").val(totalUangHarian);
 
                 var totalUangPenginapan = ''+((diffDays-1) * 1200000)
                 $("#uangpenginapan"+id+"").val(formatRupiah(totalUangPenginapan));
+                $("#uangpenginapanDum"+id+"").val(totalUangPenginapan);
 
 
                 //TOTAL
@@ -672,9 +703,11 @@ if ( $("#idxskmpnen").val() != null){
 
                 var totalUangHarian = ''+(diffDays * tarif)
                 $("#uangharian"+id+"").val(formatRupiah(totalUangHarian));
+                $("#uangharianDum"+id+"").val(totalUangHarian);
 
                 var totalUangPenginapan = ''+((diffDays-1) * 1200000)
                 $("#uangpenginapan"+id+"").val(formatRupiah(totalUangPenginapan));
+                $("#uangpenginapanDum"+id+"").val(totalUangPenginapan);
 
 
                 //TOTAL

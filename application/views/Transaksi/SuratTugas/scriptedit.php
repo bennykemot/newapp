@@ -786,6 +786,34 @@ function validateNumber(e) {
     return pattern.test(e.key )
 }
 
+function AllCount(i){
+    var harian = $("#uangharian"+i+"").val()
+    var inap = $("#uangpenginapan"+i+"").val()
+
+    var transport = $("#uangtransportasi"+i+"").val()
+    var rep = $("#uangrep"+i+"").val()
+
+    var a = harian.replace(/[^0-9\.]+/g, "");
+    var b = inap.replace(/[^0-9\.]+/g, "");
+    var c = transport.replace(/[^0-9\.]+/g, "");
+    var d = rep.replace(/[^0-9\.]+/g, "");
+
+    var uangharian = a.replace(/\./g, "");
+    var uangpenginapan = b.replace(/\./g, "");
+    var uangtransport = c.replace(/\./g, "");
+    var uangrep = d.replace(/\./g, "");
+
+    // $("#uangharianDum"+i+"").val(uangharian)
+    // $("#uangpenginapanDum"+i+"").val(uangpenginapan)
+
+    var e = Number(uangharian) + Number(uangpenginapan) + Number(uangtransport) + Number(uangrep)
+    var total = ""+e+""
+
+    $("#total"+i+"").val(formatRupiah(total))
+  
+
+}
+
 
 function cityCount(id){
 

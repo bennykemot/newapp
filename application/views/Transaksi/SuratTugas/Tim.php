@@ -72,11 +72,11 @@
                                                 <td><input type="date" min="<?=$ubah[$i]['tglmulaist']?>" max="<?=$ubah[$i]['tglselesaist']?>" onchange="dayCount('<?=$j?>','D')" id="tglberangkat<?=$j?>" name="tglberangkat<?=$j?>" value="<?=$ubah[$i]['tglberangkat']?>"></td>
                                                 <td><input type="date" max="<?=$ubah[$i]['tglselesaist']?>" min="<?=$ubah[$i]['tglmulaist']?>" onchange="dayCount(<?=$j?>)" id="tglkembali<?=$j?>" name="tglkembali<?=$j?>" value="<?=$ubah[$i]['tglkembali']?>"></td>
                                                 <td><input type="text" id="jmlhari<?=$j?>" name="jmlhari<?=$j?>" readonly value="<?=$ubah[$i]['jmlhari']?>"></td>
-                                                <td><input type="text" id="uangharian<?=$j?>" name="uangharian<?=$j?>" value="<?=rupiah($ubah[$i]['totaluangharian'])?>"></td>
-                                                <td><input type="text" id="uangpenginapan<?=$j?>" name="uangpenginapan<?=$j?>" value="<?=rupiah($ubah[$i]['totalinap'])?>"></td>
-                                                <td><input type="text" onkeypress="return validateNumber(event)" value="<?=rupiah($ubah[$i]['totaltravel'])?>"></td>
-                                                <td><input type="text" onkeypress="return validateNumber(event)" value="<?=rupiah($ubah[$i]['totalrep'])?>"></td>
-                                                <td><input type="text" id="total<?=$j?>"  name="total<?=$j?>" value="<?=rupiah($ubah[$i]['jumlah'])?>"></td>
+                                                <td><input type="text" id="uangharian<?=$j?>" name="uangharian<?=$j?>" value="<?=rupiah($ubah[$i]['totaluangharian'])?>" onkeyup="AllCount(<?=$j?>)"></td>
+                                                <td><input type="text" id="uangpenginapan<?=$j?>" name="uangpenginapan<?=$j?>" value="<?=rupiah($ubah[$i]['totalinap'])?>" onkeyup="AllCount(<?=$j?>)"></td>
+                                                <td><input type="text" id="uangtransportasi<?=$j?>" name="uangtransportasi<?=$j?>" onkeyup="AllCount(<?=$j?>)" value="<?=rupiah($ubah[$i]['transport'])?>"></td>
+                                                <td><input type="text" id="uangrep<?=$j?>" name="uangrep<?=$j?>" onkeyup="AllCount(<?=$j?>)" value="<?=rupiah($ubah[$i]['totalrep'])?>"></td>
+                                                <td><input type="text" id="total<?=$j?>"  name="total<?=$j?>" value="<?=rupiah($ubah[$i]['jumlah'])?>" readonly></td>
                                                 <td><select class="select2 browser-default" id="jnstransportasi<?=$j?>" name="jnstransportasi<?=$j?>">
                                                         <option value="Pesawat Udara">Pesawat Udara</option>
                                                         <option value="Kendaraan Umum">Kendaraan Umum</option>

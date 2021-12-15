@@ -96,7 +96,7 @@ function mappingD_none($data){
           </li>
 
           <!-- DIGRUP RENCANA KEGIATAN -->
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/SuratTugas/Page')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/SuratTugas/Page/'.$kdsatker)?>">
           <i class="material-icons">
           email
           </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>
@@ -173,7 +173,7 @@ function mappingD_none($data){
           </li>
 
           <!-- DIGRUP RENCANA KEGIATAN -->
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/SuratTugas/Page')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/SuratTugas/Page/'.$kdsatker)?>">
           <i class="material-icons">
           email
           </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>
