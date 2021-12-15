@@ -45,9 +45,17 @@ function Min_dateselesai(){
 }
 
 $(document).ready(function() {
+    $('#tb-st').DataTable( {
 
-  
-} );
+      lengthMenu: [
+            [10, 25, 50, -1],
+            [10, 25, 50, "All"],
+        ],
+        responsive: true,
+        scrollX: true,
+        info: false
+         } );
+      } );
 
 
 

@@ -24,41 +24,42 @@ class SuratTugas extends CI_Controller {
     public function Page()
 	{
         $kdsatker           =  $this->uri->segment(4);
-        $jumlah_data = $this->SuratTugas->Jum($kdsatker);
-        $config['base_url'] = base_url().'Transaksi/SuratTugas/Page/'.$kdsatker;
-		$config['total_rows'] = $jumlah_data;
-		$config['per_page'] = 10;
+        // $jumlah_data = $this->SuratTugas->Jum($kdsatker);
+        // $config['base_url'] = base_url().'Transaksi/SuratTugas/Page/'.$kdsatker;
+		// $config['total_rows'] = $jumlah_data;
+		// $config['per_page'] = 10;
 
-        $config['first_url'] = '1';
+        // $config['first_url'] = '1';
 
-        $config['full_tag_open'] = "<ul class='pagination' >";
-        $config['full_tag_close'] = '</ul>';
-        $config['num_tag_open'] = '<li >';
-        $config['num_tag_close'] = '</li>';
-        $config['cur_tag_open'] = '<li><a class="active" >';
-        $config['cur_tag_close'] = '</a></li>';
-        $config['prev_tag_open'] = '<li >';
-        $config['prev_tag_close'] = '</li>';
-        $config['first_tag_open'] = '<li >';
-        $config['first_tag_close'] = '</li>';
-        $config['last_tag_open'] = '<li >';
-        $config['last_tag_close'] = '</li>';
-
-
-
-        $config['prev_link'] = '<i style="font-size: 0px !important" ></i> Previous';
-        $config['prev_tag_open'] = '<li >';
-        $config['prev_tag_close'] = '</li>';
+        // $config['full_tag_open'] = "<ul class='pagination' >";
+        // $config['full_tag_close'] = '</ul>';
+        // $config['num_tag_open'] = '<li >';
+        // $config['num_tag_close'] = '</li>';
+        // $config['cur_tag_open'] = '<li><a class="active" >';
+        // $config['cur_tag_close'] = '</a></li>';
+        // $config['prev_tag_open'] = '<li >';
+        // $config['prev_tag_close'] = '</li>';
+        // $config['first_tag_open'] = '<li >';
+        // $config['first_tag_close'] = '</li>';
+        // $config['last_tag_open'] = '<li >';
+        // $config['last_tag_close'] = '</li>';
 
 
-        $config['next_link'] = 'Next <i style="font-size: 0px !important" ></i>';
-        $config['next_tag_open'] = '<li >';
-        $config['next_tag_close'] = '</li>';
+
+        // $config['prev_link'] = '<i style="font-size: 0px !important" ></i> Previous';
+        // $config['prev_tag_open'] = '<li >';
+        // $config['prev_tag_close'] = '</li>';
 
 
-		$from =  $this->uri->segment(3);
-		$this->pagination->initialize($config);
-        $data['SuratTugas'] = $this->SuratTugas->getDataNew($config['per_page'], $from, $kdsatker);
+        // $config['next_link'] = 'Next <i style="font-size: 0px !important" ></i>';
+        // $config['next_tag_open'] = '<li >';
+        // $config['next_tag_close'] = '</li>';
+
+
+		// $from =  $this->uri->segment(3);
+		// $this->pagination->initialize($config);
+        // $data['SuratTugas'] = $this->SuratTugas->getDataNew($config['per_page'], $from, $kdsatker);
+        $data['SuratTugas'] = $this->SuratTugas->getDataNew($kdsatker);
         $this->load->view('Transaksi/SuratTugas/manage',$data);
 	}
 

@@ -5,9 +5,10 @@ class M_Mappingapp extends CI_Model{
 
 
     function getData_Mapping($kdsatker,$thang, $userid,$roleid, $unitid){
-        $whereUnitid ="";
+        $whereUnitid ="";$whereRoleid="";
         if($roleid != 1){
            $whereUnitid = "AND d_bagipagu.unit_id ='.$unitid.'";
+           $whereRoleid = " WHERE c.role_id = ".$roleid."";
            
         }
 
@@ -29,9 +30,9 @@ class M_Mappingapp extends CI_Model{
                 
                 LEFT JOIN (SELECT d_bagipagu.role_id, d_bagipagu.kdindex FROM d_bagipagu ) as c
                 
-                ON a.kdindex=c.kdindex
+                ON a.kdindex=c.kdindex ".$whereRoleid."
                 
-                WHERE c.role_id = ".$roleid."");
+               ");
 
         // $query = $this->db->query("SELECT a.*,b.alokasi 
         // FROM 

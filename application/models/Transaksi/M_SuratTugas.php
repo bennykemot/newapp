@@ -6,11 +6,10 @@ class M_SuratTugas extends CI_Model{
         $this->load->database();
 	}
 
-    function getDataNew($number,$offset, $kdsatker){
+    function getDataNew($kdsatker){
         $this->db->where('kdsatker', $kdsatker);
         $this->db->where('is_aktif', 1);
         $this->db->order_by('tglst');
-        $this->db->limit($number, $offset);
         $query = $this->db->get('d_surattugas');
 
         return $query->result();

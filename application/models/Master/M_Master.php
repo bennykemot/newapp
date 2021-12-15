@@ -65,29 +65,32 @@ class M_Master extends CI_Model {
 
          if($kdsatker == "450491"){
             $Where_kdgiat = "WHERE d_pagu.kdgiat > 4206 AND d_pagu.kdgiat < 4230";
-            $kodekegiatan= 4206;
-        }else if($kdsatker == "604435" || $kdsatker == "636702" || $kdsatker == "636778" || $kdsatker == "450460" || $kdsatker == "651994"){
+            $res= 1;
+        }else if($kdsatker == "604435" || $kdsatker == "636702" || $kdsatker == "636778" 
+                  || $kdsatker == "450460" || $kdsatker == "651994"){
             
-         
-            $kodekegiatan = 9999;
+         $Where_kdgiat ="";
+            $res = 9999;
         }else{
 
          $Where_kdgiat = "WHERE d_pagu.kdgiat = 3701";
-            $kodekegiatan= 3701;
+            $res= 1;
          
         }
 
 
-        if($kodekegiatan == 4206 || $kodekegiatan == 3701){
+        if($res == 1){
          $query = $this->db->query("SELECT d_pagu.*, CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode
             FROM d_bagipagu 
-            JOIN d_pagu ON d_pagu.kdindex = d_bagipagu.kdindex ".$Where_kdgiat." ".$where." AND d_pagu.kdsatker = ".$kdsatker." AND d_pagu.kdakun LIKE '%524%'");
+            JOIN d_pagu ON d_pagu.kdindex = d_bagipagu.kdindex ".$Where_kdgiat." ".$where." 
+            AND d_pagu.kdsatker = ".$kdsatker." AND d_pagu.kdakun LIKE '%524%'");
         
          
         }else{
 
          $query = $this->db->query("SELECT d_pagu.*, CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode
-                  FROM d_pagu WHERE d_pagu.kdakun LIKE '%524%' AND d_pagu.kdsatker = ".$kdsatker." AND d_pagu.kdgiat != 3701");
+                  FROM d_pagu WHERE d_pagu.kdakun LIKE '%524%' AND d_pagu.kdsatker = ".$kdsatker." 
+                  AND d_pagu.kdgiat != 3701");
          
 
         }
