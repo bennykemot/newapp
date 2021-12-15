@@ -20,14 +20,6 @@ class PPK extends CI_Controller {
 		$this->load->view('MasterData/PPK/manage',$data);
 	}
 
-	public function ubah()
-	{
-		$id = $this->uri->segment(4);
-		$data['ubah'] = $this->Pegawai->getPegawaiUbah($id);
-		$this->load->view('MasterData/Pegawai/ubah',$data);
-
-	}
-
 	public function Action()
 	{
 		$Trigger = $this->input->post('Trigger');
@@ -56,7 +48,7 @@ class PPK extends CI_Controller {
 			echo json_encode($output);
 
 		}else if($Trigger == "U"){
-			$id = $this->input->post('id');
+			$id = $this->input->post('idPPK');
 			$kdsatker = $this->input->post('kdsatker_Edit');
 			$uraian = $this->input->post('uraianppk_Edit');
 			

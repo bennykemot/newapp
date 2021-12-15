@@ -31,9 +31,10 @@ class M_PPK extends CI_Model {
 
 		}else if($Trigger == "R"){
 
+
 			$this->db->select('id');
 			$this->db->from('d_ppk');
-			$this->db->where('id',$data);
+			$this->db->where($data);
 			$query = $this->db->get();
 
 			return $query->row();

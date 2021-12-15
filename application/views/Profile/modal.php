@@ -104,7 +104,7 @@
                         <div class="input-field col s2"><label>Unit</label></div>
 
                         <div class="input-field col s10" >
-														<select  id="unit-select2_Edit" name="unit_id_Edit" class="select2-data-ajax select2-hidden-accessible browser-default"></select>
+														<select  id="unit-select2_Edit" name="unit-select2_Edit" class="select2-data-ajax select2-hidden-accessible browser-default"></select>
 														<input type="text" id="unitText_Edit" name="unitText_Edit" hidden>
                           </div>
                       </div>

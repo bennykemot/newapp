@@ -137,9 +137,9 @@ $.ajax({
               
               $('#uraianppk_Edit').val(data['uraianppk']);
 
-                $('#id').val(Id);
+              $('#idPPK').val(Id);
 
-              	$('#modalEdit').modal('open');
+              $('#modalEdit').modal('open');
           
           
           }
