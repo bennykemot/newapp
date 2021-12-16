@@ -19,21 +19,10 @@ class Auth extends CI_Controller{
 			'user.password' => $password
 			);
 		$cek = $this->Auth->cek_Auth("user",$where)->num_rows();
-		$session = $this->Auth->session_Auth("user",$username,$password)->result();
-
 		
-		$hak_akses = $this->Auth->session_Auth_hakakses("t_hakakses",$session[0]->role_id)->result();
-		$hak = array();
-
-		for($i=0;$i< count($hak_akses);$i++){
-			$hak[$hak_akses[$i]->hak_menu] = $hak_akses[$i];  
-		}
-
-		// echo "<pre>";
-		// print_r($hak);
-		// echo "</pre>";
 
 		if($cek > 0){
+			$session = $this->Auth->session_Auth("user",$username,$password)->result();
 
 			$data_session = array(
 				'username' 	=> $username,
@@ -60,8 +49,32 @@ class Auth extends CI_Controller{
 			redirect(base_url("Main/Home"));
 
 		}else{
-			echo "Username dan password salah !";
+
+		?>	<script type="text/javascript">
+				alert("Cek Kembali Username dan Password");
+				history.back();
+			</script>
+		<?php
+			//redirect(base_url('Main'));
+			//echo "Username dan password salah !";
 		}
+
+
+		
+
+		
+		// $hak_akses = $this->Auth->session_Auth_hakakses("t_hakakses",$session[0]->role_id)->result();
+		// $hak = array();
+
+		// for($i=0;$i< count($hak_akses);$i++){
+		// 	$hak[$hak_akses[$i]->hak_menu] = $hak_akses[$i];  
+		// }
+
+		// echo "<pre>";
+		// print_r($hak);
+		// echo "</pre>";
+
+		
 	}
 
 	function logout(){

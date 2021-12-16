@@ -8,7 +8,7 @@ class M_Mappingapp extends CI_Model{
         $whereUnitid ="";$whereRoleid="";
         if($roleid != 1){
            $whereUnitid = "AND d_bagipagu.unit_id ='.$unitid.'";
-           $whereRoleid = " WHERE c.role_id = ".$roleid."";
+           $whereRoleid = "WHERE c.role_id = ".$roleid." ";
            
         }
 
@@ -18,29 +18,33 @@ class M_Mappingapp extends CI_Model{
                 $kdgiat = "AND d_pagu.kdgiat = 3701";
             }
 
-            $query = $this->db->query("SELECT a.*,b.alokasi , c.*
-            FROM 
-            (SELECT d_pagu.*,t_akun.nmakun FROM bsmart.d_pagu JOIN bsmart.t_akun ON d_pagu.kdakun=t_akun.kdakun 
+            // $query = $this->db->query("SELECT a.*,b.alokasi , c.*
+            // FROM 
+            // (SELECT d_pagu.*,t_akun.nmakun FROM bsmart.d_pagu JOIN bsmart.t_akun ON d_pagu.kdakun=t_akun.kdakun 
          
-                WHERE d_pagu.thang=".$thang." ".$kdgiat." AND d_pagu.kdprogram='CH' AND d_pagu.kdsatker=".$kdsatker."
-            ) as a 
-             left JOIN 
-                (SELECT d_detailapp.kdindex, SUM(d_detailapp.rupiah_tahapan) AS alokasi FROM d_detailapp GROUP BY d_detailapp.kdindex) as b
-                ON a.kdindex=b.kdindex
+            //     WHERE d_pagu.thang=".$thang." ".$kdgiat." AND d_pagu.kdprogram='CH' AND d_pagu.kdsatker=".$kdsatker."
+            // ) as a 
+            //  left JOIN 
+            //     (SELECT d_detailapp.kdindex, SUM(d_detailapp.rupiah_tahapan) AS alokasi FROM d_detailapp GROUP BY d_detailapp.kdindex) as b
+            //     ON a.kdindex=b.kdindex
                 
-                LEFT JOIN (SELECT d_bagipagu.role_id, d_bagipagu.kdindex FROM d_bagipagu ) as c
+            //     LEFT JOIN (SELECT d_bagipagu.role_id, d_bagipagu.kdindex FROM d_bagipagu ) as c
                 
-                ON a.kdindex=c.kdindex ".$whereRoleid."
+            //     ON a.kdindex=c.kdindex
                 
-               ");
+            //     ".$whereRoleid."");
 
-        // $query = $this->db->query("SELECT a.*,b.alokasi 
-        // FROM 
-        // (SELECT d_pagu.*,t_akun.nmakun FROM bsmart.d_pagu JOIN bsmart.t_akun ON d_pagu.kdakun=t_akun.kdakun 
-        //     WHERE d_pagu.thang=".$thang." ".$kdgiat" AND d_pagu.kdprogram='CH' AND d_pagu.kdsatker=".$kdsatker.") as a 
-        //  left JOIN 
-        //     (SELECT d_detailapp.kdindex, SUM(d_detailapp.rupiah_tahapan) AS alokasi FROM d_detailapp GROUP BY d_detailapp.kdindex) as b
-        //     ON a.kdindex=b.kdindex");
+        $query = $this->db->query("SELECT a.*,b.alokasi 
+        FROM 
+        (SELECT d_pagu.*,t_akun.nmakun FROM bsmart.d_pagu JOIN bsmart.t_akun ON d_pagu.kdakun=t_akun.kdakun 
+            WHERE d_pagu.thang=".$thang." ".$kdgiat." AND d_pagu.kdprogram='CH' AND d_pagu.kdsatker=".$kdsatker.") as a 
+         left JOIN 
+            (SELECT d_detailapp.kdindex, SUM(d_detailapp.rupiah_tahapan) AS alokasi FROM d_detailapp GROUP BY d_detailapp.kdindex) as b
+            ON a.kdindex=b.kdindex
+            
+            LEFT JOIN (SELECT d_bagipagu.role_id, d_bagipagu.kdindex as kdindexbagipagu FROM d_bagipagu ) as c
+                
+                 ON a.kdindex=c.kdindexbagipagu  ".$whereRoleid."");
 
         // $query =  $this->db->query('SELECT d_pagu.*, t_akun.nmakun from d_pagu 
         // JOIN t_akun ON d_pagu.kdakun = t_akun.kdakun

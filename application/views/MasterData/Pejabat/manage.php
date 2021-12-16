@@ -59,7 +59,7 @@
 								<td style="width: 25%;"><?php echo $p->unit ?></td>
 								<td style="width: 10%;">
 									<a href="javascript:;" onclick="Edit('<?= $p->id ?>')"><i class="material-icons green-text">edit</i></a>
-									<a href="javascript:;" onclick="Delete('<?= $p->id ?>')"><i class="material-icons red-text">delete</i></a>
+									<!-- <a href="javascript:;" onclick="Delete('<?= $p->id ?>')"><i class="material-icons red-text">delete</i></a> -->
 								</td> 
 							
 						<?php

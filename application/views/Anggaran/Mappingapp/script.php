@@ -145,6 +145,8 @@
                         }else{
                           var element2 = document.getElementById("divRupiah");
                                         element2.classList.remove("d-none");
+                                        var element3 = document.getElementById("divTahapan");
+                                  element3.classList.add("d-none");
                         }
 
                   }else if(kdkmpnen == "051"){
@@ -157,6 +159,8 @@
                       }else{
                         var element2 = document.getElementById("divRupiah");
                                       element2.classList.remove("d-none");
+                                      var element3 = document.getElementById("divTahapan");
+                                  element3.classList.add("d-none");
                       }
 
                   }else{
@@ -263,21 +267,14 @@
 
             rowGroup: {
             startRender: null,
-            endRender: function ( rows, group ) {
+            startRender: function ( rows, group ) {
                 var salaryAvg = rows
                     .data()
                     .pluck('rupiah_tahapan')
                     .reduce( function (a, b) {
                         return a + b.replace(/[^\d]/g, '')*1;
-                    }, 0) / rows.count();
+                    }, 0);
                 salaryAvg = $.fn.dataTable.render.number(',', '.', 0, 'Rp ').display( salaryAvg );
- 
-                var ageAvg = rows
-                    .data()
-                    .pluck('nama_app')
-                    .reduce( function (a, b) {
-                        return a + b*1;
-                    }, 0) / rows.count();
  
                 return $('<tr style="background-color: #b9f6d8 !important; color: #000" />')
                     .append( '<td >'+group+'</td>' )
@@ -286,9 +283,9 @@
             },
             dataSrc: 'nama_app'
         },
-        //     rowGroup: {
-        //         dataSrc: 'nama_app'
-        //     },
+            // rowGroup: {
+            //     dataSrc: 'nama_app'
+            // },
 
            
       
