@@ -23,6 +23,8 @@ class MappingApp extends CI_Controller {
         $roleid =  $this->uri->segment(7);
         $unit_id =  $this->uri->segment(8);
         $data['mapp'] = $this->Mappingapp->getData_Mapping($kdsatker,$thang,$userid,$roleid,$unit_id);
+
+        // var_dump($data['mapp']);exit;
         //$data['head'] = $this->db->query("SELECT SUM(rupiah) as jumlah, norevisi, tgrevisi from d_pagu WHERE d_pagu.kdsatker = ".$kdsatker." AND d_pagu.thang = ".$thang." ")->result();
 		$this->load->view('Anggaran/Mappingapp/manage', $data);
 	}
