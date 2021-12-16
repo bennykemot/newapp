@@ -232,11 +232,11 @@ function mappingD_none($data){
           </i><span class="menu-title" data-i18n="Mail">Jabatan</span></a>
           </li>
 
-					<li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Master/PPK/Page/')?>">
+					<!-- <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Master/PPK/Page/')?>">
           <i class="material-icons">
           confirmation_number
           </i><span class="menu-title" data-i18n="Mail">PPK</span></a>
-          </li>
+          </li> -->
 
 
 			<?php		
