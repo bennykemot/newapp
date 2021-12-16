@@ -158,7 +158,7 @@ $('.btn-upload').click(function (e) {
 
                 setTimeout(function() {
                   location.reload();
-               }, 7000);
+               }, 5000);
             },
             error: function (jqXHR, textStatus, errorThrown) { },
         });
