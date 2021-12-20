@@ -12,7 +12,7 @@
 
     var Tahapan = "<?= $ubah[0]->nama_tahapan?>"
 
-    var AppText = "<?= $ubah[0]->uraian_app?>"
+    var AppText = "<?= $ubah[0]->nama_app?>"
 	  var AppValue = "<?= $ubah[0]->id_app?>"
     
 	var $app = $("<option selected='selected'></option>").val(AppValue).text(AppText)

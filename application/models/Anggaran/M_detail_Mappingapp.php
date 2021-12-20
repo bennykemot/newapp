@@ -177,9 +177,9 @@
         }else{
 
             $query = $this->db->query("SELECT d_detailapp.*, 
-            r_tahapan.nama_tahapan, r_app.uraian_app 
+            r_tahapan.nama_tahapan, t_app.nama_app 
             FROM d_detailapp JOIN r_tahapan ON r_tahapan.id = d_detailapp.tahapan 
-            JOIN r_app ON r_app.id = d_detailapp.id_app 
+            JOIN t_app ON t_app.id = d_detailapp.id_app 
             WHERE d_detailapp.id = ".$Id." ");
 
             return $query->result();
