@@ -7,7 +7,7 @@ class M_Mappingapp extends CI_Model{
     function getData_Mapping($kdsatker,$thang, $userid,$roleid, $unitid){
         $whereUnitid ="";$whereRoleid="";
         if($roleid != 1){
-           $whereUnitid = "AND d_bagipagu.unit_id ='.$unitid.'";
+           $whereUnitid = "AND c.unit_id =".$unitid."";
            $whereRoleid = "WHERE c.role_id = ".$roleid." ";
            
         }
@@ -40,11 +40,10 @@ class M_Mappingapp extends CI_Model{
             WHERE d_pagu.thang=".$thang." ".$kdgiat." AND d_pagu.kdprogram='CH' AND d_pagu.kdsatker=".$kdsatker.") as a 
          left JOIN 
             (SELECT d_detailapp.kdindex, SUM(d_detailapp.rupiah_tahapan) AS alokasi FROM d_detailapp GROUP BY d_detailapp.kdindex) as b
-            ON a.kdindex=b.kdindex
-            
-            LEFT JOIN (SELECT d_bagipagu.role_id, d_bagipagu.kdindex as kdindexbagipagu FROM d_bagipagu ) as c
+            ON a.kdindex=b.kdindex 
+            LEFT JOIN (SELECT d_bagipagu.unit_id,d_bagipagu.role_id, d_bagipagu.kdindex as kdindexbagipagu FROM d_bagipagu ) as c
                 
-                 ON a.kdindex=c.kdindexbagipagu  ".$whereRoleid."");
+                 ON a.kdindex=c.kdindexbagipagu  ".$whereRoleid." ".$whereUnitid."");
 
         // $query =  $this->db->query('SELECT d_pagu.*, t_akun.nmakun from d_pagu 
         // JOIN t_akun ON d_pagu.kdakun = t_akun.kdakun
