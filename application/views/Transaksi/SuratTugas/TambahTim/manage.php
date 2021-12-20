@@ -115,12 +115,6 @@
                                             <td style="min-width: 200px">KOTA TUJUAN</td>
                                             <td>TGL<br>BERANGKAT</td>
                                             <td>TGL<br>KEMBALI</td>
-                                            <td>JML<br>HARI</td>
-                                            <td>UANG HARIAN</td>
-                                            <td>PENGINAPAN</td>
-                                            <td>TRANSPORTASI</td>
-                                            <td>REPRESENTASI</td>
-                                            <td style="min-width: 150px">JUMLAH</td>
                                             <td style="min-width: 250px">JENIS<br>TRANSPORTASI</td>
                                             <td style="min-width: 15px" >AKSI</td>
                                         </tr></thead>

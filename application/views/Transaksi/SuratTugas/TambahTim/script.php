@@ -463,15 +463,9 @@ $('.multi-field-wrapper').each(function() {
                               <td><select class="browser-default kota"  name="kotatujuan'+x+'" id="kotatujuan'+x+'" onchange="cityCount('+x+')"></select></td>\
                               <td><input type="date" min="'+minDate+'" max="'+maxDate+'" onchange="dayCount(\''+x+'\',\'D\')" id="tglberangkat'+x+'" name="tglberangkat'+x+'"></td>\
                               <td><input type="date" max="'+maxDate+'" min="'+minDate+'" onchange="dayCount('+x+')" id="tglkembali'+x+'" name="tglkembali'+x+'"></td>\
-                              <td><input type="text" id="jmlhari'+x+'" name="jmlhari'+x+'" readonly></td>\
-                              <td><input type="text" id="uangharian'+x+'" name="uangharian'+x+'" onkeyup="AllCount('+x+')"></td>\
-                              <td><input type="text" id="uangpenginapan'+x+'" name="uangpenginapan'+x+'" onkeyup="AllCount('+x+')"></td>\
-                              <td><input type="text" id="uangtransportasi'+x+'" name="uangtransportasi'+x+'" onkeyup="AllCount('+x+')"></td>\
-                              <td><input type="text" id="uangrep'+x+'" name="uangrep'+x+'" onkeyup="AllCount('+x+')"></td>\
-                              <td><input type="text" readonly id="total'+x+'"  name="total'+x+'" ></td>\
                               <td><select class="select2 browser-default" id="jnstransportasi'+x+'" name="jnstransportasi'+x+'">\
-                                    <option value="Pesawat Udara">Pesawat Udara</option>\
                                     <option value="Kendaraan Umum">Kendaraan Umum</option>\
+                                    <option value="Kendaraan Dinas">Kendaraan Dinas</option>\
                                   </select</td>\
                               <td>\
                                   <div class="col s12">\
@@ -480,6 +474,21 @@ $('.multi-field-wrapper').each(function() {
                               </td>\
                               <td hidden><input type="text" id="tarifuangpenginapan'+x+'" name="tarifuangpenginapan'+x+'"></td>\
                               <td hidden><input type="text" id="tarifuangharian'+x+'" name="tarifuangharian'+x+'" ></td>\
+                              </tr>\
+                              <tr><td>JML<br>HARI</td>\
+                                  <td colspan="2" style="min-width: 300px">UANG HARIAN</td>\
+                                  <td colspan="2" style="min-width: 300px">PENGINAPAN</td>\
+                                  <td>REPRESENTASI</td>\
+                                  <td style="min-width: 150px">JUMLAH</td>\
+                              </tr>\
+                              <tr>\
+                                  <td><input type="text" id="jmlhari'+x+'" name="jmlhari'+x+'" readonly></td>\
+                                  <td><input style="min-width: 150px" type="text" id="uangharian'+x+'" name="uangharian'+x+'" onkeyup="AllCount('+x+')"></td>\
+                                  <td><input style="min-width: 150px" type="text" id="uangharian'+x+'" name="uangharian'+x+'" onkeyup="AllCount('+x+')"></td>\
+                                  <td><input style="min-width: 150px" type="text" id="uangpenginapan'+x+'" name="uangpenginapan'+x+'" onkeyup="AllCount('+x+')"></td>\
+                                  <td><input style="min-width: 150px" type="text" id="uangpenginapan'+x+'" name="uangpenginapan'+x+'" onkeyup="AllCount('+x+')"></td>\
+                                  <td><input style="min-width: 150px" type="text" id="uangrep'+x+'" name="uangrep'+x+'" onkeyup="AllCount('+x+')"></td>\
+                                  <td><input style="min-width: 150px" type="text" readonly id="total'+x+'"  name="total'+x+'" ></td>\
                               </tr>'+end+'');
 
                         selectRefresh(x);
