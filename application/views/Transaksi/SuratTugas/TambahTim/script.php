@@ -456,7 +456,7 @@ $('.multi-field-wrapper').each(function() {
                                 <input placeholder="NIP" class="nip" id="nip'+x+'" name="nip'+x+'" readonly>\
                             </td>\
                             <td>\
-                                <textarea placeholder="Peran/Jabatan" class="perjab" id="perjab'+x+'" name="perjab'+x+'" readonly></textarea>\
+                                <textarea placeholder="Peran/Jabatan" class="perjab" id="perjab'+x+'" name="perjab'+x+'"></textarea>\
                             </td>\
                             <td><input type="text" id="gol'+x+'" name="gol'+x+'" readonly></td>\
                             <td><select class="browser-default kota" name="kotaasal'+x+'" id="kotaasal'+x+'" onchange="cityCount('+x+')"></select></td>\
