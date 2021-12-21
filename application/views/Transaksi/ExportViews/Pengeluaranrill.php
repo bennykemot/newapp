@@ -175,7 +175,7 @@ function cek_tgl($tanggal){
                     <tr>
                         <td >Mengetahui/Menyetujui,</td>
                         <td width="10%"></td>
-                        <td width="25%">Jakarta, <?=cek_tgl($e->tglst)?></td>
+                        <td width="25%"><?= ucwords(strtolower("$e->lokasi")) ?>, <?=cek_tgl($e->tglst)?></td>
                     </tr>
 
                     <tr>
@@ -191,15 +191,15 @@ function cek_tgl($tanggal){
                     </tr>
 
                     <tr>
-                        <td >Sumardi</td>
+                        <td ><?= $e->ppk_ttd ?></td>
                         <td width="10%"></td>
                         <td width="25%"><?=$e->nama?></td>
                     </tr>
 
                     <tr>
-                        <td >NIP.197307251994021001</td>
+                        <td >NIP. <?= $e->nip_ttd ?></td>
                         <td width="10%"></td>
-                        <td width="25%">NIP.<?=$e->nip?></td>
+                        <td width="25%">NIP. <?=$e->nip?></td>
                     </tr>
 
                 </tbody>
