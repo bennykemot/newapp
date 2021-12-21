@@ -85,7 +85,8 @@ class M_NotaDinas extends CI_Model{
             d_itemcs.totalinap, d_itemcs.totalrep, d_itemcs.totaltravel , d_itemcs.jnstransportasi,
             d_itemcs.jumlah ,d_pagu.rupiah,d_pagu.kdbeban,
 			t_pejabat.nama as ppk_ttd, 
-			t_pejabat.nip as nip_ttd
+			t_pejabat.nip as nip_ttd,
+			t_satker.lokasi as lokasi
             
             
             FROM d_surattugas JOIN t_unitkerja ON t_unitkerja.id = d_surattugas.id_unit 
@@ -93,6 +94,7 @@ class M_NotaDinas extends CI_Model{
             LEFT JOIN t_pegawai ON d_surattugas.id_ttd = t_pegawai.nip 
             JOIN d_pagu ON d_pagu.kdindex = d_surattugas.kdindex
 			JOIN t_pejabat ON d_surattugas.id_ttd = t_pejabat.id 
+			JOIN t_satker ON d_surattugas.kdsatker = t_satker.kdsatker
             
             WHERE d_surattugas.id = ".$Id_st." ORDER BY d_itemcs.nourut ");
 
@@ -132,11 +134,13 @@ class M_NotaDinas extends CI_Model{
             d_itemcs.totalinap, d_itemcs.totalrep, d_itemcs.totaltravel ,
             d_itemcs.tarifuangharian, 
             d_itemcs.tarifinap, d_itemcs.tarifrep, d_itemcs.transport ,
-            d_itemcs.jnstransportasi,
-            d_itemcs.jumlah 
+            d_itemcs.jnstransportasi, 
+            d_itemcs.jumlah,
+			t_satker.lokasi as lokasi
             
             FROM d_surattugas JOIN t_unitkerja ON t_unitkerja.id = d_surattugas.id_unit 
             JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
+			JOIN t_satker ON d_surattugas.kdsatker = t_satker.kdsatker
             
             WHERE d_surattugas.id = ".$Id_st." ORDER BY d_itemcs.nourut ");
 
@@ -155,10 +159,15 @@ class M_NotaDinas extends CI_Model{
             d_itemcs.tarifuangharian, 
             d_itemcs.tarifinap, d_itemcs.tarifrep, d_itemcs.transport ,
             d_itemcs.jnstransportasi,
-            d_itemcs.jumlah 
+            d_itemcs.jumlah,
+			t_pejabat.nama as ppk_ttd, 
+			t_pejabat.nip as nip_ttd,
+			t_satker.lokasi as lokasi 
             
             FROM d_surattugas JOIN t_unitkerja ON t_unitkerja.id = d_surattugas.id_unit 
             JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
+			JOIN t_pejabat ON d_surattugas.id_ttd = t_pejabat.id  
+			JOIN t_satker ON d_surattugas.kdsatker = t_satker.kdsatker
             
             WHERE d_surattugas.id = ".$Id_st." ORDER BY d_itemcs.nourut ");
 
@@ -170,10 +179,15 @@ class M_NotaDinas extends CI_Model{
             d_surattugas.uraianst, d_surattugas.tglmulaist, 
             d_surattugas.tglselesaist, d_surattugas.idxskmpnen, 
             d_itemcs.nourut, d_itemcs.nama, 
-            d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan
+            d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan,
+			t_pejabat.nama as ppk_ttd, 
+			t_pejabat.nip as nip_ttd,
+			t_satker.lokasi as lokasi 
             
             FROM d_surattugas
             JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
+			JOIN t_pejabat ON d_surattugas.id_ttd = t_pejabat.id  
+			JOIN t_satker ON d_surattugas.kdsatker = t_satker.kdsatker
             
             WHERE d_surattugas.id = ".$Id_st." ORDER BY d_itemcs.nourut ");
 

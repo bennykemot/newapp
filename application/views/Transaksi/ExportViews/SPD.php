@@ -212,7 +212,7 @@ function cek_tgl($tanggal){
                     <tr>
                         <td rowspan="6" width="55%" style="vertical-align: text-top !important;" >Coret yang tidak perlu</td>
                         <td width="10%">Dikeluarkan di</td>
-                        <td width="25%">Jakarta</td>
+                        <td width="25%"><?= ucwords(strtolower("$e->lokasi")) ?></td>
                     </tr>
                     <tr >
                         <td width="10%">Tanggal</td>

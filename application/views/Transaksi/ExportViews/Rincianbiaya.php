@@ -253,7 +253,7 @@ function cek_tgl($tanggal){
         <table width="100%"  id="borderedless" cellpadding="2">
             <tr>
                 <td colspan="2"></td>
-                <td width="30%">Jakarta, <?=cek_tgl($e->tglst)?></td>
+                <td width="30%"><?= ucwords(strtolower("$e->lokasi")) ?>, <?=cek_tgl($e->tglst)?></td>
             </tr>
 
             <tr>
@@ -350,13 +350,13 @@ function cek_tgl($tanggal){
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><u>Sumardi</u></td>
+                <td><u><?= $e->ppk_ttd ?></u></td>
             </tr>
             <tr>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>NIP. 197307251994021001</td>
+                <td>NIP. <?= $e->nip_ttd ?></td>
             </tr>
 
         </table>
