@@ -44,6 +44,29 @@ function Min_dateselesai(){
 
 }
 
+function getRep(keljab, valTrigger){
+if(valTrigger == "L"){
+      if(keljab == "E.I"){
+          res ="200000"
+          }else if(keljab == "E.II"){
+            res = "150000"
+          }else{
+            res = "0"
+      }
+    }else{
+      if(keljab == "E.I"){
+          res ="100000"
+          }else if(keljab == "E.II"){
+            res = "75000"
+          }else{
+            res = "0"
+      }
+
+    }
+  return res;
+
+}
+
 $(document).ready(function() {
     $('#tb-st').DataTable( {
 
@@ -611,8 +634,8 @@ $('.multi-field-wrapper').each(function() {
         var $wrapper = $('.multi-fields', this);
         var x = 0;
         var i = 0;
-        var head = "";
-        var end="";
+        var head = '<tbody id="Tbody" class="multi-field" style="border-top: 2px dotted #c5c5c4;">';
+        var end='</tbody>';
         var arrX = [];
         $("#add-field", $(this)).click(function(e) {
            if(x < max){
@@ -620,40 +643,48 @@ $('.multi-field-wrapper').each(function() {
               i++;
               var minDate = $('#tglst_mulai').val()
               var maxDate = $('#tglst_selesai').val()
-              $($wrapper).append( head +'<tr>\
+              $($wrapper).append( head +'<tr class="tb-tim">\
                             <td><input  type="number" id="urut'+x+'" name="urut'+x+'" min="1" max="20" value="'+x+'"></td>\
-                            <td id="Tim" name="Tim">\
-                               <select placeholder="Nama.." class="namaTim browser-default" name="namaDummy'+x+'"></select>\
+                            <td id="Tim" name="Tim" colspan="2">\
+                               <select placeholder="Nama.."  class="namaTim browser-default" name="namaDummy'+x+'"></select>\
                                <input name="nama'+x+'" id="nama'+x+'" hidden>\
                             </td>\
-                            <td>\
+                            <td colspan="2">\
                                 <input placeholder="NIP" class="nip" id="nip'+x+'" name="nip'+x+'" readonly>\
                             </td>\
-                            <td>\
-                                <textarea placeholder="Peran/Jabatan" class="perjab" id="perjab'+x+'" name="perjab'+x+'" readonly></textarea>\
+                            <td colspan="2">\
+                                <textarea placeholder="Peran/Jabatan" class="perjab" id="perjab'+x+'" name="perjab'+x+'"></textarea>\
                             </td>\
-                            <td><input type="text" id="gol'+x+'" name="gol'+x+'" readonly></td>\
-                            <td><select class="browser-default kota" name="kotaasal'+x+'" id="kotaasal'+x+'" onchange="cityCount('+x+')"></select></td>\
-                              <td><select class="browser-default kota"  name="kotatujuan'+x+'" id="kotatujuan'+x+'" onchange="cityCount('+x+')"></select></td>\
+                              <td><input type="text" id="gol'+x+'" name="gol'+x+'" readonly><input type="text" id="keljab'+x+'" name="keljab'+x+'" readonly></td>\
+                              <td colspan="2"><select class="browser-default kota kotaasal" name="kotaasal'+x+'" id="kotaasal'+x+'" onchange="cityCount('+x+')"></select></td>\
+                              <td colspan="2"><select class="browser-default kota kotatujuan"  name="kotatujuan'+x+'" id="kotatujuan'+x+'" onchange="cityCount('+x+')"></select></td>\
                               <td><input type="date" min="'+minDate+'" max="'+maxDate+'" onchange="dayCount(\''+x+'\',\'D\')" id="tglberangkat'+x+'" name="tglberangkat'+x+'"></td>\
                               <td><input type="date" max="'+maxDate+'" min="'+minDate+'" onchange="dayCount('+x+')" id="tglkembali'+x+'" name="tglkembali'+x+'"></td>\
-                              <td><input type="text" id="jmlhari'+x+'" name="jmlhari'+x+'" readonly></td>\
-                              <td><input type="text" id="uangharian'+x+'" name="uangharian'+x+'" ></td>\
-                              <td><input type="text" id="uangpenginapan'+x+'" name="uangpenginapan'+x+'" ></td>\
-                              <td><input type="text" onkeypress="return validateNumber(event)" ></td>\
-                              <td><input type="text" onkeypress="return validateNumber(event)" ></td>\
-                              <td><input type="text" id="total'+x+'"  name="total'+x+'" ></td>\
-                              <td><select class="select2 browser-default" id="jnstransportasi'+x+'" name="jnstransportasi'+x+'">\
-                                    <option value="Pesawat Udara">Pesawat Udara</option>\
-                                    <option value="Kendaraan Umum">Kendaraan Umum</option>\
-                                  </select</td>\
-                              <td>\
-                                  <div class="col s12">\
-                                      <a><span class="col s4 table-remove" style="padding: 0px !important" id="'+x+'" ><i class="material-icons">delete</i></span></a>\
-                                  </div>\
-                              </td>\
                               <td hidden><input type="text" id="tarifuangpenginapan'+x+'" name="tarifuangpenginapan'+x+'"></td>\
                               <td hidden><input type="text" id="tarifuangharian'+x+'" name="tarifuangharian'+x+'" ></td>\
+                            </tr>\
+                              <tr>\
+                                  <td><input type="text" id="jmlhari'+x+'" name="jmlhari'+x+'" readonly></td>\
+                                  <td><input style="min-width: 150px" type="text" id="satuan_uangharian'+x+'" name="satuan_uangharian'+x+'" onkeyup="AllCount(\''+x+'\',\'satuan\')"></td>\
+                                  <td><input style="min-width: 150px" type="text" id="uangharian'+x+'" name="uangharian'+x+'" onkeyup="AllCount(\''+x+'\',\'total\')"></td>\
+                                  <td><input style="min-width: 150px" type="text" id="satuan_uangpenginapan'+x+'" name="satuan_uangpenginapan'+x+'" onkeyup="AllCount(\''+x+'\',\'satuan\')"></td>\
+                                  <td><input style="min-width: 150px" type="text" id="uangpenginapan'+x+'" name="uangpenginapan'+x+'" onkeyup="AllCount(\''+x+'\',\'total\')"></td>\
+                                  <td><input style="min-width: 150px" type="text" id="uangtaxi'+x+'" name="uangtaxi'+x+'" onkeyup="AllCount(\''+x+'\',\'all\')"></td>\
+                                  <td><input style="min-width: 150px" type="text" id="uanglaut'+x+'" name="uanglaut'+x+'" onkeyup="AllCount(\''+x+'\',\'all\')"></td>\
+                                  <td><input style="min-width: 150px" type="text" id="uangudara'+x+'" name="uangudara'+x+'" onkeyup="AllCount(\''+x+'\',\'all\')"></td>\
+                                  <td><input style="min-width: 150px" type="text" id="uangdarat'+x+'" name="uangdarat'+x+'" onkeyup="AllCount(\''+x+'\',\'all\')"></td>\
+                                  <td><input style="min-width: 150px" type="text" id="uangdll'+x+'" name="uangdll'+x+'" onkeyup="AllCount(\''+x+'\',\'all\')"></td>\
+                                  <td><input style="min-width: 150px" type="text" id="uangrep'+x+'" name="uangrep'+x+'" onkeyup="AllCount(\''+x+'\',\'all\')"></td>\
+                                  <td><input style="min-width: 150px" type="text" readonly id="total'+x+'"  name="total'+x+'" ></td>\
+                                  <td><select class="select2 browser-default" id="jnstransportasi'+x+'" name="jnstransportasi'+x+'">\
+                                    <option value="Kendaraan Umum">Kendaraan Umum</option>\
+                                    <option value="Kendaraan Dinas">Kendaraan Dinas</option>\
+                                  </select</td>\
+                                  <td >\
+                                      <div class="col s12">\
+                                          <a><span class="col s4 table-remove text-center" style="padding: 0px !important" id="'+x+'" ><i class="material-icons">delete</i></span></a>\
+                                      </div>\
+                                  </td>\
                               </tr>'+end+'');
 
                         selectRefresh(x);
@@ -661,7 +692,7 @@ $('.multi-field-wrapper').each(function() {
                        
 
                         $('.table-remove').click(function() {
-                            $(this).parents('table').detach();
+                            $(this).parents('tbody').detach();
                             x--;
                                 if(x <=0 ){
                                     x=0;
@@ -690,7 +721,108 @@ function validateNumber(e) {
 }
 
 
+function AllCount(i, Trigger){
+    var harian = $("#satuan_uangharian"+i+"").val()
+    var inap = $("#satuan_uangpenginapan"+i+"").val()
+    var taxi = $("#uangtaxi"+i+"").val()
+    var laut = $("#uanglaut"+i+"").val()
+    var udara = $("#uangudara"+i+"").val()
+    var darat = $("#uangdarat"+i+"").val()
+    var dll = $("#uangdll"+i+"").val()
+    var rep = $("#uangrep"+i+"").val()
+
+    var T_harian = $("#uangharian"+i+"").val()
+    var T_inap = $("#uangpenginapan"+i+"").val()
+
+    var a = harian.replace(/[^0-9\.]+/g, "");
+    var b = inap.replace(/[^0-9\.]+/g, "");
+    var c = rep.replace(/[^0-9\.]+/g, "");
+    var d = taxi.replace(/[^0-9\.]+/g, "");
+    var e = laut.replace(/[^0-9\.]+/g, "");
+    var f = udara.replace(/[^0-9\.]+/g, "");
+    var g = darat.replace(/[^0-9\.]+/g, "");
+    var h = dll.replace(/[^0-9\.]+/g, "");
+
+    var T_a = T_harian.replace(/[^0-9\.]+/g, "");
+    var T_b = T_inap.replace(/[^0-9\.]+/g, "");
+
+    var uangharian = a.replace(/\./g, "");
+    var uangpenginapan = b.replace(/\./g, "");
+    var uangrep = c.replace(/\./g, "");
+
+    var uangtaxi = d.replace(/\./g, "");
+    var uanglaut = e.replace(/\./g, "");
+    var uangudara = f.replace(/\./g, "");
+    var uangdarat = g.replace(/\./g, "");
+    var uangdll = h.replace(/\./g, "");
+
+    var T_uangharian = T_a.replace(/\./g, "");
+    var T_uangpenginapan = T_b.replace(/\./g, "");
+
+    var jmlhari = $('#jmlhari'+i+'').val()
+
+    if(Trigger == "satuan"){
+      var total_harian_ = Number(uangharian) * Number(jmlhari)
+      var total_harian = ""+total_harian_+""
+      $('#uangharian'+i+'').val(formatRupiah(total_harian))
+
+
+      var total_inap_ = Number(uangpenginapan) * ( Number(jmlhari)-1)
+      var total_inap = ""+total_inap_+""
+      $('#uangpenginapan'+i+'').val(formatRupiah(total_inap))
+
+      var e = Number(total_harian) + Number(total_inap)  + Number(uangtaxi) + Number(uanglaut) + Number(uangudara) + Number(uangdarat) + Number(uangdll) + Number(uangrep)
+    }else if( Trigger == "total"){
+      var total_harian_ = Number(T_uangharian) / Number(jmlhari)
+      var total_harian = ""+total_harian_+""
+      $('#satuan_uangharian'+i+'').val(formatRupiah(total_harian))
+
+
+      var total_inap_ = Number(T_uangpenginapan) /( Number(jmlhari)-1)
+      var total_inap = ""+total_inap_+""
+      $('#satuan_uangpenginapan'+i+'').val(formatRupiah(total_inap))
+
+      var e = Number(total_harian) + Number(total_inap)  + Number(uangtaxi) + Number(uanglaut) + Number(uangudara) + Number(uangdarat) + Number(uangdll) + Number(uangrep)
+
+    }else if(Trigger == "all"){
+      var e = Number(T_uangharian) + Number(T_uangpenginapan)  + Number(uangtaxi) + Number(uanglaut) + Number(uangudara) + Number(uangdarat) + Number(uangdll) + Number(uangrep)
+      
+    }
+      
+    var total = ""+e+""
+
+    $("#total"+i+"").val(formatRupiah(total))
+  
+
+}
+
 function cityCount(id){
+
+
+  if(id == 0 || id == "0"){
+
+var valasal = $("#kotaasal").val()
+var Textasal = $( "#kotaasal option:selected" ).text();
+
+var kotaasal_split = valasal.split("-")
+var asal = kotaasal_split[1]
+var kotaasal_id = kotaasal_split[0]
+var nama_kotaasal_id = kotaasal_split[2]
+var $asal = $("<option selected='selected'></option>").val(valasal).text(Textasal)
+    $(".kotaasal").append($asal).trigger('change');
+
+}else if(id == "011"){
+var valtujuan = $("#kotatujuan").val()
+var Texttujuan = $( "#kotatujuan option:selected" ).text();
+
+var kotatujuan_split = valtujuan.split("-")
+var tujuan = kotatujuan_split[1]
+var kotatujuan_id = kotatujuan_split[0]
+var nama_kotatujuan_id = kotatujuan_split[2]
+var $tujuan = $("<option selected='selected'></option>").val(valtujuan).text(Texttujuan)
+    $(".kotatujuan").append($tujuan).trigger('change');
+
+}else{
 
 
   if($("#kotaasal"+id+"").val() != null || $("#kotatujuan"+id+"").val() != null){
@@ -706,78 +838,103 @@ function cityCount(id){
     var kotatujuan_id = kotatujuan_split[0]
     var nama_kotatujuan_id = kotatujuan_split[2]
   }
-
-
-
-
-
-if ( $("#idxskmpnen").val() != null){
-  var valkdakun = $("#idxskmpnen").val()
-  var kdakun_split = valkdakun.split("-")
-  var kdakun = kdakun_split[0]
-
 }
+
+var keljab = $('#keljab'+id+'').val();
+var kdakun = $('#kdakun').val();
+
 
 
 $.ajax({
-        url : master_baseurl + "Master_Uangharian",
-        data: {"Tujuan": tujuan, "Trigger": "NotaDinas"},
-        type: "post",
-        dataType: "JSON",
-        success: function(data)
-            {    
-                
-                if(kotaasal_id == kotatujuan_id){
-                  tarif = data[0]['dalam_kota_8_jam']
+    url : master_baseurl + "Master_Uangharian",
+    data: {"Tujuan": tujuan, "Trigger": "NotaDinas"},
+    type: "post",
+    dataType: "JSON",
+    success: function(data)
+        {    
+          
 
-                  if(kdakun.search("524") == 0){
-                    tarif = data[0]['fb_dalamkota']
-                  }
+          if(kdakun == "524111"){
+            tarif = data[0]['luar_kota']
+            rep = getRep(keljab, "L")
+            
+          }else if(kdakun == "524113"){
+            tarif = data[0]['dalam_kota_8_jam']
+            rep = getRep(keljab, "D")
 
-                }else{
-                  tarif = data[0]['luar_kota']
-                  if(kdakun.search("524") == 0){
-                    tarif = data[0]['fb_luarkota']
-                  }
-                }
+          }else if(kdakun == "524119"){
+            tarif = data[0]['fb_luarkota']
+            rep = getRep(keljab, "L")
 
-                $("#tarifuangharian"+id+"").val(tarif)
-                $("#tarifuangpenginapan"+id+"").val("1200000")
+          }else if(kdakun == "524114"){
+            tarif = data[0]['fb_dalamkota']
+            rep = getRep(keljab, "D")
 
-                if ( ($("#tglberangkat"+id+"").val() != "") && ($("#tglkembali"+id+"").val() != "")) {
-                var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-                var firstDate = new Date($("#tglberangkat"+id+"").val());
-                var secondDate = new Date($("#tglkembali"+id+"").val());
-                var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay) )+ 1;
-                $("#jmlhari"+id+"").val(diffDays);
+          }
 
-                var totalUangHarian = ''+((diffDays) * tarif)
-                $("#uangharian"+id+"").val(formatRupiah(totalUangHarian));
+            $("#tarifuangharian"+id+"").val(tarif)
+            $("#tarifuangpenginapan"+id+"").val("1200000")
 
-                var totalUangPenginapan = ''+((diffDays-1) * 1200000)
-                $("#uangpenginapan"+id+"").val(formatRupiah(totalUangPenginapan));
+            if ( ($("#tglberangkat"+id+"").val() != "") && ($("#tglkembali"+id+"").val() != "")) {
+            var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+            var firstDate = new Date($("#tglberangkat"+id+"").val());
+            var secondDate = new Date($("#tglkembali"+id+"").val());
+            var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay) )+ 1;
+            $("#jmlhari"+id+"").val(diffDays);
 
+            var totalUangHarian = ''+(diffDays * tarif)
+            $("#satuan_uangharian"+id+"").val(formatRupiah(tarif));
+            $("#uangharian"+id+"").val(formatRupiah(totalUangHarian));
+            $("#uangharianDum"+id+"").val(totalUangHarian);
 
-                //TOTAL
-                var total = ''+(Number(totalUangHarian)+Number(totalUangPenginapan))
-                $("#total"+id+"").val(formatRupiah(total));
+            var totalUangPenginapan = ''+((diffDays-1) * 1200000)
+            $("#satuan_uangpenginapan"+id+"").val(formatRupiah("1200000"));
+            $("#uangpenginapan"+id+"").val(formatRupiah(totalUangPenginapan));
+            $("#uangpenginapanDum"+id+"").val(totalUangPenginapan);
+            
+            var totalUangRep = ''+(diffDays * rep)
+            $("#uangrep"+id+"").val(formatRupiah(totalUangRep))
 
-                if(diffDays < 0){
-                  swal({
-                    title:"Jumlah Hari Minus !",
-                    text: "Pastikan tanggal kembali tidak < tanggal berangkat", 
-                    icon: "warning",
-                    timer: 2000
-                    })
-                    $("#tglkembali"+id+"").val("")
-                    $("#jmlhari"+id+"").val("");
-                }
-                }else{
-                    $("#jmlhari"+id+"").val();
-                }
+           
+            var taxi = $("#uangtaxi"+id+"").val()
+            var laut = $("#uanglaut"+id+"").val()
+            var udara = $("#uangudara"+id+"").val()
+            var darat = $("#uangdarat"+id+"").val()
+            var dll = $("#uangdll"+id+"").val()
+            var d = taxi.replace(/[^0-9\.]+/g, "");
+            var e = laut.replace(/[^0-9\.]+/g, "");
+            var f = udara.replace(/[^0-9\.]+/g, "");
+            var g = darat.replace(/[^0-9\.]+/g, "");
+            var h = dll.replace(/[^0-9\.]+/g, "");
+            var uangtaxi = d.replace(/\./g, "");
+            var uanglaut = e.replace(/\./g, "");
+            var uangudara = f.replace(/\./g, "");
+            var uangdarat = g.replace(/\./g, "");
+            var uangdll = h.replace(/\./g, "");
+            var uangrep = diffDays * rep
 
+            //TOTAL
+            var total = ''+(Number(totalUangHarian)+Number(totalUangPenginapan)+Number(uangtaxi)
+            +Number(uangrep)
+            +Number(uanglaut)+Number(uangudara)+Number(uangdarat)+Number(uangdll))
+            $("#total"+id+"").val(formatRupiah(total));
+
+            if(diffDays < 0){
+              swal({
+                title:"Jumlah Hari Minus !",
+                text: "Pastikan tanggal kembali tidak < tanggal berangkat", 
+                icon: "warning",
+                timer: 2000
+                })
+                $("#tglkembali"+id+"").val("")
+                $("#jmlhari"+id+"").val("");
             }
-    });
+            }else{
+                $("#jmlhari"+id+"").val();
+            }
+
+        }
+});
 
 }
 
@@ -799,14 +956,9 @@ function dayCount(id, trigger){
 
 
 
-var kdakun = "0"
+  var keljab = $('#keljab'+id+'').val();
 
-if ( $("#idxskmpnen").val() != null){
-  var valkdakun = $("#idxskmpnen").val()
-  var kdakun_split = valkdakun.split("-")
-  var kdakun = kdakun_split[0]
-
-}
+  var kdakun = $('#kdakun').val();
 
 
     $.ajax({
@@ -816,19 +968,23 @@ if ( $("#idxskmpnen").val() != null){
         dataType: "JSON",
         success: function(data)
             {    
-              if(kotaasal_id == kotatujuan_id){
-                  tarif = data[0]['dalam_kota_8_jam']
+              if(kdakun == "524111"){
+                tarif = data[0]['luar_kota']
+                rep = getRep(keljab, "L")
+                
+              }else if(kdakun == "524113"){
+                tarif = data[0]['dalam_kota_8_jam']
+                rep = getRep(keljab, "D")
 
-                  if(kdakun.search("524") == 0){
-                    tarif = data[0]['fb_dalamkota']
-                  }
+              }else if(kdakun == "524119"){
+                tarif = data[0]['fb_luarkota']
+                rep = getRep(keljab, "L")
 
-                }else{
-                  tarif = data[0]['luar_kota']
-                  if(kdakun.search("524") == 0){
-                    tarif = data[0]['fb_luarkota']
-                  }
-                }
+              }else if(kdakun == "524114"){
+                tarif = data[0]['fb_dalamkota']
+                rep = getRep(keljab, "D")
+
+              }
 
                 if ( ($("#tglberangkat"+id+"").val() != "") && ($("#tglkembali"+id+"").val() != "")) {
                 var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
@@ -836,12 +992,6 @@ if ( $("#idxskmpnen").val() != null){
                 var secondDate = new Date($("#tglkembali"+id+"").val());
                 var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay)) + 1;
                 $("#jmlhari"+id+"").val(diffDays);
-
-                // var kotatujuan = $("#kotatujuan"+id+"").val()
-                // var kotatujuan_split = kotatujuan.split("-")
-
-                // var tarif = kotatujuan_split[0]
-
                 var totalUangHarian = ''+(diffDays * tarif)
                 $("#uangharian"+id+"").val(formatRupiah(totalUangHarian));
 
@@ -849,8 +999,31 @@ if ( $("#idxskmpnen").val() != null){
                 $("#uangpenginapan"+id+"").val(formatRupiah(totalUangPenginapan));
 
 
+                var totalUangRep = ''+(diffDays * rep)
+                $("#uangrep"+id+"").val(formatRupiah(totalUangRep))
+
+               
+                var taxi = $("#uangtaxi"+id+"").val()
+                var laut = $("#uanglaut"+id+"").val()
+                var udara = $("#uangudara"+id+"").val()
+                var darat = $("#uangdarat"+id+"").val()
+                var dll = $("#uangdll"+id+"").val()
+                var d = taxi.replace(/[^0-9\.]+/g, "");
+                var e = laut.replace(/[^0-9\.]+/g, "");
+                var f = udara.replace(/[^0-9\.]+/g, "");
+                var g = darat.replace(/[^0-9\.]+/g, "");
+                var h = dll.replace(/[^0-9\.]+/g, "");
+                var uangtaxi = d.replace(/\./g, "");
+                var uanglaut = e.replace(/\./g, "");
+                var uangudara = f.replace(/\./g, "");
+                var uangdarat = g.replace(/\./g, "");
+                var uangdll = h.replace(/\./g, "");
+                var uangrep = diffDays * rep
+
                 //TOTAL
-                var total = ''+(Number(totalUangHarian)+Number(totalUangPenginapan))
+                var total = ''+(Number(totalUangHarian)+Number(totalUangPenginapan)+Number(uangtaxi)
+                +Number(uangrep)
+                +Number(uanglaut)+Number(uangudara)+Number(uangdarat)+Number(uangdll))
                 $("#total"+id+"").val(formatRupiah(total));
 
                 if(diffDays < 0){

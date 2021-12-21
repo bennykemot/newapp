@@ -82,9 +82,15 @@ class TambahTim extends CI_Controller {
                         'totalrep'  => $this->pregChar($this->input->post('uangrep'.$urut[$i].'')),
                         'taksiasal'  => $this->pregChar("0"),
                         'taksitujuan'  => $this->pregChar("0"),
-                        'lain'  => $this->pregChar($this->input->post('gol'.$urut[$i].'')),
+                        'lain'  => $this->pregChar($this->input->post('uangdll'.$urut[$i].'')),
                         'transport'  => $this->pregChar($this->input->post('uangtransportasi'.$urut[$i].'')),
                         'totaltravel'  => $this->pregChar($this->input->post('gol'.$urut[$i].'')),
+
+                        'tariftaxi'  => $this->pregChar($this->input->post('uangtaxi'.$urut[$i].'')),
+                        'tariflaut'  => $this->pregChar($this->input->post('uanglaut'.$urut[$i].'')),
+                        'tarifudara'  => $this->pregChar($this->input->post('uangudara'.$urut[$i].'')),
+                        'tarifdarat'  => $this->pregChar($this->input->post('uangdarat'.$urut[$i].'')),
+
                         'pengeluaranrill'  => $this->pregChar($this->input->post('gol'.$urut[$i].'')),
 
                         'jnstransportasi'  => $this->input->post('jnstransportasi'.$urut[$i].''),

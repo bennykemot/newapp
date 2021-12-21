@@ -114,4 +114,11 @@ class M_Master extends CI_Model {
             return $query->result();
       
             }
+
+         function getData_Kota($kdkabkota){
+
+            $query = $this->db->query("SELECT CONCAT(id_kota,'-',id,'-',nama_kota) as idkota , CONCAT(nama_provinsi,'-',nama_kota) as valkota from r_uangharian where id_kota = ".$kdkabkota."");
+            return $query->result();
+      
+            }
    }

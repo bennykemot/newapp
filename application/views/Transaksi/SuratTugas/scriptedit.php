@@ -217,6 +217,9 @@ $('#nama'+res+'').val(val[2])
 $('#gol'+res+'').html(val[3])
 $('#gol'+res+'').val(val[3])
 
+$('#keljab'+res+'').html(val[4])
+$('#keljab'+res+'').val(val[4])
+
 
 });
 
@@ -578,6 +581,9 @@ function selectRefresh(x){
          $('#gol'+res+'').html(val[3])
          $('#gol'+res+'').val(val[3])
 
+         $('#keljab'+res+'').html(val[4])
+         $('#keljab'+res+'').val(val[4])
+
 
       }); 
 
@@ -786,27 +792,74 @@ function validateNumber(e) {
     return pattern.test(e.key )
 }
 
-function AllCount(i){
-    var harian = $("#uangharian"+i+"").val()
-    var inap = $("#uangpenginapan"+i+"").val()
-
-    var transport = $("#uangtransportasi"+i+"").val()
+function AllCount(i, Trigger){
+    var harian = $("#satuan_uangharian"+i+"").val()
+    var inap = $("#satuan_uangpenginapan"+i+"").val()
+    var taxi = $("#uangtaxi"+i+"").val()
+    var laut = $("#uanglaut"+i+"").val()
+    var udara = $("#uangudara"+i+"").val()
+    var darat = $("#uangdarat"+i+"").val()
+    var dll = $("#uangdll"+i+"").val()
     var rep = $("#uangrep"+i+"").val()
+
+    var T_harian = $("#uangharian"+i+"").val()
+    var T_inap = $("#uangpenginapan"+i+"").val()
 
     var a = harian.replace(/[^0-9\.]+/g, "");
     var b = inap.replace(/[^0-9\.]+/g, "");
-    var c = transport.replace(/[^0-9\.]+/g, "");
-    var d = rep.replace(/[^0-9\.]+/g, "");
+    var c = rep.replace(/[^0-9\.]+/g, "");
+    var d = taxi.replace(/[^0-9\.]+/g, "");
+    var e = laut.replace(/[^0-9\.]+/g, "");
+    var f = udara.replace(/[^0-9\.]+/g, "");
+    var g = darat.replace(/[^0-9\.]+/g, "");
+    var h = dll.replace(/[^0-9\.]+/g, "");
+
+    var T_a = T_harian.replace(/[^0-9\.]+/g, "");
+    var T_b = T_inap.replace(/[^0-9\.]+/g, "");
 
     var uangharian = a.replace(/\./g, "");
     var uangpenginapan = b.replace(/\./g, "");
-    var uangtransport = c.replace(/\./g, "");
-    var uangrep = d.replace(/\./g, "");
+    var uangrep = c.replace(/\./g, "");
 
-    // $("#uangharianDum"+i+"").val(uangharian)
-    // $("#uangpenginapanDum"+i+"").val(uangpenginapan)
+    var uangtaxi = d.replace(/\./g, "");
+    var uanglaut = e.replace(/\./g, "");
+    var uangudara = f.replace(/\./g, "");
+    var uangdarat = g.replace(/\./g, "");
+    var uangdll = h.replace(/\./g, "");
 
-    var e = Number(uangharian) + Number(uangpenginapan) + Number(uangtransport) + Number(uangrep)
+    var T_uangharian = T_a.replace(/\./g, "");
+    var T_uangpenginapan = T_b.replace(/\./g, "");
+
+    var jmlhari = $('#jmlhari'+i+'').val()
+
+    if(Trigger == "satuan"){
+      var total_harian_ = Number(uangharian) * Number(jmlhari)
+      var total_harian = ""+total_harian_+""
+      $('#uangharian'+i+'').val(formatRupiah(total_harian))
+
+
+      var total_inap_ = Number(uangpenginapan) * ( Number(jmlhari)-1)
+      var total_inap = ""+total_inap_+""
+      $('#uangpenginapan'+i+'').val(formatRupiah(total_inap))
+
+      var e = Number(total_harian) + Number(total_inap)  + Number(uangtaxi) + Number(uanglaut) + Number(uangudara) + Number(uangdarat) + Number(uangdll) + Number(uangrep)
+    }else if( Trigger == "total"){
+      var total_harian_ = Number(T_uangharian) / Number(jmlhari)
+      var total_harian = ""+total_harian_+""
+      $('#satuan_uangharian'+i+'').val(formatRupiah(total_harian))
+
+
+      var total_inap_ = Number(T_uangpenginapan) /( Number(jmlhari)-1)
+      var total_inap = ""+total_inap_+""
+      $('#satuan_uangpenginapan'+i+'').val(formatRupiah(total_inap))
+
+      var e = Number(total_harian) + Number(total_inap)  + Number(uangtaxi) + Number(uanglaut) + Number(uangudara) + Number(uangdarat) + Number(uangdll) + Number(uangrep)
+
+    }else if(Trigger == "all"){
+      var e = Number(T_uangharian) + Number(T_uangpenginapan)  + Number(uangtaxi) + Number(uanglaut) + Number(uangudara) + Number(uangdarat) + Number(uangdll) + Number(uangrep)
+      
+    }
+      
     var total = ""+e+""
 
     $("#total"+i+"").val(formatRupiah(total))
@@ -817,183 +870,218 @@ function AllCount(i){
 
 function cityCount(id){
 
+if(id == 0 || id == "0"){
 
-  if($("#kotaasal"+id+"").val() != null || $("#kotatujuan"+id+"").val() != null){
-    var valasal = $("#kotaasal"+id+"").val()
-    var kotaasal_split = valasal.split("-")
-    var asal = kotaasal_split[1]
-    var kotaasal_id = kotaasal_split[0]
-    var nama_kotaasal_id = kotaasal_split[2]
+  var valasal = $("#kotaasal").val()
+  var Textasal = $( "#kotaasal option:selected" ).text();
 
-    var valtujuan = $("#kotatujuan"+id+"").val()
-    var kotatujuan_split = valtujuan.split("-")
-    var tujuan = kotatujuan_split[1]
-    var kotatujuan_id = kotatujuan_split[0]
-    var nama_kotatujuan_id = kotatujuan_split[2]
-  }
+  var kotaasal_split = valasal.split("-")
+  var asal = kotaasal_split[1]
+  var kotaasal_id = kotaasal_split[0]
+  var nama_kotaasal_id = kotaasal_split[2]
+  var $asal = $("<option selected='selected'></option>").val(valasal).text(Textasal)
+      $(".kotaasal").append($asal).trigger('change');
+
+}else if(id == "011"){
+  var valtujuan = $("#kotatujuan").val()
+  var Texttujuan = $( "#kotatujuan option:selected" ).text();
+
+  var kotatujuan_split = valtujuan.split("-")
+  var tujuan = kotatujuan_split[1]
+  var kotatujuan_id = kotatujuan_split[0]
+  var nama_kotatujuan_id = kotatujuan_split[2]
+  var $tujuan = $("<option selected='selected'></option>").val(valtujuan).text(Texttujuan)
+      $(".kotatujuan").append($tujuan).trigger('change');
+
+}else{
 
 
+    if($("#kotaasal"+id+"").val() != null || $("#kotatujuan"+id+"").val() != null){
+      var valasal = $("#kotaasal"+id+"").val()
+      var kotaasal_split = valasal.split("-")
+      var asal = kotaasal_split[1]
+      var kotaasal_id = kotaasal_split[0]
+      var nama_kotaasal_id = kotaasal_split[2]
 
-
-
-if ( $("#idxskmpnen").val() != null){
-  var valkdakun = $("#idxskmpnen").val()
-  var kdakun_split = valkdakun.split("-")
-  var kdakun = kdakun_split[0]
-
+      var valtujuan = $("#kotatujuan"+id+"").val()
+      var kotatujuan_split = valtujuan.split("-")
+      var tujuan = kotatujuan_split[1]
+      var kotatujuan_id = kotatujuan_split[0]
+      var nama_kotatujuan_id = kotatujuan_split[2]
+    }
 }
 
 
+
+var kdakun = $('#kdakun').val();
+
+// if ( $("#idxskmpnen").val() != null){
+//   var valkdakun = $("#idxskmpnen").val()
+//   var kdakun_split = valkdakun.split("-")
+//   var kdakun = kdakun_split[0]
+
+// }
+
+
 $.ajax({
-        url : master_baseurl + "Master_Uangharian",
-        data: {"Tujuan": tujuan, "Trigger": "NotaDinas"},
-        type: "post",
-        dataType: "JSON",
-        success: function(data)
-            {    
-                
-                if(kotaasal_id == kotatujuan_id){
-                  tarif = data[0]['dalam_kota_8_jam']
+      url : master_baseurl + "Master_Uangharian",
+      data: {"Tujuan": tujuan, "Trigger": "NotaDinas"},
+      type: "post",
+      dataType: "JSON",
+      success: function(data)
+          {    
 
-                  if(kdakun.search("524") == 0){
-                    tarif = data[0]['fb_dalamkota']
-                  }
+            if(kdakun == "524111"){
+              tarif = data[0]['luar_kota']
 
-                }else{
-                  tarif = data[0]['luar_kota']
-                  if(kdakun.search("524") == 0){
-                    tarif = data[0]['fb_luarkota']
-                  }
-                }
+            }else if(kdakun == "524113"){
+              tarif = data[0]['dalam_kota_8_jam']
 
-                $("#tarifuangharian"+id+"").val(tarif)
-                $("#tarifuangpenginapan"+id+"").val("1200000")
+            }else if(kdakun == "524119"){
+              tarif = data[0]['fb_luarkota']
 
-                if ( ($("#tglberangkat"+id+"").val() != "") && ($("#tglkembali"+id+"").val() != "")) {
-                var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-                var firstDate = new Date($("#tglberangkat"+id+"").val());
-                var secondDate = new Date($("#tglkembali"+id+"").val());
-                var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay) )+ 1;
-                $("#jmlhari"+id+"").val(diffDays);
-
-                var totalUangHarian = ''+((diffDays) * tarif)
-                $("#uangharian"+id+"").val(formatRupiah(totalUangHarian));
-
-                var totalUangPenginapan = ''+((diffDays-1) * 1200000)
-                $("#uangpenginapan"+id+"").val(formatRupiah(totalUangPenginapan));
-
-
-                //TOTAL
-                var total = ''+(Number(totalUangHarian)+Number(totalUangPenginapan))
-                $("#total"+id+"").val(formatRupiah(total));
-
-                if(diffDays < 0){
-                  swal({
-                    title:"Jumlah Hari Minus !",
-                    text: "Pastikan tanggal kembali tidak < tanggal berangkat", 
-                    icon: "warning",
-                    timer: 2000
-                    })
-                    $("#tglkembali"+id+"").val("")
-                    $("#jmlhari"+id+"").val("");
-                }
-                }else{
-                    $("#jmlhari"+id+"").val();
-                }
+            }else if(kdakun == "524114"){
+              tarif = data[0]['fb_dalamkota']
 
             }
-    });
+
+              $("#tarifuangharian"+id+"").val(tarif)
+              $("#tarifuangpenginapan"+id+"").val("1200000")
+
+              if ( ($("#tglberangkat"+id+"").val() != "") && ($("#tglkembali"+id+"").val() != "")) {
+              var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+              var firstDate = new Date($("#tglberangkat"+id+"").val());
+              var secondDate = new Date($("#tglkembali"+id+"").val());
+              var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay) )+ 1;
+              $("#jmlhari"+id+"").val(diffDays);
+
+              var totalUangHarian = ''+((diffDays) * tarif)
+              $("#satuan_uangharian"+id+"").val(formatRupiah(tarif));
+              $("#uangharian"+id+"").val(formatRupiah(totalUangHarian));
+              $("#uangharianDum"+id+"").val(totalUangHarian);
+
+              var totalUangPenginapan = ''+((diffDays-1) * 1200000)
+              $("#satuan_uangpenginapan"+id+"").val(formatRupiah("1200000"));
+              $("#uangpenginapan"+id+"").val(formatRupiah(totalUangPenginapan));
+              $("#uangpenginapanDum"+id+"").val(totalUangPenginapan);
+
+
+              //TOTAL
+              var total = ''+(Number(totalUangHarian)+Number(totalUangPenginapan))
+              $("#total"+id+"").val(formatRupiah(total));
+
+              if(diffDays < 0){
+                swal({
+                  title:"Jumlah Hari Minus !",
+                  text: "Pastikan tanggal kembali tidak < tanggal berangkat", 
+                  icon: "warning",
+                  timer: 2000
+                  })
+                  $("#tglkembali"+id+"").val("")
+                  $("#jmlhari"+id+"").val("");
+              }
+              }else{
+                  $("#jmlhari"+id+"").val();
+              }
+
+          }
+  });
 
 }
 
 function dayCount(id, trigger){
 
-  if($("#kotaasal"+id+"").val() != null || $("#kotatujuan"+id+"").val() != null){
-    var valasal = $("#kotaasal"+id+"").val()
-    var kotaasal_split = valasal.split("-")
-    var asal = kotaasal_split[1]
-    var kotaasal_id = kotaasal_split[0]
-    var nama_kotaasal_id = kotaasal_split[2]
+if($("#kotaasal"+id+"").val() != null || $("#kotatujuan"+id+"").val() != null){
+  var valasal = $("#kotaasal"+id+"").val()
+  var kotaasal_split = valasal.split("-")
+  var asal = kotaasal_split[1]
+  var kotaasal_id = kotaasal_split[0]
+  var nama_kotaasal_id = kotaasal_split[2]
 
-    var valtujuan = $("#kotatujuan"+id+"").val()
-    var kotatujuan_split = valtujuan.split("-")
-    var tujuan = kotatujuan_split[1]
-    var kotatujuan_id = kotatujuan_split[0]
-    var nama_kotatujuan_id = kotatujuan_split[2]
-  }
-
-
-
-var kdakun = "0"
-
-if ( $("#idxskmpnen").val() != null){
-  var valkdakun = $("#idxskmpnen").val()
-  var kdakun_split = valkdakun.split("-")
-  var kdakun = kdakun_split[0]
-
+  var valtujuan = $("#kotatujuan"+id+"").val()
+  var kotatujuan_split = valtujuan.split("-")
+  var tujuan = kotatujuan_split[1]
+  var kotatujuan_id = kotatujuan_split[0]
+  var nama_kotatujuan_id = kotatujuan_split[2]
 }
 
 
-    $.ajax({
-        url : master_baseurl + "Master_Uangharian",
-        data: {"Tujuan": tujuan, "Trigger": "NotaDinas"},
-        type: "post",
-        dataType: "JSON",
-        success: function(data)
-            {    
-              if(kotaasal_id == kotatujuan_id){
-                  tarif = data[0]['dalam_kota_8_jam']
 
-                  if(kdakun.search("524") == 0){
-                    tarif = data[0]['fb_dalamkota']
-                  }
+// var kdakun = "0"
 
-                }else{
-                  tarif = data[0]['luar_kota']
-                  if(kdakun.search("524") == 0){
-                    tarif = data[0]['fb_luarkota']
-                  }
-                }
+// if ( $("#idxskmpnen").val() != null){
+//   var valkdakun = $("#idxskmpnen").val()
+//   var kdakun_split = valkdakun.split("-")
+//   var kdakun = kdakun_split[0]
 
-                if ( ($("#tglberangkat"+id+"").val() != "") && ($("#tglkembali"+id+"").val() != "")) {
-                var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-                var firstDate = new Date($("#tglberangkat"+id+"").val());
-                var secondDate = new Date($("#tglkembali"+id+"").val());
-                var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay)) + 1;
-                $("#jmlhari"+id+"").val(diffDays);
+// }
 
-                // var kotatujuan = $("#kotatujuan"+id+"").val()
-                // var kotatujuan_split = kotatujuan.split("-")
+var kdakun = $('#kdakun').val();
 
-                // var tarif = kotatujuan_split[0]
+  $.ajax({
+      url : master_baseurl + "Master_Uangharian",
+      data: {"Tujuan": tujuan, "Trigger": "NotaDinas"},
+      type: "post",
+      dataType: "JSON",
+      success: function(data)
+          {    
+            if(kdakun == "524111"){
+              tarif = data[0]['luar_kota']
 
-                var totalUangHarian = ''+(diffDays * tarif)
-                $("#uangharian"+id+"").val(formatRupiah(totalUangHarian));
+            }else if(kdakun == "524113"){
+              tarif = data[0]['dalam_kota_8_jam']
 
-                var totalUangPenginapan = ''+((diffDays-1) * 1200000)
-                $("#uangpenginapan"+id+"").val(formatRupiah(totalUangPenginapan));
+            }else if(kdakun == "524119"){
+              tarif = data[0]['fb_luarkota']
 
-
-                //TOTAL
-                var total = ''+(Number(totalUangHarian)+Number(totalUangPenginapan))
-                $("#total"+id+"").val(formatRupiah(total));
-
-                if(diffDays < 0){
-                  swal({
-                    title:"Jumlah Hari Minus !",
-                    text: "Pastikan tanggal kembali tidak < tanggal berangkat", 
-                    icon: "warning",
-                    timer: 2000
-                    })
-                    $("#tglkembali"+id+"").val("")
-                    $("#jmlhari"+id+"").val("");
-                }
-                }else{
-                    $("#jmlhari"+id+"").val();
-                }
+            }else if(kdakun == "524114"){
+              tarif = data[0]['fb_dalamkota']
 
             }
-    });
+
+              if ( ($("#tglberangkat"+id+"").val() != "") && ($("#tglkembali"+id+"").val() != "")) {
+              var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+              var firstDate = new Date($("#tglberangkat"+id+"").val());
+              var secondDate = new Date($("#tglkembali"+id+"").val());
+              var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay)) + 1;
+              $("#jmlhari"+id+"").val(diffDays);
+
+              // var kotatujuan = $("#kotatujuan"+id+"").val()
+              // var kotatujuan_split = kotatujuan.split("-")
+
+              // var tarif = kotatujuan_split[0]
+
+              var totalUangHarian = ''+(diffDays * tarif)
+              $("#satuan_uangharian"+id+"").val(formatRupiah(tarif));
+              $("#uangharian"+id+"").val(formatRupiah(totalUangHarian));
+              $("#uangharianDum"+id+"").val(totalUangHarian);
+
+              var totalUangPenginapan = ''+((diffDays-1) * 1200000)
+              $("#satuan_uangpenginapan"+id+"").val(formatRupiah("1200000"));
+              $("#uangpenginapan"+id+"").val(formatRupiah(totalUangPenginapan));
+              $("#uangpenginapanDum"+id+"").val(totalUangPenginapan);
+
+
+              //TOTAL
+              var total = ''+(Number(totalUangHarian)+Number(totalUangPenginapan))
+              $("#total"+id+"").val(formatRupiah(total));
+
+              if(diffDays < 0){
+                swal({
+                  title:"Jumlah Hari Minus !",
+                  text: "Pastikan tanggal kembali tidak < tanggal berangkat", 
+                  icon: "warning",
+                  timer: 2000
+                  })
+                  $("#tglkembali"+id+"").val("")
+                  $("#jmlhari"+id+"").val("");
+              }
+              }else{
+                  $("#jmlhari"+id+"").val();
+              }
+
+          }
+  });
 
 }
 

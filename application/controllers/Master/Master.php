@@ -53,4 +53,13 @@ class Master extends CI_Controller {
 
         echo json_encode($response);
      }
+
+     public function getKota(){
+
+        $kdkabkota = $this->input->post('kdkabkota');
+        
+        $response = $this->Master->getData_Kota($kdkabkota);
+
+        echo json_encode($response);
+     }
 }

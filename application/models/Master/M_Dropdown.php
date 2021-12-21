@@ -417,6 +417,7 @@ function getData_Pegawai($searchTerm="", $Trigger){
    $this->db->select('nama');
    $this->db->select('jabatan');
    $this->db->select('golruang');
+   $this->db->select('kel_jab');
    $this->db->where("nama like '%".$searchTerm."%' ");
    $fetched_records = $this->db->get('t_pegawai');
    $users = $fetched_records->result_array();
@@ -429,7 +430,7 @@ function getData_Pegawai($searchTerm="", $Trigger){
       }
    }else{
       foreach($users as $user){
-         $data[] = array("id"=>$user['nip']."-".$user['jabatan']."-".$user['nama']."-".$user['golruang'], "text"=>$user['nama']);
+         $data[] = array("id"=>$user['nip']."-".$user['jabatan']."-".$user['nama']."-".$user['golruang']."-".$user['kel_jab'], "text"=>$user['nama']);
       }
    }
    
@@ -597,27 +598,12 @@ function getData_pagu($searchTerm="",$Trigger,$kdsatker){
    return $data;
 }
 
-function getData_kota($searchTerm="", $Trigger, $Jenistarif){
+function getData_kota($searchTerm=""){
 
-   // if($Trigger == "fullboard" || $Jenistarif == "dalam" ){
-   //    $get = 'fb_dalamkota';
-
-   // }else if($Trigger == "fullboard" || $Jenistarif == "luar" ){
-   //    $get = 'fb_luarkota';
-
-   // }else if($Trigger == "non-fullboard" || $Jenistarif == "dalam" ){
-   //    $get = 'dalam_kota_8_jam';
-
-   // }else if($Trigger == "non-fullboard" || $Jenistarif == "luar" ){
-   //    $get = 'luar_kota';
-   // }
-
-   // $get = 'luar_kota';
 
    $this->db->select('id');
    $this->db->select('id_provinsi');
    $this->db->select('id_kota');
-   //$this->db->select($get);
    $this->db->select('nama_kota');
    $this->db->select('nama_provinsi');
    $this->db->where("nama_kota like '%".$searchTerm."%' ");

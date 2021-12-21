@@ -26,7 +26,7 @@ class M_SuratTugas extends CI_Model{
 
             $query = $this->db->query('SELECT d_surattugas.nost, d_surattugas.tglst, 
             d_surattugas.uraianst, d_surattugas.tglmulaist, 
-            d_surattugas.tglselesaist ,d_surattugas.id_unit,
+            d_surattugas.tglselesaist ,d_surattugas.id_unit,d_surattugas.kdakun,d_surattugas.kdsatker,
             
             t_unitkerja.nama_unit, 
             
@@ -35,10 +35,13 @@ class M_SuratTugas extends CI_Model{
             CONCAT("NoTim") as tim,
             
             t_pejabat.nama as nama_ttd,
-            d_surattugas.id as idst
+            d_surattugas.id as idst,
+
+            t_satker.kdkabkota
             
             FROM d_surattugas 
-            JOIN t_unitkerja ON d_surattugas.id_unit = t_unitkerja.id 
+            JOIN t_unitkerja ON d_surattugas.id_unit = t_unitkerja.id
+            JOIN t_satker ON d_surattugas.kdsatker = t_satker.kdsatker 
             JOIN t_pejabat ON d_surattugas.id_ttd = t_pejabat.id  WHERE d_surattugas.id = '.$id.'');
 
         }else{
@@ -71,7 +74,8 @@ class M_SuratTugas extends CI_Model{
                             d_itemcs.jabatan, d_itemcs.golongan, 
                             d_itemcs.tglberangkat, d_itemcs.tglkembali, 
                             d_itemcs.jmlhari,d_itemcs.totaluangharian, 
-                            d_itemcs.totalinap, d_itemcs.totalrep, 
+                            d_itemcs.totalinap, d_itemcs.totalrep, d_itemcs.tarifrep, 
+                            d_itemcs.tariftaxi,d_itemcs.tariflaut,d_itemcs.tarifudara,d_itemcs.tarifdarat,d_itemcs.lain,
                             d_itemcs.totaltravel, d_itemcs.jumlah, d_itemcs.transport,
                             d_itemcs.jnstransportasi, CONCAT('WithTim') as tim, d_itemcs.id as idtim,
                 
@@ -80,12 +84,14 @@ class M_SuratTugas extends CI_Model{
 
                             $order ="ORDER BY d_itemcs.nourut";
                         
+                        }else{
+                            $select = "CONCAT('NoTim') as tim,";
                         }
                 }
             $query = $this->db->query('SELECT d_pagu.*, d_surattugas.nost, d_surattugas.tglst, 
             d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.idx_temp,
             d_surattugas.tglselesaist ,d_surattugas.id_unit,d_surattugas.id as idst,d_surattugas.idxskmpnen, 
-            d_surattugas.id_ttd,
+            d_surattugas.id_ttd,d_surattugas.kdsatker,
             
             
             t_unitkerja.nama_unit, 

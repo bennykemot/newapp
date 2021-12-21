@@ -51,20 +51,21 @@
           <!-- <a class="btn modal-trigger col s2" href="#modal2">Tambah Data</a> -->
           <div class="row">
             <div class="col s12">
-              <table id="tb-st" class="display bordered" style="width:100%;white-space: nowrap !important;overflow: hidden;">
+              <table id="tb-st-" class="display bordered" style="width:100%;white-space: nowrap !important;overflow: hidden;">
                   <thead>
                     <tr>
-                        <th style="width: 5%" >NO URUT</th>
+                        <th style="width: 5%" >NO</th>
                         <th>STATUS</th>
-                        <th style="width: 50%" >NOMOR, TANGGAL, URAIAN SURAT TUGAS</th>
+                        <th style="width: 30%" >NOMOR, TANGGAL, URAIAN SURAT TUGAS</th>
                         <th style="width: 15%" >MULAI</th>
                         <th style="width: 15%" >SELESAI</th>
-                        <th style="width: 15%" class="text-center">AKSI</th>
+                        <th style="width: 20%" class="text-center">AKSI</th>
                     </tr>
                   </thead>
                   <tbody>
                   <?php 
-                            $no = $this->uri->segment('4') + 1;
+                           // $no = $this->uri->segment('4') + 1;
+                           $no = 1;
                             foreach($SuratTugas as $u){ 
                               ?>
                         <tr>

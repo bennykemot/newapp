@@ -70,6 +70,9 @@
 
                             <div class="input-field col s10 " >
                                 <input type="text"  id="idxskmpnen" name="idxskmpnen"  value="<?= $ST[0]['idxskmpnen'] ?>" readonly>
+                                <input type="text"  id="kdakun" name="kdakun"  value="<?= $ST[0]['kdakun'] ?>" hidden>
+                                <input type="text"  id="kdsatker" name="kdsatker"  value="<?= $ST[0]['kdsatker'] ?>" hidden>
+                                <input type="text"  id="kdkabkota" name="kdkabkota"  value="<?= $ST[0]['kdkabkota'] ?>" hidden>
                         
                             </div>
                         </div>
@@ -90,6 +93,8 @@
                             </div>
                         </div>
 
+                       
+
                         <div id = "counting" >
                             <div class="multi-field-wrapper">
 
@@ -103,23 +108,60 @@
                                         <button type="button" class="btn green col s12" id ="add-field" name="add-field"><i class="material-icons left">add</i> Tambah</button>
                                     </div>
                                 </div>
+                                <!-- <div class="multi-fields">
+                                </div> -->
 
-                                    <table class="bordered fixed multi-fields" id="tbUser">
-                                        <thead><tr>
-                                            <td style="width: 5px" >NO</td>
-                                            <td style="width: 30px" >NAMA</td>
-                                            <td style="min-width: 200px" >NIP</td>
-                                            <td style="min-width: 250px" >PERAN/JABATAN</td>
-                                            <td>GOL</td>
-                                            <td style="min-width: 200px">KOTA ASAL</td>
-                                            <td style="min-width: 200px">KOTA TUJUAN</td>
-                                            <td>TGL<br>BERANGKAT</td>
-                                            <td>TGL<br>KEMBALI</td>
-                                            <td style="min-width: 250px">JENIS<br>TRANSPORTASI</td>
-                                            <td style="min-width: 15px" >AKSI</td>
+                                
+                                    
+                                <div id="divTable" style="display: none">
+
+                                <div class="input-field col s12">
+                                    <div class="input-field col s2"><label>Kota Asal</label></div>
+
+                                    <div class="input-field col s4 " >
+                                        <select class="browser-default kotaselect" id="kotaasal" name="kotaasal" onchange="cityCount('0')"></select>
+                                    </div>
+
+                                    <div class="input-field col s2"><label>Kota Tujuan</label></div>
+
+                                    <div class="input-field col s4 " >
+                                        <select class="browser-default kotaselect" id="kotatujuan" name="kotatujuan" onchange="cityCount('011')"></select>
+                                    </div>
+                                </div>
+
+
+                                    <table class="bordered striped fixed multi-fields" id="tbUser" >
+                                        <thead><tr style="background-color: rgba(242,242,242,.5)">
+                                            <td  class="text-center" style="width: 5px" >NO</td>
+                                            <td  class="text-center" style="width: 30px" colspan="2">NAMA</td>
+                                            <td  class="text-center" style="min-width: 200px" colspan="2">NIP</td>
+                                            <td  class="text-center" style="min-width: 250px" colspan="2">PERAN/JABATAN</td>
+                                            <td class="text-center" >GOL</td>
+                                            <td  class="text-center" colspan="2" style="min-width: 200px">KOTA ASAL</td>
+                                            <td colspan="2" style="min-width: 200px">KOTA TUJUAN</td>
+                                            <td class="text-center" >TGL<br>BERANGKAT</td>
+                                            <td class="text-center" >TGL<br>KEMBALI</td>
+                                            <!-- <td style="min-width: 250px">JENIS<br>TRANSPORTASI</td>
+                                            <td style="min-width: 15px" >AKSI</td> -->
+                                        </tr>
+                                    
+                                        <tr >
+                                            <td class="text-center">JML<br>HARI</td>
+                                            <td colspan="2" class="text-center" style="min-width: 300px">UANG HARIAN</td>
+                                            <td colspan="2" class="text-center" style="min-width: 300px">PENGINAPAN</td>
+                                            <td class="text-center">Taxi</td>
+                                            <td class="text-center">Angkutan<br>Laut</td>
+                                            <td class="text-center">Transportasi<br>Udara</td>
+                                            <td class="text-center">Transportasi<br>Darat</td>
+                                            <td class="text-center">DLL</td>
+                                            <td class="text-center">REPRESENTASI</td>
+                                            <td class="text-center" style="min-width: 150px">JUMLAH</td>
+                                            <td class="text-center">JENIS<br>TRANSPORTASI</td>
+                                            <td class="text-center" style="min-width: 150px">Aksi</td>
                                         </tr></thead>
-                                        <tbody class="multi-field"></tbody>
+                                        <!-- <tbody class="multi-field"></tbody> -->
                                     </table>
+                                </div>
                             </div>
                         </div>
 
