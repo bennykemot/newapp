@@ -60,6 +60,10 @@ if(valTrigger == "L"){
 
 }
 
+function getInap(gol,keljab,kdakun){
+
+}
+
 
 function formatRupiah(angka){
         var number_string = angka.replace(/[^,\d]/g, '').toString(),
@@ -439,6 +443,8 @@ function AllCount(i, Trigger){
     var nama_kotatujuan_id = kotatujuan_split[2]
   }
   var kdakun = $('#kdakun').val();
+  var gol = $('#gol'+i+'').val();
+  var keljab = $('#keljab'+i+'').val();
 
     $.ajax({
         url : master_baseurl + "Master_Uangharian",
@@ -451,6 +457,7 @@ function AllCount(i, Trigger){
 
               if(kdakun == "524111"){
                 tarif = data[0]['luar_kota']
+                maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
                 
               }else if(kdakun == "524113"){
                 tarif = data[0]['dalam_kota_8_jam']
@@ -675,6 +682,7 @@ function dayCount(id, trigger){
 
 
 var keljab = $('#keljab'+id+'').val();
+
 
 var kdakun = $('#kdakun').val();
 
