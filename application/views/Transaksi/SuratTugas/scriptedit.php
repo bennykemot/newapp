@@ -502,6 +502,8 @@ $("#user-select2").select2({
            delay: 250,
            data: function (params) {
               return {
+								Trigger: "ttd_forST",
+								kdsatker: satker_session,
                 searchTerm: params.term // search term
               };
            },
