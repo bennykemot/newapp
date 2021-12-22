@@ -237,7 +237,7 @@ class SuratTugas extends CI_Controller {
                 //     );
 
                     
-            $this->db->insert('d_costsheet',$data_cs);
+            //$this->db->insert('d_costsheet',$data_cs);
               
             //     //$this->db->insert_batch('d_stdetail', $data);
              

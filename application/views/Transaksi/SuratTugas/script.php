@@ -1084,7 +1084,7 @@ $("#TambahST").click(function (e) {
     success: function (data, textStatus, jqXHR) {
               show_msg(textStatus);
               Reset(IdForm);
-             window.history.back();
+              window.history.back();
               
               
           },

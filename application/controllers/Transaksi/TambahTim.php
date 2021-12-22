@@ -127,8 +127,8 @@ class TambahTim extends CI_Controller {
                 //    $sum += $total[$i];
 
                         $this->db->insert('d_stdetail',$data);
-                       $this->db->insert('d_itemcs',$data_ItemCS);
-                       $j = $urut[$i];
+                        $this->db->insert('d_itemcs',$data_ItemCS);
+                        $j = $urut[$i];
                 }
 
 					$data_cs = array(
