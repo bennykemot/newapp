@@ -39,7 +39,10 @@ class M_Master extends CI_Model {
 
    function getData_Uangharian($Trigger, $Tujuan){
 
-      $query = $this->db->query("SELECT * from r_uangharian where id = '".$Tujuan."' ");
+      $query = $this->db->query("SELECT r_tarifpenginapan.*,r_uangharian.* FROM r_tarifpenginapan 
+      join r_uangharian ON r_uangharian.id_provinsi = r_tarifpenginapan.id_provinsi 
+      WHERE r_tarifpenginapan.id_provinsi = '".$Tujuan."' ");
+      //$query = $this->db->query("SELECT * from r_uangharian where id = '".$Tujuan."' ");
       return $query->result();
 
       }
