@@ -149,7 +149,7 @@
                                             <td class="text-center">JML<br>HARI</td>
                                             <td colspan="2" class="text-center" style="min-width: 300px">UANG HARIAN</td>
                                             <td colspan="2" class="text-center" style="min-width: 300px">PENGINAPAN</td>
-                                            <td class="text-center">Taxi</td>
+                                            <td class="text-center">Taxi<br>Bandara</td>
                                             <td class="text-center">Angkutan<br>Laut</td>
                                             <td class="text-center">Transportasi<br>Udara</td>
                                             <td class="text-center">Transportasi<br>Darat</td>
