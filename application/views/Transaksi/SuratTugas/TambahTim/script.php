@@ -139,7 +139,8 @@ $("#user-select2").select2({
            data: function (params) {
               return {
                 session_satker: satker_session,
-                searchTerm: params.term // search term
+                searchTerm: params.term,
+                 // search term
               };
            },
            processResults: function (response) {
@@ -207,7 +208,10 @@ function selectRefresh(x){
            delay: 250,
            data: function (params) {
               return {
-                searchTerm: params.term // search term
+                searchTerm: params.term,
+                Trigger: "select_forTim",
+                tglberangkat: $('#tglberangkat'+x+'').val(),
+                tglkembali: $('#tglkembali'+x+'').val() // search term
               };
            },
            processResults: function (response) {
@@ -218,8 +222,6 @@ function selectRefresh(x){
            cache: true
          }
      });
-
-
 
     $('.namaTim').on('change', function() {
 
@@ -303,8 +305,11 @@ $('.multi-field-wrapper').each(function() {
               var minDate = $('#tglst_mulai').val()
               var maxDate = $('#tglst_selesai').val()
               $($wrapper).append( head +'<tr class="tb-tim">\
-                            <td><input  type="number" id="urut'+x+'" name="urut'+x+'" min="1" max="20" value="'+x+'"></td>\
-                            <td id="Tim" name="Tim" colspan="2">\
+                            <td style="min-width: 15px" ><input  type="number" id="urut'+x+'" name="urut'+x+'" min="1" max="20" value="'+x+'"></td>\
+                            <td><input type="date" min="'+minDate+'" max="'+maxDate+'" onchange="dayCount(\''+x+'\',\'D\')" id="tglberangkat'+x+'" name="tglberangkat'+x+'"></td>\
+                              <td><input type="date" max="'+maxDate+'" min="'+minDate+'" onchange="dayCount('+x+')" id="tglkembali'+x+'" name="tglkembali'+x+'"></td>\
+                              <td><input type="text" id="jmlhari'+x+'" name="jmlhari'+x+'" readonly></td>\
+                               <td id="Tim" name="Tim" colspan="2">\
                                <select placeholder="Nama.."  class="namaTim browser-default" name="namaDummy'+x+'"></select>\
                                <input name="nama'+x+'" id="nama'+x+'" hidden>\
                             </td>\
@@ -314,16 +319,15 @@ $('.multi-field-wrapper').each(function() {
                             <td colspan="2">\
                                 <textarea placeholder="Peran/Jabatan" class="perjab" id="perjab'+x+'" name="perjab'+x+'"></textarea>\
                             </td>\
-                              <td><input type="text" id="gol'+x+'" name="gol'+x+'" readonly><input type="text" id="keljab'+x+'" name="keljab'+x+'" readonly></td>\
+                              <td><input type="text" id="gol'+x+'" name="gol'+x+'" readonly><input type="text" id="keljab'+x+'" name="keljab'+x+'" readonly hidden></td>\
                               <td colspan="2"><select class="browser-default kota kotaasal" name="kotaasal'+x+'" id="kotaasal'+x+'" onchange="cityCount('+x+')"></select></td>\
                               <td colspan="2"><select class="browser-default kota kotatujuan"  name="kotatujuan'+x+'" id="kotatujuan'+x+'" onchange="cityCount('+x+')"></select></td>\
-                              <td><input type="date" min="'+minDate+'" max="'+maxDate+'" onchange="dayCount(\''+x+'\',\'D\')" id="tglberangkat'+x+'" name="tglberangkat'+x+'"></td>\
-                              <td><input type="date" max="'+maxDate+'" min="'+minDate+'" onchange="dayCount('+x+')" id="tglkembali'+x+'" name="tglkembali'+x+'"></td>\
                               <td hidden><input type="text" id="tarifuangpenginapan'+x+'" name="tarifuangpenginapan'+x+'"></td>\
                               <td hidden><input type="text" id="tarifuangharian'+x+'" name="tarifuangharian'+x+'" ></td>\
                             </tr>\
                               <tr>\
-                                  <td><input type="text" id="jmlhari'+x+'" name="jmlhari'+x+'" readonly></td>\
+                                   <td></td>\
+                                   <td><input type="text" id="nospd'+x+'" name="nospd'+x+'"></td>\
                                   <td><input style="min-width: 150px" type="text" id="satuan_uangharian'+x+'" name="satuan_uangharian'+x+'" onkeyup="AllCount(\''+x+'\',\'satuan\')"></td>\
                                   <td><input style="min-width: 150px" type="text" id="uangharian'+x+'" name="uangharian'+x+'" onkeyup="AllCount(\''+x+'\',\'total\')"></td>\
                                   <td><input style="min-width: 150px" type="text" id="satuan_uangpenginapan'+x+'" name="satuan_uangpenginapan'+x+'" onkeyup="AllCount(\''+x+'\',\'satuan\')"></td>\
@@ -420,6 +424,59 @@ function AllCount(i, Trigger){
 
     var T_uangharian = T_a.replace(/\./g, "");
     var T_uangpenginapan = T_b.replace(/\./g, "");
+
+    if($("#kotaasal"+i+"").val() != null || $("#kotatujuan"+i+"").val() != null){
+    var valasal = $("#kotaasal"+i+"").val()
+    var kotaasal_split = valasal.split("-")
+    var asal = kotaasal_split[1]
+    var kotaasal_id = kotaasal_split[0]
+    var nama_kotaasal_id = kotaasal_split[2]
+
+    var valtujuan = $("#kotatujuan"+i+"").val()
+    var kotatujuan_split = valtujuan.split("-")
+    var tujuan = kotatujuan_split[1]
+    var kotatujuan_id = kotatujuan_split[0]
+    var nama_kotatujuan_id = kotatujuan_split[2]
+  }
+  var kdakun = $('#kdakun').val();
+
+    $.ajax({
+        url : master_baseurl + "Master_Uangharian",
+        data: {"Tujuan": tujuan, "Trigger": "NotaDinas"},
+        type: "post",
+        dataType: "JSON",
+        success: function(data)
+            {    
+              
+
+              if(kdakun == "524111"){
+                tarif = data[0]['luar_kota']
+                
+              }else if(kdakun == "524113"){
+                tarif = data[0]['dalam_kota_8_jam']
+
+              }else if(kdakun == "524119"){
+                tarif = data[0]['fb_luarkota']
+
+              }else if(kdakun == "524114"){
+                tarif = data[0]['fb_dalamkota']
+
+              }
+
+              if(uangharian > tarif || uangpenginapan > 1200000){
+                  swal({
+                        title:"Uang Harian atau Penginapan Melebihi Batas Maksimal", 
+                        icon:"warning",
+                        timer: 2000
+                        })
+                    document.getElementById("TambahTim").disabled  =true;
+                }else{
+                    document.getElementById("TambahTim").disabled  =false;
+                }
+            }
+          });
+
+    
 
     var jmlhari = $('#jmlhari'+i+'').val()
 

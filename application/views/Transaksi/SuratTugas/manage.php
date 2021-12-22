@@ -51,7 +51,7 @@
           <!-- <a class="btn modal-trigger col s2" href="#modal2">Tambah Data</a> -->
           <div class="row">
             <div class="col s12">
-              <table id="tb-st-" class="display bordered" style="width:100%;white-space: nowrap !important;overflow: hidden;">
+              <table id="tb-st-" class="display bordered" style="width:100%;white-space: normal !important;overflow: hidden;">
                   <thead>
                     <tr>
                         <th style="width: 5%" >NO</th>

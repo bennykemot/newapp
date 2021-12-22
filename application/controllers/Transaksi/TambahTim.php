@@ -49,6 +49,7 @@ class TambahTim extends CI_Controller {
                 $total = [];
                 $totaluangharian = 0;
                 $totaluanginap = 0;
+                $totaluangtransport = 0;
                 $sum=0;
                 
                 for($i = 0 ; $i < $countTim; $i++){
@@ -64,6 +65,7 @@ class TambahTim extends CI_Controller {
 
                        $data_ItemCS = array(
                         'nourut' => $this->input->post('urut'.$urut[$i].''),
+                        'nospd' => $this->input->post('nospd'.$urut[$i].''),
                         'nama' => $this->input->post('nama'.$urut[$i].''),
                         'nip' => $this->input->post('nip'.$urut[$i].''),
                         'jabatan'  => $this->input->post('perjab'.$urut[$i].''),
@@ -103,7 +105,14 @@ class TambahTim extends CI_Controller {
 
                    $totaluangharian += $this->pregChar($this->input->post('uangharian'.$urut[$i].''));
                    $totaluanginap += $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
-                   $sum += $this->pregChar($this->input->post('uangharian'.$urut[$i].'')) + $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
+                   $totaluangtransport += $this->pregChar($this->input->post('uangdll'.$urut[$i].'')) + $this->pregChar($this->input->post('uangtaxi'.$urut[$i].''))
+                                            + $this->pregChar($this->input->post('uanglaut'.$urut[$i].''))+ $this->pregChar($this->input->post('uangudara'.$urut[$i].''))
+                                            + $this->pregChar($this->input->post('uangdarat'.$urut[$i].''));
+                   $sum +=  $this->pregChar($this->input->post('uangharian'.$urut[$i].'')) + 
+                            $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].'')) 
+                            + $this->pregChar($this->input->post('uangdll'.$urut[$i].'')) + $this->pregChar($this->input->post('uangtaxi'.$urut[$i].''))
+                            + $this->pregChar($this->input->post('uanglaut'.$urut[$i].''))+ $this->pregChar($this->input->post('uangudara'.$urut[$i].''))
+                            + $this->pregChar($this->input->post('uangdarat'.$urut[$i].''));
 
                 //    $totaluangharian = $this->pregChar($this->input->post('uangharian'.$urut[$i].''));
                 //    $totaluangpenginapan = $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
@@ -119,29 +128,14 @@ class TambahTim extends CI_Controller {
 
                         $this->db->insert('d_stdetail',$data);
                        $this->db->insert('d_itemcs',$data_ItemCS);
+                       $j = $urut[$i];
                 }
-
-				
-            	$cekCS = $this->db->query("select nost from d_costsheet where nost = ".$idst."")->result_array();
-
-				if($cekCS > 0){
-
-					$data_cs = array(
-						'tujuanst' =>  $this->input->post('kotatujuan1'),
-						'totaluangharian' =>  $totaluangharian,
-						'totaluanginap ' =>  $totaluanginap,
-						'biaya' =>  $sum
-						);
-						$this->db->where("nost", $idst);
-						$this->db->update("d_costsheet",$data_cs);
-
-				}else{
 
 					$data_cs = array(
 						'nost' => $idst,
 						'uraianst' => $uraianst,
 						'tglst' => date("Y-m-d",strtotime($tglst)),
-						'tujuanst' =>  $this->input->post('kotatujuan1'),
+						'tujuanst' =>  $this->input->post('kotatujuan'.$j.''),
 						'totaluangharian' =>  $totaluangharian,
 						'totaluanginap ' =>  $totaluanginap,
 						'biaya' =>  $sum
@@ -149,8 +143,6 @@ class TambahTim extends CI_Controller {
 	
 						
 						$this->db->insert('d_costsheet',$data_cs);
-
-				}
                 
               
                 //$this->db->insert_batch('d_stdetail', $data);

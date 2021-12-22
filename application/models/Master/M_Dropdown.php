@@ -733,4 +733,35 @@ function getData_ttd($searchTerm="",$Trigger,$kdsatker){
    
 }
 
+function getData_PegawaiST($searchTerm="", $Trigger,$tglberangkat,$tglkembali){
+
+   $getNip = $this->db->query("SELECT distinct nip from d_itemcs where tglberangkat between '".$tglberangkat."' and '".$tglkembali."' OR tglkembali between '".$tglberangkat."' and '".$tglkembali."' ");
+         //echo $getId_app;
+         $loop = [];
+         foreach ($getNip->result_array() as $row)
+         {
+               $loop[] =  $row['nip'];
+               
+         }
+
+         $res = implode(",", $loop);
+         
+         if(count($loop) <= 0){
+            $fetched_records = $this->db->query("SELECT nip,nama,jabatan,golruang,kel_jab FROM t_pegawai 
+                              WHERE nama like '%".$searchTerm."%'");
+         }else{
+            $fetched_records = $this->db->query("SELECT nip,nama,jabatan,golruang,kel_jab FROM t_pegawai 
+                              WHERE nip NOT IN (".$res.") AND nama like '%".$searchTerm."%'");
+         }
+         $users = $fetched_records->result_array();
+         $data = array();
+
+      foreach($users as $user){
+         $data[] = array("id"=>$user['nip']."-".$user['jabatan']."-".$user['nama']."-".$user['golruang']."-".$user['kel_jab'], "text"=>$user['nama']);
+      }
+   
+   
+   return $data;
+}
+
 }

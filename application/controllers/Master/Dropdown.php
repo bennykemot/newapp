@@ -186,8 +186,16 @@ class Dropdown extends CI_Controller {
       $searchTerm = $this->input->post('searchTerm');
       $Trigger = $this->input->post('Trigger');
 
+      if($Trigger == "select_forTim"){
+         $tglberangkat = $this->input->post('tglberangkat');
+         $tglkembali = $this->input->post('tglkembali');
+         $response = $this->Dropdown->getData_PegawaiST($searchTerm, $Trigger,$tglberangkat,$tglkembali);
+      }else{
+         $response = $this->Dropdown->getData_Pegawai($searchTerm, $Trigger);
+      }
+
       // Get users
-      $response = $this->Dropdown->getData_Pegawai($searchTerm, $Trigger);
+      
 
       echo json_encode($response);
    }

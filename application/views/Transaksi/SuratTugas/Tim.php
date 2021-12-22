@@ -16,21 +16,23 @@
                                     <div class="multi-field">
                                         <table class="bordered striped table-tim fixed"id="tbUser">
                                         <thead><tr style="background-color: rgba(242,242,242,.5)">
-                                            <td  class="text-center" style="width: 5px" >NO</td>
+                                            <td  class="text-center" style="min-width: 90px" >NO</td>
+                                            <td class="text-center" >TGL<br>BERANGKAT</td>
+                                            <td class="text-center" >TGL<br>KEMBALI</td>
+                                            <td class="text-center">JML<br>HARI</td>
                                             <td  class="text-center" style="width: 30px" colspan="2">NAMA</td>
                                             <td  class="text-center" style="min-width: 200px" colspan="2">NIP</td>
                                             <td  class="text-center" style="min-width: 250px" colspan="2">PERAN/JABATAN</td>
                                             <td class="text-center" >GOL</td>
                                             <td  class="text-center" colspan="2" style="min-width: 200px">KOTA ASAL</td>
                                             <td colspan="2" style="min-width: 200px">KOTA TUJUAN</td>
-                                            <td class="text-center" >TGL<br>BERANGKAT</td>
-                                            <td class="text-center" >TGL<br>KEMBALI</td>
                                             <!-- <td style="min-width: 250px">JENIS<br>TRANSPORTASI</td>
                                             <td style="min-width: 15px" >AKSI</td> -->
                                         </tr>
                                     
                                         <tr >
-                                            <td class="text-center">JML<br>HARI</td>
+                                            <td style="min-width:90px" ></td>
+                                            <td class="text-center" style="min-width: 200px" >No SPD</td>
                                             <td colspan="2" class="text-center" style="min-width: 300px">UANG HARIAN</td>
                                             <td colspan="2" class="text-center" style="min-width: 300px">PENGINAPAN</td>
                                             <td class="text-center">Taxi</td>
@@ -40,8 +42,8 @@
                                             <td class="text-center">DLL</td>
                                             <td class="text-center">REPRESENTASI</td>
                                             <td class="text-center" style="min-width: 150px">JUMLAH</td>
-                                            <td class="text-center">JENIS<br>TRANSPORTASI</td>
-                                            <td class="text-center" style="min-width: 150px">Aksi</td>
+                                            <td class="text-center" style="min-width: 200px">JENIS<br>TRANSPORTASI</td>
+                                            <td class="text-center" >Aksi</td>
                                         </tr></thead>
                                                 <?php   $j=1;$no = []; 
                                                         
@@ -53,11 +55,14 @@
 
                                 <tr class="tb-tim">
                                     <td><input  type="number" id="urut<?=$j?>" name="urut<?=$j?>" min="1" max="20" value="<?=$ubah[$i]['nourut']?>"></td>
+                                    <td><input type="date" min="<?=$ubah[$i]['tglmulaist']?>" max="<?=$ubah[$i]['tglselesaist']?>" onchange="dayCount('<?=$j?>','D')" id="tglberangkat<?=$j?>" name="tglberangkat<?=$j?>" value="<?=$ubah[$i]['tglberangkat']?>"></td>
+                                    <td><input type="date" max="<?=$ubah[$i]['tglselesaist']?>" min="<?=$ubah[$i]['tglmulaist']?>" onchange="dayCount(<?=$j?>)" id="tglkembali<?=$j?>" name="tglkembali<?=$j?>" value="<?=$ubah[$i]['tglkembali']?>"></td>
+                                    <td><input type="text" id="jmlhari<?=$j?>" name="jmlhari<?=$j?>" readonly value="<?=$ubah[$i]['jmlhari']?>"></td>
                                     <td id="Tim" name="Tim" colspan="2">
-                                    <select placeholder="Nama.."  class="namaTimHardcode browser-default" name="namaDummy<?=$j?>">
+                                    <select placeholder="Nama.."  class="namaTimHardcode browser-default" id="namaDummy<?=$j?>" name="namaDummy<?=$j?>" onclick="ubahNama('<?=$j?>')">
                                         <option selected value="<?=$ubah[$i]['nip']?>"><?=$ubah[$i]['nama']?></option>
                                     </select>
-                                    <input class="namaTim" name="nama<?=$j?>" id="nama<?=$j?>" hidden>
+                                    <input class="namaTim" name="nama<?=$j?>" id="nama<?=$j?>" value="<?=$ubah[$i]['nama']?>" hidden>
                                     <input name="idtim<?=$j?>" id="idtim<?=$j?>" value="<?=$ubah[$i]['idtim']?>"hidden>
                                     </td>
                                     <td colspan="2">
@@ -76,14 +81,13 @@
                                         <select class="browser-default kota kotatujuan"  name="kotatujuan<?=$j?>" id="kotatujuan<?=$j?>" onchange="cityCount(<?=$j?>)">
                                             <option selected value="<?=$ubah[$i]['kotatujuan']?>"><?=$kotatujuan[2]?></option>
                                         </select>
-                                    </td>
-                                    <td><input type="date" min="<?=$ubah[$i]['tglmulaist']?>" max="<?=$ubah[$i]['tglselesaist']?>" onchange="dayCount('<?=$j?>','D')" id="tglberangkat<?=$j?>" name="tglberangkat<?=$j?>" value="<?=$ubah[$i]['tglberangkat']?>"></td>
-                                    <td><input type="date" max="<?=$ubah[$i]['tglselesaist']?>" min="<?=$ubah[$i]['tglmulaist']?>" onchange="dayCount(<?=$j?>)" id="tglkembali<?=$j?>" name="tglkembali<?=$j?>" value="<?=$ubah[$i]['tglkembali']?>"></td>
+                                    </td>                                   
                                     <td hidden><input type="text" id="tarifuangpenginapan<?=$j?>" name="tarifuangpenginapan<?=$j?>"></td>
                                     <td hidden><input type="text" id="tarifuangharian<?=$j?>" name="tarifuangharian<?=$j?>" ></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" id="jmlhari<?=$j?>" name="jmlhari<?=$j?>" readonly value="<?=$ubah[$i]['jmlhari']?>"></td>
+                                    <td></td>
+                                    <td><input type="text" id="nospd<?=$j?>" name="nospd<?=$j?>" value="<?=$ubah[$i]['nospd']?>"></td>
                                     <td><input style="min-width: 150px" type="text" id="satuan_uangharian<?=$j?>" name="satuan_uangharian<?=$j?>" onkeyup="AllCount('<?=$j?>','satuan')" value="<?=rupiah(($ubah[$i]['totaluangharian']/$ubah[$i]['jmlhari']))?>"></td>
                                     <td><input style="min-width: 150px" type="text" id="uangharian<?=$j?>" name="uangharian<?=$j?>" onkeyup="AllCount('<?=$j?>','total')" value="<?=rupiah($ubah[$i]['totaluangharian'])?>"></td>
                                     <td><input style="min-width: 150px" type="text" id="satuan_uangpenginapan<?=$j?>" name="satuan_uangpenginapan<?=$j?>" onkeyup="AllCount('<?=$j?>','satuan')" value="<?=rupiah(($ubah[$i]['totalinap']/($ubah[$i]['jmlhari']-1)))?>"></td>

@@ -77,7 +77,7 @@ class M_SuratTugas extends CI_Model{
                             d_itemcs.totalinap, d_itemcs.totalrep, d_itemcs.tarifrep, 
                             d_itemcs.tariftaxi,d_itemcs.tariflaut,d_itemcs.tarifudara,d_itemcs.tarifdarat,d_itemcs.lain,
                             d_itemcs.totaltravel, d_itemcs.jumlah, d_itemcs.transport,
-                            d_itemcs.jnstransportasi, CONCAT('WithTim') as tim, d_itemcs.id as idtim,
+                            d_itemcs.jnstransportasi, CONCAT('WithTim') as tim, d_itemcs.id as idtim,d_itemcs.nospd,
                 
                             d_itemcs.kotaasal,d_itemcs.kotatujuan,";
                             $join = "JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st";

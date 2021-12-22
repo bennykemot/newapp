@@ -165,11 +165,10 @@ $("#bulan-Array").select2({
     data: data,
     dropdownParent: "#head",
 });
-    
 
-// SELECT2 INSERT
 
-   $(".namaTimHardcode").select2({
+function ubahNama(id){
+  $("#namaDummy"+id+"").select2({
           dropdownAutoWidth: true,
           width: '100%',
           placeholder: "Pilih Nama",
@@ -182,7 +181,10 @@ $("#bulan-Array").select2({
            data: function (params) {
               return {
                 
-                searchTerm: params.term // search term
+                searchTerm: params.term,
+                Trigger: "select_forTim",
+                tglberangkat: $('#tglberangkat'+id+'').val(),
+                tglkembali: $('#tglkembali'+id+'').val() // search term
               };
            },
            processResults: function (response) {
@@ -193,6 +195,36 @@ $("#bulan-Array").select2({
            cache: true
          }
      });
+
+}
+    
+
+// SELECT2 INSERT
+
+  //  $(".namaTimHardcode").select2({
+  //         dropdownAutoWidth: true,
+  //         width: '100%',
+  //         placeholder: "Pilih Nama",
+  //         dropdownParent: "#Tim",
+  //        ajax: { 
+  //          url: dropdown_baseurl + 'pegawai',
+  //          type: "post",
+  //          dataType: 'json',
+  //          delay: 250,
+  //          data: function (params) {
+  //             return {
+                
+  //               searchTerm: params.term // search term
+  //             };
+  //          },
+  //          processResults: function (response) {
+  //             return {
+  //                results: response
+  //             };
+  //          },
+  //          cache: true
+  //        }
+  //    });
 
 $('.namaTimHardcode').on('change', function() {
 
@@ -793,7 +825,7 @@ function validateNumber(e) {
 }
 
 function AllCount(i, Trigger){
-    var harian = $("#satuan_uangharian"+i+"").val()
+  var harian = $("#satuan_uangharian"+i+"").val()
     var inap = $("#satuan_uangpenginapan"+i+"").val()
     var taxi = $("#uangtaxi"+i+"").val()
     var laut = $("#uanglaut"+i+"").val()
@@ -830,7 +862,56 @@ function AllCount(i, Trigger){
     var T_uangharian = T_a.replace(/\./g, "");
     var T_uangpenginapan = T_b.replace(/\./g, "");
 
-    var jmlhari = $('#jmlhari'+i+'').val()
+    if($("#kotaasal"+i+"").val() != null || $("#kotatujuan"+i+"").val() != null){
+    var valasal = $("#kotaasal"+i+"").val()
+    var kotaasal_split = valasal.split("-")
+    var asal = kotaasal_split[1]
+    var kotaasal_id = kotaasal_split[0]
+    var nama_kotaasal_id = kotaasal_split[2]
+
+    var valtujuan = $("#kotatujuan"+i+"").val()
+    var kotatujuan_split = valtujuan.split("-")
+    var tujuan = kotatujuan_split[1]
+    var kotatujuan_id = kotatujuan_split[0]
+    var nama_kotatujuan_id = kotatujuan_split[2]
+  }
+  var kdakun = $('#kdakun').val();
+
+    $.ajax({
+        url : master_baseurl + "Master_Uangharian",
+        data: {"Tujuan": tujuan, "Trigger": "NotaDinas"},
+        type: "post",
+        dataType: "JSON",
+        success: function(data)
+            {    
+              
+
+              if(kdakun == "524111"){
+                tarif = data[0]['luar_kota']
+                
+              }else if(kdakun == "524113"){
+                tarif = data[0]['dalam_kota_8_jam']
+
+              }else if(kdakun == "524119"){
+                tarif = data[0]['fb_luarkota']
+
+              }else if(kdakun == "524114"){
+                tarif = data[0]['fb_dalamkota']
+
+              }
+
+              if(uangharian > tarif || uangpenginapan > 1200000){
+                  swal({
+                        title:"Uang Harian atau Penginapan Melebihi Batas Maksimal", 
+                        icon:"warning",
+                        timer: 2000
+                        })
+                    document.getElementById("UbahST").disabled  =true;
+                }else{
+                    document.getElementById("UbahST").disabled  =false;
+                }
+            }
+          });
 
     if(Trigger == "satuan"){
       var total_harian_ = Number(uangharian) * Number(jmlhari)

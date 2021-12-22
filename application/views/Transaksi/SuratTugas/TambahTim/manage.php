@@ -132,21 +132,23 @@
 
                                     <table class="bordered striped fixed multi-fields" id="tbUser" >
                                         <thead><tr style="background-color: rgba(242,242,242,.5)">
-                                            <td  class="text-center" style="width: 5px" >NO</td>
+                                            <td  class="text-center" style="min-width: 90px" >NO</td>
+                                            <td class="text-center" >TGL<br>BERANGKAT</td>
+                                            <td class="text-center" >TGL<br>KEMBALI</td>
+                                            <td class="text-center">JML<br>HARI</td>
                                             <td  class="text-center" style="width: 30px" colspan="2">NAMA</td>
                                             <td  class="text-center" style="min-width: 200px" colspan="2">NIP</td>
                                             <td  class="text-center" style="min-width: 250px" colspan="2">PERAN/JABATAN</td>
                                             <td class="text-center" >GOL</td>
                                             <td  class="text-center" colspan="2" style="min-width: 200px">KOTA ASAL</td>
                                             <td colspan="2" style="min-width: 200px">KOTA TUJUAN</td>
-                                            <td class="text-center" >TGL<br>BERANGKAT</td>
-                                            <td class="text-center" >TGL<br>KEMBALI</td>
                                             <!-- <td style="min-width: 250px">JENIS<br>TRANSPORTASI</td>
                                             <td style="min-width: 15px" >AKSI</td> -->
                                         </tr>
                                     
                                         <tr >
-                                            <td class="text-center">JML<br>HARI</td>
+                                            <td style="min-width:90px" ></td>
+                                            <td class="text-center" style="min-width: 200px" >No SPD</td>
                                             <td colspan="2" class="text-center" style="min-width: 300px">UANG HARIAN</td>
                                             <td colspan="2" class="text-center" style="min-width: 300px">PENGINAPAN</td>
                                             <td class="text-center">Taxi</td>
@@ -156,8 +158,8 @@
                                             <td class="text-center">DLL</td>
                                             <td class="text-center">REPRESENTASI</td>
                                             <td class="text-center" style="min-width: 150px">JUMLAH</td>
-                                            <td class="text-center">JENIS<br>TRANSPORTASI</td>
-                                            <td class="text-center" style="min-width: 150px">Aksi</td>
+                                            <td class="text-center" style="min-width: 200px">JENIS<br>TRANSPORTASI</td>
+                                            <td class="text-center" >Aksi</td>
                                         </tr></thead>
                                         <!-- <tbody class="multi-field"></tbody> -->
                                     </table>

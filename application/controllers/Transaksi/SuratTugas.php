@@ -226,18 +226,18 @@ class SuratTugas extends CI_Controller {
             //            $this->db->insert('d_itemcs',$data_ItemCS);
             //     }
 
-            //     $data_cs = array(
-            //         'nost' => $cek[0]['id'],
-            //         'uraianst' => $uraianst,
-            //         'tglst' => date("Y-m-d",strtotime($tglst)),
-            //         'tujuanst' =>  $this->input->post('kotatujuan1'),
-            //         'totaluangharian' =>  $totaluangharian,
-            //         'totaluanginap ' =>  $totaluanginap,
-            //         'biaya' =>  $sum
-            //         );
+                // $data_cs = array(
+                //     'nost' => $cek[0]['id'],
+                //     'uraianst' => $uraianst,
+                //     'tglst' => date("Y-m-d",strtotime($tglst)),
+                //     'tujuanst' =>  $this->input->post('kotatujuan1'),
+                //     'totaluangharian' =>  $totaluangharian,
+                //     'totaluanginap ' =>  $totaluanginap,
+                //     'biaya' =>  $sum
+                //     );
 
                     
-            //         $this->db->insert('d_costsheet',$data_cs);
+            $this->db->insert('d_costsheet',$data_cs);
               
             //     //$this->db->insert_batch('d_stdetail', $data);
              
@@ -337,6 +337,7 @@ class SuratTugas extends CI_Controller {
 
                        $data_ItemCS = array(
                         'nourut' => $this->input->post('urut'.$urut[$i].''),
+                        'nospd' => $this->input->post('nospd'.$urut[$i].''),
                         'nama' => $this->input->post('nama'.$urut[$i].''),
                         'nip' => $this->input->post('nip'.$urut[$i].''),
                         'jabatan'  => $this->input->post('perjab'.$urut[$i].''),
