@@ -123,6 +123,56 @@ function Min_dateselesai(){
 
 }
 
+function getRep(keljab, valTrigger){
+if(valTrigger == "L"){
+      if(keljab == "E.I"){
+          res ="200000"
+          }else if(keljab == "E.II"){
+            res = "150000"
+          }else{
+            res = "0"
+      }
+    }else{
+      if(keljab == "E.I"){
+          res ="100000"
+          }else if(keljab == "E.II"){
+            res = "75000"
+          }else{
+            res = "0"
+      }
+
+    }
+  return res;
+
+}
+
+function getInap(gol,keljab,kdakun){
+  if(kdakun == "524111"){
+      if(keljab == "E.I"){
+            res ="inap_es1"
+            }else if(keljab == "E.II"){
+              res = "inap_es2"
+            }else if(keljab == "E.III"){
+              res = "inap_es3_gol4"
+            }else if(keljab == "E.IV"){
+              res = "inap_es4_gol321"
+            }
+
+      }else if(kdakun == "524119" || kdakun == "524114" ){
+          if(keljab == "E.I" || keljab == "E.II"){
+            res ="fb_es1_es2"
+            }else{
+              res = "fb_es3_dst"
+            }
+
+      }else if(kdakun == "524113"){
+        res ="fb_es1_es2"
+
+      }
+      return res;
+  
+  }
+
 
 function formatRupiah(angka){
         var number_string = angka.replace(/[^,\d]/g, '').toString(),
@@ -878,6 +928,8 @@ function AllCount(i, Trigger){
     var nama_kotatujuan_id = kotatujuan_split[2]
   }
   var kdakun = $('#kdakun').val();
+  var gol = $('#gol'+i+'').val();
+  var keljab = $('#keljab'+i+'').val();
 
     $.ajax({
         url : master_baseurl + "Master_Uangharian",
@@ -890,19 +942,23 @@ function AllCount(i, Trigger){
 
               if(kdakun == "524111"){
                 tarif = data[0]['luar_kota']
+                maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
                 
               }else if(kdakun == "524113"){
                 tarif = data[0]['dalam_kota_8_jam']
+                maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
 
               }else if(kdakun == "524119"){
                 tarif = data[0]['fb_luarkota']
+                maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
 
               }else if(kdakun == "524114"){
                 tarif = data[0]['fb_dalamkota']
+                maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
 
               }
 
-              if(uangharian > tarif || uangpenginapan > 1200000){
+              if(Number(uangharian) > Number(tarif) || Number(uangpenginapan) > Number(maxinap)){
                   swal({
                         title:"Uang Harian atau Penginapan Melebihi Batas Maksimal", 
                         icon:"warning",
@@ -912,6 +968,7 @@ function AllCount(i, Trigger){
                 }else{
                     document.getElementById("UbahST").disabled  =false;
                 }
+                return false;
             }
           });
 
@@ -996,40 +1053,45 @@ if(id == 0 || id == "0"){
 
 
 
+var keljab = $('#keljab'+id+'').val();
 var kdakun = $('#kdakun').val();
+var gol = $('#gol'+id+'').val();
 
-// if ( $("#idxskmpnen").val() != null){
-//   var valkdakun = $("#idxskmpnen").val()
-//   var kdakun_split = valkdakun.split("-")
-//   var kdakun = kdakun_split[0]
-
-// }
 
 
 $.ajax({
-      url : master_baseurl + "Master_Uangharian",
-      data: {"Tujuan": tujuan, "Trigger": "NotaDinas"},
-      type: "post",
-      dataType: "JSON",
-      success: function(data)
-          {    
+        url : master_baseurl + "Master_Uangharian",
+        data: {"Tujuan": tujuan, "Trigger": "NotaDinas"},
+        type: "post",
+        dataType: "JSON",
+        success: function(data)
+            {    
+              
 
-            if(kdakun == "524111"){
-              tarif = data[0]['luar_kota']
+              if(kdakun == "524111"){
+                tarif = data[0]['luar_kota']
+                rep = getRep(keljab, "L")
+                maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
+                
+              }else if(kdakun == "524113"){
+                tarif = data[0]['dalam_kota_8_jam']
+                rep = getRep(keljab, "D")
+                maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];;
 
-            }else if(kdakun == "524113"){
-              tarif = data[0]['dalam_kota_8_jam']
+              }else if(kdakun == "524119"){
+                tarif = data[0]['fb_luarkota']
+                rep = getRep(keljab, "L")
+                maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
 
-            }else if(kdakun == "524119"){
-              tarif = data[0]['fb_luarkota']
+              }else if(kdakun == "524114"){
+                tarif = data[0]['fb_dalamkota']
+                rep = getRep(keljab, "D")
+                maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
 
-            }else if(kdakun == "524114"){
-              tarif = data[0]['fb_dalamkota']
+              }
 
-            }
-
-              $("#tarifuangharian"+id+"").val(tarif)
-              $("#tarifuangpenginapan"+id+"").val("1200000")
+                $("#tarifuangharian"+id+"").val(tarif)
+                $("#tarifuangpenginapan"+id+"").val(maxinap)
 
               if ( ($("#tglberangkat"+id+"").val() != "") && ($("#tglkembali"+id+"").val() != "")) {
               var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
@@ -1043,8 +1105,8 @@ $.ajax({
               $("#uangharian"+id+"").val(formatRupiah(totalUangHarian));
               $("#uangharianDum"+id+"").val(totalUangHarian);
 
-              var totalUangPenginapan = ''+((diffDays-1) * 1200000)
-              $("#satuan_uangpenginapan"+id+"").val(formatRupiah("1200000"));
+              var totalUangPenginapan = ''+((diffDays-1) * maxinap)
+              $("#satuan_uangpenginapan"+id+"").val(formatRupiah(maxinap));
               $("#uangpenginapan"+id+"").val(formatRupiah(totalUangPenginapan));
               $("#uangpenginapanDum"+id+"").val(totalUangPenginapan);
 
@@ -1074,80 +1136,89 @@ $.ajax({
 
 function dayCount(id, trigger){
 
-if($("#kotaasal"+id+"").val() != null || $("#kotatujuan"+id+"").val() != null){
-  var valasal = $("#kotaasal"+id+"").val()
-  var kotaasal_split = valasal.split("-")
-  var asal = kotaasal_split[1]
-  var kotaasal_id = kotaasal_split[0]
-  var nama_kotaasal_id = kotaasal_split[2]
-
-  var valtujuan = $("#kotatujuan"+id+"").val()
-  var kotatujuan_split = valtujuan.split("-")
-  var tujuan = kotatujuan_split[1]
-  var kotatujuan_id = kotatujuan_split[0]
-  var nama_kotatujuan_id = kotatujuan_split[2]
-}
-
-
-
-// var kdakun = "0"
-
-// if ( $("#idxskmpnen").val() != null){
-//   var valkdakun = $("#idxskmpnen").val()
-//   var kdakun_split = valkdakun.split("-")
-//   var kdakun = kdakun_split[0]
-
-// }
-
+  var keljab = $('#keljab'+id+'').val();
 var kdakun = $('#kdakun').val();
+var gol = $('#gol'+id+'').val();
 
-  $.ajax({
-      url : master_baseurl + "Master_Uangharian",
-      data: {"Tujuan": tujuan, "Trigger": "NotaDinas"},
-      type: "post",
-      dataType: "JSON",
-      success: function(data)
-          {    
-            if(kdakun == "524111"){
-              tarif = data[0]['luar_kota']
+    $.ajax({
+        url : master_baseurl + "Master_Uangharian",
+        data: {"Tujuan": tujuan, "Trigger": "NotaDinas"},
+        type: "post",
+        dataType: "JSON",
+        success: function(data)
+            {    
+              if(kdakun == "524111"){
+                tarif = data[0]['luar_kota']
+                rep = getRep(keljab, "L")
+                maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
+                
+              }else if(kdakun == "524113"){
+                tarif = data[0]['dalam_kota_8_jam']
+                rep = getRep(keljab, "D")
+                maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];;
 
-            }else if(kdakun == "524113"){
-              tarif = data[0]['dalam_kota_8_jam']
+              }else if(kdakun == "524119"){
+                tarif = data[0]['fb_luarkota']
+                rep = getRep(keljab, "L")
+                maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
 
-            }else if(kdakun == "524119"){
-              tarif = data[0]['fb_luarkota']
+              }else if(kdakun == "524114"){
+                tarif = data[0]['fb_dalamkota']
+                rep = getRep(keljab, "D")
+                maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
 
-            }else if(kdakun == "524114"){
-              tarif = data[0]['fb_dalamkota']
+              }
 
-            }
+              
 
-              if ( ($("#tglberangkat"+id+"").val() != "") && ($("#tglkembali"+id+"").val() != "")) {
-              var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-              var firstDate = new Date($("#tglberangkat"+id+"").val());
-              var secondDate = new Date($("#tglkembali"+id+"").val());
-              var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay)) + 1;
-              $("#jmlhari"+id+"").val(diffDays);
+                if ( ($("#tglberangkat"+id+"").val() != "") && ($("#tglkembali"+id+"").val() != "")) {
+                var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+                var firstDate = new Date($("#tglberangkat"+id+"").val());
+                var secondDate = new Date($("#tglkembali"+id+"").val());
+                var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay)) + 1;
+                $("#jmlhari"+id+"").val(diffDays);
 
-              // var kotatujuan = $("#kotatujuan"+id+"").val()
-              // var kotatujuan_split = kotatujuan.split("-")
+                // var kotatujuan = $("#kotatujuan"+id+"").val()
+                // var kotatujuan_split = kotatujuan.split("-")
 
-              // var tarif = kotatujuan_split[0]
+                // var tarif = kotatujuan_split[0]
 
-              var totalUangHarian = ''+(diffDays * tarif)
-              $("#satuan_uangharian"+id+"").val(formatRupiah(tarif));
-              $("#uangharian"+id+"").val(formatRupiah(totalUangHarian));
-              $("#uangharianDum"+id+"").val(totalUangHarian);
+                var totalUangHarian = ''+(diffDays * tarif)
+                $("#satuan_uangharian"+id+"").val(formatRupiah(tarif));
+                $("#uangharian"+id+"").val(formatRupiah(totalUangHarian));
+                $("#uangharianDum"+id+"").val(totalUangHarian);
 
-              var totalUangPenginapan = ''+((diffDays-1) * 1200000)
-              $("#satuan_uangpenginapan"+id+"").val(formatRupiah("1200000"));
-              $("#uangpenginapan"+id+"").val(formatRupiah(totalUangPenginapan));
-              $("#uangpenginapanDum"+id+"").val(totalUangPenginapan);
+                var totalUangPenginapan = ''+((diffDays-1) * maxinap)
+                $("#satuan_uangpenginapan"+id+"").val(formatRupiah(maxinap));
+                $("#uangpenginapan"+id+"").val(formatRupiah(totalUangPenginapan));
+                $("#uangpenginapanDum"+id+"").val(totalUangPenginapan);
+                
+                var totalUangRep = ''+(diffDays * rep)
+                $("#uangrep"+id+"").val(formatRupiah(totalUangRep))
 
+               
+                var taxi = $("#uangtaxi"+id+"").val()
+                var laut = $("#uanglaut"+id+"").val()
+                var udara = $("#uangudara"+id+"").val()
+                var darat = $("#uangdarat"+id+"").val()
+                var dll = $("#uangdll"+id+"").val()
+                var d = taxi.replace(/[^0-9\.]+/g, "");
+                var e = laut.replace(/[^0-9\.]+/g, "");
+                var f = udara.replace(/[^0-9\.]+/g, "");
+                var g = darat.replace(/[^0-9\.]+/g, "");
+                var h = dll.replace(/[^0-9\.]+/g, "");
+                var uangtaxi = d.replace(/\./g, "");
+                var uanglaut = e.replace(/\./g, "");
+                var uangudara = f.replace(/\./g, "");
+                var uangdarat = g.replace(/\./g, "");
+                var uangdll = h.replace(/\./g, "");
+                var uangrep = diffDays * rep
 
-              //TOTAL
-              var total = ''+(Number(totalUangHarian)+Number(totalUangPenginapan))
-              $("#total"+id+"").val(formatRupiah(total));
+                //TOTAL
+                var total = ''+(Number(totalUangHarian)+Number(totalUangPenginapan)+Number(uangtaxi)
+                +Number(uangrep)
+                +Number(uanglaut)+Number(uangudara)+Number(uangdarat)+Number(uangdll))
+                $("#total"+id+"").val(formatRupiah(total));
 
               if(diffDays < 0){
                 swal({
