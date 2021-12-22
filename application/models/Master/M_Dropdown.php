@@ -697,6 +697,25 @@ function getData_tahapan($searchTerm="",$kdkmpnen, $kdskmpnen, $kdindex){
 
 function getData_ttd($searchTerm="",$Trigger,$kdsatker){
 	if($Trigger == "ttd_forST"){
+		if($kdsatker == 450491){
+			$this->db->select('id');
+			$this->db->select('nama');
+			$this->db->select('nip');
+			$this->db->where("nama like '%".$searchTerm."%' ");
+			$this->db->where("kdsatker", $kdsatker);
+			$this->db->where("jabatan_id", 6);
+			$this->db->or_where("jabatan_id", 5);
+			$fetched_records = $this->db->get('t_pejabat');
+			$users = $fetched_records->result_array();
+
+			// Initialize Array with fetched data
+			$data = array();
+			foreach($users as $user){
+				$data[] = array("id"=>$user['id'], "text"=>$user['nama']);
+			}
+			return $data;
+		}
+
 		$this->db->select('id');
 		$this->db->select('nama');
 		$this->db->select('nip');
