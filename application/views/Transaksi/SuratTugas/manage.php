@@ -83,10 +83,10 @@
                                     <div class="row">
 
                                         <div class="col s4">
-                                          <a href="<?= site_url('Transaksi/TambahTim/TambahTim/'.$u->id.'/'.$u->kdindex)?>"><i class="material-icons cyan-text">people</i></a>
+                                          <a href="<?= site_url('Transaksi/TambahTim/TambahTim/'.$u->id.'/'.$u->kdindex)?>" class="tooltipped" data-position="top" data-tooltip="Anggota" ><i class="material-icons cyan-text">people</i></a>
                                         </div>
                                         <div class="col s4">
-                                          <a href="#" class="dropdown-trigger" href="#" data-target="dropdown'<?=$u->id?>'"><i class="material-icons orange-text">remove_red_eye</i></a>
+                                          <a href="#" class="dropdown-trigger tooltipped" data-position="top" data-tooltip="Printout" href="#" data-target="dropdown'<?=$u->id?>'" ><i class="material-icons orange-text">remove_red_eye</i></a>
                                                 <ul id="dropdown'<?=$u->id?>'" class='dropdown-content' style="min-width: 170px !important;">
                                                   <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/SuratTugas/Export/'.$u->id.'/'.$u->kdindex) ?>" target="blank">Surat Tugas</a></li>
                                                   <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/costsheet/L/'.$u->id.'/'.$u->kdindex) ?>" target="blank">Costsheet</a></li>
@@ -97,7 +97,7 @@
                                                 </ul>
                                         </div>
                                         <div class="col s4">
-                                          <a href="#"><i class="material-icons teal-text">check_box</i></a>
+                                          <a href="#" class="tooltipped" data-position="top" data-tooltip="Approve" ><i class="material-icons teal-text">check_box</i></a>
                                         </div>  
                                     </div>
 
@@ -105,11 +105,11 @@
 
                                 <div class="row" style="padding-top: 10px">
                                   <div class="col s6">
-                                    <a href="<?= site_url('Transaksi/SuratTugas/ubah/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex)?>"><i class="material-icons green-text">edit</i></a>
+                                    <a href="<?= site_url('Transaksi/SuratTugas/ubah/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex)?>" class="tooltipped" data-position="bottom" data-tooltip="Ubah ST" ><i class="material-icons green-text">edit</i></a>
                                   </div>
 
                                   <div class="col s6">
-                                    <a href="javascript:;" onclick="Delete('<?= $u->id ?>')"><i class="material-icons red-text">delete</i></a>
+                                    <a href="javascript:;" onclick="Delete('<?= $u->id ?>')" class="tooltipped" data-position="bottom" data-tooltip="Hapus ST" ><i class="material-icons red-text">delete</i></a>
                                   </div>
                                 </div>
                             </div>
