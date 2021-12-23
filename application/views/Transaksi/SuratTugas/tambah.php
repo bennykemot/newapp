@@ -94,6 +94,15 @@
                         </div>
 
                         <div class="input-field col s12">
+                            <div class="input-field col s2"><label>Alokasi</label></div>
+
+                            <div class="input-field col s10 " >
+                            <input readonly id="alokasilabel" name="alokasilabel">
+                            <input readonly id="alokasi" name="alokasi" hidden>
+                            </div>
+                        </div>
+
+                        <div class="input-field col s12">
                             <div class="input-field col s2"><label>Beban Anggaran</label></div>
 
                             <div class="input-field col s10 " >
@@ -109,13 +118,13 @@
                             </div>
                         </div>
 
-                        <div class="input-field col s12">
+                        <!-- <div class="input-field col s12">
                             <div class="input-field col s2"><label>Penandatangan SPD</label></div>
 
                             <div class="input-field col s10 " >
                             <select class="browser-default" id="ttd_spd" name="ttd_spd"></select>
                             </div>
-                        </div>
+                        </div> -->
                         
                         <div class="col s12" style="padding-top: 10px">
                             <div class="col s9"></div>

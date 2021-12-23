@@ -48,11 +48,21 @@ class Master extends CI_Controller {
      public function getKomponenSub(){
 
         $kdindex = $this->input->post('kdindex');
+        $tahapan = $this->input->post('tahapan');
         
-        $response = $this->Master->getKomponenSub_forJson($kdindex);
+        $response = $this->Master->getKomponenSub_forJson($kdindex,$tahapan);
 
         echo json_encode($response);
      }
+
+     public function getKomponenSub_pagu(){
+
+      $kdindex = $this->input->post('kdindex');
+      
+      $response = $this->Master->getKomponenSub_pagu_forJson($kdindex);
+
+      echo json_encode($response);
+   }
 
      public function getKota(){
 

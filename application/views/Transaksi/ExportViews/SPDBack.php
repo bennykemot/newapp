@@ -88,9 +88,7 @@ function cek_tgl($tanggal){
 
     <body>
     <?php $no=1; foreach($export as $e){ 
-        $split_ttd_spd = explode("-",$e->id_ttd_spd);
-        $nip_ttd_spd = $split_ttd_spd[1];
-        $nama_ttd_spd = $split_ttd_spd[2];
+      
         
         ?>
         
@@ -124,7 +122,7 @@ function cek_tgl($tanggal){
                             <td colspan="3" style="text-align: center; padding-top: 2%;border-left-style: none;border-right-style: none; border-bottom-style: none;border-top-style: none"></td>
                         </tr>
                         <tr>
-                            <td colspan="3" style="text-align: center;border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none"><?= $nama_ttd_spd?><br>NIP <?= $nip_ttd_spd?></td>
+                            <td colspan="3" style="text-align: center;border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none"><?= $e->nama_ttd_spd?><br>NIP <?= $e->nip_ttd_spd?></td>
                         </tr>
 
                         <!-- ---- -->

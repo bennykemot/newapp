@@ -81,12 +81,44 @@ $(document).ready(function() {
       } );
 
 
+function PilihKode_pagu(Id, kdindex){
 
-function PilihKode(Id, kdindex){
+$.ajax({
+      url : master_baseurl + "getKomponenSub_pagu",
+      data: {kdindex: kdindex},
+      type: "post",
+      dataType: "JSON",
+      success: function(data)
+          {    
+
+            $('#idxskmpnenlabel').val(Id);
+            $('#idxskmpnen').val(data[0]['kdindex']);
+            $('#kdindex').val(data[0]['kdindex']);
+            $('#thang').val(data[0]['thang']);
+            $('#kdgiat').val(data[0]['kdgiat']);
+            $('#kdoutput').val(data[0]['kdoutput']);
+            $('#kdsoutput').val(data[0]['kdsoutput']);
+            $('#kdkmpnen').val(data[0]['kdkmpnen']);
+            $('#kdskmpnen').val(data[0]['kdskmpnen']);
+            $('#kdakun').val(data[0]['kdakun']);
+            $('#kdbeban').val(data[0]['kdbeban']);
+            $('#ppk_id').val(data[0]['ppk_id']);
+            $('#alokasi').val(data[0]['rupiah']);
+            $('#alokasilabel').val(formatRupiah(data[0]['rupiah']));
+
+            $('#modalidx').modal('close');
+            
+
+          }
+  });
+}
+
+
+function PilihKode(Id, kdindex, Tahapan){
 
   $.ajax({
         url : master_baseurl + "getKomponenSub",
-        data: {kdindex: kdindex},
+        data: {kdindex: kdindex, tahapan : Tahapan},
         type: "post",
         dataType: "JSON",
         success: function(data)
@@ -104,15 +136,14 @@ function PilihKode(Id, kdindex){
               $('#kdakun').val(data[0]['kdakun']);
               $('#kdbeban').val(data[0]['kdbeban']);
               $('#ppk_id').val(data[0]['ppk_id']);
+              $('#alokasi').val(data[0]['rupiah_tahapan']);
+              $('#alokasilabel').val(formatRupiah(data[0]['rupiah_tahapan']));
 
               $('#modalidx').modal('close');
               
 
             }
     });
-
-  
-  
 }
 
 $(document).ready(function() {

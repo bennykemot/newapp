@@ -94,6 +94,15 @@
                         </div>
 
                         <div class="input-field col s12">
+                            <div class="input-field col s2"><label>Alokasi</label></div>
+
+                            <div class="input-field col s10 " >
+                            <input readonly id="alokasilabel" name="alokasilabel" value="<?= rupiah($ubah[0]['jumlah_uang']) ?>">
+                            <input readonly id="alokasi" name="alokasi" hidden value="<?= number_format($ubah[0]['jumlah_uang'],0,',','') ?>">
+                            </div>
+                        </div>
+
+                        <div class="input-field col s12">
                             <div class="input-field col s2"><label>Beban Anggaran</label></div>
 
                             <div class="input-field col s10 " >
@@ -106,14 +115,6 @@
 
                             <div class="input-field col s10 " >
                             <select class="browser-default" id="ttd" name="ttd"></select>
-                            </div>
-                        </div>
-
-                        <div class="input-field col s12">
-                            <div class="input-field col s2"><label>Penandatangan SPD</label></div>
-
-                            <div class="input-field col s10 " >
-                            <select class="browser-default" id="ttd_spd" name="ttd_spd"></select>
                             </div>
                         </div>
 

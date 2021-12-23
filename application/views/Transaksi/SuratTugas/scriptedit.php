@@ -22,10 +22,10 @@ if(document.getElementById('counting') != null){
   var countTimTable = 0
 }
 
-function PilihKode(Id, kdindex){
+function PilihKode_pagu(Id, kdindex){
 
 $.ajax({
-      url : master_baseurl + "getKomponenSub",
+      url : master_baseurl + "getKomponenSub_pagu",
       data: {kdindex: kdindex},
       type: "post",
       dataType: "JSON",
@@ -43,6 +43,40 @@ $.ajax({
             $('#kdskmpnen').val(data[0]['kdskmpnen']);
             $('#kdakun').val(data[0]['kdakun']);
             $('#kdbeban').val(data[0]['kdbeban']);
+            $('#ppk_id').val(data[0]['ppk_id']);
+            $('#alokasi').val(data[0]['rupiah']);
+            $('#alokasilabel').val(formatRupiah(data[0]['rupiah']));
+
+            $('#modalidx').modal('close');
+            
+
+          }
+  });
+}
+
+function PilihKode(Id, kdindex, Tahapan){
+
+$.ajax({
+      url : master_baseurl + "getKomponenSub",
+      data: {kdindex: kdindex, tahapan : Tahapan},
+      type: "post",
+      dataType: "JSON",
+      success: function(data)
+          {    
+
+            $('#idxskmpnenlabel').val(Id);
+            $('#idxskmpnen').val(data[0]['kdindex']);
+            $('#kdindex').val(data[0]['kdindex']);
+            $('#thang').val(data[0]['thang']);
+            $('#kdgiat').val(data[0]['kdgiat']);
+            $('#kdoutput').val(data[0]['kdoutput']);
+            $('#kdsoutput').val(data[0]['kdsoutput']);
+            $('#kdkmpnen').val(data[0]['kdkmpnen']);
+            $('#kdskmpnen').val(data[0]['kdskmpnen']);
+            $('#kdakun').val(data[0]['kdakun']);
+            $('#kdbeban').val(data[0]['kdbeban']);
+            $('#alokasi').val(data[0]['rupiah_tahapan']);
+            $('#alokasilabel').val(formatRupiah(data[0]['rupiah_tahapan']));
 
             $('#modalidx').modal('close');
             
@@ -88,13 +122,6 @@ $("#select-bebananggaran").append($beban_anggaran).trigger('change');
 
 var $ttd = $("<option selected='selected'></option>").val(TTDvalue).text(TTDtext)
 $("#ttd").append($ttd).trigger('change');
-
-var TTD_SPDvalue = "<?= $ubah[0]['id_ttd_spd'] ?>"
-var ttd_spd = TTD_SPDvalue.split("-")
-var TTD_SPDtext = ttd_spd[2]
-
-var $ttd_spd = $("<option selected='selected'></option>").val(TTD_SPDvalue).text(TTD_SPDtext)
-$("#ttd_spd").append($ttd_spd).trigger('change');
 
 
 
@@ -375,8 +402,7 @@ $("#user-select2").select2({
      });
 
 
-     $("#ttd_spd").select2({
-          dropdownAutoWidth: true,
+     $(".ttd_spd").select2({
           width: '100%',
           placeholder: "Pilih Penandatangan",
          ajax: { 

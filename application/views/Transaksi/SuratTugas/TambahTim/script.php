@@ -11,19 +11,12 @@ var user_session = "<?= $this->session->userdata("user_id")?>"
 var role_session = "<?= $this->session->userdata("role_id")?>"
 var unit_session = "<?= $this->session->userdata("unit_id")?>"
 var count_tim = "<?= count($countST) ?>"
+$sumtotal = 0;
+$sumTot = 0;
 
 if(role_session == 1){
   unit_session = 0;
 }
-
-var TTD_SPDvalue = "<?= $ST[0]['id_ttd_spd'] ?>"
-var ttd_spd = TTD_SPDvalue.split("-")
-var TTD_SPDtext = ttd_spd[2]
-
-var $ttd_spd = $("<option selected='selected'></option>").val(TTD_SPDvalue).text(TTD_SPDtext)
-$("#ttd_spd").append($ttd_spd).trigger('change');
-
-
 
 function Reset(idForm) {
   document.getElementById(idForm).reset();
@@ -210,30 +203,7 @@ $("#user-select2").select2({
       }
       });
 
-      $("#ttd_spd").select2({
-          dropdownAutoWidth: true,
-          width: '100%',
-          placeholder: "Pilih Penandatangan",
-         ajax: { 
-           url: dropdown_baseurl + 'ttd',
-           type: "post",
-           dataType: 'json',
-           delay: 250,
-           data: function (params) {
-              return {
-								Trigger: "ttd_spd_forST",
-								kdsatker: satker_session,
-                searchTerm: params.term // search term
-              };
-           },
-           processResults: function (response) {
-              return {
-                 results: response
-              };
-           },
-           cache: true
-         }
-     });
+      
 
 
 
@@ -253,6 +223,30 @@ function selectRefresh(x){
                         $("#kotaasal"+x+"").append($asal).trigger('change');
                   }
                 });
+
+                $("#ttd_spd"+x+"").select2({
+                    width: '100%',
+                    placeholder: "Pilih Penandatangan",
+                  ajax: { 
+                    url: dropdown_baseurl + 'ttd',
+                    type: "post",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                          Trigger: "ttd_spd_forST",
+                          kdsatker: satker_session,
+                          searchTerm: params.term // search term
+                        };
+                    },
+                    processResults: function (response) {
+                        return {
+                          results: response
+                        };
+                    },
+                    cache: true
+                  }
+              });
 
     
         $(".namaTim").select2({
@@ -354,6 +348,7 @@ $('.multi-field-wrapper').each(function() {
         var head = '<tbody id="Tbody" class="multi-field" style="border-top: 2px dotted #c5c5c4;">';
         var end='</tbody>';
         var arrX = [];
+        var realisasi = 0;
         $("#add-field", $(this)).click(function(e) {   
           document.getElementById("divTable").style.display = "";      
 
@@ -380,7 +375,7 @@ $('.multi-field-wrapper').each(function() {
                             </td>\
                               <td><input type="text" id="gol'+x+'" name="gol'+x+'" readonly><input type="text" id="keljab'+x+'" name="keljab'+x+'" readonly hidden></td>\
                               <td colspan="2"><select class="browser-default kota kotaasal" name="kotaasal'+x+'" id="kotaasal'+x+'" onchange="cityCount('+x+')"></select></td>\
-                              <td colspan="2"><select class="browser-default kota kotatujuan"  name="kotatujuan'+x+'" id="kotatujuan'+x+'" onchange="cityCount('+x+')"></select></td>\
+                              <td colspan="3"><select class="browser-default kota kotatujuan"  name="kotatujuan'+x+'" id="kotatujuan'+x+'" onchange="cityCount('+x+')"></select></td>\
                               <td hidden><input type="text" id="tarifuangpenginapan'+x+'" name="tarifuangpenginapan'+x+'"></td>\
                               <td hidden><input type="text" id="tarifuangharian'+x+'" name="tarifuangharian'+x+'" ></td>\
                             </tr>\
@@ -398,9 +393,11 @@ $('.multi-field-wrapper').each(function() {
                                   <td><input style="min-width: 150px" type="text" id="uangdll'+x+'" name="uangdll'+x+'" onkeyup="AllCount(\''+x+'\',\'all\')"></td>\
                                   <td><input style="min-width: 150px" type="text" id="uangrep'+x+'" name="uangrep'+x+'" onkeyup="AllCount(\''+x+'\',\'all\')"></td>\
                                   <td><input style="min-width: 150px" type="text" readonly id="total'+x+'"  name="total'+x+'" ></td>\
-                                  <td><select class="select2 browser-default" id="jnstransportasi'+x+'" name="jnstransportasi'+x+'">\
+                                  <td ><select class="select2 browser-default" id="jnstransportasi'+x+'" name="jnstransportasi'+x+'">\
                                     <option value="Kendaraan Umum">Kendaraan Umum</option>\
                                     <option value="Kendaraan Dinas">Kendaraan Dinas</option>\
+                                  </select</td>\
+                                  <td><select class="select2 browser-default" id="ttd_spd'+x+'" name="ttd_spd'+x+'">\
                                   </select</td>\
                                   <td >\
                                       <div class="col s12">\
@@ -408,6 +405,9 @@ $('.multi-field-wrapper').each(function() {
                                       </div>\
                                   </td>\
                               </tr>'+end+'');
+                              var tot = $('#total'+x+'').val()
+                              $sumTot += Number(tot);
+                              $('#realisasilabel').val($sumTot)
 
                         selectRefresh(x);
                         countX = arrX.push(x);
@@ -577,6 +577,14 @@ function AllCount(i, Trigger){
     var total = ""+e+""
 
     $("#total"+i+"").val(formatRupiah(total))
+    $sumtotal += Number(total);
+                //$('#realisasilabel').val(formatRupiah(""+$sumtotal+""));
+                $('#realisasi').val(''+$sumtotal);
+
+                alokasi = $('#alokasi').val()
+                sisa = Number(alokasi) - Number($sumtotal)
+                $('#sisalabel').val(formatRupiah(""+sisa+""));
+                $('#sisa').val(sisa);
   
 
 }
@@ -708,6 +716,14 @@ $.ajax({
                 +Number(uangrep)
                 +Number(uanglaut)+Number(uangudara)+Number(uangdarat)+Number(uangdll))
                 $("#total"+id+"").val(formatRupiah(total));
+                $sumtotal += Number(total);
+                //$('#realisasilabel').val(formatRupiah(""+$sumtotal+""));
+                $('#realisasi').val(''+$sumtotal);
+
+                alokasi = $('#alokasi').val()
+                sisa = Number(alokasi) - Number($sumtotal)
+                $('#sisalabel').val(formatRupiah(""+sisa+""));
+                $('#sisa').val(sisa);
 
                 if(diffDays < 0){
                   swal({
@@ -828,6 +844,14 @@ var gol = $('#gol'+id+'').val();
                 +Number(uangrep)
                 +Number(uanglaut)+Number(uangudara)+Number(uangdarat)+Number(uangdll))
                 $("#total"+id+"").val(formatRupiah(total));
+                $sumtotal += Number(total);
+                //$('#realisasilabel').val(formatRupiah(""+$sumtotal+""));
+                $('#realisasi').val(''+$sumtotal);
+
+                alokasi = $('#alokasi').val()
+                sisa = Number(alokasi) - Number($sumtotal)
+                $('#sisalabel').val(formatRupiah(""+sisa+""));
+                $('#sisa').val(sisa);
 
                 if(diffDays < 0){
                   swal({

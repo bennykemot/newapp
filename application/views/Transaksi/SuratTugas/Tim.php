@@ -25,7 +25,7 @@
                                             <td  class="text-center" style="min-width: 250px" colspan="2">PERAN/JABATAN</td>
                                             <td class="text-center" >GOL</td>
                                             <td  class="text-center" colspan="2" style="min-width: 200px">KOTA ASAL</td>
-                                            <td colspan="2" style="min-width: 200px">KOTA TUJUAN</td>
+                                            <td colspan="3" style="min-width: 200px">KOTA TUJUAN</td>
                                             <!-- <td style="min-width: 250px">JENIS<br>TRANSPORTASI</td>
                                             <td style="min-width: 15px" >AKSI</td> -->
                                         </tr>
@@ -43,10 +43,11 @@
                                             <td class="text-center">REPRESENTASI</td>
                                             <td class="text-center" style="min-width: 150px">JUMLAH</td>
                                             <td class="text-center" style="min-width: 200px">JENIS<br>TRANSPORTASI</td>
+                                            <td class="text-center" style="min-width: 200px">PENANDATANGAN SPD</td>
                                             <td class="text-center" >Aksi</td>
                                         </tr></thead>
                                                 <?php   $j=1;$no = []; 
-                                                        
+                                                        $total=0;
                                                         for($i = 0 ; $i < count($ubah); $i++){ 
                                                           $kotaasal   = explode("-",$ubah[$i]['kotaasal']);
                                                           $kotatujuan = explode("-",$ubah[$i]['kotatujuan']);
@@ -77,7 +78,7 @@
                                              <option selected value="<?=$ubah[$i]['kotaasal']?>"><?=$kotaasal[2]?></option>
                                         </select>
                                     </td>
-                                    <td colspan="2">
+                                    <td colspan="3">
                                         <select class="browser-default kota kotatujuan"  name="kotatujuan<?=$j?>" id="kotatujuan<?=$j?>" onchange="cityCount(<?=$j?>)">
                                             <option selected value="<?=$ubah[$i]['kotatujuan']?>"><?=$kotatujuan[2]?></option>
                                         </select>
@@ -103,8 +104,11 @@
                                         <option value="Kendaraan Umum">Kendaraan Umum</option>
                                         <option value="Kendaraan Dinas">Kendaraan Dinas</option>
                                     </select</td>
+                                    <td><select placeholder="Pilih Penandatangan SPD"  class="ttd_spd browser-default" id="ttd_spd<?=$j?>" name="ttd_spd<?=$j?>" onclick="ubahTtdSpd('<?=$j?>')">
+                                        <option selected value="<?=$ubah[$i]['id_ttd_spd']?>"> <?=$ubah[$i]['nama_ttd_spd']?> </option>
+                                    </select></td>
                                     <td>
-                                        <?php if($j != 1){?>
+                                        <?php $total += $ubah[$i]['jumlah']; if($j != 1){?>
                                             <div class="col s12">
                                                 <a type="button"><span class="col s4 table-remove" style="padding: 0px !important" id="<?=$j?>" ><i class="material-icons">delete</i></span></a>
                                             </div>
@@ -178,6 +182,7 @@
                                         <?php   $j++;}?>
                                         </table>
                                         <input id="ArrX" name="ArrX" hidden>
+                                        <input id="total" name="total" value="<?=$total?>">
                                         
                                     </div>
                                 </div>

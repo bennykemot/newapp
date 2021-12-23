@@ -111,6 +111,7 @@ class TambahTim extends CI_Controller {
                         'jnstransportasi'  => $this->input->post('jnstransportasi'.$urut[$i].''),
 
                         'jumlah'  => $this->pregChar($this->input->post('total'.$urut[$i].'')),
+                        'id_ttd_spd'  => $this->input->post('ttd_spd'.$urut[$i].''),
                         
                         'id_st'  => $idst,
                         

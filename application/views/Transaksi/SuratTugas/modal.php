@@ -1,5 +1,5 @@
-<div id="modalidx" class="modal">
-    <div class="modal-content" style="min-height: 400px;">
+<div id="modalidx" class="modal" style="width: 80%">
+    <div class="modal-content">
       <h4>Komponen/Sub Komponen</h4>
       <div style="padding-top: 10px"></div>
         <div class="row">
@@ -20,8 +20,20 @@
               <tbody>
               <?php $a=1;foreach($subkomp as $sk){?>
                 <tr>
-                  <td width="20%"><a class="btn cyan" href="javascript:;" onclick="PilihKode('<?=$sk->kode?>', '<?=$sk->kdindex?>')" id="Pilih">Pilih</a></td>
-                  <td width="80%"><?=$sk->kode?></td>
+                  <td style="min-width: 5%"><a class="btn cyan" href="javascript:;" onclick="PilihKode('<?=$sk->kode?>', '<?=$sk->kdindex?>', '<?=$sk->tahapan?>',)" id="Pilih">Pilih</a></td>
+                  <td style="width: 30%"><?=$sk->kode?></td>
+                  <td style="width: 40%"><?=$sk->nama_app?></td>
+                  <td style="width: 40%"><?php if($sk->nama_tahapan == "All"){ echo '-';}else{echo $sk->nama_tahapan;}?></td>
+                  <td style="min-width: 20%"><?=rupiah($sk->rupiah_tahapan)?></td>
+                </tr></a>
+                <?php $a++;}?>
+                <?php $a=1;foreach($subkomppagu as $skp){?>
+                <tr>
+                  <td style="min-width: 5%"><a class="btn cyan" href="javascript:;" onclick="PilihKode_pagu('<?=$skp->kode?>', '<?=$skp->kdindex?>')" id="Pilih">Pilih</a></td>
+                  <td style="width: 30%"><?=$skp->kode?></td>
+                  <td style="width: 40%">-</td>
+                  <td style="width: 40%">-</td>
+                  <td style="min-width: 20%"><?=rupiah($skp->rupiah)?></td>
                 </tr></a>
                 <?php $a++;}?>
               </tbody>

@@ -27,12 +27,13 @@ class M_SuratTugas extends CI_Model{
             $query = $this->db->query('SELECT d_surattugas.nost, d_surattugas.tglst, 
             d_surattugas.uraianst, d_surattugas.tglmulaist, 
             d_surattugas.tglselesaist ,d_surattugas.id_unit,d_surattugas.kdakun,d_surattugas.kdsatker,
+            d_surattugas.jumlah_uang,
             
             t_unitkerja.nama_unit, 
             
             d_surattugas.idxskmpnen, 
             d_surattugas.id_ttd,
-            d_surattugas.id_ttd_spd, 
+            d_surattugas.jumlah_uang,
             CONCAT("NoTim") as tim,
             
             t_pejabat.nama as nama_ttd,
@@ -78,8 +79,10 @@ class M_SuratTugas extends CI_Model{
                             d_itemcs.totalinap, d_itemcs.totalrep, d_itemcs.tarifrep, 
                             d_itemcs.tariftaxi,d_itemcs.tariflaut,d_itemcs.tarifudara,d_itemcs.tarifdarat,d_itemcs.lain,
                             d_itemcs.totaltravel, d_itemcs.jumlah, d_itemcs.transport,
-                            d_itemcs.jnstransportasi, CONCAT('WithTim') as tim, d_itemcs.id as idtim,d_itemcs.nospd,
-                
+                            d_itemcs.jnstransportasi, CONCAT('WithTim') as tim, d_itemcs.id as idtim,d_itemcs.nospd,d_itemcs.id_ttd_spd,
+                            SUBSTRING_INDEX(SUBSTRING_INDEX(d_itemcs.id_ttd_spd,'-',2),'-',-1) as nip_ttd_spd, 
+                            SUBSTRING_INDEX(SUBSTRING_INDEX(d_itemcs.id_ttd_spd,'-',3),'-',-1) as nama_ttd_spd,
+                            
                             d_itemcs.kotaasal,d_itemcs.kotatujuan,";
                             $join = "JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st";
 
@@ -92,7 +95,7 @@ class M_SuratTugas extends CI_Model{
             $query = $this->db->query('SELECT d_pagu.*, d_surattugas.nost, d_surattugas.tglst, 
             d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.idx_temp,
             d_surattugas.tglselesaist ,d_surattugas.id_unit,d_surattugas.id as idst,d_surattugas.idxskmpnen, 
-            d_surattugas.id_ttd,d_surattugas.kdsatker,d_surattugas.id_ttd,d_surattugas.id_ttd_spd,
+            d_surattugas.id_ttd,d_surattugas.kdsatker,d_surattugas.id_ttd,d_surattugas.jumlah_uang,
             
             
             t_unitkerja.nama_unit, 

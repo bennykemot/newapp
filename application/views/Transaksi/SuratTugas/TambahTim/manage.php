@@ -78,6 +78,15 @@
                         </div>
 
                         <div class="input-field col s12">
+                            <div class="input-field col s2"><label>Alokasi</label></div>
+
+                            <div class="input-field col s10 " >
+                            <input readonly id="alokasilabel" name="alokasilabel" value="<?= rupiah($ST[0]['jumlah_uang']) ?>">
+                            <input readonly id="alokasi" name="alokasi" hidden value="<?= number_format($ST[0]['jumlah_uang'],0,',','') ?>">
+                            </div>
+                        </div>
+
+                        <div class="input-field col s12">
                             <div class="input-field col s2"><label>Beban Anggaran</label></div>
 
                             <div class="input-field col s10 " >
@@ -93,13 +102,13 @@
                             </div>
                         </div>
 
-                        <div class="input-field col s12">
+                        <!-- <div class="input-field col s12">
                             <div class="input-field col s2"><label>Penandatangan SPD</label></div>
 
                             <div class="input-field col s10 " >
                             <select class="browser-default" id="ttd_spd" name="ttd_spd"></select>
                             </div>
-                        </div>
+                        </div> -->
 
                        
 
@@ -123,33 +132,34 @@
                                     
                                 <div id="divTable" style="display: none">
 
-                                <div class="input-field col s12">
-                                    <div class="input-field col s2"><label>Kota Asal</label></div>
+                                    <div class="input-field col s12">
+                                        <div class="input-field col s2"><label>Kota Asal</label></div>
 
-                                    <div class="input-field col s4 " >
-                                        <select class="browser-default kotaselect" id="kotaasal" name="kotaasal" onchange="cityCount('0')"></select>
+                                        <div class="input-field col s4 " >
+                                            <select class="browser-default kotaselect" id="kotaasal" name="kotaasal" onchange="cityCount('0')"></select>
+                                        </div>
+
+                                        <div class="input-field col s2"><label>Kota Tujuan</label></div>
+
+                                        <div class="input-field col s4 " >
+                                            <select class="browser-default kotaselect" id="kotatujuan" name="kotatujuan" onchange="cityCount('011')"></select>
+                                        </div>
                                     </div>
-
-                                    <div class="input-field col s2"><label>Kota Tujuan</label></div>
-
-                                    <div class="input-field col s4 " >
-                                        <select class="browser-default kotaselect" id="kotatujuan" name="kotatujuan" onchange="cityCount('011')"></select>
-                                    </div>
-                                </div>
 
 
                                     <table class="bordered striped fixed multi-fields" id="tbUser" >
                                         <thead><tr style="background-color: rgba(242,242,242,.5)">
-                                            <td  class="text-center" style="min-width: 90px" >NO</td>
+                                            <td class="text-center" style="min-width: 90px" >NO</td>
                                             <td class="text-center" >TGL<br>BERANGKAT</td>
                                             <td class="text-center" >TGL<br>KEMBALI</td>
                                             <td class="text-center">JML<br>HARI</td>
-                                            <td  class="text-center" style="width: 30px" colspan="2">NAMA</td>
-                                            <td  class="text-center" style="min-width: 200px" colspan="2">NIP</td>
-                                            <td  class="text-center" style="min-width: 250px" colspan="2">PERAN/JABATAN</td>
+                                            <td class="text-center" style="width: 30px" colspan="2">NAMA</td>
+                                            <td class="text-center" style="min-width: 200px" colspan="2">NIP</td>
+                                            <td class="text-center" style="min-width: 250px" colspan="2">PERAN/JABATAN</td>
                                             <td class="text-center" >GOL</td>
-                                            <td  class="text-center" colspan="2" style="min-width: 200px">KOTA ASAL</td>
-                                            <td colspan="2" style="min-width: 200px">KOTA TUJUAN</td>
+                                            <td class="text-center" colspan="2" style="min-width: 200px">KOTA ASAL</td>
+                                            <td class="text-center" colspan="3" style="min-width: 200px">KOTA TUJUAN</td>
+                                            
                                             <!-- <td style="min-width: 250px">JENIS<br>TRANSPORTASI</td>
                                             <td style="min-width: 15px" >AKSI</td> -->
                                         </tr>
@@ -167,10 +177,29 @@
                                             <td class="text-center">REPRESENTASI</td>
                                             <td class="text-center" style="min-width: 150px">JUMLAH</td>
                                             <td class="text-center" style="min-width: 200px">JENIS<br>TRANSPORTASI</td>
+                                            <td style="min-width: 200px">Penandatangan SPD</td>
                                             <td class="text-center" >Aksi</td>
                                         </tr></thead>
                                         <!-- <tbody class="multi-field"></tbody> -->
                                     </table>
+
+                                    
+                                    <div class="Sumtotal">
+                                        <div class="input-field col s12">
+                                            <div class="input-field col s2"><label>Realisasi</label></div>
+                                                <div class="input-field col s4 " >
+                                                <input readonly id="realisasilabel" name="realisasilabel">
+                                                <input readonly id="realisasi" name="realisasi" hidden>
+                                            </div>
+                                            <div class="input-field col s2"><label>Sisa</label></div>
+                                                <div class="input-field col s4 " >
+                                                <input readonly id="sisalabel" name="sisalabel">
+                                                <input readonly id="sisa" name="sisa" hidden>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
                                 </div>
                             </div>
                         </div>
