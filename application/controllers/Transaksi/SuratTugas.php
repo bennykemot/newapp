@@ -105,6 +105,7 @@ class SuratTugas extends CI_Controller {
             $idxskmpnenlabel = $this->input->post('idxskmpnenlabel');
 			$beban_anggaran = $this->input->post('select-bebananggaran');
 			$ttd = $this->input->post('ttd');
+            $ttd_spd = $this->input->post('ttd_spd');
 
             $kdsatker = $this->input->post('kdsatker');
             
@@ -143,7 +144,8 @@ class SuratTugas extends CI_Controller {
                 'idxskmpnen' => $idxskmpnen,
                 'idx_temp' => $idxskmpnenlabel,
                 'id_unit' => $beban_anggaran,
-                'id_ttd' => $ttd
+                'id_ttd' => $ttd,
+                'id_ttd_spd' => $ttd_spd
                 
                 );
 
@@ -274,6 +276,7 @@ class SuratTugas extends CI_Controller {
 			$idxskmpnen = $this->input->post('idxskmpnen');
 			$beban_anggaran = $this->input->post('select-bebananggaran');
 			$ttd = $this->input->post('ttd');
+            $ttd_spd = $this->input->post('ttd_spd');
             $countTim = $this->input->post('countTim');
             $idst = $this->input->post('idst');
             $idxskmpnenlabel = $this->input->post('idxskmpnenlabel');
@@ -312,6 +315,7 @@ class SuratTugas extends CI_Controller {
                 'id_unit' => $beban_anggaran,
                 'idx_temp' => $idxskmpnenlabel,
                 'id_ttd' => $ttd,
+                'id_ttd_spd' => $ttd_spd
                 
                 );
             $where = array('id' => $idst);

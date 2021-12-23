@@ -86,10 +86,18 @@
                         </div>
 
                         <div class="input-field col s12">
-                            <div class="input-field col s2"><label>Penandatangan</label></div>
+                            <div class="input-field col s2"><label>Penandatangan ST</label></div>
 
                             <div class="input-field col s10 " >
                                 <input type="text"  id="ttd" name="ttd"  value="<?= $ST[0]['nama_ttd'] ?>" readonly>
+                            </div>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <div class="input-field col s2"><label>Penandatangan SPD</label></div>
+
+                            <div class="input-field col s10 " >
+                            <select class="browser-default" id="ttd_spd" name="ttd_spd"></select>
                             </div>
                         </div>
 

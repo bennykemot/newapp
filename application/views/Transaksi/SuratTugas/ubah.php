@@ -109,6 +109,14 @@
                             </div>
                         </div>
 
+                        <div class="input-field col s12">
+                            <div class="input-field col s2"><label>Penandatangan SPD</label></div>
+
+                            <div class="input-field col s10 " >
+                            <select class="browser-default" id="ttd_spd" name="ttd_spd"></select>
+                            </div>
+                        </div>
+
                         
                         <?php if($ubah[0]['tim']== "WithTim"){include('Tim.php');}?>
 

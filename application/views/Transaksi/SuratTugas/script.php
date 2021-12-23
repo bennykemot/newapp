@@ -466,6 +466,31 @@ $("#user-select2").select2({
          }
      });
 
+     $("#ttd_spd").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Penandatangan",
+         ajax: { 
+           url: dropdown_baseurl + 'ttd',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+								Trigger: "ttd_spd_forST",
+								kdsatker: satker_session,
+                searchTerm: params.term // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
 // $("#ttd").select2({
 //           dropdownAutoWidth: true,
 //           width: '100%',

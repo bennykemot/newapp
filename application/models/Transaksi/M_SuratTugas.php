@@ -31,7 +31,8 @@ class M_SuratTugas extends CI_Model{
             t_unitkerja.nama_unit, 
             
             d_surattugas.idxskmpnen, 
-            d_surattugas.id_ttd, 
+            d_surattugas.id_ttd,
+            d_surattugas.id_ttd_spd, 
             CONCAT("NoTim") as tim,
             
             t_pejabat.nama as nama_ttd,
@@ -91,7 +92,7 @@ class M_SuratTugas extends CI_Model{
             $query = $this->db->query('SELECT d_pagu.*, d_surattugas.nost, d_surattugas.tglst, 
             d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.idx_temp,
             d_surattugas.tglselesaist ,d_surattugas.id_unit,d_surattugas.id as idst,d_surattugas.idxskmpnen, 
-            d_surattugas.id_ttd,d_surattugas.kdsatker,
+            d_surattugas.id_ttd,d_surattugas.kdsatker,d_surattugas.id_ttd,d_surattugas.id_ttd_spd,
             
             
             t_unitkerja.nama_unit, 

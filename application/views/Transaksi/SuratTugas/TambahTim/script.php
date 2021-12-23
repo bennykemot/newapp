@@ -16,6 +16,13 @@ if(role_session == 1){
   unit_session = 0;
 }
 
+var TTD_SPDvalue = "<?= $ST[0]['id_ttd_spd'] ?>"
+var ttd_spd = TTD_SPDvalue.split("-")
+var TTD_SPDtext = ttd_spd[2]
+
+var $ttd_spd = $("<option selected='selected'></option>").val(TTD_SPDvalue).text(TTD_SPDtext)
+$("#ttd_spd").append($ttd_spd).trigger('change');
+
 
 
 function Reset(idForm) {
@@ -202,6 +209,31 @@ $("#user-select2").select2({
         cache: true
       }
       });
+
+      $("#ttd_spd").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Penandatangan",
+         ajax: { 
+           url: dropdown_baseurl + 'ttd',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+								Trigger: "ttd_spd_forST",
+								kdsatker: satker_session,
+                searchTerm: params.term // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
 
 
 
@@ -831,6 +863,17 @@ function removeItemAll(arr, value) {
 
 $("#TambahTim").click(function (e) {
   e.preventDefault();
+
+  if($('.namaTim').val() == null){
+
+    swal({
+                title:"Tim belum ada!",
+                icon: "warning",
+                timer: 2000
+                })
+                return false;
+
+  }
 
   var btn = $(this);
   var form = $(this).closest("form");

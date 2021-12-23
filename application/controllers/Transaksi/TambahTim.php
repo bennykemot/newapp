@@ -36,6 +36,7 @@ class TambahTim extends CI_Controller {
         
         if($Trigger == "C"){
             $nost = $this->input->post('nost');
+            $ttd_spd = $this->input->post('ttd_spd');
 			$idst = $this->input->post('id_st');
 			$uraianst = $this->input->post('uraianst');
 			$countTim = $this->input->post('countTim');
@@ -51,6 +52,14 @@ class TambahTim extends CI_Controller {
                 $totaluanginap = 0;
                 $totaluangtransport = 0;
                 $sum=0;
+
+                $data_st = array(
+                    'id_ttd_spd' => $ttd_spd
+                    );
+                $where = array('id' => $idst);
+    
+                $this->SuratTugas->Update($data_st,'d_surattugas', $where);
+    
                 
                 for($i = 0 ; $i < $countTim; $i++){
                     

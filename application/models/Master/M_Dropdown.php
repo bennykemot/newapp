@@ -732,6 +732,25 @@ function getData_ttd($searchTerm="",$Trigger,$kdsatker){
 		}
 		return $data;
 
+   }else if($Trigger == "ttd_spd_forST"){
+
+      $this->db->select('id');
+		$this->db->select('nama');
+		$this->db->select('nip');
+		$this->db->where("nama like '%".$searchTerm."%' ");
+		$this->db->where("satker_id", $kdsatker);
+      $this->db->where_in('kel_jab', array("E.I", "E.II", "E.III"));
+		$fetched_records = $this->db->get('t_pegawai');
+		$users = $fetched_records->result_array();
+
+		// Initialize Array with fetched data
+		$data = array();
+		foreach($users as $user){
+			$data[] = array("id"=>$user['id'].'-'.$user['nip'].'-'.$user['nama'], "text"=>$user['nama']);
+		}
+		return $data;
+
+
 	}else{
 		
 		$this->db->select('id');

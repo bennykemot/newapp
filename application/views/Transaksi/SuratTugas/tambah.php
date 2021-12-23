@@ -102,10 +102,18 @@
                         </div>
 
                         <div class="input-field col s12">
-                            <div class="input-field col s2"><label>Penandatangan</label></div>
+                            <div class="input-field col s2"><label>Penandatangan ST</label></div>
 
                             <div class="input-field col s10 " >
                             <select class="browser-default" id="ttd" name="ttd"></select>
+                            </div>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <div class="input-field col s2"><label>Penandatangan SPD</label></div>
+
+                            <div class="input-field col s10 " >
+                            <select class="browser-default" id="ttd_spd" name="ttd_spd"></select>
                             </div>
                         </div>
                         
