@@ -615,7 +615,7 @@ function getData_kota($searchTerm=""){
    // Initialize Array with fetched data
    $data = array();
    foreach($users as $user){
-      $data[] = array("id"=>$user['id_kota'].'-'.$user['id'].'-'.$user['nama_kota'], "text"=>$user['nama_provinsi'].'-'.$user['nama_kota']);
+      $data[] = array("id"=>$user['id_provinsi'].'-'.$user['id'].'-'.$user['nama_kota'], "text"=>$user['nama_provinsi'].'-'.$user['nama_kota']);
    }
    return $data;
 }
