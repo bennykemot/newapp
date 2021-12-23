@@ -1163,4 +1163,9 @@ function show_msg(textStatus){
             })
     }
 
+$(document).ready(function(){
+  $('.tooltipped').tooltip();
+});
+
+
 </script>
