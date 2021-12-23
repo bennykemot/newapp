@@ -200,8 +200,8 @@ function cek_tgl($tanggal){
                             <td style="padding-top: 2%;border-left-style: none;border-right-style: none; border-bottom-style: none;border-top-style: none"></td>
                         </tr>
                         <tr>
-                            <td colspan="2" style="border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none"><?= $e->ppk_ttd ?><br>NIP. <?= $e->nip_ttd ?></td>
-                            <td colspan="4" style="border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none"><?= $e->ppk_ttd ?><br>NIP. <?= $e->nip_ttd ?></td>
+                            <td colspan="2" style="border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none"><?= $e->ppk_nama ?><br>NIP. <?= $e->ppk_nip ?></td>
+                            <td colspan="4" style="border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none"><?= $e->ppk_nama ?><br>NIP. <?= $e->ppk_nip ?></td>
                             
                         </tr>
 

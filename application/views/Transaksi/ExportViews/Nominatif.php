@@ -166,7 +166,7 @@ function cek_tgl($tanggal){
                     </tr>
 
                     <tr >
-                        <td width="25%">bendahara Pengeluaran</td>
+                        <td width="25%">Bendahara Pengeluaran</td>
                         <td width="50%"></td>
                         <td width="25%"></td>
                     </tr>
@@ -180,13 +180,13 @@ function cek_tgl($tanggal){
                     <tr >
                         <td width="25%">Aditya Kurniawan</td>
                         <td width="50%"></td>
-                        <td width="25%">Sumardi</td>
+                        <td width="25%"><?= $e->ppk_nama ?></td>
                     </tr>
 
                     <tr >
                         <td width="25%">NIP. 198503272007011002</td>
                         <td width="50%"></td>
-                        <td width="25%">NIP. 197307251994021001</td>
+                        <td width="25%">NIP. <?= $e->ppk_nip ?></td>
                     </tr>
 
 

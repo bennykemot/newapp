@@ -127,7 +127,7 @@ function cek_tgl($tanggal){
                     <tr>
                         <td style="text-align: center;">1</td>
                         <td>Pejabat Pembuat Komitmen</td>
-                        <td colspan="2"><?= $e->ppk_ttd ?></td>
+                        <td colspan="2"><?= $e->ppk_nama ?></td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">2</td>
@@ -227,11 +227,11 @@ function cek_tgl($tanggal){
                     </tr>
                     <tr >
                         <td></td>
-                        <td width="10%" style="text-align: center;"><?= $e->ppk_ttd ?></td>
+                        <td width="10%" style="text-align: center;"><?= $e->ppk_nama ?></td>
                     </tr>
                     <tr >
                         <td></td>
-                        <td width="10%" style="text-align: center;"><?= $e->nip_ttd ?></td>
+                        <td width="10%" style="text-align: center;"><?= $e->ppk_nip ?></td>
                     </tr>
                 </tbody>
             </table>

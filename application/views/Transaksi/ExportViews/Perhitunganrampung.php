@@ -184,13 +184,13 @@ function cek_tgl($tanggal){
             <tr>
                 <td width="30%">Nama</td>
                 <td width="2%">:</td>
-                <td>Sumardi</td>
+                <td><?= $export['0']->ppk_nama ?></td>
             </tr>
 
             <tr>
                 <td width="30%">NIP</td>
                 <td width="2%">:</td>
-                <td >197307251994021001</td>
+                <td ><?= $export['0']->ppk_nip ?></td>
             </tr>
 
             <tr>
@@ -255,7 +255,7 @@ function cek_tgl($tanggal){
         <table width="100%"  id="borderedless" cellpadding="2">
             <tr>
                 <td></td>
-                <td width="30%">Jakarta, 15 Maret 2021</td>
+                <td width="30%"><?= ucwords(strtolower("$e->lokasi")) ?>, <?=cek_tgl($e->tglst)?></td>
             </tr>
 
             <tr>
@@ -271,11 +271,11 @@ function cek_tgl($tanggal){
 
             <tr>
                 <td></td>
-                <td>Sumardi</td>
+                <td><?= $e->ppk_nama ?></td>
             </tr>
             <tr>
                 <td></td>
-                <td>NIP. 197307251994021001</td>
+                <td>NIP. <?= $e->ppk_nip ?></td>
             </tr>
 
         </table>
