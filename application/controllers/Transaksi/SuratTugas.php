@@ -117,6 +117,7 @@ class SuratTugas extends CI_Controller {
             $kdskmpnen = $this->input->post('kdskmpnen');
             $kdakun = $this->input->post('kdakun');
             $kdbeban = $this->input->post('kdbeban');
+            $ppk_id = $this->input->post('ppk_id');
             //$countTim = $this->input->post('countTim');
 
             
@@ -131,6 +132,7 @@ class SuratTugas extends CI_Controller {
                 'kdskmpnen' => $kdskmpnen,
                 'kdakun' => $kdakun,
                 'kdbeban' => $kdbeban,
+                'ppk_id' => $ppk_id,
 
                 'nost' => $nost,
                 'kdsatker' => $kdsatker,

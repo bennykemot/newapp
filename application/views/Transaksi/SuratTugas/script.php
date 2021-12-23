@@ -103,6 +103,7 @@ function PilihKode(Id, kdindex){
               $('#kdskmpnen').val(data[0]['kdskmpnen']);
               $('#kdakun').val(data[0]['kdakun']);
               $('#kdbeban').val(data[0]['kdbeban']);
+              $('#ppk_id').val(data[0]['ppk_id']);
 
               $('#modalidx').modal('close');
               

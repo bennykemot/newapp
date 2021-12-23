@@ -67,7 +67,7 @@ class M_Master extends CI_Model {
          }
 
          $query = $this->db->query("SELECT d_pagu.*, CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode
-                FROM d_bagipagu 
+                ,d_bagipagu.ppk_id FROM d_bagipagu 
                   JOIN d_pagu ON d_pagu.kdindex = d_bagipagu.kdindex ".$where." 
                 AND d_pagu.kdsatker = ".$kdsatker." AND d_pagu.kdakun LIKE '%524%'");
 
@@ -111,7 +111,7 @@ class M_Master extends CI_Model {
          function getKomponenSub_forJson($kdindex){
    
             $query = $this->db->query("SELECT d_pagu.*, CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode
-             FROM d_bagipagu 
+             ,d_bagipagu.ppk_id FROM d_bagipagu 
             JOIN d_pagu ON d_pagu.kdindex = d_bagipagu.kdindex WHERE d_pagu.kdindex = '".$kdindex."'
             ");
             return $query->result();
