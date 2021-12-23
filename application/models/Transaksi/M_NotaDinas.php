@@ -81,7 +81,7 @@ class M_NotaDinas extends CI_Model{
             t_unitkerja.nama_unit , d_itemcs.nourut, d_itemcs.nama, 
             d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan, 
             d_itemcs.tglberangkat, d_itemcs.tglkembali, d_itemcs.kotaasal, 
-            d_itemcs.kotatujuan, d_itemcs.jmlhari, d_itemcs.totaluangharian, 
+            d_itemcs.kotatujuan, d_itemcs.jmlhari, d_itemcs.totaluangharian, d_itemcs.transport, 
             d_itemcs.totalinap, d_itemcs.totalrep, d_itemcs.totaltravel , d_itemcs.jnstransportasi,
             d_itemcs.jumlah ,d_pagu.rupiah,d_pagu.kdbeban,
 			t_pejabat.nama as ppk_nama, 

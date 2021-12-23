@@ -140,7 +140,7 @@ function cek_tgl($tanggal){
                             <td style="text-align: center;"><?=$e->jmlhari?></td>
                             <td style="text-align: right;"><?=rupiah($e->totaluangharian)?></td>
                             <td style="text-align: right;"><?=rupiah($e->totalinap)?></td>
-                            <td style="text-align: right;"><?=rupiah($e->totaltravel)?></td>
+                            <td style="text-align: right;"><?=rupiah($e->transport)?></td>
                             <td style="text-align: right;"><?=rupiah($e->totalrep)?></td>
                             <td style="text-align: right;"><?=rupiah($e->jumlah)?></td>
                         </tr>  
