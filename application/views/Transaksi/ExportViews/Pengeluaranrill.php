@@ -191,13 +191,13 @@ function cek_tgl($tanggal){
                     </tr>
 
                     <tr>
-                        <td ><?= $e->ppk_ttd ?></td>
+                        <td ><?= $e->ppk_nama ?></td>
                         <td width="10%"></td>
                         <td width="25%"><?=$e->nama?></td>
                     </tr>
 
                     <tr>
-                        <td >NIP. <?= $e->nip_ttd ?></td>
+                        <td >NIP. <?= $e->ppk_nip ?></td>
                         <td width="10%"></td>
                         <td width="25%">NIP. <?=$e->nip?></td>
                     </tr>

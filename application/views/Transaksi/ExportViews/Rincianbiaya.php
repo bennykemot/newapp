@@ -350,13 +350,13 @@ function cek_tgl($tanggal){
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><u><?= $e->ppk_ttd ?></u></td>
+                <td><u><?= $e->ppk_nama ?></u></td>
             </tr>
             <tr>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>NIP. <?= $e->nip_ttd ?></td>
+                <td>NIP. <?= $e->ppk_nip ?></td>
             </tr>
 
         </table>
