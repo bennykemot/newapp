@@ -421,7 +421,7 @@ $.ajax({
       success: function(data)
           {    
               
-              $('#nip_Edit').val(data['nip']);
+              	$('#nip_Edit').val(data['nip']);
 			  
 			  		var kdsatker = $("<option selected='selected'></option>").val(data['kdsatker']).text(data['kdsatker']+' - '+data['nmsatker'])
                 $("#satker-select2_Edit").append(kdsatker).trigger('change');
@@ -429,10 +429,10 @@ $.ajax({
                 var pejabat = $("<option selected='selected'></option>").val(data['nip']).text(data['nama'])
                 $("#pejabat-select2_Edit").append(pejabat).trigger('change');
 
-                var jabatan = $("<option selected='selected'></option>").val(data['id']).text(data['jabatan'])
+                var jabatan = $("<option selected='selected'></option>").val(data['jabatan_id']).text(data['jabatan'])
                 $("#jabatan-select2_Edit").append(jabatan).trigger('change');
 
-                var unit = $("<option selected='selected'></option>").val(data['id']).text(data['nama_unit'])
+                var unit = $("<option selected='selected'></option>").val(data['unitkerja_id']).text(data['nama_unit'])
                 $("#unit-select2_Edit").append(unit).trigger('change');
 
                 $('#idPejabat').val(Id);

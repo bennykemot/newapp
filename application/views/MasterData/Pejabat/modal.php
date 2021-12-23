@@ -109,7 +109,7 @@
                         <div class="input-field col s2"><label>Jabatan</label></div>
 
                         <div class="input-field col s10 " >
-													<select  id="jabatan-select2_Edit" name="jabatan_Edit" class="select2-data-ajax select2-hidden-accessible browser-default"></select>
+													<select  id="jabatan-select2_Edit" name="jabatan_Edit" class="browser-default"></select>
 													<input type="text" id="jabatanEditText" name="jabatanEditText" hidden>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
                         <div class="input-field col s2"><label>Unit</label></div>
 
                         <div class="input-field col s10 " >
-													<select  id="unit-select2_Edit" name="unit_Edit" class="select2-data-ajax select2-hidden-accessible browser-default"></select>
+													<select  id="unit-select2_Edit" name="unit_Edit" class="browser-default"></select>
                         </div>
                     </div>
 
