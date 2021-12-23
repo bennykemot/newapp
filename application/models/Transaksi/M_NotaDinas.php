@@ -104,7 +104,7 @@ class M_NotaDinas extends CI_Model{
 
             $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, 
             d_surattugas.uraianst, d_surattugas.tglmulaist, 
-            d_surattugas.tglselesaist, d_surattugas.idxskmpnen, 
+            d_surattugas.tglselesaist, d_surattugas.idxskmpnen, d_surattugas.id_ttd_spd, 
             t_unitkerja.nama_unit , d_itemcs.nourut, d_itemcs.nama, 
             d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan, 
             d_itemcs.tglberangkat, d_itemcs.tglkembali, d_itemcs.kotaasal, 
@@ -112,11 +112,13 @@ class M_NotaDinas extends CI_Model{
             d_itemcs.totalinap, d_itemcs.totalrep, d_itemcs.totaltravel , d_itemcs.jnstransportasi,
             d_itemcs.jumlah,
 			t_pejabat.nama as ppk_nama, 
-			t_pejabat.nip as ppk_nip
+			t_pejabat.nip as ppk_nip,
+            t_pegawai.jabatan as jabatan_ttd_spd
             
             FROM d_surattugas JOIN t_unitkerja ON t_unitkerja.id = d_surattugas.id_unit 
             JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st
-			JOIN t_pejabat ON d_surattugas.ppk_id = t_pejabat.id  
+			JOIN t_pejabat ON d_surattugas.ppk_id = t_pejabat.id
+            JOIN t_pegawai ON  SUBSTRING_INDEX(SUBSTRING_INDEX(d_surattugas.id_ttd_spd,'-',2),'-',-1) = t_pegawai.nip  
             
             WHERE d_surattugas.id = ".$Id_st." ORDER BY d_itemcs.nourut ");
 

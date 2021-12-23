@@ -87,7 +87,13 @@ function cek_tgl($tanggal){
    
 
     <body>
-    <?php $no=1; foreach($export as $e){ ?>
+    <?php $no=1; foreach($export as $e){ 
+        $split_ttd_spd = explode("-",$e->id_ttd_spd);
+        $nip_ttd_spd = $split_ttd_spd[1];
+        $nama_ttd_spd = $split_ttd_spd[2];
+        
+        ?>
+        
         <div class="body">
 
             <table width="100%" id="body" cellpadding="6">
@@ -112,13 +118,13 @@ function cek_tgl($tanggal){
                         </tr>
 
                         <tr>
-                            <td colspan="3" style="text-align: center;border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none">Kepala Bagian Pelaporan Keuangan</td>
+                            <td colspan="3" style="text-align: center;border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none"><?= $e->jabatan_ttd_spd ?></td>
                         </tr>
                         <tr>
                             <td colspan="3" style="text-align: center; padding-top: 2%;border-left-style: none;border-right-style: none; border-bottom-style: none;border-top-style: none"></td>
                         </tr>
                         <tr>
-                            <td colspan="3" style="text-align: center;border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none">Muslim Ridha Muthaher<br>NIP 196802161993031001</td>
+                            <td colspan="3" style="text-align: center;border-left-style: none;border-right-style: none; border-bottom-style: none; border-top-style: none"><?= $nama_ttd_spd?><br>NIP <?= $nip_ttd_spd?></td>
                         </tr>
 
                         <!-- ---- -->
