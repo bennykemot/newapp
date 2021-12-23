@@ -84,7 +84,7 @@ function cek_tgl($tanggal){
       foreach($export as $j){
         $sumhari +=$j->jmlhari;
         $sumuangharian +=$j->totaluangharian;
-        $sumutravel +=$j->totaltravel;
+        $sumutransport +=$j->transport;
         $sumuinap +=$j->totalinap;
         $sumurep +=$j->totalrep;
         $sumtotal +=$j->jumlah;
@@ -170,7 +170,7 @@ function cek_tgl($tanggal){
                         <td style="text-align: center;"><?=$e->jmlhari?></td>
                         <td style="text-align: right;"><?=rupiah($e->totaluangharian)?></td>
                         <td style="text-align: right;"><?=rupiah($e->totalinap)?></td>
-                        <td style="text-align: right;"><?=rupiah($e->totaltravel)?></td>
+                        <td style="text-align: right;"><?=rupiah($e->transport)?></td>
                         <td style="text-align: right;"><?=rupiah($e->totalrep)?></td>
                         <td style="text-align: right;"><?=rupiah($e->jumlah)?></td>
                     </tr>
@@ -181,8 +181,8 @@ function cek_tgl($tanggal){
                         <td>Jumlah</td>
                         <td style="text-align: center;"><?=$sumhari?></td>
                         <td style="text-align: right;"><?=rupiah($sumuangharian)?></td>
-                        <td style="text-align: right;"><?=rupiah($sumutravel)?></td>
                         <td style="text-align: right;"><?=rupiah($sumuinap)?></td>
+                        <td style="text-align: right;"><?=rupiah($sumutransport)?></td>
                         <td style="text-align: right;"><?=rupiah($sumurep)?></td>
                         <td style="text-align: right;"><?=rupiah($sumtotal)?></td>
                     </tr>
