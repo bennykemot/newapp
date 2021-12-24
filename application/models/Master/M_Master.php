@@ -79,6 +79,20 @@ class M_Master extends CI_Model {
    
          }
 
+         function countPagu(){
+            $boo = "";
+            for($i= 4207; $i < 4230 ; $i++){
+               //$boo .='"'.$i.'"'.",";
+               if($i == 4229){
+                  $boo .=$i;
+               }else{
+               $boo .= $i.",";
+               }
+               }
+               return $boo;
+         }
+
+
          function getKomponenSub_pagu($kdsatker, $unitid, $roleid){
             $where="";
             if($roleid != 1){
@@ -87,7 +101,9 @@ class M_Master extends CI_Model {
    
             $query = $this->db->query("SELECT d_pagu.*, CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode, d_bagipagu.kdindex, d_bagipagu.ppk_id,d_bagipagu.unit_id 
             FROM d_pagu join d_bagipagu ON d_pagu.kdindex = d_bagipagu.kdindex where d_pagu.kdsatker = ".$kdsatker." 
-                  ".$where." AND d_pagu.kdakun LIKE '%524%'");
+                  ".$where." 
+                  AND d_pagu.kdgiat NOT IN (".$this->countpagu().")
+                  AND d_pagu.kdakun LIKE '%524%'");
    
             return $query->result();
       

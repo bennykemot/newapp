@@ -22,6 +22,15 @@ if(document.getElementById('counting') != null){
   var countTimTable = 0
 }
 
+$( document ).ready(function() {
+    var relasii = $('#realisasi').val()
+    var alokasii = $('#alokasi').val()
+    var sisaan = Number(alokasii) - Number(relasii)
+
+    $('#sisalabel').val(formatRupiah(""+sisaan+""))
+    $('#sisa').val(sisaan)
+});
+
 function PilihKode_pagu(Id, kdindex){
 
 $.ajax({
@@ -674,7 +683,7 @@ $('.multi-field-wrapper').each(function() {
         });
 
         $('.table-remove').click(function() {
-                            $(this).parents('tr').detach();
+                            $(this).parents('tbody').detach();
                             x--;
                                 if(x <=a ){
                                     x=countTimTable;

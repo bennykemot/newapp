@@ -84,6 +84,7 @@ class SuratTugas extends CI_Controller {
         $roleid =$this->uri->segment(7);
         $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unitid, $roleid);
         $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unitid, $roleid);
+        
 		$this->load->view('Transaksi/SuratTugas/ubah',$data);
 	}
 
@@ -280,7 +281,7 @@ class SuratTugas extends CI_Controller {
 			$beban_anggaran = $this->input->post('select-bebananggaran');
 			$ttd = $this->input->post('ttd');
             $countTim = $this->input->post('countTim');
-            $idst = $this->input->post('idst');
+            $idst = $this->input->post('id_st');
             $idxskmpnenlabel = $this->input->post('idxskmpnenlabel');
 
             $kdsatker = $this->input->post('kdsatker');

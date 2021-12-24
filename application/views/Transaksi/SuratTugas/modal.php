@@ -18,7 +18,7 @@
 						<div class="input-field col s12">
             <table id="KomponenSub" style="width:100%;display: block;height: 400px;overflow-y: scroll;">
               <tbody>
-              <?php $a=1;foreach($subkomp as $sk){?>
+              <?php foreach($subkomp as $sk){?>
                 <tr>
                   <td style="min-width: 5%"><a class="btn cyan" href="javascript:;" onclick="PilihKode('<?=$sk->kode?>', '<?=$sk->kdindex?>', '<?=$sk->tahapan?>',)" id="Pilih">Pilih</a></td>
                   <td style="width: 30%"><?=$sk->kode?></td>
@@ -26,16 +26,17 @@
                   <td style="width: 40%"><?php if($sk->nama_tahapan == "All"){ echo '-';}else{echo $sk->nama_tahapan;}?></td>
                   <td style="min-width: 20%"><?=rupiah($sk->rupiah_tahapan)?></td>
                 </tr></a>
-                <?php $a++;}?>
-                <?php $a=1;foreach($subkomppagu as $skp){?>
+                <?php }?>
+                <li class="divider">-----------------------------</li>
+                <?php foreach($subkomppagu as $skp){?>
                 <tr>
                   <td style="min-width: 5%"><a class="btn cyan" href="javascript:;" onclick="PilihKode_pagu('<?=$skp->kode?>', '<?=$skp->kdindex?>')" id="Pilih">Pilih</a></td>
                   <td style="width: 30%"><?=$skp->kode?></td>
                   <td style="width: 40%">-</td>
-                  <td style="width: 40%">-</td>
+                  <td style="width: 40%">no mapping</td>
                   <td style="min-width: 20%"><?=rupiah($skp->rupiah)?></td>
                 </tr></a>
-                <?php $a++;}?>
+                <?php }?>
               </tbody>
             </table>
 

@@ -12,7 +12,6 @@ var role_session = "<?= $this->session->userdata("role_id")?>"
 var unit_session = "<?= $this->session->userdata("unit_id")?>"
 var count_tim = "<?= count($countST) ?>"
 $sumtotal = 0;
-$sumTot = 0;
 
 if(role_session == 1){
   unit_session = 0;
@@ -148,92 +147,9 @@ $("#bulan-Array").select2({
     data: data,
     dropdownParent: "#head",
 });
-
-
     
 
 // SELECT2 INSERT
-
-$(".ttd_spd").select2({
-                    width: '100%',
-                    placeholder: "Pilih Penandatangan",
-                  ajax: { 
-                    url: dropdown_baseurl + 'ttd',
-                    type: "post",
-                    dataType: 'json',
-                    delay: 250,
-                    data: function (params) {
-                        return {
-                          Trigger: "ttd_spd_forST",
-                          kdsatker: satker_session,
-                          searchTerm: params.term // search term
-                        };
-                    },
-                    processResults: function (response) {
-                        return {
-                          results: response
-                        };
-                    },
-                    cache: true
-                  }
-              });
-
-$(".namaTimHardcode").select2({
-          dropdownAutoWidth: true,
-          width: '100%',
-          placeholder: "Pilih Nama",
-          dropdownParent: "#Tim",
-         ajax: { 
-           url: dropdown_baseurl + 'pegawai',
-           type: "post",
-           dataType: 'json',
-           delay: 250,
-           data: function (params) {
-              return {
-                
-                searchTerm: params.term,
-                Trigger: "select_forTim"
-              };
-           },
-           processResults: function (response) {
-              return {
-                 results: response
-              };
-           },
-           cache: true
-         }
-     });
-
-function ubahNama(id){
-  $("#namaDummy"+id+"").select2({
-          dropdownAutoWidth: true,
-          width: '100%',
-          placeholder: "Pilih Nama",
-          dropdownParent: "#Tim",
-         ajax: { 
-           url: dropdown_baseurl + 'pegawai',
-           type: "post",
-           dataType: 'json',
-           delay: 250,
-           data: function (params) {
-              return {
-                
-                searchTerm: params.term,
-                Trigger: "select_forTim",
-                tglberangkat: $('#tglberangkat'+id+'').val(),
-                tglkembali: $('#tglkembali'+id+'').val() // search term
-              };
-           },
-           processResults: function (response) {
-              return {
-                 results: response
-              };
-           },
-           cache: true
-         }
-     });
-
-}
 
 
 $("#user-select2").select2({
@@ -431,7 +347,9 @@ $('.multi-field-wrapper').each(function() {
         var head = '<tbody id="Tbody" class="multi-field" style="border-top: 2px dotted #c5c5c4;">';
         var end='</tbody>';
         var arrX = [];
+        var realisasi = 0;
         $("#add-field", $(this)).click(function(e) {   
+          document.getElementById("divTable").style.display = "";      
 
           
            if(x < max){
@@ -655,18 +573,11 @@ function AllCount(i, Trigger){
     var total = ""+e+""
 
     $("#total"+i+"").val(formatRupiah(total))
-    var tot = $("#total"+i+"").val()
-    var tota = tot.replace(/[^0-9\.]+/g, "");
-    var totalSum = tota.replace(/\./g, "");
-
-    $sumtotal = Number(totalSum);
-    $('#realisasilabel').val(formatRupiah(""+$sumtotal+""));
-    $('#realisasi').val(''+$sumtotal);
-
+    $sumtotal += Number(total);
+                $('#realisasi').val($sumtotal);
     alokasi = $('#alokasi').val()
     sisa = Number(alokasi) - Number($sumtotal)
-    $('#sisalabel').val(formatRupiah(""+sisa+""));
-    $('#sisa').val(sisa);
+                $('#sisa').val(sisa);
   
 
 }
@@ -799,12 +710,10 @@ $.ajax({
                 +Number(uanglaut)+Number(uangudara)+Number(uangdarat)+Number(uangdll))
                 $("#total"+id+"").val(formatRupiah(total));
                 $sumtotal += Number(total);
-                $('#realisasilabel').val(formatRupiah(""+$sumtotal+""));
-                $('#realisasi').val(''+$sumtotal);
+                $('#realisasi').val($sumtotal);
 
                 alokasi = $('#alokasi').val()
                 sisa = Number(alokasi) - Number($sumtotal)
-                $('#sisalabel').val(formatRupiah(""+sisa+""));
                 $('#sisa').val(sisa);
 
                 if(diffDays < 0){
@@ -927,12 +836,10 @@ var gol = $('#gol'+id+'').val();
                 +Number(uanglaut)+Number(uangudara)+Number(uangdarat)+Number(uangdll))
                 $("#total"+id+"").val(formatRupiah(total));
                 $sumtotal += Number(total);
-                //$('#realisasilabel').val(formatRupiah(""+$sumtotal+""));
-                $('#realisasi').val(''+$sumtotal);
+                $('#realisasi').val($sumtotal);
 
                 alokasi = $('#alokasi').val()
                 sisa = Number(alokasi) - Number($sumtotal)
-                $('#sisalabel').val(formatRupiah(""+sisa+""));
                 $('#sisa').val(sisa);
 
                 if(diffDays < 0){

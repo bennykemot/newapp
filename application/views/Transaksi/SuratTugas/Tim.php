@@ -1,4 +1,4 @@
-    <!-- <div id = "counting">
+    <div id = "counting">
                 <div class="multi-field-wrapper">
 
                     <div class="input-field col s12" >
@@ -8,7 +8,7 @@
                     </div>
 
 
-         <div class="multi-field-wrapper"> -->
+         <div class="multi-field-wrapper">
             <table class="bordered striped fixed fixed multi-fields" id="tbUser" >
                 <thead>
                     <tr style="background-color: rgba(242,242,242,.5)">
@@ -52,12 +52,12 @@
                     ?>
                     <tbody id="Tbody" class="multi-field" style="border-top: 2px dotted #c5c5c4;">
                     <tr class="tb-tim">
-                        <td><input  type="number" id="urut<?=$j?>" name="urut<?=$j?>" min="1" max="20" value="<?=$ubah[$i]['nourut']?>"></td>
+                        <td><input  class="nourut" type="number" id="urut<?=$j?>" name="urut<?=$j?>" min="1" max="20" value="<?=$ubah[$i]['nourut']?>"></td>
                         <td><input type="date" min="<?=$ubah[$i]['tglmulaist']?>" max="<?=$ubah[$i]['tglselesaist']?>" onchange="dayCount('<?=$j?>','D')" id="tglberangkat<?=$j?>" name="tglberangkat<?=$j?>" value="<?=$ubah[$i]['tglberangkat']?>"></td>
                         <td><input type="date" max="<?=$ubah[$i]['tglselesaist']?>" min="<?=$ubah[$i]['tglmulaist']?>" onchange="dayCount(<?=$j?>)" id="tglkembali<?=$j?>" name="tglkembali<?=$j?>" value="<?=$ubah[$i]['tglkembali']?>"></td>
                         <td><input type="text" id="jmlhari<?=$j?>" name="jmlhari<?=$j?>" readonly value="<?=$ubah[$i]['jmlhari']?>"></td>
                         <td colspan="2" id="Tim">
-                        <select placeholder="Nama.."  class="namaTimHardcode browser-default" id="namaDummy<?=$j?>" name="namaDummy<?=$j?>" onclick="ubahNama('<?=$j?>')">
+                        <select placeholder="Nama.."  class="namaTimHardcode browser-default namaTim" id="namaDummy<?=$j?>" name="namaDummy<?=$j?>" onclick="ubahNama('<?=$j?>')">
                             <option selected value="<?=$ubah[$i]['nip']?>"><?=$ubah[$i]['nama']?></option>
                         </select>
                         <input class="nama" name="nama<?=$j?>" id="nama<?=$j?>" value="<?=$ubah[$i]['nama']?>" hidden>
@@ -115,7 +115,7 @@
                             </tbody>
                 <?php   $j++;}?>
             </table>
-            <input id="ArrX" name="ArrX">
+            <input id="ArrX" name="ArrX" hidden>
             <div class="Sumtotal">
                 <div class="input-field col s12">
                         <div class="input-field col s2"><label>Realisasi</label></div>
@@ -125,13 +125,13 @@
                             </div>
                         <div class="input-field col s2"><label>Sisa</label></div>
                             <div class="input-field col s4 " >
-                                <input readonly id="sisalabel" name="sisalabel">
-                                <input readonly id="sisa" name="sisa" hidden>
+                                <input readonly id="sisalabel" name="sisalabel" >
+                                <input readonly id="sisa" name="sisa" hidden >
                             </div>
                 </div>
             </div>
-            <input id="id_st" name="id_st" value="<?= $ubah[0]['idst'] ?>">
-        <!-- </div>
-    </div> -->
+            <input id="id_st" name="id_st" value="<?= $ubah[0]['idst'] ?>" hidden>
+        </div>
+    </div>
 
                         
