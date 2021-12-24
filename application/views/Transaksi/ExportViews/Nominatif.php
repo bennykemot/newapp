@@ -178,13 +178,13 @@ function cek_tgl($tanggal){
                     </tr>
 
                     <tr >
-                        <td width="25%">Aditya Kurniawan</td>
+                        <td width="25%"><?= $bendahara[0]['nama'] ?></td>
                         <td width="50%"></td>
                         <td width="25%"><?= $e->ppk_nama ?></td>
                     </tr>
 
                     <tr >
-                        <td width="25%">NIP. 198503272007011002</td>
+                        <td width="25%">NIP. <?= $bendahara[0]['nip'] ?></td>
                         <td width="50%"></td>
                         <td width="25%">NIP. <?= $e->ppk_nip ?></td>
                     </tr>

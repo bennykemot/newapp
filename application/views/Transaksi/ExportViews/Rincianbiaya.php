@@ -285,12 +285,12 @@ function cek_tgl($tanggal){
             </tr>
 
             <tr>
-                <td>Aditya Kurniawan</td>
+                <td><?= $bendahara[0]['nama'] ?></td>
                 <td></td>
                 <td><?=$e->nama?></td>
             </tr>
             <tr>
-                <td>NIP. 198503272007011002</td>
+                <td>NIP. <?= $bendahara[0]['nip'] ?></td>
                 <td></td>
                 <td>NIP.<?=$e->nip?></td>
             </tr>

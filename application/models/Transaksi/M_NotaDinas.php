@@ -224,4 +224,18 @@ class M_NotaDinas extends CI_Model{
             }
     }
 
+	function getBendahara_export($kdsatker,$unitId){
+		$whereUnitId = "";
+		if($kdsatker == 450491){
+			$whereUnitId = " AND t_pejabat.unitkerja_id = ".$unitId." ";
+		}
+
+		$query = $this->db->query("SELECT * FROM t_pejabat 
+				WHERE jabatan_id = 2 AND kdsatker = ".$kdsatker." ".$whereUnitId."
+		");
+    
+        return $query->result_array();
+
+	}
+
 }

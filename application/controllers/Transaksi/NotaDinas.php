@@ -109,7 +109,7 @@ class NotaDinas extends CI_Controller {
 
 			
 		}else if($trigger == "spd"){
-
+			$kdsatker = $this->session->userdata('kdsatker');
 			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
 			if(count($data['export']) > 0){
 				$html = $this->load->view('Transaksi/ExportViews/SPD.php',$data,true);
@@ -130,6 +130,9 @@ class NotaDinas extends CI_Controller {
 			}
 
 		}else if($trigger == "kwitansi"){
+			$unitId = $this->session->userdata('unit_id');
+			$kdsatker = $this->session->userdata('kdsatker');
+			$data['bendahara'] = $this->NotaDinas->getBendahara_export($kdsatker,$unitId);
 
 			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
 			if(count($data['export']) > 0){
@@ -139,6 +142,9 @@ class NotaDinas extends CI_Controller {
 				$this->Error_exp();
 			}
 		}else if($trigger == "rincian_biaya"){
+			$unitId = $this->session->userdata('unit_id');
+			$kdsatker = $this->session->userdata('kdsatker');
+			$data['bendahara'] = $this->NotaDinas->getBendahara_export($kdsatker,$unitId);
 
 			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
 			if(count($data['export']) > 0){
@@ -168,6 +174,11 @@ class NotaDinas extends CI_Controller {
 			}
 			
 		}else if($trigger == "nominatif"){
+			$kdsatker = $this->session->userdata('kdsatker');
+			$unitId = $this->session->userdata('unit_id');
+
+			$data['bendahara'] = $this->NotaDinas->getBendahara_export($kdsatker,$unitId);
+
 			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
 
 			if(count($data['export']) > 0){
