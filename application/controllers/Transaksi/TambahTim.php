@@ -44,6 +44,14 @@ class TambahTim extends CI_Controller {
 			$uraianst = $this->input->post('uraianst');
 			$countTim = $this->input->post('countTim');
 			$tglst = str_replace("/", "-",$this->input->post('tglst'));
+
+                $data_st = array(
+                    'cs_menyetujui' => $this->input->post('cs_menyetujui'),
+                    'cs_mengajukan' => $this->input->post('cs_mengajukan')
+                );
+
+                $where = array('id' => $idst);
+                $this->SuratTugas->Update($data_st,'d_surattugas', $where);
         
                 $data = array();    
                 $j = 1;

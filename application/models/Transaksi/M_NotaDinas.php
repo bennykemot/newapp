@@ -104,7 +104,7 @@ class M_NotaDinas extends CI_Model{
 
             $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, 
             d_surattugas.uraianst, d_surattugas.tglmulaist, 
-            d_surattugas.tglselesaist, d_surattugas.idxskmpnen, d_surattugas.id_ttd_spd, 
+            d_surattugas.tglselesaist, d_surattugas.idxskmpnen, d_itemcs.id_ttd_spd, 
             t_unitkerja.nama_unit , d_itemcs.nourut, d_itemcs.nama, 
             d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan, 
             d_itemcs.tglberangkat, d_itemcs.tglkembali, d_itemcs.kotaasal, 

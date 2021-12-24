@@ -806,4 +806,26 @@ function getData_PegawaiST($searchTerm="", $Trigger,$tglberangkat,$tglkembali){
    return $data;
 }
 
+   function getData_csttd($searchTerm,$Trigger,$kdsatker){
+      if($Trigger == "menyetujui"){
+         $where = $this->db->where_in('kel_jab', array("E.I", "E.II"));
+      }else{
+         $where = $this->db->where_in('kel_jab', "E.III");
+      }
+
+      $this->db->select('id');
+      $this->db->select('nama');
+      $this->db->select('nip');
+      $this->db->where("nama like '%".$searchTerm."%' ");
+      $this->db->where("satker_id", $kdsatker);
+      $where;
+      $fetched_records = $this->db->get('t_pegawai');
+      $users = $fetched_records->result_array();
+      $data = array();
+		foreach($users as $user){
+			$data[] = array("id"=>$user['id'].'-'.$user['nip'].'-'.$user['nama'], "text"=>$user['nama']);
+      }
+      return $data;
+   }
+
 }

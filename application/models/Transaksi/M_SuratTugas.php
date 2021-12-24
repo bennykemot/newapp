@@ -27,7 +27,7 @@ class M_SuratTugas extends CI_Model{
             $query = $this->db->query('SELECT d_surattugas.nost, d_surattugas.tglst, 
             d_surattugas.uraianst, d_surattugas.tglmulaist, 
             d_surattugas.tglselesaist ,d_surattugas.id_unit,d_surattugas.kdakun,d_surattugas.kdsatker,
-            d_surattugas.jumlah_uang,
+            d_surattugas.jumlah_uang,d_surattugas.cs_menyetujui,d_surattugas.cs_mengajukan,
             
             t_unitkerja.nama_unit, 
             
@@ -95,7 +95,7 @@ class M_SuratTugas extends CI_Model{
             $query = $this->db->query('SELECT d_pagu.*, d_surattugas.nost, d_surattugas.tglst, 
             d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.idx_temp,
             d_surattugas.tglselesaist ,d_surattugas.id_unit,d_surattugas.id as idst,d_surattugas.idxskmpnen, 
-            d_surattugas.id_ttd,d_surattugas.kdsatker,d_surattugas.id_ttd,d_surattugas.jumlah_uang,
+            d_surattugas.id_ttd,d_surattugas.kdsatker,d_surattugas.id_ttd,d_surattugas.jumlah_uang,d_surattugas.cs_menyetujui,d_surattugas.cs_mengajukan,
             
             
             t_unitkerja.nama_unit, 

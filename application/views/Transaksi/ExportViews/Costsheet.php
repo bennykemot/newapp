@@ -108,7 +108,7 @@ function cek_tgl($tanggal){
                 </tr>
                 <tr>
                     <td>Nomor RKT/ Non RKT</td> <td>:</td> <td>ISIANNYA</td>
-                     <td></td><td>Relasi Pagu</td> <td>:</td> <td style="text-align: right"><?=rupiah($export[0]->jumlah)?></td>
+                     <td></td><td>Relasi Pagu</td> <td>:</td> <td style="text-align: right"><?=rupiah($sumtotal)?></td>
                 </tr>
                 <tr>
                     <td>Pembebanan</td> <td>:</td> <td><?=$export[0]->idxskmpnen?></td>

@@ -320,6 +320,8 @@ class SuratTugas extends CI_Controller {
                 'id_unit' => $beban_anggaran,
                 'idx_temp' => $idxskmpnenlabel,
                 'id_ttd' => $ttd,
+                'cs_menyetujui' => $this->input->post('cs_menyetujui'),
+                'cs_mengajukan' => $this->input->post('cs_mengajukan')
                 
                 
                 );

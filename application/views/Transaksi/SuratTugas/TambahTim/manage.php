@@ -78,6 +78,15 @@
                         </div>
 
                         <div class="input-field col s12">
+                            <div class="input-field col s2"><label>Alokasi</label></div>
+
+                            <div class="input-field col s10 " >
+                            <input readonly id="alokasilabel" name="alokasilabel" value="<?= rupiah($ST[0]['jumlah_uang']) ?>">
+                            <input readonly id="alokasi" name="alokasi" hidden value="<?= number_format($ST[0]['jumlah_uang'],0,',','') ?>">
+                            </div>
+                        </div>
+
+                        <div class="input-field col s12">
                             <div class="input-field col s2"><label>Beban Anggaran</label></div>
 
                             <div class="input-field col s10 " >
@@ -90,6 +99,22 @@
 
                             <div class="input-field col s10 " >
                                 <input type="text"  id="ttd" name="ttd"  value="<?= $ST[0]['nama_ttd'] ?>" readonly>
+                            </div>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <div class="input-field col s2"><label>Yang Menyetuji</label></div>
+
+                            <div class="input-field col s10 " >
+                            <select class="browser-default" name="cs_menyetujui" id="cs_menyetujui"></select>
+                            </div>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <div class="input-field col s2"><label>Yang Mengajukan</label></div>
+
+                            <div class="input-field col s10 " >
+                            <select class="browser-default" name="cs_mengajukan" id="cs_mengajukan"></select>
                             </div>
                         </div>
                         

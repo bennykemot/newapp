@@ -118,6 +118,22 @@
                             </div>
                         </div>
 
+                        <div class="input-field col s12">
+                            <div class="input-field col s2"><label>Yang Menyetuji</label></div>
+
+                            <div class="input-field col s10 " >
+                            <select class="browser-default" name="cs_menyetujui" id="cs_menyetujui"></select>
+                            </div>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <div class="input-field col s2"><label>Yang Mengajukan</label></div>
+
+                            <div class="input-field col s10 " >
+                            <select class="browser-default" name="cs_mengajukan" id="cs_mengajukan"></select>
+                            </div>
+                        </div>
+
                         
                         <?php if($ubah[0]['tim']== "WithTim"){include('Tim.php');}?>
 

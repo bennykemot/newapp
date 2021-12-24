@@ -26,7 +26,7 @@ $( document ).ready(function() {
     var relasii = $('#realisasi').val()
     var alokasii = $('#alokasi').val()
     var sisaan = Number(alokasii) - Number(relasii)
-
+    
     $('#sisalabel').val(formatRupiah(""+sisaan+""))
     $('#sisa').val(sisaan)
 });
@@ -106,6 +106,18 @@ var VAtext = "<?= $ubah[0]['nama_unit'] ?>"
 var TTDvalue = "<?= $ubah[0]['id_ttd'] ?>"
 var TTDtext = "<?= $ubah[0]['nama_ttd'] ?>"
 
+var TTDmenyetujuivalue = "<?= $ubah[0]['cs_menyetujui'] ?>"
+var textmenyetujui = "<?= $ubah[0]['cs_menyetujui'] ?>"
+
+var TTDmenyetujuitext = textmenyetujui.split("-")
+
+var TTDmengajukanvalue = "<?= $ubah[0]['cs_mengajukan'] ?>"
+var textmengajukan = "<?= $ubah[0]['cs_mengajukan'] ?>"
+
+var TTDmengajukantext = textmengajukan.split("-")
+
+
+
 var idxskmpnen = "<?= $ubah[0]['idxskmpnen'] ?>"
 
 var PROvalue = idxskmpnen.substring(17,15)
@@ -131,6 +143,12 @@ $("#select-bebananggaran").append($beban_anggaran).trigger('change');
 
 var $ttd = $("<option selected='selected'></option>").val(TTDvalue).text(TTDtext)
 $("#ttd").append($ttd).trigger('change');
+
+var $menyetujui = $("<option selected='selected'></option>").val(TTDmenyetujuivalue).text(TTDmenyetujuitext[2])
+$("#cs_menyetujui").append($menyetujui).trigger('change');
+
+var $mengajukan = $("<option selected='selected'></option>").val(TTDmengajukanvalue).text(TTDmengajukantext[2])
+$("#cs_mengajukan").append($mengajukan).trigger('change');
 
 
 
@@ -231,7 +249,13 @@ function formatRupiah(angka){
         }
   
         rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-        return 'Rp. ' + rupiah;
+
+        if(angka < 0){
+          return 'Rp. -' + rupiah;
+        }else{
+          return 'Rp. ' + rupiah;
+        }
+        
       }
 
 
@@ -257,6 +281,54 @@ $("#bulan-Array").select2({
     width: '100%',
     data: data,
     dropdownParent: "#head",
+});
+
+$("#cs_mengajukan").select2({
+                    width: '100%',
+                    placeholder: "Pilih Penandatangan",
+                  ajax: { 
+                    url: dropdown_baseurl + 'cs_ttd',
+                    type: "post",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                          Trigger: "mengusulkan",
+                          kdsatker: satker_session,
+                          searchTerm: params.term // search term
+                        };
+                    },
+                    processResults: function (response) {
+                        return {
+                          results: response
+                        };
+                    },
+                    cache: true
+                  }
+              });
+
+$("#cs_menyetujui").select2({
+      width: '100%',
+      placeholder: "Pilih Penandatangan",
+    ajax: { 
+      url: dropdown_baseurl + 'cs_ttd',
+      type: "post",
+      dataType: 'json',
+      delay: 250,
+      data: function (params) {
+          return {
+            Trigger: "menyetujui",
+            kdsatker: satker_session,
+            searchTerm: params.term // search term
+          };
+      },
+      processResults: function (response) {
+          return {
+            results: response
+          };
+      },
+      cache: true
+    }
 });
 
 

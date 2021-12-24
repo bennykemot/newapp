@@ -370,6 +370,20 @@ class Dropdown extends CI_Controller {
       echo json_encode($response);
    }
 
+   public function cs_ttd(){
+		
+
+      // Search term
+      $searchTerm = $this->input->post('searchTerm');
+      $kdsatker = $this->input->post('kdsatker');
+		$Trigger = $this->input->post('Trigger');
+
+      // Get users
+      $response = $this->Dropdown->getData_csttd($searchTerm,$Trigger,$kdsatker);
+
+      echo json_encode($response);
+   }
+
 
 
 

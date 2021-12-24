@@ -17,6 +17,22 @@ if(role_session == 1){
   unit_session = 0;
 }
 
+var TTDmenyetujuivalue = "<?= $ST[0]['cs_menyetujui'] ?>"
+var textmenyetujui = "<?= $ST[0]['cs_menyetujui'] ?>"
+
+var TTDmenyetujuitext = textmenyetujui.split("-")
+
+var TTDmengajukanvalue = "<?= $ST[0]['cs_mengajukan'] ?>"
+var textmengajukan = "<?= $ST[0]['cs_mengajukan'] ?>"
+
+var TTDmengajukantext = textmengajukan.split("-")
+
+var $menyetujui = $("<option selected='selected'></option>").val(TTDmenyetujuivalue).text(TTDmenyetujuitext[2])
+$("#cs_menyetujui").append($menyetujui).trigger('change');
+
+var $mengajukan = $("<option selected='selected'></option>").val(TTDmengajukanvalue).text(TTDmengajukantext[2])
+$("#cs_mengajukan").append($mengajukan).trigger('change');
+
 function Reset(idForm) {
   document.getElementById(idForm).reset();
   $('.browser-default').val(null).trigger('change');
@@ -150,6 +166,54 @@ $("#bulan-Array").select2({
     
 
 // SELECT2 INSERT
+
+$("#cs_mengajukan").select2({
+                    width: '100%',
+                    placeholder: "Pilih Penandatangan",
+                  ajax: { 
+                    url: dropdown_baseurl + 'cs_ttd',
+                    type: "post",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                          Trigger: "mengusulkan",
+                          kdsatker: satker_session,
+                          searchTerm: params.term // search term
+                        };
+                    },
+                    processResults: function (response) {
+                        return {
+                          results: response
+                        };
+                    },
+                    cache: true
+                  }
+              });
+
+$("#cs_menyetujui").select2({
+      width: '100%',
+      placeholder: "Pilih Penandatangan",
+    ajax: { 
+      url: dropdown_baseurl + 'cs_ttd',
+      type: "post",
+      dataType: 'json',
+      delay: 250,
+      data: function (params) {
+          return {
+            Trigger: "menyetujui",
+            kdsatker: satker_session,
+            searchTerm: params.term // search term
+          };
+      },
+      processResults: function (response) {
+          return {
+            results: response
+          };
+      },
+      cache: true
+    }
+});
 
 
 $("#user-select2").select2({
@@ -508,7 +572,7 @@ function AllCount(i, Trigger){
 
               if(kdakun == "524111"){
                 tarif = data[0]['luar_kota']
-                // maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
+                maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
                 
               }else if(kdakun == "524113"){
                 tarif = data[0]['dalam_kota_8_jam']
@@ -644,22 +708,22 @@ $.ajax({
               if(kdakun == "524111"){
                 tarif = data[0]['luar_kota']
                 rep = getRep(keljab, "L")
-                //maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
+                maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
                 
               }else if(kdakun == "524113"){
                 tarif = data[0]['dalam_kota_8_jam']
                 rep = getRep(keljab, "D")
-                //maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];;
+                maxinap = "0"
 
               }else if(kdakun == "524119"){
                 tarif = data[0]['fb_luarkota']
                 rep = getRep(keljab, "L")
-                //maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
+                maxinap = "0"
 
               }else if(kdakun == "524114"){
                 tarif = data[0]['fb_dalamkota']
                 rep = getRep(keljab, "D")
-                //maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
+                maxinap = "0"
 
               }
 
@@ -678,8 +742,8 @@ $.ajax({
                 $("#uangharian"+id+"").val(formatRupiah(totalUangHarian));
                 $("#uangharianDum"+id+"").val(totalUangHarian);
 
-                var totalUangPenginapan = ''+((diffDays-1) * 0)
-                $("#satuan_uangpenginapan"+id+"").val(formatRupiah("0"));
+                var totalUangPenginapan = ''+((diffDays-1) * maxinap)
+                $("#satuan_uangpenginapan"+id+"").val(formatRupiah(maxinap));
                 $("#uangpenginapan"+id+"").val(formatRupiah(totalUangPenginapan));
                 $("#uangpenginapanDum"+id+"").val(totalUangPenginapan);
                 
@@ -766,22 +830,22 @@ var gol = $('#gol'+id+'').val();
               if(kdakun == "524111"){
                 tarif = data[0]['luar_kota']
                 rep = getRep(keljab, "L")
-                //maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
+                maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
                 
               }else if(kdakun == "524113"){
                 tarif = data[0]['dalam_kota_8_jam']
                 rep = getRep(keljab, "D")
-                //maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];;
+                maxinap = "0"
 
               }else if(kdakun == "524119"){
                 tarif = data[0]['fb_luarkota']
                 rep = getRep(keljab, "L")
-                //maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
+                maxinap = "0"
 
               }else if(kdakun == "524114"){
                 tarif = data[0]['fb_dalamkota']
                 rep = getRep(keljab, "D")
-                //maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
+                maxinap = "0"
 
               }
 
@@ -804,8 +868,8 @@ var gol = $('#gol'+id+'').val();
                 $("#uangharian"+id+"").val(formatRupiah(totalUangHarian));
                 $("#uangharianDum"+id+"").val(totalUangHarian);
 
-                var totalUangPenginapan = ''+((diffDays-1) * 0)
-                $("#satuan_uangpenginapan"+id+"").val(formatRupiah("0"));
+                var totalUangPenginapan = ''+((diffDays-1) * maxinap)
+                $("#satuan_uangpenginapan"+id+"").val(formatRupiah(maxinap));
                 $("#uangpenginapan"+id+"").val(formatRupiah(totalUangPenginapan));
                 $("#uangpenginapanDum"+id+"").val(totalUangPenginapan);
                 
