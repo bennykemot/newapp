@@ -87,11 +87,11 @@ class M_NotaDinas extends CI_Model{
 			t_pejabat.nama as ppk_nama, 
 			t_pejabat.nip as ppk_nip,
 			t_satker.lokasi as lokasi,
-            SUBSTRING_INDEX(SUBSTRING_INDEX(d_itemcs.cs_menyetujui,'-',2),'-',-1) as nip_menyetujui, 
-            SUBSTRING_INDEX(SUBSTRING_INDEX(d_itemcs.cs_menyetujui,'-',3),'-',-1) as nama_menyetujui,
+            SUBSTRING_INDEX(SUBSTRING_INDEX(d_surattugas.cs_menyetujui,'-',2),'-',-1) as nip_menyetujui, 
+            SUBSTRING_INDEX(SUBSTRING_INDEX(d_surattugas.cs_menyetujui,'-',3),'-',-1) as nama_menyetujui,
 
-            SUBSTRING_INDEX(SUBSTRING_INDEX(d_itemcs.cs_mengajukan,'-',2),'-',-1) as nip_mengajukan, 
-            SUBSTRING_INDEX(SUBSTRING_INDEX(d_itemcs.cs_mengajukan,'-',3),'-',-1) as nama_mengajukan
+            SUBSTRING_INDEX(SUBSTRING_INDEX(d_surattugas.cs_mengajukan,'-',2),'-',-1) as nip_mengajukan, 
+            SUBSTRING_INDEX(SUBSTRING_INDEX(d_surattugas.cs_mengajukan,'-',3),'-',-1) as nama_mengajukan
             
             
             FROM d_surattugas JOIN t_unitkerja ON t_unitkerja.id = d_surattugas.id_unit 
