@@ -108,7 +108,7 @@ function cek_tgl($tanggal){
                 </tr>
                 <tr>
                     <td>Nomor RKT/ Non RKT</td> <td>:</td> <td>ISIANNYA</td>
-                     <td></td><td>Relasi Pagu</td> <td>:</td> <td style="text-align: right"><?=rupiah($sumtotal)?></td>
+                     <td></td><td>Realisasi Pagu</td> <td>:</td> <td style="text-align: right"><?=rupiah($sumtotal)?></td>
                 </tr>
                 <tr>
                     <td>Pembebanan</td> <td>:</td> <td><?=$export[0]->idxskmpnen?></td>
@@ -225,17 +225,17 @@ function cek_tgl($tanggal){
 
                     <tfoot style="text-align: center">
                         <tr>
-                            <td style="border-right-style: none;border-bottom-style: none;border-top-style: none;b"></td><td style="border-bottom-style: none;border-top-style: none;border-left-style: none;">Ernadhi Sudarmanto </td>
+                            <td style="border-right-style: none;border-bottom-style: none;border-top-style: none;b"></td><td style="border-bottom-style: none;border-top-style: none;border-left-style: none;"><?= $e->nama_menyetujui ?></td>
                             
                             <td style="border-right-style: none;border-bottom-style: none;border-top-style: none;b"></td><td style="border-bottom-style: none;border-top-style: none;border-left-style: none;"><?= $e->ppk_nama ?> </td>
-                            <td style="border-right-style: none;border-bottom-style: none;border-top-style: none;b"></td><td style="border-bottom-style: none;border-top-style: none;border-left-style: none;">Muslim Ridha Muthaher </td>
+                            <td style="border-right-style: none;border-bottom-style: none;border-top-style: none;b"></td><td style="border-bottom-style: none;border-top-style: none;border-left-style: none;"><?= $e->nama_mengajukan ?> </td>
                         </tr>
 
                         <tr>
-                            <td style="border-right-style: none;border-top-style: none;">NIP</td><td style="border-left-style: none;border-top-style: none;">196507041985031001 </td>
+                            <td style="border-right-style: none;border-top-style: none;">NIP</td><td style="border-left-style: none;border-top-style: none;"><?= $e->nip_menyetujui ?></td>
                             
                             <td style="border-right-style: none;border-top-style: none;">NIP</td><td style="border-left-style: none;border-top-style: none;"><?= $e->ppk_nip ?> </td>
-                            <td style="border-right-style: none;border-top-style: none;">NIP</td><td style="border-left-style: none;border-top-style: none;">196802161993031001 </td>
+                            <td style="border-right-style: none;border-top-style: none;">NIP</td><td style="border-left-style: none;border-top-style: none;"><?= $e->nip_mengajukan ?> </td>
                         </tr>
                     </tfoot>
             </table>
