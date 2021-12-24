@@ -86,7 +86,9 @@ class M_NotaDinas extends CI_Model{
             d_itemcs.jumlah ,d_pagu.rupiah,d_pagu.kdbeban,
 			t_pejabat.nama as ppk_nama, 
 			t_pejabat.nip as ppk_nip,
-			t_satker.lokasi as lokasi
+			t_satker.lokasi as lokasi,
+            SUBSTRING_INDEX(SUBSTRING_INDEX(d_itemcs.id_ttd_spd,'-',2),'-',-1) as nip_ttd_spd, 
+            SUBSTRING_INDEX(SUBSTRING_INDEX(d_itemcs.id_ttd_spd,'-',3),'-',-1) as nama_ttd_spd
             
             
             FROM d_surattugas JOIN t_unitkerja ON t_unitkerja.id = d_surattugas.id_unit 
