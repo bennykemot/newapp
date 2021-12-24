@@ -697,41 +697,58 @@ function getData_tahapan($searchTerm="",$kdkmpnen, $kdskmpnen, $kdindex){
 
 function getData_ttd($searchTerm="",$Trigger,$kdsatker){
 	if($Trigger == "ttd_forST"){
-		if($kdsatker == "450491"){
-			$this->db->select('id');
-			$this->db->select('nama');
-			$this->db->select('nip');
-			$this->db->where("nama like '%".$searchTerm."%' ");
-			$this->db->where("jabatan_id", "6");
-			$this->db->or_where("jabatan_id", "5");
-			$this->db->where("kdsatker", $kdsatker);
-			
-			$fetched_records = $this->db->get('t_pejabat');
-			$users = $fetched_records->result_array();
+               if($kdsatker == "450491"){
+                  $this->db->select('id');
+                  $this->db->select('nama');
+                  $this->db->select('nip');
+                  $this->db->where("nama like '%".$searchTerm."%' ");
+                  $this->db->where("jabatan_id", "6");
+                  $this->db->or_where("jabatan_id", "5");
+                  $this->db->where("kdsatker", $kdsatker);
+                  
+                  $fetched_records = $this->db->get('t_pejabat');
+                  $users = $fetched_records->result_array();
 
-			// Initialize Array with fetched data
-			$data = array();
-			foreach($users as $user){
-				$data[] = array("id"=>$user['id'], "text"=>$user['nama']);
-			}
-			return $data;
-		}else{
-			$this->db->select('id');
-			$this->db->select('nama');
-			$this->db->select('nip');
-			$this->db->where("nama like '%".$searchTerm."%' ");
-			$this->db->where("kdsatker", $kdsatker);
-			$this->db->where("jabatan_id", 5);
-			$fetched_records = $this->db->get('t_pejabat');
-			$users = $fetched_records->result_array();
+                  // Initialize Array with fetched data
+                  $data = array();
+                  foreach($users as $user){
+                     $data[] = array("id"=>$user['id'], "text"=>$user['nama']);
+                  }
+                  return $data;
+               
+                     
+               }else{
+                  $this->db->select('id');
+                  $this->db->select('nama');
+                  $this->db->select('nip');
+                  $this->db->where("nama like '%".$searchTerm."%' ");
+                  $this->db->where("kdsatker", $kdsatker);
+                  $this->db->where("jabatan_id", 5);
+                  $fetched_records = $this->db->get('t_pejabat');
+                  $users = $fetched_records->result_array();
 
-			// Initialize Array with fetched data
-			$data = array();
-			foreach($users as $user){
-				$data[] = array("id"=>$user['id'], "text"=>$user['nama']);
-			}
-			return $data;
-		}
+                  // Initialize Array with fetched data
+                  $data = array();
+                  foreach($users as $user){
+                     $data[] = array("id"=>$user['id'], "text"=>$user['nama']);
+                  }
+                  return $data;
+               }
+   }else if($Trigger == "ttd_spd_forST"){
+
+      $this->db->select('id');
+      $this->db->select('nama');
+      $this->db->select('nip');
+      $this->db->where("nama like '%".$searchTerm."%' ");
+      $this->db->where("satker_id", $kdsatker);
+      $this->db->where_in('kel_jab', array("E.I", "E.II", "E.III"));
+      $fetched_records = $this->db->get('t_pegawai');
+      $users = $fetched_records->result_array();
+      $data = array();
+		foreach($users as $user){
+			$data[] = array("id"=>$user['id'].'-'.$user['nip'].'-'.$user['nama'], "text"=>$user['nama']);
+      }
+      return $data;
 	}else{
 		
 		$this->db->select('id');

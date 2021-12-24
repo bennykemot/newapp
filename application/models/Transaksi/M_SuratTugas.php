@@ -56,7 +56,7 @@ class M_SuratTugas extends CI_Model{
                                 d_itemcs.tglberangkat, d_itemcs.tglkembali, 
                                 d_itemcs.jmlhari,d_itemcs.totaluangharian, 
                                 d_itemcs.totalinap, d_itemcs.totalrep, 
-                                d_itemcs.totaltravel, d_itemcs.jumlah, 
+                                d_itemcs.totaltravel, d_itemcs.jumlah, d_itemcs.tarifuangharian,d_itemcs.tarifinap,
                                 d_itemcs.jnstransportasi, CONCAT('WithTim') as tim, d_itemcs.id as idtim,
                                 t_pegawai.jabatan as jabatan_ttd,
                     
@@ -78,7 +78,7 @@ class M_SuratTugas extends CI_Model{
                             d_itemcs.jmlhari,d_itemcs.totaluangharian, 
                             d_itemcs.totalinap, d_itemcs.totalrep, d_itemcs.tarifrep, 
                             d_itemcs.tariftaxi,d_itemcs.tariflaut,d_itemcs.tarifudara,d_itemcs.tarifdarat,d_itemcs.lain,
-                            d_itemcs.totaltravel, d_itemcs.jumlah, d_itemcs.transport,
+                            d_itemcs.totaltravel, d_itemcs.jumlah, d_itemcs.transport,d_itemcs.tarifuangharian,d_itemcs.tarifinap,
                             d_itemcs.jnstransportasi, CONCAT('WithTim') as tim, d_itemcs.id as idtim,d_itemcs.nospd,d_itemcs.id_ttd_spd,
                             SUBSTRING_INDEX(SUBSTRING_INDEX(d_itemcs.id_ttd_spd,'-',2),'-',-1) as nip_ttd_spd, 
                             SUBSTRING_INDEX(SUBSTRING_INDEX(d_itemcs.id_ttd_spd,'-',3),'-',-1) as nama_ttd_spd,
@@ -101,12 +101,14 @@ class M_SuratTugas extends CI_Model{
             t_unitkerja.nama_unit, 
             '.$select.'
             t_pejabat.nama as nama_ttd,
-            t_pejabat.nip as nip_ttd
+            t_pejabat.nip as nip_ttd,
+            t_satker.kdkabkota
             
             FROM d_surattugas 
             JOIN t_unitkerja ON d_surattugas.id_unit = t_unitkerja.id 
             JOIN d_pagu ON d_surattugas.kdindex = d_surattugas.kdindex 
             JOIN t_pejabat ON d_surattugas.id_ttd = t_pejabat.id 
+            JOIN t_satker ON d_surattugas.kdsatker = t_satker.kdsatker 
             '.$join.' WHERE d_surattugas.id = '.$id.' 
             AND d_pagu.kdindex = "'.$kdindex.'" 
             '. $order.'');
