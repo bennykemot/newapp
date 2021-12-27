@@ -64,7 +64,7 @@ class M_SuratTugas extends CI_Model{
                                 d_itemcs.kotaasal,d_itemcs.kotatujuan,";
                                 $join = "JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
                                 JOIN t_pegawai ON t_pegawai.nip = t_pejabat.nip
-								JOIN t_kopsurat ON d_surattugas.id_unit = t_kopsurat.id";
+								JOIN t_kopsurat ON t_unitkerja.grup_id = t_kopsurat.kdunit";
 
                                 $order ="ORDER BY d_itemcs.nourut";
                 

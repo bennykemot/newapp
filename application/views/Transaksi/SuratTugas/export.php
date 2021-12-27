@@ -57,7 +57,7 @@ function cek_tgl($tanggal){
         <table width="100%" id="header" >
                 <tr>
                     <td width="20%" rowspan="2">
-						<img src="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2_jpg.jpg" alt="materialize logo">
+						<img src="<?= base_url().'assets'?>/app-assets/images/logo/logo-bpkp-3.png" alt="materialize logo">
 					</td>
                     <td style="text-align: center;" colspan="4">
 						<h5>BADAN PENGAWASAN KEUANGAN DAN PEMBANGUNAN<br><?= strtoupper($ubah[0]['nama_unit']) ?></h5>
@@ -88,7 +88,22 @@ function cek_tgl($tanggal){
 
                 <tr>
                     <td style="text-align: justify" colspan="5">
-                        Kepala Biro Keuangan BPKP dengan ini menugasi:
+					
+						<?php
+							$unitId = $ubah[0]['kdunit'];
+							$nama_unit = $ubah[0]['nama_unit'];
+							if($unitId < '605000' && $unitId > '900'){
+								if($unitId < '106000'){
+									echo "Kepala " .$nama_unit;
+								}else{
+									echo "Direktur " .$nama_unit;
+								}
+							}else{
+								echo "Kepala ";
+							}
+
+						?>
+						BPKP dengan ini menugasi:
                     </td>
                 </tr>
 
