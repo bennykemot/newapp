@@ -71,6 +71,7 @@
                               <th>Akun</th>
                               <th style="width: 20%;">Uraian</th>
                               <th style="width: 15%;">Anggaran</th>
+                              <th style="width: 15%;">Realisasi</th>
                               <th>Alokasi</th>
                           </tr>
                         </thead>
@@ -89,6 +90,7 @@
                               <td><?=$p->kdakun?></td>
                               <td><?=$p->nmakun?></td>
                               <td class="text-right"><?=rupiah($p->rupiah)?></td>
+                              <td class="text-right"><?=rupiah($p->realisasi)?></td>
                               <td class="text-center">
                                 <a href="<?= site_url('Anggaran/Pembagianpagu/Tambah/'.$p->kdindex) ?>"><i class="material-icons green-text">edit</i></a>
                               </td>

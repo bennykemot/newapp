@@ -127,7 +127,7 @@
                         </div>
 
                         <div class="input-field col s12">
-                            <div class="input-field col s2"><label>Yang Mengajukan</label></div>
+                            <div class="input-field col s2"><label>Yang Mengusulkan</label></div>
 
                             <div class="input-field col s10 " >
                             <select class="browser-default" name="cs_mengajukan" id="cs_mengajukan"></select>

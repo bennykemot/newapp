@@ -136,7 +136,10 @@ function PilihKode(Id, kdindex, Tahapan){
               $('#kdakun').val(data[0]['kdakun']);
               $('#kdbeban').val(data[0]['kdbeban']);
               $('#ppk_id').val(data[0]['ppk_id']);
+              $('#kdapp').val(data[0]['id_app']);
+              $('#kdtahapan').val(data[0]['id_tahapan']);
               $('#alokasi').val(data[0]['rupiah_tahapan']);
+              
               $('#alokasilabel').val(formatRupiah(data[0]['rupiah_tahapan']));
 
               $('#modalidx').modal('close');

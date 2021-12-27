@@ -143,8 +143,10 @@
 						<thead>
 							<tr>
 								<th width="30%">APP</th>
-								<th>Tahapan</th>
-								<th width="20%" class="text-right">Rupiah</th>
+								<th width="30%">Tahapan</th>
+								<th width="10%" class="text-right">Rupiah</th>
+								<th width="10%" class="text-right">Realisasi</th>
+								<th width="10%" class="text-right">Sisa</th>
 								<th width="10%" class="text-center">Aksi</th>
 							</tr>
 						</thead>
@@ -153,6 +155,8 @@
 							<tr>
 								<td style="text-align: left">TOTAL </td>
 								<td style="text-align: right; padding-right: 10px !important"></td>
+								<td></td>
+								<td></td>
 								<td></td>
 								<td></td>
 							</tr>

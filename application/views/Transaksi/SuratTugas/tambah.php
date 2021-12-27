@@ -81,6 +81,8 @@
                                     <input type="text"  id="kdskmpnen" name="kdskmpnen" readonly>
                                     <input type="text"  id="kdakun" name="kdakun" readonly>
                                     <input type="text"  id="kdbeban" name="kdbeban" readonly>
+                                    <input type="text"  id="kdapp" name="kdapp" readonly>
+                                    <input type="text"  id="kdtahapan" name="kdtahapan" readonly>
                                     <input type="text"  id="ppk_id" name="ppk_id" readonly>
 
                                     <input type="text"  id="kdsatker" name="kdsatker" value="<?=$kdsatker?>">

@@ -34,8 +34,16 @@ class M_Pembagianpagu extends CI_Model{
            $whereUnitid = "AND d_bagipagu.unit_id ='.$unitid.'";
         }
 
-        $query =  $this->db->query('SELECT d_pagu.*, t_akun.nmakun, d_bagipagu.unit_id from d_pagu JOIN t_akun ON d_pagu.kdakun = t_akun.kdakun LEFT JOIN d_bagipagu on d_bagipagu.kdindex = d_pagu.kdindex
-        WHERE d_pagu.kdsatker = '.$kdsatker.' AND d_pagu.thang = '.$thang.' '.$whereUnitid.'  ORDER BY d_pagu.kdindex');
+        $query = $this->db->query('SELECT a.*, b.realisasi, b.pagu_index 
+        FROM (SELECT d_pagu.*, t_akun.nmakun, d_bagipagu.unit_id 
+        from d_pagu JOIN t_akun ON d_pagu.kdakun = t_akun.kdakun 
+        LEFT JOIN d_bagipagu on d_bagipagu.kdindex = d_pagu.kdindex 
+        WHERE d_pagu.kdsatker = '.$kdsatker.' AND d_pagu.thang = '.$thang.' '.$whereUnitid.' ORDER BY d_pagu.kdindex) as a 
+        LEFT JOIN (SELECT SUM(d_surattugas.jumlah_realisasi) as realisasi, d_surattugas.kdindex as pagu_index 
+        from d_surattugas GROUP BY d_surattugas.kdindex) as b ON a.kdindex = b.pagu_index; ');
+
+        // $query =  $this->db->query('SELECT d_pagu.*, t_akun.nmakun, d_bagipagu.unit_id from d_pagu JOIN t_akun ON d_pagu.kdakun = t_akun.kdakun LEFT JOIN d_bagipagu on d_bagipagu.kdindex = d_pagu.kdindex
+        // WHERE d_pagu.kdsatker = '.$kdsatker.' AND d_pagu.thang = '.$thang.' '.$whereUnitid.'  ORDER BY d_pagu.kdindex');
 
         return $query->result();
      

@@ -331,6 +331,30 @@ $("#cs_menyetujui").select2({
     }
 });
 
+$(".kotaselect").select2({
+        dropdownAutoWidth: true,
+        width: '100%',
+        placeholder: "Pilih Kota",
+      ajax: { 
+        url: dropdown_baseurl + 'kota',
+        type: "post",
+        dataType: 'json',
+        delay: 250,
+        data: function (params) {
+            return {
+              searchTerm: params.term
+            };
+          
+        },
+        processResults: function (response) {
+            return {
+              results: response
+            };
+        },
+        cache: true
+      }
+      });
+
 
 function ubahNama(id){
   $("#namaDummy"+id+"").select2({
@@ -1171,6 +1195,15 @@ $("#UbahST").click(function (e) {
   var countTim = 0
 }
 
+sumRealisasi = 0;
+  j= 1;
+  for($i = 0 ; $i < countTim; $i++){
+    j++;
+    total = $('#total'+j+'').val();
+    sumRealisasi += total;
+  }
+
+
   btn
     .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
     .attr("disabled", true);
@@ -1178,6 +1211,7 @@ $("#UbahST").click(function (e) {
   formData.append('Trigger', 'U')
   formData.append('countTim', countTim)
   formData.append('idst', id_st_session)
+  formData.append('jumlah_realisasi', sumRealisasi)
 
   $.ajax({
     type: "POST",

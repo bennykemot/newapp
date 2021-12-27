@@ -24,72 +24,93 @@
         parent::__construct();
         $this->load->database();
 	}
-    
-    private function _get_datatables_query($kdindex)
-    {   
-        $this->db->select('d_detailapp.id', 'id');
-        $this->db->select('d_detailapp.id_app');
-        $this->db->select('d_detailapp.rupiah');
-        $this->db->select('d_detailapp.kdindex');
-        $this->db->select('d_detailapp.th_pkpt');
-        $this->db->select('d_detailapp.tahapan');
-        $this->db->select('d_detailapp.rupiah_tahapan');
 
-        $this->db->select('r_tahapan.id as id_tahapan');
-        $this->db->select('r_tahapan.nama_tahapan as nama_tahapan');
+    function get_datatables($kdindex){
 
+        $query= $this->db->query("SELECT a.*, b.realisasi from 
+        (SELECT d_detailapp.*, r_tahapan.id as id_tahapan, r_tahapan.nama_tahapan as nama_tahapan, 
+        t_app.nama_app, v_mapping.jumlah 
+        from d_detailapp 
+        JOIN t_app ON t_app.id = d_detailapp.id_app 
+        JOIN r_tahapan ON r_tahapan.id = d_detailapp.tahapan 
+        JOIN v_mapping ON v_mapping.kdindex = d_detailapp.kdindex 
+        where d_detailapp.kdindex = '".$kdindex."') as a 
+        
+        LEFT JOIN (SELECT SUM(jumlah_realisasi) as realisasi, id_app, id_tahapan, kdindex 
+        from d_surattugas GROUP BY kdindex,id_app,id_tahapan) as b 
+        ON a.kdindex = b.kdindex 
+        AND a.id_app = b.id_app 
+        AND a.tahapan = b.id_tahapan LIMIT 0,10");
 
-        $this->db->select('t_app.nama_app');
-        $this->db->select('v_mapping.jumlah');
-
-        $this->db->from('d_detailapp');
-        $this->db->join('t_app', 't_app.id = d_detailapp.id_app');
-        $this->db->join('r_tahapan', 'r_tahapan.id = d_detailapp.tahapan');
-        $this->db->join('v_mapping', 'v_mapping.kdindex = d_detailapp.kdindex');
-        $this->db->where('d_detailapp.kdindex', $kdindex);
- 
-        $i = 0;
-     
-        foreach ($this->column_search as $item) // loop column 
-        {
-            if($_POST['search']['value']) // if datatable send POST for search
-            {
-                 
-                if($i===0) // first loop
-                {   
-                    $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-                    $this->db->like($item, $_POST['search']['value']);
-                }
-                else
-                {   
-                    $this->db->or_like($item, $_POST['search']['value']);
-                }
- 
-                if(count($this->column_search) - 1 == $i) //last loop
-                    $this->db->group_end(); //close bracket
-            }
-            $i++;
-        }
-         
-        if(isset($_POST['order'])) // here order processing
-        {   
-            $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-        } 
-        else if(isset($this->order))
-        {
-            $order = $this->order;
-            $this->db->order_by(key($order), $order[key($order)]);
-        }
-    }
- 
-    function get_datatables($kdindex)
-    {
-        $this->_get_datatables_query($kdindex);
-        if($_POST['length'] != -1)
-        $this->db->limit($_POST['length'], $_POST['start']);
-        $query = $this->db->get();
         return $query->result();
+
     }
+    
+    // private function _get_datatables_query($kdindex)
+    // {   
+    //     $this->db->select('d_detailapp.id', 'id');
+    //     $this->db->select('d_detailapp.id_app');
+    //     $this->db->select('d_detailapp.rupiah');
+    //     $this->db->select('d_detailapp.kdindex');
+    //     $this->db->select('d_detailapp.th_pkpt');
+    //     $this->db->select('d_detailapp.tahapan');
+    //     $this->db->select('d_detailapp.rupiah_tahapan');
+
+    //     $this->db->select('r_tahapan.id as id_tahapan');
+    //     $this->db->select('r_tahapan.nama_tahapan as nama_tahapan');
+
+
+    //     $this->db->select('t_app.nama_app');
+    //     $this->db->select('v_mapping.jumlah');
+
+    //     $this->db->from('d_detailapp');
+    //     $this->db->join('t_app', 't_app.id = d_detailapp.id_appt_app.id = d_detailapp.id_app');
+    //     $this->db->join('r_tahapan', 'r_tahapan.id = d_detailapp.tahapan');
+    //     $this->db->join('v_mapping', 'v_mapping.kdindex = d_detailapp.kdindex');
+    //     $this->db->where('d_detailapp.kdindex', $kdindex);
+ 
+    //     $i = 0;
+     
+    //     foreach ($this->column_search as $item) // loop column 
+    //     {
+    //         if($_POST['search']['value']) // if datatable send POST for search
+    //         {
+                 
+    //             if($i===0) // first loop
+    //             {   
+    //                 $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
+    //                 $this->db->like($item, $_POST['search']['value']);
+    //             }
+    //             else
+    //             {   
+    //                 $this->db->or_like($item, $_POST['search']['value']);
+    //             }
+ 
+    //             if(count($this->column_search) - 1 == $i) //last loop
+    //                 $this->db->group_end(); //close bracket
+    //         }
+    //         $i++;
+    //     }
+         
+    //     if(isset($_POST['order'])) // here order processing
+    //     {   
+    //         $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+    //     } 
+    //     else if(isset($this->order))
+    //     {
+    //         $order = $this->order;
+    //         $this->db->order_by(key($order), $order[key($order)]);
+    //     }
+    // }
+ 
+    // function get_datatables($kdindex)
+    // {
+    //     $this->_get_datatables_query($kdindex);
+    //     if($_POST['length'] != -1)
+    //     $this->db->limit($_POST['length'], $_POST['start']);
+    //     $query = $this->db->get();
+    //     return $query->result();
+    // }
  
     function count_filtered($kdindex)
     {
