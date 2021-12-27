@@ -244,6 +244,19 @@
                     data: "rupiah_tahapan", className: "text-right", render: $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
                 },
 
+                {
+                    data: "realisasi", className: "text-right", render: $.fn.dataTable.render.number(',', '.', 0, 'Rp ')
+                },
+
+                {
+                    data: "rupiah_tahapan", className: "text-right",
+                    render: function (data, type, row, meta) {
+                          var sisa = Number(row.rupiah_tahapan) - Number(row.realisasi)
+                          return 'Rp '+formatMoney(sisa)
+                    }
+                
+                },
+
                 { data: 'id', class:"text-center",
                   render: function(data, type, row) {
                       return '<a href="javascript:;" onclick="Edit(\''+row.id+'\',\''+row.kdindex+'\')"><i class="material-icons green-text">edit</i></a>\
@@ -263,7 +276,7 @@
             //scrollX: true,
             bFilter: false,
             scrollCollapse: true,
-            columnDefs: [{ visible: false, targets: 0 }, { width: "50%", targets: 2 }],
+            columnDefs: [{ visible: false, targets: 0 }, { width: "50%", targets: 1 }],
 
             rowGroup: {
             startRender: null,
@@ -274,11 +287,15 @@
                     .reduce( function (a, b) {
                         return a + b.replace(/[^\d]/g, '')*1;
                     }, 0);
+                    
+                  
                 salaryAvg = $.fn.dataTable.render.number(',', '.', 0, 'Rp ').display( salaryAvg );
  
                 return $('<tr style="background-color: #b9f6d8 !important; color: #000" />')
                     .append( '<td >'+group+'</td>' )
                     .append( '<td class="text-right">'+salaryAvg+'</td>' )
+                    .append( '<td ></td>' )
+                    .append( '<td ></td>' )
                     .append( '<td ></td>' );
             },
             dataSrc: 'nama_app'

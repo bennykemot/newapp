@@ -66,14 +66,56 @@ class M_Master extends CI_Model {
             $where = "AND d_bagipagu.unit_id = ".$unitid." ";
          }
 
-         $query = $this->db->query("SELECT d_pagu.*, CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode
-                ,d_bagipagu.ppk_id,d_detailapp.tahapan, d_detailapp.rupiah_tahapan,r_tahapan.nama_tahapan,t_app.nama_app FROM d_bagipagu 
-                  JOIN d_pagu ON d_pagu.kdindex = d_bagipagu.kdindex 
-                  JOIN d_detailapp on d_detailapp.kdindex = d_bagipagu.kdindex
-                  JOIN r_tahapan on d_detailapp.tahapan = r_tahapan.id
-                  JOIN t_app on d_detailapp.id_app = t_app.id
-                  ".$where." 
-                AND d_pagu.kdsatker = ".$kdsatker." AND d_pagu.kdakun LIKE '%524%'");
+//          $query = $this->db->query("SELECT a.*, b.*FROM (select d_bagipagu.kdindex, CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode  from d_bagipagu 
+//          JOIN d_pagu on d_bagipagu.kdindex = d_pagu.kdindex 
+         
+//          where d_bagipagu.kdsatker = ".$kdsatker.") as a
+// LEFT JOIN (SELECT SUM(d_surattugas.jumlah_realisasi) as alokasi , d_surattugas.kdindex,d_surattugas.kodeall from d_surattugas
+//     GROUP BY d_surattugas.kodeall) as b
+    
+//     ON a.kdindex = b.kdindex;");
+
+$query = $this->db->query("SELECT a.*, b.alokasi, b.pagu_index, b.id_tahapan, b.id_appST 
+FROM (SELECT d_pagu.kdindex, CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode, 
+d_detailapp.rupiah_tahapan, d_detailapp.tahapan, d_detailapp.id_app,r_tahapan.nama_tahapan,t_app.nama_app 
+FROM d_pagu JOIN d_bagipagu ON d_pagu.kdindex = d_bagipagu.kdindex 
+JOIN d_detailapp ON d_pagu.kdindex = d_detailapp.kdindex 
+JOIN r_tahapan on d_detailapp.tahapan = r_tahapan.id 
+JOIN t_app on d_detailapp.id_app = t_app.id 
+WHERE d_pagu.kdsatker = ".$kdsatker." AND d_pagu.kdakun LIKE '%524%' ) as a 
+LEFT JOIN (SELECT SUM(d_surattugas.jumlah_realisasi) as alokasi, d_surattugas.kdindex as pagu_index, d_surattugas.id_tahapan as id_tahapan, d_surattugas.id_app as id_appST 
+from d_surattugas GROUP BY d_surattugas.kdindex,d_surattugas.id_app,d_surattugas.id_tahapan) as b ON 
+a.kdindex = b.pagu_index 
+AND a.tahapan = b.id_tahapan 
+AND a.id_app = b.id_appST; ");
+
+         // $query= $this->db->query("
+         // SELECT DISTINCT a.*,b.alokasi 
+         // FROM 
+         //    (SELECT d_pagu.*, 
+         //    CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode ,
+         //    d_bagipagu.ppk_id,d_detailapp.tahapan, d_detailapp.rupiah_tahapan,r_tahapan.nama_tahapan,t_app.nama_app,
+         //    r_tahapan.id as id_tahapan, t_app.id as id_app
+         //       FROM d_bagipagu 
+         //       JOIN d_pagu ON d_pagu.kdindex = d_bagipagu.kdindex 
+         //       JOIN d_detailapp on d_detailapp.kdindex = d_bagipagu.kdindex 
+         //       JOIN r_tahapan on d_detailapp.tahapan = r_tahapan.id 
+         //       JOIN t_app on d_detailapp.id_app = t_app.id AND d_pagu.kdsatker = ".$kdsatker." 
+         //       AND d_pagu.kdakun LIKE '%524%') as a 
+         //       left JOIN (SELECT d_surattugas.kdindex, SUM(d_surattugas.jumlah_realisasi) AS alokasi 
+         //       FROM d_surattugas GROUP BY d_surattugas.kdindex) as b 
+         //       ON a.kdindex=b.kdindex; 
+               
+         //       ");
+
+         // $query = $this->db->query("SELECT d_pagu.*, CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode
+         //        ,d_bagipagu.ppk_id,d_detailapp.tahapan, d_detailapp.rupiah_tahapan,r_tahapan.nama_tahapan,t_app.nama_app FROM d_bagipagu 
+         //          JOIN d_pagu ON d_pagu.kdindex = d_bagipagu.kdindex 
+         //          JOIN d_detailapp on d_detailapp.kdindex = d_bagipagu.kdindex
+         //          JOIN r_tahapan on d_detailapp.tahapan = r_tahapan.id
+         //          JOIN t_app on d_detailapp.id_app = t_app.id
+         //          ".$where." 
+         //        AND d_pagu.kdsatker = ".$kdsatker." AND d_pagu.kdakun LIKE '%524%'");
 
          return $query->result();
    
@@ -98,12 +140,26 @@ class M_Master extends CI_Model {
             if($roleid != 1){
                $where = "AND d_bagipagu.unit_id = ".$unitid." ";
             }
+
+            $query = $this->db->query("SELECT a.*, b.alokasi, b.pagu_index 
+            FROM (SELECT d_pagu.kdindex, d_pagu.rupiah,
+            CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode, 
+            d_bagipagu.ppk_id,d_bagipagu.unit_id 
+            FROM d_pagu 
+            JOIN d_bagipagu ON d_pagu.kdindex = d_bagipagu.kdindex 
+             where d_pagu.kdsatker = ".$kdsatker." 
+             ".$where." 
+             AND d_pagu.kdgiat NOT IN (".$this->countpagu().") 
+             AND d_pagu.kdakun LIKE '%524%') as a 
+             
+             LEFT JOIN (SELECT SUM(d_surattugas.jumlah_realisasi) as alokasi, d_surattugas.kdindex as pagu_index 
+             FROM d_surattugas GROUP BY d_surattugas.kdindex) as b ON a.kdindex = b.pagu_index; ");
    
-            $query = $this->db->query("SELECT d_pagu.*, CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode, d_bagipagu.kdindex, d_bagipagu.ppk_id,d_bagipagu.unit_id 
-            FROM d_pagu join d_bagipagu ON d_pagu.kdindex = d_bagipagu.kdindex where d_pagu.kdsatker = ".$kdsatker." 
-                  ".$where." 
-                  AND d_pagu.kdgiat NOT IN (".$this->countpagu().")
-                  AND d_pagu.kdakun LIKE '%524%'");
+            // $query = $this->db->query("SELECT d_pagu.*, CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode, d_bagipagu.kdindex, d_bagipagu.ppk_id,d_bagipagu.unit_id 
+            // FROM d_pagu join d_bagipagu ON d_pagu.kdindex = d_bagipagu.kdindex where d_pagu.kdsatker = ".$kdsatker." 
+            //       ".$where." 
+            //       AND d_pagu.kdgiat NOT IN (".$this->countpagu().")
+            //       AND d_pagu.kdakun LIKE '%524%'");
    
             return $query->result();
       
@@ -121,10 +177,12 @@ class M_Master extends CI_Model {
          function getKomponenSub_forJson($kdindex, $tahapan){
    
             $query = $this->db->query("SELECT d_pagu.*, CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode
-             ,d_bagipagu.ppk_id,d_detailapp.tahapan, d_detailapp.rupiah_tahapan,r_tahapan.nama_tahapan FROM d_bagipagu 
+             ,d_bagipagu.ppk_id,d_detailapp.tahapan, d_detailapp.rupiah_tahapan,r_tahapan.nama_tahapan,
+             r_tahapan.id as id_tahapan, t_app.id as id_app FROM d_bagipagu 
             JOIN d_pagu ON d_pagu.kdindex = d_bagipagu.kdindex 
             JOIN d_detailapp on d_detailapp.kdindex = d_bagipagu.kdindex
             JOIN r_tahapan on d_detailapp.tahapan = r_tahapan.id
+            JOIN t_app on d_detailapp.id_app = t_app.id
                   WHERE d_pagu.kdindex = '".$kdindex."' AND d_detailapp.tahapan = ".$tahapan."
             ");
             return $query->result();

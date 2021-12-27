@@ -266,13 +266,8 @@ $("#user-select2").select2({
       }
       });
 
-      
-
-
-
 function selectRefresh(x){
 
-              // M.textareaAutoResize($('#perjab'+x+''));
 
               $.ajax({
               url : master_baseurl + "getKota",
@@ -455,7 +450,7 @@ $('.multi-field-wrapper').each(function() {
                                   <td><input style="min-width: 150px" type="text" id="uangdarat'+x+'" name="uangdarat'+x+'" onkeyup="AllCount(\''+x+'\',\'all\')"></td>\
                                   <td><input style="min-width: 150px" type="text" id="uangdll'+x+'" name="uangdll'+x+'" onkeyup="AllCount(\''+x+'\',\'all\')"></td>\
                                   <td><input style="min-width: 150px" type="text" id="uangrep'+x+'" name="uangrep'+x+'" onkeyup="AllCount(\''+x+'\',\'all\')"></td>\
-                                  <td><input style="min-width: 150px" type="text" readonly id="total'+x+'"  name="total'+x+'" ></td>\
+                                  <td><input style="min-width: 150px" type="text" class="total" readonly id="total'+x+'"  name="total'+x+'" ></td>\
                                   <td ><select class="select2 browser-default" id="jnstransportasi'+x+'" name="jnstransportasi'+x+'">\
                                     <option value="Kendaraan Umum">Kendaraan Umum</option>\
                                     <option value="Kendaraan Dinas">Kendaraan Dinas</option>\
@@ -952,12 +947,25 @@ $("#TambahTim").click(function (e) {
 
   }
 
+
+
   var btn = $(this);
   var form = $(this).closest("form");
   var formData = new FormData($("#FormTim")[0]);
   //var IdForm =  "FormTim";
   var countingDiv = document.getElementById('counting');
   var countTim = countingDiv.getElementsByClassName('namaTim').length;
+  sumRealisasi = 0;
+  j= 1;
+  for($loop = 0 ; $loop < countTim; $loop++){
+    
+    total = $('#total'+j+'').val();
+    var h = total.replace(/[^0-9\.]+/g, "");
+    var ttl = h.replace(/\./g, "");
+    j++;
+  
+    sumRealisasi += Number(ttl);
+  }
 
   btn
     .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
@@ -965,6 +973,7 @@ $("#TambahTim").click(function (e) {
 
   formData.append('Trigger', 'C')
   formData.append('countTim', countTim)
+  formData.append('jumlah_realisasi', sumRealisasi)
 
   $.ajax({
     type: "POST",

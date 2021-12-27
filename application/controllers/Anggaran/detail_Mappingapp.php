@@ -20,9 +20,10 @@ class Detail_Mappingapp extends CI_Controller {
     {
 		$a = $this->input->post('kdindex');
         $kdindex = str_replace("%20", " ", $a);
-        $list = $this->detail_Mappingapp->get_datatables($kdindex);
+        
         $data = array();
         $no = $_POST['start'];
+        $list = $this->detail_Mappingapp->get_datatables($kdindex);
         foreach ($list as $customers) {
             $no++;
             $row = array();
@@ -35,14 +36,15 @@ class Detail_Mappingapp extends CI_Controller {
 			$row['kdindex'] = $customers->kdindex;
             $row['th_pkpt'] = $customers->th_pkpt;
             $row['jumlah'] = $customers->jumlah;
+            $row['realisasi'] = $customers->realisasi;
             $data[] = $row;
         }
  
         $output = array(
                         "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->detail_Mappingapp->count_all($kdindex),
-                        "recordsFiltered" => $this->detail_Mappingapp->count_filtered($kdindex),
-                        "data" => $data,
+                        // "recordsTotal" => $this->detail_Mappingapp->count_all($kdindex),
+                        // "recordsFiltered" => $this->detail_Mappingapp->count_filtered($kdindex),
+                        "data" => $list,
                 );
         echo json_encode($output);
     }
