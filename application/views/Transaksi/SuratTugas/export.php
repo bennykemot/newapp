@@ -60,15 +60,15 @@ function cek_tgl($tanggal){
 						<img src="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2_jpg.jpg" alt="materialize logo">
 					</td>
                     <td style="text-align: center;" colspan="4">
-						<h4>BADAN PENGAWASAN KEUANGAN DAN PEMBANGUNAN<br>BIRO KEUANGAN</h4>
+						<h5>BADAN PENGAWASAN KEUANGAN DAN PEMBANGUNAN<br><?= strtoupper($ubah[0]['nama_unit']) ?></h5>
 					</td>
                 </tr>
 
                 <tr>
                     <td style="text-align: center;" colspan="4" >
-						<p style="font-size: 11px;"> Gedung BPKP Lantai 4 Jalan Pramuka No 33 Jakarta Timur<br>
-							Telepon: (021) 85910512 , Faximile: (021) 85910512 <br>
-							Web: http://www.bpkp.go.id , Email: keuangan@bpkp.go.id</p>
+						<p style="font-size: 11px;"><?= $ubah[0]['alamat'] ?><br>
+							<?= $ubah[0]['notelp'] ?> , Faximile: <?= $ubah[0]['nofax'] ?> <br>
+							Web: <?= $ubah[0]['web'] ?> , Email: <?= $ubah[0]['email'] ?></p>
                     </td>
                 <tr>
 

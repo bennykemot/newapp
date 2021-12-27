@@ -59,10 +59,12 @@ class M_SuratTugas extends CI_Model{
                                 d_itemcs.totaltravel, d_itemcs.jumlah, d_itemcs.tarifuangharian,d_itemcs.tarifinap,
                                 d_itemcs.jnstransportasi, CONCAT('WithTim') as tim, d_itemcs.id as idtim,
                                 t_pegawai.jabatan as jabatan_ttd,
+								t_kopsurat.*,
                     
                                 d_itemcs.kotaasal,d_itemcs.kotatujuan,";
                                 $join = "JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
-                                JOIN t_pegawai ON t_pegawai.nip = t_pejabat.nip";
+                                JOIN t_pegawai ON t_pegawai.nip = t_pejabat.nip
+								JOIN t_kopsurat ON d_surattugas.id_unit = t_kopsurat.id";
 
                                 $order ="ORDER BY d_itemcs.nourut";
                 
