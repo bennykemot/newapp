@@ -84,6 +84,7 @@
                                     <input type="text"  id="kdapp" name="kdapp" readonly>
                                     <input type="text"  id="kdtahapan" name="kdtahapan" readonly>
                                     <input type="text"  id="ppk_id" name="ppk_id" readonly>
+                                    <input type="text"  id="id_unit" name="id_unit" value="<?=$unit_id?>" readonly>
 
                                     <input type="text"  id="kdsatker" name="kdsatker" value="<?=$kdsatker?>">
                                 </div>

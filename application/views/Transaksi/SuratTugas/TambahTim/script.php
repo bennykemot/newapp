@@ -320,9 +320,10 @@ function selectRefresh(x){
            data: function (params) {
               return {
                 searchTerm: params.term,
-                Trigger: "select_forTim",
-                tglberangkat: $('#tglberangkat'+x+'').val(),
-                tglkembali: $('#tglkembali'+x+'').val() // search term
+                session_satker: satker_session,
+                // Trigger: "select_forTim",
+                // tglberangkat: $('#tglberangkat'+x+'').val(),
+                // tglkembali: $('#tglkembali'+x+'').val() // search term
               };
            },
            processResults: function (response) {
@@ -334,7 +335,10 @@ function selectRefresh(x){
          }
      });
 
+
     $('.namaTim').on('change', function() {
+      tglberangkat = $('#tglberangkat'+x+'').val()
+      tglkembali = $('#tglkembali'+x+'').val()
 
         var id =  $(this).attr("name")
         var res = id[9]
@@ -342,11 +346,12 @@ function selectRefresh(x){
         var nip = this.value
 
         var val = nip.split("-")
-
         
 
         $('#nip'+res+'').html(val[0])
-        $('#nip'+res+'').val(val[0])
+         $('#nip'+res+'').val(val[0])
+
+         nipVal = $('#nip'+res+'').val()
 
         $('#perjablabel'+res+'').html(val[1])
         $('#perjab'+res+'').val(val[1])
@@ -359,6 +364,42 @@ function selectRefresh(x){
 
         $('#keljab'+res+'').html(val[4])
         $('#keljab'+res+'').val(val[4])
+
+        $.ajax({
+              url : dropdown_baseurl + 'pegawai',
+              data: {
+                Trigger: "select_forTim_count",
+                tglberangkat: tglberangkat,
+                tglkembali: tglkembali,
+                nip: nipVal},
+              type: "post",
+              dataType: "JSON",
+              success: function(data)
+                  { 
+                    if(data.length > 0){
+                      swal({
+                      title:"Bentrok Tanggal!",
+                      text: "Pastikan ST Pegawai Tidak Bentrok !", 
+                      icon: "warning",
+                      timer: 2000
+                      })
+
+                      document.getElementById("TambahTim").disabled  =true;
+                      tr = document.getElementById("tb-tim"+x+"")
+                      tr.style.backgroundColor = "yellow";
+                      $('#nama'+res+'').val("BENTROK") 
+                      return false;
+                }else{
+                      document.getElementById("TambahTim").disabled  =false;
+                      tr = document.getElementById("tb-tim"+x+"")
+                      tr.style.backgroundColor = "rgba(242,242,242,.5)"; 
+
+                      
+
+                    }
+
+                  }
+                });
 
 
     });
@@ -407,6 +448,8 @@ $('.multi-field-wrapper').each(function() {
         var end='</tbody>';
         var arrX = [];
         var realisasi = 0;
+
+        
         $("#add-field", $(this)).click(function(e) {   
           document.getElementById("divTable").style.display = "";      
 
@@ -416,13 +459,13 @@ $('.multi-field-wrapper').each(function() {
               i++;
               var minDate = $('#tglst_mulai').val()
               var maxDate = $('#tglst_selesai').val()
-              $($wrapper).append( head +'<tr class="tb-tim">\
-                            <td style="min-width: 15px" ><input  type="number" id="urut'+x+'" name="urut'+x+'" min="1" max="20" value="'+x+'"></td>\
+              $($wrapper).append( head +'<tr class="tb-tim" id="tb-tim'+x+'">\
+                            <td style="min-width: 15px" ><input  class="urut" type="number" id="urut'+x+'" name="urut'+x+'" min="1" max="20" value="'+x+'"></td>\
                             <td><input type="date" min="'+minDate+'" max="'+maxDate+'" onchange="dayCount(\''+x+'\',\'D\')" id="tglberangkat'+x+'" name="tglberangkat'+x+'"></td>\
                               <td><input type="date" max="'+maxDate+'" min="'+minDate+'" onchange="dayCount('+x+')" id="tglkembali'+x+'" name="tglkembali'+x+'"></td>\
                               <td><input type="text" id="jmlhari'+x+'" name="jmlhari'+x+'" readonly></td>\
                                <td id="Tim" name="Tim" colspan="2">\
-                               <select placeholder="Nama.."  class="namaTim browser-default" name="namaDummy'+x+'"></select>\
+                               <select placeholder="Nama.."  class="namaTim browser-default" id="namaDummy'+x+'" name="namaDummy'+x+'"></select>\
                                <input name="nama'+x+'" id="nama'+x+'" hidden>\
                             </td>\
                             <td colspan="2">\
@@ -477,6 +520,9 @@ $('.multi-field-wrapper').each(function() {
                                   if(count_tim > 0){
                                     x = count_tim;
                                   }
+
+                                  }else if(count_tim == x){
+                                    x = x
                                 
                                 }
 
@@ -955,16 +1001,25 @@ $("#TambahTim").click(function (e) {
   //var IdForm =  "FormTim";
   var countingDiv = document.getElementById('counting');
   var countTim = countingDiv.getElementsByClassName('namaTim').length;
-  sumRealisasi = 0;
-  j= 1;
+
+  ArrX = $('#ArrX').val()
+
+  j = ArrX.split(",")
   for($loop = 0 ; $loop < countTim; $loop++){
-    
-    total = $('#total'+j+'').val();
-    var h = total.replace(/[^0-9\.]+/g, "");
-    var ttl = h.replace(/\./g, "");
-    j++;
-  
-    sumRealisasi += Number(ttl);
+    cekBentrok = $('#nama'+j[$loop]+'').val()
+
+    if(cekBentrok == "BENTROK"){
+      swal({
+            title:"Bentrok Tanggal!",
+            text: "Pastikan ST Pegawai Tidak Bentrok !", 
+            icon: "warning",
+            timer: 2000
+            })
+            return false;
+
+    }
+
+
   }
 
   btn
@@ -973,7 +1028,7 @@ $("#TambahTim").click(function (e) {
 
   formData.append('Trigger', 'C')
   formData.append('countTim', countTim)
-  formData.append('jumlah_realisasi', sumRealisasi)
+  // formData.append('jumlah_realisasi', sumRealisasi)
 
   $.ajax({
     type: "POST",

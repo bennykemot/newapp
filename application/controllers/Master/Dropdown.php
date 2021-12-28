@@ -190,6 +190,11 @@ class Dropdown extends CI_Controller {
          $tglberangkat = $this->input->post('tglberangkat');
          $tglkembali = $this->input->post('tglkembali');
          $response = $this->Dropdown->getData_PegawaiST($searchTerm, $Trigger,$tglberangkat,$tglkembali);
+      }else if($Trigger ==  "select_forTim_count"){
+         $tglberangkat = $this->input->post('tglberangkat');
+         $tglkembali = $this->input->post('tglkembali');
+         $nip = $this->input->post('nip');
+         $response = $this->db->query("SELECT nip from d_itemcs where nip = '".$nip."' AND id_aktif = 1 AND tglberangkat between '".$tglberangkat."' and '".$tglkembali."' AND tglkembali between '".$tglberangkat."' and '".$tglkembali."' ")->result_array();
       }else{
          $response = $this->Dropdown->getData_Pegawai($searchTerm, $Trigger);
       }

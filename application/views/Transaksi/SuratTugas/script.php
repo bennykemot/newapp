@@ -81,7 +81,7 @@ $(document).ready(function() {
       } );
 
 
-function PilihKode_pagu(Id, kdindex){
+      function PilihKode_pagu(Id, kdindex){
 
 $.ajax({
       url : master_baseurl + "getKomponenSub_pagu",
@@ -105,93 +105,82 @@ $.ajax({
             $('#ppk_id').val(data[0]['ppk_id']);
             $('#alokasi').val(data[0]['rupiah']);
             $('#alokasilabel').val(formatRupiah(data[0]['rupiah']));
+            var rupiah_tahapan = data[0]['rupiah']
 
-            $('#modalidx').modal('close');
-            
+            $.ajax({
+                url : master_baseurl + "getRealisasi",
+                data: {kdindex: data[0]['kdindex'], Trigger : "Pagu"},
+                type: "post",
+                dataType: "JSON",
+                success: function(data)
+                    {    
+                      var sisaan = Number(rupiah_tahapan) - Number(data[0]['re'])
+                      $('#sisalabel').val(formatRupiah(""+sisaan+""))
+                      $('#sisa').val(sisaan)
+                    }
+                  })
 
-          }
+                $('#modalidx').modal('close');
+                
+
+              }
   });
 }
 
+function PilihKode(Id, kdindex, Tahapan, App){
 
-function PilihKode(Id, kdindex, Tahapan){
+  var relasii = $('#realisasi').val()
+    var alokasii = $('#alokasi').val()
+    var tahapan = $('#kdtahapan').val()
+    var app = $('#kdapp').val()
 
-  $.ajax({
-        url : master_baseurl + "getKomponenSub",
-        data: {kdindex: kdindex, tahapan : Tahapan},
-        type: "post",
-        dataType: "JSON",
-        success: function(data)
-            {    
+    $.ajax({
+          url : master_baseurl + "getKomponenSub",
+          data: {kdindex: kdindex, tahapan : Tahapan, app: App, Trigger : ""},
+          type: "post",
+          dataType: "JSON",
+          success: function(data)
+              {    
 
-              $('#idxskmpnenlabel').val(Id);
-              $('#idxskmpnen').val(data[0]['kdindex']);
-              $('#kdindex').val(data[0]['kdindex']);
-              $('#thang').val(data[0]['thang']);
-              $('#kdgiat').val(data[0]['kdgiat']);
-              $('#kdoutput').val(data[0]['kdoutput']);
-              $('#kdsoutput').val(data[0]['kdsoutput']);
-              $('#kdkmpnen').val(data[0]['kdkmpnen']);
-              $('#kdskmpnen').val(data[0]['kdskmpnen']);
-              $('#kdakun').val(data[0]['kdakun']);
-              $('#kdbeban').val(data[0]['kdbeban']);
-              $('#ppk_id').val(data[0]['ppk_id']);
-              $('#kdapp').val(data[0]['id_app']);
-              $('#kdtahapan').val(data[0]['id_tahapan']);
-              $('#alokasi').val(data[0]['rupiah_tahapan']);
-              
-              $('#alokasilabel').val(formatRupiah(data[0]['rupiah_tahapan']));
+                $('#idxskmpnenlabel').val(Id);
+                $('#idxskmpnen').val(data[0]['kdindex']);
+                $('#kdindex').val(data[0]['kdindex']);
+                $('#thang').val(data[0]['thang']);
+                $('#kdgiat').val(data[0]['kdgiat']);
+                $('#kdoutput').val(data[0]['kdoutput']);
+                $('#kdsoutput').val(data[0]['kdsoutput']);
+                $('#kdkmpnen').val(data[0]['kdkmpnen']);
+                $('#kdskmpnen').val(data[0]['kdskmpnen']);
+                $('#kdakun').val(data[0]['kdakun']);
+                $('#kdbeban').val(data[0]['kdbeban']);
+                $('#alokasi').val(data[0]['rupiah_tahapan']);
+                $('#kdapp').val(data[0]['id_app']);
+                $('#kdtahapan').val(data[0]['id_tahapan']);
+                $('#alokasilabel').val(formatRupiah(data[0]['rupiah_tahapan']));
 
-              $('#modalidx').modal('close');
-              
+                var rupiah_tahapan = data[0]['rupiah_tahapan']
 
-            }
-    });
-}
+                $.ajax({
+                url : master_baseurl + "getRealisasi",
+                data: {kdindex: data[0]['kdindex'], tahapan : data[0]['id_tahapan'], app: data[0]['id_app']},
+                type: "post",
+                dataType: "JSON",
+                success: function(data)
+                    {    
+                      var sisaan = Number(rupiah_tahapan) - Number(data[0]['re'])
+                      $('#sisalabel').val(formatRupiah(""+sisaan+""))
+                      $('#sisa').val(sisaan)
+                    }
+                  })
 
-$(document).ready(function() {
-    // $('#KomponenSub').DataTable( {
-    //         //serverSide: true,
-    //         //processing: true,
-    //         searchDelay: 500,
-    //         searching: false,
-    //         ordering: false,
-    //         bDestroy: true,
-
-    //       ajax: {
-    //             url: master_baseurl + 'getKomponenSub',
-    //             type: "post",
-    //             dataType: 'json',
-    //             data : {
-    //             kdsatker: "<?= $this->session->userdata("kdsatker")?>",
-    //             unitid : <?= $this->session->userdata("unit_id")?>},
-    //             dataSrc: "",
+                $('#modalidx').modal('close');
                 
-    //         },
-    //         autoWidth: false,
-    //         columns: [
-             
-    //             {
-    //                 data: null, class: "text-center",
-    //                 render: function (data, type, row, meta) {
-    //                     return meta.row + meta.settings._iDisplayStart + 1;
-    //                 }
-    //             },
 
-    //             {data: "kdindex"}
-               
- 
-    //         ],
+              }
+      });
 
-    //     lengthMenu: [
-    //         [10, 25, 50, -1],
-    //         [10, 25, 50, "All"],
-    //     ],
-    //     responsive: true,
-    //     scrollX: true,
-    //     info: false
-    //      } );
-      } );
+    
+}
 
 
 function formatRupiah(angka){

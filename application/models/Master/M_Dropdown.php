@@ -777,24 +777,24 @@ function getTtd_ppk($kdsatker){
 
 function getData_PegawaiST($searchTerm="", $Trigger,$tglberangkat,$tglkembali){
 
-   $getNip = $this->db->query("SELECT distinct nip from d_itemcs where tglberangkat between '".$tglberangkat."' and '".$tglkembali."' OR tglkembali between '".$tglberangkat."' and '".$tglkembali."' ");
-         //echo $getId_app;
-         $loop = [];
-         foreach ($getNip->result_array() as $row)
-         {
-               $loop[] =  $row['nip'];
+   // $getNip = $this->db->query("SELECT distinct nip from d_itemcs where tglberangkat between '".$tglberangkat."' and '".$tglkembali."' OR tglkembali between '".$tglberangkat."' and '".$tglkembali."' ");
+   //       //echo $getId_app;
+   //       $loop = [];
+   //       foreach ($getNip->result_array() as $row)
+   //       {
+   //             $loop[] =  $row['nip'];
                
-         }
+   //       }
 
-         $res = implode(",", $loop);
+   //       $res = implode(",", $loop);
          
-         if(count($loop) <= 0){
+   //       if(count($loop) <= 0){
             $fetched_records = $this->db->query("SELECT nip,nama,jabatan,golruang,kel_jab FROM t_pegawai 
                               WHERE nama like '%".$searchTerm."%'");
-         }else{
-            $fetched_records = $this->db->query("SELECT nip,nama,jabatan,golruang,kel_jab FROM t_pegawai 
-                              WHERE nip NOT IN (".$res.") AND nama like '%".$searchTerm."%'");
-         }
+         // }else{
+         //    $fetched_records = $this->db->query("SELECT nip,nama,jabatan,golruang,kel_jab FROM t_pegawai 
+         //                      WHERE nip NOT IN (".$res.") AND nama like '%".$searchTerm."%'");
+         // }
          $users = $fetched_records->result_array();
          $data = array();
 

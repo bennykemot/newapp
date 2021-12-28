@@ -24,6 +24,8 @@ class SuratTugas extends CI_Controller {
     public function Page()
 	{
         $kdsatker           =  $this->uri->segment(4);
+        $unitid           =  $this->uri->segment(5);
+        $roleid           =  $this->uri->segment(6);
         // $jumlah_data = $this->SuratTugas->Jum($kdsatker);
         // $config['base_url'] = base_url().'Transaksi/SuratTugas/Page/'.$kdsatker;
 		// $config['total_rows'] = $jumlah_data;
@@ -59,7 +61,7 @@ class SuratTugas extends CI_Controller {
 		// $from =  $this->uri->segment(3);
 		// $this->pagination->initialize($config);
         // $data['SuratTugas'] = $this->SuratTugas->getDataNew($config['per_page'], $from, $kdsatker);
-        $data['SuratTugas'] = $this->SuratTugas->getDataNew($kdsatker);
+        $data['SuratTugas'] = $this->SuratTugas->getDataNew($kdsatker, $unitid, $roleid);
         $this->load->view('Transaksi/SuratTugas/manage',$data);
 	}
 
@@ -106,7 +108,7 @@ class SuratTugas extends CI_Controller {
 			$tglst_selesai = str_replace("/", "-",$this->input->post('tglst_selesai'));
 			$idxskmpnen = $this->input->post('idxskmpnen');
             $idxskmpnenlabel = $this->input->post('idxskmpnenlabel');
-			$beban_anggaran = $this->input->post('select-bebananggaran');
+			$id_unit = $this->input->post('id_unit');
 			$ttd = $this->input->post('ttd');
 
             $kdsatker = $this->input->post('kdsatker');
@@ -152,7 +154,7 @@ class SuratTugas extends CI_Controller {
                 'jumlah_realisasi' => 0,
                 'idxskmpnen' => $idxskmpnen,
                 'idx_temp' => $idxskmpnenlabel,
-                'id_unit' => $beban_anggaran,
+                'id_unit' => $id_unit,
                 'id_ttd' => $ttd,
                 'id_tahapan' => $kdtahapan,
                 'id_app' => $kdapp,
@@ -190,7 +192,7 @@ class SuratTugas extends CI_Controller {
             $tglst_mulai = str_replace("/", "-",$this->input->post('tglst_mulai'));
 			$tglst_selesai = str_replace("/", "-",$this->input->post('tglst_selesai'));
 			$idxskmpnen = $this->input->post('idxskmpnen');
-			$beban_anggaran = $this->input->post('select-bebananggaran');
+			$id_unit = $this->input->post('id_unit');
 			$ttd = $this->input->post('ttd');
             $countTim = $this->input->post('countTim');
             $idst = $this->input->post('id_st');
@@ -208,7 +210,8 @@ class SuratTugas extends CI_Controller {
             $kdakun = $this->input->post('kdakun');
             $kdbeban = $this->input->post('kdbeban');
             $alokasi = $this->input->post('alokasi');
-            $jumlah_realisasi = $this->input->post('jumlah_realisasi');
+            $kdtahapan = $this->input->post('kdtahapan');
+            $kdapp = $this->input->post('kdapp');
             //$countTim = $this->input->post('countTim');
 
             
@@ -229,13 +232,14 @@ class SuratTugas extends CI_Controller {
                 'tglmulaist' => date("Y-m-d",strtotime($tglst_mulai)),
                 'tglselesaist' => date("Y-m-d",strtotime($tglst_selesai)),
                 'jumlah_uang' => $alokasi,
-                'jumlah_realisasi' => $jumlah_realisasi,
                 'idxskmpnen' => $idxskmpnen,
-                'id_unit' => $beban_anggaran,
+                'id_unit' => $id_unit,
                 'idx_temp' => $idxskmpnenlabel,
                 'id_ttd' => $ttd,
                 'cs_menyetujui' => $this->input->post('cs_menyetujui'),
                 'cs_mengajukan' => $this->input->post('cs_mengajukan'),
+                'id_tahapan' => $kdtahapan,
+                'id_app' => $kdapp,
                 
                 
                 );
@@ -256,6 +260,7 @@ class SuratTugas extends CI_Controller {
                 $totaluangharian = 0;
                 $totaluanginap = 0;
                 $sum=0;
+                $totalRealisasi=0;
 
                     $this->db->where("id_st", $idst);
                     $this->db->delete("d_itemcs");
@@ -306,7 +311,19 @@ class SuratTugas extends CI_Controller {
                    $totaluanginap += $this->pregChar($this->input->post('uangpenginapan'.$urut[$j].''));
                    $sum += $this->pregChar($this->input->post('uangharian'.$urut[$j].'')) + $this->pregChar($this->input->post('uangpenginapan'.$urut[$j].''));
                        $this->db->insert('d_itemcs',$data_ItemCS);$j++;
+               
+
+                $totalRealisasi += $this->pregChar($this->input->post('total'.$urut[$i].'')); 
                 }
+
+                // $cekRealisasi = $this->db->query("SELECT SUM(jumlah_realisasi) as jumlah_realisasi, id FROM d_surattugas where id = ".$idst."")->result_array();
+                // $jumRealisasilalu = $cekRealisasi[0]['jumlah_realisasi'] + $totalRealisasi; 
+                    $data_st = array(
+                        'jumlah_realisasi' => $totalRealisasi
+                    );
+
+                    $where = array('id' => $idst);
+                    $this->SuratTugas->Update($data_st,'d_surattugas', $where);
 
 				
             	$cekCS = $this->db->query("select nost from d_costsheet where nost = ".$idst."")->result_array();

@@ -73,8 +73,8 @@
                                 <input type="text"  id="kdakun" name="kdakun"  value="<?= $ST[0]['kdakun'] ?>" hidden>
                                 <input type="text"  id="kdsatker" name="kdsatker"  value="<?= $ST[0]['kdsatker'] ?>" hidden>
                                 <input type="text"  id="kdkabkota" name="kdkabkota"  value="<?= $ST[0]['kdkabkota'] ?>" hidden>
-                                <input type="text"  id="kdapp" name="kdapp"  value="<?= $ST[0]['id_app'] ?>">
-                                <input type="text"  id="kdtahapan" name="kdtahapan"  value="<?= $ST[0]['id_tahapan'] ?>">
+                                <input type="text"  id="kdapp" name="kdapp"  value="<?= $ST[0]['id_app'] ?>" hidden>
+                                <input type="text"  id="kdtahapan" name="kdtahapan"  value="<?= $ST[0]['id_tahapan'] ?>" hidden>
                         
                             </div>
                         </div>

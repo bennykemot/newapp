@@ -82,7 +82,7 @@ FROM d_pagu JOIN d_bagipagu ON d_pagu.kdindex = d_bagipagu.kdindex
 JOIN d_detailapp ON d_pagu.kdindex = d_detailapp.kdindex 
 JOIN r_tahapan on d_detailapp.tahapan = r_tahapan.id 
 JOIN t_app on d_detailapp.id_app = t_app.id 
-WHERE d_pagu.kdsatker = ".$kdsatker." AND d_pagu.kdakun LIKE '%524%' ) as a 
+WHERE d_pagu.kdsatker = ".$kdsatker." AND d_pagu.kdakun LIKE '%524%' ".$where." ) as a 
 LEFT JOIN (SELECT SUM(d_surattugas.jumlah_realisasi) as alokasi, d_surattugas.kdindex as pagu_index, d_surattugas.id_tahapan as id_tahapan, d_surattugas.id_app as id_appST 
 from d_surattugas GROUP BY d_surattugas.kdindex,d_surattugas.id_app,d_surattugas.id_tahapan) as b ON 
 a.kdindex = b.pagu_index 
@@ -174,7 +174,7 @@ AND a.id_app = b.id_appST; ");
                }
 
             
-         function getKomponenSub_forJson($kdindex, $tahapan){
+         function getKomponenSub_forJson($kdindex, $tahapan, $app){
    
             $query = $this->db->query("SELECT d_pagu.*, CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode
              ,d_bagipagu.ppk_id,d_detailapp.tahapan, d_detailapp.rupiah_tahapan,r_tahapan.nama_tahapan,
@@ -183,7 +183,7 @@ AND a.id_app = b.id_appST; ");
             JOIN d_detailapp on d_detailapp.kdindex = d_bagipagu.kdindex
             JOIN r_tahapan on d_detailapp.tahapan = r_tahapan.id
             JOIN t_app on d_detailapp.id_app = t_app.id
-                  WHERE d_pagu.kdindex = '".$kdindex."' AND d_detailapp.tahapan = ".$tahapan."
+                  WHERE d_pagu.kdindex = '".$kdindex."' AND d_detailapp.tahapan = ".$tahapan." AND d_detailapp.id_app = ".$app."
             ");
             return $query->result();
       

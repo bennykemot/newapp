@@ -45,31 +45,7 @@ class TambahTim extends CI_Controller {
 			$countTim = $this->input->post('countTim');
 			$tglst = str_replace("/", "-",$this->input->post('tglst'));
 
-            $cekRealisasi = $this->db->query("SELECT SUM(jumlah_realisasi) as jumlah_realisasi, id FROM d_surattugas where id = ".$idst."")->result_array();
-            $jumRealisasilalu = $cekRealisasi[0]['jumlah_realisasi'] + $this->input->post('jumlah_realisasi'); 
-                $data_st = array(
-                    'jumlah_realisasi' => $jumRealisasilalu,
-                    'cs_menyetujui' => $this->input->post('cs_menyetujui'),
-                    'cs_mengajukan' => $this->input->post('cs_mengajukan')
-                );
-
-                $where = array('id' => $idst);
-                $this->SuratTugas->Update($data_st,'d_surattugas', $where);
-
-                $alokasi = $this->input->post('alokasi');
-
-                $sisa = $alokasi - $jumRealisasilalu;
-
-                $data_tpagu= array('kdindex' => $this->input->post('idxskmpnen'),
-                'app' =>$this->input->post('kdapp'),
-                'tahapan' => $this->input->post('kdtahapan'),
-                'pagu' => $alokasi,
-                'realisasi' => $jumRealisasilalu,
-                'sisa' => $sisa
-                );
-
-                $this->db->insert('t_pagu',$data_tpagu);
-        
+            
                 $data = array();    
                 $j = 1;
                 $ArrX = $this->input->post('ArrX');
@@ -80,18 +56,10 @@ class TambahTim extends CI_Controller {
                 $totaluanginap = 0;
                 $totaluangtransport = 0;
                 $sum=0;
+                $totalRealisasi = 0;
     
                 
                 for($i = 0 ; $i < $countTim; $i++){
-                    
-                    //    $data = array(
-                    //         'nourut' => $this->input->post('urut'.$urut[$i].''),
-                    //         'nama' => $this->input->post('nama'.$urut[$i].''),
-                    //         'nip' => $this->input->post('nip'.$urut[$i].''),
-                    //         'peran'  => $this->input->post('perjab'.$urut[$i].''),
-                    //         'id_st' => $idst
-                            
-                    //    );
 
                        $totaluangtransport += $this->pregChar($this->input->post('uangdll'.$urut[$i].'')) + $this->pregChar($this->input->post('uangtaxi'.$urut[$i].''))
                                             + $this->pregChar($this->input->post('uanglaut'.$urut[$i].''))+ $this->pregChar($this->input->post('uangudara'.$urut[$i].''))
@@ -147,21 +115,35 @@ class TambahTim extends CI_Controller {
                             + $this->pregChar($this->input->post('uanglaut'.$urut[$i].''))+ $this->pregChar($this->input->post('uangudara'.$urut[$i].''))
                             + $this->pregChar($this->input->post('uangdarat'.$urut[$i].''));
 
-                //    $totaluangharian = $this->pregChar($this->input->post('uangharian'.$urut[$i].''));
-                //    $totaluangpenginapan = $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
-                   //$totaluangpenginapan += $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
-                   
-
-                //    $sumHarian +=$this->pregChar($this->input->post('totaluangharian'.$urut[$i].''));
-                //    $sumInap += $this->pregChar($this->input->post('totalinap'.$urut[$i].''));
-                //    $sumTransport += 0;
-
-                //    $total[$i] += $this->pregChar($this->input->post('totaluangharian'.$urut[$i].'')) + $this->pregChar($this->input->post('totalinap'.$urut[$i].'')) + 0;
-                //    $sum += $total[$i];
-
                         $this->db->insert('d_itemcs',$data_ItemCS);
                         $j = $urut[$i];
+                   $totalRealisasi += $this->pregChar($this->input->post('total'.$urut[$i].'')); 
                 }
+
+                $cekRealisasi = $this->db->query("SELECT SUM(jumlah_realisasi) as jumlah_realisasi, id FROM d_surattugas where id = ".$idst."")->result_array();
+                $jumRealisasilalu = $cekRealisasi[0]['jumlah_realisasi'] + $totalRealisasi; 
+                    $data_st = array(
+                        'jumlah_realisasi' => $jumRealisasilalu,
+                        'cs_menyetujui' => $this->input->post('cs_menyetujui'),
+                        'cs_mengajukan' => $this->input->post('cs_mengajukan')
+                    );
+
+                    $where = array('id' => $idst);
+                    $this->SuratTugas->Update($data_st,'d_surattugas', $where);
+
+                    $alokasi = $this->input->post('alokasi');
+
+                    $sisa = $alokasi - $jumRealisasilalu;
+
+                    $data_tpagu= array('kdindex' => $this->input->post('idxskmpnen'),
+                    'app' =>$this->input->post('kdapp'),
+                    'tahapan' => $this->input->post('kdtahapan'),
+                    'pagu' => $alokasi,
+                    'realisasi' => $jumRealisasilalu,
+                    'sisa' => $sisa
+                    );
+
+                    $this->db->insert('t_pagu',$data_tpagu);
 
 					$data_cs = array(
 						'nost' => $idst,

@@ -6,9 +6,15 @@ class M_SuratTugas extends CI_Model{
         $this->load->database();
 	}
 
-    function getDataNew($kdsatker){
+    function getDataNew($kdsatker, $unitid, $roleid){
+        $where="";
+        // if($roleid != 1){
+        //     $where = $this->db->where('id_unit', $unitid);
+        // }
+
         $this->db->where('kdsatker', $kdsatker);
         $this->db->where('is_aktif', 1);
+        $where;
         $this->db->order_by('tglst');
         $query = $this->db->get('d_surattugas');
 
@@ -30,6 +36,7 @@ class M_SuratTugas extends CI_Model{
             d_surattugas.jumlah_uang,d_surattugas.cs_menyetujui,d_surattugas.cs_mengajukan,d_surattugas.id_app,d_surattugas.id_tahapan,
             
             t_unitkerja.nama_unit, 
+            d_bagipagu.kdindex, 
             
             d_surattugas.idxskmpnen, 
             d_surattugas.id_ttd,
@@ -42,7 +49,8 @@ class M_SuratTugas extends CI_Model{
             t_satker.kdkabkota
             
             FROM d_surattugas 
-            JOIN t_unitkerja ON d_surattugas.id_unit = t_unitkerja.id
+            JOIN d_bagipagu on d_surattugas.kdindex = d_bagipagu.kdindex
+            JOIN t_unitkerja ON d_bagipagu.unit_id = t_unitkerja.id
             JOIN t_satker ON d_surattugas.kdsatker = t_satker.kdsatker 
             JOIN t_pejabat ON d_surattugas.id_ttd = t_pejabat.id  WHERE d_surattugas.id = '.$id.'');
 
@@ -59,12 +67,13 @@ class M_SuratTugas extends CI_Model{
                                 d_itemcs.totaltravel, d_itemcs.jumlah, d_itemcs.tarifuangharian,d_itemcs.tarifinap,
                                 d_itemcs.jnstransportasi, CONCAT('WithTim') as tim, d_itemcs.id as idtim,
                                 t_pegawai.jabatan as jabatan_ttd,
-								t_kopsurat.*,
+								t_kopsurat.*, 
                     
                                 d_itemcs.kotaasal,d_itemcs.kotatujuan,";
                                 $join = "JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
                                 JOIN t_pegawai ON t_pegawai.nip = t_pejabat.nip
-								JOIN t_kopsurat ON t_unitkerja.grup_id = t_kopsurat.kdunit";
+								JOIN t_kopsurat ON t_unitkerja.grup_id = t_kopsurat.kdunit
+                                ";
 
                                 $order ="ORDER BY d_itemcs.nourut";
                 
@@ -99,7 +108,7 @@ class M_SuratTugas extends CI_Model{
             d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.idx_temp,
             d_surattugas.tglselesaist ,d_surattugas.id_unit,d_surattugas.id as idst,d_surattugas.idxskmpnen, 
             d_surattugas.id_ttd,d_surattugas.kdsatker,d_surattugas.id_ttd,d_surattugas.jumlah_uang,d_surattugas.cs_menyetujui,d_surattugas.cs_mengajukan,
-            
+            d_surattugas.id_tahapan,d_surattugas.id_app,d_bagipagu.unit_id,
             
             t_unitkerja.nama_unit, 
             '.$select.'
@@ -108,10 +117,11 @@ class M_SuratTugas extends CI_Model{
             t_satker.kdkabkota
             
             FROM d_surattugas 
-            JOIN t_unitkerja ON d_surattugas.id_unit = t_unitkerja.id 
             JOIN d_pagu ON d_surattugas.kdindex = d_surattugas.kdindex 
             JOIN t_pejabat ON d_surattugas.id_ttd = t_pejabat.id 
             JOIN t_satker ON d_surattugas.kdsatker = t_satker.kdsatker 
+            JOIN d_bagipagu ON d_bagipagu.kdindex = d_surattugas.kdindex
+            JOIN t_unitkerja ON d_bagipagu.unit_id = t_unitkerja.id
             '.$join.' WHERE d_surattugas.id = '.$id.' 
             AND d_pagu.kdindex = "'.$kdindex.'" 
             '. $order.'');

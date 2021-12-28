@@ -91,7 +91,7 @@ class Detail_Mappingapp extends CI_Controller {
                                 $dataU = array('rupiah_tahapan' => $this->input->post('rupiah'.$j.''));
                                 $this->db->update('d_detailapp', $dataU, $whereU); 
                             }else{
-                            array_push($data , array(
+                            $dataDetail =array(
                                 'id_app' => $app,
                                 'rupiah' => $nilaiakun,
                                 'kdindex' => $kodeindex,
@@ -99,8 +99,8 @@ class Detail_Mappingapp extends CI_Controller {
                                 'tahapan' => $this->input->post('tahapan'.$j.''),
                                 'rupiah_tahapan'  => $this->input->post('rupiah'.$j.'')
                                 
-                                ));
-                                $this->db->insert_batch('d_detailapp', $data);
+                                );
+                                $this->db->insert('d_detailapp', $dataDetail);
                             }
                         }
                         //     $where = array('id_app' => $app, 'kdindex' => $kodeindex, 'tahapan' => $this->input->post('tahapan'.$j.''),);

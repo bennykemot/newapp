@@ -83,7 +83,9 @@
                                     <input type="text"  id="kdskmpnen" name="kdskmpnen" value="<?= $ubah[0]['kdskmpnen'] ?>" readonly>
                                     <input type="text"  id="kdakun" name="kdakun" value="<?= $ubah[0]['kdakun'] ?>" readonly>
                                     <input type="text"  id="kdbeban" name="kdbeban" value="<?= $ubah[0]['kdbeban'] ?>" readonly>
-
+                                    <input type="text"  id="kdapp" name="kdapp" value="<?= $ubah[0]['id_app'] ?>" readonly>
+                                    <input type="text"  id="kdtahapan" name="kdtahapan" value="<?= $ubah[0]['id_tahapan'] ?>" readonly>
+                                    <input type="text"  id="id_unit" name="id_unit" value="<?=$unit_id?>" readonly>
                                     <input type="text"  id="kdsatker" name="kdsatker" value="<?=$kdsatker?>">
                                 </div>
                             </div>
