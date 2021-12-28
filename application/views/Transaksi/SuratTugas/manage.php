@@ -88,7 +88,7 @@
                                         <div class="col s4">
                                           <a href="#" class="dropdown-trigger tooltipped" data-position="top" data-tooltip="Printout" href="#" data-target="dropdown'<?=$u->id?>'" ><i class="material-icons orange-text">remove_red_eye</i></a>
                                                 <ul id="dropdown'<?=$u->id?>'" class='dropdown-content' style="min-width: 170px !important;">
-                                                  <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/SuratTugas/Export/'.$u->id.'/'.$u->kdindex) ?>" target="blank">Surat Tugas</a></li>
+                                                  <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/SuratTugas/Export/'.$u->id.'/'.$u->kdindex.'/'.$unit_id) ?>" target="blank">Surat Tugas</a></li>
                                                   <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/costsheet/L/'.$u->id.'/'.$u->kdindex) ?>" target="blank">Costsheet</a></li>
                                                   <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd/P/'.$u->id.'/'.$u->kdindex) ?>" target="blank">SPD</a></li>
                                                   <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd_back/P/'.$u->id.'/'.$u->kdindex) ?>" target="blank">SPD Belakang</a></li>

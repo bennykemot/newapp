@@ -384,28 +384,34 @@ class SuratTugas extends CI_Controller {
         $path           = '<img src='.$Assets.'app-assets/images/logo/bpkp.jpg>';
         $a              = $this->uri->segment(5);
         $kdindex        = str_replace("%20", " ", $a);
-        $id        =  $this->uri->segment(4);
+		$kdunit        	= $this->uri->segment(6);
+        $id        		= $this->uri->segment(4);
         $trigger        = "export";
         $data['ubah']   = $this->SuratTugas->getDataUbah($kdindex, $id, $trigger);
-        
+        $data['kop'] = $this->db->query("
+						SELECT t_kopsurat.* FROM t_kopsurat
+
+						JOIN t_unitkerja ON t_unitkerja.grup_id = t_kopsurat.kdunit
+						JOIN user ON user.unit_id = t_unitkerja.id
+						WHERE user.unit_id = ".$kdunit." ")->result_array();
 
 
-        if(count($data['ubah']) > 0){
+        //if(count($data['ubah']) > 0){
             $html = $this->load->view('Transaksi/SuratTugas/export.php',$data,true);
             $mpdf->WriteHTML($html);          
             $mpdf->Output('SuratTugas.pdf', 'I');
-        }else{
-           ?> <script type="text/javascript">
-                    setTimeout(function() {
-                        window.close();
-                        window.history.back();
-                    }, 100);
+        //}else{
+        //    ?> <script type="text/javascript">
+        //             setTimeout(function() {
+        //                 window.close();
+        //                 window.history.back();
+        //             }, 100);
                     
                     
-                </script>
-                <?php 
+        //         </script>
+        //         <?php 
             
-        }
+        // }
 	
     }
 
