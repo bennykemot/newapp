@@ -144,7 +144,7 @@ AND a.id_app = b.id_appST; ");
             $query = $this->db->query("SELECT a.*, b.alokasi, b.pagu_index 
             FROM (SELECT d_pagu.kdindex, d_pagu.rupiah,
             CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode, 
-            d_bagipagu.ppk_id,d_bagipagu.unit_id 
+            d_bagipagu.ppk_id,d_bagipagu.unit_id
             FROM d_pagu 
             JOIN d_bagipagu ON d_pagu.kdindex = d_bagipagu.kdindex 
              where d_pagu.kdsatker = ".$kdsatker." 
@@ -166,8 +166,13 @@ AND a.id_app = b.id_appST; ");
             }
 
             function getKomponenSub_pagu_forJson($kdindex){
-               $query = $this->db->query("SELECT d_pagu.*, CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode,d_bagipagu.ppk_id
-               FROM d_pagu join d_bagipagu ON d_pagu.kdindex = d_bagipagu.kdindex where d_pagu.kdindex = '".$kdindex."'");
+               $query = $this->db->query("SELECT d_pagu.*, CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode,
+               d_bagipagu.ppk_id,d_bagipagu.unit_id,t_unitkerja.nama_unit
+               FROM d_pagu 
+               join d_bagipagu ON d_pagu.kdindex = d_bagipagu.kdindex 
+               JOIN t_unitkerja on d_bagipagu.unit_id = t_unitkerja.id
+               
+               where d_pagu.kdindex = '".$kdindex."'");
       
                return $query->result();
          
@@ -177,12 +182,13 @@ AND a.id_app = b.id_appST; ");
          function getKomponenSub_forJson($kdindex, $tahapan, $app){
    
             $query = $this->db->query("SELECT d_pagu.*, CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode
-             ,d_bagipagu.ppk_id,d_detailapp.tahapan, d_detailapp.rupiah_tahapan,r_tahapan.nama_tahapan,
+             ,d_bagipagu.ppk_id,d_detailapp.tahapan, d_detailapp.rupiah_tahapan,r_tahapan.nama_tahapan,d_bagipagu.unit_id,t_unitkerja.nama_unit,
              r_tahapan.id as id_tahapan, t_app.id as id_app FROM d_bagipagu 
             JOIN d_pagu ON d_pagu.kdindex = d_bagipagu.kdindex 
             JOIN d_detailapp on d_detailapp.kdindex = d_bagipagu.kdindex
             JOIN r_tahapan on d_detailapp.tahapan = r_tahapan.id
             JOIN t_app on d_detailapp.id_app = t_app.id
+            JOIN t_unitkerja on d_bagipagu.unit_id = t_unitkerja.id
                   WHERE d_pagu.kdindex = '".$kdindex."' AND d_detailapp.tahapan = ".$tahapan." AND d_detailapp.id_app = ".$app."
             ");
             return $query->result();

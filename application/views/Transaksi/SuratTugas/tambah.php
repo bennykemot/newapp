@@ -109,7 +109,8 @@
                             <div class="input-field col s2"><label>Beban Anggaran</label></div>
 
                             <div class="input-field col s10 " >
-                            <select class="browser-default" id="select-bebananggaran" name="select-bebananggaran"></select>
+                            <!-- <select class="browser-default" id="select-bebananggaran" name="select-bebananggaran"></select> -->
+                            <input id="bebananggaran" name="bebananggaran" readonly>
                             </div>
                         </div>
 
