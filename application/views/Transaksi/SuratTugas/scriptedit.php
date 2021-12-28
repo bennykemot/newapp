@@ -71,6 +71,7 @@ $.ajax({
             $('#kdbeban').val(data[0]['kdbeban']);
             $('#ppk_id').val(data[0]['ppk_id']);
             $('#alokasi').val(data[0]['rupiah']);
+            $('#ppk_id').val(data[0]['ppk_id']);
             $('#bebananggaran').val(data[0]['nama_unit']);
             $('#alokasilabel').val(formatRupiah(data[0]['rupiah']));
             var rupiah_tahapan = data[0]['rupiah']
