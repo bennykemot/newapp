@@ -66,7 +66,7 @@ class M_SuratTugas extends CI_Model{
                                 d_itemcs.totalinap, d_itemcs.totalrep, 
                                 d_itemcs.totaltravel, d_itemcs.jumlah, d_itemcs.tarifuangharian,d_itemcs.tarifinap,
                                 d_itemcs.jnstransportasi, CONCAT('WithTim') as tim, d_itemcs.id as idtim,
-                                t_pegawai.jabatan as jabatan_ttd,
+                                t_pegawai.jabatan_st as jabatan_ttd,
 								
                     
                                 d_itemcs.kotaasal,d_itemcs.kotatujuan,";

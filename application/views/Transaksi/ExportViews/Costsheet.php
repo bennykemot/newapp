@@ -223,7 +223,7 @@ function cek_tgl($tanggal){
                         <td style="padding-bottom: 10%;border-top-style: none;border-bottom-style: none;" colspan="2"></td>
                     </tr>
 
-                    <tfoot style="text-align: center">
+                    <tfoot>
                         <tr>
                             <td style="border-right-style: none;border-bottom-style: none;border-top-style: none;b"></td><td style="border-bottom-style: none;border-top-style: none;border-left-style: none;"><?= $e->nama_menyetujui ?></td>
                             
@@ -232,10 +232,10 @@ function cek_tgl($tanggal){
                         </tr>
 
                         <tr>
-                            <td style="border-right-style: none;border-top-style: none;">NIP</td><td style="border-left-style: none;border-top-style: none;"><?= $e->nip_menyetujui ?></td>
+                            <td style="border-right-style: none;border-top-style: none; text-align: right;">NIP. </td><td style="border-left-style: none;border-top-style: none;"><?= $e->nip_menyetujui ?></td>
                             
-                            <td style="border-right-style: none;border-top-style: none;">NIP</td><td style="border-left-style: none;border-top-style: none;"><?= $e->ppk_nip ?> </td>
-                            <td style="border-right-style: none;border-top-style: none;">NIP</td><td style="border-left-style: none;border-top-style: none;"><?= $e->nip_mengajukan ?> </td>
+                            <td style="border-right-style: none;border-top-style: none; text-align: right;">NIP. </td><td style="border-left-style: none;border-top-style: none;"><?= $e->ppk_nip ?> </td>
+                            <td style="border-right-style: none;border-top-style: none; text-align: right;">NIP. </td><td style="border-left-style: none;border-top-style: none;"><?= $e->nip_mengajukan ?> </td>
                         </tr>
                     </tfoot>
             </table>
