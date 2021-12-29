@@ -87,6 +87,8 @@ class NotaDinas extends CI_Controller {
 		$trigger         =  $this->uri->segment(4);
 		$style           =  $this->uri->segment(5);
 		$id_st           =  $this->uri->segment(6);
+		$a              = $this->uri->segment(7);
+        $kdindex        = str_replace("%20", " ", $a);
 
 		$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 
 			'format' => 'A4-'.$style.'',
@@ -100,6 +102,7 @@ class NotaDinas extends CI_Controller {
 		if($trigger == "costsheet"){
 
 			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
+			$data['cs']= $this->NotaDinas->getData_costsheet($id_st, $kdindex);
 			if(count($data['export']) > 0){
 				$html = $this->load->view('Transaksi/ExportViews/Costsheet.php',$data,true);
 				$name = "Costsheet.pdf";

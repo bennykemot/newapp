@@ -396,22 +396,22 @@ class SuratTugas extends CI_Controller {
 						WHERE user.unit_id = ".$kdunit." ")->result_array();
 
 
-        //if(count($data['ubah']) > 0){
+        if(count($data['ubah']) > 0){
             $html = $this->load->view('Transaksi/SuratTugas/export.php',$data,true);
             $mpdf->WriteHTML($html);          
             $mpdf->Output('SuratTugas.pdf', 'I');
-        //}else{
-        //    ?> <script type="text/javascript">
-        //             setTimeout(function() {
-        //                 window.close();
-        //                 window.history.back();
-        //             }, 100);
+        }else{
+           ?> <script type="text/javascript">
+                    setTimeout(function() {
+                        window.close();
+                        window.history.back();
+                    }, 100);
                     
                     
-        //         </script>
-        //         <?php 
+                </script>
+                <?php 
             
-        // }
+        }
 	
     }
 

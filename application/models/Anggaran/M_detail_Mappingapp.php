@@ -37,7 +37,7 @@
         where d_detailapp.kdindex = '".$kdindex."') as a 
         
         LEFT JOIN (SELECT SUM(jumlah_realisasi) as realisasi, id_app, id_tahapan, kdindex 
-        from d_surattugas GROUP BY kdindex,id_app,id_tahapan) as b 
+        from d_surattugas WHERE d_surattugas.is_aktif = 1  GROUP BY kdindex,id_app,id_tahapan) as b 
         ON a.kdindex = b.kdindex 
         AND a.id_app = b.id_app 
         AND a.tahapan = b.id_tahapan LIMIT 0,10");

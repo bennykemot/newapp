@@ -391,6 +391,7 @@ function selectRefresh(x){
                       return false;
                 }else{
                       document.getElementById("TambahTim").disabled  =false;
+                      $('#nama'+res+'').val(val[2]) 
                       tr = document.getElementById("tb-tim"+x+"")
                       tr.style.backgroundColor = "rgba(242,242,242,.5)"; 
 

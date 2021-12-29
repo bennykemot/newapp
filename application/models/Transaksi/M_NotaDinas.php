@@ -73,6 +73,33 @@ class M_NotaDinas extends CI_Model{
         return $this->db->get_where($table,$data);
     }
 
+    function getData_costsheet($Id_st,$Kdindex){
+
+        $cek= $this->db->query("SELECT id_tahapan, id_app from d_surattugas where id=".$Id_st."")->result();
+        $query = $this->db->query("SELECT a.*, b.realisasi from 
+        (SELECT d_detailapp.kdindex, d_detailapp.id_app, d_detailapp.tahapan, 
+        d_detailapp.rupiah_tahapan, r_tahapan.id as id_tahapan 
+        from d_detailapp 
+        JOIN t_app ON t_app.id = d_detailapp.id_app 
+        JOIN r_tahapan ON r_tahapan.id = d_detailapp.tahapan 
+        JOIN v_mapping ON v_mapping.kdindex = d_detailapp.kdindex 
+        where d_detailapp.kdindex = '202245049108901CH4207UAGU08052 A524113A00' 
+        and d_detailapp.id_app=".$cek[0]->id_app." 
+        
+        and d_detailapp.tahapan=".$cek[0]->id_tahapan." ) as a 
+        
+        
+        LEFT JOIN (SELECT SUM(jumlah_realisasi) as realisasi, id_app, id_tahapan, kdindex 
+        from d_surattugas 
+        WHERE d_surattugas.is_aktif = 1 
+        AND d_surattugas.id != ".$Id_st." 
+        GROUP BY kdindex,id_app,id_tahapan) as b 
+        
+        ON a.kdindex = b.kdindex AND a.id_app = b.id_app AND a.tahapan = b.id_tahapan");
+        return $query->result();
+
+    }
+
     function getData_export($Trigger,$Id_st){
         if($Trigger == "costsheet" || $Trigger == "spd" || $Trigger == "nominatif"){
             $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, 
@@ -87,6 +114,10 @@ class M_NotaDinas extends CI_Model{
 			t_pejabat.nama as ppk_nama, 
 			t_pejabat.nip as ppk_nip,
 			t_satker.lokasi as lokasi,
+
+            CONCAT(d_pagu.thang,'.',d_pagu.kdsatker,'.',d_pagu.kddept,'.',d_pagu.kdunit,'.',d_pagu.kdprogram,'.',
+            d_pagu.kdgiat,'.',d_pagu.kdoutput,'.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',
+            d_pagu.kdakun,'.',d_pagu.kdbeban,'.',d_pagu.kdib) as kodebeban,
             
             SUBSTRING_INDEX(SUBSTRING_INDEX(d_surattugas.cs_menyetujui,'-',2),'-',-1) as nip_menyetujui, 
             SUBSTRING_INDEX(SUBSTRING_INDEX(d_surattugas.cs_menyetujui,'-',3),'-',-1) as nama_menyetujui,

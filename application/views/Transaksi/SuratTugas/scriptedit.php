@@ -476,17 +476,22 @@ function ubahNama(id){
 
 $('.namaTimHardcode').on('change', function() {
 
-var id =  $(this).attr("name")
-var res = id[9]
+     
 
-var nip = this.value
+        var id =  $(this).attr("name")
+        var res = id[9]
 
-var val = nip.split("-")
+        var nip = this.value
 
+        var val = nip.split("-")
+        tglberangkat = $('#tglberangkat'+res+'').val()
+        tglkembali = $('#tglkembali'+res+'').val()
+        
 
+        $('#nip'+res+'').html(val[0])
+         $('#nip'+res+'').val(val[0])
 
-$('#niplabel'+res+'').val(val[0])
-$('#nip'+res+'').val(val[0])
+         nipVal = $('#nip'+res+'').val()
 
 $('#perjablabel'+res+'').html(val[1])
 $('#perjab'+res+'').val(val[1])
@@ -499,6 +504,43 @@ $('#gol'+res+'').val(val[3])
 
 $('#keljab'+res+'').html(val[4])
 $('#keljab'+res+'').val(val[4])
+
+$.ajax({
+              url : dropdown_baseurl + 'pegawai',
+              data: {
+                Trigger: "select_forTim_count",
+                tglberangkat: tglberangkat,
+                tglkembali: tglkembali,
+                nip: nipVal},
+              type: "post",
+              dataType: "JSON",
+              success: function(data)
+                  { 
+                    if(data.length > 0){
+                      swal({
+                      title:"Bentrok Tanggal!",
+                      text: "Pastikan ST Pegawai Tidak Bentrok !", 
+                      icon: "warning",
+                      timer: 2000
+                      })
+
+                      document.getElementById("UbahST").disabled  =true;
+                      tr = document.getElementById("tb-tim"+res+"")
+                      tr.style.backgroundColor = "yellow";
+                      $('#nama'+res+'').val("BENTROK") 
+                      return false;
+                }else{
+                      document.getElementById("UbahST").disabled  =false;
+                      tr = document.getElementById("tb-tim"+res+"")
+                      $('#nama'+res+'').val(val[2]) 
+                      tr.style.backgroundColor = "rgba(242,242,242,.5)"; 
+
+                      
+
+                    }
+
+                  }
+                });
 
 
 });
@@ -1252,6 +1294,26 @@ $("#UbahST").click(function (e) {
 }else{
   
   var countTim = 0
+}
+
+ArrX = $('#ArrX').val()
+
+j = ArrX.split(",")
+for($loop = 0 ; $loop < countTim; $loop++){
+  cekBentrok = $('#nama'+j[$loop]+'').val()
+
+  if(cekBentrok == "BENTROK"){
+    swal({
+          title:"Bentrok Tanggal!",
+          text: "Pastikan ST Pegawai Tidak Bentrok !", 
+          icon: "warning",
+          timer: 2000
+          })
+          return false;
+
+  }
+
+
 }
 
 

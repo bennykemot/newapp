@@ -97,30 +97,30 @@ function cek_tgl($tanggal){
     
     <div id="container">
                 <div  style="text-align: center">
-                    <p><h2>RINCIAN BIAYA PERJALANAN</h2></p>
+                    <p><h2>RINCIAN BIAYA PERJALANAN DINAS</h2></p>
                 </div>
 
 
         <table width="100%" id="head">
                 <tr>
-                    <td width="15%">Nomor Cost Sheet</td> <td width="1%">:</td> <td width="60%">ISIANNYA</td>
-                    <td width="2%"></td><td width="15%">Jumlah</td> <td width="1%">:</td> <td width="10%" style="text-align: right"><?=rupiah($export[0]->rupiah)?></td>
+                <td width="15%">Nomor ST / Tanggal ST</td> <td width="1%">:</td> <td width="60%"><?=$export[0]->nost?> / <?=cek_tgl($export[0]->tglst)?></td>
+                    <td width="2%"></td><td width="15%">Jumlah</td> <td width="1%">:</td> <td width="10%" style="text-align: right"><?=rupiah($cs[0]->rupiah_tahapan)?></td>
                 </tr>
                 <tr>
-                    <td>Nomor RKT/ Non RKT</td> <td>:</td> <td>ISIANNYA</td>
-                     <td></td><td>Realisasi Pagu</td> <td>:</td> <td style="text-align: right"><?=rupiah($sumtotal)?></td>
+                    <td>Nomor PKPT/ PKAN</td> <td>:</td> <td>  </td>
+                     <td></td><td>Realisasi Pagu</td> <td>:</td> <td style="text-align: right"><?=rupiah($cs[0]->realisasi)?></td>
                 </tr>
                 <tr>
-                    <td>Pembebanan</td> <td>:</td> <td><?=$export[0]->idxskmpnen?></td>
-                     <td></td><td>Saldo Lalu</td> <td>:</td> <td style="text-align: right">-</td>
+                    <td>Pembebanan</td> <td>:</td> <td><?=$export[0]->kodebeban?></td>
+                     <td></td><td>Saldo Lalu</td> <td>:</td> <td style="text-align: right"><?=rupiah($cs[0]->rupiah_tahapan - $cs[0]->realisasi) ?></td>
                 </tr>
                 <tr>
                     <td>Maksud Perjalanan</td> <td>:</td> <td ><?=$export[0]->uraianst?></td>
-                     <td></td><td>Pengajuan</td> <td>:</td> <td style="text-align: right">-</td>
+                     <td></td><td>Pengajuan</td> <td>:</td> <td style="text-align: right"><?=rupiah($sumtotal)?></td>
                 </tr>
                 <tr>
                     <td colspan="3"></td>
-                     <td></td><td>Saldo Sekarang</td> <td>:</td> <td style="text-align: right">-</td>
+                     <td></td><td>Saldo Sekarang</td> <td>:</td> <td style="text-align: right"><?=rupiah($cs[0]->rupiah_tahapan - $cs[0]->realisasi - $sumtotal)?></td>
                 </tr>
 
                 
