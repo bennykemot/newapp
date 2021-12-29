@@ -104,10 +104,10 @@ function cek_tgl($tanggal){
         <table width="100%" id="head">
                 <tr>
                 <td width="15%">Nomor ST / Tanggal ST</td> <td width="1%">:</td> <td width="60%"><?=$export[0]->nost?> / <?=cek_tgl($export[0]->tglst)?></td>
-                    <td width="2%"></td><td width="15%">Jumlah</td> <td width="1%">:</td> <td width="10%" style="text-align: right"><?=rupiah($cs[0]->rupiah_tahapan)?></td>
+                    <td width="2%"></td><td width="15%">Pagu</td> <td width="1%">:</td> <td width="10%" style="text-align: right"><?=rupiah($cs[0]->rupiah_tahapan)?></td>
                 </tr>
                 <tr>
-                    <td>Nomor PKPT/ PKAN</td> <td>:</td> <td>  </td>
+                    <td>Nomor PKPT/ PKAU</td> <td>:</td> <td>  </td>
                      <td></td><td>Realisasi Pagu</td> <td>:</td> <td style="text-align: right"><?=rupiah($cs[0]->realisasi)?></td>
                 </tr>
                 <tr>

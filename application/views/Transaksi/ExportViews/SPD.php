@@ -141,7 +141,12 @@ function cek_tgl($tanggal){
                             c. Tingkat Biaya Perjalanan Dinas</td>
                         <td colspan="2"><?=$e->golongan?><br>
                         <?=$e->jabatan?><br>
-                        <?=$e->kdbeban?></td>
+                        
+                        <?php if($e->jabatan == "II" || $e->jabatan == "I"){
+                            echo "B";
+                        }else{
+                            echo "C";
+                        } ?></td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">4</td>

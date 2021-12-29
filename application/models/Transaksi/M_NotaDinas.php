@@ -76,6 +76,15 @@ class M_NotaDinas extends CI_Model{
     function getData_costsheet($Id_st,$Kdindex){
 
         $cek= $this->db->query("SELECT id_tahapan, id_app from d_surattugas where id=".$Id_st."")->result();
+
+        if($cek[0]->id_app == 0){
+            $query= $this->db->query("Select a.*, b.* from
+            (SELECT kdindex,rupiah as rupiah_tahapan FROM d_pagu where d_pagu.kdindex = '".$Kdindex."')as a
+            
+            LEFT JOIN (SELECT SUM(d_surattugas.jumlah_realisasi) as realisasi, d_surattugas.kdindex as pagu_index 
+     from d_surattugas WHERE d_surattugas.is_aktif = 1 AND d_surattugas.id !=".$Id_st." GROUP BY d_surattugas.kdindex) as b ON a.kdindex = b.pagu_index");
+
+        }else{
         $query = $this->db->query("SELECT a.*, b.realisasi from 
         (SELECT d_detailapp.kdindex, d_detailapp.id_app, d_detailapp.tahapan, 
         d_detailapp.rupiah_tahapan, r_tahapan.id as id_tahapan 
@@ -96,6 +105,7 @@ class M_NotaDinas extends CI_Model{
         GROUP BY kdindex,id_app,id_tahapan) as b 
         
         ON a.kdindex = b.kdindex AND a.id_app = b.id_app AND a.tahapan = b.id_tahapan");
+        }
         return $query->result();
 
     }
