@@ -136,7 +136,7 @@ function cek_tgl($tanggal){
                     </tr>
                     <tr>
                         <td style="text-align: center;">3</td>
-                        <td>a. Pangkat dan golongan<br>
+                        <td>a. Pangkat dan Golongan<br>
                             b. Jabatan / Instansi<br>
                             c. Tingkat Biaya Perjalanan Dinas</td>
                         <td colspan="2"><?=$e->golongan?><br>
@@ -197,7 +197,7 @@ function cek_tgl($tanggal){
                     <tr>
                         <td style="text-align: center;">10</td>
                         <td>Keterangan lain</td>
-                        <td colspan="2">, tanggal : 24 Februari 2021</td>
+                        <td colspan="2"><?= $e->nost ?>, tanggal : 24 Februari 2021</td>
                     </tr>
                     
                 </tbody>
@@ -212,11 +212,11 @@ function cek_tgl($tanggal){
                     <tr>
                         <td rowspan="6" width="55%" style="vertical-align: text-top !important;" >Coret yang tidak perlu</td>
                         <td width="10%">Dikeluarkan di</td>
-                        <td width="25%"><?= ucwords(strtolower("$e->lokasi")) ?></td>
+                        <td width="25%">: <?= ucwords(strtolower("$e->lokasi")) ?></td>
                     </tr>
                     <tr >
                         <td width="10%">Tanggal</td>
-                        <td width="25%"><?= cek_tgl($e->tglst) ?></td>
+                        <td width="25%">: <?= cek_tgl($e->tglst) ?></td>
                     </tr>
                     <tr >
                         <td></td>
@@ -231,7 +231,7 @@ function cek_tgl($tanggal){
                     </tr>
                     <tr >
                         <td></td>
-                        <td width="10%" style="text-align: center;"><?= $e->ppk_nip ?></td>
+                        <td width="10%" style="text-align: center;">NIP. <?= $e->ppk_nip ?></td>
                     </tr>
                 </tbody>
             </table>
