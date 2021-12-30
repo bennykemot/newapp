@@ -56,8 +56,7 @@
                     <tr>
                         <th style="width: 5%" >NO</th>
                         <th>STATUS</th>
-												<th>PENGGUNA</th>
-												<th>PPK</th>
+												<th>TANGGAL PEMBUATAN</th>
                         <th style="width: 30%" >NOMOR, TANGGAL, URAIAN SURAT TUGAS</th>
                         <th style="width: 15%" >MULAI</th>
                         <th style="width: 15%" >SELESAI</th>
@@ -73,8 +72,7 @@
                         <tr>
                             <td><?php echo $no ?></td>
                             <td></td>
-														<td><?php echo $this->session->userdata('username') ?></td>
-														<td></td>
+														<td><?php echo cek_tgl_st(date("Y-m-d",strtotime($u->created_at))) ?></td>
                             <td><b><?php echo $u->nost ?>   <?php echo cek_tgl_st($u->tglst) ?></b>
                                 <br>
                                 <?php echo $u->uraianst ?>
