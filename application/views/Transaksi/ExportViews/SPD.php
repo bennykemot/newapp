@@ -102,13 +102,13 @@ function cek_tgl($tanggal){
     <header>
         <table width="100%" id="head">
                 <tr>
-                    <td width="20%" rowspan="2"><img src="<?= base_url().'assets'?>/app-assets/images/logo/BPKP_Logo_2_jpg.jpg" alt="materialize logo"></td>
+                    <td width="20%" rowspan="2"><img src="<?= base_url().'assets'?>/app-assets/images/logo/logo-bpkp-3-jpg.jpg" alt="materialize logo"></td>
                     <td style="text-align: center"><b>BADAN PENGAWASAN KEUANGAN DAN PEMBANGUNAN<br>S U R A T   P E R J A L A N A N   D I N A S</b></td>
                 </tr>
 
                 <tr>
                     <td style="text-align: center">
-                    Nomor : <?=$e->nost?>
+                    Nomor : <?=$e->nospd?>
                     </td>
                 <tr>
             </table>
