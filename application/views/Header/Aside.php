@@ -19,10 +19,11 @@ $unit_id = $this->session->userdata("unit_id");
 $username = $this->session->userdata("username");
 
 
-if($roleid == 5 || $roleid == 7){
-  $penjab_id = $user_id;
-}else{
+if($role_id == 5 || $role_id == 7 || $role_id == 3){
   $penjab_id = $this->session->userdata("penjab_id");
+}else{
+  $penjab_id = $user_id;
+  
 }
 
 function mappingD_none($data){

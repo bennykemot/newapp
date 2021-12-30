@@ -644,7 +644,7 @@ function getData_ppk($searchTerm="",$kdsatker,$trigger,$role){
    if($trigger == "ppk_forProfile"){
     	$where =  $this->db->where("jabatan_id", $role);
    }else{
-   	$where = $this->db->where("jabatan_id", 4);
+   	$where = $this->db->where("jabatan_id", 3);
    }
    $this->db->select('id');
    $this->db->select('nama');

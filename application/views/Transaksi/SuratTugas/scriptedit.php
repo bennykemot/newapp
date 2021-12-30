@@ -1288,12 +1288,7 @@ $("#UbahST").click(function (e) {
   if(document.getElementById('counting') != null){
   var countingDiv = document.getElementById('counting');
   var countTim = countingDiv.getElementsByClassName('namaTimHardcode').length;
-}else{
-  
-  var countTim = 0
-}
-
-ArrX = $('#ArrX').val()
+  ArrX = $('#ArrX').val()
 
 j = ArrX.split(",")
 for($loop = 0 ; $loop < countTim; $loop++){
@@ -1309,8 +1304,10 @@ for($loop = 0 ; $loop < countTim; $loop++){
           return false;
 
   }
-
-
+}
+}else{
+  
+  var countTim = 0
 }
 
 
@@ -1321,7 +1318,7 @@ for($loop = 0 ; $loop < countTim; $loop++){
 
   formData.append('Trigger', 'U')
   formData.append('countTim', countTim)
-  formData.append('idst', id_st_session)
+  formData.append('id_st', id_st_session)
 
   $.ajax({
     type: "POST",

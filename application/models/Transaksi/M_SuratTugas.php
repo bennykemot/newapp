@@ -9,19 +9,19 @@ class M_SuratTugas extends CI_Model{
     function getDataNew($kdsatker, $unitid, $roleid, $penjabid){
         $where="";$whereD="";
         if($roleid != 1){
-            $where = $this->db->where('id_unit', $unitid);
+            $where = "AND d_surattugas.id_unit = ".$unitid."";
         }
 
         if($roleid == 3){
+            $join ="";
             $whereD = "AND d_bagipagu.ppk_id = ".$penjabid."";
         }else if($roleid == 5 || $roleid == 7){
-            $str = $penjabid;
-            $userid= explode("-",$str);
-            $whereD = "AND d_surattugas.cs_menyetujui = ".$userid[0]."";
+            $cek = $this->db->query("select * from t_pejabat where id = ".$penjabid."")->result();
+            $whereD = "AND d_surattugas.cs_menyetujui like '%".$cek[0]->nip."%'";
         }
 
-        $query = $this->db->query("SELECT * from d_surattugas JOIN d_bagipagu ON d_surattugas.kdindex = d_bagipagu.kdindex
-        where d_surattugas.is_aktif = 1 ".$whereD." ORDER BY d_surattugas.tglst");
+        $query = $this->db->query("SELECT d_surattugas.* from d_surattugas JOIN d_bagipagu ON d_surattugas.kdindex = d_bagipagu.kdindex
+        where d_surattugas.is_aktif = 1 ".$whereD." ".$where." ORDER BY d_surattugas.tglst");
 
         // $this->db->where('kdsatker', $kdsatker);
         // $this->db->where('is_aktif', 1);
@@ -112,7 +112,9 @@ class M_SuratTugas extends CI_Model{
                             $order ="ORDER BY d_itemcs.nourut";
                         
                         }else{
+                            $join = "";
                             $select = "CONCAT('NoTim') as tim,";
+                            $oder = "";
                         }
                 }
             $query = $this->db->query('SELECT d_pagu.*, d_surattugas.nost, d_surattugas.tglst, 
