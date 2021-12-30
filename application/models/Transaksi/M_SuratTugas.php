@@ -6,17 +6,28 @@ class M_SuratTugas extends CI_Model{
         $this->load->database();
 	}
 
-    function getDataNew($kdsatker, $unitid, $roleid){
-        $where="";
+    function getDataNew($kdsatker, $unitid, $roleid, $penjabid){
+        $where="";$whereD="";
         if($roleid != 1){
             $where = $this->db->where('id_unit', $unitid);
         }
 
-        $this->db->where('kdsatker', $kdsatker);
-        $this->db->where('is_aktif', 1);
-        $where;
-        $this->db->order_by('tglst');
-        $query = $this->db->get('d_surattugas');
+        if($roleid == 3){
+            $whereD = "AND d_bagipagu.ppk_id = ".$penjabid."";
+        }else if($roleid == 5 || $roleid == 7){
+            $str = $penjabid;
+            $userid= explode("-",$str);
+            $whereD = "AND d_surattugas.cs_menyetujui = ".$userid[0]."";
+        }
+
+        $query = $this->db->query("SELECT * from d_surattugas JOIN d_bagipagu ON d_surattugas.kdindex = d_bagipagu.kdindex
+        where d_surattugas.is_aktif = 1 ".$whereD." ORDER BY d_surattugas.tglst");
+
+        // $this->db->where('kdsatker', $kdsatker);
+        // $this->db->where('is_aktif', 1);
+        // $where;
+        // $this->db->order_by('tglst');
+        // $query = $this->db->get('d_surattugas');
 
         return $query->result();
      
