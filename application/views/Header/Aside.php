@@ -18,6 +18,13 @@ $role_id = $this->session->userdata("role_id");
 $unit_id = $this->session->userdata("unit_id");
 $username = $this->session->userdata("username");
 
+
+if($roleid == 5 || $roleid == 7){
+  $penjab_id = $user_id;
+}else{
+  $penjab_id = $this->session->userdata("penjab_id");
+}
+
 function mappingD_none($data){
   $class="";
   if($data == "604435" || 
@@ -97,7 +104,7 @@ function mappingD_none($data){
           </li>
 
           <!-- DIGRUP RENCANA KEGIATAN -->
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/SuratTugas/Page/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$username)?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/SuratTugas/Page/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$penjab_id)?>">
           <i class="material-icons">
           email
           </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>
@@ -174,7 +181,7 @@ function mappingD_none($data){
           </li>
 
           <!-- DIGRUP RENCANA KEGIATAN -->
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/SuratTugas/Page/'.$kdsatker.'/'.$unit_id)?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/SuratTugas/Page/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$penjab_id)?>">
           <i class="material-icons">
           email
           </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>

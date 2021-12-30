@@ -26,7 +26,7 @@ class SuratTugas extends CI_Controller {
         $kdsatker           =  $this->uri->segment(4);
         $unitid           =  $this->uri->segment(5);
         $roleid           =  $this->uri->segment(6);
-        $username           =  $this->uri->segment(7);
+        $penjabid           =  $this->uri->segment(7);
         // $jumlah_data = $this->SuratTugas->Jum($kdsatker);
         // $config['base_url'] = base_url().'Transaksi/SuratTugas/Page/'.$kdsatker;
 		// $config['total_rows'] = $jumlah_data;
@@ -62,7 +62,7 @@ class SuratTugas extends CI_Controller {
 		// $from =  $this->uri->segment(3);
 		// $this->pagination->initialize($config);
         // $data['SuratTugas'] = $this->SuratTugas->getDataNew($config['per_page'], $from, $kdsatker);
-        $data['SuratTugas'] = $this->SuratTugas->getDataNew($kdsatker, $unitid, $roleid, $username);
+        $data['SuratTugas'] = $this->SuratTugas->getDataNew($kdsatker, $unitid, $roleid, $penjabid);
         $this->load->view('Transaksi/SuratTugas/manage',$data);
 	}
 
