@@ -109,7 +109,7 @@
 
                             <div class="input-field col s10 " >
                             <!-- <select class="browser-default" id="select-bebananggaran" name="select-bebananggaran"></select> -->
-                            <input id="bebananggaran" name="bebananggaran" readonly>
+                            <input id="bebananggaran" name="bebananggaran" value="<?= $ubah[0]['nama_unit'] ?>" readonly>
                             </div>
                         </div>
 

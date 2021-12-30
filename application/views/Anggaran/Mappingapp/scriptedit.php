@@ -366,7 +366,7 @@ $.ajax({
   contentType: false,
   success: function (data, textStatus, jqXHR) {
             show_msg(textStatus);
-            window.history.go(-1);
+           // window.history.go(-1);
             
             
         },

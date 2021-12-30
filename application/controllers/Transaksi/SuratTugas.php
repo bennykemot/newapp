@@ -26,6 +26,7 @@ class SuratTugas extends CI_Controller {
         $kdsatker           =  $this->uri->segment(4);
         $unitid           =  $this->uri->segment(5);
         $roleid           =  $this->uri->segment(6);
+        $username           =  $this->uri->segment(7);
         // $jumlah_data = $this->SuratTugas->Jum($kdsatker);
         // $config['base_url'] = base_url().'Transaksi/SuratTugas/Page/'.$kdsatker;
 		// $config['total_rows'] = $jumlah_data;
@@ -61,7 +62,7 @@ class SuratTugas extends CI_Controller {
 		// $from =  $this->uri->segment(3);
 		// $this->pagination->initialize($config);
         // $data['SuratTugas'] = $this->SuratTugas->getDataNew($config['per_page'], $from, $kdsatker);
-        $data['SuratTugas'] = $this->SuratTugas->getDataNew($kdsatker, $unitid, $roleid);
+        $data['SuratTugas'] = $this->SuratTugas->getDataNew($kdsatker, $unitid, $roleid, $username);
         $this->load->view('Transaksi/SuratTugas/manage',$data);
 	}
 
@@ -88,6 +89,21 @@ class SuratTugas extends CI_Controller {
         $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unitid, $roleid);
         
 		$this->load->view('Transaksi/SuratTugas/ubah',$data);
+	}
+
+    public function approve()
+	{   
+        $a = $this->uri->segment(8);
+        $kdindex = str_replace("%20", " ", $a);
+        $id =  $this->uri->segment(4);
+        $data['ubah'] = $this->SuratTugas->getDataUbah($kdindex, $id, 'Ubah_ST');
+        $kdsatker = $this->uri->segment(5);
+        $unitid =$this->uri->segment(6);
+        $roleid =$this->uri->segment(7);
+        $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unitid, $roleid);
+        $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unitid, $roleid);
+        
+		$this->load->view('Transaksi/SuratTugas/Approve/manage',$data);
 	}
 
     public function pregChar($str){
@@ -370,6 +386,16 @@ class SuratTugas extends CI_Controller {
             //$where = array('kdindex' => $kdindex);
             $output = $this->SuratTugas->CRUD($kdindex,'d_detailapp', $Trigger);
             echo json_encode($output);
+
+        }else if($Trigger == "Approve"){
+
+            $data_st = array(
+                'status_id' => $this->input->post('id_status')
+            );
+
+            $where = array('id' => $this->input->post('idst'));
+            $this->SuratTugas->Update($data_st,'d_surattugas', $where);
+
 
         }
         

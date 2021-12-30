@@ -25,7 +25,8 @@
 									<tr>
 										<td width="30%">APP</td>
 										<td>
-											<select class="select2 browser-default" id="app-select2" name="app" disabled></select>
+											<select class="select2 browser-default" id="app-select2" name="app-select2" disabled></select>
+											<input hidden name="app" value="<?=$ubah[0]->id_app?>">
 										</td>
 										<td></td>
 									</tr>

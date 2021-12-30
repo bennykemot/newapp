@@ -130,9 +130,15 @@ function formatRupiah(angka){
     dataType: "JSON",
     success: function(data)
         { 
-
+          var kdakun = $('#kdakun').val()
           var $asal = $("<option selected='selected'></option>").val(data[0]['idkota']).text(data[0]['valkota'])
 	            $("#kotaasal").append($asal).trigger('change');
+
+          if(kdakun == "524113" || kdakun == "524114"){
+            var $tujuan = $("<option selected='selected'></option>").val(data[0]['idkota']).text(data[0]['valkota'])
+	            $("#kotatujuan").append($tujuan).trigger('change');
+
+          }
         }
       });
 
@@ -276,9 +282,16 @@ function selectRefresh(x){
               dataType: "JSON",
               success: function(data)
                   { 
+                    var kdakun = $('#kdakun').val()
 
                     var $asal = $("<option selected='selected'></option>").val(data[0]['idkota']).text(data[0]['valkota'])
                         $("#kotaasal"+x+"").append($asal).trigger('change');
+
+                        if(kdakun == "524113" || kdakun == "524114"){
+                    var $tujuan = $("<option selected='selected'></option>").val(data[0]['idkota']).text(data[0]['valkota'])
+                        $(".kotatujuan").append($tujuan).trigger('change');
+
+                        }
                   }
                 });
 
@@ -619,6 +632,7 @@ function AllCount(i, Trigger){
               }else if(kdakun == "524113"){
                 tarif = data[0]['dalam_kota_8_jam']
                 // maxinap = data[0][''+getInap(gol,keljab,kdakun)+''];
+                
 
               }else if(kdakun == "524119"){
                 tarif = data[0]['fb_luarkota']
@@ -717,18 +731,20 @@ function cityCount(id){
   }else{
 
 
-      if($("#kotaasal"+id+"").val() != null || $("#kotatujuan"+id+"").val() != null){
-        var valasal = $("#kotaasal"+id+"").val()
-        var kotaasal_split = valasal.split("-")
-        var asal = kotaasal_split[1]
-        var kotaasal_id = kotaasal_split[0]
-        var nama_kotaasal_id = kotaasal_split[2]
+    if($("#kotatujuan"+id+"").val() != null){
+          var valasal = $("#kotaasal"+id+"").val()
+          var kotaasal_split = valasal.split("-")
+          var asal = kotaasal_split[1]
+          var kotaasal_id = kotaasal_split[0]
+          var nama_kotaasal_id = kotaasal_split[2]
 
-        var valtujuan = $("#kotatujuan"+id+"").val()
-        var kotatujuan_split = valtujuan.split("-")
-        var tujuan = kotatujuan_split[1]
-        var kotatujuan_id = kotatujuan_split[0]
-        var nama_kotatujuan_id = kotatujuan_split[2]
+          var valtujuan = $("#kotatujuan"+id+"").val()
+          var kotatujuan_split = valtujuan.split("-")
+          var tujuan = kotatujuan_split[1]
+          var kotatujuan_id = kotatujuan_split[0]
+          var nama_kotatujuan_id = kotatujuan_split[2]
+        }else{
+        return false;
       }
 }
 
@@ -778,6 +794,13 @@ $.ajax({
                 var secondDate = new Date($("#tglkembali"+id+"").val());
                 var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay) )+ 1;
                 $("#jmlhari"+id+"").val(diffDays);
+
+                if(kdakun == "523113"){
+                  
+                DefaultTransport = Number(diffDays) * Number(150000)
+                
+                $('#uangdarat'+id+'').val(formatRupiah(''+DefaultTransport))
+                }
 
                 var totalUangHarian = ''+(diffDays * tarif)
                 $("#satuan_uangharian"+id+"").val(formatRupiah(tarif));
@@ -899,6 +922,13 @@ var gol = $('#gol'+id+'').val();
                 var secondDate = new Date($("#tglkembali"+id+"").val());
                 var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay)) + 1;
                 $("#jmlhari"+id+"").val(diffDays);
+
+                if(kdakun == "523113"){
+                  
+                  DefaultTransport = Number(diffDays) * Number(150000)
+                  
+                  $('#uangdarat'+id+'').val(formatRupiah(''+DefaultTransport))
+                  }
 
                 // var kotatujuan = $("#kotatujuan"+id+"").val()
                 // var kotatujuan_split = kotatujuan.split("-")

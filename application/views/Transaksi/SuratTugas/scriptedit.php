@@ -100,9 +100,6 @@ function PilihKode(Id, kdindex, Tahapan, App){
 
   var relasii = $('#realisasi').val()
     var alokasii = $('#alokasi').val()
-    var tahapan = $('#kdtahapan').val()
-    var app = $('#kdapp').val()
-    var kdindex = $('#kdindex').val()
 
     $.ajax({
           url : master_baseurl + "getKomponenSub",

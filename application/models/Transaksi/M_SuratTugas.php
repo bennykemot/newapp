@@ -8,9 +8,9 @@ class M_SuratTugas extends CI_Model{
 
     function getDataNew($kdsatker, $unitid, $roleid){
         $where="";
-        // if($roleid != 1){
-        //     $where = $this->db->where('id_unit', $unitid);
-        // }
+        if($roleid != 1){
+            $where = $this->db->where('id_unit', $unitid);
+        }
 
         $this->db->where('kdsatker', $kdsatker);
         $this->db->where('is_aktif', 1);

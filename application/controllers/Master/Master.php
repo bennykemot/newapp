@@ -82,11 +82,11 @@ class Master extends CI_Controller {
 
       $Trigger = $this->input->post('Trigger');
 
-      if($Trigger == "Pagu"){
-         $response = $this->db->query("SELECT SUM(jumlah_realisasi) as re from d_surattugas where kdindex ='".$kdindex."'")->result();
-      }else{
-         $response = $this->db->query("SELECT SUM(jumlah_realisasi) as re from d_surattugas where kdindex ='".$kdindex."' AND id_app = ".$app." AND id_tahapan = ".$tahapan."")->result();
-      }
+      // if($Trigger == "Pagu"){
+      //    $response = $this->db->query("SELECT SUM(jumlah_realisasi) as re from d_surattugas where is_aktif = 1 AND kdindex ='".$kdindex."'")->result();
+      // }else{
+         $response = $this->db->query("SELECT SUM(jumlah_realisasi) as re from d_surattugas where is_aktif = 1 AND kdindex ='".$kdindex."' AND id_app = ".$app." AND id_tahapan = ".$tahapan."")->result();
+      //}
       echo json_encode($response);
    }
 }

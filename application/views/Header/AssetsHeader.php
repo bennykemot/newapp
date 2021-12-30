@@ -253,6 +253,24 @@ function getBagipagu($data){
 	return $icon;
 }
 
+function ApprovePPK($data){
+$color="grey-text";
+  if($data == 2){
+          $color ="teal-text";
+  }else if($data == 3){
+          $color ="teal-text";
+  }
+  return $color;
+}
+
+function ApproveKPA($data){
+  $color="grey-text";
+    if($data == 3){
+            $color ="brown-text";
+    }
+    return $color;
+  }
+
   
   
   ?>

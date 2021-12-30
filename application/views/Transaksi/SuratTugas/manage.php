@@ -1,29 +1,7 @@
 <?php include(APPPATH . 'views/Header/Aside.php') ?>
 
 
-<!-- Page Length Options -->
  <div class="row">
-
- <!-- <div class="col s12">
-        <div class="card" id="head">
-          <div class="card-content" style="height: 120px; padding: 0px !important">
-            <div class="col s1 display-flex justify-content-end" style="height: 100%;padding: 24px;padding-right: 34px; border-radius: 10px" >
-              <button type="button" class="btn-floating" style=""><i class="material-icons">
-              email
-                </i></button>
-            </div>
-            <div class="col s9" style="padding-top: 24px">
-              <h6> Daftar Surat Tugas</h6>
-                  <div class="col s1" style="padding-left: 0px ! important">Bulan : </div>
-                  <div class="col s11"><select class="browser-default" id="bulan-Array"><option selected><?php echo currentMonth(date("m")) ?></option></select>
-                  </div>
-            </div>
-            <div class="col s2" style="padding-top: 24px">
-              <a class="btn modal-trigger" href="<?= site_url('Transaksi/SuratTugas/Tambah') ?>">Tambah Data</a>
-            </div>
-          </div>
-        </div>
-  </div> -->
 
   <div class="col s12">
         <div class="card" id="head">
@@ -71,7 +49,7 @@
                               ?>
                         <tr>
                             <td><?php echo $no ?></td>
-                            <td></td>
+                            <td><?php echo $u->status_id ?></td>
 														<td><?php echo cek_tgl_st(date("Y-m-d",strtotime($u->created_at))) ?></td>
                             <td><b><?php echo $u->nost ?>   <?php echo cek_tgl_st($u->tglst) ?></b>
                                 <br>
@@ -108,11 +86,11 @@
                                 <div class="row" style="padding-top: 10px">
                                   <div class="col s4">
                                     
-																		<a href="#" class="tooltipped" data-position="bottom" data-tooltip="Approve PPK" ><i class="material-icons teal-text">check_box</i></a>
+																		<a href="<?= site_url('Transaksi/SuratTugas/approve/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex.'/2')?>" class="tooltipped" data-position="bottom" data-tooltip="Approve PPK" ><i class="material-icons <?=ApprovePPK($u->status_id)?>">check_box</i></a>
                                   </div>
 
                                   <div class="col s4">
-																	<a href="#" class="tooltipped" data-position="bottom" data-tooltip="Approve KPA/Es II" ><i class="material-icons grey-text">check_box</i></a>
+																	<a href="<?= site_url('Transaksi/SuratTugas/approve/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex.'/3')?>" class="tooltipped" data-position="bottom" data-tooltip="Approve KPA/Es II" ><i class="material-icons <?=ApproveKPA($u->status_id)?>">check_box</i></a>
                                   </div>
 
 																	<div class="col s4">
