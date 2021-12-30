@@ -95,12 +95,13 @@
 									</tr>
 
 										<tr hidden>
-											<td>alokasi<br> nilaiakun<br>Sisa<br> dummy_rupiah</td>
+											<td>alokasi<br> nilaiakun<br>Sisa<br> dummy_rupiah<br> selisih tanpa alokasi ini</td>
 											<td>
 												<input placeholder="00.000.000" id="alokasi" name="alokasi" type="number" readonly ><br>
 												<input placeholder="00.000.000" id="nilaiakun" name="nilaiakun" type="number" readonly ><br>
 												<input placeholder="00.000.000" id="sisa" name="sisa" type="number" readonly ><br>
-												<input placeholder="00.000.000" id="dummy_rupiah" name="dummy_rupiah" type="number" readonly ></td>
+												<input placeholder="00.000.000" id="dummy_rupiah" name="dummy_rupiah" type="number" readonly >
+												<input placeholder="00.000.000" id="selisih_" name="selisih_" type="number" readonly ></td>
 												
 											<td></td>
 										</tr>

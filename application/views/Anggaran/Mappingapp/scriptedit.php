@@ -49,6 +49,8 @@
                   $('#jumlah').val(Sisa)
                   $('#sisa').val(Sisa)
                   $('#rupiah1').val(data[0]['rupiah_tahapan'])
+                  var selisih_ = Number(Sisa) + Number(data[0]['alokasi']);
+                  $('#selisih_').val(selisih_)
 
                 if(data['tahapan'] == 11){
                 var element = document.getElementById("divTahapan");
@@ -117,9 +119,10 @@ var nilai_app = Number(sisa - getAlokasi)
 var total  = Number($('#jumlah').val());
 var sisa  = Number($('#sisa').val());
 var rupiah_dummy  = Number($('#dummy_rupiah').val());
+var selisih_ = Number(rupiah_dummy) + Number(sisa);
 
-if(nilai_app1 > rupiah_dummy){
-  var selisih_tahapan = rupiah_dummy - nilai_app1
+if(nilai_app1 > selisih_){
+  var selisih_tahapan = selisih_ - nilai_app1
   swal({
       title: "JUMLAH AKUN MINUS ! ", 
       icon: "warning",
@@ -135,8 +138,8 @@ if(nilai_app1 > rupiah_dummy){
 
 
       return false;
-}else if( nilai_app_All > rupiah_dummy){
-  var selisih_tahapan = rupiah_dummy - nilai_app_All
+}else if( nilai_app_All > selisih_){
+  var selisih_tahapan = selisih_ - nilai_app_All
   swal({
       title: "JUMLAH AKUN MINUS ! ", 
       icon: "warning",
@@ -146,25 +149,25 @@ if(nilai_app1 > rupiah_dummy){
       return false;
 }else{
 
-    if(rupiah_dummy > nilai_app1  && nilai_app1 != 0){
-      var selisih_tahapan = rupiah_dummy -nilai_app1
+    if(selisih_ > nilai_app1  && nilai_app1 != 0){
+      var selisih_tahapan = selisih_ -nilai_app1
 
-    }else if(rupiah_dummy > nilai_app_All && nilai_app_All != 0){
-      var selisih_tahapan = rupiah_dummy -nilai_app_All
+    }else if(selisih_ > nilai_app_All && nilai_app_All != 0){
+      var selisih_tahapan = selisih_ -nilai_app_All
 
-    }else if(rupiah_dummy < nilai_app1 && nilai_app1 != 0){
-      var selisih_tahapan = nilai_app1 - rupiah_dummy
+    }else if(selisih_ < nilai_app1 && nilai_app1 != 0){
+      var selisih_tahapan = nilai_app1 - selisih_
 
-    }else if(rupiah_dummy < nilai_app_All && nilai_app_All != 0){
-      var selisih_tahapan = nilai_app_All -rupiah_dummy
+    }else if(selisih_ < nilai_app_All && nilai_app_All != 0){
+      var selisih_tahapan = nilai_app_All -selisih_
     }else{
       var selisih_tahapan = 0
     }
 }
 
 
-if(nilai_app1 == rupiah_dummy || rupiah_dummy == nilai_app_All){
-  $('#jumlah').val(sisa)
+if(nilai_app1 == selisih_ || selisih_ == nilai_app_All){
+  $('#jumlah').val(selisih_tahapan)
 }else if(selisih_tahapan != 0){
   $('#jumlah').val(sisa + selisih_tahapan)
 }else if(nilai_app1 == 0 || nilai_app_All == 0){
