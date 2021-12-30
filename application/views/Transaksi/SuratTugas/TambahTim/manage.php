@@ -105,7 +105,7 @@
                         </div>
 
                         <div class="input-field col s12">
-                            <div class="input-field col s2"><label>Yang Menyetuji</label></div>
+                            <div class="input-field col s2"><label>Yang Menyetujui</label></div>
 
                             <div class="input-field col s10 " >
                             <select class="browser-default" name="cs_menyetujui" id="cs_menyetujui"></select>
