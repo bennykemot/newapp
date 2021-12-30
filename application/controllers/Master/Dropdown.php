@@ -320,9 +320,15 @@ class Dropdown extends CI_Controller {
       // Search term
       $searchTerm = $this->input->post('searchTerm');
       $kdsatker = $this->input->post('session_satker');
+		$trigger = $this->input->post('trigger');
+		if($trigger == "ppk_forProfile"){
+			$role = $this->input->post('role');
+		}else{
+			$role = 4;
+		}
 
       // Get users
-      $response = $this->Dropdown->getData_ppk($searchTerm, $kdsatker);
+      $response = $this->Dropdown->getData_ppk($searchTerm, $kdsatker, $trigger, $role);
 		echo json_encode($response);
 	}
 

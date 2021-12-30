@@ -46,6 +46,14 @@
                           </div>
                       </div>
 
+											<div class="input-field col s12" id="ppk" style="display: none;">
+                        <div class="input-field col s2"><label>Pejabat</label></div>
+
+                          <div class="input-field col s10 " >
+                            <select  id="ppk-select2" name="ppk" class="browser-default"></select>
+                          </div>
+                      </div>
+
                       <div class="input-field col s12">
                         <div class="input-field col s2"><label>Password User</label></div>
 
@@ -122,6 +130,16 @@
                           <select  id="status-select2_Edit" name="kdstatus_Edit" class="browser-default"></select>
                           </div>
                       </div>
+
+											<div class="input-field col s12" id="ppk_Edit" style="display: none;">
+                        <div class="input-field col s2"><label>Pejabat</label></div>
+
+                          <div class="input-field col s10 " >
+                            <select  id="ppk-select2_Edit" name="ppk_Edit" class="browser-default"></select>
+                          </div>
+                      </div>
+
+											
 
                       <!-- <div class="input-field col s12">
                         <div class="input-field col s2"><label>Status</label></div>

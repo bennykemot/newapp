@@ -219,6 +219,44 @@ function Reset(idForm) {
          }
      });
 
+		 $("#ppk-select2").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Pejabat",
+         ajax: { 
+           url: dropdown_baseurl + 'ppk',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+						 var role = $("#role-select2").val()
+              return {
+								trigger: "ppk_forProfile",
+                session_satker: satker_session,
+                searchTerm: params.term,
+								role: role
+								// search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
+		 $('#role-select2').on('change', function() {
+				var role = $('#role-select2').val()
+				if(role == 3 || role == 5 || role ==7){
+					document.getElementById("ppk").style.display = "";
+				}else{
+					document.getElementById("ppk").style.display = "none";
+				}
+
+		});
+
      $("#status-select2").select2({
         dropdownAutoWidth: true,
           width: '100%',
@@ -316,6 +354,45 @@ function Reset(idForm) {
            cache: true
          }
      });
+
+		 $("#ppk-select2_Edit").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Pejabat",
+          dropdownParent: "#modalEdit",
+         ajax: { 
+           url: dropdown_baseurl + 'ppk',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+						 var role = $("#role-select2").val()
+              return {
+								trigger: "ppk_forProfile",
+                session_satker: satker_session,
+                searchTerm: params.term,
+								role: role
+								// search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
+		 $('#role-select2-Edit').on('change', function() {
+				var role = $('#role-select2-Edit').val()
+				if(role == 3 || role == 5 || role ==7){
+					document.getElementById("ppk").style.display = "";
+				}else{
+					document.getElementById("ppk").style.display = "none";
+				}
+
+		});
 
      $("#status-select2_Edit").select2({
         dropdownAutoWidth: true,

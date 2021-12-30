@@ -140,6 +140,7 @@ class M_Profile extends CI_Model{
             $this->db->select('user.status');
             $this->db->select('user.unit_id');
 			$this->db->select('user.unit_kerja');
+			$this->db->select('user.pejabat_id');
             $this->db->select('t_unitkerja.nama_unit');
             $this->db->select('t_role.rolename');
             
@@ -148,6 +149,7 @@ class M_Profile extends CI_Model{
             $this->db->join('t_satker', 't_satker.kdsatker = user.kdsatker');
             $this->db->join('t_role', 't_role.id = user.role_id');
             $this->db->join('t_unitkerja', 't_unitkerja.id = user.unit_id');
+			$this->db->join('t_pejabat', 't_pejabat.jabatan_id = user.pejabat_id');
             $this->db->where($data);
             $query = $this->db->get();
     
