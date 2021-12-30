@@ -109,11 +109,7 @@ class TambahTim extends CI_Controller {
                    $totaluangharian += $this->pregChar($this->input->post('uangharian'.$urut[$i].''));
                    $totaluanginap += $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
                    
-                   $sum +=  $this->pregChar($this->input->post('uangharian'.$urut[$i].'')) + 
-                            $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].'')) 
-                            + $this->pregChar($this->input->post('uangdll'.$urut[$i].'')) + $this->pregChar($this->input->post('uangtaxi'.$urut[$i].''))
-                            + $this->pregChar($this->input->post('uanglaut'.$urut[$i].''))+ $this->pregChar($this->input->post('uangudara'.$urut[$i].''))
-                            + $this->pregChar($this->input->post('uangdarat'.$urut[$i].''));
+                   $sum +=  $totaluangharian + $totaluangharian + $totaluangtransport;
 
                         $this->db->insert('d_itemcs',$data_ItemCS);
                         $j = $urut[$i];

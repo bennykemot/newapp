@@ -174,6 +174,11 @@ class Detail_Mappingapp extends CI_Controller {
 
             $id = $this->input->post('Id_Edit');
             $where = array('id' => $id);
+
+            $whereST = array('kdindex'=>$kdindex,'id_app'=>$app,'id_tahapan'=>$tahapan);
+            $dataST = array('jumlah_uang'=> $rupiah_tahapan);
+
+            $this->db->update('d_surattugas', $dataST, $whereST);
             $this->detail_Mappingapp->update($data,'d_detailapp', $where);
 
             

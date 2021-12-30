@@ -1011,7 +1011,7 @@ function AllCount(i, Trigger){
                 return false;
             }
           });
-
+var  jmlhari = $('#jmlhari'+i+'').val()
     if(Trigger == "satuan"){
       var total_harian_ = Number(uangharian) * Number(jmlhari)
       var total_harian = ""+total_harian_+""

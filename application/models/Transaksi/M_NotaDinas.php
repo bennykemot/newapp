@@ -92,7 +92,7 @@ class M_NotaDinas extends CI_Model{
         JOIN t_app ON t_app.id = d_detailapp.id_app 
         JOIN r_tahapan ON r_tahapan.id = d_detailapp.tahapan 
         JOIN v_mapping ON v_mapping.kdindex = d_detailapp.kdindex 
-        where d_detailapp.kdindex = '202245049108901CH4207UAGU08052 A524113A00' 
+        where d_detailapp.kdindex = '".$Kdindex."' 
         and d_detailapp.id_app=".$cek[0]->id_app." 
         
         and d_detailapp.tahapan=".$cek[0]->id_tahapan." ) as a 

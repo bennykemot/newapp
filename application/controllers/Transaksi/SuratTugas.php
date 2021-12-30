@@ -261,6 +261,7 @@ class SuratTugas extends CI_Controller {
                 $totaluanginap = 0;
                 $sum=0;
                 $totalRealisasi=0;
+                $totaluangtransport = 0;
 
                     $this->db->where("id_st", $idst);
                     $this->db->delete("d_itemcs");
@@ -268,6 +269,9 @@ class SuratTugas extends CI_Controller {
 
                 
                 for($i = 0 ; $i < $countTim; $i++){
+                    $totaluangtransport += $this->pregChar($this->input->post('uangdll'.$urut[$i].'')) + $this->pregChar($this->input->post('uangtaxi'.$urut[$i].''))
+                   + $this->pregChar($this->input->post('uanglaut'.$urut[$i].''))+ $this->pregChar($this->input->post('uangudara'.$urut[$i].''))
+                   + $this->pregChar($this->input->post('uangdarat'.$urut[$i].''));
 
                        $data_ItemCS = array(
                         'nourut' => $this->input->post('urut'.$urut[$i].''),
@@ -282,16 +286,16 @@ class SuratTugas extends CI_Controller {
                         'kotaasal'  => $this->input->post('kotaasal'.$urut[$i].''),
                         'kotatujuan'  => $this->input->post('kotatujuan'.$urut[$i].''),
 
-                        'tarifuangharian'  => $this->pregChar($this->input->post('tarifuangharian'.$urut[$i].'')),
+                        'tarifuangharian'  => $this->pregChar($this->input->post('satuan_uangharian'.$urut[$i].'')),
                         'totaluangharian'  => $this->pregChar($this->input->post('uangharian'.$urut[$i].'')),
-                        'tarifinap'  => $this->pregChar($this->input->post('tarifuangpenginapan'.$urut[$i].'')),
+                        'tarifinap'  => $this->pregChar($this->input->post('satuan_uangpenginapan'.$urut[$i].'')),
                         'totalinap'  => $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].'')),
                         'tarifrep'  => $this->pregChar($this->input->post('uangrep'.$urut[$i].'')),
                         'totalrep'  => $this->pregChar($this->input->post('uangrep'.$urut[$i].'')),
                         'taksiasal'  => $this->pregChar("0"),
                         'taksitujuan'  => $this->pregChar("0"),
                         'lain'  => $this->pregChar($this->input->post('uangdll'.$urut[$i].'')),
-                        'transport'  => $this->pregChar($this->input->post('uangtransportasi'.$urut[$i].'')),
+                        'transport'  => $totaluangtransport,
                         'totaltravel'  => $this->pregChar($this->input->post('gol'.$urut[$i].'')),
 
                         'tariftaxi'  => $this->pregChar($this->input->post('uangtaxi'.$urut[$i].'')),
@@ -309,8 +313,10 @@ class SuratTugas extends CI_Controller {
 
                    $totaluangharian += $this->pregChar($this->input->post('uangharian'.$urut[$j].''));
                    $totaluanginap += $this->pregChar($this->input->post('uangpenginapan'.$urut[$j].''));
-                   $sum += $this->pregChar($this->input->post('uangharian'.$urut[$j].'')) + $this->pregChar($this->input->post('uangpenginapan'.$urut[$j].''));
+                   
+                   $sum += $totaluangharian + $totaluanginap + $totaluangtransport;
                        $this->db->insert('d_itemcs',$data_ItemCS);$j++;
+                    
                
 
                 $totalRealisasi += $this->pregChar($this->input->post('total'.$urut[$i].'')); 
