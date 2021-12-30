@@ -56,6 +56,8 @@
                     <tr>
                         <th style="width: 5%" >NO</th>
                         <th>STATUS</th>
+												<th>PENGGUNA</th>
+												<th>PPK</th>
                         <th style="width: 30%" >NOMOR, TANGGAL, URAIAN SURAT TUGAS</th>
                         <th style="width: 15%" >MULAI</th>
                         <th style="width: 15%" >SELESAI</th>
@@ -71,6 +73,8 @@
                         <tr>
                             <td><?php echo $no ?></td>
                             <td></td>
+														<td><?php echo $this->session->userdata('username') ?></td>
+														<td></td>
                             <td><b><?php echo $u->nost ?>   <?php echo cek_tgl_st($u->tglst) ?></b>
                                 <br>
                                 <?php echo $u->uraianst ?>
@@ -97,18 +101,23 @@
                                                 </ul>
                                         </div>
                                         <div class="col s4">
-                                          <a href="#" class="tooltipped" data-position="top" data-tooltip="Approve" ><i class="material-icons teal-text">check_box</i></a>
+																					<a href="<?= site_url('Transaksi/SuratTugas/ubah/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex)?>" class="tooltipped" data-position="bottom" data-tooltip="Ubah ST" ><i class="material-icons green-text">edit</i></a>
                                         </div>  
                                     </div>
 
                                 <li class="divider"></li>
 
                                 <div class="row" style="padding-top: 10px">
-                                  <div class="col s6">
-                                    <a href="<?= site_url('Transaksi/SuratTugas/ubah/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex)?>" class="tooltipped" data-position="bottom" data-tooltip="Ubah ST" ><i class="material-icons green-text">edit</i></a>
+                                  <div class="col s4">
+                                    
+																		<a href="#" class="tooltipped" data-position="bottom" data-tooltip="Approve PPK" ><i class="material-icons teal-text">check_box</i></a>
                                   </div>
 
-                                  <div class="col s6">
+                                  <div class="col s4">
+																	<a href="#" class="tooltipped" data-position="bottom" data-tooltip="Approve KPA/Es II" ><i class="material-icons grey-text">check_box</i></a>
+                                  </div>
+
+																	<div class="col s4">
                                     <a href="javascript:;" onclick="Delete('<?= $u->id ?>')" class="tooltipped" data-position="bottom" data-tooltip="Hapus ST" ><i class="material-icons red-text">delete</i></a>
                                   </div>
                                 </div>
