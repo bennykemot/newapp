@@ -266,10 +266,71 @@ $color="grey-text";
 function ApproveKPA($data){
   $color="grey-text";
     if($data == 3){
-            $color ="brown-text";
+            $color ="yellow-text";
     }
     return $color;
   }
+
+  function getDisableKPA($data){
+    $disabled="";
+      if($data == 1){
+              $disabled ="pointer-events: none;";
+      }
+      return $disabled;
+    }
+
+  function getDisablePPK($data){
+    $disabled="";
+      if($data == 3){
+              $disabled ="pointer-events: none;";
+      }
+      return $disabled;
+    }
+
+  function getComplete($data){
+    $none="";
+      if($data == 3){
+              $none ="d-none";
+      }
+      return $none;
+    }
+
+    function getForAdminOpr($data){
+      $none="";
+        if($data == 3 || $data == 5 || $data == 7 ){
+                $none ="d-none";
+        }
+        return $none;
+      }
+
+  function getDisableforKPA($data){
+    $disabled="pointer-events: none;";
+      if($data == 3){
+              $disabled ="";
+      }
+      return $disabled;
+    }
+
+  function getDisableforPPK($data){
+    $disabled="pointer-events: none;";
+      if($data == 5 || $data == 7){
+              $disabled ="";
+      }
+      return $disabled;
+    }
+
+    function getStatusId($data){
+      $span = "";
+
+      if($data == 1){
+        $span = "<span class='users-view-status chip green lighten-5 green-text'>".$data."</span>";
+      }else if($data == 2){
+        $span = "<span class='users-view-status chip red lighten-5 red-text'>".$data."</span>";
+      }else if($data == 3){
+        $span = "<span class='users-view-status chip cyan lighten-5 cyan-text'>".$data."</span>";
+      }
+      return $span;
+    }
 
   
   

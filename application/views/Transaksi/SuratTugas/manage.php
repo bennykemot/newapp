@@ -49,7 +49,7 @@
                               ?>
                         <tr>
                             <td><?php echo $no ?></td>
-                            <td><?php echo $u->status_id ?></td>
+                            <td class="text-center"><?= getStatusId($u->status_id)?></td>
 														<td><?php echo cek_tgl_st(date("Y-m-d",strtotime($u->created_at))) ?></td>
                             <td><b><?php echo $u->nost ?>   <?php echo cek_tgl_st($u->tglst) ?></b>
                                 <br>
@@ -63,7 +63,9 @@
                                     <div class="row">
 
                                         <div class="col s4">
-                                          <a href="<?= site_url('Transaksi/TambahTim/TambahTim/'.$u->id.'/'.$u->kdindex)?>" class="tooltipped" data-position="top" data-tooltip="Anggota" ><i class="material-icons cyan-text">people</i></a>
+                                          <a href="<?= site_url('Transaksi/TambahTim/TambahTim/'.$u->id.'/'.$u->kdindex)?>" 
+                                            class="tooltipped <?=getForAdminOpr($role_id)?> <?=getComplete($u->status_id)?>" 
+                                              data-position="top" data-tooltip="Anggota" ><i class="material-icons cyan-text">people</i></a>
                                         </div>
                                         <div class="col s4">
                                           <a href="#" class="dropdown-trigger tooltipped" data-position="top" data-tooltip="Printout" href="#" data-target="dropdown'<?=$u->id?>'" ><i class="material-icons orange-text">remove_red_eye</i></a>
@@ -77,7 +79,9 @@
                                                 </ul>
                                         </div>
                                         <div class="col s4">
-																					<a href="<?= site_url('Transaksi/SuratTugas/ubah/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex)?>" class="tooltipped" data-position="bottom" data-tooltip="Ubah ST" ><i class="material-icons green-text">edit</i></a>
+																					<a href="<?= site_url('Transaksi/SuratTugas/ubah/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex)?>" 
+                                            class="tooltipped <?=getForAdminOpr($role_id)?> <?=getComplete($u->status_id)?>" 
+                                            data-position="bottom" data-tooltip="Ubah ST" ><i class="material-icons green-text">edit</i></a>
                                         </div>  
                                     </div>
 
@@ -86,15 +90,21 @@
                                 <div class="row" style="padding-top: 10px">
                                   <div class="col s4">
                                     
-																		<a href="<?= site_url('Transaksi/SuratTugas/approve/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex.'/2')?>" class="tooltipped" data-position="bottom" data-tooltip="Approve PPK" ><i class="material-icons <?=ApprovePPK($u->status_id)?>">check_box</i></a>
+																		<a href="<?= site_url('Transaksi/SuratTugas/approve/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex.'/2')?>" 
+                                      class="tooltipped" style="<?=getDisablePPK($u->status_id)?> <?=getDisableforKPA($role_id)?>" 
+                                      data-position="bottom" data-tooltip="Approve PPK" ><i class="material-icons <?=ApprovePPK($u->status_id)?>">check_box</i></a>
                                   </div>
 
                                   <div class="col s4">
-																	<a href="<?= site_url('Transaksi/SuratTugas/approve/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex.'/3')?>" class="tooltipped" data-position="bottom" data-tooltip="Approve KPA/Es II" ><i class="material-icons <?=ApproveKPA($u->status_id)?>">check_box</i></a>
+																	<a href="<?= site_url('Transaksi/SuratTugas/approve/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex.'/3')?>" 
+                                    class="tooltipped"  style="<?=getDisableKPA($u->status_id)?> <?=getDisableforPPK($role_id)?>" data-position="bottom" 
+                                    data-tooltip="Approve KPA/Es II" ><i class="material-icons <?=ApproveKPA($u->status_id)?>">check_box</i></a>
                                   </div>
 
 																	<div class="col s4">
-                                    <a href="javascript:;" onclick="Delete('<?= $u->id ?>')" class="tooltipped" data-position="bottom" data-tooltip="Hapus ST" ><i class="material-icons red-text">delete</i></a>
+                                    <a href="javascript:;" onclick="Delete('<?= $u->id ?>')" 
+                                    class="tooltipped <?=getForAdminOpr($role_id)?> <?=getComplete($u->status_id)?>" 
+                                    data-position="bottom" data-tooltip="Hapus ST" ><i class="material-icons red-text">delete</i></a>
                                   </div>
                                 </div>
                             </div>
