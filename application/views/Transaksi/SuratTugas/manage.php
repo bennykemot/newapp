@@ -34,6 +34,7 @@
                     <tr>
                         <th style="width: 5%" >NO</th>
                         <th>STATUS</th>
+                        <th>PEREKAM</th>
 												<th>TANGGAL PEMBUATAN</th>
                         <th style="width: 30%" >NOMOR, TANGGAL, URAIAN SURAT TUGAS</th>
                         <th style="width: 15%" >MULAI</th>
@@ -50,6 +51,7 @@
                         <tr>
                             <td><?php echo $no ?></td>
                             <td class="text-center"><?= getStatusId($u->status_id)?></td>
+                            <td><?php echo $u->username ?></td>
 														<td><?php echo cek_tgl_st(date("Y-m-d",strtotime($u->created_at))) ?></td>
                             <td><b><?php echo $u->nost ?>   <?php echo cek_tgl_st($u->tglst) ?></b>
                                 <br>
@@ -114,8 +116,7 @@
                         
                   </tbody>
                 </table>
-                <?php 
-                echo $this->pagination->create_links(); ?>
+                <?php echo $this->pagination->create_links(); ?>
             </div>
           </div>
         </div>

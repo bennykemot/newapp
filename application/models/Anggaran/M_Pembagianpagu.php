@@ -49,6 +49,29 @@ class M_Pembagianpagu extends CI_Model{
      
     }
 
+    function getDataExport($kdsatker,$thang, $userid, $roleid,$unitid){
+        $whereUnitid ="";
+        if($roleid != 1){
+           $whereUnitid = "AND d_bagipagu.unit_id ='.$unitid.'";
+        }
+
+        $query = $this->db->query('SELECT a.*, b.realisasi, b.pagu_index 
+        FROM (SELECT d_pagu.kdprogram, d_pagu.kdgiat, d_pagu.kdoutput, d_pagu.kdsoutput, d_pagu.kdkmpnen,d_pagu.kdskmpnen, d_pagu.kdakun, d_pagu.rupiah, t_akun.nmakun, d_bagipagu.unit_id, t_pejabat.nama, t_unitkerja.nama_unit, t_role.rolename,d_pagu.kdindex
+        from d_pagu JOIN t_akun ON d_pagu.kdakun = t_akun.kdakun 
+        LEFT JOIN d_bagipagu on d_bagipagu.kdindex = d_pagu.kdindex
+        LEFT JOIN t_pejabat ON t_pejabat.id = d_bagipagu.ppk_id 
+        LEFT JOIN t_unitkerja ON t_unitkerja.id = t_pejabat.unitkerja_id 
+        LEFT JOIN t_role ON t_role.id = d_bagipagu.role_id
+        WHERE d_pagu.kdsatker = '.$kdsatker.' AND d_pagu.thang = '.$thang.' '.$whereUnitid.' ORDER BY d_pagu.kdindex) as a 
+        
+        
+        LEFT JOIN (SELECT SUM(d_surattugas.jumlah_realisasi) as realisasi, d_surattugas.kdindex as pagu_index 
+        from d_surattugas WHERE d_surattugas.is_aktif = 1  GROUP BY d_surattugas.kdindex) as b ON a.kdindex = b.pagu_index;');
+
+        return $query->result();
+     
+    }
+
 
     function CRUD($data,$table,$Trigger){
 

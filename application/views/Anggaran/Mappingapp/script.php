@@ -17,7 +17,7 @@
     }
 
     $("#app-select2").select2({
-          dropdownAutoWidth: true,
+          // dropdownAutoWidth: true,
           width: '100%',
           placeholder: "Pilih App",
          ajax: { 

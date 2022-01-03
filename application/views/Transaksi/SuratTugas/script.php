@@ -1125,6 +1125,7 @@ $("#TambahST").click(function (e) {
     .attr("disabled", false);
 
   formData.append('Trigger', 'C')
+  formData.append('user_id', user_session)
   // formData.append('countTim', countTim)
 
   $.ajax({

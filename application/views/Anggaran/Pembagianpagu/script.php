@@ -2,6 +2,7 @@
     var baseurl 	= "<?= base_url('Anggaran/Pembagianpagu/')?>";
     var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";
     var satker_session = "<?= $this->session->userdata("kdsatker")?>"
+    var user_session = "<?= $this->session->userdata("user_id")?>"
 
     $('select').select2().on('select2:open', function() {
       var container = $('.select2-container').last();
@@ -591,6 +592,7 @@ $("#TambahPagu").click(function (e) {
     .attr("disabled", true);
 
   formData.append('Trigger', 'C')
+  formData.append('userid', user_session)
 
   $.ajax({
     type: "POST",
@@ -666,7 +668,7 @@ $("#EditPagu").click(function (e) {
     .attr("disabled", true);
 
   formData.append('Trigger', 'U')
-
+  formData.append('userid', user_session)
   $.ajax({
     type: "POST",
     data: formData,

@@ -6,7 +6,7 @@ class M_SuratTugas extends CI_Model{
         $this->load->database();
 	}
 
-    function getDataNew($kdsatker, $unitid, $roleid, $penjabid){
+    function getDataNew($per_page,$from,$kdsatker, $unitid, $roleid, $penjabid){
         $where="";$whereD="";
         if($roleid != 1){
             $where = "AND d_surattugas.id_unit = ".$unitid."";
@@ -20,8 +20,11 @@ class M_SuratTugas extends CI_Model{
             $whereD = "AND d_surattugas.cs_menyetujui like '%".$cek[0]->nip."%'";
         }
 
-        $query = $this->db->query("SELECT d_surattugas.* from d_surattugas JOIN d_bagipagu ON d_surattugas.kdindex = d_bagipagu.kdindex
-        where d_surattugas.is_aktif = 1 ".$whereD." ".$where." ORDER BY d_surattugas.tglst");
+        $query = $this->db->query("SELECT d_surattugas.*, user.username 
+        from d_surattugas 
+        JOIN d_bagipagu ON d_surattugas.kdindex = d_bagipagu.kdindex
+        JOIN user ON d_surattugas.user_id = user.id where d_surattugas.is_aktif = 1 ".$whereD." ".$where." 
+        ORDER BY d_surattugas.tglst LIMIT ".$from.",".$per_page."");
 
         // $this->db->where('kdsatker', $kdsatker);
         // $this->db->where('is_aktif', 1);
@@ -33,8 +36,28 @@ class M_SuratTugas extends CI_Model{
      
     }
 
-    function Jum($kdsatker){
-         return $this->db->query("select id from d_surattugas where kdsatker = ".$kdsatker."")->num_rows();
+    function Jum($unitid, $roleid, $penjabid){
+
+        $where="";$whereD="";
+        if($roleid != 1){
+            $where = "AND d_surattugas.id_unit = ".$unitid."";
+        }
+
+        if($roleid == 3){
+            $join ="";
+            $whereD = "AND d_bagipagu.ppk_id = ".$penjabid."";
+        }else if($roleid == 5 || $roleid == 7){
+            $cek = $this->db->query("select * from t_pejabat where id = ".$penjabid."")->result();
+            $whereD = "AND d_surattugas.cs_menyetujui like '%".$cek[0]->nip."%'";
+        }
+
+        $query = $this->db->query("SELECT d_surattugas.*, user.username 
+        from d_surattugas 
+        JOIN d_bagipagu ON d_surattugas.kdindex = d_bagipagu.kdindex
+        JOIN user ON d_surattugas.user_id = user.id where d_surattugas.is_aktif = 1 ".$whereD." ".$where." 
+        ORDER BY d_surattugas.tglst");
+
+         return $query->num_rows();
 	}
 
     function getDataUbah($kdindex, $id, $trigger){

@@ -323,11 +323,11 @@ function ApproveKPA($data){
       $span = "";
 
       if($data == 1){
-        $span = "<span class='users-view-status chip green lighten-5 green-text'>".$data."</span>";
+        $span = "<span class='users-view-status chip grey lighten-2 black-text'>".$data."</span>";
       }else if($data == 2){
-        $span = "<span class='users-view-status chip red lighten-5 red-text'>".$data."</span>";
+        $span = "<span class='users-view-status chip teal lighten-2 black-text'>".$data."</span>";
       }else if($data == 3){
-        $span = "<span class='users-view-status chip cyan lighten-5 cyan-text'>".$data."</span>";
+        $span = "<span class='users-view-status chip yellow lighten-2 black-text'>".$data."</span>";
       }
       return $span;
     }
