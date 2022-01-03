@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-use Phpoffice\Phpspreadsheet\Spreadsheet;
-use Phpoffice\Phpspreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Pembagianpagu extends CI_Controller {
 
