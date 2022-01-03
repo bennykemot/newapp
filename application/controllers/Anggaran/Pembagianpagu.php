@@ -1,10 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-// $ci =& get_instance();
-// $ci->load->helper("url");
-require_once 'vendor/autoload.php';
-use phpoffice\PhpSpreadsheet\Spreadsheet;
-use phpoffice\PhpSpreadsheet\Writer\Xlsx;
+use Phpoffice\Phpspreadsheet\Spreadsheet;
+use Phpoffice\Phpspreadsheet\Writer\Xlsx;
 
 class Pembagianpagu extends CI_Controller {
 
@@ -12,9 +9,6 @@ class Pembagianpagu extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->helper("url");
-        
-
-            
 		$this->load->library("datatables");
         $this->load->library('pagination');
 		$this->load->model('Anggaran/M_Pembagianpagu','Pembagianpagu');
@@ -201,8 +195,6 @@ class Pembagianpagu extends CI_Controller {
 		}
 
     function export(){
-
-             
             $kdsatker =  $this->uri->segment(4);
             $thang =  $this->uri->segment(5);
             $userid =  $this->uri->segment(6);

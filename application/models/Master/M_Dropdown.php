@@ -379,14 +379,14 @@ function getData_app($searchTerm="", $kdindex, $Trigger, $kdsoutput){
          //    $fetched_records = $this->db->query("SELECT id, nama_app FROM t_app where id NOT IN (".$res.")");
          // }
 
-         $fetched_records = $this->db->query("SELECT id, nama_app FROM t_app where kdsoutput = '".$kdsoutput."' AND nama_app like '%".$searchTerm."%' ");
+         $fetched_records = $this->db->query("SELECT id, nama_app,kode_app FROM t_app where kdsoutput = '".$kdsoutput."' AND nama_app like '%".$searchTerm."%' ");
          
          $users = $fetched_records->result_array();
 
          // Initialize Array with fetched data
          $data = array();
          foreach($users as $user){
-            $data[] = array("id"=>$user['id'], "text"=>$user['id']. ' - ' .$user['nama_app']);
+            $data[] = array("id"=>$user['id'], "text"=>$user['kode_app']. ' - ' .$user['nama_app']);
          }
          return $data;
    }
