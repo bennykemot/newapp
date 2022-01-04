@@ -36,7 +36,7 @@ class M_SuratTugas extends CI_Model{
         JOIN d_bagipagu ON d_surattugas.kdindex = d_bagipagu.kdindex
         JOIN user ON d_surattugas.user_id = user.id where 
         d_surattugas.is_aktif = 1 AND d_surattugas.kdsatker = ".$kdsatker." ".$whereD." ".$where." 
-        ORDER BY d_surattugas.tglst LIMIT ".$from.",".$per_page."");
+        ORDER BY d_surattugas.created_at LIMIT ".$from.",".$per_page."");
 
         // $this->db->where('kdsatker', $kdsatker);
         // $this->db->where('is_aktif', 1);
