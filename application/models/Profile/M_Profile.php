@@ -129,31 +129,58 @@ class M_Profile extends CI_Model{
 
         }else if($Trigger == "R"){
 
-            $this->db->select('t_satker.nmsatker');
-            $this->db->select('t_satker.kdsatker');
+            // $this->db->select('t_satker.nmsatker');
+            // $this->db->select('t_satker.kdsatker');
     
-            $this->db->select('user.id');
-            $this->db->select('user.password');
-            $this->db->select('user.username');
-            $this->db->select('user.role_id');
-            $this->db->select('user.keterangan');
-            $this->db->select('user.status');
-            $this->db->select('user.unit_id');
-			$this->db->select('user.unit_kerja');
-			$this->db->select('user.pejabat_id');
-            $this->db->select('t_unitkerja.nama_unit');
-            $this->db->select('t_role.rolename');
+            // $this->db->select('user.id');
+            // $this->db->select('user.password');
+            // $this->db->select('user.username');
+            // $this->db->select('user.role_id');
+            // $this->db->select('user.keterangan');
+            // $this->db->select('user.status');
+            // $this->db->select('user.unit_id');
+			// $this->db->select('user.unit_kerja');
+			// $this->db->select('user.pejabat_id');
+			// $this->db->select('t_pejabat.nama');
+            // $this->db->select('t_unitkerja.nama_unit');
+            // $this->db->select('t_role.rolename');
             
             
-            $this->db->from($table);
-            $this->db->join('t_satker', 't_satker.kdsatker = user.kdsatker');
-            $this->db->join('t_role', 't_role.id = user.role_id');
-            $this->db->join('t_unitkerja', 't_unitkerja.id = user.unit_id');
-			$this->db->join('t_pejabat', 't_pejabat.jabatan_id = user.pejabat_id');
-            $this->db->where($data);
-            $query = $this->db->get();
+            // $this->db->from($table);
+            // $this->db->join('t_satker', 't_satker.kdsatker = user.kdsatker');
+            // $this->db->join('t_role', 't_role.id = user.role_id');
+            // $this->db->join('t_unitkerja', 't_unitkerja.id = user.unit_id');
+			// $this->db->join('t_pejabat', 't_pejabat.id = user.pejabat_id');
+            // $this->db->where($data);
+
+			$wherePejabatId = "";
+			$join = "";
+			$select = "";
+			if($table != "NULL" || $table != NULL){
+				$select = "t_pejabat.id, t_pejabat.nama, ";
+				$wherePejabatId = " AND user.pejabat_id = ".$table." ";
+				$join = "JOIN t_pejabat ON t_pejabat.i = user.pejabat_id";
+			}
+
+			$query = $this->db->query("SELECT t_satker.nmsatker, t_satker.kdsatker, 
+										user.id, user.password, user.username, user.role_id, 
+										t_unitkerja.nama_unit, ".$select." t_role.rolename
+
+										FROM user
+										JOIN t_satker ON t_satker.kdsatker = user.kdsatker
+										JOIN t_role ON t_role.id = user.role_id
+										JOIN t_unitkerja ON t_unitkerja.id = user.unit_id
+										".$join."
+
+										WHERE user.id = ".$data." ".$wherePejabatId." ");
+
+			return $query->result();
+
+
+
+            //$query = $this->db->get();
     
-            return $query->row();
+            //return $query->row();
         }
 	}
 
