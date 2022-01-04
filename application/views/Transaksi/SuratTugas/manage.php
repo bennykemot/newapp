@@ -29,17 +29,17 @@
           <!-- <a class="btn modal-trigger col s2" href="#modal2">Tambah Data</a> -->
           <div class="row">
             <div class="col s12">
-              <table id="tb-st-" class="display bordered" style="width:100%;white-space: normal !important;overflow: hidden;">
+              <table id="tb-st-" class="bordered striped fixed fixed" style="white-space: normal;overflow-x : auto">
                   <thead>
                     <tr>
-                        <th style="width: 5%" >NO</th>
+                        <th style="min-width: 5px" >NO</th>
                         <th>STATUS</th>
                         <th>PEREKAM</th>
 												<th>TANGGAL PEMBUATAN</th>
-                        <th style="width: 30%" >NOMOR, TANGGAL, URAIAN SURAT TUGAS</th>
-                        <th style="width: 15%" >MULAI</th>
-                        <th style="width: 15%" >SELESAI</th>
-                        <th style="width: 20%" class="text-center">AKSI</th>
+                        <th style="min-width: 300px" >NOMOR, TANGGAL, URAIAN SURAT TUGAS</th>
+                        <th style="min-width: 150px" >MULAI</th>
+                        <th style="min-width: 150px" >SELESAI</th>
+                        <th style="min-width: 200px" class="text-center">AKSI</th>
                     </tr>
                   </thead>
                   <tbody>

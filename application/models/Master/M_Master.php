@@ -149,7 +149,7 @@ AND a.id_app = b.id_appST; ");
             JOIN d_bagipagu ON d_pagu.kdindex = d_bagipagu.kdindex 
              where d_pagu.kdsatker = ".$kdsatker." 
              ".$where." 
-             AND d_pagu.kdgiat NOT IN (".$this->countpagu().") 
+             AND d_pagu.kdgiat NOT IN (3701,".$this->countpagu().") 
              AND d_pagu.kdakun LIKE '%524%') as a 
              
              LEFT JOIN (SELECT SUM(d_surattugas.jumlah_realisasi) as alokasi, d_surattugas.kdindex as pagu_index 
