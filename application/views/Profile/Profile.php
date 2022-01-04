@@ -54,15 +54,15 @@
             <div class="card-content">
               <div class="row">
                 <div class="col s12">
-                  <table id="page-length-option" class="display" style="word-wrap: break-word;" width="100%">
+                  <table id="tb-user" class="display" style="width:100%;white-space: nowrap !important;overflow: hidden;">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Nama User</th>
-                                <th>Nama Satker</th>
-                                <th>Role</th>
-                                <th style="text-align: center">Status</th>
-                                <th>Keterangan</th>
+                                <th style="width: 5%;">No</th>
+                                <th style="width: 15%;">Nama User</th>
+                                <th style="width: 30%;">Nama Satker</th>
+                                <th style="width: 15%;">Role</th>
+                                <th style="text-align: center; width: 15%">Status</th>
+                                <th style="width: 10%;">Keterangan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>

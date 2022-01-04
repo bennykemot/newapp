@@ -133,6 +133,19 @@ function Reset(idForm) {
       }
     }
 
+		$(document).ready(function() {
+    $('#tb-user').DataTable( {
+
+      lengthMenu: [
+            [10, 25, 50, -1],
+            [10, 25, 50, "All"],
+        ],
+        responsive: true,
+        scrollX: true,
+        info: false
+         } );
+      } );
+
 
 
     //     $("#satker-select2").select2({
@@ -248,6 +261,7 @@ function Reset(idForm) {
      });
 
 		 $('#role-select2').on('change', function() {
+				$('#ppk-select2').val(null).trigger('change');
 				var role = $('#role-select2').val()
 				if(role == 3 || role == 5 || role ==7){
 					document.getElementById("ppk").style.display = "";
@@ -366,7 +380,7 @@ function Reset(idForm) {
            dataType: 'json',
            delay: 250,
            data: function (params) {
-						 var role = $("#role-select2").val()
+						 var role = $("#role-select2_Edit").val()
               return {
 								trigger: "ppk_forProfile",
                 session_satker: satker_session,
@@ -384,12 +398,13 @@ function Reset(idForm) {
          }
      });
 
-		 $('#role-select2-Edit').on('change', function() {
-				var role = $('#role-select2-Edit').val()
+		 $('#role-select2_Edit').on('change', function() {
+			$('#ppk-select2_Edit').val(null).trigger('change');
+				var role = $('#role-select2_Edit').val()
 				if(role == 3 || role == 5 || role ==7){
-					document.getElementById("ppk").style.display = "";
+					document.getElementById("ppk_Edit").style.display = "";
 				}else{
-					document.getElementById("ppk").style.display = "none";
+					document.getElementById("ppk_Edit").style.display = "none";
 				}
 
 		});
@@ -469,6 +484,9 @@ $.ajax({
                 var unit = $("<option selected='selected'></option>").val(data['unit_id']).text(data['unit_kerja'])
                 $("#unit-select2_Edit").append(unit).trigger('change');
 
+								// var ppk = $("<option selected='selected'></option>").val(data['pejabat_id']).text(data['nama'])
+                // $("#ppk-select2_Edit").append(ppk).trigger('change');
+
                 if(data['status'] == 1){
                   var textt = "Aktif"
                 }else{
@@ -480,7 +498,7 @@ $.ajax({
 
                 $('#idUser').val(Id);
 
-              $('#modalEdit').modal('open');
+              	$('#modalEdit').modal('open');
           
           
           }
@@ -492,7 +510,7 @@ $("#EditUser").click(function (e) {
   e.preventDefault();
 
   var btn = $(this);
-  var form = $(this).closest("form");
+  var form = $(this).closest("form");	
   var formData = new FormData($("#FormUser_Edit")[0]);
   var IdForm =  "FormUser_Edit";
 
@@ -501,6 +519,7 @@ $("#EditUser").click(function (e) {
     .attr("disabled", true);
 
   formData.append('Trigger', 'U')
+	
 
   $.ajax({
     type: "POST",
