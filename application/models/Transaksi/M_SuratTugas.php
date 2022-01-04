@@ -10,6 +10,16 @@ class M_SuratTugas extends CI_Model{
         $where="";$whereD="";
         if($roleid != 1){
             $where = "AND d_surattugas.id_unit = ".$unitid."";
+        }else {
+            if($kdsatker == "450491"){
+                if($roleid == 3){
+                $where = "AND d_surattugas.id_unit = ".$unitid."";
+                }else{
+                    $where="";
+                }
+            }else{
+                $where="";
+            }
         }
 
         if($roleid == 3){
