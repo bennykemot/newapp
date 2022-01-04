@@ -84,7 +84,7 @@
                               
                               <td><?php echo $u->keterangan ?></td>
                               <td>
-                                <a href="javascript:;" onclick="Edit('<?= $u->id ?>')"><i class="material-icons green-text">edit</i></a>
+                                <a href="javascript:;" onclick="Edit('<?= $u->id ?>', '<?= $u->pejabat_id?>')"><i class="material-icons green-text">edit</i></a>
                                 <a href="javascript:;" onclick="Delete('<?= $u->id ?>')"><i class="material-icons red-text">delete</i></a>
                               </td>
                           </tr>

@@ -9,29 +9,10 @@ function Reset(idForm) {
   $('.unitkerja-select2').val(null).trigger('change');
 }
 
-// $('#exampleModal').on('scroll', function (event) {
-//   $(this).find(".select2").each(function () {
-//     $(this).select2({ dropdownParent: $(this).parent() });
-//   });
-// });
-
 
 	  var baseurl 	= "<?= base_url('Profile/Profile/')?>";
     var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";
     var satker_session = "<?= $this->session->userdata("kdsatker")?>"
-
-
-    // $('#modal2').on('scroll', function (event) {
-    //   $(this).find(".select2").each(function () {
-    //     $(this).select2({ dropdownParent: $(this).parent() });
-    //   });
-    // });
-
-    // $('#modalEdit').on('scroll', function (event) {
-    //   $(this).find(".select2").each(function () {
-    //     $(this).select2({ dropdownParent: $(this).parent() });
-    //   });
-    // });
 
     var grid_detail = "#tabel_user";
     var is_set_grid_detail = false;
@@ -275,7 +256,7 @@ function Reset(idForm) {
         dropdownAutoWidth: true,
           width: '100%',
           dropdownParent: "#modal2",
-          placeholder: "Pilih Role",
+          placeholder: "Pilih Status",
         data: [{
             id: 0,
             text: "Non - Aktif"
@@ -413,7 +394,7 @@ function Reset(idForm) {
         dropdownAutoWidth: true,
           width: '100%',
           dropdownParent: "#modalEdit",
-          placeholder: "Pilih Role",
+          placeholder: "Pilih Status",
         data: [{
             id: 0,
             text: "Non - Aktif"
@@ -461,11 +442,11 @@ $("#TambahUser").click(function (e) {
       });
   });
 
-  function Edit(Id){
+  function Edit(Id, Pejabat){
 
 $.ajax({
       url : baseurl + "Action",
-      data: {"id": Id, "Trigger": "R"},
+      data: {"id": Id, "Trigger": "R", "pejabat" : Pejabat},
       type: "post",
       dataType: "JSON",
       success: function(data)
@@ -591,11 +572,7 @@ function Execute(Id) {
             })
     }
 
-    var select2Instance = $(selectNode).data('select2');
-select2Instance.on('results:message', function(params){
-  this.dropdown._resizeDropdown();
-  this.dropdown._positionDropdown();
-});
+
 
     $(function () {
 
