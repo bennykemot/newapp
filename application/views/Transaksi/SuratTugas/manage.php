@@ -22,6 +22,7 @@
         </div>
     </div>
 
+		<div class="row">
     <div class="col s12">
       <div class="card">
         <div class="card-content">
@@ -29,7 +30,7 @@
           <!-- <a class="btn modal-trigger col s2" href="#modal2">Tambah Data</a> -->
           <div class="row">
             <div class="col s12">
-              <table id="tb-st-" class="display bordered" style="width:100%;white-space: normal !important;overflow: hidden;">
+              <table id="tb-st" class="display bordered" style="width:100%;white-space: normal !important;overflow: hidden;">
                   <thead>
                     <tr>
                         <th style="width: 5%" >NO</th>
@@ -122,6 +123,7 @@
         </div>
       </div>
     </div>
+														</div>
 
 
     <div id="theme-cutomizer-out" class="theme-cutomizer sidenav row">
