@@ -78,7 +78,8 @@ class M_Master extends CI_Model {
 $query = $this->db->query("SELECT a.*, b.alokasi, b.pagu_index, b.id_tahapan, b.id_appST 
 FROM (SELECT d_pagu.kdindex, CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode, 
 d_detailapp.rupiah_tahapan, d_detailapp.tahapan, d_detailapp.id_app,r_tahapan.nama_tahapan,t_app.nama_app 
-FROM d_pagu JOIN d_bagipagu ON d_pagu.kdindex = d_bagipagu.kdindex 
+FROM d_pagu 
+LEFT JOIN d_bagipagu ON d_pagu.kdindex = d_bagipagu.kdindex 
 JOIN d_detailapp ON d_pagu.kdindex = d_detailapp.kdindex 
 JOIN r_tahapan on d_detailapp.tahapan = r_tahapan.id 
 JOIN t_app on d_detailapp.id_app = t_app.id 
@@ -195,9 +196,9 @@ AND a.id_app = b.id_appST; ");
       
             }
 
-         function getData_Kota($kdkabkota){
+         function getData_Kota($kdkabkota, $kdlokasi){
 
-            $query = $this->db->query("SELECT CONCAT(id_kota,'-',id,'-',nama_kota) as idkota , CONCAT(nama_provinsi,'-',nama_kota) as valkota from r_uangharian where id_kota = ".$kdkabkota."");
+            $query = $this->db->query("SELECT CONCAT(id_kota,'-',id,'-',nama_kota) as idkota , CONCAT(nama_provinsi,'-',nama_kota) as valkota from r_uangharian where id_kota = ".$kdkabkota." AND id_provinsi = ".$kdlokasi."");
             return $query->result();
       
             }

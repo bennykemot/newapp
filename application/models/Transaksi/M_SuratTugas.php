@@ -92,7 +92,8 @@ class M_SuratTugas extends CI_Model{
             t_pejabat.nama as nama_ttd,
             d_surattugas.id as idst,
 
-            t_satker.kdkabkota
+            t_satker.kdkabkota,
+            t_satker.kdlokasi
             
             FROM d_surattugas 
             JOIN d_bagipagu on d_surattugas.kdindex = d_bagipagu.kdindex

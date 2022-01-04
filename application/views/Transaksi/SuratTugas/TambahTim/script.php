@@ -125,7 +125,7 @@ function formatRupiah(angka){
 
     $.ajax({
     url : master_baseurl + "getKota",
-    data: {"kdkabkota": $('#kdkabkota').val(), Trigger :"default"},
+    data: {"kdkabkota": $('#kdkabkota').val(),"kdlokasi": $('#kdlokasi').val(), Trigger :"default"},
     type: "post",
     dataType: "JSON",
     success: function(data)
@@ -277,7 +277,7 @@ function selectRefresh(x){
 
               $.ajax({
               url : master_baseurl + "getKota",
-              data: {"kdkabkota": $('#kdkabkota').val(), Trigger :"default"},
+              data: {"kdkabkota": $('#kdkabkota').val(),"kdlokasi": $('#kdlokasi').val(), Trigger :"default"},
               type: "post",
               dataType: "JSON",
               success: function(data)
