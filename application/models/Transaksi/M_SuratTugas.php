@@ -8,9 +8,10 @@ class M_SuratTugas extends CI_Model{
 
     function getDataNew($per_page,$from,$kdsatker, $unitid, $roleid, $penjabid){
         $where="";$whereD="";
-        if($roleid != 1){
-            $where = "AND d_surattugas.id_unit = ".$unitid."";
-        }else {
+        
+        if($roleid == 1){
+            $where = "";
+        }else{
             if($kdsatker == "450491"){
                 if($roleid == 3){
                 $where = "AND d_surattugas.id_unit = ".$unitid."";
@@ -33,7 +34,8 @@ class M_SuratTugas extends CI_Model{
         $query = $this->db->query("SELECT d_surattugas.*, user.username 
         from d_surattugas 
         JOIN d_bagipagu ON d_surattugas.kdindex = d_bagipagu.kdindex
-        JOIN user ON d_surattugas.user_id = user.id where d_surattugas.is_aktif = 1 ".$whereD." ".$where." 
+        JOIN user ON d_surattugas.user_id = user.id where 
+        d_surattugas.is_aktif = 1 AND d_surattugas.kdsatker = ".$kdsatker." ".$whereD." ".$where." 
         ORDER BY d_surattugas.tglst LIMIT ".$from.",".$per_page."");
 
         // $this->db->where('kdsatker', $kdsatker);
