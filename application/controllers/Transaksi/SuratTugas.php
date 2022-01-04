@@ -429,8 +429,8 @@ class SuratTugas extends CI_Controller {
 						SELECT t_kopsurat.* FROM t_kopsurat
 
 						JOIN t_unitkerja ON t_unitkerja.grup_id = t_kopsurat.kdunit
-						JOIN user ON user.unit_id = t_unitkerja.id
-						WHERE user.unit_id = ".$kdunit." ")->result_array();
+						
+						WHERE t_unitkerja.id = ".$kdunit." ")->result_array();
 
 
         if(count($data['ubah']) > 0){
