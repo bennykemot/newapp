@@ -70,27 +70,27 @@
    <div id="ecommerce-offer">
          <div class="row">
             <div class="col s12 m4">
-               <div class="card gradient-shadow grey lighten-2 border-radius-3 animate fadeUp">
+               <div class="card gradient-shadow grey lighten-3 border-radius-3 animate fadeUp">
                   <div class="card-content center">
-                     <img src="<?= base_url().'assets'?>/app-assets/images/icon/apple-watch.png" class="width-40 border-round z-depth-5 responsive-img" alt="image">
+                     <img src="<?= base_url().'assets'?>/app-assets/images/icon/letter.png" class="width-40" alt="Pengajuan oleh Operator">
                      <h5 class="black-text lighten-4">19</h5>
                      <p class="black-text lighten-4">Pengajuan oleh Operator</p>
                   </div>
                </div>
             </div>
             <div class="col s12 m4">
-               <div class="card gradient-shadow teal lighten-2 border-radius-3 animate fadeUp">
+               <div class="card gradient-shadow teal lighten-3 border-radius-3 animate fadeUp">
                   <div class="card-content center">
-                     <img src="<?= base_url().'assets'?>/app-assets/images/icon/printer.png" class="width-40 border-round z-depth-5 responsive-img" alt="images">
+                     <img src="<?= base_url().'assets'?>/app-assets/images/icon/file.png" class="width-40" alt="Persetujuan PPK">
                      <h5 class="black-text lighten-4">29</h5>
                      <p class="black-text lighten-4">Persetujuan PPK</p>
                   </div>
                </div>
             </div>
             <div class="col s12 m4">
-               <div class="card gradient-shadow yellow lighten-2 border-radius-3 animate fadeUp">
+               <div class="card gradient-shadow yellow lighten-3 border-radius-3 animate fadeUp">
                   <div class="card-content center">
-                     <img src="<?= base_url().'assets'?>/app-assets/images/icon/laptop.png" class="width-40 border-round z-depth-5 responsive-img" alt="image">
+                     <img src="<?= base_url().'assets'?>/app-assets/images/icon/done.png" class="width-40" alt="Persetujuan Eselon 2/KPA">
                      <h5 class="black-text lighten-4">39</h5>
                      <p class="black-text lighten-4">Persetujuan Eselon 2/KPA</p>
                   </div>

@@ -50,6 +50,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'Main';
-$route['404_override'] = 'pageMissing';
+$route['404_override'] = 'Pagemissing';
 $route['translate_uri_dashes'] = FALSE;
+# Disable Controller access without routing
+$route['(.*)'] = "Pagemissing";
 

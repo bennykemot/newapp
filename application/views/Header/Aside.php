@@ -89,7 +89,7 @@ function mappingD_none($data){
           </i><span class="menu-title" data-i18n="Mail">Mapping App</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
           <i class="material-icons">
           home
           </i><span class="menu-title" data-i18n="Mail">Mapping Lembur</span></a>
@@ -111,25 +111,25 @@ function mappingD_none($data){
           </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
           <i class="material-icons">
           speaker_notes
           </i><span class="menu-title" data-i18n="Mail">Perjadin Diklat</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
           <i class="material-icons">
           book
           </i><span class="menu-title" data-i18n="Mail">ST Non-Biaya</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
           <i class="material-icons">
           business_center
           </i><span class="menu-title" data-i18n="Mail">Lembur</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
           <i class="material-icons">
           call_to_action
           </i><span class="menu-title" data-i18n="Mail">PBJ</span></a>
@@ -170,7 +170,7 @@ function mappingD_none($data){
           </li>
 
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing')?>">
           <i class="material-icons">
           photo_filter
           </i><span class="menu-title" data-i18n="Mail">Mapping Lembur</span></a>
@@ -188,25 +188,25 @@ function mappingD_none($data){
           </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
           <i class="material-icons">
           speaker_notes
           </i><span class="menu-title" data-i18n="Mail">Perjadin Diklat</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
           <i class="material-icons">
           book
           </i><span class="menu-title" data-i18n="Mail">ST Non-Biaya</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
           <i class="material-icons">
           business_center
           </i><span class="menu-title" data-i18n="Mail">Lembur</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('pageMissing/pageMissing')?>f">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>f">
           <i class="material-icons">
           call_to_action
           </i><span class="menu-title" data-i18n="Mail">PBJ</span></a>
