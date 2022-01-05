@@ -14,9 +14,9 @@
                     <div class="col s9">
                         <h6> Pembagian Pagu Anggaran </h6>
                     </div>
-                    <!-- <div class="col s2">
+                    <div class="col s2">
                         <a class="btn modal-trigger green" href="<?= site_url('Anggaran/Pembagianpagu/export/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id.'/'.$unit_id) ?>">Export</a>
-                    </div> -->
+                    </div>
                     <!-- <div class="col s2">
                     <a class="btn modal-trigger" href="#modal2">Tambah Data</a>
                     </div> -->

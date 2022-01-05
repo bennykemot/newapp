@@ -30,6 +30,7 @@ $basepathurl = "$root";
 
 //$basepathurl 				= 'http://103.157.26.149:22/newapp/';
 // $basepathurl 				= 'http://localhost/tst/newapp/';
+//$basepathurl 				= 'http://10.10.20.154/newapp/';
 $config['base_url']         = $basepathurl;
 $config['assets_url']       = $basepathurl.'assets/';
 

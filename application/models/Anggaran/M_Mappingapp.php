@@ -20,7 +20,7 @@ class M_Mappingapp extends CI_Model{
 
             // $query = $this->db->query("SELECT a.*,b.alokasi , c.*
             // FROM 
-            // (SELECT d_pagu.*,t_akun.nmakun FROM bsmart.d_pagu JOIN bsmart.t_akun ON d_pagu.kdakun=t_akun.kdakun 
+            // (SELECT d_pagu.*,t_akun.nmakun FROM d_pagu JOIN t_akun ON d_pagu.kdakun=t_akun.kdakun 
          
             //     WHERE d_pagu.thang=".$thang." ".$kdgiat." AND d_pagu.kdprogram='CH' AND d_pagu.kdsatker=".$kdsatker."
             // ) as a 
@@ -36,7 +36,7 @@ class M_Mappingapp extends CI_Model{
 
         $query = $this->db->query("SELECT a.*,b.alokasi 
         FROM 
-        (SELECT d_pagu.*,t_akun.nmakun FROM bsmart.d_pagu JOIN bsmart.t_akun ON d_pagu.kdakun=t_akun.kdakun 
+        (SELECT d_pagu.*,t_akun.nmakun FROM d_pagu JOIN t_akun ON d_pagu.kdakun=t_akun.kdakun 
             WHERE d_pagu.thang=".$thang." ".$kdgiat." AND d_pagu.kdprogram='CH' AND d_pagu.kdsatker=".$kdsatker.") as a 
          left JOIN 
             (SELECT d_detailapp.kdindex, SUM(d_detailapp.rupiah_tahapan) AS alokasi FROM d_detailapp GROUP BY d_detailapp.kdindex) as b
