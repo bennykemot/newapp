@@ -47,7 +47,7 @@
     </div> -->
   </div>
 
-  <div class="section section-data-tables">
+  <!-- <div class="section section-data-tables"> -->
       <div class="row">
         <div class="col s12">
           <div class="card">
@@ -97,7 +97,7 @@
           </div>
         </div>
       </div>
-  </div>
+  <!-- </div> -->
 
   <?php include('modal.php');?>
   <?php include(APPPATH . 'views/Footer/Footer.php') ?>
