@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <title>View PDF SPD</title>
+    <title>View PDF Kwitansi</title>
     </head>
     <style>
         body{
@@ -100,10 +100,7 @@ function cek_tgl($tanggal){
     
     return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
     }
- 
-	// FUNGSI TERBILANG OLEH : MALASNGODING.COM
-	// WEBSITE : WWW.MALASNGODING.COM
-	// AUTHOR : https://www.malasngoding.com/author/admin
+
  
  
 	function penyebut($nilai) {
@@ -263,7 +260,23 @@ function cek_tgl($tanggal){
             <tr>
                 <td>3</td>
                 <td>Uang Transport<br>- <?=Explodekota($e->kotaasal)?> - <?=Explodekota($e->kotatujuan)?></td>
-                <td style="text-align: right"><br><?=rupiah($e->totaltravel)?></td>
+                <td style="text-align: right"><?=rupiah($e->transport)?></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>- Uang Transport Taxi Bandara<br>
+                    - Uang Transport Angkutan Laut<br>
+                    - Uang Transport Udara<br>
+                    - Uang Transport Darat<br>
+                </td>
+                <td style="text-align: right">
+                <br><?=rupiah($e->taridtaxi)?><br>
+                    <?=rupiah($e->tariflaut)?><br>
+                    <?=rupiah($e->tarifudara)?><br>
+                    <?=rupiah($e->tarifdarat)?><br>
+            
+                </td>
                 <td></td>
             </tr>
             <tr>

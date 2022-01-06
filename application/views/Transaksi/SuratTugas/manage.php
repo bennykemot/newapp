@@ -98,11 +98,11 @@
                                       data-position="bottom" data-tooltip="Approve PPK" ><i class="material-icons <?=ApprovePPK($u->status_id)?>">check_box</i></a>
                                   </div>
 
-                                  <!-- <div class="col s4">
+                                  <div class="col s4">
 																	<a href="<?= site_url('Transaksi/SuratTugas/approve/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex.'/3')?>" 
                                     class="tooltipped"  style="<?=getDisableKPA($u->status_id)?> <?=getDisableforPPK($role_id)?>" data-position="bottom" 
                                     data-tooltip="Approve KPA/Es II" ><i class="material-icons <?=ApproveKPA($u->status_id)?>">check_box</i></a>
-                                  </div> -->
+                                  </div>
 
 																	<div class="col s4">
                                     <a href="javascript:;" onclick="Delete('<?= $u->id ?>')" 
