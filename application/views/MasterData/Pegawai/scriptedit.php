@@ -6,12 +6,17 @@
 	// variabel update
 	var agamaText = "<?= $ubah[0]['agama'] ?>"
 	var pangkatText = "<?= $ubah[0]['nama_pangkat'] ?>"
+	var unitText = "<?= $ubah[0]['namaunit_lengkap'] ?>"
     
 	var $agama = $("<option selected='selected'></option>").val(agamaText).text(agamaText)
 	$("#agama-select2").append($agama).trigger('change');
 
 	var $pangkat = $("<option selected='selected'></option>").val(pangkatText).text(pangkatText)
 	$("#pangkat-select2").append($pangkat).trigger('change');
+
+	var $unit = $("<option selected='selected'></option>").val(unitText).text(unitText)
+	$("#unit-select2").append($unit).trigger('change');
+	
 
 $('select').select2().on('select2:open', function() {
       var container = $('.select2-container').last();
@@ -64,6 +69,32 @@ $("#pangkat-select2").select2({
            data: function (params) {
               return {
                 searchTerm: params.term // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
+		$("#unit-select2").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Unit Kerja",
+         	ajax: { 
+						url: dropdown_baseurl + 'unitkerja',
+						type: "post",
+						dataType: 'json',
+						delay: 250,
+						data: function (params) {
+              return {
+									Trigger: "unit_forPegawai",
+									//kdsatker: "<?= $this->session->userdata("kdsatker")?>",
+									searchTerm: params.term
+									// search term
               };
            },
            processResults: function (response) {
