@@ -444,6 +444,10 @@ $("#TambahUser").click(function (e) {
 
   function Edit(Id, Pejabat){
 
+		if(Pejabat == "" || Pejabat == NULL || Pejabat == "null"){
+			Pejabat = "null"
+		}
+
 $.ajax({
       url : baseurl + "Action",
       data: {"id": Id, "Trigger": "R", "pejabat" : Pejabat},

@@ -144,7 +144,7 @@ class M_Profile extends CI_Model{
 			$wherePejabatId = "";
 			$join = "";
 			$select = "";
-			if($table != "" || $table != null || $table != "null"){
+			if($table != "null"){
 				$select = "t_pejabat.id as pejabat_id, t_pejabat.nama as pejabat_nama, ";
 				$wherePejabatId = " AND user.pejabat_id = ".$table." ";
 				$join = "JOIN t_pejabat ON t_pejabat.id = user.pejabat_id";
