@@ -23,12 +23,24 @@ class SuratTugas extends CI_Controller {
 
     public function Page()
 	{
-        $kdsatker           =  $this->uri->segment(4);
-        $unitid             =  $this->uri->segment(5);
-        $roleid             =  $this->uri->segment(6);
-        $penjabid           =  $this->uri->segment(7);
-        $jumlah_data = $this->SuratTugas->Jum($unitid, $roleid, $penjabid);
-        $config['base_url'] = base_url().'Transaksi/SuratTugas/Page/'.$kdsatker.'/'.$unitid.'/'.$roleid.'/'.$penjabid;
+
+        $kdsatker = $this->session->userdata("kdsatker");
+        $thang = $this->session->userdata("thang");
+        $user_id = $this->session->userdata("user_id");
+        $role_id = $this->session->userdata("role_id");
+        $unit_id = $this->session->userdata("unit_id");
+        $username = $this->session->userdata("username");
+
+        if($role_id == 5 || $role_id == 7 || $role_id == 3){
+            $penjab_id = $this->session->userdata("penjab_id");
+          }else{
+            $penjab_id = $user_id;
+            
+          }
+
+
+        $jumlah_data = $this->SuratTugas->Jum($unit_id, $role_id, $penjab_id);
+        $config['base_url'] = base_url().'Transaksi/SuratTugas/Page';
 		$config['total_rows'] = $jumlah_data;
 		$config['per_page'] = 15;
 
@@ -59,13 +71,13 @@ class SuratTugas extends CI_Controller {
         $config['next_tag_close'] = '</li>';
 
        
-		$from =  $this->uri->segment(8);
+		$from =  $this->uri->segment(4);
         if($from == 1){
             $from = 0;
         }
 		$this->pagination->initialize($config);
         //$data['SuratTugas'] = $this->SuratTugas->getDataNew($config['per_page'], $from, $kdsatker);
-        $data['SuratTugas'] = $this->SuratTugas->getDataNew($config['per_page'], $from,$kdsatker, $unitid, $roleid, $penjabid);
+        $data['SuratTugas'] = $this->SuratTugas->getDataNew($config['per_page'], $from,$kdsatker, $unit_id, $role_id, $penjab_id);
         $this->load->view('Transaksi/SuratTugas/manage',$data);
 	}
 

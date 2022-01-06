@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<?php 
+
+$baseurl 	= $this->config->item('base_url');
+$assets 	= $this->config->item('assets_url');
+$url = 'javascript:window.history.go(-1);';
+
+?>
 <html class="loading" lang="en" data-textdirection="ltr">
   <!-- BEGIN: Head-->
   <head>
@@ -35,7 +42,7 @@
       <img src="<?= base_url().'assets'?>/app-assets/images/gallery/error.jpg" class="bg-image-404" alt="">
       <h1 class="error-code m-0">404</h1>
       <h6 class="mb-2">BAD REQUEST</h6>
-      <a class="btn waves-effect waves-light gradient-45deg-deep-purple-blue gradient-shadow mb-4" href="<?= site_url('Main/Home')?>">Back
+      <a class="btn waves-effect waves-light gradient-45deg-deep-purple-blue gradient-shadow mb-4" href="<?=$url?>">Back
         TO Home</a>
     </div>
   </div>

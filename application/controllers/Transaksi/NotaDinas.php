@@ -87,8 +87,9 @@ class NotaDinas extends CI_Controller {
 		$trigger         =  $this->uri->segment(4);
 		$style           =  $this->uri->segment(5);
 		$id_st           =  $this->uri->segment(6);
-		$a              = $this->uri->segment(7);
-        $kdindex        = str_replace("%20", " ", $a);
+		$unitId = $this->session->userdata('unit_id');
+		$kdsatker = $this->session->userdata('kdsatker');
+		
 
 		$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 
 			'format' => 'A4-'.$style.'',
@@ -100,6 +101,8 @@ class NotaDinas extends CI_Controller {
 			'margin_bottom' => 6,
 			]);
 		if($trigger == "costsheet"){
+			$a              = $this->uri->segment(7);
+        	$kdindex        = str_replace("%20", " ", $a);
 
 			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
 			$data['cs']= $this->NotaDinas->getData_costsheet($id_st, $kdindex);
@@ -112,7 +115,7 @@ class NotaDinas extends CI_Controller {
 
 			
 		}else if($trigger == "spd"){
-			$kdsatker = $this->session->userdata('kdsatker');
+			//$kdsatker = $this->session->userdata('kdsatker');
 			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
 			if(count($data['export']) > 0){
 				$html = $this->load->view('Transaksi/ExportViews/SPD.php',$data,true);
@@ -133,8 +136,6 @@ class NotaDinas extends CI_Controller {
 			}
 
 		}else if($trigger == "kwitansi"){
-			$unitId = $this->session->userdata('unit_id');
-			$kdsatker = $this->session->userdata('kdsatker');
 			$data['bendahara'] = $this->NotaDinas->getBendahara_export($kdsatker,$unitId);
 
 			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
@@ -145,8 +146,6 @@ class NotaDinas extends CI_Controller {
 				$this->Error_exp();
 			}
 		}else if($trigger == "rincian_biaya"){
-			$unitId = $this->session->userdata('unit_id');
-			$kdsatker = $this->session->userdata('kdsatker');
 			$data['bendahara'] = $this->NotaDinas->getBendahara_export($kdsatker,$unitId);
 
 			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
@@ -177,9 +176,6 @@ class NotaDinas extends CI_Controller {
 			}
 			
 		}else if($trigger == "nominatif"){
-			$kdsatker = $this->session->userdata('kdsatker');
-			$unitId = $this->session->userdata('unit_id');
-
 			$data['bendahara'] = $this->NotaDinas->getBendahara_export($kdsatker,$unitId);
 
 			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);

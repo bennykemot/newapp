@@ -706,8 +706,8 @@ function getData_ttd($searchTerm="",$Trigger,$kdsatker){
                   $this->db->select('nama');
                   $this->db->select('nip');
                   $this->db->where("nama like '%".$searchTerm."%' ");
-                  $this->db->where("jabatan_id", "6");
-                  $this->db->or_where("jabatan_id", "5");
+                  $this->db->where("jabatan_id", 6);
+                  $this->db->or_where("jabatan_id", 5);
                   $this->db->where("kdsatker", $kdsatker);
                   
                   $fetched_records = $this->db->get('t_pejabat');
@@ -728,6 +728,7 @@ function getData_ttd($searchTerm="",$Trigger,$kdsatker){
                   $this->db->where("nama like '%".$searchTerm."%' ");
                   $this->db->where("kdsatker", $kdsatker);
                   $this->db->where("jabatan_id", 5);
+                  // $this->db->where("jabatan_id", 7);
                   $fetched_records = $this->db->get('t_pejabat');
                   $users = $fetched_records->result_array();
 

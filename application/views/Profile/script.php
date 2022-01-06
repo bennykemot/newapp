@@ -465,6 +465,14 @@ $.ajax({
                 var unit = $("<option selected='selected'></option>").val(data['unit_id']).text(data['unit_kerja'])
                 $("#unit-select2_Edit").append(unit).trigger('change');
 
+                if(Pejabat != null || Pejabat != "null"){
+                  var pejabat = $("<option selected='selected'></option>").val(data['pejabat_id']).text(data['pejabat_nama'])
+                  $("#ppk-select2_Edit").append(pejabat).trigger('change');
+                }
+
+                
+
+
 								// var ppk = $("<option selected='selected'></option>").val(data['pejabat_id']).text(data['nama'])
                 // $("#ppk-select2_Edit").append(ppk).trigger('change');
 

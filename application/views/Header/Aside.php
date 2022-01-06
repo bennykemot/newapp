@@ -83,7 +83,7 @@ function mappingD_none($data){
 
           <!-- DIGRUP ANGGARAN -->
 
-          <li class="bold <?=mappingD_none($kdsatker)?>"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Mappingapp/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id.'/'.$unit_id)?>">
+          <li class="bold <?=mappingD_none($kdsatker)?>"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Mappingapp/Page')?>">
           <i class="material-icons">
           view_comfy
           </i><span class="menu-title" data-i18n="Mail">Mapping App</span></a>
@@ -105,7 +105,7 @@ function mappingD_none($data){
           </li>
 
           <!-- DIGRUP RENCANA KEGIATAN -->
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/SuratTugas/Page/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$penjab_id.'/0')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/SuratTugas/Page/0')?>">
           <i class="material-icons">
           email
           </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>
@@ -157,13 +157,13 @@ function mappingD_none($data){
           </li>
 
           
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Pembagianpagu/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id.'/'.$unit_id)?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Pembagianpagu/Page')?>">
           <i class="material-icons">
           turned_in_not
           </i><span class="menu-title" data-i18n="Mail">Pembagian Pagu</span></a>
           </li>
 
-          <li class="bold <?=mappingD_none($kdsatker)?>"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Mappingapp/Page/'.$kdsatker. '/'.$thang.'/'.$user_id.'/'.$role_id.'/'.$unit_id)?>">
+          <li class="bold <?=mappingD_none($kdsatker)?>"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Mappingapp/Page')?>">
           <i class="material-icons">
           view_comfy
           </i><span class="menu-title" data-i18n="Mail">Mapping App</span></a>
@@ -182,7 +182,7 @@ function mappingD_none($data){
           </li>
 
           <!-- DIGRUP RENCANA KEGIATAN -->
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/SuratTugas/Page/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$penjab_id.'/0')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/SuratTugas/Page/0')?>">
           <i class="material-icons">
           email
           </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>

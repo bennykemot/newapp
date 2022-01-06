@@ -17,12 +17,22 @@ class MappingApp extends CI_Controller {
 	{
 
         
-        $kdsatker =  $this->uri->segment(4);
-        $thang =  $this->uri->segment(5);
-        $userid =  $this->uri->segment(6);
-        $roleid =  $this->uri->segment(7);
-        $unit_id =  $this->uri->segment(8);
-        $data['mapp'] = $this->Mappingapp->getData_Mapping($kdsatker,$thang,$userid,$roleid,$unit_id);
+        // $kdsatker =  $this->uri->segment(4);
+        // $thang =  $this->uri->segment(5);
+        // $userid =  $this->uri->segment(6);
+        // $roleid =  $this->uri->segment(7);
+        // $unit_id =  $this->uri->segment(8);
+
+        $kdsatker = $this->session->userdata("kdsatker");
+        $thang = $this->session->userdata("thang");
+        $user_id = $this->session->userdata("user_id");
+        $role_id = $this->session->userdata("role_id");
+        $unit_id = $this->session->userdata("unit_id");
+        $username = $this->session->userdata("username");
+
+
+        
+        $data['mapp'] = $this->Mappingapp->getData_Mapping($kdsatker,$thang,$user_id,$role_id,$unit_id);
 
         // var_dump($data['mapp']);exit;
         //$data['head'] = $this->db->query("SELECT SUM(rupiah) as jumlah, norevisi, tgrevisi from d_pagu WHERE d_pagu.kdsatker = ".$kdsatker." AND d_pagu.thang = ".$thang." ")->result();

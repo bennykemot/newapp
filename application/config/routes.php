@@ -53,5 +53,5 @@ $route['default_controller'] = 'Main';
 $route['404_override'] = 'Pagemissing';
 $route['translate_uri_dashes'] = FALSE;
 # Disable Controller access without routing
-$route['(.*)'] = "Pagemissing";
+// $route['(.*)'] = "Pagemissing";
 
