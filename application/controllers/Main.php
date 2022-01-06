@@ -8,11 +8,14 @@ class Main extends CI_Controller {
 		parent::__construct();
 		$this->load->helper("url");
 		$this->load->model('Master/M_Dropdown','Dropdown');
+		$this->load->model('Master/M_Master','Master');
+		$this->load->library('session');
 	}
 	
 
 	public function index()
 	{
+		
 		$data['thang'] = $this->Dropdown->getData_thang_nonAjax();
 		//echo json_encode($response);
 		$this->load->view('Login/Login',$data);
@@ -20,6 +23,25 @@ class Main extends CI_Controller {
 
 	public function Home()
 	{
-		$this->load->view('Home/Home');
+
+		$kdsatker = $this->session->userdata("kdsatker");
+        $thang = $this->session->userdata("thang");
+        $user_id = $this->session->userdata("user_id");
+        $role_id = $this->session->userdata("role_id");
+        $unit_id = $this->session->userdata("unit_id");
+        $username = $this->session->userdata("username");
+
+        if($role_id == 5 || $role_id == 7 || $role_id == 3){
+            $penjab_id = $this->session->userdata("penjab_id");
+          }else{
+            $penjab_id = $user_id;
+            
+          }
+
+		$data['status1'] = $this->Master->status_st($kdsatker, $unit_id, $role_id, $penjab_id,'1');
+		$data['status2'] = $this->Master->status_st($kdsatker, $unit_id, $role_id, $penjab_id,'2');
+		$data['status3'] = $this->Master->status_st($kdsatker, $unit_id, $role_id, $penjab_id,'3');
+
+		$this->load->view('Home/Home', $data);
 	}
 }

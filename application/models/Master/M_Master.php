@@ -202,4 +202,38 @@ AND a.id_app = b.id_appST; ");
             return $query->result();
       
             }
+
+         function status_st($kdsatker, $unitid, $roleid, $penjabid, $status){
+            $where="";$whereD="";
+            
+            if($roleid == 1){
+               $where = "";
+            }else{
+               if($kdsatker == "450491"){
+                  if($roleid == 3){
+                  $where = "AND d_surattugas.id_unit = ".$unitid."";
+                  }else{
+                        $where="";
+                  }
+               }else{
+                  $where="";
+               }
+            }
+   
+            if($roleid == 3){
+               $join ="";
+               $whereD = "AND d_bagipagu.ppk_id = ".$penjabid."";
+            }else if($roleid == 5 || $roleid == 7){
+               $cek = $this->db->query("select * from t_pejabat where id = ".$penjabid."")->result();
+               $whereD = "AND d_surattugas.cs_menyetujui like '%".$cek[0]->nip."%'";
+            }
+   
+            $query = $this->db->query("SELECT d_surattugas.*
+            from d_surattugas 
+            JOIN d_bagipagu ON d_surattugas.kdindex = d_bagipagu.kdindex
+            WHERE d_surattugas.is_aktif = 1 AND d_surattugas.status_id = ".$status." AND d_surattugas.kdsatker = ".$kdsatker." ".$whereD." ".$where."");
+   
+            return $query->num_rows();
+         
+      }
    }
