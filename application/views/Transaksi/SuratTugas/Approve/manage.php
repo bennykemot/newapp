@@ -10,9 +10,16 @@
                         <button type="button" class="btn-floating" style=""><i class="material-icons">
                         done</i></button>
                     </div>
-                    <div class="col s11">
+                    <div class="col s8">
                         <h6> Form Persetujuan</h6>
                     </div>
+
+                    <div class="col s3 text-right">
+                        <h6>
+                            <p clas="purple-text"><?= $ubah[0]['status_id'] ?> - Pengajuan oleh Operator</p>
+                        </h6>
+                    </div>
+                  
                   
                 </div>
             </div>
@@ -113,7 +120,8 @@
                             <div class="input-field col s2"><label>Penandatangan</label></div>
 
                             <div class="input-field col s10 " >
-                            <select readonly class="browser-default" id="ttd" name="ttd"></select>
+                            <!-- <select readonly class="browser-default" id="ttd" name="ttd"></select> -->
+                            <input readonly id="bebananggaran" name="bebananggaran" value="<?= $ubah[0]['nama_ttd'] ?>" readonly>
                             </div>
                         </div>
 
@@ -121,7 +129,8 @@
                             <div class="input-field col s2"><label>Yang Menyetujui</label></div>
 
                             <div class="input-field col s10 " >
-                            <select readonly class="browser-default" name="cs_menyetujui" id="cs_menyetujui"></select>
+                            <!-- <select readonly class="browser-default" name="cs_menyetujui" id="cs_menyetujui"></select> -->
+                            <input readonly id="menyetujui" name="menyetujui" readonly>
                             </div>
                         </div>
 
@@ -129,7 +138,8 @@
                             <div class="input-field col s2"><label>Yang Mengusulkan</label></div>
 
                             <div class="input-field col s10 " >
-                            <select readonly class="browser-default" name="cs_mengajukan" id="cs_mengajukan"></select>
+                            <!-- <select readonly class="browser-default" name="cs_mengajukan" id="cs_mengajukan"></select> -->
+                            <input readonly id="mengajukan" name="mengajukan" readonly>
                             </div>
                         </div>
 
@@ -227,10 +237,7 @@
                         <td><input readonly style="min-width: 150px" type="text" id="uangdll<?=$j?>" name="uangdll<?=$j?>" onkeyup="AllCount('<?=$j?>','all')" value="<?=rupiah($ubah[$i]['lain'])?>"></td>
                         <td><input readonly style="min-width: 150px" type="text" id="uangrep<?=$j?>" name="uangrep<?=$j?>" onkeyup="AllCount('<?=$j?>','all')" value="<?=rupiah($ubah[$i]['tarifrep'])?>"></td>
                         <td><input readonly style="min-width: 150px" type="text" readonly id="total<?=$j?>"  name="total<?=$j?>" value="<?=rupiah($ubah[$i]['jumlah'])?>"></td>
-                        <td><select readonly class="select2 browser-default" id="jnstransportasi<?=$j?>" name="jnstransportasi<?=$j?>">
-                            <option value="Kendaraan Umum">Kendaraan Umum</option>
-                            <option value="Kendaraan Dinas">Kendaraan Dinas</option>
-                        </select</td>
+                        <td><input readonly class="select2 browser-default" id="jnstransportasi<?=$j?>" name="jnstransportasi<?=$j?>" value="<?=$ubah[$i]['jnstransportasi']?>"></td>
                         <td><select readonly placeholder="Pilih Penandatangan SPD"  class="ttd_spd browser-default" id="ttd_spd<?=$j?>" name="ttd_spd<?=$j?>" onclick="ubahTtdSpd('<?=$j?>')">
                             <option selected value="<?=$ubah[$i]['id_ttd_spd']?>"> <?=$ubah[$i]['nama_ttd_spd']?> </option>
                         </select></td>

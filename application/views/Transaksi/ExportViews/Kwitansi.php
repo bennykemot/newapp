@@ -271,7 +271,7 @@ function cek_tgl($tanggal){
                     - Uang Transport Darat<br>
                 </td>
                 <td style="text-align: right">
-                <br><?=rupiah($e->taridtaxi)?><br>
+                <br><?=rupiah($e->tariftaxi)?><br>
                     <?=rupiah($e->tariflaut)?><br>
                     <?=rupiah($e->tarifudara)?><br>
                     <?=rupiah($e->tarifdarat)?><br>

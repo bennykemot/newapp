@@ -14,6 +14,8 @@ if(role_session == 1){
   unit_session = 0;
 }
 
+var status_st = "<?= $ubah[0]['status_id'] ?>"
+
 if(document.getElementById('counting') != null){
   var countingDiv = document.getElementById('counting');
   var countTimTable = countingDiv.getElementsByClassName('namaTimHardcode').length;
@@ -197,11 +199,14 @@ $("#select-bebananggaran").append($beban_anggaran).trigger('change');
 var $ttd = $("<option selected='selected'></option>").val(TTDvalue).text(TTDtext)
 $("#ttd").append($ttd).trigger('change');
 
+
 var $menyetujui = $("<option selected='selected'></option>").val(TTDmenyetujuivalue).text(TTDmenyetujuitext[2])
 $("#cs_menyetujui").append($menyetujui).trigger('change');
 
 var $mengajukan = $("<option selected='selected'></option>").val(TTDmengajukanvalue).text(TTDmengajukantext[2])
 $("#cs_mengajukan").append($mengajukan).trigger('change');
+
+
 
 
 
@@ -1312,10 +1317,18 @@ for($loop = 0 ; $loop < countTim; $loop++){
 
 
 
+
+
   btn
     .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
     .attr("disabled", true);
 
+    if(status_st == 3){
+      formData.append('spj_ttd', TTDvalue)
+      formData.append('spj_menyetujui', TTDmenyetujuivalue)
+      formData.append('spj_mengajukan', TTDmengajukanvalue)
+    }
+  formData.append('status_id', status_st)
   formData.append('Trigger', 'U')
   formData.append('countTim', countTim)
   formData.append('id_st', id_st_session)

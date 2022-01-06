@@ -113,7 +113,7 @@ class M_NotaDinas extends CI_Model{
     function getData_export($Trigger,$Id_st){
         if($Trigger == "costsheet" || $Trigger == "spd" || $Trigger == "nominatif"){
             $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, 
-            d_surattugas.uraianst, d_surattugas.tglmulaist, 
+            d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.status_id,
             d_surattugas.tglselesaist, d_surattugas.idxskmpnen, d_surattugas.id_ttd,
             t_unitkerja.nama_unit , d_itemcs.nourut, d_itemcs.nama, 
             d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan, 
@@ -152,7 +152,7 @@ class M_NotaDinas extends CI_Model{
         }else if($Trigger == "spd_back" ){
 
             $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, 
-            d_surattugas.uraianst, d_surattugas.tglmulaist, 
+            d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.status_id,
             d_surattugas.tglselesaist, d_surattugas.idxskmpnen, d_itemcs.id_ttd_spd, 
             t_unitkerja.nama_unit , d_itemcs.nourut, d_itemcs.nama, 
             d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan, 
@@ -178,7 +178,7 @@ class M_NotaDinas extends CI_Model{
         }else if($Trigger == "kwitansi" ){
 
             $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, 
-            d_surattugas.uraianst, d_surattugas.tglmulaist, 
+            d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.status_id,
             d_surattugas.tglselesaist, d_surattugas.idxskmpnen, 
             t_unitkerja.nama_unit , d_itemcs.nourut, d_itemcs.nama, 
             d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan, 
@@ -187,7 +187,11 @@ class M_NotaDinas extends CI_Model{
             d_itemcs.totalinap, d_itemcs.totalrep, d_itemcs.totaltravel ,
             d_itemcs.tarifuangharian, 
             d_itemcs.tarifinap, d_itemcs.tarifrep, d_itemcs.transport ,
-            d_itemcs.jnstransportasi, 	
+            d_itemcs.jnstransportasi, 
+            d_itemcs.tariftaxi, 	
+            d_itemcs.tariflaut, 
+            d_itemcs.tarifdarat, 
+            d_itemcs.tarifudara, 
             d_itemcs.jumlah,
 			t_satker.lokasi as lokasi,
 			t_pejabat.nama as ppk_nama, 
@@ -205,7 +209,7 @@ class M_NotaDinas extends CI_Model{
         }else if($Trigger == "rincian_biaya" ){
 
             $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, 
-            d_surattugas.uraianst, d_surattugas.tglmulaist, 
+            d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.status_id,
             d_surattugas.tglselesaist, d_surattugas.idxskmpnen, 
             t_unitkerja.nama_unit , d_itemcs.nourut, d_itemcs.nama, 
             d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan, 
@@ -215,6 +219,10 @@ class M_NotaDinas extends CI_Model{
             d_itemcs.tarifuangharian, 
             d_itemcs.tarifinap, d_itemcs.tarifrep, d_itemcs.transport ,
             d_itemcs.jnstransportasi,
+            d_itemcs.tariftaxi, 	
+            d_itemcs.tariflaut, 
+            d_itemcs.tarifdarat, 
+            d_itemcs.tarifudara, 
             d_itemcs.jumlah,
 			t_pejabat.nama as ppk_nama, 
 			t_pejabat.nip as ppk_nip,
@@ -232,7 +240,7 @@ class M_NotaDinas extends CI_Model{
         }else if($Trigger == "pengeluaran_rill" ){
 
             $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, 
-            d_surattugas.uraianst, d_surattugas.tglmulaist, 
+            d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.status_id,
             d_surattugas.tglselesaist, d_surattugas.idxskmpnen, 
             d_itemcs.nourut, d_itemcs.nama, 
             d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan,
@@ -252,7 +260,7 @@ class M_NotaDinas extends CI_Model{
         }else if($Trigger == "perhitungan_rampung" ){
 
                 $query = $this->db->query("SELECT 
-                d_surattugas.nost, d_surattugas.tglst, 
+                d_surattugas.nost, d_surattugas.tglst, d_surattugas.status_id,
                 d_surattugas.uraianst, d_surattugas.tglmulaist, 
                 d_surattugas.tglselesaist, d_surattugas.idxskmpnen, 
                 d_itemcs.nourut, d_itemcs.nama, 

@@ -51,7 +51,11 @@
                               ?>
                         <tr>
                             <td><?php echo $no ?></td>
-                            <td class="text-center"><?= getStatusId($u->status_id)?></td>
+                            <td class="text-center">
+                              <a href="<?= site_url('Transaksi/SuratTugas/approve/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex.'/'.$u->status_id)?>"
+                              class="tooltipped" data-position="bottom" data-tooltip="Approve PPK">
+                                <?= getStatusId($u->status_id)?>
+                              </a></td>
                             <td><?php echo $u->username ?></td>
 														<td><?php echo cek_tgl_st(date("Y-m-d",strtotime($u->created_at))) ?></td>
                             <td><b><?php echo $u->nost ?>   <?php echo cek_tgl_st($u->tglst) ?></b>
@@ -67,7 +71,7 @@
 
                                         <div class="col s4">
                                           <a href="<?= site_url('Transaksi/TambahTim/TambahTim/'.$u->id.'/'.$u->kdindex)?>" 
-                                            class="tooltipped <?=getForAdminOpr($role_id)?> <?=getComplete($u->status_id)?>" 
+                                            class="tooltipped <?=getForAdminOpr($role_id)?> <?=getComplete($u->status_id, 'N')?>" 
                                               data-position="top" data-tooltip="Anggota" ><i class="material-icons cyan-text">people</i></a>
                                         </div>
                                         <div class="col s4">
@@ -83,7 +87,7 @@
                                         </div>
                                         <div class="col s4">
 																					<a href="<?= site_url('Transaksi/SuratTugas/ubah/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex)?>" 
-                                            class="tooltipped <?=getForAdminOpr($role_id)?> <?=getComplete($u->status_id)?>" 
+                                            class="tooltipped <?=getForAdminOpr($role_id)?> <?=getComplete($u->status_id, 'Y')?>" 
                                             data-position="bottom" data-tooltip="Ubah ST" ><i class="material-icons green-text">edit</i></a>
                                         </div>  
                                     </div>
@@ -106,7 +110,7 @@
 
 																	<div class="col s4">
                                     <a href="javascript:;" onclick="Delete('<?= $u->id ?>')" 
-                                    class="tooltipped <?=getForAdminOpr($role_id)?> <?=getComplete($u->status_id)?>" 
+                                    class="tooltipped <?=getForAdminOpr($role_id)?> <?=getComplete($u->status_id, 'N')?>" 
                                     data-position="bottom" data-tooltip="Hapus ST" ><i class="material-icons red-text">delete</i></a>
                                   </div>
                                 </div>

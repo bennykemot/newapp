@@ -52,12 +52,12 @@
                     ?>
                     <tbody id="Tbody" class="multi-field" style="border-top: 2px dotted #c5c5c4;">
                     <tr class="tb-tim" id="tb-tim<?=$j?>">
-                        <td><input  class="nourut" type="number" id="urut<?=$j?>" name="urut<?=$j?>" min="1" max="20" value="<?=$ubah[$i]['nourut']?>"></td>
-                        <td><input type="date" min="<?=$ubah[$i]['tglmulaist']?>" max="<?=$ubah[$i]['tglselesaist']?>" onchange="dayCount('<?=$j?>','D')" id="tglberangkat<?=$j?>" name="tglberangkat<?=$j?>" value="<?=$ubah[$i]['tglberangkat']?>"></td>
-                        <td><input type="date" max="<?=$ubah[$i]['tglselesaist']?>" min="<?=$ubah[$i]['tglmulaist']?>" onchange="dayCount(<?=$j?>)" id="tglkembali<?=$j?>" name="tglkembali<?=$j?>" value="<?=$ubah[$i]['tglkembali']?>"></td>
+                        <td><input  class="nourut" type="number" id="urut<?=$j?>" name="urut<?=$j?>" min="1" max="20" value="<?=$ubah[$i]['nourut']?>" ></td>
+                        <td><input type="date" min="<?=$ubah[$i]['tglmulaist']?>" max="<?=$ubah[$i]['tglselesaist']?>" onchange="dayCount('<?=$j?>','D')" id="tglberangkat<?=$j?>" name="tglberangkat<?=$j?>" value="<?=$ubah[$i]['tglberangkat']?>" <?=$redOnly?>></td>
+                        <td><input type="date" max="<?=$ubah[$i]['tglselesaist']?>" min="<?=$ubah[$i]['tglmulaist']?>" onchange="dayCount(<?=$j?>)" id="tglkembali<?=$j?>" name="tglkembali<?=$j?>" value="<?=$ubah[$i]['tglkembali']?>" <?=$redOnly?>></td>
                         <td><input type="text" id="jmlhari<?=$j?>" name="jmlhari<?=$j?>" readonly value="<?=$ubah[$i]['jmlhari']?>"></td>
                         <td colspan="2" id="Tim">
-                        <select placeholder="Nama.."  class="namaTimHardcode browser-default namaTim" id="namaDummy<?=$j?>" name="namaDummy<?=$j?>" onclick="ubahNama('<?=$j?>')">
+                        <select placeholder="Nama.."  class="namaTimHardcode browser-default namaTim" id="namaDummy<?=$j?>" name="namaDummy<?=$j?>" <?=$redOnly?>>
                             <option selected value="<?=$ubah[$i]['nip']?>"><?=$ubah[$i]['nama']?></option>
                         </select>
                         <input class="nama" name="nama<?=$j?>" id="nama<?=$j?>" value="<?=$ubah[$i]['nama']?>" hidden>
@@ -67,16 +67,16 @@
                             <input placeholder="NIP" class="nip" id="nip<?=$j?>" name="nip<?=$j?>" value="<?=$ubah[$i]['nip']?>" readonly>
                         </td>
                         <td colspan="2">
-                            <textarea placeholder="Peran/Jabatan" class="perjab" id="perjab<?=$j?>" name="perjab<?=$j?>"><?=$ubah[$i]['jabatan']?></textarea>
+                            <textarea placeholder="Peran/Jabatan" class="perjab" id="perjab<?=$j?>" name="perjab<?=$j?>" <?=$redOnly?>><?=$ubah[$i]['jabatan']?></textarea>
                         </td>
                         <td><input type="text" id="gol<?=$j?>" name="gol<?=$j?>" value="<?=$ubah[$i]['golongan']?>" readonly></td>
                         <td colspan="2">
-                            <select class="browser-default kota kotaasal kotaselect" name="kotaasal<?=$j?>" id="kotaasal<?=$j?>" onchange="cityCount(<?=$j?>)">
+                            <select class="browser-default kota kotaasal kotaselect" name="kotaasal<?=$j?>" id="kotaasal<?=$j?>" onchange="cityCount(<?=$j?>)" <?=$redOnly?>>
                                 <option selected value="<?=$ubah[$i]['kotaasal']?>"><?=$kotaasal[2]?></option>
                             </select>
                         </td>
                         <td colspan="3">
-                            <select class="browser-default kota kotatujuan kotaselect"  name="kotatujuan<?=$j?>" id="kotatujuan<?=$j?>" onchange="cityCount(<?=$j?>)">
+                            <select class="browser-default kota kotatujuan kotaselect"  name="kotatujuan<?=$j?>" id="kotatujuan<?=$j?>" onchange="cityCount(<?=$j?>)" <?=$redOnly?>>
                                 <option selected value="<?=$ubah[$i]['kotatujuan']?>"><?=$kotatujuan[2]?></option>
                             </select>
                         </td>                                   
@@ -101,7 +101,7 @@
                             <option value="Kendaraan Umum">Kendaraan Umum</option>
                             <option value="Kendaraan Dinas">Kendaraan Dinas</option>
                         </select</td>
-                        <td><select placeholder="Pilih Penandatangan SPD"  class="ttd_spd browser-default" id="ttd_spd<?=$j?>" name="ttd_spd<?=$j?>" onclick="ubahTtdSpd('<?=$j?>')">
+                        <td><select placeholder="Pilih Penandatangan SPD"  class="ttd_spd browser-default" id="ttd_spd<?=$j?>" name="ttd_spd<?=$j?>" onclick="ubahTtdSpd('<?=$j?>')" <?=$redOnly?>>
                             <option selected value="<?=$ubah[$i]['id_ttd_spd']?>"> <?=$ubah[$i]['nama_ttd_spd']?> </option>
                         </select></td>
                         <td>

@@ -1,4 +1,11 @@
-<?php include(APPPATH . 'views/Header/Aside.php') ?>
+<?php include(APPPATH . 'views/Header/Aside.php');
+
+$redOnly = "";$none="";
+if($ubah[0]['status_id'] == 3){
+    $redOnly = "readonly";
+    $none="d-none";
+}
+?>
 
 <div class="row">
 
@@ -10,8 +17,13 @@
                         <button type="button" class="btn-floating" style=""><i class="material-icons">
                         add</i></button>
                     </div>
-                    <div class="col s11">
-                        <h6> Input Surat Tugas : </h6>
+                    <div class="col s8">
+                        <h6> Ubah Surat Tugas :</h6>
+                    </div>
+                    <div class="col s3 text-right">
+                        <h6>
+                            <p clas="purple-text"><?= $ubah[0]['status_id'] ?> - Pengajuan oleh Operator</p>
+                        </h6>
                     </div>
                   
                 </div>
@@ -29,7 +41,7 @@
                             <div class="input-field col s2"><label>Nomor ST</label></div>
 
                             <div class="input-field col s10 " >
-                            <input type="text" id="nost" name="nost" value="<?= $ubah[0]['nost'] ?>">
+                            <input type="text" id="nost" name="nost" value="<?= $ubah[0]['nost'] ?>" <?=$redOnly?> >
                             
                             </div>
                         </div>
@@ -38,7 +50,7 @@
                             <div class="input-field col s2"><label>Tanggal ST</label></div>
 
                             <div class="input-field col s10 " >
-                            <input type="date" id="tglst" name="tglst" value="<?= $ubah[0]['tglst']; ?>">
+                            <input type="date" id="tglst" name="tglst" value="<?= $ubah[0]['tglst']; ?>" <?=$redOnly?> >
                             </div>
                         </div>
 
@@ -46,7 +58,7 @@
                             <div class="input-field col s2"><label>Uraian ST</label></div>
 
                             <div class="input-field col s10 " >
-                            <textarea class="materialize-textarea" id="uraianst" name="uraianst" ><?= $ubah[0]['uraianst'] ?></textarea>
+                            <textarea class="materialize-textarea" id="uraianst" name="uraianst"  <?=$redOnly?> ><?= $ubah[0]['uraianst'] ?></textarea>
                             </div>
                         </div>
 
@@ -54,7 +66,7 @@
                             <div class="input-field col s2"><label>Tanggal Mulai</label></div>
 
                             <div class="input-field col s10 " >
-                            <input type="date" id="tglst_mulai" name="tglst_mulai" onclick="Min_datemulai()" value="<?=$ubah[0]['tglmulaist']; ?>">
+                            <input type="date" id="tglst_mulai" name="tglst_mulai" onclick="Min_datemulai()" value="<?=$ubah[0]['tglmulaist']; ?>" <?=$redOnly?> >
                             </div>
                         </div>
 
@@ -62,7 +74,7 @@
                             <div class="input-field col s2"><label>Tanggal Selesai</label></div>
 
                             <div class="input-field col s10 " >
-                            <input type="date" id="tglst_selesai" name="tglst_selesai" onclick="Min_dateselesai()" value="<?= $ubah[0]['tglselesaist']; ?>">
+                            <input type="date" id="tglst_selesai" name="tglst_selesai" onclick="Min_dateselesai()" value="<?= $ubah[0]['tglselesaist']; ?>" <?=$redOnly?> >
                             </div>
                         </div>
 
@@ -91,7 +103,7 @@
                             </div>
 
                             <div class="input-field col s2 " >
-                                <button type="button" class="btn gradient-45deg-amber-amber col s12 modal-trigger" href="#modalidx" id ="modalIdx" name="modalIdx"><i class="material-icons left">search</i> Cari</button>
+                                <button type="button" class="btn gradient-45deg-amber-amber col s12 modal-trigger <?=$none?>" href="#modalidx" id ="modalIdx" name="modalIdx"><i class="material-icons left">search</i> Cari</button>
                             </div>
                         </div>
 
@@ -117,7 +129,7 @@
                             <div class="input-field col s2"><label>Penandatangan</label></div>
 
                             <div class="input-field col s10 " >
-                            <select class="browser-default" id="ttd" name="ttd"></select>
+                            <select class="browser-default" id="ttd" name="ttd" <?=$redOnly?>></select>
                             </div>
                         </div>
 
@@ -125,7 +137,7 @@
                             <div class="input-field col s2"><label>Yang Menyetujui</label></div>
 
                             <div class="input-field col s10 " >
-                            <select class="browser-default" name="cs_menyetujui" id="cs_menyetujui"></select>
+                            <select class="browser-default" name="cs_menyetujui" id="cs_menyetujui" <?=$redOnly?>></select>
                             </div>
                         </div>
 
@@ -133,7 +145,7 @@
                             <div class="input-field col s2"><label>Yang Mengusulkan</label></div>
 
                             <div class="input-field col s10 " >
-                            <select class="browser-default" name="cs_mengajukan" id="cs_mengajukan"></select>
+                            <select class="browser-default" name="cs_mengajukan" id="cs_mengajukan" <?=$redOnly?>></select>
                             </div>
                         </div>
 
@@ -161,4 +173,4 @@
 
 <?php include('modal.php');?>
 <?php include(APPPATH . 'views/Footer/Footer.php') ?>
-  <?php include('scriptedit.php');?>
+<?php include('scriptedit.php');?>

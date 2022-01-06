@@ -150,9 +150,13 @@ function cek_tgl($tanggal){
       
       }
 
-      function rupiah($angka){
+      function rupiah($angka, $rp){
+          $data = "Rp ";
+          if($rp == ""){
+            $data = "";
+          }
           
-        $hasil_rupiah = "Rp " . number_format($angka,0,',','.');
+        $hasil_rupiah = $data . number_format($angka,0,',','.');
         return $hasil_rupiah;
      
     }
@@ -215,32 +219,49 @@ function cek_tgl($tanggal){
             </tr>
             <tr>
                 <td>1</td>
-                <td>Uang Harian<br>- <?=Explodekota($e->kotatujuan)?> : <?= $e->jmlhari ?> hari x <?=rupiah($e->tarifuangharian)?></td>
-                <td style="text-align: right"><br><?=rupiah($e->totaluangharian)?></td>
+                <td>Uang Harian<br>- <?=Explodekota($e->kotatujuan)?> : <?= $e->jmlhari ?> hari x <?=rupiah($e->tarifuangharian, 'rp')?></td>
+                <td style="text-align: right"><br><?=rupiah($e->totaluangharian, 'rp')?></td>
                 <td></td>
             </tr>
             <tr>
                 <td>2</td>
-                <td>Uang Hotel<br>- <?=Explodekota($e->kotatujuan)?> : <?= ($e->jmlhari - 1) ?> hari = <?=rupiah($e->totalinap)?></td>
-                <td style="text-align: right"><br><?=rupiah($e->totalinap)?></td>
+                <td>Uang Hotel<br>- <?=Explodekota($e->kotatujuan)?> : <?= ($e->jmlhari - 1) ?> hari = <?=rupiah($e->totalinap, 'rp')?></td>
+                <td style="text-align: right"><br><?=rupiah($e->totalinap, 'rp')?></td>
                 <td></td>
             </tr>
             <tr>
                 <td>3</td>
                 <td>Uang Transport<br>- <?=Explodekota($e->kotaasal)?> - <?=Explodekota($e->kotatujuan)?></td>
-                <td style="text-align: right"><br><?=rupiah($e->totaltravel)?></td>
+                <td style="text-align: right"><br><?=rupiah($e->totaltravel, 'rp')?></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>- Uang Transport Taxi Bandara<br>
+                    - Uang Transport Angkutan Laut<br>
+                    - Uang Transport Udara<br>
+                    - Uang Transport Darat<br>
+                </td>
+                <td style="text-align: right">
+                <br><?=rupiah($e->tariftaxi, 'rp')?><br>
+                    <?=rupiah($e->tariflaut, 'rp')?><br>
+                    <?=rupiah($e->tarifudara, 'rp')?><br>
+                    <?=rupiah($e->tarifdarat, 'rp')?><br>
+            
+                </td>
                 <td></td>
             </tr>
             <tr>
                 <td>4</td>
                 <td>Uang Representatif</td>
-                <td style="text-align: right"><?=rupiah($e->tarifrep)?></td>
+                <td style="text-align: right"><?=rupiah($e->tarifrep, 'rp')?></td>
                 <td></td>
             </tr>
             <tr class="ttop">
                 <td class="ttop tbottom"></td>
                 <td class="ttop tbottom" style="text-align: center">TOTAL</td>
-                <td class="ttop tbottom" style="text-align: right"><?=rupiah($e->jumlah)?></td>
+                <td class="ttop tbottom" style="text-align: right"><?=rupiah($e->jumlah, 'rp')?></td>
                 <td class="ttop tbottom" ></td>
             </tr>
             <tr class="ttop">
@@ -307,21 +328,21 @@ function cek_tgl($tanggal){
             <tr>
                 <td width="30%">Ditetapkan Sejumlah</td>
                 <td width="10%">Rp</td>
-                <td width="20%" style="text-align: right"><?=$e->jumlah?></td>
+                <td width="20%" style="text-align: right"><?=rupiah($e->jumlah, '')?></td>
                 <td></td>
             </tr>
 
             <tr>
                 <td width="30%">Yang telah dibayarkan semula</td>
                 <td width="10%">Rp</td>
-                <td width="20%" style="text-align: right"><?=$e->jumlah?></td>
+                <td width="20%" style="text-align: right"><?=rupiah($e->jumlah, '')?></td>
                 <td></td>
             </tr>
 
             <tr>
                 <td width="30%">Sisa kurang/(lebih)</td>
                 <td width="10%">Rp</td>
-                <td width="20%" style="text-align: right">0</td>
+                <td width="20%" style="text-align: right"><?= rupiah("0", '') ?></td>
                 <td></td>
             </tr>
 

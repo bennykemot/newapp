@@ -257,7 +257,7 @@ function ApprovePPK($data){
 $color="grey-text";
   if($data == 2){
           $color ="teal-text";
-  }else if($data == 3){
+  }else if($data >= 3){
           $color ="teal-text";
   }
   return $color;
@@ -265,7 +265,7 @@ $color="grey-text";
 
 function ApproveKPA($data){
   $color="grey-text";
-    if($data == 3){
+    if($data >= 3){
             $color ="yellow-text";
     }
     return $color;
@@ -287,9 +287,9 @@ function ApproveKPA($data){
       return $disabled;
     }
 
-  function getComplete($data){
+  function getComplete($data, $yn){
     $none="";
-      if($data == 3){
+      if($data == 3 && $yn == "N" || $data == 4 && $yn == "N"|| $data == 4 && $yn == "Y"){
               $none ="d-none";
       }
       return $none;
@@ -328,6 +328,8 @@ function ApproveKPA($data){
         $span = "<span class='users-view-status chip teal lighten-2 black-text'>".$data."</span>";
       }else if($data == 3){
         $span = "<span class='users-view-status chip yellow lighten-2 black-text'>".$data."</span>";
+      }else if($data == 4){
+        $span = "<span class='users-view-status chip red lighten-2 black-text'>".$data."</span>";
       }
       return $span;
     }

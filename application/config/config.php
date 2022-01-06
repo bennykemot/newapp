@@ -28,6 +28,10 @@ $root = "http://".$_SERVER['HTTP_HOST'];
 $root .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 $basepathurl = "$root";
 
+// $basepathurl = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
+// $basepathurl .= "://" . $_SERVER['HTTP_HOST'];
+// $basepathurl .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+
 //$basepathurl 				= 'http://103.157.26.149:22/newapp/';
 // $basepathurl 				= 'http://localhost/tst/newapp/';
 //$basepathurl 				= 'http://10.10.20.154/newapp/';

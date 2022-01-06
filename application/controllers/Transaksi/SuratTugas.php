@@ -83,11 +83,20 @@ class SuratTugas extends CI_Controller {
 
 	public function tambah()
 	{   
-        $kdsatker = $this->uri->segment(4);
-        $unitid =$this->uri->segment(5);
-        $roleid =$this->uri->segment(6);
-        $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unitid, $roleid);
-        $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unitid, $roleid);
+        // $kdsatker = $this->uri->segment(4);
+        // $unitid =$this->uri->segment(5);
+        // $roleid =$this->uri->segment(6);
+
+        $kdsatker = $this->session->userdata("kdsatker");
+        $thang = $this->session->userdata("thang");
+        $user_id = $this->session->userdata("user_id");
+        $role_id = $this->session->userdata("role_id");
+        $unit_id = $this->session->userdata("unit_id");
+        $username = $this->session->userdata("username");
+
+
+        $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unit_id, $role_id);
+        $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unit_id, $role_id);
 		$this->load->view('Transaksi/SuratTugas/tambah', $data);
 	}
 
@@ -98,10 +107,17 @@ class SuratTugas extends CI_Controller {
         $id =  $this->uri->segment(4);
         $data['ubah'] = $this->SuratTugas->getDataUbah($kdindex, $id, 'Ubah_ST');
         $kdsatker = $this->uri->segment(5);
-        $unitid =$this->uri->segment(6);
-        $roleid =$this->uri->segment(7);
-        $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unitid, $roleid);
-        $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unitid, $roleid);
+
+        $kdsatker = $this->session->userdata("kdsatker");
+        $thang = $this->session->userdata("thang");
+        $user_id = $this->session->userdata("user_id");
+        $role_id = $this->session->userdata("role_id");
+        $unit_id = $this->session->userdata("unit_id");
+        $username = $this->session->userdata("username");
+
+
+        $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unit_id, $role_id);
+        $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unit_id, $role_id);
         
 		$this->load->view('Transaksi/SuratTugas/ubah',$data);
 	}
@@ -112,11 +128,17 @@ class SuratTugas extends CI_Controller {
         $kdindex = str_replace("%20", " ", $a);
         $id =  $this->uri->segment(4);
         $data['ubah'] = $this->SuratTugas->getDataUbah($kdindex, $id, 'Ubah_ST');
-        $kdsatker = $this->uri->segment(5);
-        $unitid =$this->uri->segment(6);
-        $roleid =$this->uri->segment(7);
-        $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unitid, $roleid);
-        $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unitid, $roleid);
+
+        $kdsatker = $this->session->userdata("kdsatker");
+        $thang = $this->session->userdata("thang");
+        $user_id = $this->session->userdata("user_id");
+        $role_id = $this->session->userdata("role_id");
+        $unit_id = $this->session->userdata("unit_id");
+        $username = $this->session->userdata("username");
+
+
+        $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unit_id, $role_id);
+        $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unit_id, $role_id);
         
 		$this->load->view('Transaksi/SuratTugas/Approve/manage',$data);
 	}
@@ -219,6 +241,13 @@ class SuratTugas extends CI_Controller {
             
         }else if($Trigger == "U"){
 
+            $status_st = $this->input->post('status_id');
+            $idst = $this->input->post('id_st');
+            if($status_st == 3){
+                $this->SuratTugas->history($idst);
+                $status_st = 4;
+            }
+
             $nost = $this->input->post('nost');
             $tglst = str_replace("/", "-",$this->input->post('tglst'));
             $uraianst = $this->input->post('uraianst');
@@ -226,9 +255,8 @@ class SuratTugas extends CI_Controller {
 			$tglst_selesai = str_replace("/", "-",$this->input->post('tglst_selesai'));
 			$idxskmpnen = $this->input->post('idxskmpnen');
 			$id_unit = $this->input->post('id_unit');
-			$ttd = $this->input->post('ttd');
             $countTim = $this->input->post('countTim');
-            $idst = $this->input->post('id_st');
+           
             $idxskmpnenlabel = $this->input->post('idxskmpnenlabel');
 
             $kdsatker = $this->input->post('kdsatker');
@@ -248,6 +276,13 @@ class SuratTugas extends CI_Controller {
             //$countTim = $this->input->post('countTim');
 
             
+            $ttd = $this->input->post('ttd');
+            $menyetujui = $this->input->post('cs_menyetujui');
+            $mengajukan = $this->input->post('cs_mengajukan');
+
+            
+
+            
 
             $data_st = array(
                 'kdindex' => $idxskmpnen,
@@ -260,6 +295,7 @@ class SuratTugas extends CI_Controller {
                 'kdakun' => $kdakun,
                 'kdbeban' => $kdbeban,
                 'nost' => $nost,
+                'status_id' => $status_st,
                 'tglst' => date("Y-m-d",strtotime($tglst)),
                 'uraianst' => $uraianst,
                 'tglmulaist' => date("Y-m-d",strtotime($tglst_mulai)),
@@ -269,8 +305,8 @@ class SuratTugas extends CI_Controller {
                 'id_unit' => $id_unit,
                 'idx_temp' => $idxskmpnenlabel,
                 'id_ttd' => $ttd,
-                'cs_menyetujui' => $this->input->post('cs_menyetujui'),
-                'cs_mengajukan' => $this->input->post('cs_mengajukan'),
+                'cs_menyetujui' => $menyetujui,
+                'cs_mengajukan' => $mengajukan,
                 'id_tahapan' => $kdtahapan,
                 'id_app' => $kdapp,
                 
@@ -420,6 +456,7 @@ class SuratTugas extends CI_Controller {
 
     public function Export(){
         $mpdf = new \Mpdf\Mpdf([
+        'tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf',
         'mode' => 'utf-8', 
         'format' => 'A4-P',
         'default_font_size' => 12,
@@ -444,11 +481,17 @@ class SuratTugas extends CI_Controller {
 						
 						WHERE t_unitkerja.id = ".$kdunit." ")->result_array();
 
-
         if(count($data['ubah']) > 0){
             $html = $this->load->view('Transaksi/SuratTugas/export.php',$data,true);
-            $mpdf->WriteHTML($html);          
-            $mpdf->Output('SuratTugas.pdf', 'I');
+
+            if($data['ubah'][0]['status_id'] < 3){
+                $mpdf->SetWatermarkText('DRAFT'); // Will cope with UTF-8 encoded text
+                $mpdf->showWatermarkText = true; // Uses default font if left blank
+            }
+            
+            $mpdf->WriteHTML($html);         
+            $mpdf->Output('SuratTugas.pdf', 'I'); 
+            //$mpdf->Output('SuratTugas.pdf', 'I');
         }else{
            ?> <script type="text/javascript">
                     setTimeout(function() {

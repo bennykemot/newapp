@@ -91,7 +91,8 @@ class NotaDinas extends CI_Controller {
 		$kdsatker = $this->session->userdata('kdsatker');
 		
 
-		$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 
+		$mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf',
+		'mode' => 'utf-8', 
 			'format' => 'A4-'.$style.'',
 			'default_font_size' => 8,
 			'default_font' => 'Calibri',
@@ -157,7 +158,8 @@ class NotaDinas extends CI_Controller {
 			}
 		}else if($trigger == "pengeluaran_rill"){
 			
-			$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 
+			$mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf',
+			'mode' => 'utf-8', 
 			'format' => 'A4-'.$style.'',
 			'default_font_size' => 9,
 			'default_font' => 'Calibri',
@@ -199,6 +201,10 @@ class NotaDinas extends CI_Controller {
 				$this->Error_exp();
 			}
 			
+		}
+		if($data['export'][0]->status_id < 3){
+			$mpdf->SetWatermarkText('DRAFT'); // Will cope with UTF-8 encoded text
+			$mpdf->showWatermarkText = true; // Uses default font if left blank
 		}
         $mpdf->WriteHTML($html);          
         $mpdf->Output($name, 'I');

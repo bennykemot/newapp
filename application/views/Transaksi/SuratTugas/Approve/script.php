@@ -12,6 +12,96 @@ var id_status = "<?=$this->uri->segment('9')?>";
 if(role_session == 1){
   unit_session = 0;
 }
+$(".browser-default").select2({disabled:'readonly'});
+
+var TTDvalue = "<?= $ubah[0]['id_ttd'] ?>"
+var TTDtext = "<?= $ubah[0]['nama_ttd'] ?>"
+
+var TTDmenyetujuivalue = "<?= $ubah[0]['cs_menyetujui'] ?>"
+var textmenyetujui = "<?= $ubah[0]['cs_menyetujui'] ?>"
+
+var TTDmenyetujuitext = textmenyetujui.split("-")
+
+var TTDmengajukanvalue = "<?= $ubah[0]['cs_mengajukan'] ?>"
+var textmengajukan = "<?= $ubah[0]['cs_mengajukan'] ?>"
+
+var TTDmengajukantext = textmengajukan.split("-")
+
+$('#menyetujui').val(TTDmenyetujuitext[2]);
+$('#mengajukan').val(TTDmengajukantext[2]);
+
+$("#cs_mengajukan").select2({
+                    width: '100%',
+                    placeholder: "Pilih Penandatangan",
+                  ajax: { 
+                    url: dropdown_baseurl + 'cs_ttd',
+                    type: "post",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                          Trigger: "mengusulkan",
+                          kdsatker: satker_session,
+                          searchTerm: params.term // search term
+                        };
+                    },
+                    processResults: function (response) {
+                        return {
+                          results: response
+                        };
+                    },
+                    cache: true
+                  }
+              });
+
+$("#cs_menyetujui").select2({
+      width: '100%',
+      placeholder: "Pilih Penandatangan",
+    ajax: { 
+      url: dropdown_baseurl + 'cs_ttd',
+      type: "post",
+      dataType: 'json',
+      delay: 250,
+      data: function (params) {
+          return {
+            Trigger: "menyetujui",
+            kdsatker: satker_session,
+            searchTerm: params.term // search term
+          };
+      },
+      processResults: function (response) {
+          return {
+            results: response
+          };
+      },
+      cache: true
+    }
+});
+
+$("#ttd").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Penandatangan",
+         ajax: { 
+           url: dropdown_baseurl + 'ttd',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+								Trigger: "ttd_forST",
+								kdsatker: satker_session,
+                searchTerm: params.term // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
 
 function formatRupiah(angka){
         var number_string = angka.replace(/[^,\d]/g, '').toString(),

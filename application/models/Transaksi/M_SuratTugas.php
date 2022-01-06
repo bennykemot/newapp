@@ -157,7 +157,7 @@ class M_SuratTugas extends CI_Model{
             d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.idx_temp,
             d_surattugas.tglselesaist ,d_surattugas.id_unit,d_surattugas.id as idst,d_surattugas.idxskmpnen, 
             d_surattugas.id_ttd,d_surattugas.kdsatker,d_surattugas.id_ttd,d_surattugas.jumlah_uang,d_surattugas.cs_menyetujui,d_surattugas.cs_mengajukan,
-            d_surattugas.id_tahapan,d_surattugas.id_app,d_bagipagu.unit_id,
+            d_surattugas.id_tahapan,d_surattugas.id_app,d_surattugas.status_id,d_bagipagu.unit_id, d_surattugas.status_id,
             
             t_unitkerja.nama_unit, 
             '.$select.'
@@ -210,5 +210,57 @@ class M_SuratTugas extends CI_Model{
 
     function cek($data,$table){
         return $this->db->get_where($table,$data);
+    }
+
+    function history($idst){
+
+        $this->db->query("INSERT into h_surattugas (
+            kdindex, thang, kdgiat, kdoutput, 
+            kdsoutput, kdkmpnen, kdskmpnen, 
+            kdakun, kdbeban, no_kuitansi, nost, 
+            tglst, uraianst, tglmulaist, tglselesaist, 
+            id_unit, unitkerja_id, kdsatker, bidang_id, 
+            id_ttd, pejabat_id, user_id, ppk_id, kaldik, 
+            kaldik_id, status_penandatangan, penandatangan, 
+            jumlah_uang, jumlah_realisasi, status_id, 
+            is_aktif, idxskmpnen, idx_temp, cs_menyetujui, 
+            cs_mengajukan, id_tahapan, id_app, created_at)
+        
+        (select 
+        kdindex, thang, kdgiat, kdoutput, 
+            kdsoutput, kdkmpnen, kdskmpnen, 
+            kdakun, kdbeban, no_kuitansi, nost, 
+            tglst, uraianst, tglmulaist, tglselesaist, 
+            id_unit, unitkerja_id, kdsatker, bidang_id, 
+            id_ttd, pejabat_id, user_id, ppk_id, kaldik, 
+            kaldik_id, status_penandatangan, penandatangan, 
+            jumlah_uang, jumlah_realisasi, status_id, 
+            is_aktif, idxskmpnen, idx_temp, cs_menyetujui, 
+            cs_mengajukan, id_tahapan, id_app,created_at
+         from d_surattugas where id = '".$idst."')");
+
+        $this->db->query("INSERT into h_itemcs (
+            nourut, nospd, nama, nip, 
+            jabatan, golongan, tglberangkat, 
+            tglkembali, jmlhari, kotaasal, 
+            kotatujuan, tarifuangharian, totaluangharian, 
+            tarifinap, totalinap, tarifrep, totalrep, 
+            taksiasal, taksitujuan, lain, transport, 
+            totaltravel, tariftaxi, tariflaut, tarifudara, 
+            tarifdarat, pengeluaranrill, jnstransportasi, 
+            jumlah, id_ttd_spd, id_st, id_cs)
+
+        (select 
+        nourut, nospd, nama, nip, 
+            jabatan, golongan, tglberangkat, 
+            tglkembali, jmlhari, kotaasal, 
+            kotatujuan, tarifuangharian, totaluangharian, 
+            tarifinap, totalinap, tarifrep, totalrep, 
+            taksiasal, taksitujuan, lain, transport, 
+            totaltravel, tariftaxi, tariflaut, tarifudara, 
+            tarifdarat, pengeluaranrill, jnstransportasi, 
+            jumlah, id_ttd_spd, id_st, id_cs
+        from d_itemcs where id_st = '".$idst."')");
+
     }
 }

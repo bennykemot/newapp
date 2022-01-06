@@ -496,7 +496,7 @@ $('.multi-field-wrapper').each(function() {
                             </tr>\
                               <tr>\
                                    <td></td>\
-                                   <td><input type="text" id="nospd'+x+'" name="nospd'+x+'"></td>\
+                                   <td><input type="text" id="nospd'+x+'" name="nospd'+x+'" value="SPD -"></td>\
                                   <td><input style="min-width: 150px" type="text" id="satuan_uangharian'+x+'" name="satuan_uangharian'+x+'" onkeyup="AllCount(\''+x+'\',\'satuan\')"></td>\
                                   <td><input style="min-width: 150px" type="text" id="uangharian'+x+'" name="uangharian'+x+'" onkeyup="AllCount(\''+x+'\',\'total\')"></td>\
                                   <td><input style="min-width: 150px" type="text" id="satuan_uangpenginapan'+x+'" name="satuan_uangpenginapan'+x+'" onkeyup="AllCount(\''+x+'\',\'satuan\')"></td>\
