@@ -57,9 +57,18 @@ class TambahTim extends CI_Controller {
                 $totaluangtransport = 0;
                 $sum=0;
                 $totalRealisasi = 0;
-    
+
                 
                 for($i = 0 ; $i < $countTim; $i++){
+                    $nip = $this->input->post('nip'.$urut[$i].'');
+                    $jabatan = $this->input->post('perjab'.$urut[$i].'');
+                    $golongan = $this->input->post('gol'.$urut[$i].'');
+                    if($nip == "" || $nip == "null" || $nip == null){
+                        $nip = "0";
+                        $jabatan = " ";
+                        $golongan = " ";
+
+                    }
 
                        $totaluangtransport += $this->pregChar($this->input->post('uangdll'.$urut[$i].'')) + $this->pregChar($this->input->post('uangtaxi'.$urut[$i].''))
                                             + $this->pregChar($this->input->post('uanglaut'.$urut[$i].''))+ $this->pregChar($this->input->post('uangudara'.$urut[$i].''))
@@ -69,9 +78,9 @@ class TambahTim extends CI_Controller {
                         'nourut' => $this->input->post('urut'.$urut[$i].''),
                         'nospd' => $this->input->post('nospd'.$urut[$i].''),
                         'nama' => $this->input->post('nama'.$urut[$i].''),
-                        'nip' => $this->input->post('nip'.$urut[$i].''),
-                        'jabatan'  => $this->input->post('perjab'.$urut[$i].''),
-                        'golongan'  => $this->input->post('gol'.$urut[$i].''),
+                        'nip' => $nip,
+                        'jabatan'  => $jabatan,
+                        'golongan'  =>  $golongan,
                         'tglberangkat'  => date("Y-m-d",strtotime($this->input->post('tglberangkat'.$urut[$i].''))),
                         'tglkembali'  => date("Y-m-d",strtotime($this->input->post('tglkembali'.$urut[$i].''))),
                         'jmlhari'  => $this->input->post('jmlhari'.$urut[$i].''),

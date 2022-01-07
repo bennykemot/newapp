@@ -1342,7 +1342,7 @@ for($loop = 0 ; $loop < countTim; $loop++){
     contentType: false,
     success: function (data, textStatus, jqXHR) {
               show_msg(textStatus);
-              Reset(IdForm);
+              //Reset(IdForm);
               window.history.back();
               
               
@@ -1359,59 +1359,5 @@ function show_msg(textStatus){
             timer: 2000
             })
     }
-
-
-
-function Tim(){
-  $('#modalTim').modal('open');
-
-  $("#multi-select").DataTable({ 
-      responsive: !0, 
-      ajax: {
-                url: master_baseurl + 'Master_Pegawai',
-                type: "post",
-                data : {"kdsatker": satker_session}
-            },
-                
-            autoWidth: false,
-            columns: [
-             
-                {
-                    data: null, class: "text-center"
-                   
-                },
-               
-                
-                { data: "nip",
-                render: function (data, type, row, meta) {
-                        return data;
-                    } 
-                  },
-
-                { data: "nama",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
-                },
-
-                { data: "jabatan",
-              render: function (data, type, row, meta) {
-                      return data;
-                  } 
-                },
- 
-            ],
-            pageLength: 10,
-            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-            bFilter: false,
-            ordering: false,
-            scrollCollapse: true,
-    
-    });
-}
-
-
-
-
 
 </script>

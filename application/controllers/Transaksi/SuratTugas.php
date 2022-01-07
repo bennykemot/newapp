@@ -338,17 +338,29 @@ class SuratTugas extends CI_Controller {
 
                 
                 for($i = 0 ; $i < $countTim; $i++){
-                    $totaluangtransport += $this->pregChar($this->input->post('uangdll'.$urut[$i].'')) + $this->pregChar($this->input->post('uangtaxi'.$urut[$i].''))
-                   + $this->pregChar($this->input->post('uanglaut'.$urut[$i].''))+ $this->pregChar($this->input->post('uangudara'.$urut[$i].''))
-                   + $this->pregChar($this->input->post('uangdarat'.$urut[$i].''));
+
+                    $nip = $this->input->post('nip'.$urut[$i].'');
+                    $jabatan = $this->input->post('perjab'.$urut[$i].'');
+                    $golongan = $this->input->post('gol'.$urut[$i].'');
+                    if($nip == "" || $nip == "null" || $nip == null){
+                        $nip = "0";
+                        $jabatan = " ";
+                        $golongan = " ";
+
+                    }
+                    $totaluangtransport +=  $this->pregChar($this->input->post('uangdll'.$urut[$i].'')) + 
+                                            $this->pregChar($this->input->post('uangtaxi'.$urut[$i].'')) +
+                                            $this->pregChar($this->input->post('uanglaut'.$urut[$i].''))+ 
+                                            $this->pregChar($this->input->post('uangudara'.$urut[$i].'')) +
+                                            $this->pregChar($this->input->post('uangdarat'.$urut[$i].''));
 
                        $data_ItemCS = array(
                         'nourut' => $this->input->post('urut'.$urut[$i].''),
                         // 'nospd' => $this->input->post('nospd'.$urut[$i].''),
                         'nama' => $this->input->post('nama'.$urut[$i].''),
-                        'nip' => $this->input->post('nip'.$urut[$i].''),
-                        'jabatan'  => $this->input->post('perjab'.$urut[$i].''),
-                        'golongan'  => $this->input->post('gol'.$urut[$i].''),
+                        'nip' => $nip,
+                        'jabatan'  => $jabatan,
+                        'golongan'  =>  $golongan,
                         'tglberangkat'  => date("Y-m-d",strtotime($this->input->post('tglberangkat'.$urut[$i].''))),
                         'tglkembali'  => date("Y-m-d",strtotime($this->input->post('tglkembali'.$urut[$i].''))),
                         'jmlhari'  => $this->input->post('jmlhari'.$urut[$i].''),
@@ -380,8 +392,8 @@ class SuratTugas extends CI_Controller {
                         
                    );
 
-                   $totaluangharian += $this->pregChar($this->input->post('uangharian'.$urut[$j].''));
-                   $totaluanginap += $this->pregChar($this->input->post('uangpenginapan'.$urut[$j].''));
+                   $totaluangharian += $this->pregChar($this->input->post('uangharian'.$urut[$i].''));
+                   $totaluanginap += $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
                    
                    $sum += $totaluangharian + $totaluanginap + $totaluangtransport;
                        $this->db->insert('d_itemcs',$data_ItemCS);$j++;
