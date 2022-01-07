@@ -90,6 +90,7 @@ class Pegawai extends CI_Controller {
 			$jbtn = $this->input->post('jbtn');
 			$tmt = $this->input->post('tmt');
 			$unit = $this->input->post('unit');
+			$satker_id = $this->input->post('satker');
 			$id = $this->input->post('id');
 
 			$data_pegawai = array(
@@ -104,6 +105,7 @@ class Pegawai extends CI_Controller {
 				'jabatan' => $jbtn,
 				'tmt_jab' => $tmt,
 				'namaunit_lengkap' => $unit,
+				'satker_id' => $satker_id
 			);
 
 			$where = array('id' => $id);

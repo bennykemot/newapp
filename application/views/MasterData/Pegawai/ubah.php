@@ -111,11 +111,23 @@
 
 						
 						<div class="input-field col s12">
+                            <div class="input-field col s2"><label>Satuan Kerja</label></div>
+
+                            <div class="input-field col s10 " >
+								<select id="satker-select2" name="satker" class="select2-data-ajax select2-hidden-accessible browser-default" value="<?= $ubah[0]['nmsatker'] ?>"></select>
+                            <!-- <input type="text" id="unit" name="unit" value="<?= $ubah[0]['namaunit_lengkap'] ?>"> -->
+                            	<!-- <input type="text" id="satker_id" name="satker_id" readonly> -->
+								
+                            </div>
+                        </div>
+
+						<div class="input-field col s12">
                             <div class="input-field col s2"><label>Unit Kerja</label></div>
 
                             <div class="input-field col s10 " >
 								<select id="unit-select2" name="unit" class="select2-data-ajax select2-hidden-accessible browser-default" value="<?= $ubah[0]['namaunit_lengkap'] ?>"></select>
                             <!-- <input type="text" id="unit" name="unit" value="<?= $ubah[0]['namaunit_lengkap'] ?>"> -->
+								
                             </div>
                         </div>
 

@@ -7,6 +7,7 @@
 	var agamaText = "<?= $ubah[0]['agama'] ?>"
 	var pangkatText = "<?= $ubah[0]['nama_pangkat'] ?>"
 	var unitText = "<?= $ubah[0]['namaunit_lengkap'] ?>"
+	var satkerText = "<?= $ubah[0]['nmsatker'] ?>"
     
 	var $agama = $("<option selected='selected'></option>").val(agamaText).text(agamaText)
 	$("#agama-select2").append($agama).trigger('change');
@@ -16,6 +17,9 @@
 
 	var $unit = $("<option selected='selected'></option>").val(unitText).text(unitText)
 	$("#unit-select2").append($unit).trigger('change');
+
+	var $satker = $("<option selected='selected'></option>").val(satkerText).text(satkerText)
+	$("#satker-select2").append($satker).trigger('change');
 	
 
 $('select').select2().on('select2:open', function() {
@@ -45,6 +49,30 @@ $("#agama-select2").select2({
            delay: 250,
            data: function (params) {
               return {
+                searchTerm: params.term // search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
+		 $("#satker-select2").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Satuan Kerja",
+         ajax: { 
+           url: dropdown_baseurl + 'satker',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+								Trigger: "satker_forPPK",
                 searchTerm: params.term // search term
               };
            },
@@ -105,6 +133,15 @@ $("#pangkat-select2").select2({
            cache: true
          }
      });
+
+		 	// AUTO FILLED 
+		 	$('#unit-select2').on('change', function() {
+
+				$('#satker_id').val()
+				var satker_id =  $("#unit-select2 option:selected").text()
+				$('#satker_id').val(satker_id)
+
+			});
 
 function show_msg(status,message){
         swal({

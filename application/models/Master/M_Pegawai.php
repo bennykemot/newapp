@@ -10,9 +10,10 @@ class M_Pegawai extends CI_Model {
 	}
 
 	function getPegawaiUbah($id){
-		$query = $this->db->query('SELECT * FROM 
-					t_pegawai
-					WHERE id = '.$id.' ');
+		$query = $this->db->query('SELECT t_pegawai.*, t_satker.nmsatker
+									FROM t_pegawai
+									JOIN t_satker ON t_satker.kdsatker = t_pegawai.satker_id
+									WHERE id = '.$id.' ');
 		return $query->result_array();
 
 	}
