@@ -330,6 +330,8 @@ function ApproveKPA($data){
         $span = "<span class='users-view-status chip yellow lighten-2 black-text'>".$data."</span>";
       }else if($data == 4){
         $span = "<span class='users-view-status chip red lighten-2 black-text'>".$data."</span>";
+      }else if($data == 5){
+        $span = "<span class='users-view-status chip brown lighten-2 black-text'>".$data."</span>";
       }
       return $span;
     }

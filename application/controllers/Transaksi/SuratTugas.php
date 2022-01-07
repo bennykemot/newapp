@@ -344,7 +344,7 @@ class SuratTugas extends CI_Controller {
 
                        $data_ItemCS = array(
                         'nourut' => $this->input->post('urut'.$urut[$i].''),
-                        'nospd' => $this->input->post('nospd'.$urut[$i].''),
+                        // 'nospd' => $this->input->post('nospd'.$urut[$i].''),
                         'nama' => $this->input->post('nama'.$urut[$i].''),
                         'nip' => $this->input->post('nip'.$urut[$i].''),
                         'jabatan'  => $this->input->post('perjab'.$urut[$i].''),
@@ -441,9 +441,11 @@ class SuratTugas extends CI_Controller {
             echo json_encode($output);
 
         }else if($Trigger == "Approve"){
+            $status_st = $this->input->post('id_status');
+            $status_st = $status_st + 1;
 
             $data_st = array(
-                'status_id' => $this->input->post('id_status')
+                'status_id' => $status_st
             );
 
             $where = array('id' => $this->input->post('idst'));

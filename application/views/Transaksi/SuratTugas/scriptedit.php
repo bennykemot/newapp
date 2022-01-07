@@ -446,7 +446,7 @@ function ubahNama(id){
          }
      });
 
-}
+
     
 
 // SELECT2 INSERT
@@ -480,8 +480,8 @@ $('.namaTimHardcode').on('change', function() {
 
      
 
-        var id =  $(this).attr("name")
-        var res = id[9]
+        //var id =  $(this).attr("name")
+        var res = id
 
         var nip = this.value
 
@@ -546,6 +546,7 @@ $.ajax({
 
 
 });
+}
 
 $("#user-select2").select2({
           dropdownAutoWidth: true,
@@ -763,31 +764,31 @@ function selectRefresh(x){
   
 }
 
-$('.namaTim').on('change', function() {
+// $('.namaTim').on('change', function() {
 
-var id =  $(this).attr("name")
-var res = id[9]
+// var id =  $(this).attr("name")
+// var res = id[9]
 
-var nip = this.value
+// var nip = this.value
 
-var val = nip.split("-")
-
-
-
-$('#nip'+res+'').html(val[0])
-$('#nip'+res+'').val(val[0])
-
-$('#perjab'+res+'').html(val[1])
-$('#perjab'+res+'').val(val[1])
-
-$('#nama'+res+'').html(val[2])
-$('#nama'+res+'').val(val[2])
-
-$('#gol'+res+'').html(val[3])
-$('#gol'+res+'').val(val[3])
+// var val = nip.split("-")
 
 
-});
+
+// $('#nip'+res+'').html(val[0])
+// $('#nip'+res+'').val(val[0])
+
+// $('#perjab'+res+'').html(val[1])
+// $('#perjab'+res+'').val(val[1])
+
+// $('#nama'+res+'').html(val[2])
+// $('#nama'+res+'').val(val[2])
+
+// $('#gol'+res+'').html(val[3])
+// $('#gol'+res+'').val(val[3])
+
+
+// });
 
 
 $('.multi-field-wrapper').each(function() {

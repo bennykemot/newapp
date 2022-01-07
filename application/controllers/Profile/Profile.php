@@ -135,6 +135,10 @@ class Profile extends CI_Controller {
 			$unit_id = $this->input->post('unit_id_Edit');
 			$pejabat_id = $this->input->post('ppk_Edit');
 
+            $dataST = array('id_unit' => $unit_id);
+            $whereST = array('user_id' => $id);
+            $this->Profile->update($dataST,'d_surattugas', $whereST);
+
 
             $data = array(
                 'username' => $username,
