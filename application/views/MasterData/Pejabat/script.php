@@ -315,7 +315,7 @@ $('#jabatan-select2').on('change', function() {
 	$('#jabatanText').val(jabatanText)
 
 });
-
+8
 
 // AUTO FILLED EDIT
 

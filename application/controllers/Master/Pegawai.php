@@ -39,6 +39,7 @@ class Pegawai extends CI_Controller {
 		if($Trigger == "C"){
 			$niplama = $this->input->post('niplama');
 			$nipbaru = $this->input->post('nipbaru');
+			$nama = $this->input->post('nama_lengkap');
 			$nama_lengkap = $this->input->post('nama_lengkap');
 			$tempat = $this->input->post('tempat_lahir');
 			$tgl_lahir = $this->input->post('tgl_lahir');
@@ -48,10 +49,12 @@ class Pegawai extends CI_Controller {
 			$jbtn = $this->input->post('jbtn');
 			$tmt = $this->input->post('tmt');
 			$unit = $this->input->post('unit');
+			$satker = $this->input->post('satker');
 
 			$data_pegawai = array(
 				'niplama' => $niplama,
 				'nip' => $nipbaru,
+				'nama' => $nama,
 				'nama_lengkap' => $nama_lengkap,
 				'tempat_lahir' => $tempat,
 				'tgl_lahir' => date("Y-m-d",strtotime($tgl_lahir)),
@@ -61,6 +64,7 @@ class Pegawai extends CI_Controller {
 				'jabatan' => $jbtn,
 				'tmt_jab' => $tmt,
 				'namaunit_lengkap' => $unit,
+				'satker_id' => $satker
 			);
 
 			$this->Pegawai->CRUD($data_pegawai,'t_pegawai',$Trigger);

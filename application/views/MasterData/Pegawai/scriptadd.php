@@ -56,7 +56,7 @@ $("#agama-select2").select2({
          }
      });
 
-$("#pangkat-select2").select2({
+	$("#pangkat-select2").select2({
           dropdownAutoWidth: true,
           width: '100%',
           placeholder: "Pilih Pangkat",
@@ -79,21 +79,19 @@ $("#pangkat-select2").select2({
          }
      });
 
-		$("#unit-select2").select2({
+	 $("#satker-select2").select2({
           dropdownAutoWidth: true,
           width: '100%',
-          placeholder: "Pilih Unit Kerja",
-         	ajax: { 
-						url: dropdown_baseurl + 'unitkerja',
-						type: "post",
-						dataType: 'json',
-						delay: 250,
-						data: function (params) {
+          placeholder: "Pilih Satuan Kerja",
+         ajax: { 
+           url: dropdown_baseurl + 'satker',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
               return {
-									Trigger: "unit_forPegawai",
-									//kdsatker: "<?= $this->session->userdata("kdsatker")?>",
-									searchTerm: params.term
-									// search term
+				Trigger: "satker_forPPK",
+                searchTerm: params.term // search term
               };
            },
            processResults: function (response) {
@@ -104,6 +102,46 @@ $("#pangkat-select2").select2({
            cache: true
          }
      });
+
+		$("#unit-select2").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Unit Kerja",
+         	ajax: { 
+					url: dropdown_baseurl + 'unitkerja',
+					type: "post",
+					dataType: 'json',
+					delay: 250,
+			data: function (params) {
+				var satker = $("#satker-select2").val()
+              	return {
+					Trigger: "unit_forPegawai",
+					//kdsatker: "<?= $this->session->userdata("kdsatker")?>",
+					searchTerm: params.term,
+					satker: satker
+					// search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     	});
+
+		$('#satker-select2').on('change', function() {
+				$('#unit-select2').val(null).trigger('change');
+				var satker = $('#satker-select2').val()
+				// if(satker == 450491){
+				// 	document.getElementById("unit").style.display = "";
+				// }else{
+				// 	document.getElementById("unit").style.display = "none";
+				// }
+
+		});
+
 
 function show_msg(status,message){
         swal({
