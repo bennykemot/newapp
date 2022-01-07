@@ -20,6 +20,11 @@ class Pegawai extends CI_Controller {
 		$this->load->view('MasterData/Pegawai/manage',$data);
 	}
 
+	public function tambah()
+	{
+		$this->load->view('MasterData/Pegawai/tambah');
+	}
+
 	public function ubah()
 	{
 		$id = $this->uri->segment(4);
@@ -32,7 +37,41 @@ class Pegawai extends CI_Controller {
 	{
 		$Trigger = $this->input->post('Trigger');
 		if($Trigger == "C"){
-			
+			$niplama = $this->input->post('niplama');
+			$nipbaru = $this->input->post('nipbaru');
+			$nama_lengkap = $this->input->post('nama_lengkap');
+			$tempat = $this->input->post('tempat_lahir');
+			$tgl_lahir = $this->input->post('tgl_lahir');
+			$jk = $this->input->post('jk');
+			$agama = $this->input->post('agama');
+			$pangkat = $this->input->post('pangkat');
+			$jbtn = $this->input->post('jbtn');
+			$tmt = $this->input->post('tmt');
+			$unit = $this->input->post('unit');
+
+			$data_pegawai = array(
+				'niplama' => $niplama,
+				'nip' => $nipbaru,
+				'nama_lengkap' => $nama_lengkap,
+				'tempat_lahir' => $tempat,
+				'tgl_lahir' => date("Y-m-d",strtotime($tgl_lahir)),
+				'jenis_kelamin' => $jk,
+				'agama' => $agama,
+				'nama_pangkat' => $pangkat,
+				'jabatan' => $jbtn,
+				'tmt_jab' => $tmt,
+				'namaunit_lengkap' => $unit,
+			);
+
+			$this->Pegawai->CRUD($data_pegawai,'t_pegawai',$Trigger);
+
+			// $response = array(
+            //     'status' => "success",
+            //     'message' => 'Data Berhasil ditambah'
+            // );
+
+			// echo json_encode($response);
+
 		}else if($Trigger == "R"){
 			$id = $this->input->post('id');
 			$where = array('t_pegawai.id' => $id);

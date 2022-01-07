@@ -14,9 +14,9 @@
                     <div class="col s9">
                         <h6>Data Pegawai</h6>
                     </div>
-                    <!-- <div class="col s2">
-                    <a class="btn modal-trigger" href="#modal2">Tambah Data</a>
-                    </div> -->
+                    <div class="col s2">
+                    <a class="btn modal-trigger" href="<?= site_url('Master/Pegawai/Tambah') ?>">Tambah Data</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@
             <div class="card-content">
               <div class="row">
                 <div class="col s12">
-                    <table id="tb-pegawai" class="display">
+                    <table id="tb-pegawai" class="display" style="width:100%;white-space: nowrap !important;overflow: hidden;">
                         <thead>
                             <tr>
 															<th>No</th>
