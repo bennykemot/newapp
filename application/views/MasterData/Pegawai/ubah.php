@@ -29,7 +29,7 @@
                             <div class="input-field col s2"><label>NIP Lama</label></div>
 
                             <div class="input-field col s10 " >
-                            <input type="text" id="niplama" name="niplama" value="<?= $ubah[0]['niplama'] ?>">
+                            <input type="text" id="niplama" name="niplama" value="<?= $ubah[0]['niplama'] ?>" readonly>
                             
 							<input type="text" id="id" name="id" value="<?= $ubah[0]['id'] ?>" hidden>
                             </div>
@@ -39,7 +39,7 @@
                             <div class="input-field col s2"><label>NIP Baru</label></div>
 
                             <div class="input-field col s10 " >
-                            <input type="text" id="nipbaru" name="nipbaru" value="<?= $ubah[0]['nip'] ?>">
+                            <input type="text" id="nipbaru" name="nipbaru" value="<?= $ubah[0]['nip'] ?>" readonly>
                             </div>
                         </div>
 
@@ -47,7 +47,7 @@
                             <div class="input-field col s2"><label>Nama Lengkap</label></div>
 
                             <div class="input-field col s10 " >
-                            <input type="text" id="nama_lengkap" name="nama_lengkap" value="<?= $ubah[0]['nama_lengkap'] ?>">
+                            <input type="text" id="nama_lengkap" name="nama_lengkap" value="<?= $ubah[0]['nama_lengkap'] ?>" readonly>
                             </div>
                         </div>
 
@@ -98,8 +98,8 @@
                             <div class="input-field col s2"><label>Pangkat</label></div>
 
                             <div class="input-field col s4 " >
-                            <select id="pangkat-select2" name="pangkat" class="select2-data-ajax select2-hidden-accessible browser-default" value="<?= $ubah[0]['nama_pangkat'] ?>">
-							</select>
+								<select id="pangkat-select2" name="pangkat" class="select2-data-ajax select2-hidden-accessible browser-default" value="<?= $ubah[0]['nama_pangkat'] ?>">
+								</select>
                             </div>
 
 							<div class="input-field col s2"><label>TMT Jabatan</label></div>
@@ -109,25 +109,25 @@
                             </div>
                         </div>
 
+						
+						<div class="input-field col s12">
+                            <div class="input-field col s2"><label>Unit Kerja</label></div>
+
+                            <div class="input-field col s10 " >
+								<select id="unit-select2" name="unit" class="select2-data-ajax select2-hidden-accessible browser-default" value="<?= $ubah[0]['namaunit_lengkap'] ?>"></select>
+                            <!-- <input type="text" id="unit" name="unit" value="<?= $ubah[0]['namaunit_lengkap'] ?>"> -->
+                            </div>
+                        </div>
+
 						<div class="input-field col s12">
                             <div class="input-field col s2"><label>Jabatan</label></div>
 
                             <div class="input-field col s10 " >
                             <input type="text" id="jbtn" name="jbtn" value="<?= $ubah[0]['jabatan'] ?>">
                             </div>
-
-							
                         </div>
 
-						<div class="input-field col s12">
-                            <div class="input-field col s2"><label>Unit Kerja</label></div>
-
-                            <div class="input-field col s10 " >
-                            <input type="text" id="unit" name="unit" value="<?= $ubah[0]['namaunit_lengkap'] ?>">
-                            </div>
-                        </div>
-
-						<div class="col s12" style="padding-top: 10px">
+						<div class="col s12" style="padding-top: 60px">
                             <div class="col s9"></div>
 
                             <div class="col s3">

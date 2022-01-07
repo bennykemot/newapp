@@ -242,6 +242,10 @@ class Dropdown extends CI_Controller {
       // Get users
       $response = $this->Dropdown->getData_unitkerja($searchTerm, $Trigger, $kdsatker);
 
+		// if($Trigger == "unit_forPegawai"){
+		// 	$response = $this->Dropdown->getData_unitkerja($searchTerm, $Trigger);
+		// }
+
       echo json_encode($response);
    }
 
