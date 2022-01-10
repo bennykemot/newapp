@@ -117,9 +117,19 @@
                         <div class="input-field col s12">
                             <div class="input-field col s2"><label>Penandatangan ST</label></div>
 
-                            <div class="input-field col s10 " >
+                            <div class="input-field col s1 " >
+                                <label>
+                                    <input type="checkbox" class="indeterminate-checkbox" id="plh"/>
+                                    <span>Plh</span>
+                                </label>
+                            </div>
+
+                            <input hidden type="text" id="status_penandatangan" name="status_penandatangan"/>
+
+                            <div class="input-field col s9 " >
                             <select class="browser-default" id="ttd" name="ttd"></select>
                             </div>
+                           
                         </div>
 
                         <!-- <div class="input-field col s12">

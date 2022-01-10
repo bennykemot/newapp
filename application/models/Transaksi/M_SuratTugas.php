@@ -11,21 +11,21 @@ class M_SuratTugas extends CI_Model{
         
         if($roleid == 1){
             $where = "";
-        }else{
-            if($kdsatker == "450491"){
-                if($roleid == 3 || $roleid == 2 || $roleid == 4 || $roleid == 9 || $roleid == 10){
-                $where = "AND d_surattugas.id_unit = ".$unitid."";
-                }else{
-                    $where="";
-                }
             }else{
-                if($roleid == 5 || $roleid == 7){
-                    $where="";
-                }else{
+                if($kdsatker == "450491"){
+                    if($roleid == 3 || $roleid == 2 || $roleid == 4 || $roleid == 9 || $roleid == 10){
                     $where = "AND d_surattugas.id_unit = ".$unitid."";
+                    }else{
+                        $where="";
+                    }
+                }else{
+                    if($roleid == 5 || $roleid == 7 || $roleid == 3 ){
+                        $where="";
+                    }else{
+                        $where = "AND d_surattugas.id_unit = ".$unitid."";
+                    }
                 }
             }
-        }
 
         if($roleid == 3){
             $join ="";

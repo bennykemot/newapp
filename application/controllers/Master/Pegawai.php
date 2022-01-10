@@ -94,6 +94,8 @@ class Pegawai extends CI_Controller {
 			$jbtn = $this->input->post('jbtn');
 			$tmt = $this->input->post('tmt');
 			$unit = $this->input->post('unit');
+			$unit_nama = $this->input->post('unitkerja_nama');
+			$unitid = $this->input->post('unitkerja_id');
 			$satker_id = $this->input->post('satker');
 			$id = $this->input->post('id');
 
@@ -108,12 +110,35 @@ class Pegawai extends CI_Controller {
 				'nama_pangkat' => $pangkat,
 				'jabatan' => $jbtn,
 				'tmt_jab' => $tmt,
-				'namaunit_lengkap' => $unit,
+				'namaunit_lengkap' => $unit_nama,
+				'unit_id' => $unit,
 				'satker_id' => $satker_id
 			);
 
 			$where = array('id' => $id);
 			$this->Pegawai->update($data_pegawai,'t_pegawai',$where);
+
+			$data_pejabat = array(
+				'unitkerja_id' => $unitid,
+				'kdsatker' => $satker_id
+			);
+
+
+			$this->db->where("nip", $nipbaru);
+			$this->db->update("t_pejabat",$data_pejabat);
+
+			$cekPejabat = $this->db->query("select id from t_pejabat where nip = ".$nipbaru." ")->result();
+
+			$where_user = array('pejabat_id' => $cekPejabat[0]->id);
+
+			$data_user = array(
+				'unit_id' => $unitid,
+				'kdsatker' => $satker_id
+			);
+
+			$this->db->where($where_user);
+			$this->db->update("user",$data_user);
+
 
 			$response = array(
                 'status' => "success",

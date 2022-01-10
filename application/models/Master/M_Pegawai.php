@@ -10,10 +10,12 @@ class M_Pegawai extends CI_Model {
 	}
 
 	function getPegawaiUbah($id){
-		$query = $this->db->query('SELECT t_pegawai.*, t_satker.nmsatker
-									FROM t_pegawai
-									JOIN t_satker ON t_satker.kdsatker = t_pegawai.satker_id
-									WHERE id = '.$id.' ');
+		$query = $this->db->query('SELECT t_pegawai.*, 
+		t_satker.nmsatker, t_unitkerja.grup_id as grup_id, t_unitkerja.id as idunitkerja, t_satker.kdsatker as kdsatker
+		FROM t_pegawai 
+		JOIN t_satker ON t_satker.kdsatker = t_pegawai.satker_id 
+		JOIN t_unitkerja ON t_unitkerja.nama_unit = t_pegawai.namaunit_lengkap  OR t_unitkerja.nama_unit = t_pegawai.namaunit
+		WHERE t_pegawai.id = '.$id.'');
 		return $query->result_array();
 
 	}

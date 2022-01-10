@@ -216,7 +216,7 @@ AND a.id_app = b.id_appST; ");
                     $where="";
                 }
             }else{
-                if($roleid == 5 || $roleid == 7){
+               if($roleid == 5 || $roleid == 7 || $roleid == 3 ){
                     $where="";
                 }else{
                     $where = "AND d_surattugas.id_unit = ".$unitid."";

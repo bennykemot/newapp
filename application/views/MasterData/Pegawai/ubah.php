@@ -114,10 +114,7 @@
                             <div class="input-field col s2"><label>Satuan Kerja</label></div>
 
                             <div class="input-field col s10 " >
-								<select id="satker-select2" name="satker" class="select2-data-ajax select2-hidden-accessible browser-default" value="<?= $ubah[0]['nmsatker'] ?>"></select>
-                            <!-- <input type="text" id="unit" name="unit" value="<?= $ubah[0]['namaunit_lengkap'] ?>"> -->
-                            	<!-- <input type="text" id="satker_id" name="satker_id" readonly> -->
-								
+								<select id="satker-select2" name="satker" class="select2-data-ajax select2-hidden-accessible browser-default"></select>							
                             </div>
                         </div>
 
@@ -125,8 +122,7 @@
                             <div class="input-field col s2"><label>Unit Kerja</label></div>
 
                             <div class="input-field col s10 " >
-								<select id="unit-select2" name="unit" class="select2-data-ajax select2-hidden-accessible browser-default" value="<?= $ubah[0]['namaunit_lengkap'] ?>"></select>
-                            <!-- <input type="text" id="unit" name="unit" value="<?= $ubah[0]['namaunit_lengkap'] ?>"> -->
+								<select id="unit-select2" name="unit" class="select2-data-ajax select2-hidden-accessible browser-default"></select>
 								
                             </div>
                         </div>
@@ -148,9 +144,15 @@
                         </div>
 
                         </div>
-
+                        
+                        <div hidden>
+                            <input name="satker_nama" id="satker_nama" value="<?= $ubah[0]['nmsatker'] ?>">
+                            <input name="unitkerja_nama" id="unitkerja_nama" value="<?= $ubah[0]['namaunit_lengkap'] ?>">
+                            <input name="unitkerja_id" id="unitkerja_id" value="<?= $ubah[0]['idunitkerja'] ?>">
+                        </div>           
 						
                         </div>
+                        
                         
 
                     </div>

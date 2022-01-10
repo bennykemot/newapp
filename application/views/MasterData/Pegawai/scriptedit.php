@@ -6,8 +6,10 @@
 	// variabel update
 	var agamaText = "<?= $ubah[0]['agama'] ?>"
 	var pangkatText = "<?= $ubah[0]['nama_pangkat'] ?>"
-	var unitText = "<?= $ubah[0]['namaunit_lengkap'] ?>"
-	var satkerText = "<?= $ubah[0]['nmsatker'] ?>"
+	var unitVal = "<?= $ubah[0]['grup_id'] ?>"
+  var unitText = "<?= $ubah[0]['namaunit_lengkap'] ?>"
+	var satkerVal = "<?= $ubah[0]['kdsatker'] ?>"
+  var satkerText = "<?= $ubah[0]['nmsatker'] ?>"
     
 	var $agama = $("<option selected='selected'></option>").val(agamaText).text(agamaText)
 	$("#agama-select2").append($agama).trigger('change');
@@ -15,10 +17,10 @@
 	var $pangkat = $("<option selected='selected'></option>").val(pangkatText).text(pangkatText)
 	$("#pangkat-select2").append($pangkat).trigger('change');
 
-	var $unit = $("<option selected='selected'></option>").val(unitText).text(unitText)
+	var $unit = $("<option selected='selected'></option>").val(unitVal).text(unitText)
 	$("#unit-select2").append($unit).trigger('change');
 
-	var $satker = $("<option selected='selected'></option>").val(satkerText).text(satkerText)
+	var $satker = $("<option selected='selected'></option>").val(satkerVal).text(satkerText)
 	$("#satker-select2").append($satker).trigger('change');
 	
 
@@ -136,10 +138,15 @@ $("#pangkat-select2").select2({
 
 		 	// AUTO FILLED 
 		 	$('#unit-select2').on('change', function() {
+				var unitkerja =  $("#unit-select2 option:selected").text()
+				$('#unitkerja_nama').val(unitkerja)
 
-				$('#satker_id').val()
-				var satker_id =  $("#unit-select2 option:selected").text()
-				$('#satker_id').val(satker_id)
+			});
+
+      $('#satker-select2').on('change', function() {
+				var satker =  $("#satker-select2 option:selected").text()
+        valsat = satker.split("-")
+				$('#satker_nama').val(valsat[1])
 
 			});
 
@@ -199,8 +206,8 @@ $("#UbahPegawai").click(function(e){
 		success: function (data, textStatus, jqXHR) {
 			res = JSON.parse(data)
               show_msg(res.status, res.message);
-              Reset(IdForm);
-              window.history.back();      
+             // Reset(IdForm);
+              //window.history.back();      
 			  //javascript:window.history.go(-1);
         },
 

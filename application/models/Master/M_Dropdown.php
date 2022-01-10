@@ -430,7 +430,7 @@ function getData_Pegawai($searchTerm="", $Trigger){
       }
    }else{
       foreach($users as $user){
-         $data[] = array("id"=>$user['nip']."-".$user['jabatan']."-".$user['nama']."-".$user['golruang']."-".$user['kel_jab'], "text"=>$user['nama']);
+         $data[] = array("id"=>$user['nip'].";".$user['jabatan'].";".$user['nama'].";".$user['golruang'].";".$user['kel_jab'], "text"=>$user['nama']);
       }
    }
    
@@ -527,7 +527,7 @@ function getData_unitkerja($searchTerm="", $Trigger, $kdsatker){
 		// Initialize Array with fetched data
 		$data = array();
 		foreach($users as $user){
-			$data[] = array("id"=>$user['nama_unit'], "text"=>$user['nama_unit']);
+			$data[] = array("id"=>$user['grup_id'], "text"=>$user['nama_unit']);
 		}
 		return $data;
 
@@ -815,7 +815,7 @@ function getData_PegawaiST($searchTerm="", $Trigger,$tglberangkat,$tglkembali){
          $data = array();
 
       foreach($users as $user){
-         $data[] = array("id"=>$user['nip']."-".$user['jabatan']."-".$user['nama']."-".$user['golruang']."-".$user['kel_jab'], "text"=>$user['nama']);
+         $data[] = array("id"=>$user['nip'].";".$user['jabatan'].";".$user['nama'].";".$user['golruang'].";".$user['kel_jab'], "text"=>$user['nama']);
       }
    
    

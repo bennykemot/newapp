@@ -136,9 +136,9 @@
                                     <div class="input-field col s2 ">
                                         <button type="button" class="btn green col s12" id ="add-field" name="add-field"><i class="material-icons left">add</i> Tambah</button>
                                     </div>
-                                    <div class="input-field col s2 ">
+                                    <!-- <div class="input-field col s2 ">
                                         <button type="button" class="btn orange lighten-2 modal-trigger col s12" href="#Modalexport" id ="export" name="export"><i class="material-icons left">cloud_upload</i> Import</button>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <!-- <div class="multi-fields">
                                 </div> -->

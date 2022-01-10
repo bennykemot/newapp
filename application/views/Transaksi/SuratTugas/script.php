@@ -517,6 +517,22 @@ $("#user-select2").select2({
          }
      });
 
+     $( "#plh" ).change(function() {
+
+            // Get the checkbox
+        var plh = document.getElementById("plh");
+        // Get the output text
+        var status_penandatangan = document.getElementById("status_penandatangan");
+
+        // If the checkbox is checked, display the output text
+        if (plh.checked == true){
+          $('#status_penandatangan').val("PLH")
+        } else {
+          $('#status_penandatangan').val("")
+        }
+       
+     });
+
 // $("#ttd").select2({
 //           dropdownAutoWidth: true,
 //           width: '100%',
@@ -611,7 +627,7 @@ function selectRefresh(x){
 
         var nip = this.value
 
-        var val = nip.split("-")
+        var val = nip.split(";")
 
         
 

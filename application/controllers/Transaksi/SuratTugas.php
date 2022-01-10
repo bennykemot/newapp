@@ -349,7 +349,7 @@ class SuratTugas extends CI_Controller {
                 
                 for($i = 0 ; $i < $countTim; $i++){
                     if($this->input->post('status_id') == 3){
-                        $nospd = $this->input->post('nospd'.$urut[$i].'');
+                        $nospd = $this->input->post('nospd'.$urut[$i].'') . $this->input->post('nospdST'.$urut[$i].'') ;
                     }else{
                         $nospd = "SPD - 0000";
                     }

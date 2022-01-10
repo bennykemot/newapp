@@ -14,7 +14,7 @@
                 <thead>
                     <tr style="background-color: rgba(242,242,242,.5)">
                         <td  class="text-center" style="min-width: 90px" >NO</td>
-                        <td class="text-center" >TGL<br>BERANGKAT</td>
+                        <td class="text-center">TGL<br>BERANGKAT</td>
                         <td class="text-center" >TGL<br>KEMBALI</td>
                         <td class="text-center">JML<br>HARI</td>
                         <td  class="text-center" style="width: 30px" colspan="2">NAMA</td>
@@ -29,7 +29,7 @@
         
                     <tr >
                         <td style="min-width:90px" ></td>
-                        <td class="text-center" style="min-width: 200px" >No SPD</td>
+                        <td class="text-center" style="min-width: 50px">No SPD</td>
                         <td colspan="2" class="text-center" style="min-width: 300px">UANG HARIAN</td>
                         <td colspan="2" class="text-center" style="min-width: 300px">PENGINAPAN</td>
                         <td class="text-center">Taxi Bandara</td>
@@ -94,7 +94,9 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="text" id="nospd<?=$j?>" name="nospd<?=$j?>" value="SPD - <?=$nospd?>" readonly>
+                        <td>
+                            <input type="text" style='width:7em' id="nospd<?=$j?>" name="nospd<?=$j?>" value="SPD - <?=$nospd?> /" readonly>
+                            <input type="text" style='width:8em' id="nospdST<?=$j?>" name="nospdST<?=$j?>">
                         </td>
                         <td><input style="min-width: 150px" type="text" id="satuan_uangharian<?=$j?>" name="satuan_uangharian<?=$j?>" onkeyup="AllCount('<?=$j?>','satuan')" value="<?=rupiah($ubah[$i]['tarifuangharian'])?>"></td>
                         <td><input style="min-width: 150px" type="text" id="uangharian<?=$j?>" name="uangharian<?=$j?>" onkeyup="AllCount('<?=$j?>','total')" value="<?=rupiah($ubah[$i]['totaluangharian'])?>"></td>

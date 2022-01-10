@@ -485,7 +485,7 @@ $('.namaTimHardcode').on('change', function() {
 
         var nip = this.value
 
-        var val = nip.split("-")
+        var val = nip.split(";")
         tglberangkat = $('#tglberangkat'+res+'').val()
         tglkembali = $('#tglkembali'+res+'').val()
         
@@ -692,7 +692,7 @@ function selectRefresh(x){
 
          var nip = this.value
 
-         var val = nip.split("-")
+         var val = nip.split(";")
 
          
 
@@ -771,7 +771,7 @@ function selectRefresh(x){
 
 // var nip = this.value
 
-// var val = nip.split("-")
+// var val = nip.split(";")
 
 
 

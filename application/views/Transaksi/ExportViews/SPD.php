@@ -142,9 +142,11 @@ function cek_tgl($tanggal){
                         <td colspan="2"><?=$e->golongan?><br>
                         <?=$e->jabatan?><br>
                         
-                        <?php if($e->jabatan == "II" || $e->jabatan == "I"){
+                        <?php if($e->jabatan == "I"){
+                            echo "A";
+                        }else if($e->jabatan == "II"){
                             echo "B";
-                        }else{
+                        }else {
                             echo "C";
                         } ?></td>
                     </tr>

@@ -202,10 +202,10 @@ class NotaDinas extends CI_Controller {
 			}
 			
 		}
-		if($data['export'][0]->status_id < 3){
-			$mpdf->SetWatermarkText('DRAFT'); // Will cope with UTF-8 encoded text
-			$mpdf->showWatermarkText = true; // Uses default font if left blank
-		}
+		// if($data['export'][0]->status_id < 3){
+		// 	$mpdf->SetWatermarkText('DRAFT'); // Will cope with UTF-8 encoded text
+		// 	$mpdf->showWatermarkText = true; // Uses default font if left blank
+		// }
         $mpdf->WriteHTML($html);          
         $mpdf->Output($name, 'I');
      
