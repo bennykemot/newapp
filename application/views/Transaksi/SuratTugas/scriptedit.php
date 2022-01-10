@@ -1179,6 +1179,57 @@ $.ajax({
 
 function dayCount(id, trigger){
 
+  var harian = $("#satuan_uangharian"+id+"").val()
+    var inap = $("#satuan_uangpenginapan"+id+"").val()
+    var taxi = $("#uangtaxi"+id+"").val()
+    var laut = $("#uanglaut"+id+"").val()
+    var udara = $("#uangudara"+id+"").val()
+    var darat = $("#uangdarat"+id+"").val()
+    var dll = $("#uangdll"+id+"").val()
+    var rep = $("#uangrep"+id+"").val()
+
+    var T_harian = $("#uangharian"+id+"").val()
+    var T_inap = $("#uangpenginapan"+id+"").val()
+
+    var a = harian.replace(/[^0-9\.]+/g, "");
+    var b = inap.replace(/[^0-9\.]+/g, "");
+    var c = rep.replace(/[^0-9\.]+/g, "");
+    var d = taxi.replace(/[^0-9\.]+/g, "");
+    var e = laut.replace(/[^0-9\.]+/g, "");
+    var f = udara.replace(/[^0-9\.]+/g, "");
+    var g = darat.replace(/[^0-9\.]+/g, "");
+    var h = dll.replace(/[^0-9\.]+/g, "");
+
+    var T_a = T_harian.replace(/[^0-9\.]+/g, "");
+    var T_b = T_inap.replace(/[^0-9\.]+/g, "");
+
+    var uangharian = a.replace(/\./g, "");
+    var uangpenginapan = b.replace(/\./g, "");
+    var uangrep = c.replace(/\./g, "");
+
+    var uangtaxi = d.replace(/\./g, "");
+    var uanglaut = e.replace(/\./g, "");
+    var uangudara = f.replace(/\./g, "");
+    var uangdarat = g.replace(/\./g, "");
+    var uangdll = h.replace(/\./g, "");
+
+    var T_uangharian = T_a.replace(/\./g, "");
+    var T_uangpenginapan = T_b.replace(/\./g, "");
+
+    if($("#kotaasal"+id+"").val() != null || $("#kotatujuan"+id+"").val() != null){
+    var valasal = $("#kotaasal"+id+"").val()
+    var kotaasal_split = valasal.split("-")
+    var asal = kotaasal_split[1]
+    var kotaasal_id = kotaasal_split[0]
+    var nama_kotaasal_id = kotaasal_split[2]
+
+    var valtujuan = $("#kotatujuan"+id+"").val()
+    var kotatujuan_split = valtujuan.split("-")
+    var tujuan = kotatujuan_split[1]
+    var kotatujuan_id = kotatujuan_split[0]
+    var nama_kotatujuan_id = kotatujuan_split[2]
+  }
+
   var keljab = $('#keljab'+id+'').val();
 var kdakun = $('#kdakun').val();
 var gol = $('#gol'+id+'').val();
@@ -1291,6 +1342,20 @@ $("#UbahST").click(function (e) {
   var formData = new FormData($("#FormST")[0]);
   var IdForm =  "FormST";
 
+  ttdVal = $('#ttd').val()
+  cs_menyetujui = $('#cs_menyetujui').val()
+  cs_mengajukan = $('#cs_mengajukan').val()
+  if(ttdVal == "" || cs_menyetujui == "" || cs_mengajukan == ""){
+    swal({
+          title:"Penandatangan Masih Kosong",
+          text: "Pastikan Field Terisi Semua", 
+          icon: "warning",
+          timer: 2000
+          })
+          return false;
+  }
+
+
   if(document.getElementById('counting') != null){
   var countingDiv = document.getElementById('counting');
   var countTim = countingDiv.getElementsByClassName('namaTimHardcode').length;
@@ -1343,7 +1408,7 @@ for($loop = 0 ; $loop < countTim; $loop++){
     success: function (data, textStatus, jqXHR) {
               show_msg(textStatus);
               //Reset(IdForm);
-              window.history.back();
+              //window.history.back();
               
               
           },

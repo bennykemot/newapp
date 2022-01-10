@@ -51,6 +51,60 @@ function Min_dateselesai(){
 
 }
 
+function Template(){
+
+  $.ajax({
+    url : master_baseurl + "getKota",
+    data: {"kdkabkota": $('#kdkabkota').val(),"kdlokasi": $('#kdlokasi').val(), Trigger :"default"},
+    type: "post",
+    dataType: "JSON",
+    success: function(data)
+        { 
+          var kdakun = $('#kdakun').val()
+
+          var $asal = $("<option selected='selected'></option>").val(data[0]['idkota']).text(data[0]['valkota'])
+              $("#kotaasaTemplate").append($asal).trigger('change');
+
+              if(kdakun == "524113" || kdakun == "524114"){
+          var $tujuan = $("<option selected='selected'></option>").val(data[0]['idkota']).text(data[0]['valkota'])
+              $("#KotatujuanTemplate").append($tujuan).trigger('change');
+
+              }
+
+          document.getElementById("FormTemplate").style.display = "";
+        }
+      });
+
+
+}
+
+$("#SubmitTemplate").click(function (e) {
+  e.preventDefault();
+
+  var btn = $(this);
+  var form = $(this).closest("form");
+  var formData = new FormData($("#FormTemplate")[0]);
+  var IdForm =  "FormTemplate";
+  btn
+    .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
+    .attr("disabled", false);
+
+  formData.append('user_id', user_session)
+  // formData.append('countTim', countTim)
+
+  $.ajax({
+    type: "POST",
+    data: formData,
+    url: baseurl + "Template",
+    processData: false,
+    contentType: false,
+    success: function (data, textStatus, jqXHR) {              
+              
+          },
+          error: function (jqXHR, textStatus, errorThrown) { },
+      });
+});
+
 
 function getRep(keljab, valTrigger){
 if(valTrigger == "L"){
@@ -101,6 +155,16 @@ function getInap(gol,keljab,kdakun){
       return res;
   
   }
+  function Upload(){
+        $('#file_').click();
+    }
+
+    $('#file_').on('change', function () {
+    var file = this.files[0];
+    if (file) {
+        $('#shad_file').val(file.name);
+    }
+});
 
 
 function formatRupiah(angka){

@@ -1,4 +1,5 @@
-    <div id = "counting">
+ 
+  <div id = "counting">
                 <div class="multi-field-wrapper">
 
                     <div class="input-field col s12" >
@@ -45,7 +46,15 @@
                 </thead>
                     <?php   $j=1;$no = []; 
                             $total=0;
+                            $nospdCount = substr($nospd[0]->countspd, 6, 4);
                             for($i = 0 ; $i < count($ubah); $i++){ 
+                                $nospd = "0000";
+                                if($ubah[0]['status_id'] == 3){
+                                    $nospdCount = $nospdCount + 1;
+                                    $nospd = str_pad($nospdCount, 4, "0", STR_PAD_LEFT);
+
+                                };
+                                
                                 $kotaasal   = explode("-",$ubah[$i]['kotaasal']);
                                 $kotatujuan = explode("-",$ubah[$i]['kotatujuan']);
                                 
@@ -85,7 +94,8 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="text" id="nospd<?=$j?>" name="nospd<?=$j?>" value="<?=$ubah[$i]['nospd']?>"></td>
+                        <td><input type="text" id="nospd<?=$j?>" name="nospd<?=$j?>" value="SPD - <?=$nospd?>" readonly>
+                        </td>
                         <td><input style="min-width: 150px" type="text" id="satuan_uangharian<?=$j?>" name="satuan_uangharian<?=$j?>" onkeyup="AllCount('<?=$j?>','satuan')" value="<?=rupiah($ubah[$i]['tarifuangharian'])?>"></td>
                         <td><input style="min-width: 150px" type="text" id="uangharian<?=$j?>" name="uangharian<?=$j?>" onkeyup="AllCount('<?=$j?>','total')" value="<?=rupiah($ubah[$i]['totaluangharian'])?>"></td>
                         <td><input style="min-width: 150px" type="text" id="satuan_uangpenginapan<?=$j?>" name="satuan_uangpenginapan<?=$j?>" onkeyup="AllCount('<?=$j?>','satuan')" value="<?=rupiah($ubah[$i]['tarifinap'])?>"></td>

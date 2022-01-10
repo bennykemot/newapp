@@ -1119,6 +1119,16 @@ $("#TambahST").click(function (e) {
   var IdForm =  "FormST";
   // var countingDiv = document.getElementById('counting');
   // var countTim = countingDiv.getElementsByClassName('namaTim').length;
+ttdVal = $('#ttd').val()
+  if(ttdVal == null || ttdVal == ""){
+    swal({
+          title:"Penandatangan Masih Kosong",
+          text: "Pastikan Field Terisi Semua", 
+          icon: "warning",
+          timer: 2000
+          })
+          return false;
+  }
 
   btn
     .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")

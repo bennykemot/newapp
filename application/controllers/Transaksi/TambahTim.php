@@ -73,6 +73,11 @@ class TambahTim extends CI_Controller {
                        $totaluangtransport += $this->pregChar($this->input->post('uangdll'.$urut[$i].'')) + $this->pregChar($this->input->post('uangtaxi'.$urut[$i].''))
                                             + $this->pregChar($this->input->post('uanglaut'.$urut[$i].''))+ $this->pregChar($this->input->post('uangudara'.$urut[$i].''))
                                             + $this->pregChar($this->input->post('uangdarat'.$urut[$i].''));
+                        $transport = $this->pregChar($this->input->post('uangdll'.$urut[$i].'')) + 
+                                    $this->pregChar($this->input->post('uangtaxi'.$urut[$i].'')) +
+                                    $this->pregChar($this->input->post('uanglaut'.$urut[$i].''))+ 
+                                    $this->pregChar($this->input->post('uangudara'.$urut[$i].'')) +
+                                    $this->pregChar($this->input->post('uangdarat'.$urut[$i].''));
 
                        $data_ItemCS = array(
                         'nourut' => $this->input->post('urut'.$urut[$i].''),
@@ -96,7 +101,7 @@ class TambahTim extends CI_Controller {
                         'taksiasal'  => $this->pregChar("0"),
                         'taksitujuan'  => $this->pregChar("0"),
                         'lain'  => $this->pregChar($this->input->post('uangdll'.$urut[$i].'')),
-                        'transport'  => $totaluangtransport,
+                        'transport'  => $transport,
                         'totaltravel'  => $this->pregChar($this->input->post('gol'.$urut[$i].'')),
 
                         'tariftaxi'  => $this->pregChar($this->input->post('uangtaxi'.$urut[$i].'')),

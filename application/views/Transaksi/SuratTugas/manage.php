@@ -52,10 +52,14 @@
                         <tr>
                             <td><?php echo $no ?></td>
                             <td class="text-center">
-                              <a href="<?= site_url('Transaksi/SuratTugas/approve/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex.'/'.$u->status_id)?>"
+                              <!-- <a href="<?= site_url('Transaksi/SuratTugas/approve/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex.'/'.$u->status_id)?>"
                               class="tooltipped" data-position="bottom" data-tooltip="Approve PPK">
                                 <?= getStatusId($u->status_id)?>
-                              </a></td>
+                              </a> -->
+
+                              <?= getStatusId($u->status_id)?>
+                            
+                            </td>
                             <td><?php echo $u->username ?></td>
 														<td><?php echo cek_tgl_st(date("Y-m-d",strtotime($u->created_at))) ?></td>
                             <td><b><?php echo $u->nost ?>   <?php echo cek_tgl_st($u->tglst) ?></b>
@@ -72,7 +76,9 @@
                                         <div class="col s4">
                                           <a href="<?= site_url('Transaksi/TambahTim/TambahTim/'.$u->id.'/'.$u->kdindex)?>" 
                                             class="tooltipped <?=getForAdminOpr($role_id)?> <?=getComplete($u->status_id, 'N')?>" 
-                                              data-position="top" data-tooltip="Anggota" ><i class="material-icons cyan-text">people</i></a>
+                                              data-position="top" data-tooltip="Anggota" >
+                                              
+                                              <i class="material-icons cyan-text">people</i></a>
                                         </div>
                                         <div class="col s4">
                                           <a href="#" class="dropdown-trigger tooltipped" data-position="top" data-tooltip="Printout" href="#" data-target="dropdown'<?=$u->id?>'" ><i class="material-icons orange-text">remove_red_eye</i></a>

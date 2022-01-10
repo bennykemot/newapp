@@ -202,7 +202,7 @@ function cek_tgl($tanggal){
                     <tr>
                         <td style="text-align: center;">10</td>
                         <td>Keterangan lain</td>
-                        <td colspan="2"><?= $e->nost ?>, tanggal : 24 Februari 2021</td>
+                        <td colspan="2"><?= $e->nost ?>, tanggal : <?= cek_tgl($e->tglst) ?></td>
                     </tr>
                     
                 </tbody>

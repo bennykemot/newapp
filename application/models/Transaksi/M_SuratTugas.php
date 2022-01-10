@@ -13,13 +13,17 @@ class M_SuratTugas extends CI_Model{
             $where = "";
         }else{
             if($kdsatker == "450491"){
-                if($roleid == 3){
+                if($roleid == 3 || $roleid == 2 || $roleid == 4 || $roleid == 9 || $roleid == 10){
                 $where = "AND d_surattugas.id_unit = ".$unitid."";
                 }else{
                     $where="";
                 }
             }else{
-                $where="";
+                if($roleid == 5 || $roleid == 7){
+                    $where="";
+                }else{
+                    $where = "AND d_surattugas.id_unit = ".$unitid."";
+                }
             }
         }
 
@@ -121,6 +125,7 @@ class M_SuratTugas extends CI_Model{
                                 JOIN t_pegawai ON t_pegawai.nip = t_pejabat.nip
 								
                                 ";
+                                $group = "GROUP BY d_itemcs.nip";
 
                                 $order ="ORDER BY d_itemcs.nourut";
                 
@@ -144,6 +149,7 @@ class M_SuratTugas extends CI_Model{
                             
                             d_itemcs.kotaasal,d_itemcs.kotatujuan,";
                             $join = "JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st";
+                            $group="";
 
                             $order ="ORDER BY d_itemcs.nourut";
                         
@@ -151,6 +157,7 @@ class M_SuratTugas extends CI_Model{
                             $join = "";
                             $select = "CONCAT('NoTim') as tim,";
                             $oder = "";
+                            $group = "";
                         }
                 }
             $query = $this->db->query('SELECT d_pagu.*, d_surattugas.nost, d_surattugas.tglst, 
@@ -159,7 +166,8 @@ class M_SuratTugas extends CI_Model{
             d_surattugas.id_ttd,d_surattugas.kdsatker,d_surattugas.id_ttd,d_surattugas.jumlah_uang,d_surattugas.cs_menyetujui,d_surattugas.cs_mengajukan,
             d_surattugas.id_tahapan,d_surattugas.id_app,d_surattugas.status_id,d_bagipagu.unit_id, d_surattugas.status_id,
             
-            t_unitkerja.nama_unit, 
+            t_unitkerja.nama_unit,
+            t_unitkerja.grup_id as kdunit, 
             '.$select.'
             t_pejabat.nama as nama_ttd,
             t_pejabat.nip as nip_ttd,
@@ -172,7 +180,7 @@ class M_SuratTugas extends CI_Model{
             JOIN d_bagipagu ON d_bagipagu.kdindex = d_surattugas.kdindex
             JOIN t_unitkerja ON d_bagipagu.unit_id = t_unitkerja.id
             '.$join.' WHERE d_surattugas.id = '.$id.' 
-            AND d_pagu.kdindex = "'.$kdindex.'" 
+            AND d_pagu.kdindex = "'.$kdindex.'" '.$group.'
             '. $order.'');
     }
         

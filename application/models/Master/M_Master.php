@@ -205,28 +205,32 @@ AND a.id_app = b.id_appST; ");
 
          function status_st($kdsatker, $unitid, $roleid, $penjabid, $status){
             $where="";$whereD="";
-            
-            if($roleid == 1){
-               $where = "";
+        
+        if($roleid == 1){
+            $where = "";
+        }else{
+            if($kdsatker == "450491"){
+                if($roleid == 3 || $roleid == 2 || $roleid == 4 || $roleid == 9 || $roleid == 10){
+                $where = "AND d_surattugas.id_unit = ".$unitid."";
+                }else{
+                    $where="";
+                }
             }else{
-               if($kdsatker == "450491"){
-                  if($roleid == 3){
-                  $where = "AND d_surattugas.id_unit = ".$unitid."";
-                  }else{
-                        $where="";
-                  }
-               }else{
-                  $where="";
-               }
+                if($roleid == 5 || $roleid == 7){
+                    $where="";
+                }else{
+                    $where = "AND d_surattugas.id_unit = ".$unitid."";
+                }
             }
-   
-            if($roleid == 3){
-               $join ="";
-               $whereD = "AND d_bagipagu.ppk_id = ".$penjabid."";
-            }else if($roleid == 5 || $roleid == 7){
-               $cek = $this->db->query("select * from t_pejabat where id = ".$penjabid."")->result();
-               $whereD = "AND d_surattugas.cs_menyetujui like '%".$cek[0]->nip."%'";
-            }
+        }
+
+        if($roleid == 3){
+            $join ="";
+            $whereD = "AND d_bagipagu.ppk_id = ".$penjabid."";
+        }else if($roleid == 5 || $roleid == 7){
+            $cek = $this->db->query("select * from t_pejabat where id = ".$penjabid."")->result();
+            $whereD = "AND d_surattugas.cs_menyetujui like '%".$cek[0]->nip."%'";
+        }
    
             $query = $this->db->query("SELECT d_surattugas.*
             from d_surattugas 

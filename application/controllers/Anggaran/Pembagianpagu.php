@@ -210,6 +210,8 @@ class Pembagianpagu extends CI_Controller {
             $roleid =  $this->uri->segment(7);
             $unit_id =  $this->uri->segment(8);
             $spreadsheet = new Spreadsheet();
+            $spreadsheet->getActiveSheet()->getProtection()->setSheet(true);
+            $spreadsheet->getDefaultStyle()->getProtection()->setLocked(false);
             $sheet = $spreadsheet->getActiveSheet();
         
             $style_col = [
@@ -300,6 +302,8 @@ class Pembagianpagu extends CI_Controller {
                         $sheet->getColumnDimension('E')->setWidth(10);
                         $sheet->getColumnDimension('F')->setWidth(10);
 					}
+                    $sheet->getStyle('D'.$numrow.'')->getProtection()
+                    ->setLocked(\PhpOffice\PhpSpreadsheet\Style\Protection::PROTECTION_PROTECTED);
 
                     $sheet->getStyle('J'.$numrow.'')->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER_COMMA_SEPARATED1);
                     $sheet->getStyle('K'.$numrow.'')->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER_COMMA_SEPARATED1);
@@ -310,6 +314,9 @@ class Pembagianpagu extends CI_Controller {
            
             $sheet->getColumnDimension('A')->setWidth(5);
             $sheet->getDefaultRowDimension()->setRowHeight(-1);
+           
+
+
             $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
             $sheet->setTitle("PembagianPagu".$thang."-".$kdsatker."");
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

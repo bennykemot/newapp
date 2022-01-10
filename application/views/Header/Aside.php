@@ -382,7 +382,7 @@ function mappingD_none($data){
     <!-- END: SideNav-->
 
 <!-- BEGIN: Page Main-->
-<div id="main">
+<div id="main" style="overflow-x: hidden">
 	<div class="row">
 		<div class="col s12">
 			<div class="container">

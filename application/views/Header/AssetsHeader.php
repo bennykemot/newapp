@@ -341,6 +341,6 @@ function ApproveKPA($data){
   ?>
 
   <!-- END: Head-->
-  <body class="vertical-layout page-header-light vertical-menu-collapsible vertical-dark-menu preload-transitions 2-columns   " data-open="click" data-menu="vertical-dark-menu" data-col="2-columns">
+  <body class="vertical-layout page-header-light vertical-menu-collapsible vertical-dark-menu preload-transitions 2-columns   " data-open="click" data-menu="vertical-dark-menu" data-col="2-columns" >
 
     <!-- BEGIN: Header-->

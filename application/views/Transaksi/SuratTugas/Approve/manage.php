@@ -1,4 +1,11 @@
-<?php include(APPPATH . 'views/Header/Aside.php') ?>
+<?php include(APPPATH . 'views/Header/Aside.php');
+
+$redOnly = "";$none="";
+if($ubah[0]['status_id'] == 3){
+    $redOnly = "readonly";
+    $none="d-none";
+}
+?>
 
 <div class="row">
 
@@ -53,7 +60,7 @@
                             <div class="input-field col s2"><label>Uraian ST</label></div>
 
                             <div class="input-field col s10 " >
-                            <textarea readonly readonly class="materialize-textarea" id="uraianst" name="uraianst" ><?= $ubah[0]['uraianst'] ?></textarea>
+                            <textarea readonly class="materialize-textarea" id="uraianst" name="uraianst" ><?= $ubah[0]['uraianst'] ?></textarea>
                             </div>
                         </div>
 
@@ -77,23 +84,23 @@
                             <div class="input-field col s2"><label>MAK</label></div>
 
                             <div class="input-field col s10 " >
-                                <input readonly type="text"  id="idxskmpnenlabel" name="idxskmpnenlabel" value="<?= $ubah[0]['idx_temp'] ?>" readonly>
-                                <input readonly type="text"  id="idxskmpnen" name="idxskmpnen" value="<?= $ubah[0]['idxskmpnen'] ?>" readonly hidden>
+                                <input <?=$redOnly?> type="text"  id="idxskmpnenlabel" name="idxskmpnenlabel" value="<?= $ubah[0]['idx_temp'] ?>" <?=$redOnly?>>
+                                <input <?=$redOnly?> type="text"  id="idxskmpnen" name="idxskmpnen" value="<?= $ubah[0]['idxskmpnen'] ?>" <?=$redOnly?> hidden>
                                 
                                 <div hidden>
-                                    <input readonly type="text"  id="kdindex" name="kdindex" value="<?= $ubah[0]['idxskmpnen'] ?>" readonly>
-                                    <input readonly type="text"  id="thang" name="thang" value="<?= $ubah[0]['thang'] ?>" readonly>
-                                    <input readonly type="text"  id="kdgiat" name="kdgiat" value="<?= $ubah[0]['kdgiat'] ?>" readonly>
-                                    <input readonly type="text"  id="kdoutput" name="kdoutput" value="<?= $ubah[0]['kdoutput'] ?>" readonly>
-                                    <input readonly type="text"  id="kdsoutput" name="kdsoutput" value="<?= $ubah[0]['kdsoutput'] ?>" readonly>
-                                    <input readonly type="text"  id="kdkmpnen" name="kdkmpnen" value="<?= $ubah[0]['kdkmpnen'] ?>" readonly>
-                                    <input readonly type="text"  id="kdskmpnen" name="kdskmpnen" value="<?= $ubah[0]['kdskmpnen'] ?>" readonly>
-                                    <input readonly type="text"  id="kdakun" name="kdakun" value="<?= $ubah[0]['kdakun'] ?>" readonly>
-                                    <input readonly type="text"  id="kdbeban" name="kdbeban" value="<?= $ubah[0]['kdbeban'] ?>" readonly>
-                                    <input readonly type="text"  id="kdapp" name="kdapp" value="<?= $ubah[0]['id_app'] ?>" readonly>
-                                    <input readonly type="text"  id="kdtahapan" name="kdtahapan" value="<?= $ubah[0]['id_tahapan'] ?>" readonly>
-                                    <input readonly type="text"  id="id_unit" name="id_unit" value="<?=$unit_id?>" readonly>
-                                    <input readonly type="text"  id="kdsatker" name="kdsatker" value="<?=$kdsatker?>">
+                                    <input <?=$redOnly?> type="text"  id="kdindex" name="kdindex" value="<?= $ubah[0]['idxskmpnen'] ?>" <?=$redOnly?>>
+                                    <input <?=$redOnly?> type="text"  id="thang" name="thang" value="<?= $ubah[0]['thang'] ?>" <?=$redOnly?>>
+                                    <input <?=$redOnly?> type="text"  id="kdgiat" name="kdgiat" value="<?= $ubah[0]['kdgiat'] ?>" <?=$redOnly?>>
+                                    <input <?=$redOnly?> type="text"  id="kdoutput" name="kdoutput" value="<?= $ubah[0]['kdoutput'] ?>" <?=$redOnly?>>
+                                    <input <?=$redOnly?> type="text"  id="kdsoutput" name="kdsoutput" value="<?= $ubah[0]['kdsoutput'] ?>" <?=$redOnly?>>
+                                    <input <?=$redOnly?> type="text"  id="kdkmpnen" name="kdkmpnen" value="<?= $ubah[0]['kdkmpnen'] ?>" <?=$redOnly?>>
+                                    <input <?=$redOnly?> type="text"  id="kdskmpnen" name="kdskmpnen" value="<?= $ubah[0]['kdskmpnen'] ?>" <?=$redOnly?>>
+                                    <input <?=$redOnly?> type="text"  id="kdakun" name="kdakun" value="<?= $ubah[0]['kdakun'] ?>" <?=$redOnly?>>
+                                    <input <?=$redOnly?> type="text"  id="kdbeban" name="kdbeban" value="<?= $ubah[0]['kdbeban'] ?>" <?=$redOnly?>>
+                                    <input <?=$redOnly?> type="text"  id="kdapp" name="kdapp" value="<?= $ubah[0]['id_app'] ?>" <?=$redOnly?>>
+                                    <input <?=$redOnly?> type="text"  id="kdtahapan" name="kdtahapan" value="<?= $ubah[0]['id_tahapan'] ?>" <?=$redOnly?>>
+                                    <input <?=$redOnly?> type="text"  id="id_unit" name="id_unit" value="<?=$unit_id?>" <?=$redOnly?>>
+                                    <input <?=$redOnly?> type="text"  id="kdsatker" name="kdsatker" value="<?=$kdsatker?>">
                                 </div>
                             </div>
                         </div>
@@ -102,8 +109,8 @@
                             <div class="input-field col s2"><label>Alokasi</label></div>
 
                             <div class="input-field col s10 " >
-                            <input readonly readonly id="alokasilabel" name="alokasilabel" value="<?= rupiah($ubah[0]['jumlah_uang']) ?>">
-                            <input readonly readonly id="alokasi" name="alokasi" hidden value="<?= number_format($ubah[0]['jumlah_uang'],0,',','') ?>">
+                            <input readonly id="alokasilabel" name="alokasilabel" value="<?= rupiah($ubah[0]['jumlah_uang']) ?>">
+                            <input readonly id="alokasi" name="alokasi" hidden value="<?= number_format($ubah[0]['jumlah_uang'],0,',','') ?>">
                             </div>
                         </div>
 
@@ -111,8 +118,8 @@
                             <div class="input-field col s2"><label>Beban Anggaran</label></div>
 
                             <div class="input-field col s10 " >
-                            <!-- <select readonly class="browser-default" id="select-bebananggaran" name="select-bebananggaran"></select> -->
-                            <input readonly id="bebananggaran" name="bebananggaran" value="<?= $ubah[0]['nama_unit'] ?>" readonly>
+                            <!-- <select <?=$redOnly?> class="browser-default" id="select-bebananggaran" name="select-bebananggaran"></select> -->
+                            <input readonly id="bebananggaran" name="bebananggaran" value="<?= $ubah[0]['nama_unit'] ?>" <?=$redOnly?>>
                             </div>
                         </div>
 
@@ -120,8 +127,8 @@
                             <div class="input-field col s2"><label>Penandatangan</label></div>
 
                             <div class="input-field col s10 " >
-                            <!-- <select readonly class="browser-default" id="ttd" name="ttd"></select> -->
-                            <input readonly id="bebananggaran" name="bebananggaran" value="<?= $ubah[0]['nama_ttd'] ?>" readonly>
+                            <!-- <select <?=$redOnly?> class="browser-default" id="ttd" name="ttd"></select> -->
+                            <input readonly id="bebananggaran" name="bebananggaran" value="<?= $ubah[0]['nama_ttd'] ?>" <?=$redOnly?>>
                             </div>
                         </div>
 
@@ -129,8 +136,8 @@
                             <div class="input-field col s2"><label>Yang Menyetujui</label></div>
 
                             <div class="input-field col s10 " >
-                            <!-- <select readonly class="browser-default" name="cs_menyetujui" id="cs_menyetujui"></select> -->
-                            <input readonly id="menyetujui" name="menyetujui" readonly>
+                            <!-- <select <?=$redOnly?> class="browser-default" name="cs_menyetujui" id="cs_menyetujui"></select> -->
+                            <input readonly id="menyetujui" name="menyetujui">
                             </div>
                         </div>
 
@@ -138,8 +145,8 @@
                             <div class="input-field col s2"><label>Yang Mengusulkan</label></div>
 
                             <div class="input-field col s10 " >
-                            <!-- <select readonly class="browser-default" name="cs_mengajukan" id="cs_mengajukan"></select> -->
-                            <input readonly id="mengajukan" name="mengajukan" readonly>
+                            <!-- <select <?=$redOnly?> class="browser-default" name="cs_mengajukan" id="cs_mengajukan"></select> -->
+                            <input readonly id="mengajukan" name="mengajukan">
                             </div>
                         </div>
 
@@ -195,7 +202,7 @@
                         <td><input readonly  class="nourut" type="number" id="urut<?=$j?>" name="urut<?=$j?>" min="1" max="20" value="<?=$ubah[$i]['nourut']?>"></td>
                         <td><input readonly type="date" min="<?=$ubah[$i]['tglmulaist']?>" max="<?=$ubah[$i]['tglselesaist']?>" onchange="dayCount('<?=$j?>','D')" id="tglberangkat<?=$j?>" name="tglberangkat<?=$j?>" value="<?=$ubah[$i]['tglberangkat']?>"></td>
                         <td><input readonly type="date" max="<?=$ubah[$i]['tglselesaist']?>" min="<?=$ubah[$i]['tglmulaist']?>" onchange="dayCount(<?=$j?>)" id="tglkembali<?=$j?>" name="tglkembali<?=$j?>" value="<?=$ubah[$i]['tglkembali']?>"></td>
-                        <td><input readonly type="text" id="jmlhari<?=$j?>" name="jmlhari<?=$j?>" readonly value="<?=$ubah[$i]['jmlhari']?>"></td>
+                        <td><input readonly type="text" id="jmlhari<?=$j?>" name="jmlhari<?=$j?>" value="<?=$ubah[$i]['jmlhari']?>"></td>
                         <td colspan="2" id="Tim">
                         <select readonly placeholder="Nama.."  class="namaTimHardcode browser-default namaTim" id="namaDummy<?=$j?>" name="namaDummy<?=$j?>" onclick="ubahNama('<?=$j?>')">
                             <option selected value="<?=$ubah[$i]['nip']?>"><?=$ubah[$i]['nama']?></option>
@@ -204,12 +211,12 @@
                         <input readonly name="idtim<?=$j?>" id="idtim<?=$j?>" value="<?=$ubah[$i]['idtim']?>"hidden>
                         </td>
                         <td colspan="2">
-                            <input readonly placeholder="NIP" class="nip" id="nip<?=$j?>" name="nip<?=$j?>" value="<?=$ubah[$i]['nip']?>" readonly>
+                            <input readonly> placeholder="NIP" class="nip" id="nip<?=$j?>" name="nip<?=$j?>" value="<?=$ubah[$i]['nip']?>" <?=$redOnly?>>
                         </td>
                         <td colspan="2">
                             <textarea readonly placeholder="Peran/Jabatan" class="perjab" id="perjab<?=$j?>" name="perjab<?=$j?>"><?=$ubah[$i]['jabatan']?></textarea>
                         </td>
-                        <td><input readonly type="text" id="gol<?=$j?>" name="gol<?=$j?>" value="<?=$ubah[$i]['golongan']?>" readonly></td>
+                        <td><input readonly type="text" id="gol<?=$j?>" name="gol<?=$j?>" value="<?=$ubah[$i]['golongan']?>" <?=$redOnly?>></td>
                         <td colspan="2">
                             <select readonly class="browser-default kota kotaasal kotaselect" name="kotaasal<?=$j?>" id="kotaasal<?=$j?>" onchange="cityCount(<?=$j?>)">
                                 <option selected value="<?=$ubah[$i]['kotaasal']?>"><?=$kotaasal[2]?></option>
@@ -225,19 +232,19 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input readonly type="text" id="nospd<?=$j?>" name="nospd<?=$j?>" value="<?=$ubah[$i]['nospd']?>"></td>
-                        <td><input readonly style="min-width: 150px" type="text" id="satuan_uangharian<?=$j?>" name="satuan_uangharian<?=$j?>" onkeyup="AllCount('<?=$j?>','satuan')" value="<?=rupiah($ubah[$i]['tarifuangharian'])?>"></td>
-                        <td><input readonly style="min-width: 150px" type="text" id="uangharian<?=$j?>" name="uangharian<?=$j?>" onkeyup="AllCount('<?=$j?>','total')" value="<?=rupiah($ubah[$i]['totaluangharian'])?>"></td>
-                        <td><input readonly style="min-width: 150px" type="text" id="satuan_uangpenginapan<?=$j?>" name="satuan_uangpenginapan<?=$j?>" onkeyup="AllCount('<?=$j?>','satuan')" value="<?=rupiah($ubah[$i]['tarifinap'])?>"></td>
-                        <td><input readonly style="min-width: 150px" type="text" id="uangpenginapan<?=$j?>" name="uangpenginapan<?=$j?>" readonly value="<?=rupiah($ubah[$i]['totalinap'])?>"></td>
-                        <td><input readonly style="min-width: 150px" type="text" id="uangtaxi<?=$j?>" name="uangtaxi<?=$j?>" onkeyup="AllCount('<?=$j?>','all')" value="<?=rupiah($ubah[$i]['tariftaxi'])?>"></td>
-                        <td><input readonly style="min-width: 150px" type="text" id="uanglaut<?=$j?>" name="uanglaut<?=$j?>" onkeyup="AllCount('<?=$j?>','all')" value="<?=rupiah($ubah[$i]['tariflaut'])?>"></td>
-                        <td><input readonly style="min-width: 150px" type="text" id="uangudara<?=$j?>" name="uangudara<?=$j?>" onkeyup="AllCount('<?=$j?>','all')" value="<?=rupiah($ubah[$i]['tarifudara'])?>"></td>
-                        <td><input readonly style="min-width: 150px" type="text" id="uangdarat<?=$j?>" name="uangdarat<?=$j?>" onkeyup="AllCount('<?=$j?>','all')" value="<?=rupiah($ubah[$i]['tarifdarat'])?>"></td>
-                        <td><input readonly style="min-width: 150px" type="text" id="uangdll<?=$j?>" name="uangdll<?=$j?>" onkeyup="AllCount('<?=$j?>','all')" value="<?=rupiah($ubah[$i]['lain'])?>"></td>
-                        <td><input readonly style="min-width: 150px" type="text" id="uangrep<?=$j?>" name="uangrep<?=$j?>" onkeyup="AllCount('<?=$j?>','all')" value="<?=rupiah($ubah[$i]['tarifrep'])?>"></td>
-                        <td><input readonly style="min-width: 150px" type="text" readonly id="total<?=$j?>"  name="total<?=$j?>" value="<?=rupiah($ubah[$i]['jumlah'])?>"></td>
-                        <td><input readonly class="select2 browser-default" id="jnstransportasi<?=$j?>" name="jnstransportasi<?=$j?>" value="<?=$ubah[$i]['jnstransportasi']?>"></td>
+                        <td><input <?=$redOnly?> type="text" id="nospd<?=$j?>" name="nospd<?=$j?>" value="<?=$ubah[$i]['nospd']?>"></td>
+                        <td><input <?=$redOnly?> style="min-width: 150px" type="text" id="satuan_uangharian<?=$j?>" name="satuan_uangharian<?=$j?>" onkeyup="AllCount('<?=$j?>','satuan')" value="<?=rupiah($ubah[$i]['tarifuangharian'])?>"></td>
+                        <td><input <?=$redOnly?> style="min-width: 150px" type="text" id="uangharian<?=$j?>" name="uangharian<?=$j?>" onkeyup="AllCount('<?=$j?>','total')" value="<?=rupiah($ubah[$i]['totaluangharian'])?>"></td>
+                        <td><input <?=$redOnly?> style="min-width: 150px" type="text" id="satuan_uangpenginapan<?=$j?>" name="satuan_uangpenginapan<?=$j?>" onkeyup="AllCount('<?=$j?>','satuan')" value="<?=rupiah($ubah[$i]['tarifinap'])?>"></td>
+                        <td><input <?=$redOnly?> style="min-width: 150px" type="text" id="uangpenginapan<?=$j?>" name="uangpenginapan<?=$j?>" <?=$redOnly?> value="<?=rupiah($ubah[$i]['totalinap'])?>"></td>
+                        <td><input <?=$redOnly?> style="min-width: 150px" type="text" id="uangtaxi<?=$j?>" name="uangtaxi<?=$j?>" onkeyup="AllCount('<?=$j?>','all')" value="<?=rupiah($ubah[$i]['tariftaxi'])?>"></td>
+                        <td><input <?=$redOnly?> style="min-width: 150px" type="text" id="uanglaut<?=$j?>" name="uanglaut<?=$j?>" onkeyup="AllCount('<?=$j?>','all')" value="<?=rupiah($ubah[$i]['tariflaut'])?>"></td>
+                        <td><input <?=$redOnly?> style="min-width: 150px" type="text" id="uangudara<?=$j?>" name="uangudara<?=$j?>" onkeyup="AllCount('<?=$j?>','all')" value="<?=rupiah($ubah[$i]['tarifudara'])?>"></td>
+                        <td><input <?=$redOnly?> style="min-width: 150px" type="text" id="uangdarat<?=$j?>" name="uangdarat<?=$j?>" onkeyup="AllCount('<?=$j?>','all')" value="<?=rupiah($ubah[$i]['tarifdarat'])?>"></td>
+                        <td><input <?=$redOnly?> style="min-width: 150px" type="text" id="uangdll<?=$j?>" name="uangdll<?=$j?>" onkeyup="AllCount('<?=$j?>','all')" value="<?=rupiah($ubah[$i]['lain'])?>"></td>
+                        <td><input <?=$redOnly?> style="min-width: 150px" type="text" id="uangrep<?=$j?>" name="uangrep<?=$j?>" onkeyup="AllCount('<?=$j?>','all')" value="<?=rupiah($ubah[$i]['tarifrep'])?>"></td>
+                        <td><input <?=$redOnly?> style="min-width: 150px" type="text" id="total<?=$j?>"  name="total<?=$j?>" value="<?=rupiah($ubah[$i]['jumlah'])?>"></td>
+                        <td><input <?=$redOnly?> class="select2 browser-default" id="jnstransportasi<?=$j?>" name="jnstransportasi<?=$j?>" value="<?=$ubah[$i]['jnstransportasi']?>"></td>
                         <td><select readonly placeholder="Pilih Penandatangan SPD"  class="ttd_spd browser-default" id="ttd_spd<?=$j?>" name="ttd_spd<?=$j?>" onclick="ubahTtdSpd('<?=$j?>')">
                             <option selected value="<?=$ubah[$i]['id_ttd_spd']?>"> <?=$ubah[$i]['nama_ttd_spd']?> </option>
                         </select></td>

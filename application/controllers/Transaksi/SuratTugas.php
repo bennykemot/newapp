@@ -115,6 +115,12 @@ class SuratTugas extends CI_Controller {
         $unit_id = $this->session->userdata("unit_id");
         $username = $this->session->userdata("username");
 
+        $data['nospd'] = $this->db->query("Select  MAX(d_itemcs.nospd) as countspd from d_itemcs JOIN d_surattugas ON d_itemcs.id_st = d_surattugas.id 
+        WHERE d_surattugas.kdsatker = ".$kdsatker." AND d_surattugas.id_unit = ".$unit_id." ")->result();
+
+        // echo $data['nospd'][0]->countspd;
+        // exit;
+
 
         $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unit_id, $role_id);
         $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unit_id, $role_id);
@@ -243,7 +249,11 @@ class SuratTugas extends CI_Controller {
 
             $status_st = $this->input->post('status_id');
             $idst = $this->input->post('id_st');
+            $id_unit = $this->input->post('id_unit');
+            $kdsatker = $this->input->post('kdsatker');
+            
             if($status_st == 3){
+                
                 $this->SuratTugas->history($idst);
                 $status_st = 4;
             }
@@ -254,12 +264,12 @@ class SuratTugas extends CI_Controller {
             $tglst_mulai = str_replace("/", "-",$this->input->post('tglst_mulai'));
 			$tglst_selesai = str_replace("/", "-",$this->input->post('tglst_selesai'));
 			$idxskmpnen = $this->input->post('idxskmpnen');
-			$id_unit = $this->input->post('id_unit');
+			
             $countTim = $this->input->post('countTim');
            
             $idxskmpnenlabel = $this->input->post('idxskmpnenlabel');
 
-            $kdsatker = $this->input->post('kdsatker');
+            
             
             $kdindex = $this->input->post('idxskmpnen');
             $thang = $this->input->post('thang');
@@ -335,9 +345,17 @@ class SuratTugas extends CI_Controller {
                     $this->db->where("id_st", $idst);
                     $this->db->delete("d_itemcs");
 
-
+                
                 
                 for($i = 0 ; $i < $countTim; $i++){
+                    if($this->input->post('status_id') == 3){
+                        $nospd = $this->input->post('nospd'.$urut[$i].'');
+                    }else{
+                        $nospd = "SPD - 0000";
+                    }
+                    
+                    $format = $noSpd++;
+                    $spd  = str_pad($format, 4, "0", STR_PAD_LEFT);
 
                     $nip = $this->input->post('nip'.$urut[$i].'');
                     $jabatan = $this->input->post('perjab'.$urut[$i].'');
@@ -354,9 +372,15 @@ class SuratTugas extends CI_Controller {
                                             $this->pregChar($this->input->post('uangudara'.$urut[$i].'')) +
                                             $this->pregChar($this->input->post('uangdarat'.$urut[$i].''));
 
+                    $transport = $this->pregChar($this->input->post('uangdll'.$urut[$i].'')) + 
+                                    $this->pregChar($this->input->post('uangtaxi'.$urut[$i].'')) +
+                                    $this->pregChar($this->input->post('uanglaut'.$urut[$i].''))+ 
+                                    $this->pregChar($this->input->post('uangudara'.$urut[$i].'')) +
+                                    $this->pregChar($this->input->post('uangdarat'.$urut[$i].''));
+
                        $data_ItemCS = array(
                         'nourut' => $this->input->post('urut'.$urut[$i].''),
-                        // 'nospd' => $this->input->post('nospd'.$urut[$i].''),
+                        'nospd' => $nospd,
                         'nama' => $this->input->post('nama'.$urut[$i].''),
                         'nip' => $nip,
                         'jabatan'  => $jabatan,
@@ -376,7 +400,7 @@ class SuratTugas extends CI_Controller {
                         'taksiasal'  => $this->pregChar("0"),
                         'taksitujuan'  => $this->pregChar("0"),
                         'lain'  => $this->pregChar($this->input->post('uangdll'.$urut[$i].'')),
-                        'transport'  => $totaluangtransport,
+                        'transport'  => $transport,
                         'totaltravel'  => $this->pregChar($this->input->post('gol'.$urut[$i].'')),
 
                         'tariftaxi'  => $this->pregChar($this->input->post('uangtaxi'.$urut[$i].'')),
@@ -455,6 +479,24 @@ class SuratTugas extends CI_Controller {
         }else if($Trigger == "Approve"){
             $status_st = $this->input->post('id_status');
             $status_st = $status_st + 1;
+
+            $data_st = array(
+                'status_id' => $status_st
+            );
+
+            $where = array('id' => $this->input->post('idst'));
+            $this->SuratTugas->Update($data_st,'d_surattugas', $where);
+
+
+        }else if($Trigger == "TolakApprove"){
+            $status_st = $this->input->post('id_status');
+
+            if($status_st == 3){
+                $status_st = 1;
+            }else{
+                $status_st = $status_st - 1;
+            }
+            
 
             $data_st = array(
                 'status_id' => $status_st

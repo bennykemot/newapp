@@ -8,7 +8,7 @@ var user_session = "<?= $this->session->userdata("user_id")?>"
 var role_session = "<?= $this->session->userdata("role_id")?>"
 var unit_session = "<?= $this->session->userdata("unit_id")?>"
 var id_st_session = "<?=$this->uri->segment('4')?>";
-var id_status = "<?=$this->uri->segment('9')?>";
+var id_status = "<?=$ubah[0]['status_id']?>";
 if(role_session == 1){
   unit_session = 0;
 }
@@ -203,6 +203,81 @@ $("#ApproveST").click(function (e) {
       });
 });
 
+function AllCount(i, Trigger){
+    var harian = $("#satuan_uangharian"+i+"").val()
+    var inap = $("#satuan_uangpenginapan"+i+"").val()
+    var taxi = $("#uangtaxi"+i+"").val()
+    var laut = $("#uanglaut"+i+"").val()
+    var udara = $("#uangudara"+i+"").val()
+    var darat = $("#uangdarat"+i+"").val()
+    var dll = $("#uangdll"+i+"").val()
+    var rep = $("#uangrep"+i+"").val()
+
+    var T_harian = $("#uangharian"+i+"").val()
+    var T_inap = $("#uangpenginapan"+i+"").val()
+
+    var a = harian.replace(/[^0-9\.]+/g, "");
+    var b = inap.replace(/[^0-9\.]+/g, "");
+    var c = rep.replace(/[^0-9\.]+/g, "");
+    var d = taxi.replace(/[^0-9\.]+/g, "");
+    var e = laut.replace(/[^0-9\.]+/g, "");
+    var f = udara.replace(/[^0-9\.]+/g, "");
+    var g = darat.replace(/[^0-9\.]+/g, "");
+    var h = dll.replace(/[^0-9\.]+/g, "");
+
+    var T_a = T_harian.replace(/[^0-9\.]+/g, "");
+    var T_b = T_inap.replace(/[^0-9\.]+/g, "");
+
+    var uangharian = a.replace(/\./g, "");
+    var uangpenginapan = b.replace(/\./g, "");
+    var uangrep = c.replace(/\./g, "");
+
+    var uangtaxi = d.replace(/\./g, "");
+    var uanglaut = e.replace(/\./g, "");
+    var uangudara = f.replace(/\./g, "");
+    var uangdarat = g.replace(/\./g, "");
+    var uangdll = h.replace(/\./g, "");
+
+    var T_uangharian = T_a.replace(/\./g, "");
+    var T_uangpenginapan = T_b.replace(/\./g, "");
+
+    var jmlhari = $('#jmlhari'+i+'').val()
+
+    if(Trigger == "satuan"){
+      var total_harian_ = Number(uangharian) * Number(jmlhari)
+      var total_harian = ""+total_harian_+""
+      $('#uangharian'+i+'').val(formatRupiah(total_harian))
+
+
+      var total_inap_ = Number(uangpenginapan) * ( Number(jmlhari)-1)
+      var total_inap = ""+total_inap_+""
+      $('#uangpenginapan'+i+'').val(formatRupiah(total_inap))
+
+      var e = Number(total_harian) + Number(total_inap)  + Number(uangtaxi) + Number(uanglaut) + Number(uangudara) + Number(uangdarat) + Number(uangdll) + Number(uangrep)
+    }else if( Trigger == "total"){
+      var total_harian_ = Number(T_uangharian) / Number(jmlhari)
+      var total_harian = ""+total_harian_+""
+      $('#satuan_uangharian'+i+'').val(formatRupiah(total_harian))
+
+
+      var total_inap_ = Number(T_uangpenginapan) /( Number(jmlhari)-1)
+      var total_inap = ""+total_inap_+""
+      $('#satuan_uangpenginapan'+i+'').val(formatRupiah(total_inap))
+
+      var e = Number(total_harian) + Number(total_inap)  + Number(uangtaxi) + Number(uanglaut) + Number(uangudara) + Number(uangdarat) + Number(uangdll) + Number(uangrep)
+
+    }else if(Trigger == "all"){
+      var e = Number(T_uangharian) + Number(T_uangpenginapan)  + Number(uangtaxi) + Number(uanglaut) + Number(uangudara) + Number(uangdarat) + Number(uangdll) + Number(uangrep)
+      
+    }
+      
+    var total = ""+e+""
+
+    $("#total"+i+"").val(formatRupiah(total))
+  
+
+}
+
 $("#TolakST").click(function (e) {
   e.preventDefault();
 
@@ -215,9 +290,9 @@ $("#TolakST").click(function (e) {
     .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
     .attr("disabled", true);
 
-  formData.append('Trigger', 'Approve')
+  formData.append('Trigger', 'TolakApprove')
   formData.append('idst', id_st_session)
-    formData.append('id_status', 1)
+  formData.append('id_status', id_status)
     
 
   $.ajax({
