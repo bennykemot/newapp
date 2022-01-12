@@ -229,7 +229,7 @@ function getData_satker($searchTerm="", $kdsatker, $Trigger){
    $this->db->select('kdsatker');
    $this->db->select('nmsatker');
 	if($Trigger != "satker_forPPK"){
-		$this->db->where("kdsatker",$kdsatker);
+		//$this->db->where("kdsatker",$kdsatker);
 	}
    $this->db->where("nmsatker like '%".$searchTerm."%' ");
    $this->db->where("kdsatker like '%".$searchTerm."%' ");
@@ -716,9 +716,8 @@ function getData_ttd($searchTerm="",$Trigger,$kdsatker){
                   $this->db->select('id');
                   $this->db->select('nama');
                   $this->db->select('nip');
+                  $this->db->where_in("jabatan_id", [5,6,7]);
                   $this->db->where("nama like '%".$searchTerm."%' ");
-                  $this->db->where("jabatan_id", 6);
-                  $this->db->or_where("jabatan_id", 5);
                   $this->db->where("kdsatker", $kdsatker);
                   
                   $fetched_records = $this->db->get('t_pejabat');
@@ -815,7 +814,7 @@ function getData_PegawaiST($searchTerm="", $Trigger,$tglberangkat,$tglkembali){
          $data = array();
 
       foreach($users as $user){
-         $data[] = array("id"=>$user['nip'].";".$user['jabatan'].";".$user['nama'].";".$user['golruang'].";".$user['kel_jab'], "text"=>$user['nama']);
+         $data[] = array("id"=>$user['nip'].";".$user['jabatan'].";".$user['nama'].";".$user['golruang'].";".$user['kel_jab'], "text"=>$user['nip']." - ".$user['nama']);
       }
    
    

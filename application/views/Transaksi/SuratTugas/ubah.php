@@ -126,12 +126,30 @@ if($ubah[0]['status_id'] == 3){
                         </div>
 
                         <div class="input-field col s12">
+                            <div class="input-field col s2"><label>Penandatangan ST</label></div>
+
+                            <div class="input-field col s1 " >
+                                <label>
+                                    <input type="checkbox" class="indeterminate-checkbox" id="plh" <?=$redOnly?>/>
+                                    <span>Plh</span>
+                                </label>
+                            </div>
+
+                            <input hidden type="text" id="status_penandatangan" name="status_penandatangan" value="TDK"/>
+
+                            <div class="input-field col s9 " >
+                            <select class="browser-default" id="ttd" name="ttd" <?=$redOnly?>></select>
+                            </div>
+                           
+                        </div>
+
+                        <!-- <div class="input-field col s12">
                             <div class="input-field col s2"><label>Penandatangan</label></div>
 
                             <div class="input-field col s10 " >
                             <select class="browser-default" id="ttd" name="ttd" <?=$redOnly?>></select>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="input-field col s12">
                             <div class="input-field col s2"><label>Yang Menyetujui</label></div>

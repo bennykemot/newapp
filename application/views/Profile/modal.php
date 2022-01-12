@@ -104,8 +104,11 @@
                         <div class="input-field col s2"><label>Satker</label></div>
 
                         <div class="input-field col s10" >
-                        <input readonly placeholder="<?php echo $this->session->userdata("nmsatker"); ?>" id="kdsatker_Edit" name="kdsatker_Edit" value = "<?php echo $this->session->userdata("kdsatker"); ?>">
-                          </div>
+                        <!-- <input readonly placeholder="<?php echo $this->session->userdata("nmsatker"); ?>" id="kdsatker_Edit" name="kdsatker_Edit" value = "<?php echo $this->session->userdata("kdsatker"); ?>"> -->
+                          <div class="input-field col s10" >
+														<select  id="satker-select2_Edit" name="satker_Edit" class="select2-data-ajax select2-hidden-accessible browser-default"></select>
+                          </div>    
+                      </div>
                     </div>
 
 										<div class="input-field col s12">

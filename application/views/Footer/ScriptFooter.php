@@ -191,6 +191,8 @@
     window.onscroll = resetIdleTimeout;
 
 });
+
+var $API = 'https://apip.bpkp.go.id/apisimabisma/public/';
     
       </script>
 

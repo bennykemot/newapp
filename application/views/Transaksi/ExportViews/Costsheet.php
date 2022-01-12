@@ -132,7 +132,6 @@ function cek_tgl($tanggal){
                 <thead style="text-align: center; vertical-align: middle; height:1px !important;">
                     <tr>
                         <td rowspan="2" width="3%">No</td>
-                        <td rowspan="2" width="3%">No SPD</td>
                         <td rowspan="2" width="13%">Nama</td>
                         <td rowspan="2" width="13%">NIP</td>
                         <td rowspan="2" width="5%">GOL</td>
@@ -161,7 +160,6 @@ function cek_tgl($tanggal){
                     <?php $no=1; foreach($export as $e){ ?>
                     <tr>
                         <td style="text-align: center;"><?=$no++?></td>
-                        <td><?=$e->nospd?></td>
                         <td><?=$e->nama?></td>
                         <td><?=$e->nip?></td>
                         <td style="text-align: center;"><?=$e->golongan?></td>

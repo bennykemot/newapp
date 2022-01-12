@@ -1,9 +1,7 @@
-
-
 <script>
 
-
-var baseurl 	= "<?= base_url('Transaksi/TambahTim/')?>";
+var baseurl 	= "<?= base_url('Transaksi/SuratTugas/')?>";
+var baseurl_export 	= "<?= base_url('Transaksi/NotaDinas/')?>";
 var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";
 var master_baseurl 	= "<?= base_url('Master/Master/')?>";
 var satker_session = "<?= $this->session->userdata("kdsatker")?>"
@@ -11,33 +9,9 @@ var user_session = "<?= $this->session->userdata("user_id")?>"
 var role_session = "<?= $this->session->userdata("role_id")?>"
 var unit_session = "<?= $this->session->userdata("unit_id")?>"
 var count_tim = "<?= count($countST) ?>"
-$sumtotal = 0;
-
 if(role_session == 1){
   unit_session = 0;
 }
-
-var TTDmenyetujuivalue = "<?= $ST[0]['cs_menyetujui'] ?>"
-var textmenyetujui = "<?= $ST[0]['cs_menyetujui'] ?>"
-
-var TTDmenyetujuitext = textmenyetujui.split("-")
-
-var TTDmengajukanvalue = "<?= $ST[0]['cs_mengajukan'] ?>"
-var textmengajukan = "<?= $ST[0]['cs_mengajukan'] ?>"
-
-var TTDmengajukantext = textmengajukan.split("-")
-
-var $menyetujui = $("<option selected='selected'></option>").val(TTDmenyetujuivalue).text(TTDmenyetujuitext[2])
-$("#cs_menyetujui").append($menyetujui).trigger('change');
-
-var $mengajukan = $("<option selected='selected'></option>").val(TTDmengajukanvalue).text(TTDmengajukantext[2])
-$("#cs_mengajukan").append($mengajukan).trigger('change');
-
-function Reset(idForm) {
-  document.getElementById(idForm).reset();
-  $('.browser-default').val(null).trigger('change');
-}
-
 
 function Min_datemulai(){
   var min_date_st = $('#tglst').val()
@@ -50,61 +24,6 @@ function Min_dateselesai(){
   document.getElementById("tglst_selesai").setAttribute("min", min_date_mulai);
 
 }
-
-function Template(){
-
-  $.ajax({
-    url : master_baseurl + "getKota",
-    data: {"kdkabkota": $('#kdkabkota').val(),"kdlokasi": $('#kdlokasi').val(), Trigger :"default"},
-    type: "post",
-    dataType: "JSON",
-    success: function(data)
-        { 
-          var kdakun = $('#kdakun').val()
-
-          var $asal = $("<option selected='selected'></option>").val(data[0]['idkota']).text(data[0]['valkota'])
-              $("#kotaasaTemplate").append($asal).trigger('change');
-
-              if(kdakun == "524113" || kdakun == "524114"){
-          var $tujuan = $("<option selected='selected'></option>").val(data[0]['idkota']).text(data[0]['valkota'])
-              $("#KotatujuanTemplate").append($tujuan).trigger('change');
-
-              }
-
-          document.getElementById("FormTemplate").style.display = "";
-        }
-      });
-
-
-}
-
-$("#SubmitTemplate").click(function (e) {
-  e.preventDefault();
-
-  var btn = $(this);
-  var form = $(this).closest("form");
-  var formData = new FormData($("#FormTemplate")[0]);
-  var IdForm =  "FormTemplate";
-  btn
-    .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
-    .attr("disabled", false);
-
-  formData.append('user_id', user_session)
-  // formData.append('countTim', countTim)
-
-  $.ajax({
-    type: "POST",
-    data: formData,
-    url: baseurl + "Template",
-    processData: false,
-    contentType: false,
-    success: function (data, textStatus, jqXHR) {              
-              
-          },
-          error: function (jqXHR, textStatus, errorThrown) { },
-      });
-});
-
 
 function getRep(keljab, valTrigger){
 if(valTrigger == "L"){
@@ -155,17 +74,6 @@ function getInap(gol,keljab,kdakun){
       return res;
   
   }
-  function Upload(){
-        $('#file_').click();
-    }
-
-    $('#file_').on('change', function () {
-    var file = this.files[0];
-    if (file) {
-        $('#shad_file').val(file.name);
-    }
-});
-
 
 function formatRupiah(angka){
         var number_string = angka.replace(/[^,\d]/g, '').toString(),
@@ -184,62 +92,93 @@ function formatRupiah(angka){
         return 'Rp. ' + rupiah;
       }
 
-  $(document).ready(function() { 
+      $(document).ready(function() { 
 
-    tglmulai = $('#tglst_mulai').val()
-    tglselesai = $('#tglst_selesai').val()
+        var min_date = $('#tglst_mulai').val()
+        var max_date = $('#tglst_selesai').val()
+        document.getElementById("tglst_mulai").setAttribute("min", min_date_st);
+        document.getElementById("tglst_selesai").setAttribute("min", min_date_mulai);
 
-    $(".tglberangkat").val(tglmulai)
-    $(".tglkembali").val(tglselesai)
 
+$.ajax({
+url : master_baseurl + "getKota",
+data: {"kdkabkota": $('#kdkabkota').val(),"kdlokasi": $('#kdlokasi').val(), Trigger :"default"},
+type: "post",
+dataType: "JSON",
+success: function(data)
+    { 
+      var kdakun = $('#kdakun').val()
+      var $asal = $("<option selected='selected'></option>").val(data[0]['idkota']).text(data[0]['valkota'])
+            $(".kotaasal").append($asal).trigger('change');
 
-    $.ajax({
-    url : master_baseurl + "getKota",
-    data: {"kdkabkota": $('#kdkabkota').val(),"kdlokasi": $('#kdlokasi').val(), Trigger :"default"},
-    type: "post",
-    dataType: "JSON",
-    success: function(data)
-        { 
-          var kdakun = $('#kdakun').val()
-          var $asal = $("<option selected='selected'></option>").val(data[0]['idkota']).text(data[0]['valkota'])
-	            $("#kotaasal").append($asal).trigger('change');
+      if(kdakun == "524113" || kdakun == "524114"){
+        var $tujuan = $("<option selected='selected'></option>").val(data[0]['idkota']).text(data[0]['valkota'])
+            $(".kotatujuan").append($tujuan).trigger('change');
 
-          if(kdakun == "524113" || kdakun == "524114"){
-            var $tujuan = $("<option selected='selected'></option>").val(data[0]['idkota']).text(data[0]['valkota'])
-	            $("#kotatujuan").append($tujuan).trigger('change');
-
-          }
-        }
-      });
-
+      }
+    }
   });
 
-
-
-//SELECT2 VIEW
-// Loading array data
-var data = [
-    { id: 1, text: 'Januari' },
-    { id: 2, text: 'Februari' },
-    { id: 3, text: 'Maret' },
-    { id: 4, text: 'April' },
-    { id: 5, text: 'Mei' },
-    { id: 6, text: 'Juni' },
-    { id: 7, text: 'Juli' },
-    { id: 8, text: 'Agustus' },
-    { id: 9, text: 'September' },
-    { id: 10, text: 'Oktober' },
-    { id: 11, text: 'November' },
-    { id: 12, text: 'Desember' }
-];
-
-$("#bulan-Array").select2({
-    dropdownAutoWidth: true,
-    width: '100%',
-    data: data,
-    dropdownParent: "#head",
 });
-    
+
+
+
+function PilihKode(Id, kdindex, Tahapan, App){
+
+var relasii = $('#realisasi').val()
+  var alokasii = $('#alokasi').val()
+  var tahapan = $('#kdtahapan').val()
+  var app = $('#kdapp').val()
+
+  $.ajax({
+        url : master_baseurl + "getKomponenSub",
+        data: {kdindex: kdindex, tahapan : Tahapan, app: App, Trigger : ""},
+        type: "post",
+        dataType: "JSON",
+        success: function(data)
+            {    
+
+              $('#idxskmpnenlabel').val(Id);
+              $('#idxskmpnen').val(data[0]['kdindex']);
+              $('#kdindex').val(data[0]['kdindex']);
+              $('#thang').val(data[0]['thang']);
+              $('#kdgiat').val(data[0]['kdgiat']);
+              $('#kdoutput').val(data[0]['kdoutput']);
+              $('#kdsoutput').val(data[0]['kdsoutput']);
+              $('#kdkmpnen').val(data[0]['kdkmpnen']);
+              $('#kdskmpnen').val(data[0]['kdskmpnen']);
+              $('#kdakun').val(data[0]['kdakun']);
+              $('#kdbeban').val(data[0]['kdbeban']);
+              $('#alokasi').val(data[0]['rupiah_tahapan']);
+              $('#kdapp').val(data[0]['id_app']);
+              $('#kdtahapan').val(data[0]['id_tahapan']);
+              $('#ppk_id').val(data[0]['ppk_id']);
+              $('#bebananggaran').val(data[0]['nama_unit']);
+              $('#alokasilabel').val(formatRupiah(data[0]['rupiah_tahapan']));
+
+              var rupiah_tahapan = data[0]['rupiah_tahapan']
+
+              $.ajax({
+              url : master_baseurl + "getRealisasi",
+              data: {kdindex: data[0]['kdindex'], tahapan : data[0]['id_tahapan'], app: data[0]['id_app']},
+              type: "post",
+              dataType: "JSON",
+              success: function(data)
+                  {    
+                    var sisaan = Number(rupiah_tahapan) - Number(data[0]['re'])
+                    $('#sisalabel').val(formatRupiah(""+sisaan+""))
+                    $('#sisa').val(sisaan)
+                  }
+                })
+
+              $('#modalidx').modal('close');
+              
+
+            }
+    });
+
+  
+}
 
 // SELECT2 INSERT
 
@@ -419,12 +358,12 @@ function selectRefresh(x){
      });
 
 
-    $('#namaDummy'+x+'').on('change', function() {
+    $('.namaTim').on('change', function() {
       tglberangkat = $('#tglberangkat'+x+'').val()
       tglkembali = $('#tglkembali'+x+'').val()
 
-        //var id =  $(this).attr("name")
-        var res = x
+        var id =  $(this).attr("name")
+        var res = id[9]
 
         var nip = this.value
 
@@ -517,116 +456,6 @@ function selectRefresh(x){
       });
 
 }
-
-
-$('.multi-field-wrapper').each(function() {
-        var max      = 20;
-        var $wrapper = $('.multi-fields', this);
-        var x = 0;
-        if(count_tim > 0){
-          var x = count_tim;
-        }
-        
-        var i = 0;
-        var head = '<tbody id="Tbody" class="multi-field" style="border-top: 2px dotted #c5c5c4;">';
-        var end='</tbody>';
-        var arrX = [];
-        var realisasi = 0;
-        tglmulai = $('#tglst_mulai').val()
-          tglselesai = $('#tglst_selesai').val()
-
-        
-        $("#add-field", $(this)).click(function(e) {   
-
-          document.getElementById("divTable").style.display = "";      
-
-          
-           if(x < max){
-              x++;
-              i++;
-              var minDate = $('#tglst_mulai').val()
-              var maxDate = $('#tglst_selesai').val()
-              $($wrapper).append( head +'<tr class="tb-tim" id="tb-tim'+x+'">\
-                            <td style="min-width: 15px" ><input  class="urut" type="number" id="urut'+x+'" name="urut'+x+'" min="1" max="20" value="'+x+'"></td>\
-                            <td><input type="date" class="tglberangkat" value="'+tglmulai+'" min="'+minDate+'" max="'+maxDate+'" onchange="dayCount(\''+x+'\',\'D\')" id="tglberangkat'+x+'" name="tglberangkat'+x+'"></td>\
-                              <td><input type="date" class="tglkembali" value="'+tglselesai+'" max="'+maxDate+'" min="'+minDate+'" onchange="dayCount('+x+')" id="tglkembali'+x+'" name="tglkembali'+x+'"></td>\
-                              <td><input type="text" id="jmlhari'+x+'" name="jmlhari'+x+'" readonly></td>\
-                               <td id="Tim" name="Tim" colspan="2">\
-                               <select placeholder="Nama.."  class="namaTim browser-default" id="namaDummy'+x+'" name="namaDummy'+x+'"></select>\
-                               <input name="nama'+x+'" id="nama'+x+'" hidden>\
-                            </td>\
-                            <td colspan="2">\
-                                <input placeholder="NIP" class="nip" id="nip'+x+'" name="nip'+x+'" readonly>\
-                            </td>\
-                            <td colspan="2">\
-                                <textarea placeholder="Peran/Jabatan" class="perjab" id="perjab'+x+'" name="perjab'+x+'"></textarea>\
-                            </td>\
-                              <td><input type="text" id="gol'+x+'" name="gol'+x+'" readonly><input type="text" id="keljab'+x+'" name="keljab'+x+'" readonly hidden></td>\
-                              <td colspan="2"><select class="browser-default kota kotaasal" name="kotaasal'+x+'" id="kotaasal'+x+'" onchange="cityCount('+x+')"></select></td>\
-                              <td colspan="3"><select class="browser-default kota kotatujuan"  name="kotatujuan'+x+'" id="kotatujuan'+x+'" onchange="cityCount('+x+')"></select></td>\
-                              <td hidden><input type="text" id="tarifuangpenginapan'+x+'" name="tarifuangpenginapan'+x+'"></td>\
-                              <td hidden><input type="text" id="tarifuangharian'+x+'" name="tarifuangharian'+x+'" ></td>\
-                            </tr>\
-                              <tr>\
-                                   <td></td>\
-                                   <td><input type="text" id="nospd'+x+'" name="nospd'+x+'" value="SPD - 0000" readonly></td>\
-                                  <td><input style="min-width: 150px" type="text" id="satuan_uangharian'+x+'" name="satuan_uangharian'+x+'" onkeyup="AllCount(\''+x+'\',\'satuan\')"></td>\
-                                  <td><input style="min-width: 150px" type="text" id="uangharian'+x+'" name="uangharian'+x+'" onkeyup="AllCount(\''+x+'\',\'total\')"></td>\
-                                  <td><input style="min-width: 150px" type="text" id="satuan_uangpenginapan'+x+'" name="satuan_uangpenginapan'+x+'" onkeyup="AllCount(\''+x+'\',\'satuan\')"></td>\
-                                  <td><input style="min-width: 150px" type="text" id="uangpenginapan'+x+'" name="uangpenginapan'+x+'" readonly></td>\
-                                  <td><input style="min-width: 150px" type="text" id="uangtaxi'+x+'" name="uangtaxi'+x+'" onkeyup="AllCount(\''+x+'\',\'all\')"></td>\
-                                  <td><input style="min-width: 150px" type="text" id="uanglaut'+x+'" name="uanglaut'+x+'" onkeyup="AllCount(\''+x+'\',\'all\')"></td>\
-                                  <td><input style="min-width: 150px" type="text" id="uangudara'+x+'" name="uangudara'+x+'" onkeyup="AllCount(\''+x+'\',\'all\')"></td>\
-                                  <td><input style="min-width: 150px" type="text" id="uangdarat'+x+'" name="uangdarat'+x+'" onkeyup="AllCount(\''+x+'\',\'all\')"></td>\
-                                  <td><input style="min-width: 150px" type="text" id="uangdll'+x+'" name="uangdll'+x+'" onkeyup="AllCount(\''+x+'\',\'all\')"></td>\
-                                  <td><input style="min-width: 150px" type="text" id="uangrep'+x+'" name="uangrep'+x+'" onkeyup="AllCount(\''+x+'\',\'all\')"></td>\
-                                  <td><input style="min-width: 150px" type="text" class="total" readonly id="total'+x+'"  name="total'+x+'" ></td>\
-                                  <td ><select class="select2 browser-default" id="jnstransportasi'+x+'" name="jnstransportasi'+x+'">\
-                                    <option value="Kendaraan Umum">Kendaraan Umum</option>\
-                                    <option value="Kendaraan Dinas">Kendaraan Dinas</option>\
-                                  </select</td>\
-                                  <td><select class="select2 browser-default" id="ttd_spd'+x+'" name="ttd_spd'+x+'">\
-                                  </select</td>\
-                                  <td >\
-                                      <div class="col s12">\
-                                          <a><span class="col s4 table-remove text-center" style="padding: 0px !important" id="'+x+'" ><i class="material-icons">delete</i></span></a>\
-                                      </div>\
-                                  </td>\
-                              </tr>'+end+'');
-
-                        selectRefresh(x);
-                        countX = arrX.push(x);
-                        
-                       
-
-                        $('.table-remove').click(function() {
-                            $(this).parents('tbody').detach();
-                            x--;
-                                if(x <=0 ){
-                                  x=0;
-                                  if(count_tim > 0){
-                                    x = count_tim;
-                                  }
-
-                                  }else if(count_tim == x){
-                                    x = x
-                                
-                                }
-
-                                var nm =  $(this).attr("id")
-                                var d = removeItemAll(arrX, parseInt(nm))
-                                $('#ArrX').val(d)
-                                
-                            
-                        });
-
-                        $('#ArrX').val(arrX)
-                        //console.log(arrX)
-            }
-            
-        });
-        
-    });
 
 function validateNumber(e) {
     const pattern = /^[0-9]$/;
@@ -790,7 +619,7 @@ function cityCount(id){
     var $asal = $("<option selected='selected'></option>").val(valasal).text(Textasal)
 	      $(".kotaasal").append($asal).trigger('change');
 
-  }else if(id == "99999"){
+  }else if(id == "011"){
     var valtujuan = $("#kotatujuan").val()
     var Texttujuan = $( "#kotatujuan option:selected" ).text();
 
@@ -1083,83 +912,6 @@ function removeItemAll(arr, value) {
 }
 
 
-$("#TambahTim").click(function (e) {
-  e.preventDefault();
 
-  if($('.namaTim').val() == null){
-
-    swal({
-                title:"Tim belum ada!",
-                icon: "warning",
-                timer: 2000
-                })
-                return false;
-
-  }
-
-
-
-  var btn = $(this);
-  var form = $(this).closest("form");
-  var formData = new FormData($("#FormTim")[0]);
-  //var IdForm =  "FormTim";
-  var countingDiv = document.getElementById('counting');
-  var countTim = countingDiv.getElementsByClassName('namaTim').length;
-
-  ArrX = $('#ArrX').val()
-
-  j = ArrX.split(",")
-  for($loop = 0 ; $loop < countTim; $loop++){
-    cekBentrok = $('#nama'+j[$loop]+'').val()
-
-    if(cekBentrok == "BENTROK"){
-      swal({
-            title:"Bentrok Tanggal!",
-            text: "Pastikan ST Pegawai Tidak Bentrok !", 
-            icon: "warning",
-            timer: 2000
-            })
-            return false;
-
-    }
-
-
-  }
-
-  btn
-    .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
-    .attr("disabled", false);
-
-  formData.append('Trigger', 'C')
-  formData.append('countTim', countTim)
-  // formData.append('jumlah_realisasi', sumRealisasi)
-
-  $.ajax({
-    type: "POST",
-    data: formData,
-    url: baseurl + "Action",
-    processData: false,
-    contentType: false,
-    success: function (data, textStatus, jqXHR) {
-              show_msg(textStatus);
-              //Reset(IdForm);
-              if(satker_session != "a"){
-              window.history.back();
-              }
-              
-              
-          },
-          error: function (jqXHR, textStatus, errorThrown) { },
-      });
-});
-
-
-function show_msg(textStatus){
-        swal({
-            title:textStatus, 
-            icon:textStatus,
-            timer: 2000
-            })
-    }
 
 </script>

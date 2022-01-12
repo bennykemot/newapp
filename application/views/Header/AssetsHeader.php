@@ -336,6 +336,16 @@ function ApproveKPA($data){
       return $span;
     }
 
+    function getAccess($role,$status){
+      $disabled="pointer-events: none;";
+        if($role == 3 && $status == 1){
+                $disabled ="";
+        }else if($role == 5 && $status == 2 || $role == 7 && $status == 2){
+                $disabled ="";
+        }
+        return $disabled;
+      }
+
   
   
   ?>

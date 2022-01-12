@@ -1,7 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+use GuzzleHttp\Client;
 
 class TambahTim extends CI_Controller {
+    var $API = 'https://apip.bpkp.go.id/apisimabisma/public/';
 
 	public function __construct()
 	{
@@ -11,6 +13,7 @@ class TambahTim extends CI_Controller {
         $this->load->library('pdf');
         $this->load->model('Transaksi/M_SuratTugas','SuratTugas');
 		$this->load->model('Transaksi/M_TambahTim','TambahTim');
+        $this->load->model('Master/M_Master','Master');
 	}
 
 	public function TambahTim()
@@ -24,6 +27,48 @@ class TambahTim extends CI_Controller {
         $data['countST'] = $this->db->query("select id_st from d_itemcs where id_st = ".$id."")->result();
 		$this->load->view('Transaksi/SuratTugas/TambahTim/manage', $data);
 	}
+
+    function tambahtimAPI(){
+        $id = $this->uri->segment(4);
+
+        $kdsatker = $this->session->userdata("kdsatker");
+        $thang = $this->session->userdata("thang");
+        $user_id = $this->session->userdata("user_id");
+        $role_id = $this->session->userdata("role_id");
+        $unit_id = $this->session->userdata("unit_id");
+        $username = $this->session->userdata("username");
+
+
+        $data = json_decode($this->getId($this->API,'getdatast/'.$id.''), true); 
+        $ro = str_replace(".","",$data['data'][0]['ro_kode']);
+        // echo $ro;
+        $data['subkomp'] = $this->Master->APIsubkomp($ro, $kdsatker, $unit_id, $role_id);
+        $data['subkomp_pagu'] = $this->Master->APISubkomp_pagu($ro, $kdsatker, $unit_id, $role_id);
+        $data['countST'] = $this->db->query("select id_st from d_itemcs where id_st = ".$id."")->result();
+        $data['countdata'] = count($data);
+        $data['lok'] = $this->db->query("select kdkabkota, kdlokasi from t_satker where kdsatker = ".$kdsatker."")->result();
+
+        
+        //$data['subkomppagu'] = $this->Master->APIsubkomppagu($ro);
+        $this->load->view('Transaksi/Costsheet/manage', $data);
+
+    }
+
+    
+
+    function getId($url,$uri){
+
+        $client = new Client([
+            'base_uri' => $url,
+            'timeout'  => 5,
+        ]);
+
+         
+        $response = $client->request('GET', $uri);
+        return $response->getBody()->getcontents();
+        //$result = json_decode($body,true);
+
+    }
 
 	public function pregChar($str){
         $res = preg_replace('/[^A-Za-z0-9\-]/', '', $str);

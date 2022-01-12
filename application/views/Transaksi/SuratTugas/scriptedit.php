@@ -242,6 +242,26 @@ function Min_dateselesai(){
 
 }
 
+
+$( "#plh" ).change(function() {
+
+$('#ttd').val(null).trigger('change');
+
+    // Get the checkbox
+var plh = document.getElementById("plh");
+// Get the output text
+var status_penandatangan = document.getElementById("status_penandatangan");
+
+// If the checkbox is checked, display the output text
+if (plh.checked == true){
+  $('#status_penandatangan').val(3)
+} else {
+  $('#status_penandatangan').val(0)
+}
+
+});
+
+
 function getRep(keljab, valTrigger){
 if(valTrigger == "L"){
       if(keljab == "E.I"){
@@ -419,7 +439,6 @@ $(".kotaselect").select2({
 
 function ubahNama(id){
   $("#namaDummy"+id+"").select2({
-          dropdownAutoWidth: true,
           width: '100%',
           placeholder: "Pilih Nama",
           dropdownParent: "#Tim",
@@ -447,36 +466,7 @@ function ubahNama(id){
      });
 
 
-    
-
-// SELECT2 INSERT
-
-  //  $(".namaTimHardcode").select2({
-  //         dropdownAutoWidth: true,
-  //         width: '100%',
-  //         placeholder: "Pilih Nama",
-  //         dropdownParent: "#Tim",
-  //        ajax: { 
-  //          url: dropdown_baseurl + 'pegawai',
-  //          type: "post",
-  //          dataType: 'json',
-  //          delay: 250,
-  //          data: function (params) {
-  //             return {
-                
-  //               searchTerm: params.term // search term
-  //             };
-  //          },
-  //          processResults: function (response) {
-  //             return {
-  //                results: response
-  //             };
-  //          },
-  //          cache: true
-  //        }
-  //    });
-
-$('.namaTimHardcode').on('change', function() {
+$('#namaDummy'+id+'').on('change', function() {
 
      
 
@@ -659,136 +649,8 @@ $("#user-select2").select2({
          }
      });
 
-function selectRefresh(x){
-    
-        $(".namaTim").select2({
-          dropdownAutoWidth: true,
-          width: '100%',
-          placeholder: "Pilih Nama",
-          dropdownParent: "#Tim",
-         ajax: { 
-           url: dropdown_baseurl + 'pegawai',
-           type: "post",
-           dataType: 'json',
-           delay: 250,
-           data: function (params) {
-              return {
-                searchTerm: params.term // search term
-              };
-           },
-           processResults: function (response) {
-              return {
-                 results: response
-              };
-           },
-           cache: true
-         }
-     });
-
-      $('.namaTim').on('change', function() {
-
-         var id =  $(this).attr("name")
-         var res = id[9]
-
-         var nip = this.value
-
-         var val = nip.split(";")
-
-         
-
-         $('#niplabel'+res+'').html(val[0])
-         $('#nip'+res+'').val(val[0])
-
-         $('#perjablabel'+res+'').html(val[1])
-         $('#perjab'+res+'').val(val[1])
-
-         $('#nama'+res+'').html(val[2])
-         $('#nama'+res+'').val(val[2])
-
-         $('#gol'+res+'').html(val[3])
-         $('#gol'+res+'').val(val[3])
-
-         $('#keljab'+res+'').html(val[4])
-         $('#keljab'+res+'').val(val[4])
 
 
-      }); 
-
-         var idkota_asal = $('#kotaasal'+x+'').val()
-         var idkota_tujuan = $('#kotatujuan'+x+'').val()
-
-      if($('#idxskmpnen').val() != null){
-
-        var id = $('#idxskmpnen').val();
-        var split_id = id.split("-")
-        var kdakun = split_id[0]
-
-        var trigger = "non-fullboard"
-        var jenistarif = "luar"
-
-          if(kdakun.search("524") == 0){
-              trigger = "fullboard"
-          }
-
-          if(idkota_asal == idkota_tujuan){
-              jenistarif = "dalam"
-        }
-
-      }
-    
-      $(".kota").select2({
-        dropdownAutoWidth: true,
-        width: '100%',
-        placeholder: "Pilih Kota",
-      ajax: { 
-        url: dropdown_baseurl + 'kota',
-        type: "post",
-        dataType: 'json',
-        delay: 250,
-        data: function (params) {
-            return {
-              searchTerm: params.term,
-              Trigger : trigger,
-              Jenistarif : jenistarif // search term
-            };
-          
-        },
-        processResults: function (response) {
-            return {
-              results: response
-            };
-        },
-        cache: true
-      }
-      });  
-  
-}
-
-// $('.namaTim').on('change', function() {
-
-// var id =  $(this).attr("name")
-// var res = id[9]
-
-// var nip = this.value
-
-// var val = nip.split(";")
-
-
-
-// $('#nip'+res+'').html(val[0])
-// $('#nip'+res+'').val(val[0])
-
-// $('#perjab'+res+'').html(val[1])
-// $('#perjab'+res+'').val(val[1])
-
-// $('#nama'+res+'').html(val[2])
-// $('#nama'+res+'').val(val[2])
-
-// $('#gol'+res+'').html(val[3])
-// $('#gol'+res+'').val(val[3])
-
-
-// });
 
 
 $('.multi-field-wrapper').each(function() {
@@ -1408,7 +1270,9 @@ for($loop = 0 ; $loop < countTim; $loop++){
     success: function (data, textStatus, jqXHR) {
               show_msg(textStatus);
               //Reset(IdForm);
-              //window.history.back();
+              if(satker_session != "a"){
+              window.history.back();
+              }
               
               
           },

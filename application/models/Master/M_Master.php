@@ -240,4 +240,54 @@ AND a.id_app = b.id_appST; ");
             return $query->num_rows();
          
       }
-   }
+
+      function APISubkomp($ro,$kdsatker, $unitid, $roleid){
+            $where="";
+            if($roleid != 1){
+               $where = "AND d_bagipagu.unit_id = ".$unitid." ";
+            }
+   
+            $query = $this->db->query("SELECT a.*, b.alokasi, b.pagu_index, b.id_tahapan, b.id_appST 
+            FROM (SELECT d_pagu.kdindex, CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode, 
+            d_detailapp.rupiah_tahapan, d_detailapp.tahapan, d_detailapp.id_app,r_tahapan.nama_tahapan,t_app.nama_app 
+            FROM d_pagu 
+            LEFT JOIN d_bagipagu ON d_pagu.kdindex = d_bagipagu.kdindex 
+            JOIN d_detailapp ON d_pagu.kdindex = d_detailapp.kdindex 
+            JOIN r_tahapan on d_detailapp.tahapan = r_tahapan.id 
+            JOIN t_app on d_detailapp.id_app = t_app.id 
+            WHERE d_bagipagu.kdindex like '%202245049108901CH4207UAGU03051%' AND d_pagu.kdakun LIKE '%524%' ".$where." ) as a 
+            LEFT JOIN (SELECT SUM(d_surattugas.jumlah_realisasi) as alokasi, d_surattugas.kdindex as pagu_index, d_surattugas.id_tahapan as id_tahapan, d_surattugas.id_app as id_appST 
+            from d_surattugas WHERE d_surattugas.is_aktif = 1  GROUP BY d_surattugas.kdindex,d_surattugas.id_app,d_surattugas.id_tahapan) as b ON 
+            a.kdindex = b.pagu_index 
+            AND a.tahapan = b.id_tahapan 
+            AND a.id_app = b.id_appST; ");
+   
+            return $query->result();
+      
+            
+      }
+
+      function APISubkomp_pagu($ro, $kdsatker, $unitid, $roleid){
+         $where="";
+         if($roleid != 1){
+            $where = "AND d_bagipagu.unit_id = ".$unitid." ";
+         }
+
+         $query = $this->db->query("SELECT a.*, b.alokasi, b.pagu_index 
+         FROM (SELECT d_pagu.kdindex, d_pagu.rupiah,
+         CONCAT(d_pagu.kdgiat,'.',d_pagu.kdoutput,'.','[IB.',d_pagu.kdib,']','.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',d_pagu.kdakun) as kode, 
+         d_bagipagu.ppk_id,d_bagipagu.unit_id
+         FROM d_pagu 
+         JOIN d_bagipagu ON d_pagu.kdindex = d_bagipagu.kdindex 
+         WHERE d_pagu.kdindex like '%202245049108901CH4207FAGU01052%'
+          ".$where." 
+          AND d_pagu.kdgiat NOT IN (3701,".$this->countpagu().") 
+          AND d_pagu.kdakun LIKE '%524%') as a 
+          
+          LEFT JOIN (SELECT SUM(d_surattugas.jumlah_realisasi) as alokasi, d_surattugas.kdindex as pagu_index 
+          FROM d_surattugas WHERE d_surattugas.is_aktif = 1 GROUP BY d_surattugas.kdindex) as b ON a.kdindex = b.pagu_index; ");
+
+         return $query->result();
+   
+         }
+}

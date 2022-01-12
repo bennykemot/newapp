@@ -124,7 +124,7 @@
                                 </label>
                             </div>
 
-                            <input hidden type="text" id="status_penandatangan" name="status_penandatangan"/>
+                            <input hidden type="text" id="status_penandatangan" name="status_penandatangan" value="TDK"/>
 
                             <div class="input-field col s9 " >
                             <select class="browser-default" id="ttd" name="ttd"></select>

@@ -228,7 +228,30 @@ $("#bulan-Array").select2({
     dropdownParent: "#head",
 });
 
+$( "#bulan-Array" ).change(function() {
+  var bulan = $("#bulan-Array").val()
+  $.ajax({
+    url : $API + "getdatast/"+bulan+"",
+    //data: {"Tujuan": tujuan, "Trigger": "NotaDinas"},
+    type: "post",
+    dataType: "JSON",
+    success: function(data)
+        {    
+          var a = 8
+        }
+  });
 
+
+});
+
+$( ".tgl" ).change(function() {
+  var tgl_mulai = $("#tglst_mulai").val()
+  var tgl_selesai = $("#tglst_selesai").val()
+  
+  
+
+
+});
     
 
 // SELECT2 INSERT
@@ -531,9 +554,9 @@ $("#user-select2").select2({
 
         // If the checkbox is checked, display the output text
         if (plh.checked == true){
-          $('#status_penandatangan').val(3)
+          $('#status_penandatangan').val("PLH")
         } else {
-          $('#status_penandatangan').val(0)
+          $('#status_penandatangan').val("TDK")
         }
        
      });
@@ -625,10 +648,10 @@ function selectRefresh(x){
 
 
 
-    $('#namaDummy'+x+'').on('change', function() {
+    $('.namaTim').on('change', function() {
 
         var id =  $(this).attr("name")
-        var res = x
+        var res = id[9]
 
         var nip = this.value
 
@@ -703,7 +726,7 @@ function selectRefresh(x){
 
 
 $('.multi-field-wrapper').each(function() {
-        var max      = 50;
+        var max      = 20;
         var $wrapper = $('.multi-fields', this);
         var x = 0;
         var i = 0;
@@ -1167,6 +1190,7 @@ ttdVal = $('#ttd').val()
     contentType: false,
     success: function (data, textStatus, jqXHR) {
               show_msg(textStatus);
+              Reset(IdForm);
               window.history.back();
               
               

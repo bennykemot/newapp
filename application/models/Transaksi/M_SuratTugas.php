@@ -52,12 +52,27 @@ class M_SuratTugas extends CI_Model{
      
     }
 
-    function Jum($unitid, $roleid, $penjabid){
+    function Jum($kdsatker, $unitid, $roleid, $penjabid){
 
         $where="";$whereD="";
-        if($roleid != 1){
-            $where = "AND d_surattugas.id_unit = ".$unitid."";
-        }
+        
+        if($roleid == 1){
+            $where = "";
+            }else{
+                if($kdsatker == "450491"){
+                    if($roleid == 3 || $roleid == 2 || $roleid == 4 || $roleid == 9 || $roleid == 10){
+                    $where = "AND d_surattugas.id_unit = ".$unitid."";
+                    }else{
+                        $where="";
+                    }
+                }else{
+                    if($roleid == 5 || $roleid == 7 || $roleid == 3 ){
+                        $where="";
+                    }else{
+                        $where = "AND d_surattugas.id_unit = ".$unitid."";
+                    }
+                }
+            }
 
         if($roleid == 3){
             $join ="";
@@ -70,8 +85,8 @@ class M_SuratTugas extends CI_Model{
         $query = $this->db->query("SELECT d_surattugas.*, user.username 
         from d_surattugas 
         JOIN d_bagipagu ON d_surattugas.kdindex = d_bagipagu.kdindex
-        JOIN user ON d_surattugas.user_id = user.id where d_surattugas.is_aktif = 1 ".$whereD." ".$where." 
-        ORDER BY d_surattugas.tglst");
+        JOIN user ON d_surattugas.user_id = user.id where 
+        d_surattugas.is_aktif = 1 AND d_surattugas.kdsatker = ".$kdsatker." ".$whereD." ".$where."");
 
          return $query->num_rows();
 	}
@@ -164,7 +179,7 @@ class M_SuratTugas extends CI_Model{
             d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.idx_temp,
             d_surattugas.tglselesaist ,d_surattugas.id_unit,d_surattugas.id as idst,d_surattugas.idxskmpnen, 
             d_surattugas.id_ttd,d_surattugas.kdsatker,d_surattugas.id_ttd,d_surattugas.jumlah_uang,d_surattugas.cs_menyetujui,d_surattugas.cs_mengajukan,
-            d_surattugas.id_tahapan,d_surattugas.id_app,d_surattugas.status_id,d_bagipagu.unit_id, d_surattugas.status_id,
+            d_surattugas.id_tahapan,d_surattugas.id_app,d_surattugas.status_id,d_bagipagu.unit_id, d_surattugas.status_id, d_surattugas.status_penandatangan,
             
             t_unitkerja.nama_unit,
             t_unitkerja.grup_id as kdunit, 

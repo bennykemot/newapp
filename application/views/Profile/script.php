@@ -404,6 +404,30 @@ function Reset(idForm) {
         }]
     })
 
+    $("#satker-select2_Edit").select2({
+          width: '100%',
+          placeholder: "Pilih Satker",
+          dropdownParent: "#modalEdit",
+         ajax: { 
+           url: dropdown_baseurl + 'satker',
+           type: "post",
+           dataType: 'json',
+           delay: 250,
+           data: function (params) {
+              return {
+                searchTerm: params.term,
+								// search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
      
 
 $("#TambahUser").click(function (e) {

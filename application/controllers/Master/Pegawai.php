@@ -118,26 +118,26 @@ class Pegawai extends CI_Controller {
 			$where = array('id' => $id);
 			$this->Pegawai->update($data_pegawai,'t_pegawai',$where);
 
-			$data_pejabat = array(
-				'unitkerja_id' => $unitid,
-				'kdsatker' => $satker_id
-			);
+			// $data_pejabat = array(
+			// 	'unitkerja_id' => $unitid,
+			// 	'kdsatker' => $satker_id
+			// );
 
 
-			$this->db->where("nip", $nipbaru);
-			$this->db->update("t_pejabat",$data_pejabat);
+			// $this->db->where("nip", $nipbaru);
+			// $this->db->update("t_pejabat",$data_pejabat);
 
-			$cekPejabat = $this->db->query("select id from t_pejabat where nip = ".$nipbaru." ")->result();
+			// $cekPejabat = $this->db->query("select id from t_pejabat where nip = ".$nipbaru." ")->result();
 
-			$where_user = array('pejabat_id' => $cekPejabat[0]->id);
+			// $where_user = array('pejabat_id' => $cekPejabat[0]->id);
 
-			$data_user = array(
-				'unit_id' => $unitid,
-				'kdsatker' => $satker_id
-			);
+			// $data_user = array(
+			// 	'unit_id' => $unitid,
+			// 	'kdsatker' => $satker_id
+			// );
 
-			$this->db->where($where_user);
-			$this->db->update("user",$data_user);
+			// $this->db->where($where_user);
+			// $this->db->update("user",$data_user);
 
 
 			$response = array(

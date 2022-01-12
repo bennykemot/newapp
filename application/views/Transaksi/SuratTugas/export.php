@@ -48,6 +48,22 @@ function cek_tgl($tanggal){
     return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
     }
 
+    function StatusPenandatangan($status,$jabatanST){
+        $result="";
+        if($status == 3){
+            if($jabatanST == "Kepala Biro"){
+                $result = "Plh. Sekretaris Utama";
+            }else if($jabatanST == "Direktur"){
+                $result = "Plh. Deputi";
+            }
+        }else{
+            $result = $jabatanST;
+        }
+        return $result;
+
+    }
+
+
 ?>
 
 
@@ -142,7 +158,7 @@ function cek_tgl($tanggal){
                 </tr>
 
                 <tr>
-                    <td style="text-align: left"><?= $ubah[0]['jabatan_ttd']?></td>
+                    <td style="text-align: left"><?=Statuspenandatangan($ubah[0]['status_penandatangan'],$ubah[0]['jabatan_ttd'])?></td>
                 </tr>
 
                 <tr>

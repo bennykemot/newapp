@@ -157,7 +157,7 @@
                                     <div class="input-field col s2"><label>Kota Tujuan</label></div>
 
                                     <div class="input-field col s4 " >
-                                        <select class="browser-default kotaselect" id="kotatujuan" name="kotatujuan" onchange="cityCount('011')"></select>
+                                        <select class="browser-default kotaselect" id="kotatujuan" name="kotatujuan" onchange="cityCount('99999')"></select>
                                     </div>
                                 </div>
 

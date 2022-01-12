@@ -127,7 +127,9 @@
                             </tbody>
                 <?php   $j++;}?>
             </table>
-            <input id="ArrX" name="ArrX" hidden>
+
+            <?php if($kdsatker == "test"){$hide = "";}else{$hide = "hidden";}?>
+            <input id="ArrX" name="ArrX" <?=$hide?>>
             <div class="Sumtotal">
                 <div class="input-field col s12">
                         <div class="input-field col s2"><label>Realisasi</label></div>

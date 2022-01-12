@@ -1,7 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+use GuzzleHttp\Client;
 
 class SuratTugas extends CI_Controller {
+    var $API = 'https://apip.bpkp.go.id/apisimabisma/public/';
 
 	public function __construct()
 	{
@@ -19,6 +21,38 @@ class SuratTugas extends CI_Controller {
 		$this->load->view('Transaksi/SuratTugas/manage');
 	}
 
+    function testAPI(){
+        
+        $data = json_decode($this->getAll($this->API,'getdata'), true); 
+        $this->load->view('Transaksi/apisurattugas/manage',$data);
+        // echo $data['data'][0]['sumber_data'];
+        // var_dump($data['data'][0]['sumber_data']); 
+    }
+
+    function filterrAPI(){
+        $mulai =  $this->input->post('tglst_mulai');
+        $selesai =  $this->input->post('tglst_selesai');
+        $trigger =  $this->input->post('trigger');
+        $data = json_decode($this->getAll($this->API,'getdatatanggalst/'.$mulai.'/'.$selesai.''), true); 
+        
+        $this->load->view('Transaksi/apisurattugas/manage', $data);
+
+    }
+
+
+    function getAll($url,$uri){
+
+        $client = new Client([
+            'base_uri' => $url,
+            'timeout'  => 5,
+        ]);
+
+         
+        $response = $client->request('GET', $uri);
+        return $response->getBody()->getcontents();
+        //$result = json_decode($body,true);
+
+    }
     
 
     public function Page()
@@ -39,7 +73,7 @@ class SuratTugas extends CI_Controller {
           }
 
 
-        $jumlah_data = $this->SuratTugas->Jum($unit_id, $role_id, $penjab_id);
+        $jumlah_data = $this->SuratTugas->Jum($kdsatker, $unit_id, $role_id, $penjab_id);
         $config['base_url'] = base_url().'Transaksi/SuratTugas/Page';
 		$config['total_rows'] = $jumlah_data;
 		$config['per_page'] = 15;
@@ -186,6 +220,7 @@ class SuratTugas extends CI_Controller {
             $kdtahapan = $this->input->post('kdtahapan');
             $kdapp = $this->input->post('kdapp');
             $user_id = $this->input->post('user_id');
+            $status_penandatangan = $this->input->post('status_penandatangan');
 
             //$countTim = $this->input->post('countTim');
 
@@ -216,6 +251,7 @@ class SuratTugas extends CI_Controller {
                 'idx_temp' => $idxskmpnenlabel,
                 'id_unit' => $id_unit,
                 'id_ttd' => $ttd,
+                'status_penandatangan' => $status_penandatangan,
                 'id_tahapan' => $kdtahapan,
                 'id_app' => $kdapp,
                 'user_id' => $user_id,
@@ -289,6 +325,7 @@ class SuratTugas extends CI_Controller {
             $ttd = $this->input->post('ttd');
             $menyetujui = $this->input->post('cs_menyetujui');
             $mengajukan = $this->input->post('cs_mengajukan');
+            $status_penandatangan = $this->input->post('status_penandatangan');
 
             
 
@@ -315,6 +352,7 @@ class SuratTugas extends CI_Controller {
                 'id_unit' => $id_unit,
                 'idx_temp' => $idxskmpnenlabel,
                 'id_ttd' => $ttd,
+                'status_penandatangan' => $status_penandatangan,
                 'cs_menyetujui' => $menyetujui,
                 'cs_mengajukan' => $mengajukan,
                 'id_tahapan' => $kdtahapan,
@@ -348,14 +386,14 @@ class SuratTugas extends CI_Controller {
                 
                 
                 for($i = 0 ; $i < $countTim; $i++){
-                    if($this->input->post('status_id') == 3){
-                        $nospd = $this->input->post('nospd'.$urut[$i].'') . $this->input->post('nospdST'.$urut[$i].'') ;
-                    }else{
-                        $nospd = "SPD - 0000";
-                    }
+                    // if($this->input->post('status_id') == 3){
+                    //     $nospd = $this->input->post('nospd'.$urut[$i].'') . $this->input->post('nospdST'.$urut[$i].'') ;
+                    // }else{
+                    //     $nospd = "SPD - 0000";
+                    // }
                     
-                    $format = $noSpd++;
-                    $spd  = str_pad($format, 4, "0", STR_PAD_LEFT);
+                    // $format = $noSpd++;
+                    // $spd  = str_pad($format, 4, "0", STR_PAD_LEFT);
 
                     $nip = $this->input->post('nip'.$urut[$i].'');
                     $jabatan = $this->input->post('perjab'.$urut[$i].'');
@@ -380,7 +418,7 @@ class SuratTugas extends CI_Controller {
 
                        $data_ItemCS = array(
                         'nourut' => $this->input->post('urut'.$urut[$i].''),
-                        'nospd' => $nospd,
+                        'nospd' => "SPD - ",
                         'nama' => $this->input->post('nama'.$urut[$i].''),
                         'nip' => $nip,
                         'jabatan'  => $jabatan,

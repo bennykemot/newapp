@@ -15,13 +15,13 @@
                         <h6> Daftar Surat Tugas </h6>
                     </div>
                     <?php 
-                     if($role_id == 2 || $role_id == 4 || $role_id == 9 || $role_id == 10){ 
+                     //if($role_id == 2 || $role_id == 4 || $role_id == 9 || $role_id == 10){ 
                       ?>
                     <div class="col s2">
                         <a class="btn modal-trigger" href="<?= site_url('Transaksi/SuratTugas/Tambah/'.$kdsatker.'/'.$unit_id.'/'.$role_id) ?>">Tambah Data</a>
                     </div>
                     <?php 
-                   }
+                   //}
                   ?>
                 </div>
             </div>
