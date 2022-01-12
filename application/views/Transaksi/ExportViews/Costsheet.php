@@ -177,7 +177,7 @@ function cek_tgl($tanggal){
                     <?php } ?>
                 
                     <tr>
-                        <td colspan="8"></td>
+                        <td colspan="7"></td>
                         <td>Jumlah</td>
                         <td style="text-align: center;"><?=$sumhari?></td>
                         <td style="text-align: right;"><?=rupiah($sumuangharian)?></td>
