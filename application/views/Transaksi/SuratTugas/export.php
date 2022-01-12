@@ -110,8 +110,12 @@ function cek_tgl($tanggal){
                     <td style="text-align: justify" colspan="5">
 					
 						<?php
-							$unitId = $ubah[0]['kdunit'];
-							$nama_unit = $ubah[0]['nama_unit'];
+							if($ubah[0]['status_penandatangan'] == 3){
+								$ket = Statuspenandatangan($ubah[0]['status_penandatangan'],$ubah[0]['jabatan_ttd']);
+								echo substr($ket,4);
+							}else{
+								$unitId = $ubah[0]['kdunit'];
+								$nama_unit = $ubah[0]['nama_unit'];
                                 if($unitId < '605000' && $unitId > '900'){
                                     if($unitId < '106000'){
                                         echo "Kepala " .$nama_unit;
@@ -121,6 +125,8 @@ function cek_tgl($tanggal){
                                 }else{
                                     echo "Kepala ";
                                 }
+							}
+								
 
 						?>
 						BPKP dengan ini menugasi:
@@ -170,6 +176,8 @@ function cek_tgl($tanggal){
                 </tr>
 
                 <tr>
+					'
+					'
                     <td style="text-align: left"> <?= $ubah[0]['nama_ttd']?></td>
                 </tr>
                 <tr>
