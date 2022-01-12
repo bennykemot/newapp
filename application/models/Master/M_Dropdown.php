@@ -566,6 +566,20 @@ function getData_jabatan($searchTerm="", $Trigger){
    return $data;
 }
 
+function getData_keljab($searchTerm=""){
+
+	$fetched_records = $this->db->query("SELECT DISTINCT kel_jab FROM t_pegawai");
+
+   $users = $fetched_records->result_array();
+
+   // Initialize Array with fetched data
+   $data = array();
+   foreach($users as $user){
+      $data[] = array("id"=>$user['kel_jab'], "text"=>$user['kel_jab']);
+   }
+   return $data;
+}
+
 function getData_v_mapping($searchTerm="", $kdsatker){
 
    $this->db->where("kdsatker", $kdsatker);

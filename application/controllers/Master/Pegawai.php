@@ -98,6 +98,7 @@ class Pegawai extends CI_Controller {
 			$unitid = $this->input->post('unitkerja_id');
 			$satker_id = $this->input->post('satker');
 			$id = $this->input->post('id');
+			$keljab = $this->input->post('keljab');
 
 			$data_pegawai = array(
 				'niplama' => $niplama,
@@ -112,7 +113,8 @@ class Pegawai extends CI_Controller {
 				'tmt_jab' => $tmt,
 				'namaunit_lengkap' => $unit_nama,
 				'unit_id' => $unit,
-				'satker_id' => $satker_id
+				'satker_id' => $satker_id,
+				'kel_jab' => $keljab
 			);
 
 			$where = array('id' => $id);

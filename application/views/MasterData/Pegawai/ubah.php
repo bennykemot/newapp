@@ -135,6 +135,15 @@
                             </div>
                         </div>
 
+						<div class="input-field col s12">
+                            <div class="input-field col s2"><label>Kelompok Jabatan</label></div>
+
+                            <div class="input-field col s10 " >
+								<select id="keljab-select2" name="keljab" class="select2-data-ajax select2-hidden-accessible browser-default"></select>
+								
+                            </div>
+                        </div>
+
 						<div class="col s12" style="padding-top: 60px">
                             <div class="col s9"></div>
 
@@ -142,6 +151,7 @@
                                 <button id="UbahPegawai" class="btn col s12"><i class="material-icons left">done</i> Simpan</button>
                             </div>
                         </div>
+						
 
                         </div>
                         
