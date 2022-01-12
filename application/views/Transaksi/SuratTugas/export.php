@@ -70,6 +70,7 @@ function cek_tgl($tanggal){
     <body>
     
     <div id="container">
+        <?php if ($Pilihkop == "Kop"){?>
         <table width="100%" id="header" >
                 <tr>
                     <td width="20%" rowspan="2">
@@ -92,6 +93,9 @@ function cek_tgl($tanggal){
                     <td colspan="5"><hr></td>
                 </tr>
         </table>
+        <?php }else{
+            echo "<div style='padding-bottom: 20%'></div>";
+        }?>
 
         <table width="100%">
                 <tr>
@@ -108,15 +112,15 @@ function cek_tgl($tanggal){
 						<?php
 							$unitId = $ubah[0]['kdunit'];
 							$nama_unit = $ubah[0]['nama_unit'];
-							if($unitId < '605000' && $unitId > '900'){
-								if($unitId < '106000'){
-									echo "Kepala " .$nama_unit;
-								}else{
-									echo "Direktur " .$nama_unit;
-								}
-							}else{
-								echo "Kepala ";
-							}
+                                if($unitId < '605000' && $unitId > '900'){
+                                    if($unitId < '106000'){
+                                        echo "Kepala " .$nama_unit;
+                                    }else{
+                                        echo "Direktur " .$nama_unit;
+                                    }
+                                }else{
+                                    echo "Kepala ";
+                                }
 
 						?>
 						BPKP dengan ini menugasi:

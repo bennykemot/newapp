@@ -1175,6 +1175,25 @@ ttdVal = $('#ttd').val()
       });
 });
 
+function exportST(id,kdindex,unit){
+  swal({
+    title: "Cetak ST",
+    icon: 'info',
+    dangerMode: true,
+    buttons: {
+      delete: 'Dengan Kop',
+      cancel: 'Tanpa Kop'
+    }
+  }).then(function (willDelete) {
+    if (willDelete) {
+          window.open(baseurl + 'Export/' + id + '/' + kdindex + '/' + unit + '/Kop', '_blank')
+      
+    } else {
+          window.open(baseurl + 'Export/' + id + '/' + kdindex + '/' + unit + '/TnpKop', '_blank')
+    }
+  });
+}
+
 function Delete(Id) {
     swal({
     title: "Apakah Yakin Ingin Dihapus?",
@@ -1188,6 +1207,7 @@ function Delete(Id) {
       Execute(Id);
     }
   });
+  
 }
 
 function Execute(Id) {

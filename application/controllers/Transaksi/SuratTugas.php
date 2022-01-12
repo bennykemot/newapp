@@ -566,9 +566,11 @@ class SuratTugas extends CI_Controller {
         $kdindex        = str_replace("%20", " ", $a);
 		$kdunit        	= $this->uri->segment(6);
         $id        		= $this->uri->segment(4);
+        $Pilihkop   	= $this->uri->segment(7);
         $trigger        = "export";
         $data['ubah']   = $this->SuratTugas->getDataUbah($kdindex, $id, $trigger);
-        $data['kop'] = $this->db->query("
+        $data['Pilihkop'] = $Pilihkop;
+        $data['kop']    = $this->db->query("
 						SELECT t_kopsurat.* FROM t_kopsurat
 
 						JOIN t_unitkerja ON t_unitkerja.grup_id = t_kopsurat.kdunit

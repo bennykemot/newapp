@@ -434,8 +434,6 @@ function selectRefresh(x){
         $('#nip'+res+'').html(val[0])
          $('#nip'+res+'').val(val[0])
 
-         nipVal = $('#nip'+res+'').val()
-
         $('#perjablabel'+res+'').html(val[1])
         $('#perjab'+res+'').val(val[1])
 
@@ -447,6 +445,8 @@ function selectRefresh(x){
 
         $('#keljab'+res+'').html(val[4])
         $('#keljab'+res+'').val(val[4])
+        nipVal = $('#nip'+res+'').val()
+        namaVal = $('#nama'+res+'').val()
 
         $.ajax({
               url : dropdown_baseurl + 'pegawai',
@@ -454,7 +454,8 @@ function selectRefresh(x){
                 Trigger: "select_forTim_count",
                 tglberangkat: tglberangkat,
                 tglkembali: tglkembali,
-                nip: nipVal},
+                nip: nipVal,
+                nama: namaVal},
               type: "post",
               dataType: "JSON",
               success: function(data)
