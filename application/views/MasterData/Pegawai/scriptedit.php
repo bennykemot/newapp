@@ -10,6 +10,7 @@
   var unitText = "<?= $ubah[0]['namaunit_lengkap'] ?>"
 	var satkerVal = "<?= $ubah[0]['kdsatker'] ?>"
   var satkerText = "<?= $ubah[0]['nmsatker'] ?>"
+	var keljabVal = "<?= $ubah[0]['kel_jab'] ?>"
     
 	var $agama = $("<option selected='selected'></option>").val(agamaText).text(agamaText)
 	$("#agama-select2").append($agama).trigger('change');
@@ -22,6 +23,9 @@
 
 	var $satker = $("<option selected='selected'></option>").val(satkerVal).text(satkerText)
 	$("#satker-select2").append($satker).trigger('change');
+
+	var $keljab = $("<option selected='selected'></option>").val(keljabVal).text(keljabVal)
+	$("#keljab-select2").append($keljab).trigger('change');
 	
 
 $('select').select2().on('select2:open', function() {
@@ -136,6 +140,32 @@ $("#pangkat-select2").select2({
          }
      });
 
+		 $("#keljab-select2").select2({
+          dropdownAutoWidth: true,
+          width: '100%',
+          placeholder: "Pilih Kelompok Jabatan",
+         	ajax: { 
+						url: dropdown_baseurl + 'keljab',
+						type: "post",
+						dataType: 'json',
+						delay: 250,
+						data: function (params) {
+              return {
+									//Trigger: "unit_forPegawai",
+									//kdsatker: "<?= $this->session->userdata("kdsatker")?>",
+									searchTerm: params.term
+									// search term
+              };
+           },
+           processResults: function (response) {
+              return {
+                 results: response
+              };
+           },
+           cache: true
+         }
+     });
+
 		 	// AUTO FILLED 
 		 	$('#unit-select2').on('change', function() {
 				var unitkerja =  $("#unit-select2 option:selected").text()
@@ -207,7 +237,7 @@ $("#UbahPegawai").click(function(e){
 			res = JSON.parse(data)
               show_msg(res.status, res.message);
              // Reset(IdForm);
-              //window.history.back();      
+              window.history.back();      
 			  //javascript:window.history.go(-1);
         },
 

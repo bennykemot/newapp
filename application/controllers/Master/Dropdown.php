@@ -261,6 +261,18 @@ class Dropdown extends CI_Controller {
       echo json_encode($response);
    }
 
+	public function keljab(){
+
+      // Search term
+      $searchTerm = $this->input->post('searchTerm');
+      //$Trigger = $this->input->post('Trigger');
+
+      // Get users
+      $response = $this->Dropdown->getData_keljab($searchTerm);
+
+      echo json_encode($response);
+   }
+
    public function v_mapping(){
 
       // Search term
