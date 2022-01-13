@@ -53,6 +53,8 @@ class SuratTugas extends CI_Controller {
         //$result = json_decode($body,true);
 
     }
+
+    
     
 
     public function Page()
