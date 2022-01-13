@@ -20,7 +20,7 @@
 		"tecnickcom/tcpdf": "^6.4",
 		"mpdf/mpdf": "^8.0",
 		"phpoffice/phpspreadsheet": "^1.20",
-		"guzzlehttp/guzzle": "~6.0"
+		"guzzlehttp/guzzle": "6.0"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
