@@ -61,7 +61,7 @@
                             <div class="input-field col s2"><label>RO</label></div>
 
                             <div class="input-field col s10 " >
-                            <input id="uraianst" name="uraianst" value="<?= $data[0]['ro_kode'] ?>" readonly></textarea>
+                            <input id="ro_kode" name="ro_kode" value="<?= $data[0]['ro_kode'] ?>" readonly></textarea>
                             </div>
                         </div>
 
@@ -200,7 +200,7 @@
                         <td><input type="date" class="tglkembali" onchange="dayCount(<?=$j?>)" id="tglkembali<?=$j?>" name="tglkembali<?=$j?>" value="" ></td>
                         <td style="text-align: center"><input type="text" id="jmlhari<?=$j?>" name="jmlhari<?=$j?>" onkeyup="cityCount('<?=$j?>','edit')"></td>
                         <td colspan="2" id="Tim">
-                        <input class="nama" name="nama<?=$j?>" id="nama<?=$j?>" value="<?= $data[$i]['nama'] ?>" readonly>
+                        <input class="nama namaTim" name="nama<?=$j?>" id="nama<?=$j?>" value="<?= $data[$i]['nama'] ?>" readonly>
                         <input name="idtim<?=$j?>" id="idtim<?=$j?>" value=""hidden>
                         </td>
                         <td colspan="2">
@@ -253,7 +253,6 @@
                      }
             ?>
             </table>
-            <input id="ArrX" name="ArrX" hidden>
             <div class="Sumtotal">
                 <div class="input-field col s12">
                         <div class="input-field col s2"><label>Realisasi</label></div>
@@ -268,11 +267,9 @@
                             </div>
                 </div>
             </div>
-            <input id="id_st" name="id_st" value="" hidden>
+            <input id="id_st" name="id_st" value="<?= $data[0]['id_st'] ?>" hidden>
         </div>
     </div>
-
-                        <input id="ArrX" name="ArrX" hidden>
                     
 
                         <div class="col s12" datayle="padding-top: 10px">

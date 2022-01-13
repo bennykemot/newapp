@@ -1,6 +1,6 @@
 <script>
 
-var baseurl 	= "<?= base_url('Transaksi/SuratTugas/')?>";
+var baseurl 	= "<?= base_url('Transaksi/TambahTim/')?>";
 var baseurl_export 	= "<?= base_url('Transaksi/NotaDinas/')?>";
 var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";
 var master_baseurl 	= "<?= base_url('Master/Master/')?>";
@@ -889,7 +889,7 @@ $("#TambahTim").click(function (e) {
 
                   }
     });
-    $j++;
+    j++;
 
 
   }
@@ -905,13 +905,13 @@ $("#TambahTim").click(function (e) {
   $.ajax({
     type: "POST",
     data: formData,
-    url: baseurl + "Action",
+    url: baseurl + "ActionAPI",
     processData: false,
     contentType: false,
     success: function (data, textStatus, jqXHR) {
               show_msg(textStatus);
               //Reset(IdForm);
-              if(satker_session != "a"){
+              if(satker_session != 450491){
               window.history.back();
               }
               
