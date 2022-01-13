@@ -25,7 +25,6 @@ class SuratTugas extends CI_Controller {
 	{
 		$data['satker'] = $this->SuratTugas->getDataList();
 		//$data['SuratTugas'] = $this->SuratTugas->getDataNew();
-		//$data['count'] = $this->SuratTugas->getCount();
         $this->load->view('Superadmin/Transaksi/SuratTugas/manage',$data);
 	}
 

@@ -139,9 +139,9 @@ function mappingD_none($data){
           </i><span class="menu-title" data-i18n="Mail">Dashboard</span></a>
           </li>
 
-          <!-- <li class="navigation-header"><a class="navigation-header-text">Anggaran</a>
+          <li class="navigation-header"><a class="navigation-header-text">Anggaran</a>
           <i class="navigation-header-icon material-icons">more_horiz</i>
-          </li> -->
+          </li>
 
           <!-- DIGRUP ANGGARAN -->
 
@@ -152,13 +152,13 @@ function mappingD_none($data){
           </li> -->
 
           
-          <!-- <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Pembagianpagu/Page')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Superadmin/Anggaran/Pembagianpagu/Page')?>">
           <i class="material-icons">
           turned_in_not
           </i><span class="menu-title" data-i18n="Mail">Pembagian Pagu</span></a>
           </li>
 
-          <li class="bold <?=mappingD_none($kdsatker)?>"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Mappingapp/Page')?>">
+          <!-- <li class="bold <?=mappingD_none($kdsatker)?>"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Mappingapp/Page')?>">
           <i class="material-icons">
           view_comfy
           </i><span class="menu-title" data-i18n="Mail">Mapping App</span></a>

@@ -7,13 +7,10 @@ class M_SuratTugas extends CI_Model{
 	}
 
 	function getDataList(){
-		$query = $this->db->query("SELECT a.*, b.count_id FROM (SELECT kdsatker, nmsatker FROM t_satker) AS a LEFT JOIN (SELECT COUNT(id) AS count_id, kdsatker FROM d_surattugas GROUP BY kdsatker) AS b ON a.kdsatker = b.kdsatker");
-
-		return $query->result();
-	}
-
-	function getCount($kdsatker){
-		$query = $this->db->query("SELECT COUNT(id) FROM `d_surattugas` WHERE kdsatker = ".$kdsatker." ");
+		$query = $this->db->query("SELECT a.*, b.count_id FROM 
+					(SELECT kdsatker, nmsatker FROM t_satker) AS a LEFT JOIN 
+					(SELECT COUNT(id) AS count_id, kdsatker FROM d_surattugas GROUP BY kdsatker) AS b 
+					ON a.kdsatker = b.kdsatker ");
 
 		return $query->result();
 	}
