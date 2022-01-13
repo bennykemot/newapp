@@ -54,12 +54,17 @@
                       <select class="browser-default" name="bulan-Array" id="bulan-Array"></select>
                     </div>
                 </div> -->
-              <table id="tb-st-" class="bordered striped fixed fixed" style="white-space: normal;overflow-x : auto">
-                  <thead>
+                <div style="padding-top : 20%"></div>
+              <table id="tb-st-" class="bordered striped  responsive" 
+                          style="overflow: hidden;
+                          overflow-x: auto;
+                          clear: both;
+                          width: 100%;min-width: rem-calc(640);">
+                                          <thead>
                     <tr>
                         <th style="min-width: 5px" >NO</th>
                         <th>STATUS</th>
-												<th>NO ST <br>URAIAN</th>
+												<th style="min-width: 370px">NO ST <br>URAIAN</th>
                         <th style="min-width: 150px" >MULAI</th>
                         <th style="min-width: 150px" >SELESAI</th>
                         <th style="min-width: 200px" class="text-center">AKSI</th>

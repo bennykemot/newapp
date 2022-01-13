@@ -196,7 +196,7 @@ AND a.id_app = b.id_appST; ");
       
             }
 
-         function getData_Kota($kdkabkota, $kdlokasi){
+         function getData_Kota($kdkabkota, $kdlokasi, $trigger){
 
             $query = $this->db->query("SELECT CONCAT(id_kota,'-',id,'-',nama_kota) as idkota , CONCAT(nama_provinsi,'-',nama_kota) as valkota from r_uangharian where id_kota = ".$kdkabkota." AND id_provinsi = ".$kdlokasi."");
             return $query->result();

@@ -346,6 +346,10 @@ function ApproveKPA($data){
         return $disabled;
       }
 
+      function disableApprove($status,$role){
+
+      }
+
   
   
   ?>

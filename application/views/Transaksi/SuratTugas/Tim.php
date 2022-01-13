@@ -95,7 +95,7 @@
                     <tr>
                         <td></td>
                         <td>
-                            <input type="text" style='width:7em' id="nospd<?=$j?>" name="nospd<?=$j?>" value="SPD - <?=$nospd?> /" readonly>
+                            <input type="text" style='width:7em' id="nospd<?=$j?>" name="nospd<?=$j?>" value="SPD - " readonly>
                             <input type="text" style='width:8em' id="nospdST<?=$j?>" name="nospdST<?=$j?>">
                         </td>
                         <td><input style="min-width: 150px" type="text" id="satuan_uangharian<?=$j?>" name="satuan_uangharian<?=$j?>" onkeyup="AllCount('<?=$j?>','satuan')" value="<?=rupiah($ubah[$i]['tarifuangharian'])?>"></td>

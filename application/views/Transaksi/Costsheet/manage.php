@@ -45,7 +45,7 @@
                             <div class="input-field col s2"><label>Tanggal Mulai ST</label></div>
 
                             <div class="input-field col s10 " >
-                            <input type="date" id="tg_lmulai" name="tg_lmulai" value="<?= $data[0]['tanggal_mulai'] ?>" readonly>
+                            <input type="date" id="tglst_mulai" name="tglst_mulai" value="<?= $data[0]['tanggal_mulai'] ?>" readonly>
                             </div>
                         </div>
 
@@ -53,7 +53,7 @@
                             <div class="input-field col s2"><label>Tanggal Selesai ST</label></div>
 
                             <div class="input-field col s10 " >
-                            <input type="date" id="tgl_selesai" name="tgl_selesai" value="<?= $data[0]['tanggal_selesai'] ?>" readonly>
+                            <input type="date" id="tglst_selesai" name="tglst_selesai" value="<?= $data[0]['tanggal_selesai'] ?>" readonly>
                             </div>
                         </div>
 
@@ -115,12 +115,36 @@
                             </div>
                         </div>
 
+                        <div class="input-field col s12">
+                            <div class="input-field col s2"><label>Penandatangan</label></div>
+
+                            <div class="input-field col s10 " >
+                                <input type="text"  id="ttd" name="ttd" readonly>
+                            </div>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <div class="input-field col s2"><label>Yang Menyetujui</label></div>
+
+                            <div class="input-field col s10 " >
+                            <select class="browser-default" name="cs_menyetujui" id="cs_menyetujui"></select>
+                            </div>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <div class="input-field col s2"><label>Yang Mengajukan</label></div>
+
+                            <div class="input-field col s10 " >
+                            <select class="browser-default" name="cs_mengajukan" id="cs_mengajukan"></select>
+                            </div>
+                        </div>
+
                         
                         
 
                        
 
-                        <div id = "counting">
+        <div id = "counting">
                 <div class="multi-field-wrapper">
 
                     <div class="input-field col s12" >
@@ -130,8 +154,8 @@
                     </div>
 
 
-         <div class="multi-field-wrapper">
-            <table class="bordered striped fixed fixed multi-fields" id="tbUser" >
+         <div class="multi-field-wrapper" >
+            <table class="bordered striped fixed fixed multi-fields" id="tbUser" style="display: none">
                 <thead>
                     <tr style="background-color: rgba(242,242,242,.5)">
                         <td  class="text-center" style="min-width: 90px" >NO</td>
@@ -172,11 +196,11 @@
                     <tbody id="Tbody" class="multi-field" style="border-top: 2px dotted #c5c5c4;">
                     <tr class="tb-tim" id="tb-tim<?=$j?>">
                         <td><input  class="nourut" type="number" id="urut<?=$j?>" name="urut<?=$j?>" min="1" max="20" value="<?=$j?>" readonly></td>
-                        <td><input type="date" class="tgl" onchange="dayCount('<?=$j?>','D')" id="tglberangkat<?=$j?>" name="tglberangkat<?=$j?>" value=""></td>
-                        <td><input type="date" class="tgl" onchange="dayCount(<?=$j?>)" id="tglkembali<?=$j?>" name="tglkembali<?=$j?>" value="" ></td>
-                        <td><input type="text" id="jmlhari<?=$j?>" name="jmlhari<?=$j?>" readonly value=""></td>
+                        <td><input type="date" class="tglberangkat" onchange="dayCount('<?=$j?>','D')" id="tglberangkat<?=$j?>" name="tglberangkat<?=$j?>" value=""></td>
+                        <td><input type="date" class="tglkembali" onchange="dayCount(<?=$j?>)" id="tglkembali<?=$j?>" name="tglkembali<?=$j?>" value="" ></td>
+                        <td style="text-align: center"><input type="text" id="jmlhari<?=$j?>" name="jmlhari<?=$j?>" onkeyup="cityCount('<?=$j?>','edit')"></td>
                         <td colspan="2" id="Tim">
-                        <input class="nama" name="nama<?=$j?>" id="nama<?=$j?>" value="<?= $data[$i]['nama'] ?>" >
+                        <input class="nama" name="nama<?=$j?>" id="nama<?=$j?>" value="<?= $data[$i]['nama'] ?>" readonly>
                         <input name="idtim<?=$j?>" id="idtim<?=$j?>" value=""hidden>
                         </td>
                         <td colspan="2">
@@ -187,14 +211,14 @@
                         </td>
                         <td><input type="text" id="gol<?=$j?>" name="gol<?=$j?>" value="<?= $data[$i]['golongan'] ?>" readonly></td>
                         <td colspan="2">
-                            <select class="browser-default kota kotaasal kotaselect" name="kotaasal<?=$j?>" id="kotaasal<?=$j?>" onchange="cityCount(<?=$j?>)" >
-                                <option selected value=""></option>
+                            <select class="browser-default kota kotaasal kotaselect" name="kotaasal<?=$j?>" id="kotaasal<?=$j?>" onchange="cityCount('<?=$j?>','default')" >
                             </select>
                         </td>
                         <td colspan="3">
-                            <select class="browser-default kota kotatujuan kotaselect"  name="kotatujuan<?=$j?>" id="kotatujuan<?=$j?>" onchange="cityCount(<?=$j?>)" >
-                                <option selected value=""></option>
+                            <select class="browser-default kota kotatujuan kotaselect"  name="kotatujuan<?=$j?>" id="kotatujuan<?=$j?>" onchange="cityCount('<?=$j?>','default')" >
                             </select>
+                            <input hidden id="provinsi<?=$j?>" value="<?= $data[$i]['lokasi_provinsi_kode'] ?>">
+                            <input hidden id="kota<?=$j?>" value="<?= $data[$i]['lokasi_kabupaten_kode'] ?>">
                         </td>                                   
                         <td hidden><input type="text" id="tarifuangpenginapan<?=$j?>" name="tarifuangpenginapan<?=$j?>"></td>
                         <td hidden><input type="text" id="tarifuangharian<?=$j?>" name="tarifuangharian<?=$j?>" ></td>
@@ -202,7 +226,7 @@
                     <tr>
                         <td></td>
                         <td>
-                            <input type="text" style='width:7em' id="nospd<?=$j?>" name="nospd<?=$j?>" value="SPD - /" readonly>
+                            <input type="text" style='width:7em' id="nospd<?=$j?>" name="nospd<?=$j?>" value="SPD - " readonly>
                             <input type="text" style='width:8em' id="nospdST<?=$j?>" name="nospdST<?=$j?>">
                         </td>
                         <td><input style="min-width: 150px" type="text" id="satuan_uangharian<?=$j?>" name="satuan_uangharian<?=$j?>" onkeyup="AllCount('<?=$j?>','satuan')" value=""></td>
@@ -220,7 +244,7 @@
                             <option value="Kendaraan Umum">Kendaraan Umum</option>
                             <option value="Kendaraan Dinas">Kendaraan Dinas</option>
                         </select</td>
-                        <td><select placeholder="Pilih Penandatangan SPD"  class="ttd_spd browser-default" id="ttd_spd<?=$j?>" name="ttd_spd<?=$j?>" onclick="ubahTtdSpd('<?=$j?>')" >
+                        <td><select placeholder="Pilih Penandatangan SPD"  class="ttd_spd browser-default" id="ttd_spd<?=$j?>" name="ttd_spd<?=$j?>" >
                         </select></td>
                     </tr>
                             </tbody>
@@ -234,8 +258,8 @@
                 <div class="input-field col s12">
                         <div class="input-field col s2"><label>Realisasi</label></div>
                             <div class="input-field col s4 " >
-                                <input readonly id="realisasilabel" name="realisasilabel" value="<?=rupiah($total)?>">
-                                <input readonly id="realisasi" name="realisasi" hidden value="<?=$total?>">
+                                <input readonly id="realisasilabel" name="realisasilabel">
+                                <input readonly id="realisasi" name="realisasi" hidden>
                             </div>
                         <div class="input-field col s2"><label>Sisa</label></div>
                             <div class="input-field col s4 " >

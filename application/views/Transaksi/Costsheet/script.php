@@ -9,6 +9,8 @@ var user_session = "<?= $this->session->userdata("user_id")?>"
 var role_session = "<?= $this->session->userdata("role_id")?>"
 var unit_session = "<?= $this->session->userdata("unit_id")?>"
 var count_tim = "<?= count($countST) ?>"
+var countJSON = "<?= $countdata ?>"
+var valTujuan = "<?= $countdata ?>"
 if(role_session == 1){
   unit_session = 0;
 }
@@ -96,30 +98,62 @@ function formatRupiah(angka){
 
         var min_date = $('#tglst_mulai').val()
         var max_date = $('#tglst_selesai').val()
-        document.getElementById("tglst_mulai").setAttribute("min", min_date_st);
-        document.getElementById("tglst_selesai").setAttribute("min", min_date_mulai);
+        $(".tglberangkat").val(min_date)
+        $(".tglkembali").val(max_date)
 
+        document.getElementsByClassName('tglberangkat')[0].setAttribute("min", min_date)
+        document.getElementsByClassName('tglberangkat')[0].setAttribute("max", max_date)
 
-$.ajax({
-url : master_baseurl + "getKota",
-data: {"kdkabkota": $('#kdkabkota').val(),"kdlokasi": $('#kdlokasi').val(), Trigger :"default"},
-type: "post",
-dataType: "JSON",
-success: function(data)
-    { 
-      var kdakun = $('#kdakun').val()
-      var $asal = $("<option selected='selected'></option>").val(data[0]['idkota']).text(data[0]['valkota'])
-            $(".kotaasal").append($asal).trigger('change');
+        document.getElementsByClassName('tglkembali')[0].setAttribute("min", min_date)
+        document.getElementsByClassName('tglkembali')[0].setAttribute("max", max_date)
+        var b= 1
 
-      if(kdakun == "524113" || kdakun == "524114"){
-        var $tujuan = $("<option selected='selected'></option>").val(data[0]['idkota']).text(data[0]['valkota'])
-            $(".kotatujuan").append($tujuan).trigger('change');
+        for(a = 0; a < countJSON; a++){
+            Kotatujuan(b)
+            b++
+          }
 
-      }
-    }
-  });
+      $.ajax({
+      url : master_baseurl + "getKota",
+      data: {"kdkabkota": $('#kdkabkota').val(),"kdlokasi": $('#kdlokasi').val(), Trigger :"default"},
+      type: "post",
+      dataType: "JSON",
+      success: function(data)
+          { 
+            var kdakun = $('#kdakun').val()
+            var $asal = $("<option selected='selected'></option>").val(data[0]['idkota']).text(data[0]['valkota'])
+                  $(".kotaasal").append($asal).trigger('change');
+          }
+        });
 
+        
 });
+
+function Kotatujuan(b){
+          var prov  = $("#provinsi"+b+"").val()
+          var kota  = $("#kota"+b+"").val()
+
+            $.ajax({
+            url : master_baseurl + "getKota",
+            data: {"kdlokasi": prov,"kdkabkota": kota, Trigger :"tujuan"},
+            type: "post",
+            dataType: "JSON",
+            success: function(data)
+                { 
+                  var $tujuan = $("<option selected='selected'></option>").val(data[0]['idkota']).text(data[0]['valkota'])
+                        $("#kotatujuan"+b+"").append($tujuan).trigger('change');
+                }
+              });
+
+              var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+              var firstDate = new Date($("#tglberangkat"+b+"").val());
+              var secondDate = new Date($("#tglkembali"+b+"").val());
+              var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay))+1;
+
+              $("#jmlhari"+b+"").val(diffDays);
+
+              cityCount(b,'default')
+}
 
 
 
@@ -172,6 +206,20 @@ var relasii = $('#realisasi').val()
                 })
 
               $('#modalidx').modal('close');
+
+              var idxskmpnenlabel = $('#idxskmpnenlabel').val();
+
+              if(idxskmpnenlabel != ""){
+                tb = document.getElementById("tbUser")
+                tb.style.display = ""; 
+              }
+
+              b=1;
+              for(a=0; a < countJSON; a++){
+                
+                cityCount(b,'default')
+                b++;
+              }
               
 
             }
@@ -281,30 +329,7 @@ $("#user-select2").select2({
       }
       });
 
-function selectRefresh(x){
-
-
-              $.ajax({
-              url : master_baseurl + "getKota",
-              data: {"kdkabkota": $('#kdkabkota').val(),"kdlokasi": $('#kdlokasi').val(), Trigger :"default"},
-              type: "post",
-              dataType: "JSON",
-              success: function(data)
-                  { 
-                    var kdakun = $('#kdakun').val()
-
-                    var $asal = $("<option selected='selected'></option>").val(data[0]['idkota']).text(data[0]['valkota'])
-                        $("#kotaasal"+x+"").append($asal).trigger('change');
-
-                        if(kdakun == "524113" || kdakun == "524114"){
-                    var $tujuan = $("<option selected='selected'></option>").val(data[0]['idkota']).text(data[0]['valkota'])
-                        $(".kotatujuan").append($tujuan).trigger('change');
-
-                        }
-                  }
-                });
-
-                $("#ttd_spd"+x+"").select2({
+      $(".ttd_spd").select2({
                     width: '100%',
                     placeholder: "Pilih Penandatangan",
                   ajax: { 
@@ -327,135 +352,6 @@ function selectRefresh(x){
                     cache: true
                   }
               });
-
-    
-        $(".namaTim").select2({
-          dropdownAutoWidth: true,
-          width: '100%',
-          placeholder: "Pilih Nama",
-          dropdownParent: "#Tim",
-         ajax: { 
-           url: dropdown_baseurl + 'pegawai',
-           type: "post",
-           dataType: 'json',
-           delay: 250,
-           data: function (params) {
-              return {
-                searchTerm: params.term,
-                session_satker: satker_session,
-                // Trigger: "select_forTim",
-                // tglberangkat: $('#tglberangkat'+x+'').val(),
-                // tglkembali: $('#tglkembali'+x+'').val() // search term
-              };
-           },
-           processResults: function (response) {
-              return {
-                 results: response
-              };
-           },
-           cache: true
-         }
-     });
-
-
-    $('.namaTim').on('change', function() {
-      tglberangkat = $('#tglberangkat'+x+'').val()
-      tglkembali = $('#tglkembali'+x+'').val()
-
-        var id =  $(this).attr("name")
-        var res = id[9]
-
-        var nip = this.value
-
-        var val = nip.split(";")
-        
-
-        $('#nip'+res+'').html(val[0])
-         $('#nip'+res+'').val(val[0])
-
-         nipVal = $('#nip'+res+'').val()
-
-        $('#perjablabel'+res+'').html(val[1])
-        $('#perjab'+res+'').val(val[1])
-
-        $('#nama'+res+'').html(val[2])
-        $('#nama'+res+'').val(val[2])
-
-        $('#gol'+res+'').html(val[3])
-        $('#gol'+res+'').val(val[3])
-
-        $('#keljab'+res+'').html(val[4])
-        $('#keljab'+res+'').val(val[4])
-
-        $.ajax({
-              url : dropdown_baseurl + 'pegawai',
-              data: {
-                Trigger: "select_forTim_count",
-                tglberangkat: tglberangkat,
-                tglkembali: tglkembali,
-                nip: nipVal},
-              type: "post",
-              dataType: "JSON",
-              success: function(data)
-                  { 
-                    if(data.length > 0){
-                      swal({
-                      title:"Bentrok Tanggal!",
-                      text: "Pastikan ST Pegawai Tidak Bentrok !", 
-                      icon: "warning",
-                      timer: 2000
-                      })
-
-                      document.getElementById("TambahTim").disabled  =true;
-                      tr = document.getElementById("tb-tim"+x+"")
-                      tr.style.backgroundColor = "yellow";
-                      $('#nama'+res+'').val("BENTROK") 
-                      return false;
-                }else{
-                      document.getElementById("TambahTim").disabled  =false;
-                      $('#nama'+res+'').val(val[2]) 
-                      tr = document.getElementById("tb-tim"+x+"")
-                      tr.style.backgroundColor = "rgba(242,242,242,.5)"; 
-
-                      
-
-                    }
-
-                  }
-                });
-
-
-    });
-
-    var idkota_asal = $('#kotaasal'+x+'').val()
-    var idkota_tujuan = $('#kotatujuan'+x+'').val()
-
-     
-      $(".kota").select2({
-        dropdownAutoWidth: true,
-        width: '100%',
-        placeholder: "Pilih Kota",
-      ajax: { 
-        url: dropdown_baseurl + 'kota',
-        type: "post",
-        dataType: 'json',
-        delay: 250,
-        data: function (params) {
-            return {
-              searchTerm: params.term
-            };
-          
-        },
-        processResults: function (response) {
-            return {
-              results: response
-            };
-        },
-        cache: true
-      }
-      });
-
-}
 
 function validateNumber(e) {
     const pattern = /^[0-9]$/;
@@ -605,7 +501,19 @@ function AllCount(i, Trigger){
 }
 
 
-function cityCount(id){
+
+
+
+function cityCount(id, trigger){
+
+  $sumtotal = 0;
+
+  var keljab = $('#keljab'+id+'').val();
+  var kdakun = $('#kdakun').val();
+  var gol = $('#gol'+id+'').val();
+  if(kdakun == "" || kdakun == null){
+    return false
+  }
 
   if(id == 0 || id == "0"){
 
@@ -650,9 +558,7 @@ function cityCount(id){
       }
 }
 
-var keljab = $('#keljab'+id+'').val();
-var kdakun = $('#kdakun').val();
-var gol = $('#gol'+id+'').val();
+
 
 
 
@@ -687,15 +593,36 @@ $.ajax({
 
               }
 
-                $("#tarifuangharian"+id+"").val(tarif)
-                // $("#tarifuangpenginapan"+id+"").val(maxinap)
+                    var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+                    var firstDate = new Date($("#tglberangkat"+id+"").val());
+                    var secondDate = new Date($("#tglkembali"+id+"").val());
+                    var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay) )+ 1;
 
+                $("#tarifuangharian"+id+"").val(tarif)
                 if ( ($("#tglberangkat"+id+"").val() != "") && ($("#tglkembali"+id+"").val() != "")) {
-                var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-                var firstDate = new Date($("#tglberangkat"+id+"").val());
-                var secondDate = new Date($("#tglkembali"+id+"").val());
-                var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay) )+ 1;
-                $("#jmlhari"+id+"").val(diffDays);
+                  if(trigger == "default"){
+
+                   
+                    $("#jmlhari"+id+"").val(diffDays);
+
+                  }else if(trigger == "edit"){
+                    beforediffDays = diffDays;
+                    diffDays = $("#jmlhari"+id+"").val();
+
+                    if(diffDays > beforediffDays){
+
+                      swal({
+                          title:"Jumlah Hari Melebihi Maksimal",
+                          text: "Pastikan Jumlah Hari Tidak Melebihi "+beforediffDays+" Hari", 
+                          icon: "warning",
+                          timer: 2000
+                          })
+                          return false
+
+                    }
+
+                  }
+                
 
                 if(kdakun == "523113"){
                   
@@ -742,6 +669,8 @@ $.ajax({
                 $("#total"+id+"").val(formatRupiah(total));
                 $sumtotal += Number(total);
                 $('#realisasi').val($sumtotal);
+                $('#realisasilabel').val(formatRupiah(''+$sumtotal));
+
 
                 alokasi = $('#alokasi').val()
                 sisa = Number(alokasi) - Number($sumtotal)
@@ -767,6 +696,26 @@ $.ajax({
 }
 
 function dayCount(id, trigger){
+
+                var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+                var firstDate = new Date($("#tglberangkat"+id+"").val());
+                var secondDate = new Date($("#tglkembali"+id+"").val());
+                var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay)) + 1;
+
+                if(diffDays < 0){
+                  swal({
+                    title:"Jumlah Hari Minus !",
+                    text: "Pastikan tanggal kembali tidak < tanggal berangkat", 
+                    icon: "warning",
+                    timer: 2000
+                    })
+                    $("#tglkembali"+id+"").val("")
+                    $("#jmlhari"+id+"").val("");
+                    return false;
+                }
+
+                var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay)) + 1;
+
 
   if($("#kotaasal"+id+"").val() != null || $("#kotatujuan"+id+"").val() != null){
     var valasal = $("#kotaasal"+id+"").val()
@@ -819,10 +768,7 @@ var gol = $('#gol'+id+'').val();
               
 
                 if ( ($("#tglberangkat"+id+"").val() != "") && ($("#tglkembali"+id+"").val() != "")) {
-                var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-                var firstDate = new Date($("#tglberangkat"+id+"").val());
-                var secondDate = new Date($("#tglkembali"+id+"").val());
-                var diffDays = ((secondDate.getTime() - firstDate.getTime()) / (oneDay)) + 1;
+                
                 $("#jmlhari"+id+"").val(diffDays);
 
                 if(kdakun == "523113"){
@@ -880,16 +826,7 @@ var gol = $('#gol'+id+'').val();
                 sisa = Number(alokasi) - Number($sumtotal)
                 $('#sisa').val(sisa);
 
-                if(diffDays < 0){
-                  swal({
-                    title:"Jumlah Hari Minus !",
-                    text: "Pastikan tanggal kembali tidak < tanggal berangkat", 
-                    icon: "warning",
-                    timer: 2000
-                    })
-                    $("#tglkembali"+id+"").val("")
-                    $("#jmlhari"+id+"").val("");
-                }
+                
                 }else{
                     $("#jmlhari"+id+"").val();
                 }
@@ -910,6 +847,88 @@ function removeItemAll(arr, value) {
   }
   return arr;
 }
+
+$("#TambahTim").click(function (e) {
+  e.preventDefault();
+
+  var btn = $(this);
+  var form = $(this).closest("form");
+  var formData = new FormData($("#FormTim")[0]);
+  var countingDiv = document.getElementById('counting');
+  var countTim = countingDiv.getElementsByClassName('namaTim').length;
+
+  j = 1
+  for($loop = 0 ; $loop < countTim; $loop++){
+    cekBentrok    = $('#nama'+j+'').val()
+    tglberangkat  = $('#tglberangkat'+j+'').val()
+    tglkembali    = $('#tglkembali'+j+'').val()
+    nipVal        = $('#nip'+j+'').val()
+    namaVal       = $('#nama'+j+'').val()
+
+    $.ajax({
+              url : dropdown_baseurl + 'pegawai',
+              data: {
+                Trigger: "select_forTim_count",
+                tglberangkat: tglberangkat,
+                tglkembali: tglkembali,
+                nip: nipVal,
+                nama: namaVal},
+              type: "post",
+              dataType: "JSON",
+              success: function(data)
+                  { 
+                    if(data.length > 0){
+                      swal({
+                      title:"Bentrok Tanggal!",
+                      text: "Pastikan ST Pegawai Tidak Bentrok !", 
+                      icon: "warning",
+                      timer: 2000
+                      })
+                      return false;
+                    }
+
+                  }
+    });
+    $j++;
+
+
+  }
+
+  btn
+    .addClass("kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light")
+    .attr("disabled", false);
+
+  formData.append('Trigger', 'C')
+  formData.append('countTim', countTim)
+  // formData.append('jumlah_realisasi', sumRealisasi)
+
+  $.ajax({
+    type: "POST",
+    data: formData,
+    url: baseurl + "Action",
+    processData: false,
+    contentType: false,
+    success: function (data, textStatus, jqXHR) {
+              show_msg(textStatus);
+              //Reset(IdForm);
+              if(satker_session != "a"){
+              window.history.back();
+              }
+              
+              
+          },
+          error: function (jqXHR, textStatus, errorThrown) { },
+      });
+});
+
+
+function show_msg(textStatus){
+        swal({
+            title:textStatus, 
+            icon:textStatus,
+            timer: 2000
+            })
+    }
 
 
 

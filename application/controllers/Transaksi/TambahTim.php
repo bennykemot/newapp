@@ -41,13 +41,14 @@ class TambahTim extends CI_Controller {
 
         $data = json_decode($this->getId($this->API,'getdatast/'.$id.''), true); 
         $ro = str_replace(".","",$data['data'][0]['ro_kode']);
-        // echo $ro;
+        //var_dump($data);
         $data['subkomp'] = $this->Master->APIsubkomp($ro, $kdsatker, $unit_id, $role_id);
         $data['subkomp_pagu'] = $this->Master->APISubkomp_pagu($ro, $kdsatker, $unit_id, $role_id);
         $data['countST'] = $this->db->query("select id_st from d_itemcs where id_st = ".$id."")->result();
-        $data['countdata'] = count($data);
+        $data['countdata'] = count($data['data']);
         $data['lok'] = $this->db->query("select kdkabkota, kdlokasi from t_satker where kdsatker = ".$kdsatker."")->result();
 
+        // echo count($data['data']);
         
         //$data['subkomppagu'] = $this->Master->APIsubkomppagu($ro);
         $this->load->view('Transaksi/Costsheet/manage', $data);

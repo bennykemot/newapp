@@ -20,7 +20,7 @@
               <tbody>
               <?php foreach($subkomp as $sk){?>
                 <tr>
-                  <td style="min-width: 3%"><a class="btn cyan" href="javascript:;" onclick="PilihKode('<?=$sk->kode?>', '<?=$sk->kdindex?>', '<?=$sk->tahapan?>', '<?=$sk->id_app?>')" id="Pilih">Pilih</a></td>
+                  <td style="min-width: 3%"><a class="btn cyan pilihkode" href="javascript:;" onclick="PilihKode('<?=$sk->kode?>', '<?=$sk->kdindex?>', '<?=$sk->tahapan?>', '<?=$sk->id_app?>')" id="Pilih">Pilih</a></td>
                   <td style="width: 30%"><?=$sk->kode?></td>
                   <td style="width: 40%"><?=$sk->nama_app?></td>
                   <td style="width: 40%"><?php if($sk->nama_tahapan == "All"){ echo '-';}else{echo $sk->nama_tahapan;}?></td>
@@ -31,7 +31,7 @@
                 <li class="divider">-----------------------------</li>
                 <?php foreach($subkomp_pagu as $skp){?>
                 <tr>
-                  <td style="min-width: 3%"><a class="btn cyan" href="javascript:;" onclick="PilihKode_pagu('<?=$skp->kode?>', '<?=$skp->kdindex?>')" id="Pilih">Pilih</a></td>
+                  <td style="min-width: 3%"><a class="btn cyan pilihkode" href="javascript:;" onclick="PilihKode_pagu('<?=$skp->kode?>', '<?=$skp->kdindex?>')" id="Pilih">Pilih</a></td>
                   <td style="width: 30%"><?=$skp->kode?></td>
                   <td style="width: 40%">-</td>
                   <td style="width: 40%">no mapping</td>

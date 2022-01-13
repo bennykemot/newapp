@@ -69,8 +69,9 @@ class Master extends CI_Controller {
 
         $kdkabkota = $this->input->post('kdkabkota');
         $kdlokasi = $this->input->post('kdlokasi');
+        $trigger = $this->input->post('trigger');
         
-        $response = $this->Master->getData_Kota($kdkabkota, $kdlokasi);
+        $response = $this->Master->getData_Kota($kdkabkota, $kdlokasi, $trigger);
 
         echo json_encode($response);
      }

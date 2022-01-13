@@ -418,7 +418,7 @@ class SuratTugas extends CI_Controller {
 
                        $data_ItemCS = array(
                         'nourut' => $this->input->post('urut'.$urut[$i].''),
-                        'nospd' => "SPD - ",
+                        'nospd' => $this->input->post('nospd'.$urut[$i].'') . $this->input->post('nospdST'.$urut[$i].''),
                         'nama' => $this->input->post('nama'.$urut[$i].''),
                         'nip' => $nip,
                         'jabatan'  => $jabatan,
@@ -549,24 +549,35 @@ class SuratTugas extends CI_Controller {
     }
 
     public function Export(){
+        $Pilihkop   	= $this->uri->segment(7);
+
+        if($Pilihkop == "TnpKop"){
+            $left  = 36;
+            $right = 16;
+        }else{
+            $left  = 26;
+            $right = 26;
+        }
+        $Assets			= $this->config->item('assets_url');
+        $path           = ''.$Assets.'app-assets/images/logo/qrcode.jpg';
         $mpdf = new \Mpdf\Mpdf([
         'tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf',
         'mode' => 'utf-8', 
         'format' => 'A4-P',
         'default_font_size' => 12,
         'default_font' => 'Arial',
-        'margin_left' => 26,
-        'margin_right' => 26,
+        'margin_left' => $left,
+        'margin_right' => $right,
         'margin_top' => 16,
-        'margin_bottom' => 26,
+        'margin_bottom' => 20,
         ]);
-        $Assets			= $this->config->item('assets_url');
-        $path           = '<img src='.$Assets.'app-assets/images/logo/bpkp.jpg>';
+
+        
         $a              = $this->uri->segment(5);
         $kdindex        = str_replace("%20", " ", $a);
 		$kdunit        	= $this->uri->segment(6);
         $id        		= $this->uri->segment(4);
-        $Pilihkop   	= $this->uri->segment(7);
+        
         $trigger        = "export";
         $data['ubah']   = $this->SuratTugas->getDataUbah($kdindex, $id, $trigger);
         $data['Pilihkop'] = $Pilihkop;

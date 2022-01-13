@@ -205,7 +205,8 @@ class Dropdown extends CI_Controller {
          }
          $response = $this->db->query("SELECT d_itemcs.nip,d_itemcs.id_st from d_itemcs
          JOIN d_surattugas ON d_itemcs.id_st = d_surattugas.id where (".$where." 
-         AND d_surattugas.is_aktif = 1 AND d_itemcs.tglberangkat between '".$tglberangkat."' and '".$tglkembali."') OR (d_surattugas.is_aktif = 1 AND d_itemcs.nip = '".$nip."' AND d_itemcs.tglkembali between '".$tglberangkat."' and '".$tglkembali."')")->result_array();
+         AND d_surattugas.is_aktif = 1 AND d_itemcs.tglberangkat between '".$tglberangkat."' and '".$tglkembali."') 
+         OR (d_surattugas.is_aktif = 1 AND ".$where." AND d_itemcs.tglkembali between '".$tglberangkat."' and '".$tglkembali."')")->result_array();
       }else{
          $response = $this->Dropdown->getData_Pegawai($searchTerm, $Trigger);
       }

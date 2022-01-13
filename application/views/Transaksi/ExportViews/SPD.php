@@ -198,7 +198,7 @@ function cek_tgl($tanggal){
 
                     <tr>
                         <td style="border-top-style: none;">a. Instansi<br> b. Akun</td>
-                        <td style="border-top-style: none;" colspan="2"><?=$e->nama_unit?> <br><?=$e->idxskmpnen?></td>
+                        <td style="border-top-style: none;" colspan="2"><?=$e->nama_unit?> <br><?=$e->kodebeban?></td>
                     </tr>
 
                     <tr>

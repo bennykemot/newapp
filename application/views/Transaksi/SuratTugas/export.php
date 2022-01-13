@@ -10,11 +10,14 @@
 
 		table, td, th {
 			vertical-align: center;
+            /* border-collapse: collapse;
+            border: 1px solid black; */
 			
 			}
 
         table {
             vertical-align: top;
+            /* border: 1px solid black; */
         }
 
 		
@@ -94,7 +97,7 @@ function cek_tgl($tanggal){
                 </tr>
         </table>
         <?php }else{
-            echo "<div style='padding-bottom: 20%'></div>";
+            echo "<div style='padding-bottom: 40%'></div>";
         }?>
 
         <table width="100%">
@@ -130,33 +133,57 @@ function cek_tgl($tanggal){
                 <tr><td><div style="padding-top: 10px"></div></td></tr>
 
                 <tr>
-                    <td>No</td>
-                    <td>Nama</td>
-                    <td>NIP</td>
-                    <td>Jabatan / Peran</td>
+                    <td width="5%">No</td>
+                    <td width="30%">Nama</td>
+                    <td width="35%">NIP</td>
+                    <td width="30%" colspan="2">Jabatan/Peran</td>
                 </tr>
 
-                <?php $no=1;for($i = 0 ; $i < count($ubah); $i++){ ?>
+                <?php
+                    $no=1;for($i = 0 ; $i < count($ubah); $i++){ ?>
                 <tr>
                     <td width="5%"><?= $no++?></td>
                     <td width="30%"><?= $ubah[$i]['nama']?></td>
                     <td width="35%"><?= $ubah[$i]['nip']?></td>
-                    <td width="30%" colspan="2"><?= $ubah[$i]['jabatan']?></td>
+                    <td width="30%" colspan="2" style="text-align: justify"><?= $ubah[$i]['jabatan']?></td>
                 </tr>
                 <?php }?>
                 
         </table>
         
-        <p style="text-align: justify"> Untuk melaksanakan <?= $ubah[0]['uraianst']?>. <br>
+        <p style="text-align: justify"> Untuk melaksanakan <?= $ubah[0]['uraianst']?>. <br><br>
 						Penugasan ini dilaksanakan selama <?= $ubah[0]['jmlhari']?> hari kerja mulai tanggal <?= cek_tgl($ubah[0]['tglmulaist'])?> sampai dengan <?= cek_tgl($ubah[0]['tglselesaist'])?>. <br>
-						Biaya kegiatan ini dibebankan pada anggaran <?= $ubah[0]['nama_unit']?>.<br>
-						Demikian untuk dilaksanakan dengan penuh tanggung jawab.
+						<br>Penugasan ini menjadi beban anggaran <?= $ubah[0]['nama_unit']?>.<br>
+						<br>Demikian untuk dilaksanakan dengan penuh tanggung jawab.
                         
                         
         </p>
 
         <table width="100%">
+
                 <tr>
+                    <td width="50%" rowspan="3" colspan="5"></td>
+                    <td></td>
+                    <td style="text-align: left" width="50%"><?= cek_tgl($ubah[0]['tglst'])?></td>
+                </tr>
+                
+                <tr>
+                    <td rowspan="2" width="12%" style="text-align: center">
+                        <br><img src="<?= base_url().'assets'?>/app-assets/images/logo/qrcode.jpg" alt="bpkp" width="80" height="80">
+                    </td>
+                    <td style="font-size:0.8em;color:blue;text-align: left"><i>Ditandatangani secara elektronik oleh</i></td>
+                </tr>
+
+                <tr>
+                    
+                    <td style="text-align: left;vertical-align: bottom;" width="38%">
+                        <br><?=Statuspenandatangan($ubah[0]['status_penandatangan'],$ubah[0]['jabatan_ttd'])?>
+                        <br> <?= $ubah[0]['nama_ttd']?>
+                        <br> NIP <?= $ubah[0]['nip_ttd']?>
+                    </td>
+                </tr>
+                
+                <!-- <tr>
                     <td width="60%" rowspan="5" colspan="5"></td>
                     <td style="text-align: left" width="40%"><?= cek_tgl($ubah[0]['tglst'])?></td>
                 </tr>
@@ -174,10 +201,17 @@ function cek_tgl($tanggal){
                 </tr>
                 <tr>
                     <td style="text-align: left">NIP <?= $ubah[0]['nip_ttd']?></td>
-                </tr>
+                </tr> -->
         </table>
     </div>
-    
+        <!-- <footer>
+                <table width="100%"><tr>
+                    <td width="10%" rowspan="2">
+                        <img src="<?= base_url().'assets'?>/app-assets/images/logo/qrcode.jpg" alt="bpkp" width="60" height="60">
+                    </td>
+                </tr>
+                </table>
+        </footer> -->
     </body>
 
    
