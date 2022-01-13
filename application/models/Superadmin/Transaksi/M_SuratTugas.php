@@ -6,6 +6,33 @@ class M_SuratTugas extends CI_Model{
         $this->load->database();
 	}
 
+	function getDataList(){
+		$query = $this->db->query("SELECT a.*, b.count_id FROM (SELECT kdsatker, nmsatker FROM t_satker) AS a LEFT JOIN (SELECT COUNT(id) AS count_id, kdsatker FROM d_surattugas GROUP BY kdsatker) AS b ON a.kdsatker = b.kdsatker");
+
+		return $query->result();
+	}
+
+	function getCount($kdsatker){
+		$query = $this->db->query("SELECT COUNT(id) FROM `d_surattugas` WHERE kdsatker = ".$kdsatker." ");
+
+		return $query->result();
+	}
+
+	function getDetail($kdsatker){
+		$query = $this->db->query("SELECT d_surattugas.*, user.username, t_satker.nmsatker
+					from d_surattugas 
+					JOIN d_bagipagu ON d_surattugas.kdindex = d_bagipagu.kdindex
+					JOIN user ON d_surattugas.user_id = user.id
+					JOIN t_satker ON d_surattugas.kdsatker = t_satker.kdsatker
+					
+					WHERE d_surattugas.kdsatker = ".$kdsatker."
+					
+					ORDER BY d_surattugas.created_at
+		");
+
+		return $query->result();
+	}
+
     function getDataNew(){
         $query = $this->db->query("SELECT d_surattugas.*, user.username 
         from d_surattugas 
@@ -16,6 +43,8 @@ class M_SuratTugas extends CI_Model{
         return $query->result();
      
     }
+
+	
 
     function Jum(){
 
