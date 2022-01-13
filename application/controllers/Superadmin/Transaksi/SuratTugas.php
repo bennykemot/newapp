@@ -32,6 +32,7 @@ class SuratTugas extends CI_Controller {
 	public function detail(){
 		$kdsatker = $this->uri->segment(5);
 		$data['SuratTugas'] = $this->SuratTugas->getDetail($kdsatker);
+		$data['Satker'] = $this->SuratTugas->getNamaSatker($kdsatker);
 		$this->load->view('Superadmin/Transaksi/SuratTugas/detail',$data);
 	}
 

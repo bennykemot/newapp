@@ -12,7 +12,7 @@
                         email</i></button>
                     </div>
                     <div class="col s9">
-                        <h6>SURAT TUGAS SATKER : <?php echo $SuratTugas[0]->nmsatker ?></h6>
+                        <h6>SURAT TUGAS SATKER : <?php echo $Satker[0]->nmsatker ?></h6>
                     </div>
                     
                     <!-- <div class="col s2">

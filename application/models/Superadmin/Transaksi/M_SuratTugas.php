@@ -33,6 +33,16 @@ class M_SuratTugas extends CI_Model{
 		return $query->result();
 	}
 
+	function getNamaSatker($kdsatker){
+		$query = $this->db->query("SELECT nmsatker
+					FROM t_satker 
+					
+					WHERE kdsatker = ".$kdsatker."
+		");
+
+		return $query->result();
+	}
+
     function getDataNew(){
         $query = $this->db->query("SELECT d_surattugas.*, user.username 
         from d_surattugas 
