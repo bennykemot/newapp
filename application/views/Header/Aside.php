@@ -69,12 +69,12 @@ function mappingD_none($data){
       <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="accordion">
         
       <?php
-				if($role_id != 1){
+				if($role_id != 1 && $role_id != 99){
 			?>
 				<li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
           <i class="material-icons">
           home
-          </i><span class="menu-title" data-i18n="Mail">Dashboard</span></a>
+          </i><span class="menu-title" data-i18n="Mail">xx</span></a>
           </li>
 
           <li class="navigation-header"><a class="navigation-header-text">Anggaran</a>
@@ -94,11 +94,6 @@ function mappingD_none($data){
           home
           </i><span class="menu-title" data-i18n="Mail">Mapping Lembur</span></a>
           </li>
-
-         
-
-          
-
 
           <li class="navigation-header"><a class="navigation-header-text">Rencana Kegiatan</a>
           <i class="navigation-header-icon material-icons">more_horiz</i>
@@ -133,6 +128,112 @@ function mappingD_none($data){
           <i class="material-icons">
           call_to_action
           </i><span class="menu-title" data-i18n="Mail">PBJ</span></a>
+          </li>
+			
+			<?php
+				}elseif($role_id == 99){
+			?>
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
+          <i class="material-icons">
+          home
+          </i><span class="menu-title" data-i18n="Mail">Dashboard</span></a>
+          </li>
+
+          <!-- <li class="navigation-header"><a class="navigation-header-text">Anggaran</a>
+          <i class="navigation-header-icon material-icons">more_horiz</i>
+          </li> -->
+
+          <!-- DIGRUP ANGGARAN -->
+
+          <!-- <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Transfer')?>">
+          <i class="material-icons">
+          get_app
+          </i><span class="menu-title" data-i18n="Mail">Transfer Pagu</span></a>
+          </li> -->
+
+          
+          <!-- <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Pembagianpagu/Page')?>">
+          <i class="material-icons">
+          turned_in_not
+          </i><span class="menu-title" data-i18n="Mail">Pembagian Pagu</span></a>
+          </li>
+
+          <li class="bold <?=mappingD_none($kdsatker)?>"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Mappingapp/Page')?>">
+          <i class="material-icons">
+          view_comfy
+          </i><span class="menu-title" data-i18n="Mail">Mapping App</span></a>
+          </li> -->
+
+
+          <!-- <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing')?>">
+          <i class="material-icons">
+          photo_filter
+          </i><span class="menu-title" data-i18n="Mail">Mapping Lembur</span></a>
+          </li> -->
+
+
+          <li class="navigation-header"><a class="navigation-header-text">Rencana Kegiatan</a>
+          <i class="navigation-header-icon material-icons">more_horiz</i>
+          </li>
+
+          <!-- DIGRUP RENCANA KEGIATAN -->
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Superadmin/Transaksi/SuratTugas/Page/0')?>">
+          <i class="material-icons">
+          email
+          </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>
+          </li>
+
+          <!-- <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
+          <i class="material-icons">
+          speaker_notes
+          </i><span class="menu-title" data-i18n="Mail">Perjadin Diklat</span></a>
+          </li>
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
+          <i class="material-icons">
+          book
+          </i><span class="menu-title" data-i18n="Mail">ST Non-Biaya</span></a>
+          </li>
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
+          <i class="material-icons">
+          business_center
+          </i><span class="menu-title" data-i18n="Mail">Lembur</span></a>
+          </li>
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>f">
+          <i class="material-icons">
+          call_to_action
+          </i><span class="menu-title" data-i18n="Mail">PBJ</span></a>
+          </li> -->
+
+          <li class="navigation-header"><a class="navigation-header-text">Pengaturan</a>
+          <i class="navigation-header-icon material-icons">more_horiz</i>
+          </li>
+
+          <!-- DIGRUP RENCANA KEGIATAN -->
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Superadmin/Profile/Profile/Page/')?>">
+          <i class="material-icons">
+          import_contacts
+          </i><span class="menu-title" data-i18n="Mail">Pengguna</span></a>
+          </li>
+
+					<li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Master/Pegawai/Page/')?>">
+          <i class="material-icons">
+          face
+          </i><span class="menu-title" data-i18n="Mail">Pegawai</span></a>
+          </li>
+
+					<li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Superadmin/Master/Pejabat/Page/')?>">
+          <i class="material-icons">
+          grade
+          </i><span class="menu-title" data-i18n="Mail">Pejabat</span></a>
+          </li>
+
+					<li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Superadmin/Master/Jabatan/Page/')?>">
+          <i class="material-icons">
+          local_library
+          </i><span class="menu-title" data-i18n="Mail">Jabatan</span></a>
           </li>
 
 			<?php

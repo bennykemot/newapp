@@ -1,10 +1,21 @@
-
+<?php $role_id = $this->session->userdata("role_id") ?>
     <header class="page-topbar" id="header">
       <div class="navbar navbar-fixed"> 
         <nav class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-light">
           <div class="nav-wrapper">
             <div class="header-search-wrapper hide-on-med-and-down">
-              <h6><?php echo $this->session->userdata("nmsatker"); ?></h6>
+							<?php 
+								if($role_id == 99){
+							?>
+								<h6>USER : SUPERADMIN</h6>
+							<?php
+								}else{
+							?>
+								<h6><?php echo $this->session->userdata("nmsatker"); ?></h6>
+							<?php
+								}
+							?>
+
             </div>
             <ul class="right hide-on-med-and-down">
 							<!-- <li><a class="waves-effect waves-block waves-light"><span><?php echo $this->session->userdata("username"); ?></span></a></li> -->
