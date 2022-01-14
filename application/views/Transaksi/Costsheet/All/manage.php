@@ -1,4 +1,27 @@
-<?php include(APPPATH . 'views/Header/Aside.php') ?>
+<?php include(APPPATH . 'views/Header/Aside.php');
+
+function hideNoStHead($dat){
+  if($dat == "Detail"){
+    $res = "";
+  }else{
+    $res = "hidden";
+  }
+  return $res;
+  }
+
+function hideNoSt($dat){
+  if($dat == "All"){
+    $res = "";
+  }else{
+    $res = "hidden";
+  }
+  return $res;
+  }
+
+
+?>
+
+
 
 
  <div class="row">
@@ -12,7 +35,7 @@
                         email</i></button>
                     </div>
                     <div class="col s9">
-                        <h6> Daftar Costsheet </h6>
+                        <h6> Daftar Costsheet <p <?=hideNoStHead($result)?>><?=$costsheet[0]->nost?></p></h6>
                     </div>
                     
                 </div>
@@ -45,7 +68,7 @@
                       <?php $no=1;for($i=0; $i < count($costsheet); $i++){?>
                         <tr>
                             <td><?=$no++?></td>
-                            <td><?=$costsheet[$i]->nost?><br><?=$costsheet[$i]->uraianst?><br><?=$costsheet[$i]->id_cs?></td>
+                            <td><div <?=hideNoSt($result)?>><?=$costsheet[$i]->nost?></div><?=$costsheet[$i]->id_cs?><br><?=$costsheet[$i]->uraianst?></td>
                             <td><?=rupiah($costsheet[$i]->biaya)?></td>
                             <td class="text-center">
                               <a href="<?= site_url('Transaksi/Apisima/Getcostsheetdetail/'.$costsheet[$i]->id_cs.'/Detail')?>" 
@@ -55,11 +78,11 @@
                             <td class="text-center">
                               <a href="#" class="btn orange dropdown-trigger tooltipped" data-position="top" data-tooltip="Printout" href="#" data-target="dropdown'<?=$costsheet[$i]->id?>'" ><i class="material-icons white-text">remove_red_eye</i></a>
                                 <ul id="dropdown'<?=$costsheet[$i]->id?>'" class='dropdown-content' style="min-width: 170px !important;">
-                                <li><a style="font-size: 14px;" href="javascript:;" onclick="exportST('<?=$costsheet[$i]->id?>','<?=$costsheet[$i]->kdindex?>','<?=$unit_id?>')">Surat Tugas</a></li>
+                                <!-- <li><a style="font-size: 14px;" href="javascript:;" onclick="exportST('<?=$costsheet[$i]->id?>','<?=$costsheet[$i]->kdindex?>','<?=$unit_id?>')">Surat Tugas</a></li> -->
                                   <!-- <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/SuratTugas/Export/'.$costsheet[$i]->id.'/'.$costsheet[$i]->kdindex.'/'.$unit_id) ?>" target="blank">Surat Tugas</a></li> -->
-                                  <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/costsheet/L/'.$costsheet[$i]->id.'/'.$costsheet[$i]->kdindex) ?>" target="blank">Costsheet</a></li>
-                                  <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd/P/'.$costsheet[$i]->id.'/'.$costsheet[$i]->kdindex) ?>" target="blank">SPD</a></li>
-                                  <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd_back/P/'.$costsheet[$i]->id.'/'.$costsheet[$i]->kdindex) ?>" target="blank">SPD Belakang</a></li>
+                                  <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/Apisima/Export/costsheet/L/'.$costsheet[$i]->id_cs.'/'.$costsheet[$i]->id_st.'/'.$costsheet[$i]->kdindex) ?>" target="blank">Costsheet</a></li>
+                                  <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/Apisima/Export/spd/P/'.$costsheet[$i]->id_cs.'/'.$costsheet[$i]->id_st.'/'.$costsheet[$i]->kdindex) ?>" target="blank">SPD</a></li>
+                                  <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/Apisima/Export/spd_back/P/'.$costsheet[$i]->id.'/'.$costsheet[$i]->kdindex) ?>" target="blank">SPD Belakang</a></li>
                                   <li><a style="font-size: 14px;" href="#" class="sidenav-trigger" data-target="theme-cutomizer-out" onclick="show('<?=$costsheet[$i]->id?>')">Kwitansi Rampung</a>
                                   </li>
                                 </ul>

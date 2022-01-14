@@ -28,7 +28,7 @@
           <!-- <a class="btn modal-trigger col s2" href="#modal2">Tambah Data</a> -->
           <div class="row">
             <div class="col s12">
-              <form method="post" action ="<?= site_url('Transaksi/SuratTugas/filterrAPI')?>">
+              <form method="post" action ="<?= site_url('Transaksi/Apisima/filterrAPI')?>">
 
                 <div class="input-field col s12">
                     <div class="input-field col s2"><label>Tanggal Mulai</label></div>

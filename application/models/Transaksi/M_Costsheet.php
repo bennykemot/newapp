@@ -6,7 +6,7 @@ class M_Costsheet extends CI_Model{
         $this->load->database();
 	}
 
-    function getData_costsheet($id, $trigger){
+    function getData($id, $trigger){
         if($trigger == "Detail"){  
             $query = $this->db->query("SELECT d_itemcs.* , d_surattugas.* , 
             t_unitkerja.nama_unit,
@@ -18,11 +18,96 @@ class M_Costsheet extends CI_Model{
             JOIN t_unitkerja ON t_unitkerja.id = d_bagipagu.unit_id 
             where d_itemcs.id_cs = '".$id."'");
         }else{
-            $query = $this->db->query("SELECT d_costsheet.*, d_surattugas.kdindex from d_costsheet
-            LEFT JOIN d_surattugas ON d_surattugas.id_st = d_costsheet.id_st 
-            where d_costsheet.id_st = ".$id."");
+            if($id == 0){
+                $query = $this->db->query("SELECT d_costsheet.*, d_surattugas.kdindex from d_costsheet
+                LEFT JOIN d_surattugas ON d_surattugas.id_st = d_costsheet.id_st");
+
+            }else{
+                $query = $this->db->query("SELECT d_costsheet.*, d_surattugas.kdindex from d_costsheet
+                LEFT JOIN d_surattugas ON d_surattugas.id_st = d_costsheet.id_st 
+                where d_costsheet.id_cs LIKE '%".$id."%'");
+            }
+            
         }
         return $query->result();
 
+    }
+
+    function getData_costsheet($Id_st,$Kdindex,$id_cs){
+
+        $cek= $this->db->query("SELECT id_tahapan, id_app from d_surattugas where id_st=".$Id_st."")->result();
+
+        if($cek[0]->id_app == 0){
+            $query= $this->db->query("Select a.*, b.* from
+            (SELECT kdindex,rupiah as rupiah_tahapan FROM d_pagu where d_pagu.kdindex = '".$Kdindex."')as a
+            
+            LEFT JOIN (SELECT SUM(d_surattugas.jumlah_realisasi) as realisasi, d_surattugas.kdindex as pagu_index 
+     from d_surattugas WHERE d_surattugas.is_aktif = 1 AND d_surattugas.id_st !=".$Id_st." GROUP BY d_surattugas.kdindex) as b ON a.kdindex = b.pagu_index");
+
+        }else{
+        $query = $this->db->query("SELECT a.*, b.realisasi from 
+        (SELECT d_detailapp.kdindex, d_detailapp.id_app, d_detailapp.tahapan, 
+        d_detailapp.rupiah_tahapan, r_tahapan.id as id_tahapan 
+        from d_detailapp 
+        JOIN t_app ON t_app.id = d_detailapp.id_app 
+        JOIN r_tahapan ON r_tahapan.id = d_detailapp.tahapan 
+        JOIN v_mapping ON v_mapping.kdindex = d_detailapp.kdindex 
+        where d_detailapp.kdindex = '".$Kdindex."' 
+        and d_detailapp.id_app=".$cek[0]->id_app." 
+        
+        and d_detailapp.tahapan=".$cek[0]->id_tahapan." ) as a 
+        
+        
+        LEFT JOIN (SELECT SUM(jumlah_realisasi) as realisasi, id_app, id_tahapan, kdindex 
+        from d_surattugas 
+        WHERE d_surattugas.is_aktif = 1 
+        AND d_surattugas.id_st != ".$Id_st." 
+        GROUP BY kdindex,id_app,id_tahapan) as b 
+        
+        ON a.kdindex = b.kdindex AND a.id_app = b.id_app AND a.tahapan = b.id_tahapan");
+        }
+        return $query->result();
+
+    }
+
+    function getData_export($Trigger,$Id_st,$Id_cs){
+        if($Trigger == "costsheet" || $Trigger == "spd" || $Trigger == "nominatif"){
+            $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, d_surattugas.status_cs, d_surattugas.status_penandatangan,
+            d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.status_id,
+            d_surattugas.tglselesaist, d_surattugas.idxskmpnen, d_surattugas.id_ttd,
+            t_unitkerja.nama_unit , d_itemcs.nourut, d_itemcs.nama, 
+            d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan, 
+            d_itemcs.tglberangkat, d_itemcs.tglkembali, d_itemcs.kotaasal, 
+            d_itemcs.kotatujuan, d_itemcs.jmlhari, d_itemcs.totaluangharian, d_itemcs.transport, 
+            d_itemcs.totalinap, d_itemcs.totalrep, d_itemcs.totaltravel , d_itemcs.jnstransportasi,d_itemcs.nospd,
+            d_itemcs.jumlah ,d_pagu.rupiah,d_pagu.kdbeban,
+			t_pejabat.nama as ppk_nama, 
+			t_pejabat.nip as ppk_nip,
+			t_satker.lokasi as lokasi,
+
+            CONCAT(d_pagu.thang,'.',d_pagu.kdsatker,'.',d_pagu.kddept,'.',d_pagu.kdunit,'.',d_pagu.kdprogram,'.',
+            d_pagu.kdgiat,'.',d_pagu.kdoutput,'.',d_pagu.kdsoutput,'.',d_pagu.kdkmpnen,'.',d_pagu.kdskmpnen,'.',
+            d_pagu.kdakun,'.',d_pagu.kdbeban,'.',d_pagu.kdib) as kodebeban,
+            
+            SUBSTRING_INDEX(SUBSTRING_INDEX(d_surattugas.cs_menyetujui,'-',2),'-',-1) as nip_menyetujui, 
+            SUBSTRING_INDEX(SUBSTRING_INDEX(d_surattugas.cs_menyetujui,'-',3),'-',-1) as nama_menyetujui,
+
+            SUBSTRING_INDEX(SUBSTRING_INDEX(d_surattugas.cs_mengajukan,'-',2),'-',-1) as nip_mengajukan, 
+            SUBSTRING_INDEX(SUBSTRING_INDEX(d_surattugas.cs_mengajukan,'-',3),'-',-1) as nama_mengajukan
+            
+            
+            FROM d_surattugas 
+            JOIN d_itemcs ON d_surattugas.id_st = d_itemcs.id_st 
+            LEFT JOIN t_pegawai ON d_surattugas.id_ttd = t_pegawai.nip 
+            JOIN d_pagu ON d_pagu.kdindex = d_surattugas.kdindex
+			JOIN t_pejabat ON d_surattugas.ppk_id = t_pejabat.id 
+			JOIN t_satker ON d_surattugas.kdsatker = t_satker.kdsatker
+            JOIN d_bagipagu ON d_bagipagu.kdindex = d_surattugas.kdindex
+            JOIN t_unitkerja ON d_bagipagu.unit_id = t_unitkerja.id
+            
+            WHERE d_itemcs.id_cs = '".$Id_cs."' ORDER BY d_itemcs.nourut ");
+
+            return $query->result();
+        }
     }
 }

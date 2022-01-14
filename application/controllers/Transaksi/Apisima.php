@@ -75,7 +75,7 @@ class Apisima extends CI_Controller {
 
     }
 
-    function testAPI(){
+    function Data(){
 
         $kdsatker = $this->session->userdata("kdsatker");
         $role_id = $this->session->userdata("role_id");
@@ -109,15 +109,24 @@ class Apisima extends CI_Controller {
     function Getcostsheet(){
         $id = $this->uri->segment(4);
         $trigger = $this->uri->segment(5);
-        $data['costsheet']= $this->Costsheet->getData_costsheet($id,$trigger);
+        $data['costsheet']= $this->Costsheet->getData($id,$trigger);
+
+        if($id == 0){
+            $data['result']= "All";
+        }else{
+            $data['result']= "Detail";
+        }
         $this->load->view('Transaksi/Costsheet/All/manage', $data);
+
+
 
     }
 
     function Getcostsheetdetail(){
         $id = $this->uri->segment(4);
         $trigger = $this->uri->segment(5);
-        $data['costsheet']= $this->Costsheet->getData_costsheet($id,$trigger);
+        $data['costsheet']= $this->Costsheet->getData($id,$trigger);
+        
 
         //print_r ($data['costsheet'][0]->nost);
 
@@ -214,7 +223,7 @@ class Apisima extends CI_Controller {
                 'tglmulaist' => date("Y-m-d",strtotime($tglst_mulai)),
                 'tglselesaist' => date("Y-m-d",strtotime($tglst_selesai)),
                 'jumlah_uang' => $alokasi,
-                'jumlah_realisasi' => 0,
+                'jumlah_realisasi' => $this->input->post('realisasi'),
                 'idxskmpnen' => $idxskmpnen,
                 'idx_temp' => $idxskmpnenlabel,
                 'id_unit' => $id_unit,
@@ -230,9 +239,10 @@ class Apisima extends CI_Controller {
                 
                 );
 
-            $CekST = $this->db->query("SELECT id from d_surattugas where id_st = ".$idst."")->result();
+            $CekST = $this->db->query("SELECT count(id) as idcount from d_surattugas where id_st = ".$idst."")->result();
+            $this->SuratTugas->CRUD($data_st,'d_surattugas', $Trigger);
 
-            if(count($CekST) > 0){
+            if($CekST[0]->idcount > 0){
                 $this->SuratTugas->CRUD($data_st,'d_surattugas', $Trigger);
             }else{
                 $this->SuratTugas->history($idst);
@@ -319,7 +329,12 @@ class Apisima extends CI_Controller {
                        
                        $sum +=  $this->pregChar($this->input->post('uangharian'.$i.'')) + 
                                 $this->pregChar($this->input->post('uangpenginapan'.$i.'')) +
-                                $this->input->post('jnstransportasi'.$i.'');
+                                $this->pregChar($this->input->post('uangdll'.$i.'')) + 
+                                        $this->pregChar($this->input->post('uangtaxi'.$i.'')) +
+                                        $this->pregChar($this->input->post('uanglaut'.$i.''))+ 
+                                        $this->pregChar($this->input->post('uangudara'.$i.'')) +
+                                        $this->pregChar($this->input->post('uangdarat'.$i.''));
+    
     
                             $this->db->insert('d_itemcs',$data_ItemCS);
                             $j = $i;
@@ -383,6 +398,152 @@ class Apisima extends CI_Controller {
 
         }
             
+    }
+
+    public function Error_exp(){
+		?> <script type="text/javascript">
+                    setTimeout(function() {
+                        window.close();
+                        window.history.back();
+                    }, 100);
+                    
+                    
+                </script>
+                <?php 
+	}
+
+    public function Export(){
+		
+		$trigger         =  $this->uri->segment(4);
+		$style           =  $this->uri->segment(5);
+		$id_st           =  $this->uri->segment(7);
+        $id_cs           =  $this->uri->segment(6);
+		$unitId = $this->session->userdata('unit_id');
+		$kdsatker = $this->session->userdata('kdsatker');
+		
+
+		$mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf',
+		'mode' => 'utf-8', 
+			'format' => 'A4-'.$style.'',
+			'default_font_size' => 8,
+			'default_font' => 'Calibri',
+			'margin_left' => 10,
+			'margin_right' => 10,
+			'margin_top' => 6,
+			'margin_bottom' => 6,
+			]);
+		if($trigger == "costsheet"){
+			$a              = $this->uri->segment(8);
+        	$kdindex        = str_replace("%20", " ", $a);
+
+			$data['export']= $this->Costsheet->getData_export($trigger,$id_st,$id_cs);
+			$data['cs']= $this->Costsheet->getData_costsheet($id_st, $kdindex,$id_cs);
+
+            //echo $data['export'][0]->nost;
+            //var_dump($data['export']);
+			// if(count($data['export']) > 0){
+			$html = $this->load->view('Transaksi/Costsheet/ExportViews/Costsheet.php',$data,true);
+			$name = "Costsheet.pdf";
+			// 	}else{
+			// 	$this->Error_exp();
+			// }
+
+			
+		}else if($trigger == "spd"){
+			//$kdsatker = $this->session->userdata('kdsatker');
+			$data['export']= $this->Costsheet->getData_export($trigger,$id_st,$id_cs);
+			if(count($data['export']) > 0){
+				$html = $this->load->view('Transaksi/ExportViews/SPD.php',$data,true);
+			$name = "SPD.pdf";
+				}else{
+				$this->Error_exp();
+			}
+			
+
+		}else if($trigger == "spd_back"){
+
+			$data['export']= $this->Costsheet->getData_export($trigger,$id_st);
+			if(count($data['export']) > 0){
+				$html = $this->load->view('Transaksi/ExportViews/SPDBack.php',$data,true);
+				$name = "SPD-Back.pdf";
+				}else{
+				$this->Error_exp();
+			}
+
+		}else if($trigger == "kwitansi"){
+			$data['bendahara'] = $this->Costsheet->getBendahara_export($kdsatker,$unitId);
+
+			$data['export']= $this->Costsheet->getData_export($trigger,$id_st);
+			if(count($data['export']) > 0){
+				$html = $this->load->view('Transaksi/ExportViews/Kwitansi.php',$data,true);
+				$name = "Kwitansi.pdf";
+				}else{
+				$this->Error_exp();
+			}
+		}else if($trigger == "rincian_biaya"){
+			$data['bendahara'] = $this->Costsheet->getBendahara_export($kdsatker,$unitId);
+
+			$data['export']= $this->Costsheet->getData_export($trigger,$id_st);
+			if(count($data['export']) > 0){
+				$html = $this->load->view('Transaksi/ExportViews/Rincianbiaya.php',$data,true);
+			$name = "RincianBiaya.pdf";
+				}else{
+				$this->Error_exp();
+			}
+		}else if($trigger == "pengeluaran_rill"){
+			
+			$mpdf = new \Mpdf\Mpdf(['tempDir' => sys_get_temp_dir().DIRECTORY_SEPARATOR.'mpdf',
+			'mode' => 'utf-8', 
+			'format' => 'A4-'.$style.'',
+			'default_font_size' => 9,
+			'default_font' => 'Calibri',
+			'margin_left' => 16,
+			'margin_right' => 16,
+			'margin_top' => 16,
+			'margin_bottom' => 16,
+			]);
+
+			$data['export']= $this->Costsheet->getData_export($trigger,$id_st);
+			if(count($data['export']) > 0){
+				$html = $this->load->view('Transaksi/ExportViews/Pengeluaranrill.php',$data,true);
+			$name = "Pengeluaran-Rill.pdf";
+				}else{
+				$this->Error_exp();
+			}
+			
+		}else if($trigger == "nominatif"){
+			$data['bendahara'] = $this->Costsheet->getBendahara_export($kdsatker,$unitId);
+
+			$data['export']= $this->Costsheet->getData_export($trigger,$id_st);
+
+			if(count($data['export']) > 0){
+				$html = $this->load->view('Transaksi/ExportViews/Nominatif.php',$data,true);
+				$name = "Nominatif.pdf";
+				}else{
+				$this->Error_exp();
+			}
+			
+		}else if($trigger == "perhitungan_rampung"){
+
+			
+			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
+
+			if(count($data['export']) > 0){
+				$html = $this->load->view('Transaksi/ExportViews/Perhitunganrampung.php',$data,true);
+				$name = "Perhitungan-Rampung.pdf";
+				}else{
+				$this->Error_exp();
+			}
+			
+		}
+		// if($data['export'][0]->status_id < 3){
+		// 	$mpdf->SetWatermarkText('DRAFT'); // Will cope with UTF-8 encoded text
+		// 	$mpdf->showWatermarkText = true; // Uses default font if left blank
+		// }
+        $mpdf->WriteHTML($html);          
+        $mpdf->Output($name, 'I');
+     
+	
     }
 
 }

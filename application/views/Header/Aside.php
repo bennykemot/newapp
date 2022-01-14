@@ -106,6 +106,7 @@ function mappingD_none($data){
           </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>
           </li>
 
+
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
           <i class="material-icons">
           speaker_notes
@@ -131,7 +132,7 @@ function mappingD_none($data){
           </li>
 			
 			<?php
-				}elseif($role_id == 99){
+				}else if($role_id == 99){
 			?>
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
           <i class="material-icons">
@@ -287,6 +288,18 @@ function mappingD_none($data){
           <i class="material-icons">
           email
           </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>
+          </li>
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/Apisima/Data')?>">
+          <i class="material-icons">
+          add
+          </i><span class="menu-title" data-i18n="Mail">R / U / H</span></a>
+          </li>
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/Apisima/Getcostsheet/0/All')?>">
+          <i class="material-icons">
+          monetization_on
+          </i><span class="menu-title" data-i18n="Mail">Rincian Costsheet</span></a>
           </li>
 
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">

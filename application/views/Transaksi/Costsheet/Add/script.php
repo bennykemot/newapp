@@ -78,6 +78,10 @@ function getInap(gol,keljab,kdakun){
   }
 
 function formatRupiah(angka){
+  $minus ="";
+  if(angka< 0 ){
+    $minus = "-";
+  }
         var number_string = angka.replace(/[^,\d]/g, '').toString(),
         split   		= number_string.split(','),
         sisa     		= split[0].length % 3,
@@ -91,7 +95,7 @@ function formatRupiah(angka){
         }
   
         rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-        return 'Rp. ' + rupiah;
+        return 'Rp. '+$minus + rupiah;
       }
 
       $(document).ready(function() { 
@@ -200,6 +204,7 @@ var relasii = $('#realisasi').val()
               success: function(data)
                   {    
                     var sisaan = Number(rupiah_tahapan) - Number(data[0]['re'])
+                    
                     $('#sisalabel').val(formatRupiah(""+sisaan+""))
                     $('#sisa').val(sisaan)
                   }
@@ -911,9 +916,9 @@ $("#TambahTim").click(function (e) {
     success: function (data, textStatus, jqXHR) {
               show_msg(textStatus);
               //Reset(IdForm);
-              if(satker_session != "a"){
-              window.history.back();
-              }
+              // if(satker_session != "a"){
+              // window.history.back();
+              // }
               
               
           },
