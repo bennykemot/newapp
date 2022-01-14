@@ -10,6 +10,8 @@ var user_session = "<?= $this->session->userdata("user_id")?>"
 var role_session = "<?= $this->session->userdata("role_id")?>"
 var unit_session = "<?= $this->session->userdata("unit_id")?>"
 var id_st_session = "<?=$this->uri->segment('4')?>";
+var status_cs = "<?= $ubah[0]['status_cs'] ?>"
+var status_penandatangan = "<?= $ubah[0]['status_penandatangan'] ?>"
 if(role_session == 1){
   unit_session = 0;
 }
@@ -25,6 +27,14 @@ if(document.getElementById('counting') != null){
 }
 
 $( document ).ready(function() {
+
+  if(status_cs == 3){
+      document.getElementById('plh_cs').checked = true;
+    }
+
+  if(status_penandatangan == 3){
+    document.getElementById('plh').checked = true;
+  }
   
  
     var relasii = $('#realisasi').val()
@@ -261,6 +271,24 @@ if (plh.checked == true){
 
 });
 
+$( "#plh_cs" ).change(function() {
+
+$('#cs_menyetujui').val(null).trigger('change');
+
+    // Get the checkbox
+var plh_cs = document.getElementById("plh_cs");
+// Get the output text
+var status_cs = document.getElementById("status_penandatangan_cs");
+
+// If the checkbox is checked, display the output text
+if (plh_cs.checked == true){
+  $('#status_penandatangan_cs').val(3)
+} else {
+  $('#status_penandatangan_cs').val(0)
+}
+
+});
+
 
 function getRep(keljab, valTrigger){
 if(valTrigger == "L"){
@@ -397,6 +425,7 @@ $("#cs_menyetujui").select2({
           return {
             Trigger: "menyetujui",
             kdsatker: satker_session,
+            status_ttd : $('#status_penandatangan_cs').val(),
             searchTerm: params.term // search term
           };
       },
@@ -592,6 +621,7 @@ $("#user-select2").select2({
               return {
 								Trigger: "ttd_forST",
 								kdsatker: satker_session,
+                status_ttd : $('#status_penandatangan').val(),
                 searchTerm: params.term // search term
               };
            },
@@ -1274,9 +1304,9 @@ for($loop = 0 ; $loop < countTim; $loop++){
     success: function (data, textStatus, jqXHR) {
               show_msg(textStatus);
               //Reset(IdForm);
-              if(satker_session != "a"){
-              window.history.back();
-              }
+              // if(satker_session != "a"){
+              // window.history.back();
+              // }
               
               
           },

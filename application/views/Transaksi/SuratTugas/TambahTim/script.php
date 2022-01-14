@@ -10,6 +10,7 @@ var satker_session = "<?= $this->session->userdata("kdsatker")?>"
 var user_session = "<?= $this->session->userdata("user_id")?>"
 var role_session = "<?= $this->session->userdata("role_id")?>"
 var unit_session = "<?= $this->session->userdata("unit_id")?>"
+var status_cs = "<?= $ST[0]['status_cs'] ?>"
 var count_tim = "<?= count($countST) ?>"
 $sumtotal = 0;
 
@@ -185,6 +186,10 @@ function formatRupiah(angka){
       }
 
   $(document).ready(function() { 
+    
+    if(status_cs == 3){
+      document.getElementById('plh').checked = true;
+    }
 
     tglmulai = $('#tglst_mulai').val()
     tglselesai = $('#tglst_selesai').val()
@@ -279,6 +284,7 @@ $("#cs_menyetujui").select2({
           return {
             Trigger: "menyetujui",
             kdsatker: satker_session,
+            status_ttd : $('#status_penandatangan').val(),
             searchTerm: params.term // search term
           };
       },
@@ -289,6 +295,24 @@ $("#cs_menyetujui").select2({
       },
       cache: true
     }
+});
+
+$( "#plh" ).change(function() {
+
+$('#cs_menyetujui').val(null).trigger('change');
+
+    // Get the checkbox
+var plh = document.getElementById("plh");
+// Get the output text
+var status_penandatangan = document.getElementById("status_penandatangan");
+
+// If the checkbox is checked, display the output text
+if (plh.checked == true){
+  $('#status_penandatangan').val(3)
+} else {
+  $('#status_penandatangan').val(0)
+}
+
 });
 
 

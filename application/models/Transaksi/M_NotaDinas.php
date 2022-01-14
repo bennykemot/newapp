@@ -112,7 +112,7 @@ class M_NotaDinas extends CI_Model{
 
     function getData_export($Trigger,$Id_st){
         if($Trigger == "costsheet" || $Trigger == "spd" || $Trigger == "nominatif"){
-            $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, 
+            $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, d_surattugas.status_cs, d_surattugas.status_penandatangan,
             d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.status_id,
             d_surattugas.tglselesaist, d_surattugas.idxskmpnen, d_surattugas.id_ttd,
             t_unitkerja.nama_unit , d_itemcs.nourut, d_itemcs.nama, 
@@ -151,7 +151,7 @@ class M_NotaDinas extends CI_Model{
             
         }else if($Trigger == "spd_back" ){
 
-            $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, 
+            $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, d_surattugas.status_cs, d_surattugas.status_penandatangan,
             d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.status_id,
             d_surattugas.tglselesaist, d_surattugas.idxskmpnen, d_itemcs.id_ttd_spd, 
             t_unitkerja.nama_unit , d_itemcs.nourut, d_itemcs.nama, 
@@ -177,7 +177,7 @@ class M_NotaDinas extends CI_Model{
 
         }else if($Trigger == "kwitansi" ){
 
-            $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, 
+            $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, d_surattugas.status_cs, d_surattugas.status_penandatangan,
             d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.status_id,
             d_surattugas.tglselesaist, d_surattugas.idxskmpnen, 
             t_unitkerja.nama_unit , d_itemcs.nourut, d_itemcs.nama, 
@@ -208,7 +208,7 @@ class M_NotaDinas extends CI_Model{
 
         }else if($Trigger == "rincian_biaya" ){
 
-            $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, 
+            $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, d_surattugas.status_cs, d_surattugas.status_penandatangan,
             d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.status_id,
             d_surattugas.tglselesaist, d_surattugas.idxskmpnen, 
             t_unitkerja.nama_unit , d_itemcs.nourut, d_itemcs.nama, 
@@ -239,7 +239,7 @@ class M_NotaDinas extends CI_Model{
 
         }else if($Trigger == "pengeluaran_rill" ){
 
-            $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, 
+            $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, d_surattugas.status_cs, d_surattugas.status_penandatangan,
             d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.status_id,
             d_surattugas.tglselesaist, d_surattugas.idxskmpnen, 
             d_itemcs.nourut, d_itemcs.nama, 
@@ -260,7 +260,7 @@ class M_NotaDinas extends CI_Model{
         }else if($Trigger == "perhitungan_rampung" ){
 
                 $query = $this->db->query("SELECT 
-                d_surattugas.nost, d_surattugas.tglst, d_surattugas.status_id,
+                d_surattugas.nost, d_surattugas.tglst, d_surattugas.status_id,d_surattugas.status_cs, d_surattugas.status_penandatangan,
                 d_surattugas.uraianst, d_surattugas.tglmulaist, 
                 d_surattugas.tglselesaist, d_surattugas.idxskmpnen, 
                 d_itemcs.nourut, d_itemcs.nama, 

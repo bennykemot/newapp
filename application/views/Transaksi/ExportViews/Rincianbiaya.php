@@ -189,7 +189,7 @@ function cek_tgl($tanggal){
             <tr>
                 <td width="15%">Nomor</td>
                 <td width="2%">:</td>
-                <td ><?=$e->nost?></td>
+                <td >SPD - </td>
             </tr>
 
             <tr>

@@ -778,6 +778,27 @@ function getData_ttd($searchTerm="",$Trigger,$kdsatker){
 			$data[] = array("id"=>$user['id'].'-'.$user['nip'].'-'.$user['nama'], "text"=>$user['nama']);
       }
       return $data;
+
+   }else if($Trigger == "Plh"){
+
+                  $this->db->select('id');
+                  $this->db->select('nama');
+                  $this->db->select('nip');
+                  $this->db->where_in("jabatan_id", [5,6,8]);
+                  $this->db->where("nama like '%".$searchTerm."%' ");
+                  $this->db->where("kdsatker", $kdsatker);
+                  
+                  $fetched_records = $this->db->get('t_pejabat');
+                  $users = $fetched_records->result_array();
+
+                  // Initialize Array with fetched data
+                  $data = array();
+                  foreach($users as $user){
+                     $data[] = array("id"=>$user['id'], "text"=>$user['nama']);
+                  }
+                  return $data;
+
+   
 	}else{
 		
 		$this->db->select('id');
@@ -838,8 +859,10 @@ function getData_PegawaiST($searchTerm="", $Trigger,$tglberangkat,$tglkembali){
    function getData_csttd($searchTerm,$Trigger,$kdsatker){
       if($Trigger == "menyetujui"){
          $where = $this->db->where_in('kel_jab', array("E.I", "E.II"));
-      }else{
+      }else if($Trigger == "mengusulkan"){
          $where = $this->db->where_in('kel_jab', "E.III");
+      }else{
+         $where = $this->db->where_in('kel_jab', array("E.I", "E.II", "E.III", "E.IV"));
       }
 
       $this->db->select('id');

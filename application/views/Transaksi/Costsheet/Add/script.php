@@ -1,6 +1,6 @@
 <script>
 
-var baseurl 	= "<?= base_url('Transaksi/TambahTim/')?>";
+var baseurl 	= "<?= base_url('Transaksi/Apisima/')?>";
 var baseurl_export 	= "<?= base_url('Transaksi/NotaDinas/')?>";
 var dropdown_baseurl 	= "<?= base_url('Master/Dropdown/')?>";
 var master_baseurl 	= "<?= base_url('Master/Master/')?>";
@@ -911,7 +911,7 @@ $("#TambahTim").click(function (e) {
     success: function (data, textStatus, jqXHR) {
               show_msg(textStatus);
               //Reset(IdForm);
-              if(satker_session != 450491){
+              if(satker_session != "a"){
               window.history.back();
               }
               

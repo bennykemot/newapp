@@ -11,21 +11,21 @@ class M_SuratTugas extends CI_Model{
         
         if($roleid == 1){
             $where = "";
-            }else{
-                if($kdsatker == "450491"){
-                    if($roleid == 3 || $roleid == 2 || $roleid == 4 || $roleid == 9 || $roleid == 10){
-                    $where = "AND d_surattugas.id_unit = ".$unitid."";
-                    }else{
-                        $where="";
-                    }
+        }else{
+            if($kdsatker == "450491"){
+                if($roleid == 3 || $roleid == 2 || $roleid == 4 || $roleid == 9 || $roleid == 10){
+                $where = "AND d_surattugas.id_unit = ".$unitid."";
                 }else{
-                    if($roleid == 5 || $roleid == 7 || $roleid == 3 ){
-                        $where="";
-                    }else{
-                        $where = "AND d_surattugas.id_unit = ".$unitid."";
-                    }
+                    $where="";
+                }
+            }else{
+                if($roleid == 5 || $roleid == 7 || $roleid == 3 ){
+                    $where="";
+                }else{
+                    $where = "AND d_surattugas.id_unit = ".$unitid."";
                 }
             }
+        }
 
         if($roleid == 3){
             $join ="";
@@ -96,7 +96,7 @@ class M_SuratTugas extends CI_Model{
         if($trigger == "Tambah_Tim"){
 
             $query = $this->db->query('SELECT d_surattugas.nost, d_surattugas.tglst, 
-            d_surattugas.uraianst, d_surattugas.tglmulaist, 
+            d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.status_cs,
             d_surattugas.tglselesaist ,d_surattugas.id_unit,d_surattugas.kdakun,d_surattugas.kdsatker,
             d_surattugas.jumlah_uang,d_surattugas.cs_menyetujui,d_surattugas.cs_mengajukan,d_surattugas.id_app,d_surattugas.id_tahapan,
             
@@ -176,7 +176,7 @@ class M_SuratTugas extends CI_Model{
                         }
                 }
             $query = $this->db->query('SELECT d_pagu.*, d_surattugas.nost, d_surattugas.tglst, 
-            d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.idx_temp,
+            d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.idx_temp,d_surattugas.status_cs,
             d_surattugas.tglselesaist ,d_surattugas.id_unit,d_surattugas.id as idst,d_surattugas.idxskmpnen, 
             d_surattugas.id_ttd,d_surattugas.kdsatker,d_surattugas.id_ttd,d_surattugas.jumlah_uang,d_surattugas.cs_menyetujui,d_surattugas.cs_mengajukan,
             d_surattugas.id_tahapan,d_surattugas.id_app,d_surattugas.status_id,d_bagipagu.unit_id, d_surattugas.status_id, d_surattugas.status_penandatangan,
@@ -238,7 +238,7 @@ class M_SuratTugas extends CI_Model{
     function history($idst){
 
         $this->db->query("INSERT into h_surattugas (
-            kdindex, thang, kdgiat, kdoutput, 
+           id_st, kdindex, thang, kdgiat, kdoutput, 
             kdsoutput, kdkmpnen, kdskmpnen, 
             kdakun, kdbeban, no_kuitansi, nost, 
             tglst, uraianst, tglmulaist, tglselesaist, 
@@ -246,11 +246,11 @@ class M_SuratTugas extends CI_Model{
             id_ttd, pejabat_id, user_id, ppk_id, kaldik, 
             kaldik_id, status_penandatangan, penandatangan, 
             jumlah_uang, jumlah_realisasi, status_id, 
-            is_aktif, idxskmpnen, idx_temp, cs_menyetujui, 
+            is_aktif, idxskmpnen, idx_temp,status_cs, cs_menyetujui, 
             cs_mengajukan, id_tahapan, id_app, created_at)
         
         (select 
-        kdindex, thang, kdgiat, kdoutput, 
+        id_st, kdindex, thang, kdgiat, kdoutput, 
             kdsoutput, kdkmpnen, kdskmpnen, 
             kdakun, kdbeban, no_kuitansi, nost, 
             tglst, uraianst, tglmulaist, tglselesaist, 
@@ -258,12 +258,12 @@ class M_SuratTugas extends CI_Model{
             id_ttd, pejabat_id, user_id, ppk_id, kaldik, 
             kaldik_id, status_penandatangan, penandatangan, 
             jumlah_uang, jumlah_realisasi, status_id, 
-            is_aktif, idxskmpnen, idx_temp, cs_menyetujui, 
+            is_aktif, idxskmpnen, idx_temp, status_cs, cs_menyetujui, 
             cs_mengajukan, id_tahapan, id_app,created_at
          from d_surattugas where id = '".$idst."')");
 
         $this->db->query("INSERT into h_itemcs (
-            nourut, nospd, nama, nip, 
+            id_tim, nourut, nospd, nama, nip, 
             jabatan, golongan, tglberangkat, 
             tglkembali, jmlhari, kotaasal, 
             kotatujuan, tarifuangharian, totaluangharian, 
@@ -274,7 +274,7 @@ class M_SuratTugas extends CI_Model{
             jumlah, id_ttd_spd, id_st, id_cs)
 
         (select 
-        nourut, nospd, nama, nip, 
+        id_tim, nourut, nospd, nama, nip, 
             jabatan, golongan, tglberangkat, 
             tglkembali, jmlhari, kotaasal, 
             kotatujuan, tarifuangharian, totaluangharian, 

@@ -90,6 +90,21 @@ function cek_tgl($tanggal){
         $sumtotal +=$j->jumlah;
         }
 
+        function StatusPenandatangan($status,$jabatanST){
+            $result="";
+            if($status == 3){
+                if($jabatanST == "Kepala Biro"){
+                    $result = "Plh. Sekretaris Utama";
+                }else if($jabatanST == "Direktur"){
+                    $result = "Plh. Deputi";
+                }
+            }else{
+                $result = $jabatanST;
+            }
+            return $result;
+    
+        }
+
 ?>
 
 

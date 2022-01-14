@@ -108,7 +108,17 @@
                         <div class="input-field col s12">
                             <div class="input-field col s2"><label>Yang Menyetujui</label></div>
 
-                            <div class="input-field col s10 " >
+                            <div class="input-field col s1 " >
+                                <label>
+                                    <input type="checkbox" class="indeterminate-checkbox" id="plh"/>
+                                    <span>Plh</span>
+                                </label>
+                            </div>
+
+                            <input hidden type="text" id="status_penandatangan" name="status_penandatangan" value="<?= $ST[0]['status_cs'] ?>"/>
+
+
+                            <div class="input-field col s9 " >
                             <select class="browser-default" name="cs_menyetujui" id="cs_menyetujui"></select>
                             </div>
                         </div>

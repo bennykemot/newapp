@@ -12,7 +12,7 @@
                         email</i></button>
                     </div>
                     <div class="col s9">
-                        <h6> Daftar Surat Tugas </h6>
+                        <h6> Daftar Costsheet </h6>
                     </div>
                     
                 </div>
@@ -28,33 +28,6 @@
           <!-- <a class="btn modal-trigger col s2" href="#modal2">Tambah Data</a> -->
           <div class="row">
             <div class="col s12">
-              <form method="post" action ="<?= site_url('Transaksi/SuratTugas/filterrAPI')?>">
-
-                <div class="input-field col s12">
-                    <div class="input-field col s2"><label>Tanggal Mulai</label></div>
-
-                    <div class="input-field col s10 " >
-                    <input type="date" class="tgl" id="tglst_mulai" name="tglst_mulai">
-                    </div>
-                </div>
-
-                <div class="input-field col s12">
-                    <div class="input-field col s2"><label>Tanggal Selesai</label></div>
-
-                    <div class="input-field col s10 " >
-                    <input type="date" class="tgl" id="tglst_selesai" name="tglst_selesai">
-                    </div>
-                </div>
-                <button type="submit" class="btn cyan col s12" name="tombol" >FILTER</button>
-            </form>
-                <!-- <div class="input-field col s12">
-                    <div class="input-field col s2"><label>Bulan</label></div>
-
-                    <div class="input-field col s10 " >
-                      <select class="browser-default" name="bulan-Array" id="bulan-Array"></select>
-                    </div>
-                </div> -->
-                <div style="padding-top : 20%"></div>
               <table id="tb-st-" class="bordered striped  responsive" 
                           style="overflow: hidden;
                           overflow-x: auto;
@@ -63,45 +36,44 @@
                                           <thead>
                     <tr>
                         <th style="min-width: 5px" >NO</th>
-                        <th>STATUS</th>
-												<th style="min-width: 370px">NO ST <br>URAIAN</th>
-                        <th style="min-width: 150px" >MULAI</th>
-                        <th style="min-width: 150px" >SELESAI</th>
-                        <th style="min-width: 200px" class="text-center">AKSI</th>
+						<th style="min-width: 370px">NO ST <br>URAIAN</th>
+                        <th style="min-width: 150px" >BIAYA</th>
+                        <th style="min-width: 200px" class="text-center" colspan="2">AKSI</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <!-- <tr><td><?=$data[0]['sumber_data']?></td></tr> -->
-                  <?php $no = 1;foreach ($data as $st){ ?>
-                    <tr>
-                    <td><?php echo $no ?></td>
-                      <td><?=$st['status_st']?></td>
-                      <td><a href="<?= site_url('Transaksi/Apisima/Getcostsheet/'.$st['id_st'].'/All')?>"><?=$st['no_surat_tugas']?></a><br><?=$st['nama_penugasan']?></td>
-                      <td><?=cek_tgl_st($st['tanggal_mulai'])?></td>
-                      <td><?=cek_tgl_st($st['tanggal_selesai'])?></td>
-                      <td class="text-center">
-                        <div>
-
-                        <a href="<?= site_url('Transaksi/Apisima/tambahtimAPI/'.$st['id_st'].'/'.$st['status_st'])?>" 
-                                            class="tooltipped" 
-                                              data-position="top" data-tooltip="Tambah Costsheet" >
-                                              
-                                              <button class="btn cyan"> pilih</button></a>
-                          <!-- <a><button class="btn cyan"> pilih</button></a> -->
-                        </div>
-
-                      </td>
-                    </tr>
-                    <?php $no++;} ?>
+                      <?php $no=1;for($i=0; $i < count($costsheet); $i++){?>
+                        <tr>
+                            <td><?=$no++?></td>
+                            <td><?=$costsheet[$i]->nost?><br><?=$costsheet[$i]->uraianst?><br><?=$costsheet[$i]->id_cs?></td>
+                            <td><?=rupiah($costsheet[$i]->biaya)?></td>
+                            <td class="text-center">
+                              <a href="<?= site_url('Transaksi/Apisima/Getcostsheetdetail/'.$costsheet[$i]->id_cs.'/Detail')?>" 
+                                class="tooltipped" data-position="top" data-tooltip="Detail Costsheet" >
+                                  <button class="btn cyan"> pilih</button></a>
+                            </td>
+                            <td class="text-center">
+                              <a href="#" class="btn orange dropdown-trigger tooltipped" data-position="top" data-tooltip="Printout" href="#" data-target="dropdown'<?=$costsheet[$i]->id?>'" ><i class="material-icons white-text">remove_red_eye</i></a>
+                                <ul id="dropdown'<?=$costsheet[$i]->id?>'" class='dropdown-content' style="min-width: 170px !important;">
+                                <li><a style="font-size: 14px;" href="javascript:;" onclick="exportST('<?=$costsheet[$i]->id?>','<?=$costsheet[$i]->kdindex?>','<?=$unit_id?>')">Surat Tugas</a></li>
+                                  <!-- <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/SuratTugas/Export/'.$costsheet[$i]->id.'/'.$costsheet[$i]->kdindex.'/'.$unit_id) ?>" target="blank">Surat Tugas</a></li> -->
+                                  <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/costsheet/L/'.$costsheet[$i]->id.'/'.$costsheet[$i]->kdindex) ?>" target="blank">Costsheet</a></li>
+                                  <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd/P/'.$costsheet[$i]->id.'/'.$costsheet[$i]->kdindex) ?>" target="blank">SPD</a></li>
+                                  <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd_back/P/'.$costsheet[$i]->id.'/'.$costsheet[$i]->kdindex) ?>" target="blank">SPD Belakang</a></li>
+                                  <li><a style="font-size: 14px;" href="#" class="sidenav-trigger" data-target="theme-cutomizer-out" onclick="show('<?=$costsheet[$i]->id?>')">Kwitansi Rampung</a>
+                                  </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <?php }?>
                   </tbody>
                 </table>
-                <?php echo $this->pagination->create_links(); ?>
             </div>
           </div>
         </div>
       </div>
     </div>
-														</div>
+    </div>
 
 
     <div id="theme-cutomizer-out" class="theme-cutomizer sidenav row">

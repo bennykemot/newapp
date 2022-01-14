@@ -20,41 +20,6 @@ class SuratTugas extends CI_Controller {
 
 		$this->load->view('Transaksi/SuratTugas/manage');
 	}
-
-    function testAPI(){
-        
-        $data = json_decode($this->getAll($this->API,'getdata'), true); 
-        $this->load->view('Transaksi/apisurattugas/manage',$data);
-        // echo $data['data'][0]['sumber_data'];
-        // var_dump($data['data'][0]['sumber_data']); 
-    }
-
-    function filterrAPI(){
-        $mulai =  $this->input->post('tglst_mulai');
-        $selesai =  $this->input->post('tglst_selesai');
-        $trigger =  $this->input->post('trigger');
-        $data = json_decode($this->getAll($this->API,'getdatatanggalst/'.$mulai.'/'.$selesai.''), true); 
-        
-        $this->load->view('Transaksi/apisurattugas/manage', $data);
-
-    }
-
-
-    function getAll($url,$uri){
-
-        $client = new Client([
-            'base_uri' => $url,
-            'timeout'  => 5,
-        ]);
-
-         
-        $response = $client->request('GET', $uri);
-        return $response->getBody()->getcontents();
-        //$result = json_decode($body,true);
-
-    }
-
-    
     
 
     public function Page()
@@ -328,6 +293,7 @@ class SuratTugas extends CI_Controller {
             $menyetujui = $this->input->post('cs_menyetujui');
             $mengajukan = $this->input->post('cs_mengajukan');
             $status_penandatangan = $this->input->post('status_penandatangan');
+            $status_cs = $this->input->post('status_penandatangan_cs');
 
             
 
@@ -355,6 +321,7 @@ class SuratTugas extends CI_Controller {
                 'idx_temp' => $idxskmpnenlabel,
                 'id_ttd' => $ttd,
                 'status_penandatangan' => $status_penandatangan,
+                'status_cs' => $status_cs,
                 'cs_menyetujui' => $menyetujui,
                 'cs_mengajukan' => $mengajukan,
                 'id_tahapan' => $kdtahapan,

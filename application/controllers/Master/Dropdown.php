@@ -402,9 +402,13 @@ class Dropdown extends CI_Controller {
       $searchTerm = $this->input->post('searchTerm');
       $kdsatker = $this->input->post('kdsatker');
 		$Trigger = $this->input->post('Trigger');
+      $status_ttd = $this->input->post('status_ttd');
 
-      // Get users
-      $response = $this->Dropdown->getData_ttd($searchTerm,$Trigger,$kdsatker);
+      if($status_ttd == 3){
+         $response = $this->Dropdown->getData_ttd($searchTerm,"Plh",$kdsatker);
+      }else{
+         $response = $this->Dropdown->getData_ttd($searchTerm,$Trigger,$kdsatker,$status_ttd);
+      }
 
       echo json_encode($response);
    }
@@ -416,6 +420,13 @@ class Dropdown extends CI_Controller {
       $searchTerm = $this->input->post('searchTerm');
       $kdsatker = $this->input->post('kdsatker');
 		$Trigger = $this->input->post('Trigger');
+      $status_ttd = $this->input->post('status_ttd');
+
+      if($status_ttd == 3){
+         $this->Dropdown->getData_csttd($searchTerm,"plh",$kdsatker);
+      }else{
+         $this->Dropdown->getData_csttd($searchTerm,$Trigger,$kdsatker);
+      }
 
       // Get users
       $response = $this->Dropdown->getData_csttd($searchTerm,$Trigger,$kdsatker);

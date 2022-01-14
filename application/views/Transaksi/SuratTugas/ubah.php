@@ -127,6 +127,7 @@ if($ubah[0]['status_id'] == 3){
 
                         <div class="input-field col s12">
                             <div class="input-field col s2"><label>Penandatangan ST</label></div>
+                            
 
                             <div class="input-field col s1 " >
                                 <label>
@@ -135,7 +136,7 @@ if($ubah[0]['status_id'] == 3){
                                 </label>
                             </div>
 
-                            <input hidden type="text" id="status_penandatangan" name="status_penandatangan" value="TDK"/>
+                            <input hidden type="text" id="status_penandatangan" name="status_penandatangan" value="<?=$ubah[0]['status_penandatangan']?>"/>
 
                             <div class="input-field col s9 " >
                             <select class="browser-default" id="ttd" name="ttd" <?=$redOnly?>></select>
@@ -143,18 +144,21 @@ if($ubah[0]['status_id'] == 3){
                            
                         </div>
 
-                        <!-- <div class="input-field col s12">
-                            <div class="input-field col s2"><label>Penandatangan</label></div>
-
-                            <div class="input-field col s10 " >
-                            <select class="browser-default" id="ttd" name="ttd" <?=$redOnly?>></select>
-                            </div>
-                        </div> -->
-
                         <div class="input-field col s12">
                             <div class="input-field col s2"><label>Yang Menyetujui</label></div>
 
-                            <div class="input-field col s10 " >
+                            
+                            <div class="input-field col s1 " >
+                                <label>
+                                    <input type="checkbox" class="indeterminate-checkbox" id="plh_cs" <?=$redOnly?>/>
+                                    <span>Plh</span>
+                                </label>
+                            </div>
+
+                            <input  hidden type="text" id="status_penandatangan_cs" name="status_penandatangan_cs" value="<?=$ubah[0]['status_cs']?>"/>
+
+
+                            <div class="input-field col s9 " >
                             <select class="browser-default" name="cs_menyetujui" id="cs_menyetujui" <?=$redOnly?>></select>
                             </div>
                         </div>

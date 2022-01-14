@@ -253,9 +253,9 @@ AND a.id_app = b.id_appST; ");
             FROM d_pagu 
             LEFT JOIN d_bagipagu ON d_pagu.kdindex = d_bagipagu.kdindex 
             JOIN d_detailapp ON d_pagu.kdindex = d_detailapp.kdindex 
-            JOIN r_tahapan on d_detailapp.tahapan = r_tahapan.id 
+            JOIN r_tahapan on d_detailapp.tahapan = r_tahapan.id
             JOIN t_app on d_detailapp.id_app = t_app.id 
-            WHERE d_bagipagu.kdindex like '%202245049108901CH4207UAGU03051%' AND d_pagu.kdakun LIKE '%524%' ".$where." ) as a 
+            WHERE d_bagipagu.kdindex like '%".$ro."%' AND d_pagu.kdakun LIKE '%524%' ".$where." ) as a 
             LEFT JOIN (SELECT SUM(d_surattugas.jumlah_realisasi) as alokasi, d_surattugas.kdindex as pagu_index, d_surattugas.id_tahapan as id_tahapan, d_surattugas.id_app as id_appST 
             from d_surattugas WHERE d_surattugas.is_aktif = 1  GROUP BY d_surattugas.kdindex,d_surattugas.id_app,d_surattugas.id_tahapan) as b ON 
             a.kdindex = b.pagu_index 
@@ -279,7 +279,7 @@ AND a.id_app = b.id_appST; ");
          d_bagipagu.ppk_id,d_bagipagu.unit_id
          FROM d_pagu 
          JOIN d_bagipagu ON d_pagu.kdindex = d_bagipagu.kdindex 
-         WHERE d_pagu.kdindex like '%202245049108901CH4207FAGU01052%'
+         WHERE d_pagu.kdindex like '%".$ro."%'
           ".$where." 
           AND d_pagu.kdgiat NOT IN (3701,".$this->countpagu().") 
           AND d_pagu.kdakun LIKE '%524%') as a 
