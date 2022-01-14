@@ -12,7 +12,7 @@
                         email</i></button>
                     </div>
                     <div class="col s9">
-                        <h6> Daftar Surat Tugas </h6>
+                        <h6> Daftar Surat Tugas Per Satuan Kerja</h6>
                     </div>
                     
                     <!-- <div class="col s2">
@@ -32,98 +32,42 @@
           <!-- <a class="btn modal-trigger col s2" href="#modal2">Tambah Data</a> -->
           <div class="row">
             <div class="col s12">
-              <table id="tb-st" class="display" style="white-space: normal;overflow-x : auto">
+              <table id="tb-st" class="display" style="white-space: normal;width: 100%;">
                   <thead>
                     <tr>
                         <th style="min-width: 5px" >NO</th>
-                        <th>STATUS</th>
-                        <th>PEREKAM</th>
-												<th>TANGGAL PEMBUATAN</th>
-                        <th style="min-width: 300px" >NOMOR, TANGGAL, URAIAN SURAT TUGAS</th>
-                        <th style="min-width: 150px" >MULAI</th>
-                        <th style="min-width: 150px" >SELESAI</th>
-                        <th style="min-width: 200px" class="text-center">AKSI</th>
+                        <th>KODE SATKER</th>
+                        <th>NAMA SATKER</th>
+												<th>JUMLAH ST</th>
+												<th>AKSI</th>
+                        
                     </tr>
                   </thead>
                   <tbody>
                   <?php 
                            // $no = $this->uri->segment('4') + 1;
                            $no = 1;
-                            foreach($SuratTugas as $u){ 
+                            foreach($satker as $u){ 
                               ?>
                         <tr>
-                            <td><?php echo $no ?></td>
+                            <td class="text-center"><?php echo $no ?></td>
+                            <td><?php echo $u->kdsatker ?></td>
+														<td><?php echo $u->nmsatker ?></td>
                             <td class="text-center">
-                              <!-- <a href="<?= site_url('Transaksi/SuratTugas/approve/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex.'/'.$u->status_id)?>"
-                              class="tooltipped" data-position="bottom" data-tooltip="Approve PPK">
-                                <?= getStatusId($u->status_id)?>
-                              </a> -->
-
-                              <?= getStatusId($u->status_id)?>
-                            
-                            </td>
-                            <td><?php echo $u->username ?></td>
-														<td><?php echo cek_tgl_st(date("Y-m-d",strtotime($u->created_at))) ?></td>
-                            <td><b><?php echo $u->nost ?>   <?php echo cek_tgl_st($u->tglst) ?></b>
-                                <br>
-                                <?php echo $u->uraianst ?>
-                            </td>
-                            <td><?php echo cek_tgl_st($u->tglmulaist) ?></td>
-                            <td><?php echo cek_tgl_st($u->tglselesaist) ?></td>
-                            <td class="text-center">
-                                <div class="col s12">
-
-                                    <div class="row">
-
-                                        <div class="col s4">
-                                          <a href="<?= site_url('Transaksi/TambahTim/TambahTim/'.$u->id.'/'.$u->kdindex)?>" 
-                                            class="tooltipped <?=getForAdminOpr($role_id)?> <?=getComplete($u->status_id, 'N')?>" 
-                                              data-position="top" data-tooltip="Anggota" >
-                                              
-                                              <i class="material-icons cyan-text">people</i></a>
-                                        </div>
-                                        <div class="col s4">
-                                          <a href="#" class="dropdown-trigger tooltipped" data-position="top" data-tooltip="Printout" href="#" data-target="dropdown'<?=$u->id?>'" ><i class="material-icons orange-text">remove_red_eye</i></a>
-                                                <ul id="dropdown'<?=$u->id?>'" class='dropdown-content' style="min-width: 170px !important;">
-                                                  <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/SuratTugas/Export/'.$u->id.'/'.$u->kdindex.'/'.$unit_id) ?>" target="blank">Surat Tugas</a></li>
-                                                  <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/costsheet/L/'.$u->id.'/'.$u->kdindex) ?>" target="blank">Costsheet</a></li>
-                                                  <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd/P/'.$u->id.'/'.$u->kdindex) ?>" target="blank">SPD</a></li>
-                                                  <li><a style="font-size: 14px;" href="<?= site_url('Transaksi/NotaDinas/Export/spd_back/P/'.$u->id.'/'.$u->kdindex) ?>" target="blank">SPD Belakang</a></li>
-                                                  <li><a style="font-size: 14px;" href="#" class="sidenav-trigger" data-target="theme-cutomizer-out" onclick="show('<?=$u->id?>')">Kwitansi Rampung</a>
-                                                  </li>
-                                                </ul>
-                                        </div>
-                                        <div class="col s4">
-																					<a href="<?= site_url('Superadmin/Transaksi/SuratTugas/ubah/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex)?>" 
-                                            class="tooltipped <?=getForAdminOpr($role_id)?> <?=getComplete($u->status_id, 'Y')?>" 
-                                            data-position="bottom" data-tooltip="Ubah ST" ><i class="material-icons green-text">edit</i></a>
-                                        </div>  
-                                    </div>
-
-                                <li class="divider"></li>
-
-                                <div class="row" style="padding-top: 10px">
-                                  <div class="col s4">
-                                    
-																		<a href="<?= site_url('Transaksi/SuratTugas/approve/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex.'/2')?>" 
-                                      class="tooltipped" style="<?=getDisablePPK($u->status_id)?> <?=getDisableforKPA($role_id)?>" 
-                                      data-position="bottom" data-tooltip="Approve PPK" ><i class="material-icons <?=ApprovePPK($u->status_id)?>">check_box</i></a>
-                                  </div>
-
-                                  <div class="col s4">
-																	<a href="<?= site_url('Transaksi/SuratTugas/approve/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex.'/3')?>" 
-                                    class="tooltipped"  style="<?=getDisableKPA($u->status_id)?> <?=getDisableforPPK($role_id)?>" data-position="bottom" 
-                                    data-tooltip="Approve KPA/Es II" ><i class="material-icons <?=ApproveKPA($u->status_id)?>">check_box</i></a>
-                                  </div>
-
-																	<div class="col s4">
-                                    <a href="javascript:;" onclick="Delete('<?= $u->id ?>')" 
-                                    class="tooltipped <?=getForAdminOpr($role_id)?> <?=getComplete($u->status_id, 'N')?>" 
-                                    data-position="bottom" data-tooltip="Hapus ST" ><i class="material-icons red-text">delete</i></a>
-                                  </div>
-                                </div>
-                            </div>
-                            </td>
+															<?php 
+																if($u->count_id != "NULL" && $u->count_id != NULL && $u->count_id != 0){
+															?>
+																<span class="users-view-status chip blue lighten-5 blue-text"><?php echo $u->count_id ?></span>
+															<?php
+																}else{
+															?>
+																<span></span>
+															<?php
+																}
+															?>
+															
+														</td>
+														<td class="text-center"><a href="<?= site_url('Superadmin/Transaksi/SuratTugas/detail/'.$u->kdsatker)?>" class="waves-effect waves-light btn-small">Detail</a></td>
                         </tr>
                         <?php $no++;} ?>
                         

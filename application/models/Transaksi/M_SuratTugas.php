@@ -182,6 +182,7 @@ class M_SuratTugas extends CI_Model{
             d_surattugas.id_tahapan,d_surattugas.id_app,d_surattugas.status_id,d_bagipagu.unit_id, d_surattugas.status_id, d_surattugas.status_penandatangan,
             
             t_unitkerja.nama_unit,
+			t_unitkerja.nama_grup,
             t_unitkerja.grup_id as kdunit, 
             '.$select.'
             t_pejabat.nama as nama_ttd,
