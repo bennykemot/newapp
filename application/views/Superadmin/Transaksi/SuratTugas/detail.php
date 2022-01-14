@@ -42,7 +42,7 @@
                         <th style="min-width: 300px" >NOMOR, TANGGAL, URAIAN SURAT TUGAS</th>
                         <th style="min-width: 150px" >MULAI</th>
                         <th style="min-width: 150px" >SELESAI</th>
-                        <th style="min-width: 200px" class="text-center">AKSI</th>
+                        <!-- <th style="min-width: 200px" class="text-center">AKSI</th> -->
                     </tr>
                   </thead>
                   <tbody>
@@ -70,7 +70,7 @@
                             </td>
                             <td><?php echo cek_tgl_st($u->tglmulaist) ?></td>
                             <td><?php echo cek_tgl_st($u->tglselesaist) ?></td>
-                            <td class="text-center">
+                            <!-- <td class="text-center">
                                 <div class="col s12">
 
                                     <div class="row">
@@ -123,7 +123,7 @@
                                   </div>
                                 </div>
                             </div>
-                            </td>
+                            </td> -->
                         </tr>
                         <?php $no++;} ?>
                         

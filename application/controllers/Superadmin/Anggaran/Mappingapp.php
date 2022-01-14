@@ -10,109 +10,46 @@ class MappingApp extends CI_Controller {
 		$this->load->library("datatables");
         $this->load->library('pagination');
         $this->load->library('session');
-		$this->load->model('Anggaran/M_Mappingapp','Mappingapp');
+		$this->load->model('Superadmin/Anggaran/M_Mappingapp','Mappingapp');
 	}
 
     public function Page()
 	{
 
-        
-        // $kdsatker =  $this->uri->segment(4);
-        // $thang =  $this->uri->segment(5);
-        // $userid =  $this->uri->segment(6);
-        // $roleid =  $this->uri->segment(7);
-        // $unit_id =  $this->uri->segment(8);
-
         $kdsatker = $this->session->userdata("kdsatker");
         $thang = $this->session->userdata("thang");
-        $user_id = $this->session->userdata("user_id");
-        $role_id = $this->session->userdata("role_id");
         $unit_id = $this->session->userdata("unit_id");
         $username = $this->session->userdata("username");
+		$data['mapp'] = $this->Mappingapp->getDataList();
 
-
-        
-        $data['mapp'] = $this->Mappingapp->getData_Mapping($kdsatker,$thang,$user_id,$role_id,$unit_id);
+        //$data['mapp'] = $this->Mappingapp->getData_Mapping($kdsatker,$thang,$user_id,$role_id,$unit_id);
 
         // var_dump($data['mapp']);exit;
         //$data['head'] = $this->db->query("SELECT SUM(rupiah) as jumlah, norevisi, tgrevisi from d_pagu WHERE d_pagu.kdsatker = ".$kdsatker." AND d_pagu.thang = ".$thang." ")->result();
-		$this->load->view('Anggaran/Mappingapp/manage', $data);
+		$this->load->view('Superadmin/Anggaran/Mappingapp/manage', $data);
+	}
+
+	public function detail(){
+		$kdsatker = $this->uri->segment(5);
+		$thang = $this->session->userdata("thang");
+
+		$data['Satker'] = $this->Mappingapp->getNamaSatker($kdsatker);
+		$data['mapp'] = $this->Mappingapp->getData_Mapping($kdsatker,$thang);
+
+		$this->load->view('Superadmin/Anggaran/Mappingapp/detail',$data);
 	}
 
     public function Tambah()
 		{
-            $var =  $this->uri->segment(4);
+            $var =  $this->uri->segment(5);
 
             $kdindex = str_replace("%20", " ", $var);
+			$data['getmapp'] = $this->Mappingapp->getDetailApp($kdindex);
             $data['tambahmapp'] = $this->Mappingapp->CRUD($kdindex,'d_detailapp','R');
             $data['readmapp'] = $this->Mappingapp->CRUD($kdindex,'d_detailapp','R-table');
 
-			$this->load->view('Anggaran/Mappingapp/tambah', $data);
+			$this->load->view('Superadmin/Anggaran/Mappingapp/tambah', $data);
 		}
-
-    
-
-    
-
-    // public function Page(){
-
-    //     $satker = $this->uri->segment(4);
-    //     $userId =  $this->uri->segment(5);
-    //     $roleId = $this->uri->segment(6);
-
-    //     $jumlah_data = $this->Mappingapp->Jum($satker,$userId, $roleId);
-    //     $config['base_url'] = base_url().'Anggaran/Mappingapp/Page/'.$satker.'/'.$userId.'/'.$roleId;
-	// 	$config['total_rows'] = $jumlah_data;
-	// 	$config['per_page'] = 20;
-
-    //     $config['first_url'] = '1';
-    //     $config['first_link'] = false;
-    //     $config['last_link'] = false;
-
-    //     $config['full_tag_open'] = "<ul class='pagination' >";
-    //     $config['full_tag_close'] = '</ul>';
-    //     $config['num_tag_open'] = '<li >';
-    //     $config['num_tag_close'] = '</li>';
-    //     $config['cur_tag_open'] = '<li><a class="active" >';
-    //     $config['cur_tag_close'] = '</a></li>';
-    //     $config['prev_tag_open'] = '<li >';
-    //     $config['prev_tag_close'] = '</li>';
-    //     $config['first_tag_open'] = '<li >';
-    //     $config['first_tag_close'] = '</li>';
-    //     $config['last_tag_open'] = '<li >';
-    //     $config['last_tag_close'] = '</li>';
-
-
-
-    //     $config['prev_link'] = '<i style="font-size: 0px !important" ></i> Previous';
-    //     $config['prev_tag_open'] = '<li >';
-    //     $config['prev_tag_close'] = '</li>';
-
-
-    //     $config['next_link'] = 'Next <i style="font-size: 0px !important" ></i>';
-    //     $config['next_tag_open'] = '<li >';
-    //     $config['next_tag_close'] = '</li>';
-
-
-	// 	$from =  $this->uri->segment(7);
-	// 	$this->pagination->initialize($config);
-
-    //     if($from == 1){
-    //         $from = 0;
-    //     };
-
-    //     $kdsatker =  $satker;
-    //     $data['mapp'] = $this->Mappingapp->getDataNew($satker, $config['per_page'], $from, $userId, $roleId);
-        
-    //     //$data['mapp'] = $this->Page();
-
-    //     //echo json_encode($data)
-        
-	// 	$this->load->view('Anggaran/Mappingapp/manage',$data);
-
-    // }
-
-    
 
     public function Action()
     {

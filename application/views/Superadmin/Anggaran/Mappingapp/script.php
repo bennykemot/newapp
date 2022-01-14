@@ -7,7 +7,7 @@
     var satker_session = "<?= $this->session->userdata("kdsatker")?>"
     var role_session = "<?= $this->session->userdata("role_id")?>"
     var user_session = "<?= $this->session->userdata("user_id")?>"
-    var kdindex_session = "<?= $this->uri->segment('4')?>"
+    var kdindex_session = "<?= $this->uri->segment('5')?>"
 
     function Reset(idForm) {
       document.getElementById(idForm).reset();
@@ -203,8 +203,8 @@
 
       var grid_detail_app = "#tb-app";
       var collapsedGroups = [];
-	var groupParent = [];
-    var counter = 1;
+			var groupParent = [];
+    	var counter = 1;
       $(grid_detail_app).DataTable({
         
             serverSide: true,
@@ -223,9 +223,6 @@
                 
             autoWidth: false,
             columns: [
-             
-              
-
                 {
                     data: "nama_app"
                 },
@@ -257,14 +254,13 @@
                 
                 },
 
-                { data: 'id', class:"text-center",
-                  render: function(data, type, row) {
-                      return '<a href="javascript:;" onclick="Edit(\''+row.id+'\',\''+row.kdindex+'\')"><i class="material-icons green-text">edit</i></a>\
-                      <a  href="javascript:;" onclick="Delete(\''+row.id+'\',\''+row.kdindex+'\')"><i class="material-icons red-text">delete</i></a>';
-                  }
-                },
+                // { data: 'id', class:"text-center",
+                //   render: function(data, type, row) {
+                //       // return '<a href="javascript:;" onclick="Edit(\''+row.id+'\',\''+row.kdindex+'\')"><i class="material-icons green-text">edit</i></a>\
+                //       // <a  href="javascript:;" onclick="Delete(\''+row.id+'\',\''+row.kdindex+'\')"><i class="material-icons red-text">delete</i></a>';
+                //   }
+                // },
                
- 
             ],
             pageLength: -1,
             lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
@@ -295,8 +291,8 @@
                     .append( '<td >'+group+'</td>' )
                     .append( '<td class="text-right">'+salaryAvg+'</td>' )
                     .append( '<td ></td>' )
-                    .append( '<td ></td>' )
                     .append( '<td ></td>' );
+                    
             },
             dataSrc: 'nama_app'
         },

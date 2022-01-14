@@ -159,11 +159,11 @@ function mappingD_none($data){
           </i><span class="menu-title" data-i18n="Mail">Pembagian Pagu</span></a>
           </li>
 
-          <!-- <li class="bold <?=mappingD_none($kdsatker)?>"><a class="waves-effect waves-cyan" href="<?= site_url('Anggaran/Mappingapp/Page')?>">
+          <li class="bold <?=mappingD_none($kdsatker)?>"><a class="waves-effect waves-cyan" href="<?= site_url('Superadmin/Anggaran/Mappingapp/Page')?>">
           <i class="material-icons">
           view_comfy
           </i><span class="menu-title" data-i18n="Mail">Mapping App</span></a>
-          </li> -->
+          </li>
 
 
           <!-- <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing')?>">
