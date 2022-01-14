@@ -3,58 +3,64 @@ class M_Mappingapp extends CI_Model{
 
     var $table ="v_mapping";
 
+	function getDataList(){
+		$query = $this->db->query("SELECT kdsatker, nmsatker FROM t_satker");
 
-    function getData_Mapping($kdsatker,$thang, $userid,$roleid, $unitid){
-        $whereUnitid ="";$whereRoleid="";
-        if($roleid != 1){
-           $whereUnitid = "AND c.unit_id =".$unitid."";
-           $whereRoleid = "WHERE c.role_id = ".$roleid." ";
+		return $query->result();
+	}
+
+    function getData_Mapping($kdsatker,$thang){
+        // $whereUnitid ="";$whereRoleid="";
+        // if($roleid != 1){
+        //    $whereUnitid = "AND c.unit_id =".$unitid."";
+        //    $whereRoleid = "WHERE c.role_id = ".$roleid." ";
            
-        }
+        // }
 
-        if($kdsatker == "450491"){
-                $kdgiat = "AND d_pagu.kdgiat > 4206 AND d_pagu.kdgiat < 4230";
-            }else{
-                $kdgiat = "AND d_pagu.kdgiat = 3701";
-            }
-
-            // $query = $this->db->query("SELECT a.*,b.alokasi , c.*
-            // FROM 
-            // (SELECT d_pagu.*,t_akun.nmakun FROM d_pagu JOIN t_akun ON d_pagu.kdakun=t_akun.kdakun 
-         
-            //     WHERE d_pagu.thang=".$thang." ".$kdgiat." AND d_pagu.kdprogram='CH' AND d_pagu.kdsatker=".$kdsatker."
-            // ) as a 
-            //  left JOIN 
-            //     (SELECT d_detailapp.kdindex, SUM(d_detailapp.rupiah_tahapan) AS alokasi FROM d_detailapp GROUP BY d_detailapp.kdindex) as b
-            //     ON a.kdindex=b.kdindex
-                
-            //     LEFT JOIN (SELECT d_bagipagu.role_id, d_bagipagu.kdindex FROM d_bagipagu ) as c
-                
-            //     ON a.kdindex=c.kdindex
-                
-            //     ".$whereRoleid."");
+        // if($kdsatker == "450491"){
+        //         $kdgiat = "AND d_pagu.kdgiat > 4206 AND d_pagu.kdgiat < 4230";
+        //     }else{
+        //         $kdgiat = "AND d_pagu.kdgiat = 3701";
+        //     }
 
         $query = $this->db->query("SELECT a.*,b.alokasi 
         FROM 
         (SELECT d_pagu.*,t_akun.nmakun FROM d_pagu JOIN t_akun ON d_pagu.kdakun=t_akun.kdakun 
-            WHERE d_pagu.thang=".$thang." ".$kdgiat." AND d_pagu.kdprogram='CH' AND d_pagu.kdsatker=".$kdsatker.") as a 
+            WHERE d_pagu.thang=".$thang." AND d_pagu.kdprogram='CH' AND d_pagu.kdsatker=".$kdsatker.") as a 
          left JOIN 
             (SELECT d_detailapp.kdindex, SUM(d_detailapp.rupiah_tahapan) AS alokasi FROM d_detailapp GROUP BY d_detailapp.kdindex) as b
             ON a.kdindex=b.kdindex 
             LEFT JOIN (SELECT d_bagipagu.unit_id,d_bagipagu.role_id, d_bagipagu.kdindex as kdindexbagipagu FROM d_bagipagu ) as c
                 
-                 ON a.kdindex=c.kdindexbagipagu  ".$whereRoleid." ".$whereUnitid."");
-
-        // $query =  $this->db->query('SELECT d_pagu.*, t_akun.nmakun from d_pagu 
-        // JOIN t_akun ON d_pagu.kdakun = t_akun.kdakun
-        // JOIN d_bagipagu ON d_bagipagu.kdsatker = d_pagu.kdsatker 
-        
-        // WHERE d_bagipagu.kdsatker = '.$kdsatker.' AND d_bagipagu.thang = '.$thang.'  '.$whereUnitid.'
-        // AND d_pagu.kdprogram = "CH"');
+                 ON a.kdindex=c.kdindexbagipagu");
 
         return $query->result();
      
     }
+
+	function getNamaSatker($kdsatker){
+		$query = $this->db->query("SELECT nmsatker
+					FROM t_satker 
+					
+					WHERE kdsatker = ".$kdsatker."
+		");
+
+		return $query->result();
+	}
+
+	function getDetailApp($kdindex){
+		$query = $this->db->query("SELECT d_detailapp.* ,t_app.nama_app ,r_tahapan.nama_tahapan 
+            
+					FROM d_detailapp JOIN t_app ON d_detailapp.id_app = t_app.id
+					JOIN r_tahapan ON d_detailapp.tahapan = r_tahapan.id 
+					
+					WHERE d_detailapp.kdindex = '".$kdindex."' 
+					ORDER BY d_detailapp.id_app, d_detailapp.tahapan ASC
+	
+		");
+
+		return $query->result();
+	}
 
     function datatablesdata($kdsatker){
 
@@ -64,8 +70,6 @@ class M_Mappingapp extends CI_Model{
             $query =  $this->db->get($this->table);
 
             return $query->result();
-
-
     }
 
     function count_filtered($satker)
