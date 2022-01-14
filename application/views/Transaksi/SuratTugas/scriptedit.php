@@ -1303,10 +1303,10 @@ for($loop = 0 ; $loop < countTim; $loop++){
     contentType: false,
     success: function (data, textStatus, jqXHR) {
               show_msg(textStatus);
-              //Reset(IdForm);
-              // if(satker_session != "a"){
-              // window.history.back();
-              // }
+              Reset(IdForm);
+              if(satker_session != "a"){
+              window.history.back();
+              }
               
               
           },

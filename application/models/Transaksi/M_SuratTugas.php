@@ -35,10 +35,13 @@ class M_SuratTugas extends CI_Model{
             $whereD = "AND d_surattugas.cs_menyetujui like '%".$cek[0]->nip."%'";
         }
 
-        $query = $this->db->query("SELECT d_surattugas.*, user.username 
+        $query = $this->db->query("SELECT d_surattugas.*, user.username,r_statuscs.uraian_pusat,r_statuscs.uraian_perwakilan 
         from d_surattugas 
         JOIN d_bagipagu ON d_surattugas.kdindex = d_bagipagu.kdindex
-        JOIN user ON d_surattugas.user_id = user.id where 
+        JOIN user ON d_surattugas.user_id = user.id 
+        JOIN r_statuscs ON d_surattugas.status_id = r_statuscs.id
+        
+        where 
         d_surattugas.is_aktif = 1 AND d_surattugas.kdsatker = ".$kdsatker." ".$whereD." ".$where." 
         ORDER BY d_surattugas.created_at LIMIT ".$from.",".$per_page."");
 
@@ -187,7 +190,8 @@ class M_SuratTugas extends CI_Model{
             '.$select.'
             t_pejabat.nama as nama_ttd,
             t_pejabat.nip as nip_ttd,
-            t_satker.kdkabkota
+            t_satker.kdkabkota,
+            r_statuscs.uraian_pusat,r_statuscs.uraian_perwakilan,d_costsheet.id_cs
             
             FROM d_surattugas 
             JOIN d_pagu ON d_surattugas.kdindex = d_surattugas.kdindex 
@@ -195,7 +199,10 @@ class M_SuratTugas extends CI_Model{
             JOIN t_satker ON d_surattugas.kdsatker = t_satker.kdsatker 
             JOIN d_bagipagu ON d_bagipagu.kdindex = d_surattugas.kdindex
             JOIN t_unitkerja ON d_bagipagu.unit_id = t_unitkerja.id
-            '.$join.' WHERE d_surattugas.id = '.$id.' 
+            JOIN r_statuscs ON d_surattugas.status_id = r_statuscs.id
+            
+            '.$join.' JOIN d_costsheet ON d_costsheet.id_cs = d_itemcs.id_cs
+            WHERE d_surattugas.id = '.$id.' 
             AND d_pagu.kdindex = "'.$kdindex.'" '.$group.'
             '. $order.'');
     }

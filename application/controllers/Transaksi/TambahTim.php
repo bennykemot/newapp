@@ -22,7 +22,7 @@ class TambahTim extends CI_Controller {
         $a = $this->uri->segment(5);
         $kdindex = str_replace("%20", " ", $a);
         $trigger = "Tambah_Tim";
-        $data['ST'] = $this->SuratTugas->getDataUbah($kdindex, $id,$trigger);
+        $data['ST'] = $this->SuratTugas->getDataUbah($kdindex, $id,$trigger,'');
         //$data['ubah'] = $this->SuratTugas->getDataUbah($kdindex, $id, 'Ubah_ST');
         $data['countST'] = $this->db->query("select id_st from d_itemcs where id_st = ".$id."")->result();
 		$this->load->view('Transaksi/SuratTugas/TambahTim/manage', $data);
@@ -68,12 +68,6 @@ class TambahTim extends CI_Controller {
                     $nip = $this->input->post('nip'.$urut[$i].'');
                     $jabatan = $this->input->post('perjab'.$urut[$i].'');
                     $golongan = $this->input->post('gol'.$urut[$i].'');
-                    if($nip == "" || $nip == "null" || $nip == null){
-                        $nip = "0";
-                        $jabatan = " ";
-                        $golongan = " ";
-
-                    }
 
                        $totaluangtransport += $this->pregChar($this->input->post('uangdll'.$urut[$i].'')) + $this->pregChar($this->input->post('uangtaxi'.$urut[$i].''))
                                             + $this->pregChar($this->input->post('uanglaut'.$urut[$i].''))+ $this->pregChar($this->input->post('uangudara'.$urut[$i].''))
@@ -122,18 +116,37 @@ class TambahTim extends CI_Controller {
                         'id_ttd_spd'  => $this->input->post('ttd_spd'.$urut[$i].''),
                         
                         'id_st'  => $idst,
+                        'id_cs'  => $idst.'-',
                         
                    );
 
                    $totaluangharian += $this->pregChar($this->input->post('uangharian'.$urut[$i].''));
                    $totaluanginap += $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].''));
                    
-                   $sum +=  $totaluangharian + $totaluangharian + $totaluangtransport;
+                   $sum +=  $this->pregChar($this->input->post('uangharian'.$urut[$i].'')) + 
+                   $this->pregChar($this->input->post('uangpenginapan'.$urut[$i].'')) +
+                   $this->pregChar($this->input->post('uangdll'.$urut[$i].'')) + 
+                           $this->pregChar($this->input->post('uangtaxi'.$urut[$i].'')) +
+                           $this->pregChar($this->input->post('uanglaut'.$urut[$i].''))+ 
+                           $this->pregChar($this->input->post('uangudara'.$urut[$i].'')) +
+                           $this->pregChar($this->input->post('uangdarat'.$urut[$i].''));
 
                         $this->db->insert('d_itemcs',$data_ItemCS);
                         $j = $urut[$i];
                    $totalRealisasi += $this->pregChar($this->input->post('total'.$urut[$i].'')); 
                 }
+
+                $cekIdCS = $this->db->query("SELECT MAX(id_cs) as idcs FROM d_itemcs where id_st = ".$idst."")->result();
+                $a = explode("-",$cekIdCS[0]->idcs);
+                $IDCS = $a[1] + 1;
+
+                $data_ics = array(
+                    'id_cs' => $idst.'-'.$IDCS
+                );
+                $whereICS = array('id_st' => $idst, 'id_cs' => $idst.'-');
+
+                $this->db->where($whereICS);
+                $this->db->update("d_itemcs",$data_ics);
 
                 $cekRealisasi = $this->db->query("SELECT SUM(jumlah_realisasi) as jumlah_realisasi, id FROM d_surattugas where id = ".$idst."")->result_array();
                 $jumRealisasilalu = $cekRealisasi[0]['jumlah_realisasi'] + $totalRealisasi; 
@@ -162,7 +175,9 @@ class TambahTim extends CI_Controller {
                     $this->db->insert('t_pagu',$data_tpagu);
 
 					$data_cs = array(
-						'nost' => $idst,
+                        'id_cs' => $idst.'-'.$IDCS,
+                        'id_st' => $idst,
+						'nost' => $nost,
 						'uraianst' => $uraianst,
 						'tglst' => date("Y-m-d",strtotime($tglst)),
 						'tujuanst' =>  $this->input->post('kotatujuan'.$j.''),

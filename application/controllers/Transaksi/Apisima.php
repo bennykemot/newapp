@@ -186,6 +186,28 @@ class Apisima extends CI_Controller {
 
     }
 
+    public function approve()
+	{   
+        $a = $this->uri->segment(8);
+        $dataFrom = $this->uri->segment(10);
+        $kdindex = str_replace("%20", " ", $a);
+        $id =  $this->uri->segment(4);
+        $data['ubah'] = $this->Costsheet->getData_Ubah($kdindex, $id, 'Ubah_ST',$dataFrom);
+
+        $kdsatker = $this->session->userdata("kdsatker");
+        $thang = $this->session->userdata("thang");
+        $user_id = $this->session->userdata("user_id");
+        $role_id = $this->session->userdata("role_id");
+        $unit_id = $this->session->userdata("unit_id");
+        $username = $this->session->userdata("username");
+
+
+        $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unit_id, $role_id);
+        $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unit_id, $role_id);
+        
+		$this->load->view('Transaksi/SuratTugas/Approve/manage',$data);
+	}
+
     
     function ActionAPI()
     {
@@ -261,13 +283,19 @@ class Apisima extends CI_Controller {
                 );
 
             $CekST = $this->db->query("SELECT count(id) as idcount from d_surattugas where id_st = ".$idst."")->result();
-            $this->SuratTugas->CRUD($data_st,'d_surattugas', $Trigger);
+            //$this->SuratTugas->CRUD($data_st,'d_surattugas', $Trigger);
 
             if($CekST[0]->idcount > 0){
-                $this->SuratTugas->CRUD($data_st,'d_surattugas', $Trigger);
-            }else{
+                //echo "lebih dr 1";
                 $this->SuratTugas->history($idst);
-                $this->SuratTugas->CRUD($data_st,'d_surattugas', "U");
+                $whereST = array('id_st'=>$idst);
+                $this->db->where($whereST);
+                $this->db->update('d_surattugas',$data_st);
+                // $this->SuratTugas->history($idst);
+                // $this->SuratTugas->CRUD($data_st,'d_surattugas', "U");
+            }else{
+                //echo "halo";
+                $this->SuratTugas->CRUD($data_st,'d_surattugas', $Trigger);
             }
 
             

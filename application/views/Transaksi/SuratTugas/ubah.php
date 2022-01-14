@@ -1,7 +1,7 @@
 <?php include(APPPATH . 'views/Header/Aside.php');
 
 $redOnly = "";$none="";
-if($ubah[0]['status_id'] == 3){
+if($ubah[0]['status_id'] == 3 || $ubah[0]['status_id'] > 4){
     $redOnly = "readonly";
     $none="d-none";
 }

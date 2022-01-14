@@ -1,9 +1,18 @@
 <?php include(APPPATH . 'views/Header/Aside.php');
 
 $redOnly = "";$none="";
-if($ubah[0]['status_id'] == 3){
+if($ubah[0]['status_id'] != 3){
     $redOnly = "readonly";
     $none="d-none";
+}
+
+function getUraian($dat){
+    $res = "uraian_pusat";
+    if($dat != 450491){
+        $res = "uraian_perwakilan";
+    }
+    return $res;
+
 }
 ?>
 
@@ -17,13 +26,13 @@ if($ubah[0]['status_id'] == 3){
                         <button type="button" class="btn-floating" style=""><i class="material-icons">
                         done</i></button>
                     </div>
-                    <div class="col s8">
+                    <div class="col s5">
                         <h6> Form Persetujuan</h6>
                     </div>
 
-                    <div class="col s3 text-right">
+                    <div class="col s6 text-right">
                         <h6>
-                            <p clas="purple-text"><?= $ubah[0]['status_id'] ?> - Pengajuan oleh Operator</p>
+                            <p clas="purple-text"><?= $ubah[0]['status_id'] ?> - <?= $ubah[0][''.getUraian($ubah[0]['kdsatker'].'')] ?></p>
                         </h6>
                     </div>
                   
@@ -236,7 +245,7 @@ if($ubah[0]['status_id'] == 3){
                         <td><input <?=$redOnly?> style="min-width: 150px" type="text" id="satuan_uangharian<?=$j?>" name="satuan_uangharian<?=$j?>" onkeyup="AllCount('<?=$j?>','satuan')" value="<?=rupiah($ubah[$i]['tarifuangharian'])?>"></td>
                         <td><input <?=$redOnly?> style="min-width: 150px" type="text" id="uangharian<?=$j?>" name="uangharian<?=$j?>" onkeyup="AllCount('<?=$j?>','total')" value="<?=rupiah($ubah[$i]['totaluangharian'])?>"></td>
                         <td><input <?=$redOnly?> style="min-width: 150px" type="text" id="satuan_uangpenginapan<?=$j?>" name="satuan_uangpenginapan<?=$j?>" onkeyup="AllCount('<?=$j?>','satuan')" value="<?=rupiah($ubah[$i]['tarifinap'])?>"></td>
-                        <td><input <?=$redOnly?> style="min-width: 150px" type="text" id="uangpenginapan<?=$j?>" name="uangpenginapan<?=$j?>" <?=$redOnly?> value="<?=rupiah($ubah[$i]['totalinap'])?>"></td>
+                        <td><input <?=$redOnly?> style="min-width: 150px" type="text" id="uangpenginapan<?=$j?>" name="uangpenginapan<?=$j?>" value="<?=rupiah($ubah[$i]['totalinap'])?>"></td>
                         <td><input <?=$redOnly?> style="min-width: 150px" type="text" id="uangtaxi<?=$j?>" name="uangtaxi<?=$j?>" onkeyup="AllCount('<?=$j?>','all')" value="<?=rupiah($ubah[$i]['tariftaxi'])?>"></td>
                         <td><input <?=$redOnly?> style="min-width: 150px" type="text" id="uanglaut<?=$j?>" name="uanglaut<?=$j?>" onkeyup="AllCount('<?=$j?>','all')" value="<?=rupiah($ubah[$i]['tariflaut'])?>"></td>
                         <td><input <?=$redOnly?> style="min-width: 150px" type="text" id="uangudara<?=$j?>" name="uangudara<?=$j?>" onkeyup="AllCount('<?=$j?>','all')" value="<?=rupiah($ubah[$i]['tarifudara'])?>"></td>

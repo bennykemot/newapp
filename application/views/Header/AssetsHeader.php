@@ -332,6 +332,14 @@ function ApproveKPA($data){
         $span = "<span class='users-view-status chip red lighten-2 black-text'>".$data."</span>";
       }else if($data == 5){
         $span = "<span class='users-view-status chip brown lighten-2 black-text'>".$data."</span>";
+      }else if($data == 6){
+        $span = "<span class='users-view-status chip deep-purple lighten-2 white-text'>".$data."</span>";
+      }else if($data == 7){
+        $span = "<span class='users-view-status chip pink lighten-2 white-text'>".$data."</span>";
+      }else if($data == 8){
+        $span = "<span class='users-view-status chip light-blue lighten-2 black-text'>".$data."</span>";
+      }else if($data == 9){
+        $span = "<span class='users-view-status chip lime lighten-2 black-text'>".$data."</span>";
       }
       return $span;
     }
@@ -347,6 +355,53 @@ function ApproveKPA($data){
       }
 
       function disableApprove($status,$role){
+        $disabled = "";
+
+        if($status == 1){
+            if($role !=1 || $role !=2 || $role !=4 || $role !=9){
+              $disabled = "pointer-events: none;";
+            }
+        }else if($status == 2){
+          if($role !=1 || $role !=3){
+            $disabled = "pointer-events: none;";
+          }
+
+        }else if($status == 3){
+          if($role !=1 || $role !=5 || $role !=7){
+            $disabled = "pointer-events: none;";
+          }
+
+        }else if($status == 4){
+          if($role !=1 || $role !=2 || $role !=4 || $role !=9){
+            $disabled = "pointer-events: none;";
+          }
+
+        }else if($status == 5){
+          if($role !=1 || $role !=4){
+            $disabled = "pointer-events: none;";
+          }
+
+        }else if($status == 6){
+          if($role !=1 || $role !=3){
+            $disabled = "pointer-events: none;";
+          }
+
+        }else if($status == 7){
+          if($role !=1 || $role !=8){
+            $disabled = "pointer-events: none;";
+          }
+
+        }else if($status == 8){
+          if($role !=1 || $role !=4){
+            $disabled = "pointer-events: none;";
+          }
+
+        }else if($status == 9){
+          if($role !=1 || $role !=4){
+            $disabled = "pointer-events: none;";
+          }
+        }
+        return $disabled;
 
       }
 

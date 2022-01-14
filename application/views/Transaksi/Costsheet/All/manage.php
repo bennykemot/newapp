@@ -69,7 +69,7 @@ function hideNoSt($dat){
                         <tr>
                             <td><?=$no++?></td>
                             <td class="text-center">
-                              <a href="<?= site_url('Transaksi/SuratTugas/approve/'.$costsheet[$i]->id_st.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$costsheet[$i]->kdindex.'/'.$costsheet[$i]->status_id.'/api')?>"
+                              <a href="<?= site_url('Transaksi/Apisima/approve/'.$costsheet[$i]->id_st.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$costsheet[$i]->kdindex.'/'.$costsheet[$i]->status_id.'/api')?>"
                               class="tooltipped <?=disableApprove($costsheet[$i]->status_id,$role_id)?>" data-position="bottom" data-tooltip="Approve">
                                 <?= getStatusId($costsheet[$i]->status_id)?>
                               </a>
@@ -104,7 +104,7 @@ function hideNoSt($dat){
                                   <div class="col s4">
                                     <a href="<?= site_url('Transaksi/SuratTugas/ubah/'.$costsheet[$i]->id_cs.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$costsheet[$i]->kdindex)?>" 
                                       class="tooltipped <?=getForAdminOpr($role_id)?> <?=getComplete($costsheet[$i]->status_id, 'Y')?>" 
-                                      data-position="bottom" data-tooltip="Ubah ST" ><i class="material-icons green-text">edit</i></a>
+                                      data-position="bottom" data-tooltip="Ubah CS" ><i class="material-icons green-text">edit</i></a>
                                   </div>
                                 </div>
                               </div>

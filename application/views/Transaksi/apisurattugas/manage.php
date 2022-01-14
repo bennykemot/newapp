@@ -47,13 +47,6 @@
                 </div>
                 <button type="submit" class="btn cyan col s12" name="tombol" >FILTER</button>
             </form>
-                <!-- <div class="input-field col s12">
-                    <div class="input-field col s2"><label>Bulan</label></div>
-
-                    <div class="input-field col s10 " >
-                      <select class="browser-default" name="bulan-Array" id="bulan-Array"></select>
-                    </div>
-                </div> -->
                 <div style="padding-top : 20%"></div>
               <table id="tb-st-" class="bordered striped  responsive" 
                           style="overflow: hidden;

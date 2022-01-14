@@ -486,6 +486,7 @@ class SuratTugas extends CI_Controller {
 
         }else if($Trigger == "Approve"){
             $status_st = $this->input->post('id_status');
+            
             $status_st = $status_st + 1;
 
             $data_st = array(
@@ -500,6 +501,8 @@ class SuratTugas extends CI_Controller {
             $status_st = $this->input->post('id_status');
 
             if($status_st == 3){
+                $status_st = 1;
+            }else if($status_st == 1){
                 $status_st = 1;
             }else{
                 $status_st = $status_st - 1;
@@ -549,7 +552,7 @@ class SuratTugas extends CI_Controller {
         $id        		= $this->uri->segment(4);
         
         $trigger        = "export";
-        $data['ubah']   = $this->SuratTugas->getDataUbah($kdindex, $id, $trigger,'');
+        $data['ubah']   = $this->SuratTugas->getDataUbah($kdindex, $id, $trigger,'n');
         $data['Pilihkop'] = $Pilihkop;
         $data['kop']    = $this->db->query("
 						SELECT t_kopsurat.* FROM t_kopsurat

@@ -46,12 +46,9 @@
                 </thead>
                     <?php   $j=1;$no = []; 
                             $total=0;
-                            $nospdCount = substr($nospd[0]->countspd, 6, 4);
                             for($i = 0 ; $i < count($ubah); $i++){ 
                                 $nospd = "0000";
                                 if($ubah[0]['status_id'] == 3){
-                                    $nospdCount = $nospdCount + 1;
-                                    $nospd = str_pad($nospdCount, 4, "0", STR_PAD_LEFT);
 
                                 };
                                 
