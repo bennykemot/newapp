@@ -106,7 +106,7 @@ class SuratTugas extends CI_Controller {
         $a = $this->uri->segment(8);
         $kdindex = str_replace("%20", " ", $a);
         $id =  $this->uri->segment(4);
-        $data['ubah'] = $this->SuratTugas->getDataUbah($kdindex, $id, 'Ubah_ST');
+        $data['ubah'] = $this->SuratTugas->getDataUbah($kdindex, $id, 'Ubah_ST','');
         $kdsatker = $this->uri->segment(5);
 
         $kdsatker = $this->session->userdata("kdsatker");
@@ -132,9 +132,10 @@ class SuratTugas extends CI_Controller {
     public function approve()
 	{   
         $a = $this->uri->segment(8);
+        $dataFrom = $this->uri->segment(10);
         $kdindex = str_replace("%20", " ", $a);
         $id =  $this->uri->segment(4);
-        $data['ubah'] = $this->SuratTugas->getDataUbah($kdindex, $id, 'Ubah_ST');
+        $data['ubah'] = $this->SuratTugas->getDataUbah($kdindex, $id, 'Ubah_ST',$dataFrom);
 
         $kdsatker = $this->session->userdata("kdsatker");
         $thang = $this->session->userdata("thang");
@@ -548,7 +549,7 @@ class SuratTugas extends CI_Controller {
         $id        		= $this->uri->segment(4);
         
         $trigger        = "export";
-        $data['ubah']   = $this->SuratTugas->getDataUbah($kdindex, $id, $trigger);
+        $data['ubah']   = $this->SuratTugas->getDataUbah($kdindex, $id, $trigger,'');
         $data['Pilihkop'] = $Pilihkop;
         $data['kop']    = $this->db->query("
 						SELECT t_kopsurat.* FROM t_kopsurat

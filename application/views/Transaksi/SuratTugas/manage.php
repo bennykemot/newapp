@@ -110,13 +110,13 @@
                                 <div class="row" style="padding-top: 10px">
                                   <div class="col s4">
                                     
-																		<a href="<?= site_url('Transaksi/SuratTugas/approve/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex.'/2')?>" 
+																		<a href="<?= site_url('Transaksi/SuratTugas/approve/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex.'/2/lcl')?>" 
                                       class="tooltipped" style="<?=getDisablePPK($u->status_id)?> <?=getDisableforKPA($role_id)?>" 
                                       data-position="bottom" data-tooltip="Approve PPK" ><i class="material-icons <?=ApprovePPK($u->status_id)?>">check_box</i></a>
                                   </div>
 
                                   <div class="col s4">
-																	<a href="<?= site_url('Transaksi/SuratTugas/approve/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex.'/3')?>" 
+																	<a href="<?= site_url('Transaksi/SuratTugas/approve/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex.'/3/lcl')?>" 
                                     class="tooltipped"  style="<?=getDisableforPPK($role_id)?>" data-position="bottom" 
                                     data-tooltip="Approve KPA/Es II" ><i class="material-icons <?=ApproveKPA($u->status_id)?>">check_box</i></a>
                                   </div>

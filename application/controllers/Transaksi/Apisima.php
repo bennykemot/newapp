@@ -42,21 +42,25 @@ class Apisima extends CI_Controller {
             'base_uri' => $url,
             'timeout'  => 5,
         ]);
-
-        if($role_id == 1){
+        if($role_id == 99){
             $unit_id = "";
+            $kdsatker ="";
         }else{
-            if($kdsatker == 450491){
-                if($role_id == 3 || $role_id == 2 || $role_id == 4 || $role_id == 9 || $role_id == 10){
-                    $unit_id = $unit_id;
-                    }else{
-                        $unit_id = "";
-                    }
+            if($role_id == 1){
+                $unit_id = "";
             }else{
-                if($role_id == 5 || $role_id == 7 || $role_id == 3 ){
-                    $unit_id="";
+                if($kdsatker == 450491){
+                    if($role_id == 3 || $role_id == 2 || $role_id == 4 || $role_id == 9 || $role_id == 10){
+                        $unit_id = $unit_id;
+                        }else{
+                            $unit_id = "";
+                        }
                 }else{
-                    $unit_id = $unit_id;
+                    if($role_id == 5 || $role_id == 7 || $role_id == 3 ){
+                        $unit_id="";
+                    }else{
+                        $unit_id = $unit_id;
+                    }
                 }
             }
         }
@@ -116,7 +120,24 @@ class Apisima extends CI_Controller {
         }else{
             $data['result']= "Detail";
         }
-        $this->load->view('Transaksi/Costsheet/All/manage', $data);
+
+        //echo count($data['costsheet']);
+
+        if(count($data['costsheet']) > 0){
+            
+            $this->load->view('Transaksi/Costsheet/All/manage', $data);
+        }else{
+            ?> <script type="text/javascript">
+                    alert("Data Tidak Ada !");
+                    setTimeout(function() {
+                        window.close();
+                        window.history.back();
+                    }, 100);
+                    
+                    
+                </script>
+                <?php 
+        }
 
 
 
@@ -223,7 +244,7 @@ class Apisima extends CI_Controller {
                 'tglmulaist' => date("Y-m-d",strtotime($tglst_mulai)),
                 'tglselesaist' => date("Y-m-d",strtotime($tglst_selesai)),
                 'jumlah_uang' => $alokasi,
-                'jumlah_realisasi' => $this->input->post('realisasi'),
+                'jumlah_realisasi' => 0,
                 'idxskmpnen' => $idxskmpnen,
                 'idx_temp' => $idxskmpnenlabel,
                 'id_unit' => $id_unit,
@@ -462,7 +483,7 @@ class Apisima extends CI_Controller {
 
 		}else if($trigger == "spd_back"){
 
-			$data['export']= $this->Costsheet->getData_export($trigger,$id_st);
+			$data['export']= $this->Costsheet->getData_export($trigger,$id_st,$id_cs);
 			if(count($data['export']) > 0){
 				$html = $this->load->view('Transaksi/ExportViews/SPDBack.php',$data,true);
 				$name = "SPD-Back.pdf";
@@ -473,7 +494,7 @@ class Apisima extends CI_Controller {
 		}else if($trigger == "kwitansi"){
 			$data['bendahara'] = $this->Costsheet->getBendahara_export($kdsatker,$unitId);
 
-			$data['export']= $this->Costsheet->getData_export($trigger,$id_st);
+			$data['export']= $this->Costsheet->getData_export($trigger,$id_st,$id_cs);
 			if(count($data['export']) > 0){
 				$html = $this->load->view('Transaksi/ExportViews/Kwitansi.php',$data,true);
 				$name = "Kwitansi.pdf";
@@ -483,7 +504,7 @@ class Apisima extends CI_Controller {
 		}else if($trigger == "rincian_biaya"){
 			$data['bendahara'] = $this->Costsheet->getBendahara_export($kdsatker,$unitId);
 
-			$data['export']= $this->Costsheet->getData_export($trigger,$id_st);
+			$data['export']= $this->Costsheet->getData_export($trigger,$id_st,$id_cs);
 			if(count($data['export']) > 0){
 				$html = $this->load->view('Transaksi/ExportViews/Rincianbiaya.php',$data,true);
 			$name = "RincianBiaya.pdf";
@@ -503,7 +524,7 @@ class Apisima extends CI_Controller {
 			'margin_bottom' => 16,
 			]);
 
-			$data['export']= $this->Costsheet->getData_export($trigger,$id_st);
+			$data['export']= $this->Costsheet->getData_export($trigger,$id_st,$id_cs);
 			if(count($data['export']) > 0){
 				$html = $this->load->view('Transaksi/ExportViews/Pengeluaranrill.php',$data,true);
 			$name = "Pengeluaran-Rill.pdf";
@@ -514,7 +535,7 @@ class Apisima extends CI_Controller {
 		}else if($trigger == "nominatif"){
 			$data['bendahara'] = $this->Costsheet->getBendahara_export($kdsatker,$unitId);
 
-			$data['export']= $this->Costsheet->getData_export($trigger,$id_st);
+			$data['export']= $this->Costsheet->getData_export($trigger,$id_st,$id_cs);
 
 			if(count($data['export']) > 0){
 				$html = $this->load->view('Transaksi/ExportViews/Nominatif.php',$data,true);
@@ -526,7 +547,7 @@ class Apisima extends CI_Controller {
 		}else if($trigger == "perhitungan_rampung"){
 
 			
-			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st);
+			$data['export']= $this->NotaDinas->getData_export($trigger,$id_st,$id_cs);
 
 			if(count($data['export']) > 0){
 				$html = $this->load->view('Transaksi/ExportViews/Perhitunganrampung.php',$data,true);
@@ -540,6 +561,7 @@ class Apisima extends CI_Controller {
 		// 	$mpdf->SetWatermarkText('DRAFT'); // Will cope with UTF-8 encoded text
 		// 	$mpdf->showWatermarkText = true; // Uses default font if left blank
 		// }
+        ini_set("pcre.backtrack_limit", "5000000");
         $mpdf->WriteHTML($html);          
         $mpdf->Output($name, 'I');
      

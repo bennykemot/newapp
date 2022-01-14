@@ -184,6 +184,18 @@ function mappingD_none($data){
           </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>
           </li>
 
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/Apisima/Data')?>">
+          <i class="material-icons">
+          add
+          </i><span class="menu-title" data-i18n="Mail">Daftar ST SIMA</span></a>
+          </li>
+
+          <!-- <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/Apisima/Getcostsheet/0/All')?>">
+          <i class="material-icons">
+          monetization_on
+          </i><span class="menu-title" data-i18n="Mail">Rincian Costsheet</span></a>
+          </li> -->
+
           <!-- <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
           <i class="material-icons">
           speaker_notes
@@ -293,14 +305,14 @@ function mappingD_none($data){
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/Apisima/Data')?>">
           <i class="material-icons">
           add
-          </i><span class="menu-title" data-i18n="Mail">R / U / H</span></a>
+          </i><span class="menu-title" data-i18n="Mail">Daftar ST SIMA</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/Apisima/Getcostsheet/0/All')?>">
+          <!-- <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/Apisima/Getcostsheet/0/All')?>">
           <i class="material-icons">
           monetization_on
           </i><span class="menu-title" data-i18n="Mail">Rincian Costsheet</span></a>
-          </li>
+          </li> -->
 
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
           <i class="material-icons">

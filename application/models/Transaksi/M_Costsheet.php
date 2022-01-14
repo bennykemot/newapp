@@ -19,11 +19,11 @@ class M_Costsheet extends CI_Model{
             where d_itemcs.id_cs = '".$id."'");
         }else{
             if($id == 0){
-                $query = $this->db->query("SELECT d_costsheet.*, d_surattugas.kdindex from d_costsheet
-                LEFT JOIN d_surattugas ON d_surattugas.id_st = d_costsheet.id_st");
+                $query = $this->db->query("SELECT d_costsheet.*, d_surattugas.kdindex,d_surattugas.status_id from d_costsheet
+                LEFT JOIN d_surattugas ON d_surattugas.id_st = d_costsheet.id_st WHERE d_costsheet.id_cs != '' AND d_costsheet.id_st!='0' ");
 
             }else{
-                $query = $this->db->query("SELECT d_costsheet.*, d_surattugas.kdindex from d_costsheet
+                $query = $this->db->query("SELECT d_costsheet.*, d_surattugas.kdindex,d_surattugas.status_id from d_costsheet
                 LEFT JOIN d_surattugas ON d_surattugas.id_st = d_costsheet.id_st 
                 where d_costsheet.id_cs LIKE '%".$id."%'");
             }
@@ -108,6 +108,32 @@ class M_Costsheet extends CI_Model{
             WHERE d_itemcs.id_cs = '".$Id_cs."' ORDER BY d_itemcs.nourut ");
 
             return $query->result();
+        }else if($Trigger == "spd_back" ){
+
+            $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, d_surattugas.status_cs, d_surattugas.status_penandatangan,
+            d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.status_id,
+            d_surattugas.tglselesaist, d_surattugas.idxskmpnen, d_itemcs.id_ttd_spd, 
+            t_unitkerja.nama_unit , d_itemcs.nourut, d_itemcs.nama, 
+            d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan, 
+            d_itemcs.tglberangkat, d_itemcs.tglkembali, d_itemcs.kotaasal, 
+            d_itemcs.kotatujuan, d_itemcs.jmlhari, d_itemcs.totaluangharian, 
+            d_itemcs.totalinap, d_itemcs.totalrep, d_itemcs.totaltravel , d_itemcs.jnstransportasi,
+            d_itemcs.jumlah,
+			t_pejabat.nama as ppk_nama, 
+			t_pejabat.nip as ppk_nip,
+            t_pegawai.jabatan as jabatan_ttd_spd,
+            SUBSTRING_INDEX(SUBSTRING_INDEX(d_itemcs.id_ttd_spd,'-',2),'-',-1) as nip_ttd_spd, 
+            SUBSTRING_INDEX(SUBSTRING_INDEX(d_itemcs.id_ttd_spd,'-',3),'-',-1) as nama_ttd_spd
+            
+            FROM d_surattugas JOIN t_unitkerja ON t_unitkerja.id = d_surattugas.id_unit 
+            JOIN d_itemcs ON d_surattugas.id_st = d_itemcs.id_st
+			JOIN t_pejabat ON d_surattugas.ppk_id = t_pejabat.id
+            JOIN t_pegawai ON  SUBSTRING_INDEX(SUBSTRING_INDEX(d_itemcs.id_ttd_spd,'-',2),'-',-1) = t_pegawai.nip  
+            
+            WHERE d_itemcs.id_cs = '".$Id_cs."' ORDER BY d_itemcs.nourut ");
+
+            return $query->result();
+
         }
     }
 }

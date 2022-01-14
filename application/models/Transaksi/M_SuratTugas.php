@@ -91,7 +91,7 @@ class M_SuratTugas extends CI_Model{
          return $query->num_rows();
 	}
 
-    function getDataUbah($kdindex, $id, $trigger){
+    function getDataUbah($kdindex, $id, $trigger,$data){
 
         if($trigger == "Tambah_Tim"){
 
