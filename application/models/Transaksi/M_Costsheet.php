@@ -6,7 +6,7 @@ class M_Costsheet extends CI_Model{
         $this->load->database();
 	}
 
-    function getData($id, $trigger){
+    function getData($id, $trigger,$kdsatker){
         if($trigger == "Detail"){  
             $query = $this->db->query("SELECT d_itemcs.* , d_surattugas.* , 
             t_unitkerja.nama_unit,
@@ -20,7 +20,9 @@ class M_Costsheet extends CI_Model{
         }else{
             if($id == 0){
                 $query = $this->db->query("SELECT d_costsheet.*, d_surattugas.kdindex,d_surattugas.status_id,d_costsheet.status_cs from d_costsheet
-                LEFT JOIN d_surattugas ON d_surattugas.id_st = d_costsheet.id_st WHERE d_costsheet.id_cs != '' AND d_costsheet.id_st!='0' ");
+                LEFT JOIN d_surattugas ON d_surattugas.id_st = d_costsheet.id_st 
+                WHERE d_costsheet.id_cs != '' AND d_costsheet.id_st!='0' AND d_surattugas.is_aktif = 1
+                AND d_surattugas.kdsatker = ".$kdsatker."");
 
             }else{
                 $query = $this->db->query("SELECT d_costsheet.*, d_surattugas.kdindex,d_surattugas.status_id from d_costsheet
@@ -70,7 +72,21 @@ class M_Costsheet extends CI_Model{
 
     }
 
-    function getData_Approve($kdindex, $id, $trigger,$data){
+    function getData_Approve($idcs, $id, $trigger,$data){
+
+      //  $query= $this->db->query("select * from t_app");
+
+        if($data == "lcl"){
+            $select = " t_pejabat.nama as nama_ttd, 
+            t_pejabat.nip as nip_ttd, ";
+            $join = "JOIN t_pejabat ON d_surattugas.id_ttd = t_pejabat.id ";
+
+        }else{
+            $select = " t_pegawai.nama as nama_ttd, 
+            t_pegawai.nip as nip_ttd, ";
+            $join = "JOIN t_pegawai ON d_surattugas.id_ttd = t_pegawai.nip ";
+
+        }
 
         $query = $this->db->query("SELECT 
         d_pagu.*, 
@@ -103,16 +119,15 @@ class M_Costsheet extends CI_Model{
         SUBSTRING_INDEX(SUBSTRING_INDEX(d_itemcs.id_ttd_spd,'-',3),'-',-1) as nama_ttd_spd, 
         d_itemcs.kotaasal,d_itemcs.kotatujuan, 
         
-        t_pegawai.nama as nama_ttd, 
-        t_pegawai.nip as nip_ttd, 
+       ".$select."
         
         t_satker.kdkabkota, 
         r_statuscs.uraian_pusat,
         r_statuscs.uraian_perwakilan, d_costsheet.id_cs 
         
         FROM d_surattugas 
-        JOIN d_pagu ON d_surattugas.kdindex = d_surattugas.kdindex 
-        JOIN t_pegawai ON d_surattugas.id_ttd = t_pegawai.nip 
+        JOIN d_pagu ON d_pagu.kdindex = d_surattugas.kdindex 
+        ".$join."
         JOIN t_satker ON d_surattugas.kdsatker = t_satker.kdsatker 
         JOIN d_bagipagu ON d_bagipagu.kdindex = d_surattugas.kdindex 
         JOIN t_unitkerja ON d_bagipagu.unit_id = t_unitkerja.id 
@@ -120,9 +135,11 @@ class M_Costsheet extends CI_Model{
         JOIN d_itemcs ON d_surattugas.id_st = d_itemcs.id_st 
         JOIN d_costsheet ON d_costsheet.id_cs = d_itemcs.id_cs
         
-        WHERE d_surattugas.id_st = ".$id." 
-        AND d_pagu.kdindex = '".$kdindex."' ORDER BY d_itemcs.nourut");
+        WHERE d_surattugas.id_st = ".$id." and d_itemcs.id_cs = '".$idcs."'
+        ");
         return $query->result_array();
+
+        
         
     }
 
@@ -166,14 +183,14 @@ class M_Costsheet extends CI_Model{
         r_statuscs.uraian_pusat,
         r_statuscs.uraian_perwakilan, d_costsheet.id_cs 
         
-        FROM d_surattugas 
+        FROM d_itemcs 
         JOIN d_pagu ON d_surattugas.kdindex = d_surattugas.kdindex 
         JOIN t_pegawai ON d_surattugas.id_ttd = t_pegawai.nip 
         JOIN t_satker ON d_surattugas.kdsatker = t_satker.kdsatker 
         JOIN d_bagipagu ON d_bagipagu.kdindex = d_surattugas.kdindex 
         JOIN t_unitkerja ON d_bagipagu.unit_id = t_unitkerja.id 
         JOIN r_statuscs ON d_surattugas.status_id = r_statuscs.id 
-        JOIN d_itemcs ON d_surattugas.id_st = d_itemcs.id_st 
+        JOIN d_surattugas ON d_surattugas.id_st = d_itemcs.id_st 
         JOIN d_costsheet ON d_costsheet.id_cs = d_itemcs.id_cs
         
         WHERE d_costsheet.id_cs = '".$id." '

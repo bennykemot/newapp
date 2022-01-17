@@ -284,7 +284,7 @@ function getUraian($dat){
                 </div>
             </div>
             <input readonly id="id_st" name="id_st" value="<?= $ubah[0]['idst'] ?>" hidden>
-            <!-- <input readonly id="id_cs" name="id_cs" value="<?= $ubah[0]['id_cs'] ?>" hidden> -->
+            <input readonly id="id_cs" name="id_cs" value="<?= $ubah[0]['id_cs'] ?>" hidden>
         </div>
     </div>
 

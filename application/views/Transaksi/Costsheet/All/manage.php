@@ -58,7 +58,7 @@ function hideNoSt($dat){
             </form>
           <div class="row">
             <div class="col s12">
-            <table id="tb-st-" class="bordered striped fixed fixed" style="white-space: normal;overflow-x : auto">
+            <table id="tb-st-" class="bordered striped responsive" style="white-space: normal;overflow-x : auto">
                   <thead>
                     <tr>
                         <th style="min-width: 5px" >NO</th>
@@ -77,7 +77,8 @@ function hideNoSt($dat){
                         <tr>
                             <td><?=$no++?></td>
                             <td class="text-center">
-                              <a href="<?= site_url('Transaksi/Apisima/approve/'.$costsheet[$i]->id_st.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$costsheet[$i]->kdindex.'/'.$costsheet[$i]->status_id.'/api')?>"
+                              <?php if($costsheet[$i]->from_data == "lcl"){$controller = "SuratTugas";$segment8 = $costsheet[$i]->kdindex;}else{$controller = "Apisima";$segment8 = $costsheet[$i]->id_cs;}?>
+                              <a href="<?= site_url('Transaksi/'.$controller.'/approve/'.$costsheet[$i]->id_st.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$segment8.'/'.$costsheet[$i]->status_id.'/'.$costsheet[$i]->from_data)?>"
                               class="tooltipped <?=disableApprove($costsheet[$i]->status_id,$role_id)?>" data-position="bottom" data-tooltip="Approve">
                                 <?= getStatusId($costsheet[$i]->status_cs)?>
                               </a>

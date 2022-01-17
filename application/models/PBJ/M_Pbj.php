@@ -36,7 +36,7 @@ class M_Pbj extends CI_Model
 		$this->db->select('v_mak_pbj.mak AS mak');
 		$this->db->select('v_mak_pbj.pagu AS pagu');
 		$this->db->select('(SELECT SUM(tppd.rupiah) FROM t_permintaan_pbj_detail tppd WHERE tppd.permintaan_pbj_id = t_permintaan_pbj.id) AS pengajuan');
-		$this->db->join('r_pegawai as pg_pjwb', 'pg_pjwb.id = '.$this->table.'.penangungjawab_id');
+		$this->db->join('t_pegawai as pg_pjwb', 'pg_pjwb.id = '.$this->table.'.penangungjawab_id');
 		$this->db->join('t_pejabat as pg_ppk', 'pg_ppk.id = '.$this->table.'.ppk');
 		$this->db->join('v_mak_pbj', 'v_mak_pbj.kd_index_bagipagu = '.$this->table.'.kdindex');
 		$this->db->from($this->table);

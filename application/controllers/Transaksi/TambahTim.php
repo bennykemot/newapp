@@ -25,8 +25,7 @@ class TambahTim extends CI_Controller {
         $data['ST'] = $this->SuratTugas->getDataUbah($kdindex, $id,$trigger,'');
         //$data['ubah'] = $this->SuratTugas->getDataUbah($kdindex, $id, 'Ubah_ST');
         $data['countST'] = $this->db->query("select id_st from d_itemcs where id_st = ".$id."")->result();
-		// $this->load->view('Transaksi/SuratTugas/TambahTim/manage', $data);
-        $this->load->view('Error404');
+		$this->load->view('Transaksi/SuratTugas/TambahTim/manage', $data);
 	}
 
  

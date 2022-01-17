@@ -45,12 +45,6 @@ class M_SuratTugas extends CI_Model{
         d_surattugas.is_aktif = 1 AND d_surattugas.kdsatker = ".$kdsatker." ".$whereD." ".$where." 
         ORDER BY d_surattugas.created_at LIMIT ".$from.",".$per_page."");
 
-        // $this->db->where('kdsatker', $kdsatker);
-        // $this->db->where('is_aktif', 1);
-        // $where;
-        // $this->db->order_by('tglst');
-        // $query = $this->db->get('d_surattugas');
-
         return $query->result();
      
     }
@@ -141,6 +135,7 @@ class M_SuratTugas extends CI_Model{
                                 d_itemcs.kotaasal,d_itemcs.kotatujuan,";
                                 $join = "JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
                                 JOIN t_pegawai ON t_pegawai.nip = t_pejabat.nip
+                                
 								
                                 ";
                                 $group = "GROUP BY d_itemcs.nip";
@@ -150,6 +145,14 @@ class M_SuratTugas extends CI_Model{
                 }else{
 
                         $cek = $this->db->query("SELECT id from d_itemcs WHERE id_st = ".$id."")->result_array();
+                        if($data == "api"){
+                            $aa="d_costsheet.status_cs,d_costsheet.id_cs,";
+                            $bb="JOIN d_costsheet ON d_costsheet.id_cs = d_itemcs.id_cs";
+
+                        }else{
+                            $aa="";
+                            $bb="";
+                        }
                         $select ="";$join="";$order="";
                         if(count($cek) > 0){
                             $select = "d_itemcs.nourut, d_itemcs.jabatan,
@@ -163,10 +166,12 @@ class M_SuratTugas extends CI_Model{
                             d_itemcs.jnstransportasi, CONCAT('WithTim') as tim, d_itemcs.id as idtim,d_itemcs.nospd,d_itemcs.id_ttd_spd,
                             SUBSTRING_INDEX(SUBSTRING_INDEX(d_itemcs.id_ttd_spd,'-',2),'-',-1) as nip_ttd_spd, 
                             SUBSTRING_INDEX(SUBSTRING_INDEX(d_itemcs.id_ttd_spd,'-',3),'-',-1) as nama_ttd_spd,
-                           
+                            r_statuscs.uraian_pusat,r_statuscs.uraian_perwakilan, ".$aa."
                             
                             d_itemcs.kotaasal,d_itemcs.kotatujuan,";
-                            $join = "JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st";
+                            $join = "JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
+                            ".$bb."
+                            JOIN r_statuscs ON d_surattugas.status_id = r_statuscs.id";
                             $group="";
 
                             $order ="ORDER BY d_itemcs.nourut";
@@ -179,7 +184,7 @@ class M_SuratTugas extends CI_Model{
                         }
                 }
             $query = $this->db->query('SELECT d_pagu.*, d_surattugas.nost, d_surattugas.tglst, 
-            d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.idx_temp,d_costsheet.status_cs,
+            d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.idx_temp,
             d_surattugas.tglselesaist ,d_surattugas.id_unit,d_surattugas.id as idst,d_surattugas.idxskmpnen, 
             d_surattugas.id_ttd,d_surattugas.kdsatker,d_surattugas.id_ttd,d_surattugas.jumlah_uang,d_surattugas.cs_menyetujui,d_surattugas.cs_mengajukan,
             d_surattugas.id_tahapan,d_surattugas.id_app,d_surattugas.status_id,d_bagipagu.unit_id, d_surattugas.status_id, d_surattugas.status_penandatangan,
@@ -190,8 +195,8 @@ class M_SuratTugas extends CI_Model{
             '.$select.'
             t_pejabat.nama as nama_ttd,
             t_pejabat.nip as nip_ttd,
-            t_satker.kdkabkota,
-            r_statuscs.uraian_pusat,r_statuscs.uraian_perwakilan,d_costsheet.id_cs
+            t_satker.kdkabkota
+            
             
             FROM d_surattugas 
             JOIN d_pagu ON d_surattugas.kdindex = d_surattugas.kdindex 
@@ -199,9 +204,8 @@ class M_SuratTugas extends CI_Model{
             JOIN t_satker ON d_surattugas.kdsatker = t_satker.kdsatker 
             JOIN d_bagipagu ON d_bagipagu.kdindex = d_surattugas.kdindex
             JOIN t_unitkerja ON d_bagipagu.unit_id = t_unitkerja.id
-            JOIN r_statuscs ON d_surattugas.status_id = r_statuscs.id
             
-            '.$join.' JOIN d_costsheet ON d_costsheet.id_cs = d_itemcs.id_cs
+            '.$join.' 
             WHERE d_surattugas.id = '.$id.' 
             AND d_pagu.kdindex = "'.$kdindex.'" '.$group.'
             '. $order.'');

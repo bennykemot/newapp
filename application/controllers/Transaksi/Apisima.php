@@ -119,7 +119,9 @@ class Apisima extends CI_Controller {
     function Getcostsheet(){
         $id = $this->uri->segment(4);
         $trigger = $this->uri->segment(5);
-        $data['costsheet']= $this->Costsheet->getData($id,$trigger);
+        $kdsatker = $this->session->userdata("kdsatker"); 
+        
+        $data['costsheet']= $this->Costsheet->getData($id,$trigger, $kdsatker);
 
         if($id == 0){
             $data['result']= "All";
@@ -215,11 +217,17 @@ class Apisima extends CI_Controller {
 
     public function approve()
 	{   
-        $a = $this->uri->segment(8);
+        $idcs = $this->uri->segment(8);
         $dataFrom = $this->uri->segment(10);
-        $kdindex = str_replace("%20", " ", $a);
+        // $kdindex = str_replace("%20", " ", $a);
         $id =  $this->uri->segment(4);
-        $data['ubah'] = $this->Costsheet->getData_Approve($kdindex, $id, 'Ubah_ST',$dataFrom);
+        $data['cTim'] = $this->db->query("SELECT id from d_itemcs where id_st = ".$id."")->result();
+        if(Count($data['cTim']) > 0){
+        $data['ubah'] = $this->Costsheet->getData_Approve($idcs, $id, 'Ubah_ST',$dataFrom);
+
+        //if($kdsatker == 450491){
+        //    echo count($data['ubah']);
+        //}
 
         $kdsatker = $this->session->userdata("kdsatker");
         $thang = $this->session->userdata("thang");
@@ -232,7 +240,19 @@ class Apisima extends CI_Controller {
         $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unit_id, $role_id);
         $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unit_id, $role_id);
         
-		$this->load->view('Transaksi/SuratTugas/Approve/manage',$data);
+		$this->load->view('Transaksi/Costsheet/Approve/manage',$data);
+        }else{
+            ?> <script type="text/javascript">
+                    alert("Belum Ada Tim !");
+                    setTimeout(function() {
+                        window.close();
+                        window.history.back();
+                    }, 100);
+                    
+                    
+                </script>
+                <?php 
+        }
 	}
 
     
@@ -461,7 +481,8 @@ class Apisima extends CI_Controller {
                             'tujuanst' =>  $this->input->post('kotatujuan'.$j.''),
                             'totaluangharian' =>  $totaluangharian,
                             'totaluanginap ' =>  $totaluanginap,
-                            'biaya' =>  $sum
+                            'biaya' =>  $sum,
+                            'from_data' =>  "api"
                             );
         
                             

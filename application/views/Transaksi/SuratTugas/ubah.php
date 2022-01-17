@@ -155,7 +155,7 @@ if($ubah[0]['status_id'] == 3 || $ubah[0]['status_id'] > 4){
                                 </label>
                             </div>
 
-                            <input  hidden type="text" id="status_penandatangan_cs" name="status_penandatangan_cs" value="<?=$ubah[0]['status_cs']?>"/>
+                            <!-- <input  hidden type="text" id="status_penandatangan_cs" name="status_penandatangan_cs" value="<?=$ubah[0]['status_cs']?>"/> -->
 
 
                             <div class="input-field col s9 " >

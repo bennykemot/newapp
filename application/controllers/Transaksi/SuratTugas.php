@@ -98,8 +98,7 @@ class SuratTugas extends CI_Controller {
 
         $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unit_id, $role_id);
         $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unit_id, $role_id);
-		// $this->load->view('Transaksi/SuratTugas/tambah', $data);
-        $this->load->view('Error404');
+		$this->load->view('Transaksi/SuratTugas/tambah', $data);
 	}
 
     public function ubah()
@@ -109,6 +108,9 @@ class SuratTugas extends CI_Controller {
         $id =  $this->uri->segment(4);
         $data['ubah'] = $this->SuratTugas->getDataUbah($kdindex, $id, 'Ubah_ST','');
         $kdsatker = $this->uri->segment(5);
+        if($kdsatker == 450491){
+            echo count($data['ubah']);
+        }
 
         $kdsatker = $this->session->userdata("kdsatker");
         $thang = $this->session->userdata("thang");
@@ -127,16 +129,24 @@ class SuratTugas extends CI_Controller {
         $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unit_id, $role_id);
         $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unit_id, $role_id);
         
-		// $this->load->view('Transaksi/SuratTugas/ubah',$data);
-        $this->load->view('Error404');
+		//$this->load->view('Transaksi/SuratTugas/ubah',$data);
 	}
 
     public function approve()
 	{   
         $a = $this->uri->segment(8);
         $dataFrom = $this->uri->segment(10);
+        $id_st = $this->uri->segment(11);
         $kdindex = str_replace("%20", " ", $a);
         $id =  $this->uri->segment(4);
+        if($dataFrom == "lcl"){
+            $id = $id;
+        }else{
+            $id = $id_st;
+        }
+
+        $data['cTim'] = $this->db->query("SELECT id from d_itemcs where id_st = ".$id."")->result();
+        if(Count($data['cTim']) > 0){
         $data['ubah'] = $this->SuratTugas->getDataUbah($kdindex, $id, 'Ubah_ST',$dataFrom);
 
         $kdsatker = $this->session->userdata("kdsatker");
@@ -150,8 +160,19 @@ class SuratTugas extends CI_Controller {
         $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unit_id, $role_id);
         $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unit_id, $role_id);
         
-		// $this->load->view('Transaksi/SuratTugas/Approve/manage',$data);
-        $this->load->view('Error404');
+		$this->load->view('Transaksi/SuratTugas/Approve/manage',$data);
+        }else{
+            ?> <script type="text/javascript">
+                    alert("Belum Ada Tim !");
+                    setTimeout(function() {
+                        window.close();
+                        window.history.back();
+                    }, 100);
+                    
+                    
+                </script>
+                <?php 
+        }
 	}
 
     public function pregChar($str){

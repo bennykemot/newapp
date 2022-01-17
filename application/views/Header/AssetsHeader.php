@@ -289,7 +289,7 @@ function ApproveKPA($data){
 
   function getComplete($data, $yn){
     $none="";
-      if($data == 3 && $yn == "N" || $data == 4 && $yn == "N"|| $data == 4 && $yn == "Y"){
+      if($data == 3 && $yn == "N" || $data == 4 && $yn == "N"){
               $none ="d-none";
       }
       return $none;

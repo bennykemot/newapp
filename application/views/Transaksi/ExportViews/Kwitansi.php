@@ -209,7 +209,7 @@ function cek_tgl($tanggal){
             <tr>
                 <td width="30%">Nomor / Tanggal</td>
                 <td width="2%">:</td>
-                <td><?=$e->nost?> /<?=cek_tgl($e->tglst)?></td>
+                <td><?=$e->nospd?> /<?=cek_tgl($e->tglst)?></td>
             </tr>
 
             <tr>
