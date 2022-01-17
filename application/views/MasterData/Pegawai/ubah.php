@@ -29,7 +29,7 @@
                             <div class="input-field col s2"><label>NIP Lama</label></div>
 
                             <div class="input-field col s10 " >
-                            <input type="text" id="niplama" name="niplama" value="<?= $ubah[0]['niplama'] ?>" readonly>
+                            <input type="text" id="niplama" name="niplama" value="<?= $ubah[0]['niplama'] ?>">
                             
 							<input type="text" id="id" name="id" value="<?= $ubah[0]['id'] ?>" hidden>
                             </div>
@@ -39,7 +39,7 @@
                             <div class="input-field col s2"><label>NIP Baru</label></div>
 
                             <div class="input-field col s10 " >
-                            <input type="text" id="nipbaru" name="nipbaru" value="<?= $ubah[0]['nip'] ?>" readonly>
+                            <input type="text" id="nipbaru" name="nipbaru" value="<?= $ubah[0]['nip'] ?>">
                             </div>
                         </div>
 
@@ -47,7 +47,7 @@
                             <div class="input-field col s2"><label>Nama Lengkap</label></div>
 
                             <div class="input-field col s10 " >
-                            <input type="text" id="nama_lengkap" name="nama_lengkap" value="<?= $ubah[0]['nama_lengkap'] ?>" readonly>
+                            <input type="text" id="nama_lengkap" name="nama_lengkap" value="<?= $ubah[0]['nama_lengkap'] ?>">
                             </div>
                         </div>
 
