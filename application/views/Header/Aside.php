@@ -137,7 +137,7 @@ function mappingD_none($data){
           </i><span class="menu-title" data-i18n="Mail">Lembur</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('PBJ/Pbj/Page')?>">
           <i class="material-icons">
           call_to_action
           </i><span class="menu-title" data-i18n="Mail">PBJ</span></a>
@@ -238,7 +238,7 @@ function mappingD_none($data){
           </i><span class="menu-title" data-i18n="Mail">Lembur</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>f">
+          <li class="bold"><a class="waves-effect waves-cyan" href=""<?= site_url('PBJ/Pbj/Page')?>">
           <i class="material-icons">
           call_to_action
           </i><span class="menu-title" data-i18n="Mail">PBJ</span></a>
@@ -362,7 +362,7 @@ function mappingD_none($data){
           </i><span class="menu-title" data-i18n="Mail">Lembur</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>f">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('PBJ/Pbj/Page')?>">
           <i class="material-icons">
           call_to_action
           </i><span class="menu-title" data-i18n="Mail">PBJ</span></a>

@@ -15,6 +15,7 @@ class Pbj_detail extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->library("datatables");
 		$this->load->library('pagination');
+		$this->load->helper('bisma_helper');
 		$this->load->model('PBJ/M_Pbj_detail','pbjdetail');
 		$this->load->model('M_data','mdata');
 	}
