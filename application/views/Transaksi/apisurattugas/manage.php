@@ -28,7 +28,7 @@
           <!-- <a class="btn modal-trigger col s2" href="#modal2">Tambah Data</a> -->
           <div class="row">
             <div class="col s12">
-              <form method="post" action ="<?= site_url('Transaksi/Apisima/filterrAPI')?>">
+              <form method="post" action ="<?= site_url('Transaksi/Apisima/Data')?>">
 
                 <div class="input-field col s12">
                     <div class="input-field col s2"><label>Tanggal Mulai</label></div>
@@ -69,7 +69,11 @@
                     <tr>
                     <td><?php echo $no ?></td>
                       <td><?=$st['status_st']?></td>
-                      <td><a href="<?= site_url('Transaksi/Apisima/Getcostsheet/'.$st['id_st'].'/All')?>"><?=$st['no_surat_tugas']?></a><br><?=$st['nama_penugasan']?></td>
+                      <td>
+                          <!-- <a href="<?= site_url('Transaksi/Apisima/Getcostsheet/'.$st['id_st'].'/All')?>">
+                          <?=$st['no_surat_tugas']?></a><br> -->
+                          <?=$st['no_surat_tugas']?>
+                          <?=$st['nama_penugasan']?></td>
                       <td><?=cek_tgl_st($st['tanggal_mulai'])?></td>
                       <td><?=cek_tgl_st($st['tanggal_selesai'])?></td>
                       <td class="text-center">

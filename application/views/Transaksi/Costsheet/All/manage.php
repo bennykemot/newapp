@@ -46,12 +46,20 @@ function hideNoSt($dat){
     <div class="col s12">
       <div class="card">
         <div class="card-content">
-          <h4 class="card-title col s10"></h4>
-          <!-- <a class="btn modal-trigger col s2" href="#modal2">Tambah Data</a> -->
+            <form method="post" action ="<?= site_url('Transaksi/Apisima/filterrAPI')?>">
+                <div class="input-field col s12">
+                    <div class="input-field col s2"><label>Nomor ST</label></div>
+
+                    <div class="input-field col s10 " >
+                    <select class="browser-default" id="nost" name="nost"></select>
+                    </div>
+                </div>
+                <button type="submit" class="btn cyan col s12" name="tombol" >FILTER</button>
+            </form>
           <div class="row">
             <div class="col s12">
             <table id="tb-st-" class="bordered striped fixed fixed" style="white-space: normal;overflow-x : auto">
-                                          <thead>
+                  <thead>
                     <tr>
                         <th style="min-width: 5px" >NO</th>
                         <th style="min-width: 5px" >STATUS</th>
@@ -71,7 +79,7 @@ function hideNoSt($dat){
                             <td class="text-center">
                               <a href="<?= site_url('Transaksi/Apisima/approve/'.$costsheet[$i]->id_st.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$costsheet[$i]->kdindex.'/'.$costsheet[$i]->status_id.'/api')?>"
                               class="tooltipped <?=disableApprove($costsheet[$i]->status_id,$role_id)?>" data-position="bottom" data-tooltip="Approve">
-                                <?= getStatusId($costsheet[$i]->status_id)?>
+                                <?= getStatusId($costsheet[$i]->status_cs)?>
                               </a>
                             <td><div <?=hideNoSt($result)?>><?=$costsheet[$i]->nost?></div><?=$costsheet[$i]->id_cs?><br><?=$costsheet[$i]->uraianst?></td>
                             <td><?=rupiah($costsheet[$i]->biaya)?></td>
@@ -101,11 +109,13 @@ function hideNoSt($dat){
                                           </li>
                                       </ul>
                                   </div>
+                                  <?php if($costsheet[$i]->status_id ==3){?>
                                   <div class="col s4">
-                                    <a href="<?= site_url('Transaksi/SuratTugas/ubah/'.$costsheet[$i]->id_cs.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$costsheet[$i]->kdindex)?>" 
+                                    <a href="<?= site_url('Transaksi/Apisima/ubah/'.$costsheet[$i]->id_cs.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$costsheet[$i]->kdindex)?>" 
                                       class="tooltipped <?=getForAdminOpr($role_id)?> <?=getComplete($costsheet[$i]->status_id, 'Y')?>" 
                                       data-position="bottom" data-tooltip="Ubah CS" ><i class="material-icons green-text">edit</i></a>
                                   </div>
+                                  <?php }?>
                                 </div>
                               </div>
 

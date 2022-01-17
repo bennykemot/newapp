@@ -36,7 +36,7 @@ class Apisima extends CI_Controller {
 
     }
 
-    function getData_Post($url,$uri,$kdsatker,$unit_id,$role_id,$penjab_id){
+    function getData_Post($url,$uri,$kdsatker,$unit_id,$role_id,$penjab_id,$mulai,$selesai){
 
         $client = new Client([
             'base_uri' => $url,
@@ -69,7 +69,9 @@ class Apisima extends CI_Controller {
             'form_params' => [
                 'id_st' => "",
                 'kd_satker' => $kdsatker,
-                'id_unit_kerja' => $unit_id
+                'id_unit_kerja' => $unit_id,
+                'tanggal_awal' => $mulai,
+                'tanggal_akhir' => $selesai
             ]
             ]);
 
@@ -86,6 +88,9 @@ class Apisima extends CI_Controller {
         $unit_id = $this->session->userdata("unit_id");
         $user_id = $this->session->userdata("user_id");
 
+        $mulai =  $this->input->post('tglst_mulai');
+        $selesai =  $this->input->post('tglst_selesai');
+
         if($role_id == 5 || $role_id == 7 || $role_id == 3){
             $penjab_id = $this->session->userdata("penjab_id");
           }else{
@@ -94,7 +99,7 @@ class Apisima extends CI_Controller {
           }
 
         
-        $data = json_decode($this->getData_Post($this->API,'getdatadetil',$kdsatker,$unit_id,$role_id,$penjab_id), true); 
+        $data = json_decode($this->getData_Post($this->API,'getdatadetil',$kdsatker,$unit_id,$role_id,$penjab_id,$mulai,$selesai), true); 
         $this->load->view('Transaksi/apisurattugas/manage',$data);
         // echo $data['data'][0]['sumber_data'];
         // var_dump($data['data'][0]['sumber_data']); 
@@ -110,6 +115,7 @@ class Apisima extends CI_Controller {
 
     }
 
+
     function Getcostsheet(){
         $id = $this->uri->segment(4);
         $trigger = $this->uri->segment(5);
@@ -120,8 +126,6 @@ class Apisima extends CI_Controller {
         }else{
             $data['result']= "Detail";
         }
-
-        //echo count($data['costsheet']);
 
         if(count($data['costsheet']) > 0){
             
@@ -186,13 +190,36 @@ class Apisima extends CI_Controller {
 
     }
 
+    public function ubah()
+	{   
+        $a = $this->uri->segment(8);
+        $kdindex = str_replace("%20", " ", $a);
+        $id =  $this->uri->segment(4);
+        $data['ubah'] = $this->Costsheet->getData_Ubah($kdindex, $id, 'Ubah_ST','');
+        $kdsatker = $this->uri->segment(5);
+
+        $kdsatker = $this->session->userdata("kdsatker");
+        $thang = $this->session->userdata("thang");
+        $user_id = $this->session->userdata("user_id");
+        $role_id = $this->session->userdata("role_id");
+        $unit_id = $this->session->userdata("unit_id");
+        $username = $this->session->userdata("username");
+
+        $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unit_id, $role_id);
+        $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unit_id, $role_id);
+
+        //var_dump($data['ubah']);
+        
+		$this->load->view('Transaksi/Costsheet/Edit/manage',$data);
+	}
+
     public function approve()
 	{   
         $a = $this->uri->segment(8);
         $dataFrom = $this->uri->segment(10);
         $kdindex = str_replace("%20", " ", $a);
         $id =  $this->uri->segment(4);
-        $data['ubah'] = $this->Costsheet->getData_Ubah($kdindex, $id, 'Ubah_ST',$dataFrom);
+        $data['ubah'] = $this->Costsheet->getData_Approve($kdindex, $id, 'Ubah_ST',$dataFrom);
 
         $kdsatker = $this->session->userdata("kdsatker");
         $thang = $this->session->userdata("thang");
