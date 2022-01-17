@@ -118,12 +118,12 @@ function cek_tgl($tanggal){
 								echo substr($ket,4);
 							}else{
 								$unitId = $ubah[0]['kdunit'];
-								$nama_unit = $ubah[0]['nama_unit'];
+								$nama_grup = $ubah[0]['nama_grup'];
                                 if($unitId < '605000' && $unitId > '900'){
                                     if($unitId < '106000'){
-                                        echo "Kepala " .$nama_unit;
+                                        echo "Kepala " .$nama_grup;
                                     }else{
-                                        echo "Direktur " .$nama_unit;
+                                        echo "Direktur " .$nama_grup;
                                     }
                                 }else{
                                     echo "Kepala ";
