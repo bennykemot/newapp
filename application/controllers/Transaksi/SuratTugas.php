@@ -98,7 +98,8 @@ class SuratTugas extends CI_Controller {
 
         $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unit_id, $role_id);
         $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unit_id, $role_id);
-		$this->load->view('Transaksi/SuratTugas/tambah', $data);
+		// $this->load->view('Transaksi/SuratTugas/tambah', $data);
+        $this->load->view('Error404');
 	}
 
     public function ubah()
@@ -126,7 +127,8 @@ class SuratTugas extends CI_Controller {
         $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unit_id, $role_id);
         $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unit_id, $role_id);
         
-		$this->load->view('Transaksi/SuratTugas/ubah',$data);
+		// $this->load->view('Transaksi/SuratTugas/ubah',$data);
+        $this->load->view('Error404');
 	}
 
     public function approve()
@@ -148,7 +150,8 @@ class SuratTugas extends CI_Controller {
         $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unit_id, $role_id);
         $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unit_id, $role_id);
         
-		$this->load->view('Transaksi/SuratTugas/Approve/manage',$data);
+		// $this->load->view('Transaksi/SuratTugas/Approve/manage',$data);
+        $this->load->view('Error404');
 	}
 
     public function pregChar($str){
@@ -486,19 +489,40 @@ class SuratTugas extends CI_Controller {
 
         }else if($Trigger == "Approve"){
             $status_st = $this->input->post('id_status');
+            $status_cs = $this->input->post('id_status_cs');
             
-            $status_st = $status_st + 1;
+            
+
+            if($status_st == 9){
+                $status_st = 9;
+            }else{
+                $status_st = $status_st + 1;
+            }
+
+            if($status_cs == 9){
+                $status_cs = 9;
+            }else{
+                $status_cs = $status_cs + 1;
+            }
 
             $data_st = array(
                 'status_id' => $status_st
             );
 
-            $where = array('id' => $this->input->post('idst'));
-            $this->SuratTugas->Update($data_st,'d_surattugas', $where);
+            $data_cs = array(
+                'status_cs' => $status_cs
+            );
+
+            $where_st = array('id' => $this->input->post('idst'));
+            $where_cs = array('id_cs' => $this->input->post('id_cs'));
+            $this->SuratTugas->Update($data_st,'d_surattugas', $where_st);
+            $this->SuratTugas->Update($data_cs,'d_costsheet', $where_cs);
 
 
         }else if($Trigger == "TolakApprove"){
             $status_st = $this->input->post('id_status');
+            $status_cs = $this->input->post('id_status_cs');
+            
 
             if($status_st == 3){
                 $status_st = 1;
@@ -507,14 +531,28 @@ class SuratTugas extends CI_Controller {
             }else{
                 $status_st = $status_st - 1;
             }
+
+            if($status_cs == 3){
+                $status_cs = 1;
+            }else if($status_cs == 1){
+                $status_cs = 1;
+            }else{
+                $status_cs = $status_cs - 1;
+            }
             
 
             $data_st = array(
                 'status_id' => $status_st
             );
 
-            $where = array('id' => $this->input->post('idst'));
-            $this->SuratTugas->Update($data_st,'d_surattugas', $where);
+            $data_cs = array(
+                'status_cs' => $status_cs
+            );
+
+            $where_st = array('id' => $this->input->post('idst'));
+            $where_cs = array('id_cs' => $this->input->post('id_cs'));
+            $this->SuratTugas->Update($data_st,'d_surattugas', $where_st);
+            $this->SuratTugas->Update($data_cs,'d_costsheet', $where_cs);
 
 
         }

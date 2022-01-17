@@ -292,12 +292,11 @@ function getUraian($dat){
 
                         
                         <div class="col s12" style="padding-top: 10px">
-                        <div class="col s6">
-                                <button id="TolakST" class="btn red col s12"><i class="material-icons left">close</i> Tolak</button>
-                            </div>
-                            
-                            <div class="col s6">
-                                <button id="ApproveST" class="btn col s12"><i class="material-icons left">done</i> Approve</button>
+                        <div class="col s12" style="padding-top: 10px">
+                            <div class="col s9"></div>
+
+                            <div class="col s3">
+                                <button id="UbahST" class="btn col s12"><i class="material-icons left">done</i> Simpan</button>
                             </div>
                         </div>
                         

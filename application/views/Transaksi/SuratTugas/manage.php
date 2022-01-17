@@ -58,7 +58,7 @@
                         <tr>
                             <td><?php echo $no ?></td>
                             <td class="text-center">
-                              <a href="<?= site_url('Transaksi/SuratTugas/approve/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex.'/'.$u->status_id)?>"
+                              <a href="<?= site_url('Transaksi/SuratTugas/approve/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex.'/'.$u->status_id.'/lcl')?>"
                               class="tooltipped <?=disableApprove($u->status_id,$role_id)?>" data-position="bottom" data-tooltip="Approve">
                                 <?= getStatusId($u->status_id)?>
                               </a>

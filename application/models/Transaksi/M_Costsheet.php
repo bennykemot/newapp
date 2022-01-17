@@ -19,7 +19,7 @@ class M_Costsheet extends CI_Model{
             where d_itemcs.id_cs = '".$id."'");
         }else{
             if($id == 0){
-                $query = $this->db->query("SELECT d_costsheet.*, d_surattugas.kdindex,d_surattugas.status_id from d_costsheet
+                $query = $this->db->query("SELECT d_costsheet.*, d_surattugas.kdindex,d_surattugas.status_id,d_costsheet.status_cs from d_costsheet
                 LEFT JOIN d_surattugas ON d_surattugas.id_st = d_costsheet.id_st WHERE d_costsheet.id_cs != '' AND d_costsheet.id_st!='0' ");
 
             }else{
@@ -70,12 +70,12 @@ class M_Costsheet extends CI_Model{
 
     }
 
-    function getData_Ubah($kdindex, $id, $trigger,$data){
+    function getData_Approve($kdindex, $id, $trigger,$data){
 
         $query = $this->db->query("SELECT 
         d_pagu.*, 
         d_surattugas.nost, d_surattugas.tglst, d_surattugas.uraianst, 
-        d_surattugas.tglmulaist, d_surattugas.idx_temp,d_surattugas.status_cs, 
+        d_surattugas.tglmulaist, d_surattugas.idx_temp,d_costsheet.status_cs, 
         d_surattugas.tglselesaist ,d_surattugas.id_unit,d_surattugas.id_st as idst,
         d_surattugas.idxskmpnen, d_surattugas.id_ttd,d_surattugas.kdsatker,
         d_surattugas.id_ttd,d_surattugas.jumlah_uang,d_surattugas.cs_menyetujui,
@@ -121,6 +121,62 @@ class M_Costsheet extends CI_Model{
         JOIN d_costsheet ON d_costsheet.id_cs = d_itemcs.id_cs
         
         WHERE d_surattugas.id_st = ".$id." 
+        AND d_pagu.kdindex = '".$kdindex."' ORDER BY d_itemcs.nourut");
+        return $query->result_array();
+        
+    }
+
+    function getData_Ubah($kdindex, $id, $trigger,$data){
+
+        $query = $this->db->query("SELECT 
+        d_pagu.*, 
+        d_surattugas.nost, d_surattugas.tglst, d_surattugas.uraianst, 
+        d_surattugas.tglmulaist, d_surattugas.idx_temp,d_costsheet.status_cs, 
+        d_surattugas.tglselesaist ,d_surattugas.id_unit,d_surattugas.id_st as idst,
+        d_surattugas.idxskmpnen, d_surattugas.id_ttd,d_surattugas.kdsatker,
+        d_surattugas.id_ttd,d_surattugas.jumlah_uang,d_surattugas.cs_menyetujui,
+        d_surattugas.cs_mengajukan, d_surattugas.id_tahapan,d_surattugas.id_app
+        ,d_surattugas.status_id,d_bagipagu.unit_id, d_surattugas.status_id, 
+        d_surattugas.status_penandatangan, 
+        
+        t_unitkerja.nama_unit, 
+        t_unitkerja.nama_grup, t_unitkerja.grup_id as kdunit, 
+        
+        d_itemcs.nourut, d_itemcs.jabatan, d_itemcs.nama, 
+        d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan, 
+        d_itemcs.tglberangkat, d_itemcs.tglkembali, 
+        d_itemcs.jmlhari,d_itemcs.totaluangharian, 
+        d_itemcs.totalinap, d_itemcs.totalrep, 
+        d_itemcs.tarifrep, d_itemcs.tariftaxi,d_itemcs.tariflaut,
+        d_itemcs.tarifudara,d_itemcs.tarifdarat,d_itemcs.lain, 
+        d_itemcs.totaltravel, d_itemcs.jumlah, d_itemcs.transport,
+        d_itemcs.tarifuangharian,d_itemcs.tarifinap, 
+        d_itemcs.jnstransportasi, CONCAT('WithTim') as tim, 
+        d_itemcs.id as idtim,
+        d_itemcs.nospd,
+        d_itemcs.id_ttd_spd, 
+        SUBSTRING_INDEX(SUBSTRING_INDEX(d_itemcs.id_ttd_spd,'-',2),'-',-1) as nip_ttd_spd, 
+        SUBSTRING_INDEX(SUBSTRING_INDEX(d_itemcs.id_ttd_spd,'-',3),'-',-1) as nama_ttd_spd, 
+        d_itemcs.kotaasal,d_itemcs.kotatujuan, 
+        
+        t_pegawai.nama as nama_ttd, 
+        t_pegawai.nip as nip_ttd, 
+        
+        t_satker.kdkabkota, 
+        r_statuscs.uraian_pusat,
+        r_statuscs.uraian_perwakilan, d_costsheet.id_cs 
+        
+        FROM d_surattugas 
+        JOIN d_pagu ON d_surattugas.kdindex = d_surattugas.kdindex 
+        JOIN t_pegawai ON d_surattugas.id_ttd = t_pegawai.nip 
+        JOIN t_satker ON d_surattugas.kdsatker = t_satker.kdsatker 
+        JOIN d_bagipagu ON d_bagipagu.kdindex = d_surattugas.kdindex 
+        JOIN t_unitkerja ON d_bagipagu.unit_id = t_unitkerja.id 
+        JOIN r_statuscs ON d_surattugas.status_id = r_statuscs.id 
+        JOIN d_itemcs ON d_surattugas.id_st = d_itemcs.id_st 
+        JOIN d_costsheet ON d_costsheet.id_cs = d_itemcs.id_cs
+        
+        WHERE d_costsheet.id_cs = '".$id." '
         AND d_pagu.kdindex = '".$kdindex."' ORDER BY d_itemcs.nourut");
         return $query->result_array();
         
@@ -191,5 +247,11 @@ class M_Costsheet extends CI_Model{
             return $query->result();
 
         }
+    }
+
+    function getData_costsheetJSON($kdsatker){
+        $query = $this->db->query("SELECT d_costsheet.*, d_surattugas.kdindex,d_surattugas.status_id from d_costsheet
+                LEFT JOIN d_surattugas ON d_surattugas.id_st = d_costsheet.id_st WHERE d_costsheet.id_cs != '' AND d_costsheet.id_st!='0' ");
+                return $query->result_array();
     }
 }

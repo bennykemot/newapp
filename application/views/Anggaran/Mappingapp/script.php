@@ -203,8 +203,8 @@
 
       var grid_detail_app = "#tb-app";
       var collapsedGroups = [];
-	var groupParent = [];
-    var counter = 1;
+      var groupParent = [];
+      var counter = 1;
       $(grid_detail_app).DataTable({
         
             serverSide: true,

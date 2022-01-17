@@ -179,7 +179,7 @@ class M_SuratTugas extends CI_Model{
                         }
                 }
             $query = $this->db->query('SELECT d_pagu.*, d_surattugas.nost, d_surattugas.tglst, 
-            d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.idx_temp,d_surattugas.status_cs,
+            d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.idx_temp,d_costsheet.status_cs,
             d_surattugas.tglselesaist ,d_surattugas.id_unit,d_surattugas.id as idst,d_surattugas.idxskmpnen, 
             d_surattugas.id_ttd,d_surattugas.kdsatker,d_surattugas.id_ttd,d_surattugas.jumlah_uang,d_surattugas.cs_menyetujui,d_surattugas.cs_mengajukan,
             d_surattugas.id_tahapan,d_surattugas.id_app,d_surattugas.status_id,d_bagipagu.unit_id, d_surattugas.status_id, d_surattugas.status_penandatangan,

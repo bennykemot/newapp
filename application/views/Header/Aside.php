@@ -103,7 +103,19 @@ function mappingD_none($data){
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/SuratTugas/Page/0')?>">
           <i class="material-icons">
           email
-          </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>
+          </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai (BISMA)</span></a>
+          </li>
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/Apisima/Data')?>">
+          <i class="material-icons">
+          add
+          </i><span class="menu-title" data-i18n="Mail">Daftar ST SIMA</span></a>
+          </li>
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/Apisima/Getcostsheet/0/All')?>">
+          <i class="material-icons">
+          email
+          </i><span class="menu-title" data-i18n="Mail">Costsheet Pegawai (SIMA)</span></a>
           </li>
 
 
@@ -178,10 +190,22 @@ function mappingD_none($data){
           </li>
 
           <!-- DIGRUP RENCANA KEGIATAN -->
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Superadmin/Transaksi/SuratTugas/Page/0')?>">
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/SuratTugas/Page/0')?>">
           <i class="material-icons">
           email
-          </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>
+          </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai (BISMA)</span></a>
+          </li>
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/Apisima/Data')?>">
+          <i class="material-icons">
+          add
+          </i><span class="menu-title" data-i18n="Mail">Daftar ST SIMA</span></a>
+          </li>
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/Apisima/Getcostsheet/0/All')?>">
+          <i class="material-icons">
+          email
+          </i><span class="menu-title" data-i18n="Mail">Costsheet Pegawai (SIMA)</span></a>
           </li>
 
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/Apisima/Data')?>">
@@ -299,13 +323,19 @@ function mappingD_none($data){
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/SuratTugas/Page/0')?>">
           <i class="material-icons">
           email
-          </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai</span></a>
+          </i><span class="menu-title" data-i18n="Mail">Perjadin Pegawai (BISMA)</span></a>
           </li>
 
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/Apisima/Data')?>">
           <i class="material-icons">
           add
           </i><span class="menu-title" data-i18n="Mail">Daftar ST SIMA</span></a>
+          </li>
+
+          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/Apisima/Getcostsheet/0/All')?>">
+          <i class="material-icons">
+          email
+          </i><span class="menu-title" data-i18n="Mail">Costheet Pegawai (SIMA)</span></a>
           </li>
 
           <!-- <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Transaksi/Apisima/Getcostsheet/0/All')?>">
