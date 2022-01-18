@@ -45,13 +45,13 @@
                       </div>
                     </div> -->
 						  <div class="col s12 m12">
-               <div class="card gradient-shadow grey lighten-3 border-radius-3 animate fadeUp">
-                  <div class="card-content center">
-                     <img src="<?= base_url().'assets'?>/app-assets/images/logo/LOGO-BISMA.png" class="width-10" alt="BISMA">
-                     <h4 class="font-weight-900 text-uppercase"><a href="#">BISMA</a></h4>
-                     <h5>Bijak Innovative Spending Management</h5>
-                  </div>
-               </div>
+								<div class="card gradient-shadow grey lighten-3 border-radius-3 animate fadeUp">
+									<div class="card-content center">
+										<img src="<?= base_url().'assets'?>/app-assets/images/logo/LOGO-BISMA.png" class="width-10" alt="BISMA">
+										<h4 class="font-weight-900 text-uppercase"><a href="#">BISMA</a></h4>
+										<h5>Bijak Innovative Spending Management</h5>
+									</div>
+								</div>
             </div>
                   </div>
 

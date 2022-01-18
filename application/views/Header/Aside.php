@@ -74,7 +74,7 @@ function mappingD_none($data){
 				<li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Main/Home')?>">
           <i class="material-icons">
           home
-          </i><span class="menu-title" data-i18n="Mail">xx</span></a>
+          </i><span class="menu-title" data-i18n="Mail">Dashboard</span></a>
           </li>
 
           <li class="navigation-header"><a class="navigation-header-text">Anggaran</a>
