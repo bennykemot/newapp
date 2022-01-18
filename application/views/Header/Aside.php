@@ -142,7 +142,12 @@ function mappingD_none($data){
           call_to_action
           </i><span class="menu-title" data-i18n="Mail">PBJ</span></a>
           </li>
-			
+					
+					<li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Auth/Auth/logout')?>">
+          <i class="material-icons">
+          keyboard_tab
+          </i><span class="menu-title" data-i18n="Mail">Logout</span></a>
+          </li>
 			<?php
 				}else if($role_id == 99){
 			?>
@@ -271,6 +276,12 @@ function mappingD_none($data){
           <i class="material-icons">
           local_library
           </i><span class="menu-title" data-i18n="Mail">Jabatan</span></a>
+          </li>
+
+					<li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Auth/Auth/logout')?>">
+          <i class="material-icons">
+          keyboard_tab
+          </i><span class="menu-title" data-i18n="Mail">Logout</span></a>
           </li>
 
 			<?php
@@ -402,6 +413,12 @@ function mappingD_none($data){
           confirmation_number
           </i><span class="menu-title" data-i18n="Mail">PPK</span></a>
           </li> -->
+
+					<li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Auth/Auth/logout')?>">
+          <i class="material-icons">
+          keyboard_tab
+          </i><span class="menu-title" data-i18n="Mail">Logout</span></a>
+          </li>
 
 
 			<?php		
