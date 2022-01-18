@@ -87,6 +87,30 @@ function cek_tgl($tanggal){
        
       }
 
+      foreach($export as $j){
+        $sumhari +=$j->jmlhari;
+        $sumuangharian +=$j->totaluangharian;
+        $sumutransport +=$j->transport;
+        $sumuinap +=$j->totalinap;
+        $sumurep +=$j->totalrep;
+        $sumtotal +=$j->jumlah;
+        }
+
+        function StatusPenandatangan($status,$jabatanST){
+            $result="";
+            if($status == 3){
+                if($jabatanST == "Kepala Biro"){
+                    $result = "Plh. Sekretaris Utama";
+                }else if($jabatanST == "Direktur"){
+                    $result = "Plh. Deputi";
+                }
+            }else{
+                $result = $jabatanST;
+            }
+            return $result;
+    
+        }
+
 ?>
 
 
@@ -127,11 +151,18 @@ function cek_tgl($tanggal){
                 </thead>
 
                 <tbody>
-                    <?php $no=1; foreach($export as $e){ ?>
+                    <?php $no=1; foreach($export as $e){
+                        
+                        if($e->jabatan == "PPNPN"){
+                            $nip = "-";
+                        }else{
+                            $nip = $e->nip;
+                        }?>
                         <tr>
                             <td style="text-align: center;"><?=$no?></td>
                             <td><?=$e->nama?></td>
-                            <td><?=$e->nip?></td>
+                            
+                            <td><?=$nip?></td>
                             <td style="text-align: center;"><?=$e->golongan?></td>
                             <td><?=Explodekota($e->kotaasal)?></td>
                             <td><?=Explodekota($e->kotatujuan)?></td>
@@ -144,7 +175,18 @@ function cek_tgl($tanggal){
                             <td style="text-align: right;"><?=rupiah($e->totalrep)?></td>
                             <td style="text-align: right;"><?=rupiah($e->jumlah)?></td>
                         </tr>  
-                    <?php } ?>                 
+                    <?php $no++;} ?> 
+                    
+                    <tr>
+                        <td colspan="7"></td>
+                        <td>Jumlah</td>
+                        <td style="text-align: center;"><?=$sumhari?></td>
+                        <td style="text-align: right;"><?=rupiah($sumuangharian)?></td>
+                        <td style="text-align: right;"><?=rupiah($sumuinap)?></td>
+                        <td style="text-align: right;"><?=rupiah($sumutransport)?></td>
+                        <td style="text-align: right;"><?=rupiah($sumurep)?></td>
+                        <td style="text-align: right;"><?=rupiah($sumtotal)?></td>
+                    </tr>
                 </tbody>
                 
 

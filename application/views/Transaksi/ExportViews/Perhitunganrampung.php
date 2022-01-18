@@ -210,7 +210,7 @@ function cek_tgl($tanggal){
             <tr class="ttop">
                 <td rowspan="2" style="text-align: center;" class="ttop tbottom" width="5%">No</td>
                 <td rowspan="2" style="text-align: center;" class="ttop tbottom" width="25%">Nama</td>
-                <td colspan="2" style="text-align: center;" class="ttop tbottom" width="25%">SSPD</td>
+                <td colspan="2" style="text-align: center;" class="ttop tbottom" width="25%">SPD</td>
                 <td rowspan="2" style="text-align: center;" class="ttop tbottom" width="15%">Pengajuan (Rp) </td>
                 <td rowspan="2" style="text-align: center;" class="ttop tbottom" width="15%">Realisasi (Rp) </td>
                 <td rowspan="2" style="text-align: center;" class="ttop tbottom" width="15%">Selisih (Rp) </td>
@@ -226,7 +226,7 @@ function cek_tgl($tanggal){
             <tr>
                 <td class="ttop tbottom" ><?=$e->nourut?></td>
                 <td class="ttop tbottom" ><?=$e->nama?></td>
-                <td class="ttop tbottom" ><?=$e->nost?></td>
+                <td class="ttop tbottom" ><?=$e->nospd?></td>
                 <td class="ttop tbottom" ><?=cek_tgl($e->tglst)?></td>
                 <td style="text-align: right;" class="ttop tbottom" ><?=rupiah($e->jumlah)?></td>
                 <td style="text-align: right;" class="ttop tbottom" ><?=rupiah($e->jumlah)?></td>

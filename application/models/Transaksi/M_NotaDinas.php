@@ -193,6 +193,7 @@ class M_NotaDinas extends CI_Model{
             d_itemcs.tarifdarat, 
             d_itemcs.tarifudara, 
             d_itemcs.jumlah,
+            d_itemcs.lain,
 			t_satker.lokasi as lokasi,
 			t_pejabat.nama as ppk_nama, 
 			t_pejabat.nip as ppk_nip
@@ -223,6 +224,7 @@ class M_NotaDinas extends CI_Model{
             d_itemcs.tariflaut, 
             d_itemcs.tarifdarat, 
             d_itemcs.tarifudara, 
+            d_itemcs.lain, 
             d_itemcs.jumlah,
 			t_pejabat.nama as ppk_nama, 
 			t_pejabat.nip as ppk_nip,
@@ -242,11 +244,12 @@ class M_NotaDinas extends CI_Model{
             $query = $this->db->query("SELECT d_surattugas.nost, d_surattugas.tglst, d_surattugas.status_cs, d_surattugas.status_penandatangan,
             d_surattugas.uraianst, d_surattugas.tglmulaist, d_surattugas.status_id,
             d_surattugas.tglselesaist, d_surattugas.idxskmpnen, 
-            d_itemcs.nourut, d_itemcs.nama, 
+            d_itemcs.nourut, d_itemcs.nama, d_itemcs.lain,
             d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan,d_itemcs.nospd,
 			t_pejabat.nama as ppk_nama, 
 			t_pejabat.nip as ppk_nip,
 			t_satker.lokasi as lokasi 
+            
             
             FROM d_surattugas
             JOIN d_itemcs ON d_surattugas.id = d_itemcs.id_st 
@@ -265,7 +268,7 @@ class M_NotaDinas extends CI_Model{
                 d_surattugas.tglselesaist, d_surattugas.idxskmpnen, d_itemcs.nospd,
                 d_itemcs.nourut, d_itemcs.nama, 
                 d_itemcs.nip, d_itemcs.jabatan, d_itemcs.golongan, d_itemcs.jumlah,
-				t_pejabat.nama as ppk_nama, 
+				t_pejabat.nama as ppk_nama, d_itemcs.lain,
 				t_pejabat.nip as ppk_nip,
 				t_satker.lokasi as lokasi 
                 

@@ -355,44 +355,47 @@ function ApproveKPA($data){
       }
 
       function disableApprove($status,$role){
-        $disabled = "";
+        $disabled = "pointer-events: none;";
+
+        //echo "<script>console.log('Role: " . $role . "' );</script>";
 
         if($status == 1){
-            if($role !=1 || $role !=2 || $role !=4 || $role !=9){
+            if($role !=3){
               $disabled = "pointer-events: none;";
             }
+
         }else if($status == 2){
-          if($role !=1 || $role !=3){
+          if($role !=1 || $role !=2 || $role !=4 || $role !=9){
             $disabled = "pointer-events: none;";
           }
-
+        
         }else if($status == 3){
-          if($role !=1 || $role !=5 || $role !=7){
+          if($role !=1 || $role !=3){
             $disabled = "pointer-events: none;";
           }
 
         }else if($status == 4){
-          if($role !=1 || $role !=2 || $role !=4 || $role !=9){
+          if($role !=1 || $role !=5 || $role !=7){
             $disabled = "pointer-events: none;";
           }
 
         }else if($status == 5){
-          if($role !=1 || $role !=4){
+          if($role !=1 || $role !=2 || $role !=4 || $role !=9){
             $disabled = "pointer-events: none;";
           }
 
         }else if($status == 6){
-          if($role !=1 || $role !=3){
+          if($role !=1 || $role !=4){
             $disabled = "pointer-events: none;";
           }
 
         }else if($status == 7){
-          if($role !=1 || $role !=8){
+          if($role !=1 || $role !=3){
             $disabled = "pointer-events: none;";
           }
 
         }else if($status == 8){
-          if($role !=1 || $role !=4){
+          if($role !=1 || $role !=8){
             $disabled = "pointer-events: none;";
           }
 
@@ -400,6 +403,7 @@ function ApproveKPA($data){
           if($role !=1 || $role !=4){
             $disabled = "pointer-events: none;";
           }
+
         }
         return $disabled;
 

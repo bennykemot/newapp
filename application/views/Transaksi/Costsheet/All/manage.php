@@ -56,6 +56,7 @@ function hideNoSt($dat){
                 </div>
                 <button type="submit" class="btn cyan col s12" name="tombol" >FILTER</button>
             </form>
+            <div style="padding-top : 20%"></div>
           <div class="row">
             <div class="col s12">
             <table id="tb-st-" class="bordered striped responsive" style="white-space: normal;overflow-x : auto">

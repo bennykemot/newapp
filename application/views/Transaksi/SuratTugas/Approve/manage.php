@@ -191,7 +191,7 @@ function getUraian($dat){
                         <td class="text-center">Angkutan<br>Laut</td>
                         <td class="text-center">Transportasi<br>Udara</td>
                         <td class="text-center">Transportasi<br>Darat</td>
-                        <td class="text-center">DLL</td>
+                        <td class="text-center">LAIN - LAIN</td>
                         <td class="text-center">REPRESENTASI</td>
                         <td class="text-center" style="min-width: 150px">JUMLAH</td>
                         <td class="text-center" style="min-width: 200px">JENIS<br>TRANSPORTASI</td>

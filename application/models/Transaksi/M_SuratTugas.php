@@ -145,14 +145,23 @@ class M_SuratTugas extends CI_Model{
                 }else{
 
                         $cek = $this->db->query("SELECT id from d_itemcs WHERE id_st = ".$id."")->result_array();
-                        if($data == "api"){
+                        $cekCS = $this->db->query("SELECT id from d_costsheet WHERE id_st = ".$id." AND id_cs != NULL")->result_array();
+                        
+                        if(count($cekCS) > 0){
                             $aa="d_costsheet.status_cs,d_costsheet.id_cs,";
                             $bb="JOIN d_costsheet ON d_costsheet.id_cs = d_itemcs.id_cs";
-
                         }else{
                             $aa="";
                             $bb="";
                         }
+                        // if($data == "api"){
+                        //     $aa="d_costsheet.status_cs,d_costsheet.id_cs,";
+                        //     $bb="JOIN d_costsheet ON d_costsheet.id_cs = d_itemcs.id_cs";
+
+                        // }else{
+                        //     $aa="";
+                        //     $bb="";
+                        // }
                         $select ="";$join="";$order="";
                         if(count($cek) > 0){
                             $select = "d_itemcs.nourut, d_itemcs.jabatan,
@@ -199,7 +208,7 @@ class M_SuratTugas extends CI_Model{
             
             
             FROM d_surattugas 
-            JOIN d_pagu ON d_surattugas.kdindex = d_surattugas.kdindex 
+            JOIN d_pagu ON d_pagu.kdindex = d_surattugas.kdindex 
             JOIN t_pejabat ON d_surattugas.id_ttd = t_pejabat.id 
             JOIN t_satker ON d_surattugas.kdsatker = t_satker.kdsatker 
             JOIN d_bagipagu ON d_bagipagu.kdindex = d_surattugas.kdindex

@@ -36,7 +36,7 @@
                         <td class="text-center">Angkutan<br>Laut</td>
                         <td class="text-center">Transportasi<br>Udara</td>
                         <td class="text-center">Transportasi<br>Darat</td>
-                        <td class="text-center">DLL</td>
+                        <td class="text-center">LAIN - LAIN</td>
                         <td class="text-center">REPRESENTASI</td>
                         <td class="text-center" style="min-width: 150px">JUMLAH</td>
                         <td class="text-center" style="min-width: 200px">JENIS<br>TRANSPORTASI</td>
@@ -47,13 +47,10 @@
                     <?php   $j=1;$no = []; 
                             $total=0;
                             for($i = 0 ; $i < count($ubah); $i++){ 
-                                $nospd = "0000";
-                                if($ubah[0]['status_id'] == 3){
-
-                                };
                                 
                                 $kotaasal   = explode("-",$ubah[$i]['kotaasal']);
                                 $kotatujuan = explode("-",$ubah[$i]['kotatujuan']);
+                                $nospd = explode("-",$ubah[$i]['nospd']);
                                 
                     ?>
                     <tbody id="Tbody" class="multi-field" style="border-top: 2px dotted #c5c5c4;">
@@ -93,7 +90,7 @@
                         <td></td>
                         <td>
                             <input type="text" style='width:7em' id="nospd<?=$j?>" name="nospd<?=$j?>" value="SPD - " readonly>
-                            <input type="text" style='width:8em' id="nospdST<?=$j?>" name="nospdST<?=$j?>">
+                            <input type="text" style='width:8em' id="nospdST<?=$j?>" name="nospdST<?=$j?>" value="<?=$nospd[1]?>">
                         </td>
                         <td><input style="min-width: 150px" type="text" id="satuan_uangharian<?=$j?>" name="satuan_uangharian<?=$j?>" onkeyup="AllCount('<?=$j?>','satuan')" value="<?=rupiah($ubah[$i]['tarifuangharian'])?>"></td>
                         <td><input style="min-width: 150px" type="text" id="uangharian<?=$j?>" name="uangharian<?=$j?>" onkeyup="AllCount('<?=$j?>','total')" value="<?=rupiah($ubah[$i]['totaluangharian'])?>"></td>

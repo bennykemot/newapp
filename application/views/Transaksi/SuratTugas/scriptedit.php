@@ -10,7 +10,6 @@ var user_session = "<?= $this->session->userdata("user_id")?>"
 var role_session = "<?= $this->session->userdata("role_id")?>"
 var unit_session = "<?= $this->session->userdata("unit_id")?>"
 var id_st_session = "<?=$this->uri->segment('4')?>";
-// var status_cs = "<?= $ubah[0]['status_cs'] ?>"
 var status_penandatangan = "<?= $ubah[0]['status_penandatangan'] ?>"
 if(role_session == 1){
   unit_session = 0;

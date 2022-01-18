@@ -242,12 +242,14 @@ function cek_tgl($tanggal){
                     - Uang Transport Angkutan Laut<br>
                     - Uang Transport Udara<br>
                     - Uang Transport Darat<br>
+                    - Biaya Lain - Lain <br>
                 </td>
                 <td style="text-align: right">
                 <br><?=rupiah($e->tariftaxi, 'rp')?><br>
                     <?=rupiah($e->tariflaut, 'rp')?><br>
                     <?=rupiah($e->tarifudara, 'rp')?><br>
                     <?=rupiah($e->tarifdarat, 'rp')?><br>
+                    <?=rupiah($e->lain, 'rp')?><br>
             
                 </td>
                 <td></td>

@@ -108,9 +108,9 @@ class SuratTugas extends CI_Controller {
         $id =  $this->uri->segment(4);
         $data['ubah'] = $this->SuratTugas->getDataUbah($kdindex, $id, 'Ubah_ST','');
         $kdsatker = $this->uri->segment(5);
-        if($kdsatker == 450491){
-            echo count($data['ubah']);
-        }
+        // if($kdsatker == 450491){
+        //     echo count($data['ubah']);
+        // }
 
         $kdsatker = $this->session->userdata("kdsatker");
         $thang = $this->session->userdata("thang");
@@ -129,7 +129,7 @@ class SuratTugas extends CI_Controller {
         $data['subkomp'] = $this->Master->getKomponenSub($kdsatker, $unit_id, $role_id);
         $data['subkomppagu'] = $this->Master->getKomponenSub_pagu($kdsatker, $unit_id, $role_id);
         
-		//$this->load->view('Transaksi/SuratTugas/ubah',$data);
+		$this->load->view('Transaksi/SuratTugas/ubah',$data);
 	}
 
     public function approve()
@@ -644,6 +644,36 @@ class SuratTugas extends CI_Controller {
             
         }
 	
+    }
+
+    function updateTHL(){
+        $kdsatker = 689266;
+        $query = $this->db->query("SELECT id from t_pegawai 
+        where niplama = '689266015' AND nipbaru ='689266015' AND nip ='689266015' AND satker_id =".$kdsatker."")->result();
+        $where = array('niplama' =>"689266015",
+                        'nipbaru' => "689266015",
+                        'nip' => "689266015");
+        //echo count($query);
+        $j = 14;
+        for($i = 0 ; $i < count($query); $i++){
+
+            $data = array(
+                'nipbaru' => $kdsatker."0".$j,
+                'niplama' =>  $kdsatker."0".$j,
+                'nip' =>  $kdsatker."0".$j,
+                'unit_id' => "032000",
+                'status' => 1,
+                );
+                
+                
+                $this->db->where($where);
+                $this->db->update("t_pegawai",$data);
+                $j++;
+                echo $j."<br>";
+
+
+        }
+
     }
 
 }
