@@ -80,15 +80,15 @@ function cek_tgl($tanggal){
 						<img src="<?= base_url().'assets'?>/app-assets/images/logo/logo-bpkp-3-jpg.jpg" alt="materialize logo">
 					</td>
                     <td style="text-align: center;" colspan="4">
-						<h5>BADAN PENGAWASAN KEUANGAN DAN PEMBANGUNAN<br><?= strtoupper($kop[0]['nama_unit']) ?></h5>
+						<h5>BADAN PENGAWASAN KEUANGAN DAN PEMBANGUNAN<br><?= strtoupper($ubah[0]['kop_unit']) ?></h5>
 					</td>
                 </tr>
 
                 <tr>
                     <td style="text-align: center;" colspan="4" >
-						<p style="font-size: 11px;"><?= $kop[0]['alamat'] ?><br>
-							<?= $kop[0]['notelp'] ?> , Faximile: <?= $kop[0]['nofax'] ?> <br>
-							Web: <?= $kop[0]['web'] ?> , Email: <?= $kop[0]['email'] ?></p>
+						<p style="font-size: 11px;"><?= $ubah[0]['kop_alamat'] ?><br>
+							<?= $ubah[0]['kop_notelp'] ?> , Faximile: <?= $ubah[0]['kop_nofax'] ?> <br>
+							Web: <?= $ubah[0]['kop_web'] ?> , Email: <?= $ubah[0]['kop_email'] ?></p>
                     </td>
                 <tr>
 
