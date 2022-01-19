@@ -646,34 +646,6 @@ class SuratTugas extends CI_Controller {
 	
     }
 
-    function updateTHL(){
-        $kdsatker = 689266;
-        $query = $this->db->query("SELECT id from t_pegawai 
-        where niplama = '689266015' AND nipbaru ='689266015' AND nip ='689266015' AND satker_id =".$kdsatker."")->result();
-        $where = array('niplama' =>"689266015",
-                        'nipbaru' => "689266015",
-                        'nip' => "689266015");
-        //echo count($query);
-        $j = 14;
-        for($i = 0 ; $i < count($query); $i++){
-
-            $data = array(
-                'nipbaru' => $kdsatker."0".$j,
-                'niplama' =>  $kdsatker."0".$j,
-                'nip' =>  $kdsatker."0".$j,
-                'unit_id' => "032000",
-                'status' => 1,
-                );
-                
-                
-                $this->db->where($where);
-                $this->db->update("t_pegawai",$data);
-                $j++;
-                echo $j."<br>";
-
-
-        }
-
-    }
+    
 
 }

@@ -285,8 +285,8 @@ function cek_tgl($tanggal){
             </tr>
 
             <tr>
-                <td colspan="2"><?=terbilang($e->jumlah)?></td>
-                <td width="30%"><?=terbilang($e->jumlah)?></td>
+                <td colspan="2"><?=rupiah($e->jumlah,'rp')?></td>
+                <td width="30%"><?=rupiah($e->jumlah,'rp')?></td>
             </tr>
 
             <tr>

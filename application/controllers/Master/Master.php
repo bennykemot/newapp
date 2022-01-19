@@ -92,21 +92,5 @@ class Master extends CI_Controller {
       echo json_encode($response);
    }
 
-   function Repair(){
-      $unit_id = $this->db->query("SELECT namaunit_lengkap FROM t_pegawai where namaunit_lengkap BETWEEN '00000' AND '605000' ")->result();
-      
-
-      for($i= 0; $i < count($unit_id); $i++){
-         
-         $select = $this->db->query("SELECT nama_grup from t_unitkerja WHERE grup_id = ".$unit_id[$i]->namaunit_lengkap."")->result();
-         echo $select[0]->nama_grup."<br>";
-
-         $data = array(
-            'namaunit_lengkap' => $select[0]->nama_grup,
-            );
-
-         $this->db->where("namaunit_lengkap",$unit_id[$i]->namaunit_lengkap);
-         $this->db->update("t_pegawai",$data);
-      }
-   }
+  
 }

@@ -287,11 +287,18 @@ function ApproveKPA($data){
       return $disabled;
     }
 
-  function getComplete($data, $yn){
+  function getComplete($data, $tombol){
     $none="";
-      if($data == 3 && $yn == "N" || $data == 4 && $yn == "N"){
+
+    if($tombol == "tim"){
+      if($data != 1 && $data != 99){
+        $none ="d-none";
+      }
+    }else{
+      if($data != 1 && $data != 4 && $data != 99){
               $none ="d-none";
       }
+    }
       return $none;
     }
 
@@ -322,7 +329,9 @@ function ApproveKPA($data){
     function getStatusId($data){
       $span = "";
 
-      if($data == 1){
+      if($data == 99){
+        $span = "<a class='btn btn-cyan'>Ajukan</a>";
+      }else if($data == 1){
         $span = "<span class='users-view-status chip grey lighten-2 black-text'>".$data."</span>";
       }else if($data == 2){
         $span = "<span class='users-view-status chip teal lighten-2 black-text'>".$data."</span>";
@@ -355,7 +364,7 @@ function ApproveKPA($data){
       }
 
       function disableApprove($status,$role){
-        $disabled = "pointer-events: none;";
+        $disabled = "";
 
         //echo "<script>console.log('Role: " . $role . "' );</script>";
 

@@ -27,19 +27,20 @@
                     <div class="card-content">
                       <div class="row">
                         <div class="col s12">
-                          <form method="POST" id="form-import" enctype="multipart/form-data">
-                            <div class="input-field col s12">
+                          <form method="POST" id="form-import" enctype="multipart/form-data" >
+                            
+                          <!-- <form method="POST" action="<?= site_url("Anggaran/Transfer/upload");?>" > -->
+                          <div class="input-field col s12">
                                   <!-- <div class="input-field col s2">Upload File</div> -->
                                   <div class="col s3">
                                     <a class="gradient-45deg-indigo-light-blue btn-large col s12" onclick="Upload()"><i class="material-icons left">file_download</i>Upload File</a>
                                   </div>
                                     <div class="input-field col s9 ">
-                                      <input placeholder="File..." id="shad_file" name="shad_file" type="text"Readonly>
+                                      <input placeholder="File..." id="shad_file" name="shad_file" type="text" Readonly>
                                   </div>
                             </div>
 
                             <input value="<?= $this->session->userdata("kdsatker"); ?>" id="kdsatker" name="kdsatker" type="text" hidden>
-
                             <div class="input-field col s2 ">
                                       
                                       <input type="file" id="file_" name="file_" hidden>

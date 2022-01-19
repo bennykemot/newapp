@@ -58,9 +58,9 @@ $('.btn-upload').click(function (e) {
             icon: "info",
             timer: 2000,
             buttonsStyling: false,
-            customClass: {
-                confirmButton: 'd-none' //insert class here
-            }
+            // className: {
+            //     confirmButton: 'd-none' //insert class here
+            // }
 
             })
 
@@ -135,13 +135,15 @@ $('.btn-upload').click(function (e) {
         }
 
 
+
         $.ajax({
             type: "POST",
             data: formData,
-            url: baseurl + 'Upload',
+            url: baseurl + 'upload',
             processData: false,
             contentType: false,
             success: function (data, textStatus, jqXHR) {
+                console.log(response);
                 show_msg("success", "Berhasil Upload File");
                 $('#alert-Pagu').fadeIn()
                 $('#alert-Item').fadeIn()
@@ -156,9 +158,9 @@ $('.btn-upload').click(function (e) {
                 $('#alert-SubKomponen').addClass('animated fadeOutUp delay-5s');
                 Reset(IdForm)
 
-                setTimeout(function() {
-                  location.reload();
-               }, 5000);
+            //     setTimeout(function() {
+            //       location.reload();
+            //    }, 5000);
             },
             error: function (jqXHR, textStatus, errorThrown) { },
         });

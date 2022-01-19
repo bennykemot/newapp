@@ -84,7 +84,7 @@
 
                                         <div class="col s4">
                                           <a href="<?= site_url('Transaksi/TambahTim/TambahTim/'.$u->id.'/'.$u->kdindex)?>" 
-                                            class="tooltipped <?=getForAdminOpr($role_id)?> <?=getComplete($u->status_id, 'N')?>" 
+                                            class="tooltipped <?=getForAdminOpr($role_id)?> <?=getComplete($u->status_id, 'tim')?>" 
                                               data-position="top" data-tooltip="Anggota" >
                                               
                                               <i class="material-icons cyan-text">people</i></a>
@@ -103,7 +103,7 @@
                                         </div>
                                         <div class="col s4">
 																					<a href="<?= site_url('Transaksi/SuratTugas/ubah/'.$u->id.'/'.$kdsatker.'/'.$unit_id.'/'.$role_id.'/'.$u->kdindex)?>" 
-                                            class="tooltipped <?=getForAdminOpr($role_id)?> <?=getComplete($u->status_id, 'Y')?>" 
+                                            class="tooltipped <?=getComplete($u->status_id, 'ubah')?>" 
                                             data-position="bottom" data-tooltip="Ubah ST" ><i class="material-icons green-text">edit</i></a>
                                         </div>  
                                     </div>

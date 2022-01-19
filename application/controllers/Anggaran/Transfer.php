@@ -77,7 +77,8 @@ class Transfer extends CI_Controller {
 
         if (!file_exists(FCPATH.'/assets/temp_folder/'.$kdsatker.'')) {
             mkdir(FCPATH.'/assets/temp_folder/'.$kdsatker.'', 0777, true);
-        }else{
+        }
+        else{
 
             $files = glob(FCPATH.'/assets/temp_folder/'.$kdsatker.'/*'); // get all file names
                 foreach($files as $file){ // iterate files
