@@ -57,6 +57,7 @@ class Pegawai extends CI_Controller {
 			$data_pegawai = array(
 				'niplama' => $niplama,
 				'nip' => $nipbaru,
+				'nipbaru' => $nipbaru,
 				'nama' => $nama,
 				'nama_lengkap' => $nama_lengkap,
 				'tempat_lahir' => $tempat,
@@ -108,6 +109,7 @@ class Pegawai extends CI_Controller {
 			$data_pegawai = array(
 				'niplama' => $niplama,
 				'nip' => $nipbaru,
+				'nipbaru' => $nipbaru,
 				'nama_lengkap' => $nama_lengkap,
 				'tempat_lahir' => $tempat,
 				'tgl_lahir' => date("Y-m-d",strtotime($tgl_lahir)),
@@ -125,10 +127,25 @@ class Pegawai extends CI_Controller {
 			$where = array('id' => $id);
 			$this->Pegawai->update($data_pegawai,'t_pegawai',$where);
 
-			// $data_pejabat = array(
-			// 	'unitkerja_id' => $unitid,
-			// 	'kdsatker' => $satker_id
-			// );
+			$cekUnit = $this->db->query("select id from t_unitkerja where grup_id = ".$unitkerja_grup." ")->result();
+
+			$data_pejabat = array(
+				'unitkerja_id' => $cekUnit[0]->id,
+				'kdsatker' => $satker_id
+			);
+			$where_pejabat = array(
+				'nip' => $nipbaru,
+			);
+
+			$cekPejabat = $this->db->query("select id from t_pejabat where nip = ".$nipbaru." ")->result();
+
+			if(count($cekPejabat) > 0 ){
+
+				$this->db->where($where_pejabat);
+				$this->db->update("t_pejabat",$data_pejabat);
+
+
+			}
 
 
 			// $this->db->where("nip", $nipbaru);
