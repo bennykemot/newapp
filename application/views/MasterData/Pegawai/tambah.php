@@ -123,7 +123,7 @@
                             </div>
                         </div>
 
-                        <div>
+                        <div hidden>
                             <input name="unitkerja_nama" id="unitkerja_nama" >
                             <input name="unitkerja_grup" id="unitkerja_grup" >
                             <input name="unitkerja_id" id="unitkerja_id" >

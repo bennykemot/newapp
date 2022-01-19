@@ -14,19 +14,24 @@ class Master extends CI_Controller {
     function R_unitkerjapegawai(){
         $unit_id = $this->db->query("SELECT namaunit_lengkap FROM t_pegawai where namaunit_lengkap BETWEEN '00000' AND '605000' ")->result();
         
+        $update = $this->db->query(" UPDATE t_pegawai
+        SET unit_id = t_pegawai.namaunit_lengkap
+        where namaunit_lengkap BETWEEN '00000' AND '605000' ");
+
+        //$data = =
   
-        for($i= 0; $i < count($unit_id); $i++){
+        // for($i= 0; $i < count($unit_id); $i++){
            
-           $select = $this->db->query("SELECT nama_grup from t_unitkerja WHERE grup_id = ".$unit_id[$i]->namaunit_lengkap."")->result();
-           echo $select[0]->nama_grup."<br>";
+        //    $select = $this->db->query("SELECT nama_grup from t_unitkerja WHERE grup_id = ".$unit_id[$i]->namaunit_lengkap."")->result();
+        //    echo $select[0]->nama_grup."<br>";
   
-           $data = array(
-              'namaunit_lengkap' => $select[0]->nama_grup,
-              );
+        //    $data = array(
+        //       'namaunit_lengkap' => $select[0]->nama_grup,
+        //       );
   
-           $this->db->where("namaunit_lengkap",$unit_id[$i]->namaunit_lengkap);
-           $this->db->update("t_pegawai",$data);
-        }
+        //    $this->db->where("namaunit_lengkap",$unit_id[$i]->namaunit_lengkap);
+        //    $this->db->update("t_pegawai",$data);
+        // }
      }
 
      function R_THL(){
