@@ -158,9 +158,9 @@ $('.btn-upload').click(function (e) {
                 $('#alert-SubKomponen').addClass('animated fadeOutUp delay-5s');
                 Reset(IdForm)
 
-            //     setTimeout(function() {
-            //       location.reload();
-            //    }, 5000);
+                setTimeout(function() {
+                  location.reload();
+               }, 5000);
             },
             error: function (jqXHR, textStatus, errorThrown) { },
         });

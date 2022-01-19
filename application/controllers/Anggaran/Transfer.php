@@ -70,6 +70,8 @@ class Transfer extends CI_Controller {
         $info = pathinfo($filename);
         $name =  $info['filename'] . '.zip';
 
+        // echo $filename;
+
         //$name= $dumNamaFile.".zip";
 
         $no_revisi = $this->input->post('no_revisi');
@@ -117,7 +119,7 @@ class Transfer extends CI_Controller {
         }
         echo json_encode(array('status' => $status, 'msg' => $msg));
 
-        /* example by Erik Jenssen aka erix */
+    //     /* example by Erik Jenssen aka erix */
 
         //$filename = "foobar.rar";
         // $filepath = FCPATH.'/assets/temp_folder/'.$kdsatker.'/';

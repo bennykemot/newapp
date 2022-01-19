@@ -298,7 +298,7 @@ function cek_tgl($tanggal){
         <table width="100%"  id="borderedless" cellpadding="2">
             <tr>
                 <td colspan="2"></td>
-                <td width="30%"><?= ucwords(strtolower("$e->lokasi")) ?>, <?=cek_tgl($e->tglst)?></td>
+                <td width="30%"><?= ucwords(strtolower("$e->lokasi")) ?>, <?=cek_tgl(date("Y-m-d"))?></td>
             </tr>
 
             <tr>

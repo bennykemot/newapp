@@ -155,10 +155,11 @@
 
                         </div>
                         
-                        <div hidden>
+                        <div>
                             <input name="kdsatker" id="kdsatker" value="<?= $ubah[0]['kdsatker'] ?>">
                             <input name="satker_nama" id="satker_nama" value="<?= $ubah[0]['nmsatker'] ?>">
                             <input name="unitkerja_nama" id="unitkerja_nama" value="<?= $ubah[0]['namaunit_lengkap'] ?>">
+                            <input name="unitkerja_grup" id="unitkerja_grup" value="<?= $ubah[0]['unit_id'] ?>">
                             <input name="unitkerja_id" id="unitkerja_id" value="<?= $ubah[0]['idunitkerja'] ?>">
                         </div>           
 						

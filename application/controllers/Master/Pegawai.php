@@ -49,6 +49,9 @@ class Pegawai extends CI_Controller {
 			$jbtn = $this->input->post('jbtn');
 			$tmt = $this->input->post('tmt');
 			$unit = $this->input->post('unit');
+			$unit_nama = $this->input->post('unitkerja_nama');
+			$unitid = $this->input->post('unitkerja_id');
+			$unitkerja_grup = $this->input->post('unitkerja_grup');
 			$satker = $this->input->post('satker');
 
 			$data_pegawai = array(
@@ -63,7 +66,8 @@ class Pegawai extends CI_Controller {
 				'nama_pangkat' => $pangkat,
 				'jabatan' => $jbtn,
 				'tmt_jab' => $tmt,
-				'namaunit_lengkap' => $unit,
+				'namaunit_lengkap' => $unit_nama,
+				'unit_id' => $unitkerja_grup,
 				'satker_id' => $satker
 			);
 
@@ -96,6 +100,7 @@ class Pegawai extends CI_Controller {
 			$unit = $this->input->post('unit');
 			$unit_nama = $this->input->post('unitkerja_nama');
 			$unitid = $this->input->post('unitkerja_id');
+			$unitkerja_grup = $this->input->post('unitkerja_grup');
 			$satker_id = $this->input->post('satker');
 			$id = $this->input->post('id');
 			$keljab = $this->input->post('keljab');
@@ -112,7 +117,7 @@ class Pegawai extends CI_Controller {
 				'jabatan' => $jbtn,
 				'tmt_jab' => $tmt,
 				'namaunit_lengkap' => $unit_nama,
-				'unit_id' => $unit,
+				'unit_id' => $unitkerja_grup,
 				'satker_id' => $satker_id,
 				'kel_jab' => $keljab
 			);

@@ -7,9 +7,9 @@
 	var agamaText = "<?= $ubah[0]['agama'] ?>"
 	var pangkatText = "<?= $ubah[0]['nama_pangkat'] ?>"
 	var unitVal = "<?= $ubah[0]['grup_id'] ?>"
-  var unitText = "<?= $ubah[0]['namaunit_lengkap'] ?>"
+   var unitText = "<?= $ubah[0]['namaunit_lengkap'] ?>"
 	var satkerVal = "<?= $ubah[0]['kdsatker'] ?>"
-  var satkerText = "<?= $ubah[0]['nmsatker'] ?>"
+   var satkerText = "<?= $ubah[0]['nmsatker'] ?>"
 	var keljabVal = "<?= $ubah[0]['kel_jab'] ?>"
     
 	var $agama = $("<option selected='selected'></option>").val(agamaText).text(agamaText)
@@ -169,7 +169,9 @@ $("#pangkat-select2").select2({
 		 	// AUTO FILLED 
 		 	$('#unit-select2').on('change', function() {
 				var unitkerja =  $("#unit-select2 option:selected").text()
+            var unitkerja_grup =  $("#unit-select2").val()
 				$('#unitkerja_nama').val(unitkerja)
+            $('#unitkerja_grup').val(unitkerja_grup)
 
 			});
 

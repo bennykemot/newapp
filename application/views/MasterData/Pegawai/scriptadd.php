@@ -131,6 +131,15 @@ $("#agama-select2").select2({
          }
      	});
 
+       // AUTO FILLED 
+		 	$('#unit-select2').on('change', function() {
+				var unitkerja =  $("#unit-select2 option:selected").text()
+            var unitkerja_grup =  $("#unit-select2").val()
+				$('#unitkerja_nama').val(unitkerja)
+            $('#unitkerja_grup').val(unitkerja_grup)
+
+			});
+
 		$('#satker-select2').on('change', function() {
 				$('#unit-select2').val(null).trigger('change');
 				var satker = $('#satker-select2').val()

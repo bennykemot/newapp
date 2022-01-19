@@ -28,8 +28,6 @@
                       <div class="row">
                         <div class="col s12">
                           <form method="POST" id="form-import" enctype="multipart/form-data" >
-                            
-                          <!-- <form method="POST" action="<?= site_url("Anggaran/Transfer/upload");?>" > -->
                           <div class="input-field col s12">
                                   <!-- <div class="input-field col s2">Upload File</div> -->
                                   <div class="col s3">

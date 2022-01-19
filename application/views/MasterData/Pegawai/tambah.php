@@ -123,6 +123,12 @@
                             </div>
                         </div>
 
+                        <div>
+                            <input name="unitkerja_nama" id="unitkerja_nama" >
+                            <input name="unitkerja_grup" id="unitkerja_grup" >
+                            <input name="unitkerja_id" id="unitkerja_id" >
+                        </div>  
+
 						<div class="col s12" style="padding-top: 60px">
                             <div class="col s9"></div>
 
