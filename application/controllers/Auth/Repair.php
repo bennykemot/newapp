@@ -18,6 +18,12 @@ class Master extends CI_Controller {
         SET unit_id = t_pegawai.namaunit_lengkap
         where namaunit_lengkap BETWEEN '00000' AND '605000' ");
 
+            if(mysqli_affected_rows($mysqli) >0 ){
+                echo "berhasil";
+            }else{
+                echo $update;
+            }
+
         //$data = =
   
         // for($i= 0; $i < count($unit_id); $i++){
