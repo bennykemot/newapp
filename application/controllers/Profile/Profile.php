@@ -126,7 +126,7 @@ class Profile extends CI_Controller {
 
             $id         = $this->input->post('idUser');
             $username         = $this->input->post('nama_user_Edit');
-            $kdsatker  = $this->input->post('kdsatker_Edit');
+            $kdsatker  = $this->input->post('satker_Edit');
             $kdrole   = $this->input->post('kdrole_Edit');
             $kdstatus  = $this->input->post('kdstatus_Edit');
             $password     = $this->input->post('password_Edit');
