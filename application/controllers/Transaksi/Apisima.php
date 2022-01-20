@@ -42,28 +42,29 @@ class Apisima extends CI_Controller {
             'base_uri' => $url,
             'timeout'  => 5,
         ]);
-        if($role_id == 99){
-            $unit_id = "";
-            $kdsatker ="";
-        }else{
-            if($role_id == 1){
-                $unit_id = "";
-            }else{
-                if($kdsatker == 450491){
-                    if($role_id == 3 || $role_id == 2 || $role_id == 4 || $role_id == 9 || $role_id == 10){
-                        $unit_id = $unit_id;
-                        }else{
-                            $unit_id = "";
-                        }
-                }else{
-                    if($role_id == 5 || $role_id == 7 || $role_id == 3 ){
-                        $unit_id="";
-                    }else{
-                        $unit_id = $unit_id;
-                    }
-                }
-            }
-        }
+        $unit_id="";
+        // if($role_id == 99){
+        //     $unit_id = "";
+        //     $kdsatker ="";
+        // }else{
+        //     if($role_id == 1){
+        //         $unit_id = "";
+        //     }else{
+        //         if($kdsatker == 450491){
+        //             if($role_id == 3 || $role_id == 2 || $role_id == 4 || $role_id == 9 || $role_id == 10){
+        //                 $unit_id = $unit_id;
+        //                 }else{
+        //                     $unit_id = "";
+        //                 }
+        //         }else{
+        //             if($role_id == 5 || $role_id == 7 || $role_id == 3 ){
+        //                 $unit_id="";
+        //             }else{
+        //                 $unit_id = $unit_id;
+        //             }
+        //         }
+        //     }
+        // }
 
         $response = $client->request('POST', $uri, [
             'form_params' => [

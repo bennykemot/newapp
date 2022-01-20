@@ -58,30 +58,77 @@
    <!-- PERJADIN INFO -->
    <div id="ecommerce-offer">
          <div class="row">
-            <div class="col s12 m4">
+            <div class="col s12 m3">
                <div class="card gradient-shadow grey lighten-3 border-radius-3 animate fadeUp">
                   <div class="card-content center">
                      <img src="<?= base_url().'assets'?>/app-assets/images/icon/letter.png" class="width-40" alt="Pengajuan oleh Operator">
-                     <h5 class="black-text lighten-4"><?=$status1?></h5>
-                     <p class="black-text lighten-4">Pengajuan oleh Operator</p>
+                     <h5 class="black-text lighten-4"><?=$status1[0]->status_count?></h5>
+                     <p class="black-text lighten-4"><?=$status1[0]->status_nama?></p>
                   </div>
                </div>
             </div>
-            <div class="col s12 m4">
+            <div class="col s12 m3">
                <div class="card gradient-shadow teal lighten-3 border-radius-3 animate fadeUp">
                   <div class="card-content center">
                      <img src="<?= base_url().'assets'?>/app-assets/images/icon/file.png" class="width-40" alt="Persetujuan PPK">
-                     <h5 class="black-text lighten-4"><?=$status2?></h5>
-                     <p class="black-text lighten-4">Persetujuan PPK</p>
+                     <h5 class="black-text lighten-4"><?=$status2[0]->status_count?></h5>
+                     <p class="black-text lighten-4"><?=$status2[0]->status_nama?></p>
                   </div>
                </div>
             </div>
-            <div class="col s12 m4">
+            <div class="col s12 m3">
                <div class="card gradient-shadow yellow lighten-3 border-radius-3 animate fadeUp">
                   <div class="card-content center">
                      <img src="<?= base_url().'assets'?>/app-assets/images/icon/done.png" class="width-40" alt="Persetujuan Eselon 2/KPA">
-                     <h5 class="black-text lighten-4"><?=$status3?></h5>
-                     <p class="black-text lighten-4">Persetujuan Eselon 2/KPA</p>
+                     <h5 class="black-text lighten-4"><?=$status3[0]->status_count?></h5>
+                     <p class="black-text lighten-4"><?=$status3[0]->status_nama?></p>
+                  </div>
+               </div>
+            </div>
+            <div class="col s12 m3">
+               <div class="card gradient-shadow red lighten-3 border-radius-3 animate fadeUp">
+                  <div class="card-content center">
+                     <img src="<?= base_url().'assets'?>/app-assets/images/icon/transaction.png" class="width-40" alt="Persetujuan Eselon 2/KPA">
+                     <h5 class="black-text lighten-4"><?=$status4[0]->status_count?></h5>
+                     <p class="black-text lighten-4"><?=$status4[0]->status_nama?></p>
+                  </div>
+               </div>
+            </div>
+
+            <!-- BAWAH -->
+            <div class="col s12 m3">
+               <div class="card gradient-shadow brown lighten-3 border-radius-3 animate fadeUp">
+                  <div class="card-content center">
+                     <img src="<?= base_url().'assets'?>/app-assets/images/icon/signature.png" class="width-40" alt="Pengajuan oleh Operator">
+                     <h5 class="black-text lighten-4"><?=$status5[0]->status_count?></h5>
+                     <p class="black-text lighten-4"><?=$status5[0]->status_nama?></p>
+                  </div>
+               </div>
+            </div>
+            <div class="col s12 m3">
+               <div class="card gradient-shadow deep-purple lighten-3 border-radius-3 animate fadeUp">
+                  <div class="card-content center">
+                     <img src="<?= base_url().'assets'?>/app-assets/images/icon/search.png" class="width-40" alt="Persetujuan PPK">
+                     <h5 class="black-text lighten-4"><?=$status6[0]->status_count?></h5>
+                     <p class="black-text lighten-4"><?=$status6[0]->status_nama?></p>
+                  </div>
+               </div>
+            </div>
+            <div class="col s12 m3">
+               <div class="card gradient-shadow pink lighten-3 border-radius-3 animate fadeUp">
+                  <div class="card-content center">
+                     <img src="<?= base_url().'assets'?>/app-assets/images/icon/time-is-money.png" class="width-40" alt="Persetujuan Eselon 2/KPA">
+                     <h5 class="black-text lighten-4"><?=$status7[0]->status_count?></h5>
+                     <p class="black-text lighten-4"><?=$status7[0]->status_nama?></p>
+                  </div>
+               </div>
+            </div>
+            <div class="col s12 m3">
+               <div class="card gradient-shadow light-blue lighten-3 border-radius-3 animate fadeUp">
+                  <div class="card-content center">
+                     <img src="<?= base_url().'assets'?>/app-assets/images/icon/folder.png" class="width-40" alt="Persetujuan Eselon 2/KPA">
+                     <h5 class="black-text lighten-4"><?=$status8[0]->status_count?></h5>
+                     <p class="black-text lighten-4"><?=$status8[0]->status_nama?></p>
                   </div>
                </div>
             </div>

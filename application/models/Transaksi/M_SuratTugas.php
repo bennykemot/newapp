@@ -35,7 +35,13 @@ class M_SuratTugas extends CI_Model{
             $whereD = "AND d_surattugas.cs_menyetujui like '%".$cek[0]->nip."%'";
         }
 
-        $query = $this->db->query("SELECT d_surattugas.*, user.username,r_statuscs.uraian_pusat,r_statuscs.uraian_perwakilan 
+        if($kdsatker == 450491){
+            $uraianst = "r_statuscs.uraian_pusat as status_nama";
+        }else{
+            $uraianst = "r_statuscs.uraian_perwakilan as status_nama";
+        }
+
+        $query = $this->db->query("SELECT d_surattugas.*, user.username, ".$uraianst."
         from d_surattugas 
         JOIN d_bagipagu ON d_surattugas.kdindex = d_bagipagu.kdindex
         JOIN user ON d_surattugas.user_id = user.id 

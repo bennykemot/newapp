@@ -65,7 +65,7 @@
                   </thead>
                   <tbody>
                     <!-- <tr><td><?=$data[0]['sumber_data']?></td></tr> -->
-                  <?php $no = 1;foreach ($data as $st){ ?>
+                  <?php $no = 1;foreach ($data as $st){$hide=""; if($st['status_st']=="Draft"){$hide = "hidden";} ?>
                     <tr>
                     <td><?php echo $no ?></td>
                       <td><?=$st['status_st']?></td>
@@ -77,7 +77,9 @@
                       <td><?=cek_tgl_st($st['tanggal_mulai'])?></td>
                       <td><?=cek_tgl_st($st['tanggal_selesai'])?></td>
                       <td class="text-center">
-                        <div>
+
+                      
+                        <div <?=$hide;?>>
 
                         <a href="<?= site_url('Transaksi/Apisima/tambahtimAPI/'.$st['id_st'].'/'.$st['status_st'])?>" 
                                             class="tooltipped" 

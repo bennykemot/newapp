@@ -18,8 +18,8 @@ class Repair extends CI_Controller {
         SET unit_id = t_pegawai.namaunit_lengkap
         where namaunit_lengkap BETWEEN '00000' AND '605000' ");
 
-            if(mysqli_affected_rows($mysqli) >0 ){
-                echo "berhasil";
+            if($this->db->affected_rows() > 0 ){
+                echo "berhasil<br>";
             }else{
                 echo $update;
             }
@@ -71,8 +71,25 @@ class Repair extends CI_Controller {
 
     function R_idst(){
 
-        $data = array(
-        );
+        $update = $this->db->query(" UPDATE d_surattugas
+        SET id_st = d_surattugas.id
+        where id_st = 0");
+
+            if($this->db->affected_rows() > 0 ){
+                echo "berhasil Update id ST<br>";
+            }else{
+                echo $update;
+            }
+
+        $updateCS = $this->db->query(" UPDATE d_costsheet
+        SET id_cs = CONCAT(d_surattugas.id,'-1')
+        where id_cs = 0 AND from_data = 'lcl'");
+
+            if($this->db->affected_rows() > 0 ){
+                echo "berhasil Update id ST<br>";
+            }else{
+                echo $updateCS;
+            }
 
     }
 

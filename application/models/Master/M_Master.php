@@ -231,13 +231,22 @@ AND a.id_app = b.id_appST; ");
             $cek = $this->db->query("select * from t_pejabat where id = ".$penjabid."")->result();
             $whereD = "AND d_surattugas.cs_menyetujui like '%".$cek[0]->nip."%'";
         }
+
+        if($kdsatker == 450491){
+         $uraianst = "r_statuscs.uraian_pusat as status_nama";
+            }else{
+                  $uraianst = "r_statuscs.uraian_perwakilan as status_nama";
+            }
    
-            $query = $this->db->query("SELECT d_surattugas.*
+            $query = $this->db->query("SELECT count(d_surattugas.id) as status_count, ".$uraianst."
             from d_surattugas 
             JOIN d_bagipagu ON d_surattugas.kdindex = d_bagipagu.kdindex
-            WHERE d_surattugas.is_aktif = 1 AND d_surattugas.status_id = ".$status." AND d_surattugas.kdsatker = ".$kdsatker." ".$whereD." ".$where."");
+            JOIN r_statuscs ON d_surattugas.status_id = r_statuscs.id
+            WHERE d_surattugas.is_aktif = 1 
+            AND d_surattugas.status_id = ".$status." 
+            AND d_surattugas.kdsatker = ".$kdsatker." ".$whereD." ".$where."");
    
-            return $query->num_rows();
+            return $query->result();
          
       }
 

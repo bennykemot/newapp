@@ -41,6 +41,12 @@ class Main extends CI_Controller {
 		$data['status1'] = $this->Master->status_st($kdsatker, $unit_id, $role_id, $penjab_id,'1');
 		$data['status2'] = $this->Master->status_st($kdsatker, $unit_id, $role_id, $penjab_id,'2');
 		$data['status3'] = $this->Master->status_st($kdsatker, $unit_id, $role_id, $penjab_id,'3');
+		$data['status4'] = $this->Master->status_st($kdsatker, $unit_id, $role_id, $penjab_id,'4');
+		$data['status5'] = $this->Master->status_st($kdsatker, $unit_id, $role_id, $penjab_id,'5');
+		$data['status6'] = $this->Master->status_st($kdsatker, $unit_id, $role_id, $penjab_id,'6');
+		$data['status7'] = $this->Master->status_st($kdsatker, $unit_id, $role_id, $penjab_id,'7');
+		$data['status8'] = $this->Master->status_st($kdsatker, $unit_id, $role_id, $penjab_id,'8');
+		$data['status9'] = $this->Master->status_st($kdsatker, $unit_id, $role_id, $penjab_id,'9');
 
 		$this->load->view('Home/Home', $data);
 	}

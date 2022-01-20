@@ -125,11 +125,11 @@ function mappingD_none($data){
           </i><span class="menu-title" data-i18n="Mail">Perjadin Diklat</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
+          <!-- <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
           <i class="material-icons">
           book
           </i><span class="menu-title" data-i18n="Mail">ST Non-Biaya</span></a>
-          </li>
+          </li> -->
 
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
           <i class="material-icons">
@@ -361,11 +361,11 @@ function mappingD_none($data){
           </i><span class="menu-title" data-i18n="Mail">Perjadin Diklat</span></a>
           </li>
 
-          <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
+          <!-- <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
           <i class="material-icons">
           book
           </i><span class="menu-title" data-i18n="Mail">ST Non-Biaya</span></a>
-          </li>
+          </li> -->
 
           <li class="bold"><a class="waves-effect waves-cyan" href="<?= site_url('Pagemissing/Pagemissing')?>">
           <i class="material-icons">
